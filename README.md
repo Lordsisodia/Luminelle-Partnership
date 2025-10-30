@@ -5,7 +5,6 @@ This is the marketing experience for the Lumelle creator program. Built with Rea
 ## Getting started
 
 ```bash
-cd app
 npm install
 npm run dev
 ```
@@ -14,7 +13,8 @@ Create a `.env` file based on `.env.example` to configure the WhatsApp invite li
 
 ## Project structure
 
-- `app/` – Vite application source (views, sections, data models).
+- `app/` – Vite application source (views, sections, data models). All npm
+  commands are proxied through the root workspace.
 - `components-library/` – Local clone of `siso-app-factory` component workspace (used for future UI imports).
 - `docs/` – Client documentation and requirements.
 
@@ -28,7 +28,7 @@ Create a `.env` file based on `.env.example` to configure the WhatsApp invite li
 
 ## Available scripts
 
-Inside `app/`:
+At the root (workspace-aware):
 
 - `npm run dev` – Start Vite dev server.
 - `npm run build` – Type-check and build for production.

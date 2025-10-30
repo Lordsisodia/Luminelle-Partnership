@@ -1,0 +1,17 @@
+# Node artifacts
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Vite build output (root workspace triggers build inside /app)
+app/dist/
+
+# OS / editor junk
+.DS_Store
+.env
+.env.*
+.vercel
+
+# component-library local installs
+components-library/node_modules/
+components-library/package-lock.json
