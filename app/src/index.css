@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/the-seasons');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply min-h-screen bg-white text-brand-cocoa font-body antialiased;
+}
+
+.font-heading {
+  font-family: "The Seasons", serif;
+}
+
+.font-body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
