@@ -4,6 +4,15 @@ export type MetricBadge = {
   description: string
 }
 
+export type HeroSpotlightSlide = {
+  id: string
+  backgroundSrc: string
+  label: string
+  title: string
+  description: string
+  imageSrc?: string
+}
+
 export type JourneyStep = {
   title: string
   description: string
@@ -36,12 +45,6 @@ export type RewardTier = {
   name: string
   range: string
   rewards: string[]
-  callout?: string
-}
-
-export type CommissionTier = {
-  label: string
-  details: string
 }
 
 export type LeaderboardEntry = {
@@ -49,6 +52,7 @@ export type LeaderboardEntry = {
   name: string
   handle: string
   sold: number
+  avatarSrc: string
   avatarAlt: string
   trend: 'up' | 'steady'
 }
@@ -80,6 +84,40 @@ export const heroContent = {
   imageAlt: 'Lumelle luxury shower caps displayed with creator content',
   imageSrc: '/images/hero.jpg',
 }
+
+export const heroSpotlightSlides: HeroSpotlightSlide[] = [
+  {
+    id: 'spa-day',
+    backgroundSrc: '/images/brand-lifestyle.jpg',
+    imageSrc: '/images/brand-lifestyle.jpg',
+    label: 'Creator perk highlight',
+    title: 'Luxury spa day escapes',
+    description: 'Top three finishers unlock a full spa experience—travel stipend, treatments, and content concierge included.',
+  },
+  {
+    id: 'cash-boost',
+    backgroundSrc: '/images/hero.jpg',
+    label: 'Cash boost',
+    title: '£1,000 leaderboard bonus',
+    description: 'Hit Gold and screenshot your payout—weekly cash drops land directly in WhatsApp so you can celebrate fast.',
+  },
+  {
+    id: 'product-drops',
+    backgroundSrc: '/images/product.jpg',
+    imageSrc: '/images/product.jpg',
+    label: 'Product drops',
+    title: 'Early access product drops',
+    description: 'Creators preview every release before it hits the store, complete with creative briefs and shot lists.',
+  },
+  {
+    id: 'community',
+    backgroundSrc: '/images/community.jpg',
+    imageSrc: '/images/community.jpg',
+    label: 'Community wins',
+    title: 'Co-create with Lumelle',
+    description: 'Join collaborative campaigns, test scripts side-by-side, and tap into the collective brain of 100+ creators.',
+  },
+]
 
 export const metricBadges: MetricBadge[] = [
   {
@@ -116,23 +154,23 @@ export const trustSignals = [
 
 export const rewardHighlights: RewardHighlight[] = [
   {
-    title: 'Monthly spa escapes',
-    description: 'Luxury wellness days for top performers',
+    title: 'Leaderboard spa retreats',
+    description: 'Gold creators unwind with luxury wellness days and full content glam teams.',
     icon: 'Sparkles',
   },
   {
     title: 'Cash performance boosts',
-    description: 'Stackable bonuses for every milestone',
+    description: 'Weekly cash drops when you beat your personal best or bring on new creators.',
     icon: 'Gift',
   },
   {
     title: 'Platinum leaderboard perks',
-    description: 'Campaign co-creation with the Lumelle team',
+    description: 'Co-create campaigns and hold a monthly retainer with the Lumelle studio.',
     icon: 'Crown',
   },
   {
     title: 'Creator spotlight features',
-    description: 'Get showcased across Lumelle channels',
+    description: 'Front-page features, paid shoots, and newsletter takeovers to grow your brand.',
     icon: 'Trophy',
   },
 ]
@@ -140,42 +178,43 @@ export const rewardHighlights: RewardHighlight[] = [
 export const journeySteps: JourneyStep[] = [
   {
     title: 'Trial',
-    description: 'You already tried our products and know they deliver.',
+    description:
+      'Unbox your creator kit, test every product, and capture the unedited reactions that make your audience lean in.',
     caption: 'Product love secured',
   },
   {
     title: 'Learn',
     description:
-      'Collect fresh winning scripts, content ideas, and launch playbooks.',
-    caption: 'Creator resources unlocked',
+      'Steal proven storyboards, top-performer scripts, and swipeable content briefs updated every week.',
+    caption: 'Creator intel unlocked',
   },
   {
     title: 'Launch',
     description:
-      'Publish, track, and compete on the leaderboard for bonuses and prizes.',
-    caption: 'Start earning immediately',
+      'Drop your first video, get live feedback in WhatsApp, and climb the leaderboard for prizes up to £1,000.',
+    caption: 'Bonuses unlocked',
   },
 ]
 
 export const storyCards: StoryCard[] = [
   {
     title: 'Our Vision',
-    headline: 'Luxury self-care, made accessible',
-    body: 'Lumelle elevates everyday routines with beautifully designed shower caps that protect hair and feel good to wear.',
+    headline: 'Luxury self-care, made iconic',
+    body: 'We pair heritage beauty craftsmanship with creator-first design so every launch feels like a brand moment.',
     mediaAlt: 'Founder presenting Lumelle products',
     imageSrc: '/images/brand-lifestyle.jpg',
   },
   {
     title: 'Product Proof',
     headline: 'Built for creators and their audiences',
-    body: 'Waterproof, satin-lined, and TikTok beloved—every detail is crafted to photograph beautifully and perform IRL.',
+    body: 'Waterproof, satin-lined, and TikTok beloved—every detail photographs beautifully, ships quickly, and delivers results.',
     mediaAlt: 'Close-up of Lumelle shower cap details',
     imageSrc: '/images/product.jpg',
   },
   {
     title: 'Community Wins',
     headline: 'Creators growing together',
-    body: 'Weekly workshops, content clinics, and peer reviews ensure you always know what is working right now.',
+    body: 'Weekly labs, analytics drops, and peer breakdowns keep you ahead of trends before they explode.',
     mediaAlt: 'Creators celebrating Lumelle milestone',
     imageSrc: '/images/community.jpg',
   },
@@ -227,70 +266,37 @@ export const successStories: SuccessStory[] = [
 
 export const rewardTiers: RewardTier[] = [
   {
-    name: 'Bronze',
-    range: '10-20 sales/month',
+    name: 'Gold',
+    range: '1st place · Leaderboard finish',
     rewards: [
-      '20% base commission on every sale',
-      'Weekly content clinics',
-      'Feature in monthly newsletter',
+      '£1,000 cash prize wired within 48 hours',
+      'Luxury spa day experience with glam team',
+      'Invitation to stay on retainer for the next campaign',
     ],
   },
   {
     name: 'Silver',
-    range: '21-35 sales/month',
+    range: '2nd place · Leaderboard finish',
     rewards: [
-      '22% commission boost',
-      '£100 cash bonus eligibility',
-      'Studio lighting kit raffle',
+      '£500 cash prize for your next content sprint',
+      'Curated Lumelle gift set delivered to your door',
+      'Invitation to stay on retainer for the next campaign',
     ],
   },
   {
-    name: 'Gold',
-    range: '36+ sales/month',
+    name: 'Bronze',
+    range: '3rd place · Leaderboard finish',
     rewards: [
-      '25% commission boost',
-      'Monthly spa day experience',
-      'Early access to product drops',
+      '£250 cash prize and product allowance',
+      'Creator gift set featuring best-selling bundles',
+      'Invitation to stay on retainer for the next campaign',
     ],
   },
-  {
-    name: 'Platinum',
-    range: 'Top 3 performers',
-    rewards: [
-      '30% commission for the next month',
-      'Custom campaign co-creation with Lumelle',
-      'Exclusive creator spotlight across channels',
-    ],
-    callout: 'Leaderboard exclusive',
-  },
-]
-
-export const commissionDetails: CommissionTier[] = [
-  {
-    label: 'Base',
-    details: '20% commission paid weekly via Stripe',
-  },
-  {
-    label: 'Launch Bonus',
-    details: 'Extra 5% on your first seven days once your first video is live',
-  },
-  {
-    label: 'Referral Boost',
-    details: 'Invite a creator and earn £50 when they hit Gold tier',
-  },
-]
-
-export const weekOneRoadmap = [
-  'Day 1: Join WhatsApp, introduce yourself, pick your content angle.',
-  'Day 2: Review winning hooks & scripts, outline your first video.',
-  'Day 3: Shoot & edit—submit for peer review to get copy tweaks.',
-  'Day 4: Publish with tracking link, log your post in the leaderboard.',
-  'Day 5: Share performance, grab new prompts, prep your next drop.',
 ]
 
 export const whatsappCtaContent: WhatsAppCtaContent = {
   title: 'Ready to start earning?',
-  subtitle: 'Join our private WhatsApp creator community and get your launch playbook in minutes.',
+  subtitle: 'Join our private WhatsApp creator community and grab the content brief in minutes.',
   primaryCta: 'Join WhatsApp Community',
   benefits: [
     'Daily prompts and winning script templates',
@@ -306,6 +312,7 @@ export const leaderboardEntries: LeaderboardEntry[] = [
     name: 'Random Life UK',
     handle: '@randomlifeuk',
     sold: 41,
+    avatarSrc: '/images/avatar-randomlife.jpg',
     avatarAlt: 'Top creator avatar',
     trend: 'up',
   },
@@ -314,6 +321,7 @@ export const leaderboardEntries: LeaderboardEntry[] = [
     name: 'Shannon Mitchell',
     handle: '@shannon_mitch',
     sold: 29,
+    avatarSrc: '/images/avatar-shannon.jpg',
     avatarAlt: 'Creator avatar',
     trend: 'steady',
   },
@@ -322,6 +330,7 @@ export const leaderboardEntries: LeaderboardEntry[] = [
     name: 'Rachel',
     handle: '@rachelsummergreenie._',
     sold: 23,
+    avatarSrc: '/images/avatar-rachel.jpg',
     avatarAlt: 'Creator avatar',
     trend: 'up',
   },
@@ -331,17 +340,27 @@ export const faqItems: FAQItem[] = [
   {
     question: 'What happens after I tap join?',
     answer:
-      'You will be redirected to our private WhatsApp group. Say hi, read the pinned playbook, and a Lumelle coach will message you within 24 hours to map your launch.',
+      'You will be redirected to our private WhatsApp group. Say hi, open the pinned content brief, and a Lumelle coach will message you within 24 hours to map your launch.',
   },
   {
-    question: 'Do I need to buy inventory up front?',
+    question: 'Why Lumelle instead of another affiliate program?',
     answer:
-      'No inventory purchases are required. You already have your product sample, and we drop-ship every order directly to your audience.',
+      'Lumelle blends luxury beauty with proven creator content briefs. You get premium products that convert, fast shipping, and weekly intel so every post feels like a launch—not a gamble.',
   },
   {
-    question: 'How are commissions tracked and paid?',
+    question: 'How does Lumelle help me grow my brand?',
     answer:
-      'Every creator receives a unique trackable link. We reconcile weekly and pay out to your bank via Stripe every Friday.',
+      'We position you as the face of a growing luxury brand. Expect spotlight takeovers, co-created campaigns, and resources that make your audience see you as the go-to for self-care ritual upgrades.',
+  },
+  {
+    question: 'Who are we, and where can I learn more?',
+    answer:
+      'Lumelle is a UK-based beauty studio backed by a team of creator strategists and product developers. Meet the founders and explore our story at https://lumellebeauty.co.uk/about.',
+  },
+  {
+    question: 'What are the commissions and ad spend expectations?',
+    answer:
+      'Creators earn a baseline 20% commission on every sale and we advise reinvesting 10% of your payouts into ads or content boosts—our team shares best practices to stretch every pound.',
   },
   {
     question: 'What if I am new to affiliate marketing?',
@@ -351,13 +370,6 @@ export const faqItems: FAQItem[] = [
   {
     question: 'Can I opt out of WhatsApp?',
     answer:
-      'WhatsApp is our real-time operations hub. If you prefer email, let us know— we will send weekly digests and resources directly to you.',
+      'WhatsApp is our real-time operations hub. If you prefer email, let us know—we will send weekly digests and resources directly to you.',
   },
-]
-
-export const formBenefits = [
-  'Creator launch playbook and scripts',
-  'Weekly performance labs & office hours',
-  'Access to real-time leaderboard and rewards',
-  'Priority shipping on refill inventory',
 ]

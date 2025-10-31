@@ -11,7 +11,7 @@ export const LeaderboardSection = ({
   return (
     <section
       id="leaderboard"
-      className="bg-brand-blush/15 py-20 text-brand-cocoa"
+      className="scroll-mt-24 bg-brand-blush/15 py-20 text-brand-cocoa md:scroll-mt-32"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
@@ -47,13 +47,18 @@ export const LeaderboardSection = ({
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-full bg-brand-peach/30" />
+                      <img
+                        src={entry.avatarSrc}
+                        alt={entry.avatarAlt}
+                        className="h-12 w-12 rounded-full object-cover"
+                        loading="lazy"
+                      />
                       <span className="font-semibold text-brand-cocoa">
                         {entry.name}
                       </span>
                     </div>
                   </td>
-                  <td className="px-4 py-4 text-brand-cocoa/60">
+                  <td className="px-4 py-4 text-brand-cocoa">
                     {entry.handle}
                   </td>
                   <td className="px-4 py-4 text-right font-semibold text-brand-cocoa">

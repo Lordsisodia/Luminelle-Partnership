@@ -21,7 +21,7 @@ export const BrandStorySection = () => {
   return (
     <section
       id="story"
-      className="bg-brand-blush/15 py-20 text-brand-cocoa"
+      className="scroll-mt-24 bg-brand-blush/15 py-20 text-brand-cocoa md:scroll-mt-32"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
@@ -30,8 +30,8 @@ export const BrandStorySection = () => {
           description="Combine luxury aesthetics with proven conversion tactics—every detail is crafted to help you stand out and sell out."
           alignment="center"
         />
-        <div className="mt-12 flex flex-col gap-8 lg:flex-row lg:items-center">
-          <div className="relative flex-1 overflow-hidden rounded-[2.5rem] border border-brand-peach/40 bg-white shadow-soft">
+        <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr,0.85fr] lg:items-start">
+          <div className="relative min-h-[32rem] overflow-hidden rounded-[2.5rem] border border-brand-peach/40 bg-white shadow-soft">
             {slides.map((slide, index) => {
               const isActive = index === activeIndex
               return (
@@ -79,7 +79,7 @@ export const BrandStorySection = () => {
               ))}
             </div>
           </div>
-          <div className="max-w-sm rounded-3xl border border-brand-peach/30 bg-white/90 p-6 shadow-inner">
+          <div className="rounded-3xl border border-brand-peach/30 bg-white/90 p-6 shadow-inner lg:sticky lg:top-28">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
               Explore the story
             </p>

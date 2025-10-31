@@ -10,7 +10,7 @@
 }
 
 body {
-  @apply min-h-screen bg-white text-brand-cocoa font-body antialiased;
+  @apply min-h-screen bg-white text-brand-cocoa font-body antialiased overflow-x-hidden;
 }
 
 .font-heading {

@@ -16,7 +16,8 @@ export const CompetitiveCallout = ({
         </h3>
         <p className="mt-3 text-base text-brand-cocoa/80">
           The top three creators unlock Platinum perks for the next month—
-          including 30% commission and co-created campaigns with Lumelle.
+          including 20% commission boosters and co-created campaigns with
+          Lumelle.
         </p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <button

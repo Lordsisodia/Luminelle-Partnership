@@ -5,7 +5,7 @@ export const FAQSection = () => {
   return (
     <section
       id="faq"
-      className="bg-white py-20 text-brand-cocoa"
+      className="scroll-mt-24 bg-white py-20 text-brand-cocoa md:scroll-mt-32"
     >
       <div className="mx-auto max-w-4xl px-4 md:px-6">
         <SectionHeading

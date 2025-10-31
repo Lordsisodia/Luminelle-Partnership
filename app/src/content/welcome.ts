@@ -16,7 +16,7 @@ export const welcomeHero = {
 export const welcomeSteps = [
   {
     title: 'Join the WhatsApp crew',
-    description: 'Tap the button above, introduce yourself, and pin the creator playbook.',
+    description: 'Tap the button above, introduce yourself, and pin the creator content brief.',
   },
   {
     title: 'Download the content brief',

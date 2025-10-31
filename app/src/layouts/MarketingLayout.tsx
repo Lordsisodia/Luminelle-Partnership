@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { SUPPORT_EMAIL } from '@/config/constants'
 
@@ -23,95 +22,77 @@ export const MarketingLayout = ({
   onPrimaryAction,
   primaryLabel = 'Join WhatsApp',
 }: MarketingLayoutProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
   const handleNavClick = (id: string) => {
     const target = document.getElementById(id)
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      setIsMenuOpen(false)
     }
   }
 
   return (
     <div className="min-h-screen bg-white text-brand-cocoa">
-      <header className="sticky top-0 z-50 border-b border-brand-blush/40 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
-          <RouterLink to="/" className="flex items-center gap-2">
-            <span className="font-heading text-xl font-semibold uppercase tracking-[0.24em] text-brand-cocoa">
-              Lumelle
-            </span>
-            <span className="hidden text-sm font-medium text-brand-cocoa/70 md:inline">
-              Creator Program
-            </span>
-          </RouterLink>
-          <div className="flex items-center gap-3 md:gap-6">
-            <nav className="hidden items-center gap-4 md:flex">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
-                    activeId === item.id
-                      ? 'bg-brand-peach/20 text-brand-cocoa'
-                      : 'text-brand-cocoa/70 hover:text-brand-cocoa'
-                  }`}
-                  type="button"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </nav>
-            <button
-              type="button"
-              onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="inline-flex items-center gap-2 rounded-full border border-brand-peach/50 px-4 py-2 text-sm font-medium text-brand-cocoa shadow-sm transition-colors hover:border-brand-peach hover:bg-brand-peach/20 md:hidden"
+      <header className="sticky top-0 z-50 border-b border-brand-blush/40 bg-white/95 backdrop-blur">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <div className="flex flex-col items-center gap-4 py-4 md:flex-row md:justify-between md:gap-6">
+            <RouterLink
+              to="/"
+              className="flex flex-col items-center gap-1 text-center md:flex-row md:items-center md:gap-2 md:text-left"
             >
-              Menu
-              <span className="text-xs text-brand-cocoa/70">
-                {isMenuOpen ? 'Close' : 'Open'}
+              <span className="font-heading text-2xl font-semibold uppercase tracking-[0.24em] text-brand-cocoa md:text-xl">
+                Lumelle
               </span>
-            </button>
-            {onPrimaryAction ? (
-              <button
-                onClick={onPrimaryAction}
-                type="button"
-                className="hidden items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90 md:inline-flex"
-              >
-                {primaryLabel}
-              </button>
-            ) : null}
-          </div>
-        </div>
-        {isMenuOpen ? (
-          <div className="border-t border-brand-blush/40 bg-white md:hidden">
-            <nav className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`rounded-2xl px-4 py-3 text-left text-base font-medium transition-colors ${
-                    activeId === item.id
-                      ? 'bg-brand-peach/20 text-brand-cocoa'
-                      : 'text-brand-cocoa/80 hover:bg-brand-peach/10'
-                  }`}
-                  type="button"
-                >
-                  {item.label}
-                </button>
-              ))}
+              <span className="text-xs font-medium uppercase tracking-[0.3em] text-brand-cocoa/60 md:hidden">
+                Creator Program
+              </span>
+              <span className="hidden text-sm font-medium text-brand-cocoa/70 md:inline">
+                Creator Program
+              </span>
+            </RouterLink>
+            <div className="hidden items-center gap-6 md:flex">
+              <nav className="flex items-center gap-4">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
+                      activeId === item.id
+                        ? 'bg-brand-peach/20 text-brand-cocoa'
+                        : 'text-brand-cocoa/70 hover:text-brand-cocoa'
+                    }`}
+                    type="button"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
               {onPrimaryAction ? (
                 <button
                   onClick={onPrimaryAction}
                   type="button"
-                  className="mt-2 w-full rounded-full bg-brand-peach px-4 py-3 text-base font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90"
                 >
                   {primaryLabel}
                 </button>
               ) : null}
-            </nav>
+            </div>
           </div>
-        ) : null}
+          <nav className="flex w-full items-center justify-center gap-3 overflow-x-auto pb-4 md:hidden">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                  activeId === item.id
+                    ? 'bg-brand-peach/30 text-brand-cocoa shadow-soft'
+                    : 'bg-white/80 text-brand-cocoa/70 hover:text-brand-cocoa'
+                }`}
+                type="button"
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+        </div>
       </header>
       <main>{children}</main>
       <footer className="border-t border-brand-blush/40 bg-brand-blush/20">

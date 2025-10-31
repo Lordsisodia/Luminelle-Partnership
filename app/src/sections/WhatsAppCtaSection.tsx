@@ -12,7 +12,7 @@ export const WhatsAppCtaSection = ({
   return (
     <section
       id="whatsapp"
-      className="mx-auto max-w-6xl px-4 py-20 text-brand-cocoa md:px-6"
+      className="mx-auto max-w-6xl scroll-mt-24 px-4 py-20 text-brand-cocoa md:scroll-mt-32 md:px-6"
     >
       <div className="overflow-hidden rounded-[3rem] border border-brand-peach/50 bg-gradient-to-br from-brand-peach/30 via-white to-brand-blush/40 px-6 py-12 shadow-soft md:px-12 md:py-16">
         <div className="grid gap-10 md:grid-cols-[1.1fr,0.9fr] md:items-center">
@@ -59,7 +59,7 @@ export const WhatsAppCtaSection = ({
             <ol className="mt-4 space-y-3 text-sm text-brand-cocoa/75">
               <li className="rounded-2xl bg-brand-blush/30 px-4 py-3">
                 <span className="font-semibold text-brand-cocoa">Day 1:</span>{' '}
-                Introduce yourself, grab the pinned playbook, and share your
+                Introduce yourself, grab the pinned content brief, and share your
                 launch goal.
               </li>
               <li className="rounded-2xl bg-brand-blush/30 px-4 py-3">

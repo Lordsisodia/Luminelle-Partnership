@@ -20,12 +20,9 @@ const navItems: NavItem[] = [
   { id: 'hero', label: 'Overview' },
   { id: 'journey', label: 'How it works' },
   { id: 'story', label: 'Brand story' },
-  { id: 'success', label: 'Success stories' },
-  { id: 'whatsapp', label: 'Community' },
-  { id: 'rewards', label: 'Rewards' },
+  { id: 'success', label: 'Creator proof' },
   { id: 'leaderboard', label: 'Leaderboard' },
   { id: 'faq', label: 'FAQ' },
-  { id: 'join', label: 'Join' },
 ]
 
 export const LandingPage = () => {
