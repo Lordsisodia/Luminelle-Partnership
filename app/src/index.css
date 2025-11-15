@@ -13,6 +13,10 @@ body {
   @apply min-h-screen bg-white text-brand-cocoa font-body antialiased overflow-x-hidden;
 }
 
+/* Hide horizontal scrollbar for snap carousels */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 .font-heading {
   font-family: "The Seasons", serif;
 }

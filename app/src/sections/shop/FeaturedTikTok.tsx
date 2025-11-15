@@ -1,0 +1,77 @@
+import { useRef } from 'react'
+import { successStories } from '@/content/landing'
+
+export const FeaturedTikTok = () => {
+  const stories = successStories.slice(0, 3)
+  const scrollerRef = useRef<HTMLDivElement | null>(null)
+
+  const nudge = (dir: 'left' | 'right') => {
+    const el = scrollerRef.current
+    if (!el) return
+    const amount = Math.min(420, el.clientWidth * 0.8)
+    el.scrollBy({ left: dir === 'right' ? amount : -amount, behavior: 'smooth' })
+  }
+
+  return (
+    <section className="bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6">
+        <div className="mb-6 text-center text-brand-cocoa">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">As seen on TikTok</p>
+          <h2 className="mt-2 font-heading text-2xl md:text-3xl">Creators using Lumelle, unfiltered</h2>
+          <p className="mt-2 text-sm text-brand-cocoa/70">Swipe to watch a few of our favourite videos.</p>
+        </div>
+
+        <div ref={scrollerRef} className="relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:px-0">
+          {stories.map((s) => (
+            <article key={s.handle} className="min-w-[min(90vw,420px)] snap-center">
+              <div className="relative overflow-hidden rounded-3xl border border-brand-peach/40 pb-[177.77%] shadow-soft">
+                <iframe
+                  src={`${s.embedUrl}?lang=en`}
+                  title={`${s.name} TikTok embed`}
+                  loading="lazy"
+                  allow="encrypted-media; fullscreen; clipboard-write"
+                  scrolling="no"
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
+              <div className="mt-3 text-center text-sm text-brand-cocoa/70">{s.name} • {s.handle}</div>
+              {/* Desktop-only external link; mobile stays minimal */}
+              <div className="mt-1 hidden text-center md:block">
+                <a
+                  href={s.videoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold text-brand-cocoa/80 hover:bg-brand-blush/40"
+                >
+                  Watch on TikTok
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              </div>
+            </article>
+          ))}
+          {/* Desktop-only arrow nudges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden items-center md:flex">
+            <button
+              aria-label="Scroll videos left"
+              onClick={() => nudge('left')}
+              className="pointer-events-auto ml-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center md:flex">
+            <button
+              aria-label="Scroll videos right"
+              onClick={() => nudge('right')}
+              className="pointer-events-auto mr-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default FeaturedTikTok

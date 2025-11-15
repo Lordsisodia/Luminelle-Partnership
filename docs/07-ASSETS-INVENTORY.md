@@ -17,25 +17,30 @@
 
 ### Product Images
 **Files Provided:**
-1. `IMG_1878.jpeg` - Product photo
-2. `IMG_1907.jpeg` - Product photo
-3. `7850b2f7-4fc9-46dc-9e6e-baba4c00da86.jpeg` - Product photo
-4. `IMG_2651.jpeg` - Product showcase
-5. `IMG_2656.png` - Product detail/screenshot
+1. `product-main.jpg` - Primary Luminele shower-cap hero image
+2. `product-feature-01.jpg` - Feature card (comfort focus) with headline overlay
+3. `product-feature-02.jpg` - Feature card (care instructions / benefits) with overlay
+4. `product-feature-03.jpg` - Feature card (usage scenario) with overlay
+5. `product-feature-04.jpg` - Feature card (audience call-out) with overlay
+6. `product-feature-05.jpg` - Feature card (materials breakdown) with overlay
+7. `product-feature-06.jpg` - Feature card (testimonial style) with overlay
+8. `product-feature-07.jpg` - Feature card (step-by-step) with overlay
+9. `product-feature-08.jpg` - Feature card (bundle overview) with overlay
 
-**Status:** ✅ Provided
+**Status:** ✅ Renamed & organised (`app/public/uploads/luminele`)
 
 **Action Items:**
-- [ ] Optimize all images (WebP format)
-- [ ] Create multiple sizes (responsive)
-- [ ] Generate thumbnails
-- [ ] Add alt text descriptions
+- [ ] Convert to WebP + generate responsive sizes
+- [ ] Decide which feature cards migrate into landing sections vs resource downloads
+- [ ] Add descriptive alt text per placement
+- [ ] Back up originals after optimisation
 
 **Planned Usage:**
-- Hero background
-- Brand story section
-- Product showcase carousel
-- Testimonial backgrounds
+- `product-main.jpg` → Replace current hero/product imagery once palette alignment is confirmed
+- `product-feature-01.jpg` / `product-feature-04.jpg` → Brand Story carousel (vision + community slides)
+- `product-feature-02.jpg` / `product-feature-05.jpg` → Value Stack / Rewards section callouts
+- `product-feature-06.jpg` → Success Stories sidebar or testimonial tile
+- Remaining feature cards → Downloadable content brief / FAQ visuals or future resource library
 
 ---
 
@@ -139,6 +144,16 @@
 - [ ] Design medal graphics
 - [ ] Create badge variations
 - [ ] Export in multiple sizes
+
+---
+
+### Website Imagery Requirements
+- **Hero lifestyle** → Replace `app/public/images/hero.jpg` with a high-res (≥1500×2000, portrait or 4:5) creator-in-use shot. Keep space for text overlay and ensure lighting matches warm blush palette.
+- **Founder/brand scene** → Update `app/public/images/brand-lifestyle.jpg` with a 3:2 photo showing team or packaging moments (≥1200 px wide) to anchor the vision card.
+- **Product macro** → Refresh `app/public/images/product.jpg` with a crisp square (≥1200×1200) close-up highlighting satin texture and luxe details.
+- **Community moment** → Source `app/public/images/community.jpg` (≥1600×900, landscape) featuring multiple creators or event energy for the community story card.
+- **Creator avatars** → Provide 600×600 headshots for Shannon, Rachel, and Random Life UK to replace `avatar-shannon.jpg`, `avatar-rachel.jpg`, `avatar-randomlife.jpg`; crop tight with clean backgrounds.
+- **Reward/prize visuals (optional for MVP)** → Collect photography for upcoming incentives so we can extend the rewards section beyond placeholders later.
 
 ---
 

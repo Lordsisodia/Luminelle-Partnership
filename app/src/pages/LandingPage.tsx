@@ -48,8 +48,7 @@ export const LandingPage = () => {
     <MarketingLayout
       navItems={navItems}
       activeId={activeId}
-      primaryLabel="Join WhatsApp"
-      onPrimaryAction={handleJoinClick}
+      subtitle="Creators Program"
     >
       <HeroSection
         onPrimaryAction={handleJoinClick}
