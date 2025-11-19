@@ -5,7 +5,7 @@ import { Star } from 'lucide-react'
 type Slide = { title: string; copy: string; image: string; ctaHref: string; tag?: string; proof?: string }
 
 export const BenefitsSection = ({ slides }: { slides: Slide[] }) => (
-  <section className="bg-brand-blush/10 py-12">
+  <section className="bg-white py-12">
     <div className="mx-auto max-w-6xl px-4 md:px-6">
       <SectionHeading
         eyebrow="Benefits"
@@ -13,7 +13,7 @@ export const BenefitsSection = ({ slides }: { slides: Slide[] }) => (
         description="Every feature solves a creator pain point—from frizz control to durable finishes."
         alignment="center"
       />
-      <div className="mt-6 rounded-[2.5rem] border border-brand-peach/40 bg-white/90 p-4 shadow-soft md:p-6">
+      <div className="mt-6 rounded-[2.5rem] border border-brand-peach/40 bg-white p-4 shadow-soft md:p-6">
         <OfferCarousel slides={slides} />
         <div className="mt-6 flex flex-col items-center gap-3 text-sm text-brand-cocoa/70 md:flex-row md:justify-between">
           <div className="inline-flex items-center gap-2">

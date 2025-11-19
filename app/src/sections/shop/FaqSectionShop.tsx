@@ -2,7 +2,36 @@ import { useMemo, useState } from 'react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Search, Plus, Minus } from 'lucide-react'
 
-export const FaqSectionShop = ({ items }: { items: { q: string; a: string }[] }) => {
+type FAQItem = { q: string; a: string }
+
+type Heading = {
+  eyebrow?: string
+  title?: string
+  description?: string
+  alignment?: 'left' | 'center' | 'right'
+}
+
+type Props = {
+  items: FAQItem[]
+  heading?: Heading
+  sectionId?: string
+  ctaHref?: string
+  ctaLabel?: string
+}
+
+const defaultHeading: Heading = {
+  eyebrow: 'Frequently asked',
+  title: 'Answers before you buy',
+  description: "If you don't see your question here, reach out to us and we'll help right away.",
+  alignment: 'center',
+}
+
+const defaultCta = {
+  href: 'https://wa.me/message/lumellecaps',
+  label: 'Chat with WhatsApp concierge',
+}
+
+export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel }: Props) => {
   const [query, setQuery] = useState('')
   const [openIndex, setOpenIndex] = useState(0)
 
@@ -13,15 +42,24 @@ export const FaqSectionShop = ({ items }: { items: { q: string; a: string }[] })
   }, [items, normalizedQuery])
 
   const visibleItems = filtered.length ? filtered : items
+  const resolvedHeading = {
+    ...defaultHeading,
+    ...heading,
+    alignment: heading?.alignment ?? defaultHeading.alignment,
+  }
+  const resolvedCta = {
+    href: ctaHref ?? defaultCta.href,
+    label: ctaLabel ?? defaultCta.label,
+  }
 
   return (
-    <section id="faq" className="bg-white py-16">
+    <section id={sectionId ?? 'faq'} className="bg-white py-16">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
-          eyebrow="Frequently asked"
-          title="Answers before you buy"
-          description="If you don't see your question here, reach out to us and we'll help right away."
-          alignment="center"
+          eyebrow={resolvedHeading.eyebrow}
+          title={resolvedHeading.title}
+          description={resolvedHeading.description}
+          alignment={resolvedHeading.alignment}
         />
 
         <div className="mt-6 flex flex-col gap-3 rounded-3xl border border-brand-peach/30 bg-brand-blush/10 p-4 md:flex-row md:items-center">
@@ -37,12 +75,12 @@ export const FaqSectionShop = ({ items }: { items: { q: string; a: string }[] })
             />
           </label>
           <a
-            href="https://wa.me/message/lumellecaps"
+            href={resolvedCta.href}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-2xl bg-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft"
           >
-            Chat with WhatsApp concierge
+            {resolvedCta.label}
           </a>
         </div>
 

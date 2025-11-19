@@ -1,21 +1,105 @@
 import { MarketingLayout } from '@/layouts/MarketingLayout'
+import type { NavItem } from '@/layouts/MarketingLayout'
+import { blogPosts } from '@/content/blog'
+import { SectionHeading } from '@/components/SectionHeading'
+import { Link } from 'react-router-dom'
+
+const navItems: NavItem[] = [
+  { id: 'hero', label: 'Blog' },
+  { id: 'posts', label: 'Posts' },
+]
+
+const tags = ['Frizz-free', 'Protective styles', 'Science', 'Creator tips', 'Travel', 'Care', 'How-to', 'Tips']
 
 export const BlogIndexPage = () => {
+  const featured = blogPosts.filter((p) => p.featured).slice(0, 2)
+  const rest = blogPosts.filter((p) => !p.featured)
+
   return (
-    <MarketingLayout navItems={[]} subtitle={null}>
-      <section className="bg-white">
-        <div className="mx-auto max-w-3xl px-4 py-16">
-          <h1 className="font-heading text-3xl text-brand-cocoa">Blog</h1>
-          <p className="mt-2 text-brand-cocoa/70">Articles coming soon. We’ll publish hair care tips, styling preservation guides, and product updates here.</p>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <article className="rounded-2xl border border-brand-blush/60 bg-brand-blush/20 p-5">
-              <h3 className="font-heading text-lg text-brand-cocoa">How to keep a blowout fresh for days</h3>
-              <p className="mt-2 text-sm text-brand-cocoa/80">Smart shower routines and protective accessories that prevent frizz.</p>
-            </article>
-            <article className="rounded-2xl border border-brand-blush/60 bg-brand-blush/20 p-5">
-              <h3 className="font-heading text-lg text-brand-cocoa">The problem with disposable shower caps</h3>
-              <p className="mt-2 text-sm text-brand-cocoa/80">Why reusables are better for your hair and the planet.</p>
-            </article>
+    <MarketingLayout navItems={navItems} subtitle="Journal">
+      <section id="hero" className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
+          <div className="text-center">
+            <span className="inline-flex rounded-full bg-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/70">
+              Journal
+            </span>
+            <h1 className="mt-3 font-heading text-4xl text-brand-cocoa md:text-5xl">Frizz-free hair, creator-tested</h1>
+            <p className="mt-3 text-base text-brand-cocoa/75 md:text-lg">
+              Guides, routines, and creator scripts that keep your style flawless—plus launches and behind-the-scenes.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/70">
+              {tags.map((tag) => (
+                <span key={tag} className="rounded-full bg-brand-blush/40 px-3 py-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="posts" className="bg-brand-blush/10">
+        <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
+          <SectionHeading
+            eyebrow="Featured"
+            title="Start with these"
+            description="Editor picks to help you protect your style fast."
+            alignment="left"
+          />
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {featured.map((post) => (
+              <Link
+                key={post.slug}
+                to={`/blog/${post.slug}`}
+                className="group overflow-hidden rounded-3xl border border-brand-peach/40 bg-white shadow-soft transition hover:-translate-y-1"
+              >
+                <div className="aspect-[3/2] w-full overflow-hidden bg-brand-blush/20">
+                  <img src={post.cover} alt={post.title} className="h-full w-full object-cover" loading="lazy" />
+                </div>
+                <div className="space-y-2 p-5">
+                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
+                    <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-brand-cocoa/80">{post.tag}</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h3 className="font-heading text-xl text-brand-cocoa">{post.title}</h3>
+                  <p className="text-sm text-brand-cocoa/75">{post.teaser}</p>
+                  <div className="text-xs text-brand-cocoa/60">
+                    {post.author} • {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <SectionHeading
+            eyebrow="Latest"
+            title="Browse all posts"
+            description="Fresh tips for blowouts, curls, braids, and creator workflows."
+            alignment="left"
+          />
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {rest.map((post) => (
+              <Link
+                key={post.slug}
+                to={`/blog/${post.slug}`}
+                className="group overflow-hidden rounded-2xl border border-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
+              >
+                <div className="aspect-[3/2] w-full overflow-hidden bg-brand-blush/20">
+                  <img src={post.cover} alt={post.title} className="h-full w-full object-cover" loading="lazy" />
+                </div>
+                <div className="space-y-2 p-4">
+                  <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
+                    <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-brand-cocoa/80">{post.tag}</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h3 className="font-heading text-lg text-brand-cocoa">{post.title}</h3>
+                  <p className="text-sm text-brand-cocoa/75 line-clamp-2">{post.teaser}</p>
+                  <div className="text-xs text-brand-cocoa/60">
+                    {post.author} • {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -24,4 +108,3 @@ export const BlogIndexPage = () => {
 }
 
 export default BlogIndexPage
-

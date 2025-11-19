@@ -14,11 +14,20 @@ export const FloatingBuyCta = ({ label = 'Buy Now', href }: Props) => {
   }, [])
 
   useEffect(() => {
-    const target = document.querySelector('[data-sticky-buy-target]')
-    if (!target || !('IntersectionObserver' in window)) return
-    const io = new IntersectionObserver(([entry]) => setIsCtaInView(entry.isIntersecting), { rootMargin: '0px 0px -40% 0px' })
-    io.observe(target)
-    return () => io.disconnect()
+    if (!('IntersectionObserver' in window)) return
+    const targets = Array.from(document.querySelectorAll('[data-sticky-buy-target]'))
+    if (!targets.length) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        setIsCtaInView(entries.some((entry) => entry.isIntersecting))
+      },
+      { rootMargin: '0px 0px -40% 0px' }
+    )
+    targets.forEach((el) => io.observe(el))
+    return () => {
+      targets.forEach((el) => io.unobserve(el))
+      io.disconnect()
+    }
   }, [])
 
   const show = isVisible && !isCtaInView
@@ -31,4 +40,3 @@ export const FloatingBuyCta = ({ label = 'Buy Now', href }: Props) => {
     </div>
   )
 }
-

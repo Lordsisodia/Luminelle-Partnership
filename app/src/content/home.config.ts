@@ -27,8 +27,23 @@ export type HomeConfig = {
   socialProof: { rating: number; count: number; tagline: string }
   problemSolution: { problems: string[]; solutions: string[] }
   ugc: { src: string; type: 'image' | 'video'; caption?: string }[]
+  benefits3?: { title: string; body: string; icon?: string }[]
+  realWorldUse?: { src: string; alt: string; caption: string }[]
+  details?: { title: string; body: string; thumbSrc?: string; thumbAlt?: string }[]
   reviews: Review[]
-  pdpTeaser: { price: string; bullets: string[]; image: string; href: string }
+  pdpTeaser: {
+    title: string
+    subtitle: string
+    description: string
+    rating: number
+    reviews: number
+    pills: string[]
+    price: string
+    bullets: string[]
+    image: string
+    href: string
+    ctaLabel: string
+  }
   faq: { q: string; a: string }[]
   stats: { value: string; label: string; helper?: string }[]
   comparison: { feature: string; lumelle: string; other: string }[]
@@ -83,6 +98,22 @@ export const homeConfig: HomeConfig = {
       ctaHref: '/product/shower-cap',
       tag: 'Durability',
       proof: 'Tested for 100+ showers without leaks',
+    },
+    {
+      title: 'Steam shield',
+      copy: 'Moisture-guard lining blocks even sauna-level steam.',
+      image: '/uploads/luminele/product-feature-03.jpg',
+      ctaHref: '/product/shower-cap',
+      tag: 'Steam-proof',
+      proof: 'Creators report 0 flyaways after 20-min showers',
+    },
+    {
+      title: 'Creator-ready fit',
+      copy: 'Roomy silhouette stretches over braids, locs, and rollers.',
+      image: '/uploads/luminele/product-feature-07.jpg',
+      ctaHref: '/product/shower-cap',
+      tag: 'All hair welcome',
+      proof: '100+ pros keep it in their travel kits',
     }
   ],
   socialProof: { rating: 4.9, count: 1240, tagline: 'Loved by thousands' },
@@ -103,16 +134,40 @@ export const homeConfig: HomeConfig = {
     { src: '/uploads/luminele/product-feature-02.jpg', type: 'image' },
     { src: '/uploads/luminele/product-feature-04.jpg', type: 'image' }
   ],
+  benefits3: [
+    { title: 'Seal out steam', body: 'Waterproof core protects styles from moisture and frizz.' },
+    { title: 'Comfort, no creases', body: 'Spa‑grade band hugs softly without leaving marks.' },
+    { title: 'Reusable luxe', body: 'Dual‑layer satin built to last 100+ uses.' },
+  ],
+  realWorldUse: [
+    { src: '/uploads/luminele/product-feature-03.jpg', alt: 'Creator mirror selfie wearing cap', caption: 'After a hot shower — blowout stays smooth.' },
+    { src: '/uploads/luminele/product-feature-07.jpg', alt: 'Comfort band macro', caption: 'Comfort band sits softly — no marks.' },
+    { src: '/uploads/luminele/product-feature-02.jpg', alt: 'Bathroom lifestyle shot', caption: 'Fits curls and braids comfortably.' },
+  ],
+  details: [
+    { title: 'Materials & care', body: 'Dual‑layer satin with waterproof TPU core. Rinse after use, air dry, and hand wash weekly with mild soap for longevity.', thumbSrc: '/uploads/luminele/product-feature-05.jpg', thumbAlt: 'Satin lining macro' },
+    { title: 'Fit & sizing', body: 'Comfort‑fit band stretches to 24"+ circumference. Designed for curls, braids, and blowouts.', thumbSrc: '/uploads/luminele/product-feature-04.jpg', thumbAlt: 'Comfort band detail' },
+    { title: 'What’s in the box', body: 'Lumelle Shower Cap in protective pouch. Simple care card inside.' },
+    { title: 'Shipping & returns', body: 'Tracked worldwide shipping from the UK. 30‑day Luxe Guarantee with easy exchanges.' },
+  ],
   reviews: [
     { author: 'Amelia', stars: 5, title: 'Zero frizz', body: 'Finally a cap that actually works.' },
     { author: 'Beth', stars: 5, title: 'So comfy', body: 'No marks on my forehead and looks cute.' },
     { author: 'Cara', stars: 5, title: 'Worth it', body: 'Saved my blowout more than once.' }
   ],
   pdpTeaser: {
-    price: '£24.00',
+    title: 'Lumelle Shower Cap',
+    subtitle: 'Creator-loved protection for every style',
+    description:
+      'Dual-layer satin with a waterproof core keeps silk presses, curls, and braids flawless through every steamy shower.',
+    rating: 4.9,
+    reviews: 1240,
+    pills: ['No-frizz seal', 'Luxury feel', 'Reusable + eco'],
+    price: 'From £24',
     bullets: ['Moisture‑guard lining', 'Comfort stretch band', 'Reusable & durable'],
     image: '/uploads/luminele/product-feature-05.jpg',
-    href: '/product/shower-cap'
+    href: '/product/shower-cap',
+    ctaLabel: 'Shop the cap',
   },
   faq: [
     { q: 'Is it fully waterproof?', a: 'Yes, with a moisture‑guard lining and sealed seams.' },

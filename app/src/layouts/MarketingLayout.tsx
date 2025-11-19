@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { SUPPORT_EMAIL } from '@/config/constants'
 import { useCart } from '@/state/CartContext'
 import { useAuth } from '@/state/AuthContext'
+import { DrawerContext } from '@/state/DrawerContext'
 
 export type NavItem = {
   id: string
@@ -38,7 +39,7 @@ export const MarketingLayout = ({
   const contentRef = useRef<HTMLDivElement | null>(null)
   const drawerRef = useRef<HTMLDivElement | null>(null)
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
-  const { items, qty, subtotal, add, setQty, remove } = useCart()
+  const { items, qty, subtotal, setQty, remove } = useCart()
   const { signedIn, user, signIn } = useAuth()
   // --- V2 state: promo, cart ---
 
@@ -114,17 +115,75 @@ export const MarketingLayout = ({
 
   // search logic removed
 
+  const drawerApi = {
+    openCart: () => {
+      setActiveTab('cart')
+      setMenuOpen(true)
+    },
+    openMenu: () => {
+      setActiveTab('menu')
+      setMenuOpen(true)
+    },
+  }
+
+  // rotating promo banner messages
+  const promoMessages = [
+    'Fast shipping over £40',
+    '30-day Luxe guarantee',
+    'Secure checkout + instant tracking',
+    'Buy 2, save 10%'
+  ]
+  const [activePromo, setActivePromo] = useState(0)
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActivePromo((prev) => (prev + 1) % promoMessages.length)
+    }, 4000)
+    return () => window.clearInterval(id)
+  }, [promoMessages.length])
+
+  // hide header on scroll down, reveal on slight scroll up
+  const [showHeader, setShowHeader] = useState(true)
+  const lastScrollRef = useRef(0)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const current = window.scrollY
+      const last = lastScrollRef.current
+      const delta = current - last
+
+      if (menuOpen) {
+        setShowHeader(true)
+      } else if (current < 12) {
+        setShowHeader(true)
+      } else if (delta > 6) {
+        setShowHeader(false)
+      } else if (delta < -6) {
+        setShowHeader(true)
+      }
+
+      lastScrollRef.current = current
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [menuOpen])
+
   return (
+    <DrawerContext.Provider value={drawerApi}>
     <div className="relative min-h-screen overflow-x-hidden bg-white text-brand-cocoa">
       {/* Top announcement bar */}
       <div className="overflow-hidden bg-brand-blush text-brand-cocoa">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex items-center justify-between gap-2 py-2 text-xs font-medium font-body">
-            <span className="flex-1 text-center">Fast UK shipping over £40</span>
-            <span className="hidden h-1 w-1 rounded-full bg-brand-cocoa/60 sm:inline" />
-            <span className="flex-1 text-center">30-day Luxe Guarantee</span>
-            <span className="hidden h-1 w-1 rounded-full bg-brand-cocoa/60 sm:inline" />
-            <span className="flex-1 text-center">Secure checkout + instant tracking</span>
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="relative flex h-10 items-center justify-center text-[11px] font-semibold uppercase tracking-[0.26em] sm:text-xs">
+            {promoMessages.map((msg, idx) => (
+              <span
+                key={msg}
+                className={`absolute whitespace-nowrap transition-opacity duration-400 ${idx === activePromo ? 'opacity-100' : 'opacity-0'}`}
+                aria-hidden={idx !== activePromo}
+              >
+                {msg}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -133,7 +192,11 @@ export const MarketingLayout = ({
         className="relative z-10 transition-transform duration-300 will-change-transform"
         style={{ transform: menuOpen ? `translateX(-${DRAWER_WIDTH}px)` : 'translateX(0)' }}
       >
-      <header className="sticky top-0 z-50 border-b border-brand-blush/40 bg-white/95 backdrop-blur">
+      <header
+        className={`sticky top-0 z-50 border-b border-brand-blush/40 bg-white/95 backdrop-blur transition-transform duration-250 ease-out ${
+          showHeader ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="flex items-center justify-between gap-4 py-4">
             <RouterLink
@@ -192,7 +255,7 @@ export const MarketingLayout = ({
         </div>
       </header>
       <main>{children}</main>
-      <footer className="border-t border-brand-blush/40 bg-brand-blush/20">
+      <footer className="border-t border-brand-blush/40 bg-brand-blush/20" data-sticky-buy-target>
         <div className="mx-auto flex flex-col gap-6 px-4 py-12 md:max-w-6xl md:flex-row md:items-start md:justify-between md:px-6">
           <div>
             <p className="font-heading text-lg font-semibold uppercase tracking-[0.3em]">
@@ -218,22 +281,6 @@ export const MarketingLayout = ({
             >
               {SUPPORT_EMAIL}
             </a>
-          </div>
-        </div>
-        <div className="mx-auto max-w-6xl border-t border-white/40 px-4 py-6 md:px-6">
-          <div className="flex flex-col gap-3 text-sm text-brand-cocoa/80 md:flex-row md:items-center md:justify-between">
-            <p>Need help picking a pack? Chat with us or head to the shop when you’re ready.</p>
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <a href="https://wa.me/message/lumellecaps" className="inline-flex items-center justify-center rounded-full border border-brand-cocoa/20 px-4 py-2 text-sm font-semibold text-brand-cocoa hover:border-brand-cocoa">
-                Chat with stylist
-              </a>
-              <RouterLink
-                to="/product/shower-cap"
-                className="inline-flex items-center justify-center rounded-full bg-brand-cocoa px-5 py-2 text-sm font-semibold text-white shadow-soft"
-              >
-                Buy Now
-              </RouterLink>
-            </div>
           </div>
         </div>
       </footer>
@@ -297,34 +344,11 @@ export const MarketingLayout = ({
                   <div className="mt-1 rounded-xl">
                     <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa/50">More</div>
                     <RouterLink to="/affiliates" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/affiliates' }) }}>Affiliates</RouterLink>
+                    <RouterLink to="/brand" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}>Brand story</RouterLink>
                     <RouterLink to="/blog" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}>Blog</RouterLink>
                   </div>
                 </nav>
 
-                {/* Promo carousel (free shipping first) */}
-                <div className="px-4">
-                  <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
-                    <div className="min-w-[260px] snap-start rounded-2xl border border-brand-blush/60 p-4 shadow-soft">
-                      <div className="text-sm font-semibold">Free shipping</div>
-                      <div className="mt-1 text-sm text-brand-cocoa/70">Spend £{FREE_SHIP_THRESHOLD} to qualify.</div>
-                      <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-brand-blush/40">
-                        <div className="h-full bg-brand-peach" style={{ width: `${freeShipProgress}%` }} />
-                      </div>
-                      <div className="mt-2 text-xs text-brand-cocoa/70">{remainingForFreeShip > 0 ? `£${remainingForFreeShip} away` : 'You unlocked free shipping!'}</div>
-                    </div>
-                    <div className="min-w-[260px] snap-start rounded-2xl border border-brand-blush/60 p-4 shadow-soft">
-                      <div className="text-sm font-semibold">Buy 2, save 10%</div>
-                      <div className="mt-1 text-sm text-brand-cocoa/70">Bundle and save on caps.</div>
-                      <div className="mt-3 flex items-center gap-2">
-                        <button onClick={() => { track('promo_add', { id: 'bundle_2' }); setActiveTab('cart'); add({ id: 'lumelle-cap', title: 'Lumelle Shower Cap', price: 24 }, 1) }} className="rounded-full bg-brand-peach px-4 py-2 text-sm font-semibold text-brand-cocoa shadow-soft">Add one</button>
-                        <button onClick={() => { track('promo_click', { id: 'bundle_2' }); setMenuOpen(false); window.location.href = '/product/shower-cap' }} className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold">View</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-2 text-center text-xs text-brand-cocoa/70">
-                    {remainingForFreeShip > 0 ? `£${remainingForFreeShip.toFixed(2)} away from free shipping` : 'You’ve unlocked free shipping!'}
-                  </div>
-                </div>
                 <div className="my-4 h-px bg-brand-blush/60" />
 
                 {/* Cart summary pill */}
@@ -342,7 +366,7 @@ export const MarketingLayout = ({
                 <div className="px-4">
                   <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Profile</p>
                   {signedIn ? (
-                    <RouterLink to="/account" onClick={() => setMenuOpen(false)} className="flex w-full items-center justify-between rounded-2xl border border-brand-blush/60 px-4 py-3 text-left text-sm">
+                    <RouterLink to="/account/orders" onClick={() => setMenuOpen(false)} className="flex w-full items-center justify-between rounded-2xl border border-brand-blush/60 px-4 py-3 text-left text-sm">
                       <span className="font-semibold text-brand-cocoa">Hi, {user?.firstName}</span>
                       <span className="text-brand-cocoa/60">Orders ▸</span>
                     </RouterLink>
@@ -360,26 +384,36 @@ export const MarketingLayout = ({
               // Cart tab
               <div className="pb-28">
                 <div className="px-4 pt-2">
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Cart</p>
+                  <div className="mb-2 flex items-center justify-between">
+                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Cart ({cartQty})</p>
+                    <button className="rounded-full border border-brand-blush/60 px-2 py-1 text-xs text-brand-cocoa/70" onClick={() => setActiveTab('menu')}>Continue shopping</button>
+                  </div>
+                  {/* Progress banner */}
+                  <div className="mb-2 rounded-xl bg-brand-blush/30 px-3 py-2 text-xs text-brand-cocoa/80">
+                    {remainingForFreeShip > 0 ? `You are £${remainingForFreeShip.toFixed(2)} away from free shipping.` : 'You’ve unlocked free shipping!'}
+                  </div>
+                  <div className="mb-3 h-2 w-full overflow-hidden rounded-full bg-brand-blush/40">
+                    <div className="h-full bg-brand-peach" style={{ width: `${freeShipProgress}%` }} />
+                  </div>
                   <div className="rounded-2xl border border-brand-blush/60 p-3">
                     {items.length === 0 ? (
                       <div className="rounded-xl border border-brand-blush/60 p-3 text-sm text-brand-cocoa/70">Your cart is empty.</div>
                     ) : (
                       items.map((it) => (
-                        <div key={it.id} className="mb-3 flex items-center gap-3 last:mb-0">
-                          <img src="/uploads/luminele/product-feature-05.jpg" alt={it.title} className="h-12 w-12 rounded-lg border border-brand-blush/60 object-cover" />
-                          <div className="flex-1 text-sm text-brand-cocoa">
-                            {it.title}
-                            <div className="mt-1 flex items-center justify-between text-xs text-brand-cocoa/70">
-                              <span>£{it.price.toFixed(2)} each</span>
-                              <div className="inline-flex items-center gap-2">
-                                <button aria-label="Decrease quantity" className="h-7 w-7 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, Math.max(0, it.qty - 1))}>−</button>
-                                <span className="w-4 text-center text-brand-cocoa">{it.qty}</span>
-                                <button aria-label="Increase quantity" className="h-7 w-7 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, it.qty + 1)}>+</button>
-                              </div>
+                        <div key={it.id} className="mb-4 grid grid-cols-[64px_1fr_auto] items-center gap-3 last:mb-0">
+                          <img src="/uploads/luminele/product-feature-05.jpg" alt={it.title} className="h-16 w-16 rounded-lg border border-brand-blush/60 object-cover" />
+                          <div className="text-sm text-brand-cocoa">
+                            <div className="font-medium">{it.title}</div>
+                            <div className="mt-1 text-xs text-brand-cocoa/70">£{it.price.toFixed(2)} each</div>
+                            <button className="mt-1 text-[11px] uppercase tracking-wide text-brand-cocoa/60" onClick={() => remove(it.id)}>Remove</button>
+                          </div>
+                          <div className="justify-self-end">
+                            <div className="inline-flex items-center gap-2">
+                              <button aria-label="Decrease quantity" className="h-8 w-8 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, Math.max(0, it.qty - 1))}>−</button>
+                              <span className="w-5 text-center text-brand-cocoa">{it.qty}</span>
+                              <button aria-label="Increase quantity" className="h-8 w-8 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, it.qty + 1)}>+</button>
                             </div>
                           </div>
-                          <button className="text-sm text-brand-cocoa/60" aria-label="Remove" onClick={() => remove(it.id)}>×</button>
                         </div>
                       ))
                     )}
@@ -409,8 +443,8 @@ export const MarketingLayout = ({
                     <span className="font-semibold">£{subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex gap-2">
-                    <button disabled={cartQty === 0} className="flex-1 rounded-full bg-brand-peach px-4 py-2 text-sm font-semibold text-brand-cocoa shadow-soft disabled:opacity-50" onClick={() => track('begin_checkout')}>Checkout</button>
-                    <RouterLink to="/product/shower-cap" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/shower-cap', source: 'cart_footer' }) }} className="flex-1 rounded-full border border-brand-blush/60 px-4 py-2 text-center text-sm font-semibold text-brand-cocoa">View cart</RouterLink>
+                    <button disabled={cartQty === 0} className="flex-1 rounded-full bg-brand-peach px-4 py-2 text-sm font-semibold text-brand-cocoa shadow-soft disabled:opacity-50" onClick={() => { track('begin_checkout'); setMenuOpen(false); window.location.href = '/checkout' }}>Checkout</button>
+                    <RouterLink to="/cart" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/cart', source: 'cart_footer' }) }} className="flex-1 rounded-full border border-brand-blush/60 px-4 py-2 text-center text-sm font-semibold text-brand-cocoa">View cart</RouterLink>
                   </div>
                 </div>
               </div>
@@ -419,5 +453,6 @@ export const MarketingLayout = ({
         </>
       ) : null}
     </div>
+    </DrawerContext.Provider>
   )
 }

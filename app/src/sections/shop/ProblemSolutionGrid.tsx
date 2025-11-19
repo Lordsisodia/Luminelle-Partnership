@@ -5,42 +5,32 @@ export const ProblemSolutionGrid = ({
 }: {
   data: { problems: string[]; solutions: string[] }
 }) => {
+  const pairs = data.problems.map((problem, idx) => ({
+    problem,
+    solution: data.solutions[idx] ?? '',
+  }))
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_auto_1fr]">
-      <div className="rounded-[28px] border border-rose-200 bg-[#FFF2F2] p-6 text-rose-900 shadow-[0_12px_30px_rgba(249,176,176,0.25)]">
-        <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-rose-500">
-          <span className="inline-block h-2 w-2 rounded-full bg-rose-400" />
-          Common issues
+    <div className="space-y-3">
+      {pairs.map((pair, idx) => (
+        <div
+          key={idx}
+          className="grid min-w-0 gap-2 rounded-2xl border border-brand-peach/30 bg-white p-3 text-xs shadow-sm md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-4 md:p-4 md:text-sm"
+        >
+          <div className="flex items-start gap-2 rounded-2xl bg-[#FFF2F2] p-3 text-rose-900">
+            <XCircle className="h-4 w-4 flex-shrink-0 text-rose-500" />
+            <span>{pair.problem}</span>
+          </div>
+          <div className="flex items-center justify-center gap-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-cocoa/50">
+            <ArrowRight className="h-4 w-4" />
+            Fixes it
+          </div>
+          <div className="flex items-start gap-2 rounded-2xl bg-[#EBFAF3] p-3 text-brand-cocoa">
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-emerald-600" />
+            <span>{pair.solution}</span>
+          </div>
         </div>
-        <ul className="space-y-4 text-sm leading-relaxed">
-          {data.problems.map((p, i) => (
-            <li key={i} className="flex gap-3">
-              <XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-rose-500" />
-              <span className="text-base text-rose-900/90">{p}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="hidden items-center justify-center lg:flex">
-        <div className="flex flex-col items-center text-center text-brand-cocoa/60">
-          <ArrowRight className="h-8 w-8" />
-          <span className="text-xs font-semibold tracking-[0.3em]">Lumelle solves it</span>
-        </div>
-      </div>
-      <div className="rounded-[28px] border border-emerald-200 bg-[#EBFAF3] p-6 text-brand-cocoa shadow-[0_18px_40px_rgba(51,143,102,0.18)]">
-        <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-700">
-          <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
-          Our solution
-        </div>
-        <ul className="space-y-4 text-sm leading-relaxed">
-          {data.solutions.map((s, i) => (
-            <li key={i} className="flex gap-3">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-600" />
-              <span className="text-base text-brand-cocoa/90">{s}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      ))}
     </div>
   )
 }

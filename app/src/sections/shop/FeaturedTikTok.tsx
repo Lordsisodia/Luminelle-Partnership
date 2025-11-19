@@ -1,7 +1,27 @@
 import { useRef } from 'react'
 import { successStories } from '@/content/landing'
+import { SectionHeading } from '@/components/SectionHeading'
 
-export const FeaturedTikTok = () => {
+type Heading = {
+  eyebrow?: string
+  title?: string
+  description?: string
+  alignment?: 'left' | 'center' | 'right'
+}
+
+type Props = {
+  heading?: Heading
+  sectionId?: string
+}
+
+const defaultHeading: Heading = {
+  eyebrow: 'As seen on TikTok',
+  title: 'Creators using Lumelle, unfiltered',
+  description: 'Swipe to watch a few of our favourite videos.',
+  alignment: 'center',
+}
+
+export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
   const stories = successStories.slice(0, 3)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
 
@@ -12,14 +32,21 @@ export const FeaturedTikTok = () => {
     el.scrollBy({ left: dir === 'right' ? amount : -amount, behavior: 'smooth' })
   }
 
+  const resolvedHeading = {
+    ...defaultHeading,
+    ...heading,
+    alignment: heading?.alignment ?? defaultHeading.alignment,
+  }
+
   return (
-    <section className="bg-white">
+    <section id={sectionId} className="bg-white">
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6">
-        <div className="mb-6 text-center text-brand-cocoa">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">As seen on TikTok</p>
-          <h2 className="mt-2 font-heading text-2xl md:text-3xl">Creators using Lumelle, unfiltered</h2>
-          <p className="mt-2 text-sm text-brand-cocoa/70">Swipe to watch a few of our favourite videos.</p>
-        </div>
+        <SectionHeading
+          eyebrow={resolvedHeading.eyebrow}
+          title={resolvedHeading.title}
+          description={resolvedHeading.description}
+          alignment={resolvedHeading.alignment}
+        />
 
         <div ref={scrollerRef} className="relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:px-0">
           {stories.map((s) => (
@@ -54,7 +81,7 @@ export const FeaturedTikTok = () => {
             <button
               aria-label="Scroll videos left"
               onClick={() => nudge('left')}
-              className="pointer-events-auto ml-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40"
+              className="pointer-events-auto ml-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
@@ -63,7 +90,7 @@ export const FeaturedTikTok = () => {
             <button
               aria-label="Scroll videos right"
               onClick={() => nudge('right')}
-              className="pointer-events-auto mr-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40"
+              className="pointer-events-auto mr-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>

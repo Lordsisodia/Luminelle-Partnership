@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 export type CartItem = { id: string; title: string; price: number; qty: number }
 
@@ -14,8 +14,15 @@ type CartState = {
 
 const CartCtx = createContext<CartState | null>(null)
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<CartItem[]>([])
+const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [items, setItems] = useState<CartItem[]>(() => {
+    try {
+      const raw = localStorage.getItem('lumelle_cart')
+      return raw ? (JSON.parse(raw) as CartItem[]) : []
+    } catch {
+      return []
+    }
+  })
 
   const add: CartState['add'] = (item, qty = 1) => {
     setItems((prev) => {
@@ -35,6 +42,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const subtotal = useMemo(() => items.reduce((sum, i) => sum + i.price * i.qty, 0), [items])
   const qty = useMemo(() => items.reduce((sum, i) => sum + i.qty, 0), [items])
 
+  useEffect(() => {
+    try {
+      const serialized = JSON.stringify(items)
+      localStorage.setItem('lumelle_cart', serialized)
+    } catch {
+      /* ignore */
+    }
+  }, [items])
+
   const value: CartState = { items, add, setQty, remove, clear, subtotal, qty }
   return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>
 }
@@ -45,3 +61,5 @@ export const useCart = () => {
   if (!ctx) throw new Error('useCart must be used within CartProvider')
   return ctx
 }
+
+export const CartProvider = CartProviderBase

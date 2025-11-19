@@ -1,82 +1,109 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { StarRating } from '@/components/StarRating'
-import type { Review } from '@/content/home.config'
+import type { Review as ReviewType } from '@/content/home.config'
 
-export const ReviewsAutoCarousel = ({
-  reviews,
-}: {
+type Review = ReviewType & { image?: string }
+
+type Heading = {
+  eyebrow?: string
+  title?: string
+  description?: string
+  alignment?: 'left' | 'center' | 'right'
+}
+
+type ReviewsAutoCarouselProps = {
   reviews: Review[]
-}) => {
-  const [active, setActive] = useState(0)
-  const ordered = useMemo(() => reviews, [reviews])
+  heading?: Heading
+  sectionId?: string
+}
 
-  useEffect(() => {
-    if (ordered.length <= 1) return
-    const id = window.setInterval(() => {
-      setActive((prev) => (prev + 1) % ordered.length)
-    }, 3000)
-    return () => window.clearInterval(id)
-  }, [ordered.length])
+const fallbackImages = [
+  '/uploads/luminele/product-feature-02.jpg',
+  '/uploads/luminele/product-feature-03.jpg',
+  '/uploads/luminele/product-feature-04.jpg',
+  '/uploads/luminele/product-feature-05.jpg',
+  '/uploads/luminele/product-feature-06.jpg',
+  '/uploads/luminele/product-feature-07.jpg',
+]
 
-  const review = ordered[active]
-  const headlineBadge = review.meta?.includes('Type') ? review.meta : 'Community love'
+const cardBase = 'relative h-80 w-56 shrink-0 overflow-hidden rounded-[28px] shadow-xl shadow-brand-cocoa/15'
+
+const defaultHeading: Required<Heading> = {
+  eyebrow: 'Loved by thousands',
+  title: 'Customer Stories',
+  description: 'Portrait stories from verified shoppers—scroll to peek at the glow-ups.',
+  alignment: 'center',
+}
+
+export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAutoCarouselProps) => {
+  const cards = useMemo(
+    () =>
+      reviews.map((review, idx) => ({
+        ...review,
+        image: review.image ?? fallbackImages[idx % fallbackImages.length],
+      })),
+    [reviews]
+  )
+
+  const rows = [
+    cards.filter((_, idx) => idx % 2 === 0),
+    cards.filter((_, idx) => idx % 2 === 1),
+  ]
+
+  const renderRow = (items: Review[], reverse = false) => {
+    const looped = items.length ? [...items, ...items] : []
+    if (!looped.length) return null
+    return (
+      <div className="relative overflow-hidden">
+        <div
+          className="flex gap-4"
+          style={{ animation: `marquee 22s linear infinite${reverse ? ' reverse' : ''}` }}
+        >
+          {looped.map((review, idx) => (
+            <article
+              key={`${review.author}-${idx}-${reverse ? 'rev' : 'fwd'}`}
+              className={`${cardBase} bg-brand-blush/20`}
+              aria-hidden={idx >= items.length}
+            >
+              <img
+                src={review.image}
+                alt={review.title}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/35 to-black/85" />
+              <div className="relative flex h-full flex-col justify-end gap-2 p-5 text-white">
+                <StarRating value={review.stars} size={16} />
+                <p className="text-sm font-semibold leading-snug">{review.title}</p>
+                <p className="text-xs text-white/80">{review.body}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-white/70">{review.author}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  const resolvedHeading = {
+    ...defaultHeading,
+    ...heading,
+    alignment: heading?.alignment ?? defaultHeading.alignment,
+  }
 
   return (
-    <section id="reviews" className="bg-white py-16">
+    <section id={sectionId ?? 'reviews'} className="bg-white py-16">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
-          eyebrow="Loved by thousands"
-          title="What customers are saying"
-          description="Short quotes from verified customers who use Lumelle every day."
-          alignment="center"
+          eyebrow={resolvedHeading.eyebrow}
+          title={resolvedHeading.title}
+          description={resolvedHeading.description}
+          alignment={resolvedHeading.alignment}
         />
-        <div className="mt-8 flex flex-col items-center gap-5 rounded-[32px] border border-brand-peach/50 bg-white/95 p-8 text-center shadow-soft">
-          <div className="flex items-center gap-3 text-left">
-            <div
-              className="flex h-12 w-12 items-center justify-center rounded-full text-base font-semibold text-brand-cocoa"
-              style={{ backgroundImage: `linear-gradient(135deg, hsl(${(active * 47) % 360} 70% 80%), hsl(${((active * 47) + 40) % 360} 65% 88%))` }}
-            >
-              {review.author
-                .split(' ')
-                .map((p) => p[0])
-                .join('')
-                .slice(0, 2)
-                .toUpperCase()}
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-brand-cocoa">{review.author}</div>
-              <StarRating value={review.stars} size={14} />
-              {review.meta ? <p className="text-xs text-brand-cocoa/60">{review.meta}</p> : null}
-            </div>
-          </div>
-          <blockquote className="space-y-3 text-left">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-cocoa/60">{headlineBadge}</p>
-            <p className="font-heading text-2xl text-brand-cocoa">{review.title}</p>
-            <p className="text-lg text-brand-cocoa/80">
-              <span className="text-3xl text-brand-cocoa">“</span>
-              {review.body}
-              <span className="text-3xl text-brand-cocoa">”</span>
-            </p>
-          </blockquote>
-          <div className="flex items-center gap-3">
-            {ordered.map((_, idx) => (
-              <button
-                key={idx}
-                aria-label={`Show review ${idx + 1}`}
-                onClick={() => setActive(idx)}
-                className={`h-2.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-cocoa ${
-                  idx === active ? 'w-8 bg-brand-cocoa' : 'w-3 bg-brand-cocoa/30 hover:bg-brand-cocoa/70'
-                }`}
-              />
-            ))}
-          </div>
-          <div className="text-sm font-semibold text-brand-cocoa/80">
-            <a href="/product/shower-cap#reviews" className="inline-flex items-center gap-1 underline-offset-4 hover:underline">
-              See all reviews
-              <span aria-hidden>→</span>
-            </a>
-          </div>
+        <div className="mt-10 space-y-6">
+          {renderRow(rows[0], true)}
+          {renderRow(rows[1])}
         </div>
       </div>
     </section>

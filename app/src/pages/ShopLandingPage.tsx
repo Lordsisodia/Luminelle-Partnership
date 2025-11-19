@@ -3,7 +3,7 @@ import type { NavItem } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
 import {
   HeroShop,
-  HeroProofStrip,
+  ProductSpotlightSection,
   TrustBar,
   ProblemSolutionSection,
   UgcSection,
@@ -19,7 +19,6 @@ import {
   HowItWorks,
 } from '@/sections/shop'
 import { FeaturedTikTok } from '@/sections/shop/FeaturedTikTok'
-import { FloatingBuyCta } from '@/components/FloatingBuyCta'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Overview' },
@@ -36,11 +35,7 @@ export const ShopLandingPage = () => {
           <HeroShop config={homeConfig.hero} />
         </section>
         <TrustBar />
-        <HeroProofStrip
-          rating={homeConfig.socialProof.rating}
-          count={homeConfig.socialProof.count}
-          tagline={homeConfig.socialProof.tagline}
-        />
+        <ProductSpotlightSection teaser={homeConfig.pdpTeaser} />
         <section id="benefits">
           <BenefitsSection slides={homeConfig.slides} />
         </section>
@@ -59,7 +54,6 @@ export const ShopLandingPage = () => {
         <FinalCtaSection data={homeConfig.finalCta} />
         <EmailCaptureBand />
       </MarketingLayout>
-      <FloatingBuyCta href="/product/shower-cap" />
     </>
   )
 }

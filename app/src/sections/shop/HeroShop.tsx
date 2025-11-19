@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Truck, RotateCcw, Lock, Play } from 'lucide-react'
+import { Star } from 'lucide-react'
 
 type Props = {
   config: {
@@ -31,7 +31,7 @@ export const HeroShop = ({ config }: Props) => {
   // controls removed; retain auto-advance only
 
   return (
-    <section className="relative min-h-[78vh] md:min-h-[74vh] overflow-hidden">
+    <section className="relative min-h-[76vh] overflow-hidden md:min-h-[72vh]">
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 flex transition-transform duration-700"
@@ -52,42 +52,42 @@ export const HeroShop = ({ config }: Props) => {
         <div className="absolute inset-0 bg-white/40" />
       </div>
       <div className="absolute inset-0 z-10">
-        <div className="grid h-full place-items-center px-4 pt-20 pb-16 text-center md:px-6">
-          <div className="max-w-2xl">
-            {config.pill ? (
-              <span className="inline-flex rounded-full bg-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/70">
-                {config.pill}
+        <div className="mx-auto flex h-full max-w-6xl items-center px-4 pt-[4.5rem] pb-[3.5rem] text-center md:px-6">
+          <div className="mx-auto w-full max-w-xl md:max-w-2xl">
+            <div className="inline-flex flex-wrap items-center gap-3 rounded-full bg-white/30 px-4 py-2 text-brand-cocoa backdrop-blur-md shadow-soft ring-1 ring-white/50">
+              <div className="flex -space-x-1.5">
+                {["https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=120","https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=120","https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=120&h=120&auto=format&fit=crop","https://randomuser.me/api/portraits/men/75.jpg"].map((src) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt="avatar"
+                    className="h-7 w-7 rounded-full border-2 border-white object-cover shadow-sm"
+                  />
+                ))}
+              </div>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-cocoa/80 whitespace-nowrap">
+                Trusted by 100k users
               </span>
-            ) : null}
-            <h1 className="mt-4 font-heading text-4xl leading-tight text-brand-cocoa md:text-5xl lg:text-6xl">
+            </div>
+            <h1 className="mt-4 font-heading text-3xl leading-tight text-brand-cocoa sm:text-4xl md:text-5xl lg:text-6xl">
               {config.headline}
             </h1>
-            <p className="mt-4 text-base text-brand-cocoa/80 md:text-lg">
+            <p className="mt-4 text-base text-brand-cocoa/80 sm:text-lg">
               {config.subhead}
             </p>
-            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <div className="mt-6 flex justify-center">
               <a
                 href={config.ctaHref}
                 className="inline-flex items-center justify-center rounded-full bg-brand-cocoa px-7 py-3 text-base font-semibold text-white shadow-soft transition hover:-translate-y-0.5"
               >
                 {config.ctaLabel}
               </a>
-              <a
-                href="#closer-look"
-                className="inline-flex items-center justify-center rounded-full border border-brand-cocoa/30 px-6 py-3 text-base font-semibold text-brand-cocoa/80"
-              >
-                <Play className="mr-2 h-4 w-4" /> Watch demo
-              </a>
             </div>
-            {config.offerChip ? (
-              <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-brand-peach/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/70">
-                {config.offerChip}
-              </div>
-            ) : null}
-            <div className="mt-6 flex items-center justify-center gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-cocoa/70">
-              <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" /> Fast shipping</span>
-              <span className="inline-flex items-center gap-2"><RotateCcw className="h-4 w-4" /> Easy returns</span>
-              <span className="inline-flex items-center gap-2"><Lock className="h-4 w-4" /> Secure checkout</span>
+            <div className="mt-3 flex items-center justify-center gap-1 text-brand-cocoa">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <Star key={idx} className="h-4 w-4 fill-brand-peach text-brand-peach" />
+              ))}
+              <span className="ml-2 text-sm font-semibold">4.9 (1,240)</span>
             </div>
           </div>
         </div>
