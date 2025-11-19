@@ -43,9 +43,9 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6">
         <SectionHeading
           eyebrow={resolvedHeading.eyebrow}
-          title={resolvedHeading.title}
+          title={resolvedHeading.title ?? ''}
           description={resolvedHeading.description}
-          alignment={resolvedHeading.alignment}
+          alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
 
         <div ref={scrollerRef} className="relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:px-0">

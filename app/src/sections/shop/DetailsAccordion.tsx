@@ -18,12 +18,12 @@ type DetailsAccordionProps = {
 export const DetailsAccordion = ({ items, heading, sectionId }: DetailsAccordionProps) => (
   <section id={sectionId} className="bg-white">
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
-      {heading ? (
+      {heading?.title ? (
         <SectionHeading
           eyebrow={heading.eyebrow}
           title={heading.title}
           description={heading.description}
-          alignment={heading.alignment ?? 'center'}
+          alignment={heading.alignment === 'right' ? 'center' : heading.alignment}
         />
       ) : null}
       <div className={`divide-y divide-brand-blush/60 rounded-2xl border border-brand-blush/60 bg-white ${heading ? 'mt-8' : 'mt-0'}`}>

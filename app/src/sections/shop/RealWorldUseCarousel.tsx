@@ -38,12 +38,12 @@ export const RealWorldUseCarousel = ({ items, heading, sectionId }: Props) => {
   return (
     <section id={sectionId} className="bg-white">
       <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-        {resolvedHeading.eyebrow || resolvedHeading.title || resolvedHeading.description ? (
+        {resolvedHeading.title ? (
           <SectionHeading
             eyebrow={resolvedHeading.eyebrow}
             title={resolvedHeading.title}
             description={resolvedHeading.description}
-            alignment={resolvedHeading.alignment}
+            alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
           />
         ) : null}
         <div ref={scrollerRef} className="relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:px-0">

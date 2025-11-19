@@ -57,9 +57,9 @@ export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel }:
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
           eyebrow={resolvedHeading.eyebrow}
-          title={resolvedHeading.title}
+          title={resolvedHeading.title ?? ''}
           description={resolvedHeading.description}
-          alignment={resolvedHeading.alignment}
+          alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
 
         <div className="mt-6 flex flex-col gap-3 rounded-3xl border border-brand-peach/30 bg-brand-blush/10 p-4 md:flex-row md:items-center">

@@ -56,7 +56,7 @@ export const FeatureCallouts = ({ items, heading, sectionId, className }: Featur
           eyebrow={resolvedHeading.eyebrow}
           title={resolvedHeading.title}
           description={resolvedHeading.description}
-          alignment={resolvedHeading.alignment}
+          alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
         <div className="mt-8 rounded-3xl border border-brand-peach/40 bg-white/90 p-6 shadow-soft md:p-8">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">

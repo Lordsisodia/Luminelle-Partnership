@@ -99,7 +99,7 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
           eyebrow={resolvedHeading.eyebrow}
           title={resolvedHeading.title}
           description={resolvedHeading.description}
-          alignment={resolvedHeading.alignment}
+          alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
         <div className="mt-10 space-y-6">
           {renderRow(rows[0], true)}
