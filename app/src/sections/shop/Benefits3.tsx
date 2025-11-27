@@ -19,7 +19,7 @@ export const Benefits3 = ({ items }: { items: Benefit[] }) => {
                   <b.icon className="h-5 w-5" />
                 </div>
               ) : null}
-              <h3 className="font-heading text-lg text-brand-cocoa">{b.title}</h3>
+              <h3 className="font-heading text-lg font-bold text-brand-cocoa">{b.title}</h3>
               <p className="mt-1 text-sm text-brand-cocoa/80">{b.body}</p>
             </div>
           ))}

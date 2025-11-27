@@ -5,18 +5,12 @@ import {
   HeroShop,
   ProductSpotlightSection,
   TrustBar,
-  ProblemSolutionSection,
-  UgcSection,
   ReviewsAutoCarousel,
+  FinalCtaSection,
   FaqSectionShop,
   BundleCards,
   EmailCaptureBand,
-  HighlightsSection,
   BenefitsSection,
-  CreatorWinsSection,
-  GuaranteeSection,
-  FinalCtaSection,
-  HowItWorks,
 } from '@/sections/shop'
 import { FeaturedTikTok } from '@/sections/shop/FeaturedTikTok'
 
@@ -30,7 +24,7 @@ const navItems: NavItem[] = [
 export const ShopLandingPage = () => {
   return (
     <>
-      <MarketingLayout navItems={navItems} subtitle="Shop">
+      <MarketingLayout navItems={navItems} subtitle={null}>
         <section id="hero" className="bg-white">
           <HeroShop config={homeConfig.hero} />
         </section>
@@ -39,19 +33,16 @@ export const ShopLandingPage = () => {
         <section id="benefits">
           <BenefitsSection slides={homeConfig.slides} />
         </section>
-        <ProblemSolutionSection data={homeConfig.problemSolution} />
-        <HowItWorks />
-        <CreatorWinsSection stats={homeConfig.stats} />
-        <FeaturedTikTok />
-        <section id="ugc">
-          <UgcSection items={homeConfig.ugc} />
-        </section>
-        <HighlightsSection />
-        <BundleCards />
+        <FinalCtaSection />
         <ReviewsAutoCarousel reviews={homeConfig.reviews} />
-        <GuaranteeSection comparison={homeConfig.comparison} />
-        <FaqSectionShop items={homeConfig.faq} />
-        <FinalCtaSection data={homeConfig.finalCta} />
+        <FeaturedTikTok />
+        {/* UGC section removed per latest client request */}
+        <BundleCards />
+        <FaqSectionShop
+          items={homeConfig.faq}
+          hideCta
+          heading={{ eyebrow: 'FAQ', title: 'Frequently Asked Questions', description: undefined, alignment: 'center' }}
+        />
         <EmailCaptureBand />
       </MarketingLayout>
     </>

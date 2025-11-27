@@ -17,7 +17,7 @@ export const WelcomePage = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-cocoa/60">
             Welcome to Lumelle
           </p>
-          <h1 className="mt-4 font-heading text-3xl md:text-4xl">
+          <h1 className="mt-4 font-heading text-3xl font-bold md:text-4xl">
             {welcomeHero.headline}
           </h1>
           <p className="mt-3 text-base text-brand-cocoa/75">

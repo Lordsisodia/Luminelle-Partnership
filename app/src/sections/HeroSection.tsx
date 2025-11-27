@@ -1,9 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import {
-  heroContent,
-  heroSpotlightSlides,
-  metricBadges,
-} from '@/content/landing'
+import { useMemo } from 'react'
+import { heroContent, heroSpotlightSlides, metricBadges } from '@/content/landing'
 
 type HeroSectionProps = {
   onPrimaryAction: () => void
@@ -14,20 +10,9 @@ export const HeroSection = ({
   onPrimaryAction,
   onSecondaryAction,
 }: HeroSectionProps) => {
-  const slides = useMemo(() => heroSpotlightSlides, [])
-  const [activeSlide, setActiveSlide] = useState(0)
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % slides.length)
-    }, 7000)
-
-    return () => window.clearInterval(id)
-  }, [slides.length])
-
-  const goToSlide = (index: number) => {
-    setActiveSlide(index)
-  }
+  // Force a single-slide experience (no auto-advance) per client request
+  const slides = useMemo(() => heroSpotlightSlides.slice(0, 1), [])
+  const activeSlide = 0
 
   const currentSlide = slides[activeSlide]
 
@@ -36,19 +21,19 @@ export const HeroSection = ({
       id="hero"
       className="relative overflow-hidden scroll-mt-24 bg-brand-blush/10 pb-20 pt-24 text-brand-cocoa md:scroll-mt-32 md:pb-24 md:pt-32"
     >
-      <div className="absolute inset-0">
-        {slides.map((slide, index) => (
-          <img
-            key={slide.id}
-            src={slide.backgroundSrc}
-            alt=""
-            aria-hidden="true"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-              index === activeSlide ? 'opacity-100' : 'opacity-0'
-            }`}
-          />
-        ))}
-        <div className="absolute inset-0 bg-brand-cocoa/55 backdrop-blur-sm" />
+        <div className="absolute inset-0">
+            {slides.map((slide, index) => (
+              <img
+                key={slide.id}
+                src={slide.backgroundSrc}
+                alt=""
+                aria-hidden="true"
+                className={`absolute inset-0 h-full w-full object-contain object-center md:object-cover transition-opacity duration-700 ${
+                  index === activeSlide ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+            ))}
+        <div className="absolute inset-0 bg-brand-cocoa/20 md:bg-brand-cocoa/50 backdrop-blur-[2px]" />
       </div>
       <div className="relative">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 px-4 text-center md:items-start md:px-6 md:text-left">
@@ -98,14 +83,14 @@ export const HeroSection = ({
           <div className="w-full rounded-[2.5rem] border border-white/40 bg-white/90 p-6 text-left shadow-soft backdrop-blur md:max-w-3xl">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
               {currentSlide.imageSrc ? (
-                <div className="relative h-28 w-full overflow-hidden rounded-2xl border border-brand-peach/40 bg-brand-blush/30 md:h-32 md:w-40">
+                <div className="relative h-32 w-full overflow-hidden rounded-2xl border border-brand-peach/40 bg-brand-blush/30 md:h-40 md:w-56">
                   <img
                     src={currentSlide.imageSrc}
                     alt=""
                     aria-hidden="true"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain object-center"
                   />
-                  <div className="absolute inset-0 bg-brand-cocoa/20 backdrop-blur-sm" />
+                  <div className="absolute inset-0 bg-brand-cocoa/15 backdrop-blur-[1px]" />
                 </div>
               ) : null}
               <div className="flex-1 space-y-2">
@@ -120,30 +105,7 @@ export const HeroSection = ({
                 </p>
               </div>
             </div>
-            <div className="mt-6 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                {slides.map((slide, index) => (
-                  <button
-                    key={slide.id}
-                    type="button"
-                    aria-label={`Show spotlight ${slide.title}`}
-                    onClick={() => goToSlide(index)}
-                    className={`h-2.5 rounded-full transition-all ${
-                      index === activeSlide
-                        ? 'w-8 bg-brand-cocoa'
-                        : 'w-2.5 bg-brand-cocoa/30 hover:bg-brand-cocoa/70'
-                    }`}
-                  />
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => goToSlide((activeSlide + 1) % slides.length)}
-                className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cocoa/70 transition hover:text-brand-cocoa"
-              >
-                Next highlight →
-              </button>
-            </div>
+            {/* No pagination/next controls when only one slide */}
           </div>
         </div>
       </div>

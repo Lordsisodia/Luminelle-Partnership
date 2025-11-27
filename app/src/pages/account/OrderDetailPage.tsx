@@ -1,19 +1,38 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link as RouterLink } from 'react-router-dom'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
-import { useAuth } from '@/state/AuthContext'
-import { getOrders, type Order } from '@/state/OrdersStore'
+import { useAuth as useAppAuth } from '@/state/AuthContext'
+import { fetchOrderById, type Order } from '@/state/OrdersStore'
+import { useAuth as useClerkAuth } from '@clerk/clerk-react'
 
 export const OrderDetailPage = () => {
   const { orderId } = useParams()
-  const { signedIn, signIn } = useAuth()
+  const { signedIn, signIn } = useAppAuth()
+  const { getToken } = useClerkAuth()
   const [order, setOrder] = useState<Order | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!orderId) return
-    const found = getOrders().find((o) => o.id === orderId) || null
-    setOrder(found)
-  }, [orderId])
+    let active = true
+
+    const hydrate = async () => {
+      setLoading(true)
+      try {
+        const token = await getToken({ template: 'supabase' }).catch(() => null)
+        const found = await fetchOrderById(orderId, token ?? undefined)
+        if (!active) return
+        setOrder(found)
+      } finally {
+        if (active) setLoading(false)
+      }
+    }
+
+    hydrate()
+    return () => {
+      active = false
+    }
+  }, [getToken, orderId])
 
   return (
     <MarketingLayout navItems={[]} subtitle="Order detail">
@@ -28,6 +47,8 @@ export const OrderDetailPage = () => {
                 Sign in
               </button>
             </div>
+          ) : loading ? (
+            <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading order details…</div>
           ) : !order ? (
             <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">
               We couldn’t find this order. Check the ID or view your <RouterLink to="/account/orders" className="underline">orders list</RouterLink>.

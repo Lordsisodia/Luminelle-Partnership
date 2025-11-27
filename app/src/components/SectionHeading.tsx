@@ -32,11 +32,11 @@ export const SectionHeading = ({
           alignment === 'center' ? 'items-center' : ''
         }`}
       >
-        <h2 className="font-heading text-3xl font-semibold md:text-4xl">
+        <h2 className="font-heading text-3xl font-bold md:text-4xl">
           {title}
         </h2>
         {description ? (
-          <p className="max-w-2xl text-base leading-relaxed text-brand-cocoa/75">
+          <p className="max-w-2xl text-base leading-relaxed text-brand-cocoa/80 font-serif">
             {description}
           </p>
         ) : null}

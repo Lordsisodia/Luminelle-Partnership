@@ -1,22 +1,42 @@
 import { useState } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
-import { getOrders, type Order } from '@/state/OrdersStore'
+import { fetchOrderById, type Order } from '@/state/OrdersStore'
+import { useAuth as useClerkAuth } from '@clerk/clerk-react'
 
 export const OrderTrackingPage = () => {
   const [orderId, setOrderId] = useState('')
   const [result, setResult] = useState<Order | null>(null)
   const [error, setError] = useState('')
+  const [checking, setChecking] = useState(false)
+  const { getToken } = useClerkAuth()
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const found = getOrders().find((o) => o.id.toLowerCase() === orderId.trim().toLowerCase()) || null
-    if (!found) {
-      setError('We couldn’t find that order. Double-check the ID from your confirmation email.')
+    const lookup = orderId.trim()
+    if (!lookup) {
+      setError('Enter your order ID to continue.')
       setResult(null)
       return
     }
-    setError('')
-    setResult(found)
+
+    setChecking(true)
+    try {
+      const token = await getToken({ template: 'supabase' }).catch(() => null)
+      const found = await fetchOrderById(lookup, token ?? undefined)
+      if (!found) {
+        setError('We couldn’t find that order. Double-check the ID from your confirmation email.')
+        setResult(null)
+        return
+      }
+      setError('')
+      setResult(found)
+    } catch (err) {
+      console.error('Order lookup failed', err)
+      setError('Something went wrong while checking Supabase. Please try again in a moment.')
+      setResult(null)
+    } finally {
+      setChecking(false)
+    }
   }
 
   return (
@@ -31,9 +51,12 @@ export const OrderTrackingPage = () => {
             </label>
             <div className="mt-2 flex gap-3">
               <input id="track-order" value={orderId} onChange={(e) => setOrderId(e.target.value)} className="flex-1 rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" placeholder="e.g. LUM-ABC123" />
-              <button className="rounded-full bg-brand-cocoa px-5 py-2 text-sm font-semibold text-white">Check status</button>
+              <button className="rounded-full bg-brand-cocoa px-5 py-2 text-sm font-semibold text-white disabled:opacity-60" disabled={checking}>
+                {checking ? 'Checking…' : 'Check status'}
+              </button>
             </div>
             {error ? <p className="mt-2 text-sm text-brand-peach">{error}</p> : null}
+            {!error && checking ? <p className="mt-2 text-sm text-brand-cocoa/70">Contacting Supabase…</p> : null}
           </form>
           {result ? (
             <div className="mt-6 rounded-2xl border border-brand-blush/60 bg-brand-blush/20 p-4 text-brand-cocoa">

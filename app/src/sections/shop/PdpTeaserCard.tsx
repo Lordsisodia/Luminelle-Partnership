@@ -12,7 +12,7 @@ export const PdpTeaserCard = ({
       <div className="flex flex-1 flex-col justify-between p-6">
         <div>
           <div className="text-sm uppercase tracking-[0.3em] text-brand-cocoa/60">From</div>
-          <div className="text-3xl font-heading text-brand-cocoa">{data.price}</div>
+          <div className="text-3xl font-heading font-bold text-brand-cocoa">{data.price}</div>
           <ul className="mt-3 list-disc pl-5 text-brand-cocoa/80">
           {data.bullets.map((b, i) => (
             <li key={i} className="mb-1">{b}</li>

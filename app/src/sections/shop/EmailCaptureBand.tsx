@@ -3,8 +3,8 @@ import { Lock } from 'lucide-react'
 export const EmailCaptureBand = () => (
   <section className="bg-brand-blush/20 py-12">
     <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-4 text-center md:px-6">
-      <h3 className="font-heading text-2xl text-brand-cocoa">Get 10% off your first order</h3>
-      <p className="text-sm text-brand-cocoa/75">Join for exclusive creator tutorials, drops, and early access.</p>
+      <h3 className="font-heading text-2xl font-bold text-brand-cocoa">Get 10% off your first order</h3>
+      <p className="text-sm font-serif text-brand-cocoa/80">Join for exclusive creator tutorials, drops, and early access.</p>
       <form className="flex w-full max-w-xl flex-col items-stretch gap-2 sm:flex-row" aria-label="Newsletter signup">
         <div className="w-full text-left">
           <label htmlFor="landing-email" className="block text-xs font-semibold uppercase tracking-[0.3em] text-brand-cocoa/60">

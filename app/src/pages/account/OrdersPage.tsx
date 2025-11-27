@@ -1,8 +1,9 @@
 import { MarketingLayout } from '@/layouts/MarketingLayout'
-import { useAuth } from '@/state/AuthContext'
-import { getOrders, type Order, type OrderItem } from '@/state/OrdersStore'
+import { useAuth as useAppAuth } from '@/state/AuthContext'
+import { fetchOrders, type Order, type OrderItem } from '@/state/OrdersStore'
 import { Link as RouterLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useAuth as useClerkAuth } from '@clerk/clerk-react'
 
 const StatusBadge = ({ status }: { status: Order['status'] }) => {
   const colors: Record<Order['status'], string> = {
@@ -15,12 +16,38 @@ const StatusBadge = ({ status }: { status: Order['status'] }) => {
 }
 
 export const OrdersPage = () => {
-  const { signedIn, signIn } = useAuth()
+  const { signedIn, signIn } = useAppAuth()
+  const { getToken } = useClerkAuth()
   const [orders, setOrders] = useState<Order[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setOrders(getOrders())
-  }, [])
+    let active = true
+
+    if (!signedIn) {
+      setOrders([])
+      setLoading(false)
+      return () => {
+        active = false
+      }
+    }
+
+    const loadOrders = async () => {
+      try {
+        const token = await getToken({ template: 'supabase' }).catch(() => null)
+        const next = await fetchOrders(token ?? undefined)
+        if (!active) return
+        setOrders(next)
+      } finally {
+        if (active) setLoading(false)
+      }
+    }
+
+    loadOrders()
+    return () => {
+      active = false
+    }
+  }, [getToken, signedIn])
 
   return (
     <MarketingLayout navItems={[]} subtitle="Orders">
@@ -32,6 +59,8 @@ export const OrdersPage = () => {
               <p className="text-brand-cocoa/80">Sign in to view orders and tracking updates.</p>
               <button className="mt-3 rounded-full bg-brand-peach px-5 py-2 font-semibold text-brand-cocoa" onClick={() => signIn('Jane')}>Sign in</button>
             </div>
+          ) : loading ? (
+            <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading your orders…</div>
           ) : orders.length === 0 ? (
             <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">
               You haven’t placed any orders yet.

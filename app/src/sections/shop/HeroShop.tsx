@@ -17,10 +17,11 @@ type Props = {
 }
 
 export const HeroShop = ({ config }: Props) => {
-  const slides = config.gallery && config.gallery.length > 0 ? config.gallery : [config.image]
+  const slides = config.gallery && config.gallery.length > 0 ? config.gallery.slice(0, 1) : [config.image]
   const [active, setActive] = useState(0)
 
   useEffect(() => {
+    // no auto-advance when single slide
     if (slides.length <= 1) return
     const id = window.setInterval(() => {
       setActive((prev) => (prev + 1) % slides.length)
@@ -31,7 +32,7 @@ export const HeroShop = ({ config }: Props) => {
   // controls removed; retain auto-advance only
 
   return (
-    <section className="relative min-h-[76vh] overflow-hidden md:min-h-[72vh]">
+    <section className="relative min-h-[76vh] overflow-hidden bg-white md:min-h-[72vh]">
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 flex transition-transform duration-700"
@@ -43,13 +44,19 @@ export const HeroShop = ({ config }: Props) => {
               key={idx}
               src={src}
               alt=""
-              className="h-full w-full flex-[0_0_100%] scale-110 object-cover brightness-90 blur-[1px]"
+              className="h-full w-full flex-[0_0_100%] object-cover brightness-95"
               style={{ objectPosition: config.objectPosition || 'center center' }}
               loading={idx === 0 ? 'eager' : 'lazy'}
             />
           ))}
         </div>
-        <div className="absolute inset-0 bg-white/40" />
+        <div
+          className="absolute inset-0 pointer-events-none backdrop-blur-[2px]"
+          style={{
+            backgroundImage:
+              'linear-gradient(180deg, rgba(247,239,232,0.5) 0%, rgba(247,239,232,0.3) 32%, rgba(247,239,232,0.12) 55%, rgba(247,239,232,0) 78%)',
+          }}
+        />
       </div>
       <div className="absolute inset-0 z-10">
         <div className="mx-auto flex h-full max-w-6xl items-center px-4 pt-[4.5rem] pb-[3.5rem] text-center md:px-6">
@@ -69,7 +76,7 @@ export const HeroShop = ({ config }: Props) => {
                 Trusted by 100k users
               </span>
             </div>
-            <h1 className="mt-4 font-heading text-3xl leading-tight text-brand-cocoa sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 font-heading text-3xl font-bold leading-tight text-brand-cocoa sm:text-4xl md:text-5xl lg:text-6xl">
               {config.headline}
             </h1>
             <p className="mt-4 text-base text-brand-cocoa/80 sm:text-lg">
@@ -87,7 +94,7 @@ export const HeroShop = ({ config }: Props) => {
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star key={idx} className="h-4 w-4 fill-brand-peach text-brand-peach" />
               ))}
-              <span className="ml-2 text-sm font-semibold">4.9 (1,240)</span>
+              <span className="ml-2 text-sm font-semibold">4.8 (100+)</span>
             </div>
           </div>
         </div>

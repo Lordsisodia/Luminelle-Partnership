@@ -7,6 +7,17 @@ export type Review = {
   source?: string
 }
 
+type MainCreatorClip = {
+  eyebrow?: string
+  title: string
+  description: string
+  stat?: string
+  image: string
+  imageAlt: string
+  ctaLabel?: string
+  ctaHref?: string
+}
+
 export type HomeConfig = {
   hero: {
     headline: string
@@ -48,6 +59,7 @@ export type HomeConfig = {
   stats: { value: string; label: string; helper?: string }[]
   comparison: { feature: string; lumelle: string; other: string }[]
   finalCta: { headline: string; subhead: string; bullets: string[]; ctaLabel: string; ctaHref: string }
+  mainCreatorClip: MainCreatorClip
 }
 
 export const homeConfig: HomeConfig = {
@@ -59,25 +71,20 @@ export const homeConfig: HomeConfig = {
     offerChip: 'Buy 2, save 10%',
     secondaryCtaLabel: 'Join WhatsApp',
     secondaryCtaHref: '/affiliates',
-    image: '/uploads/luminele/product-feature-02.jpg',
-    bgImage: '/uploads/luminele/product-feature-06.jpg',
+    image: '/uploads/luminele/photo-for-page-3v2.jpeg',
+    bgImage: '/uploads/luminele/photo-for-page-3v2.jpeg',
     objectPosition: 'center center',
     pill: 'Best seller',
     assurances: [
-      { label: 'Fast shipping' },
-      { label: 'Easy returns' },
-      { label: 'Secure checkout' },
+      { label: 'Free shipping £20+' },
+      { label: '30-day money back' },
     ],
-    gallery: [
-      '/uploads/luminele/product-feature-02.jpg',
-      '/uploads/luminele/product-feature-04.jpg',
-      '/uploads/luminele/product-feature-05.jpg'
-    ]
+    gallery: ['/uploads/luminele/photo-for-page-3v2.jpeg'],
   },
   slides: [
     {
       title: 'No‑frizz protection',
-      copy: 'Keep blowouts and curls intact.',
+      copy: 'Waterproof lining seals out steam so blowouts and curls stay smooth after every shower.',
       image: '/uploads/luminele/product-feature-04.jpg',
       ctaHref: '/product/shower-cap',
       tag: 'Creator fave',
@@ -85,7 +92,7 @@ export const homeConfig: HomeConfig = {
     },
     {
       title: 'Luxury feel',
-      copy: 'Soft lining, comfortable fit.',
+      copy: 'Spa-grade satin lining and cloud-soft band mean comfy wear with no dents or forehead marks.',
       image: '/uploads/luminele/product-feature-05.jpg',
       ctaHref: '/product/shower-cap',
       tag: 'Spa-grade',
@@ -93,7 +100,7 @@ export const homeConfig: HomeConfig = {
     },
     {
       title: 'Reusable & eco‑friendly',
-      copy: 'Skip the disposables. Choose durable.',
+      copy: 'Dual-layer build is made to last 100+ showers, replacing flimsy disposables and cutting waste.',
       image: '/uploads/luminele/product-feature-06.jpg',
       ctaHref: '/product/shower-cap',
       tag: 'Durability',
@@ -101,7 +108,7 @@ export const homeConfig: HomeConfig = {
     },
     {
       title: 'Steam shield',
-      copy: 'Moisture-guard lining blocks even sauna-level steam.',
+      copy: 'TPU core blocks sauna-level steam, keeping silk presses and curls glossy, not puffy.',
       image: '/uploads/luminele/product-feature-03.jpg',
       ctaHref: '/product/shower-cap',
       tag: 'Steam-proof',
@@ -109,14 +116,14 @@ export const homeConfig: HomeConfig = {
     },
     {
       title: 'Creator-ready fit',
-      copy: 'Roomy silhouette stretches over braids, locs, and rollers.',
+      copy: 'Roomy silhouette stretches over braids, locs, and rollers—no tugging, no tension, all coverage.',
       image: '/uploads/luminele/product-feature-07.jpg',
       ctaHref: '/product/shower-cap',
       tag: 'All hair welcome',
       proof: '100+ pros keep it in their travel kits',
     }
   ],
-  socialProof: { rating: 4.9, count: 1240, tagline: 'Loved by thousands' },
+  socialProof: { rating: 4.8, count: 108, tagline: 'Loved by hundreds' },
   problemSolution: {
     problems: [
       'Plastic caps trap humidity → frizz',
@@ -164,17 +171,33 @@ export const homeConfig: HomeConfig = {
     reviews: 1240,
     pills: ['No-frizz seal', 'Luxury feel', 'Reusable + eco'],
     price: 'From £24',
-    bullets: ['Moisture‑guard lining', 'Comfort stretch band', 'Reusable & durable'],
+    bullets: [
+      'Reusable waterproof',
+      'Satin lined',
+      'Large wide shower cap',
+      'Adjustable',
+    ],
     image: '/uploads/luminele/product-feature-05.jpg',
     href: '/product/shower-cap',
     ctaLabel: 'Shop the cap',
   },
   faq: [
-    { q: 'Is it fully waterproof?', a: 'Yes, with a moisture‑guard lining and sealed seams.' },
-    { q: 'Will it fit my hair?', a: 'Designed to fit most hair types with a comfort stretch band.' },
-    { q: 'How do I care for it?', a: 'Rinse and air‑dry. Hand wash as needed.' },
-    { q: 'Can I travel with it?', a: 'Absolutely—packs flat and dries fast for hotel showers.' },
-    { q: 'What’s the return policy?', a: 'Easy returns within 30 days if unused and in original packaging.' }
+    {
+      q: 'Is it fully waterproof?',
+      a: 'Yes, the durable waterproof outer shell shields hair from moisture and humidity.',
+    },
+    {
+      q: 'Will it fit my hair?',
+      a: 'The cap fits most hair lengths — even customers with bum-length hair have reviewed that it fits perfectly.',
+    },
+    {
+      q: 'How do I wash it?',
+      a: 'Hand wash the shower cap in lukewarm water with mild soap, gently clean the satin lining, rinse well, and air-dry only. Avoid machine washing, tumble drying, or heat to keep the waterproof layer and satin in good condition.',
+    },
+    {
+      q: 'What’s the return policy?',
+      a: '30-day Luxe Guarantee with easy exchanges or returns.',
+    },
   ],
   stats: [
     { value: '4.9★', label: 'Average rating', helper: '1,240 reviews' },
@@ -193,5 +216,15 @@ export const homeConfig: HomeConfig = {
     bullets: ['Luxury satin exterior', 'Leak-proof lining', '30-day Luxe Guarantee'],
     ctaLabel: 'Buy Now',
     ctaHref: '/product/shower-cap',
+  },
+  mainCreatorClip: {
+    eyebrow: 'From Lumelle HQ',
+    title: 'Our studio lead sets the tone',
+    description: 'Go behind the scenes with the core Lumelle creator as she maps out look-book shots and scripts that everyone in the program riffs on.',
+    stat: 'Shot inside the Lumelle content studio',
+    image: '/uploads/luminele/product-main.jpg',
+    imageAlt: 'Lumelle studio lead planning a shoot with the signature cap',
+    ctaLabel: 'See the full brief',
+    ctaHref: '/affiliates',
   },
 }

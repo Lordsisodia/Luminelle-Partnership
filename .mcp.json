@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "lumelle-supabasse": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=tmsbyiwqzesmirbargxv"
+      ],
+      "env": {
+        "SUPABASE_URL": "https://tmsbyiwqzesmirbargxv.supabase.co",
+        "SUPABASE_ANON_KEY": "sb_publishable_e0qvbW6GL0G_02IkjVLfng_dUPmSJd9",
+        "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtc2J5aXdxemVzbWlyYmFyZ3h2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MzA1MDIyNCwiZXhwIjoyMDc4NjI2MjI0fQ.S9lnlu_23IStjU-4VDGscq8nSOpTP8F7d5EfbRqNpEI",
+        "SUPABASE_ACCESS_TOKEN": "sbp_b6d2e650268ab16b2c12489c714bb005d58cbe9d"
+      }
+    }
+  }
+}

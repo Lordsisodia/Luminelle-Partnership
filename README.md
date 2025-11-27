@@ -34,6 +34,12 @@ At the root (workspace-aware):
 - `npm run build` – Type-check and build for production.
 - `npm run preview` – Preview production build locally.
 
+## Supabase orders storage
+
+- Copy `app/.env.example` → `app/.env` and add `VITE_SUPABASE_URL` plus `VITE_SUPABASE_ANON_KEY` from the Lumelle Supabase project (`tmsbyiwqzesmirbargxv`).
+- Run the SQL in `docs/supabase-orders.sql` to create the `orders` table (details in `docs/SUPABASE-SETUP.md`).
+- Place a checkout order locally to push real data into Supabase; the orders + tracking pages now hydrate from that data with a localStorage fallback when offline.
+
 ## Next steps
 
 - Wire in selected components from `@siso/ui` to replace bespoke Tailwind blocks once we pick candidates.

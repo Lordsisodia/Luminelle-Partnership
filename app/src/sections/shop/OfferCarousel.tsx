@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { Quote } from 'lucide-react'
 
 type Slide = { title: string; copy: string; image: string; ctaHref: string; tag?: string; proof?: string }
 
@@ -38,14 +38,11 @@ export const OfferCarousel = ({ slides }: { slides: Slide[] }) => {
     return () => el.removeEventListener('scroll', onScroll)
   }, [slides.length, goTo])
 
-  const handlePrev = () => goTo(active - 1)
-  const handleNext = () => goTo(active + 1)
-
   return (
     <div className="relative">
       <div
         ref={trackRef}
-        className="overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
+        className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory md:mx-0 md:px-0"
       >
         <div className="flex gap-4 pr-4">
           {slides.map((s, i) => (
@@ -53,59 +50,35 @@ export const OfferCarousel = ({ slides }: { slides: Slide[] }) => {
               key={i}
               href={s.ctaHref}
               data-benefit-card
-              className="relative block w-[85%] shrink-0 snap-center snap-always overflow-hidden rounded-2xl border border-brand-blush/60 bg-white shadow-soft transition hover:-translate-y-1 sm:w-72 md:w-[calc(50%-0.5rem)]"
+              className="relative block w-[88%] shrink-0 snap-center snap-always overflow-visible sm:w-[75%] md:w-[48%]"
             >
-              {s.tag ? (
-                <span className="absolute left-3 top-3 z-10 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-cocoa backdrop-blur">
-                  {s.tag}
-                </span>
-              ) : null}
-              <span className="absolute left-3 top-3 z-10 rounded-full bg-brand-cocoa/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur">
-                {s.title}
-              </span>
-              <img src={s.image} alt={s.title} className="block h-44 w-full object-cover" loading={i === 0 ? 'eager' : 'lazy'} />
-              <div className="p-4">
-                <h3 className="font-heading text-xl text-brand-cocoa">{s.title}</h3>
-                <p className="text-sm text-brand-cocoa/80">{s.copy}</p>
+              <img
+                src={s.image}
+                alt={s.title}
+                className="block h-80 w-full overflow-hidden rounded-3xl object-cover shadow-soft sm:h-96"
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+              <div className="px-1 pt-3 text-brand-cocoa">
+                <h3 className="font-heading text-xl font-bold leading-tight text-brand-cocoa">{s.title}</h3>
+                <p className="mt-1 text-sm text-brand-cocoa/80">{s.copy}</p>
                 {s.proof ? (
                   <p className="mt-3 flex items-center gap-2 text-xs text-brand-cocoa/70">
                     <Quote className="h-3.5 w-3.5 text-brand-peach" />
                     {s.proof}
                   </p>
                 ) : null}
-                <span className="mt-3 inline-flex items-center text-sm font-semibold text-brand-peach">
-                  Shop now →
-                </span>
               </div>
             </a>
           ))}
         </div>
       </div>
-      <div className="mt-4 flex items-center justify-center gap-3 text-brand-cocoa/70">
-        <button
-          type="button"
-          onClick={handlePrev}
-          className="inline-flex items-center gap-1 rounded-full border border-brand-cocoa/20 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-brand-cocoa/80 transition hover:border-brand-cocoa hover:text-brand-cocoa"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Prev
-        </button>
-        <div className="flex items-center gap-1">
-          {slides.map((slide, i) => (
-            <span
-              key={slide.title}
-              className={`h-2 w-2 rounded-full transition ${i === active ? 'bg-brand-cocoa' : 'bg-brand-cocoa/30'}`}
-            />
-          ))}
-        </div>
-        <button
-          type="button"
-          onClick={handleNext}
-          className="inline-flex items-center gap-1 rounded-full border border-brand-cocoa/20 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-brand-cocoa/80 transition hover:border-brand-cocoa hover:text-brand-cocoa"
-        >
-          Next
-          <ChevronRight className="h-4 w-4" />
-        </button>
+      <div className="mt-4 flex items-center justify-center gap-2 text-sm text-brand-cocoa/80">
+        {slides.map((_, i) => (
+          <span
+            key={i}
+            className={`h-2 w-2 rounded-full transition ${i === active ? 'bg-brand-cocoa' : 'bg-brand-cocoa/30'}`}
+          />
+        ))}
       </div>
       <span className="sr-only" aria-live="polite">
         Showing benefit slide {active + 1} of {slides.length}

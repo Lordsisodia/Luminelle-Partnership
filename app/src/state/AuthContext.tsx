@@ -1,6 +1,15 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useMemo } from 'react'
+import type { ReactNode } from 'react'
+import { useClerk, useUser } from '@clerk/clerk-react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useSyncUserToSupabase } from '@/hooks/useSyncUserToSupabase'
 
-export type User = { firstName: string } | null
+export type User = {
+  firstName: string
+  fullName?: string | null
+  email?: string | null
+  avatarUrl?: string | null
+} | null
 
 type AuthState = {
   user: User
@@ -11,40 +20,64 @@ type AuthState = {
 
 const AuthCtx = createContext<AuthState | null>(null)
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User>(null)
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const { isLoaded, isSignedIn, user } = useUser()
+  const { signOut } = useClerk()
+  const navigate = useNavigate()
+  const location = useLocation()
+  useSyncUserToSupabase()
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem('lumelle_user')
-      if (raw) setUser(JSON.parse(raw))
-    } catch (error) {
-      void error
+  const redirectSearch = useMemo(() => {
+    const target = `${location.pathname}${location.search}${location.hash}` || '/'
+    const params = new URLSearchParams({ redirect: target })
+    return params.toString()
+  }, [location.pathname, location.search, location.hash])
+
+  const goToSignIn = useCallback(() => {
+    navigate(`/sign-in?${redirectSearch}`)
+  }, [navigate, redirectSearch])
+
+  const derivedUser = useMemo<User>(() => {
+    if (!user) return null
+    const fallback =
+      user.firstName ??
+      user.fullName ??
+      user.username ??
+      user.primaryEmailAddress?.emailAddress ??
+      'Friend'
+
+    return {
+      firstName: fallback,
+      fullName: user.fullName,
+      email: user.primaryEmailAddress?.emailAddress ?? null,
+      avatarUrl: user.imageUrl ?? null,
     }
-  }, [])
+  }, [user])
 
-  const signIn: AuthState['signIn'] = (firstName = 'Jane') => {
-    const u = { firstName }
-    setUser(u)
-    try {
-      localStorage.setItem('lumelle_user', JSON.stringify(u))
-    } catch (error) {
-      void error
-    }
-  }
+  const triggerSignOut = useCallback(async () => {
+    await signOut()
+    navigate('/')
+  }, [navigate, signOut])
 
-  const signOut = () => {
-    setUser(null)
-    try {
-      localStorage.removeItem('lumelle_user')
-    } catch (error) {
-      void error
-    }
-  }
+  const handleSignIn = useCallback<AuthState['signIn']>(() => {
+    goToSignIn()
+  }, [goToSignIn])
 
-  return (
-    <AuthCtx.Provider value={{ user, signedIn: Boolean(user), signIn, signOut }}>{children}</AuthCtx.Provider>
+  const handleSignOut = useCallback<AuthState['signOut']>(() => {
+    void triggerSignOut()
+  }, [triggerSignOut])
+
+  const value = useMemo<AuthState>(
+    () => ({
+      user: derivedUser,
+      signedIn: Boolean(isLoaded && isSignedIn),
+      signIn: handleSignIn,
+      signOut: handleSignOut,
+    }),
+    [derivedUser, handleSignIn, handleSignOut, isLoaded, isSignedIn]
   )
+
+  return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>
 }
 
 // eslint-disable-next-line react-refresh/only-export-components

@@ -81,43 +81,18 @@ export const heroContent = {
   subheadline: 'Turn your creativity into income with luxury self-care products loved by 100+ creators.',
   primaryCta: 'Join WhatsApp',
   secondaryCta: 'See how it works',
-  imageAlt: 'Lumelle luxury shower caps displayed with creator content',
-  imageSrc: '/images/hero.jpg',
+  imageAlt: 'Creator wearing a pink checker Lumelle shower cap',
+  imageSrc: '/uploads/luminele/photo-for-page-3v2.jpeg',
 }
 
 export const heroSpotlightSlides: HeroSpotlightSlide[] = [
   {
-    id: 'spa-day',
-    backgroundSrc: '/images/brand-lifestyle.jpg',
-    imageSrc: '/images/brand-lifestyle.jpg',
-    label: 'Creator perk highlight',
-    title: 'Luxury spa day escapes',
-    description: 'Top three finishers unlock a full spa experience—travel stipend, treatments, and content concierge included.',
-  },
-  {
-    id: 'cash-boost',
-    backgroundSrc: '/images/hero.jpg',
-    imageSrc:
-      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='160' viewBox='0 0 320 160'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop offset='0%' stop-color='%23fbe4d6'/><stop offset='100%' stop-color='%23f7c9b8'/></linearGradient><filter id='blur'><feGaussianBlur stdDeviation='12' /></filter></defs><rect width='320' height='160' fill='%23f5d1c0'/><rect x='-20' y='-20' width='360' height='200' fill='url(%23g)' filter='url(%23blur)' opacity='0.9'/><g font-family=\"'Inter',sans-serif\" fill='%2350353a'><text x='26' y='70' font-size='22' font-weight='600'>Natasha · Lumelle</text><text x='26' y='102' font-size='40' font-weight='700'>£1,000 received</text><text x='26' y='128' font-size='18' fill='%2350353a' opacity='0.75'>\"Congrats on topping the board!\"</text></g></svg>",
-    label: 'Cash boost',
-    title: '£1,000 leaderboard bonus',
-    description: 'Hit Gold and screenshot your payout—weekly cash drops land directly in WhatsApp so you can celebrate fast.',
-  },
-  {
-    id: 'product-drops',
-    backgroundSrc: '/images/product.jpg',
-    imageSrc: '/images/product.jpg',
-    label: 'Product drops',
-    title: 'Early access product drops',
-    description: 'Creators preview every release before it hits the store, complete with creative briefs and shot lists.',
-  },
-  {
-    id: 'community',
-    backgroundSrc: '/images/community.jpg',
-    imageSrc: '/images/community.jpg',
-    label: 'Community wins',
-    title: 'Co-create with Lumelle',
-    description: 'Join collaborative campaigns, test scripts side-by-side, and tap into the collective brain of 100+ creators.',
+    id: 'hero-product',
+    backgroundSrc: '/uploads/luminele/photo-for-page-3v2.jpeg',
+    imageSrc: '/uploads/luminele/photo-for-page-3v2.jpeg',
+    label: 'Creator highlight',
+    title: 'Meet the Lumelle cap',
+    description: 'See the exact cap creators love—full shot, no crop.',
   },
 ]
 

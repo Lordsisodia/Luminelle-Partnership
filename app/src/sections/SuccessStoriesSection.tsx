@@ -36,7 +36,7 @@ export const SuccessStoriesSection = () => {
             </div>
             <div className="space-y-4 md:flex-1">
               <div className="space-y-1 text-center md:text-left">
-                <h3 className="font-heading text-2xl text-brand-cocoa">
+                <h3 className="font-heading text-2xl font-bold text-brand-cocoa">
                   {featured.name}
                 </h3>
                 <p className="text-sm font-medium text-brand-cocoa/70">
@@ -79,7 +79,7 @@ export const SuccessStoriesSection = () => {
                 />
                 <div className="space-y-2 md:flex-1">
                   <div className="space-y-1">
-                    <h4 className="font-heading text-xl text-brand-cocoa">
+                    <h4 className="font-heading text-xl font-bold text-brand-cocoa">
                       {story.name}
                     </h4>
                     <p className="text-sm font-medium text-brand-cocoa/70">

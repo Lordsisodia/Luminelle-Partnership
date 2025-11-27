@@ -27,7 +27,7 @@ const fallbackImages = [
   '/uploads/luminele/product-feature-07.jpg',
 ]
 
-const cardBase = 'relative h-80 w-56 shrink-0 overflow-hidden rounded-[28px] shadow-xl shadow-brand-cocoa/15'
+const cardBase = 'relative h-72 w-44 shrink-0 overflow-hidden rounded-[24px] shadow-xl shadow-brand-cocoa/15'
 
 const defaultHeading: Required<Heading> = {
   eyebrow: 'Loved by thousands',
@@ -52,18 +52,20 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
   ]
 
   const renderRow = (items: Review[], reverse = false) => {
-    const looped = items.length ? [...items, ...items] : []
+    // Loop 4x to eliminate visible gaps on wide viewports
+    const looped = items.length ? [...items, ...items, ...items, ...items] : []
     if (!looped.length) return null
+    const duration = Math.max(10, items.length * 2.5)
     return (
-      <div className="relative overflow-hidden">
+      <div className="relative -mx-6 overflow-hidden px-6 md:mx-0 md:px-0">
         <div
-          className="flex gap-4"
-          style={{ animation: `marquee 22s linear infinite${reverse ? ' reverse' : ''}` }}
+          className="flex min-w-max gap-2"
+          style={{ animation: `marquee ${duration}s linear infinite${reverse ? ' reverse' : ''}` }}
         >
           {looped.map((review, idx) => (
             <article
               key={`${review.author}-${idx}-${reverse ? 'rev' : 'fwd'}`}
-              className={`${cardBase} bg-brand-blush/20`}
+              className={cardBase}
               aria-hidden={idx >= items.length}
             >
               <img

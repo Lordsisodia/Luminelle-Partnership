@@ -20,6 +20,9 @@ import { SearchResultsPage } from '@/pages/SearchResultsPage'
 import { AccountPage } from '@/pages/account/AccountPage'
 import { OrdersPage } from '@/pages/account/OrdersPage'
 import { BrandStoryPage } from '@/pages/BrandStoryPage'
+import { SignInPage } from '@/pages/auth/SignInPage'
+import { SignUpPage } from '@/pages/auth/SignUpPage'
+import { SSOCallbackPage } from '@/pages/auth/SSOCallbackPage'
 
 const App = () => {
   return (
@@ -47,6 +50,9 @@ const App = () => {
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/brief" element={<BriefPage />} />
+      <Route path="/sign-in" element={<SignInPage />} />
+      <Route path="/sign-up" element={<SignUpPage />} />
+      <Route path="/sso-callback" element={<SSOCallbackPage />} />
     </Routes>
   )
 }

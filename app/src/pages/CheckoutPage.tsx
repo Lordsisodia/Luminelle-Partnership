@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useCart } from '@/state/CartContext'
 import { addOrder, type Order } from '@/state/OrdersStore'
+import { useAuth as useClerkAuth } from '@clerk/clerk-react'
 
 const FREE_SHIP_THRESHOLD = 40
 const STANDARD_SHIPPING = 3.95
@@ -27,10 +28,13 @@ export const CheckoutPage = () => {
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping])
   const [emailOptIn, setEmailOptIn] = useState(true)
   const [step, setStep] = useState(0)
+  const [placingOrder, setPlacingOrder] = useState(false)
   const disabled = qty === 0
+  const { getToken } = useClerkAuth()
 
-  const placeOrder = () => {
-    if (disabled) return
+  const placeOrder = async () => {
+    if (disabled || placingOrder) return
+    setPlacingOrder(true)
     const order: Order = {
       id: `LUM-${Date.now().toString(36).toUpperCase()}`,
       placedAt: new Date().toISOString(),
@@ -44,9 +48,14 @@ export const CheckoutPage = () => {
         { at: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(), message: 'Processing at warehouse' },
       ],
     }
-    addOrder(order)
-    clear()
-    window.location.href = `/order/${order.id}/confirm`
+    try {
+      const token = await getToken({ template: 'supabase' }).catch(() => null)
+      await addOrder(order, token ?? undefined)
+      clear()
+      window.location.href = `/order/${order.id}/confirm`
+    } finally {
+      setPlacingOrder(false)
+    }
   }
 
   const goNext = () => setStep((s) => Math.min(s + 1, steps.length - 1))
@@ -156,8 +165,8 @@ export const CheckoutPage = () => {
               <button className="rounded-full border border-brand-blush/60 px-5 py-2 text-sm font-semibold text-brand-cocoa" onClick={goBack}>
                 Edit details
               </button>
-              <button onClick={placeOrder} disabled={disabled} className="rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa disabled:opacity-50">
-                Place order
+              <button onClick={placeOrder} disabled={disabled || placingOrder} className="rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa disabled:opacity-50">
+                {placingOrder ? 'Saving order…' : 'Place order'}
               </button>
             </div>
           </div>

@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
+import { UserRound, ShoppingBag, Menu } from 'lucide-react'
 import { SUPPORT_EMAIL } from '@/config/constants'
 import { useCart } from '@/state/CartContext'
 import { useAuth } from '@/state/AuthContext'
@@ -128,10 +130,9 @@ export const MarketingLayout = ({
 
   // rotating promo banner messages
   const promoMessages = [
-    'Fast shipping over £40',
-    '30-day Luxe guarantee',
-    'Secure checkout + instant tracking',
-    'Buy 2, save 10%'
+    { label: 'Free shipping over £19.99' },
+    { label: '30-day money back guarantee' },
+    { label: 'Buy 2, save 10% — Shop now', href: '/product/shower-cap' },
   ]
   const [activePromo, setActivePromo] = useState(0)
 
@@ -177,11 +178,17 @@ export const MarketingLayout = ({
           <div className="relative flex h-10 items-center justify-center text-[11px] font-semibold uppercase tracking-[0.26em] sm:text-xs">
             {promoMessages.map((msg, idx) => (
               <span
-                key={msg}
+                key={msg.label}
                 className={`absolute whitespace-nowrap transition-opacity duration-400 ${idx === activePromo ? 'opacity-100' : 'opacity-0'}`}
                 aria-hidden={idx !== activePromo}
               >
-                {msg}
+                {msg.href ? (
+                  <RouterLink to={msg.href} className="underline decoration-brand-cocoa/50 underline-offset-4 hover:text-brand-cocoa/80">
+                    {msg.label}
+                  </RouterLink>
+                ) : (
+                  msg.label
+                )}
               </span>
             ))}
           </div>
@@ -198,17 +205,28 @@ export const MarketingLayout = ({
         }`}
       >
         <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="flex items-center justify-between gap-4 py-4">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 py-4">
+            <div className="flex items-center gap-2" ref={menuRef}>
+              <button
+                aria-label="Open menu"
+                aria-expanded={menuOpen}
+                onClick={() => { setActiveTab('menu'); setMenuOpen(true); track('nav_open') }}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
+              >
+                <Menu className="h-5 w-5" />
+              </button>
+            </div>
+
             <RouterLink
               to="/"
-              className="flex flex-col items-start gap-1"
+              className="flex flex-col items-center justify-center gap-1 text-center"
             >
               <span className="font-heading text-2xl font-semibold uppercase tracking-[0.24em] text-brand-cocoa md:text-xl">
                 Lumelle
               </span>
               {subtitle ? (
                 <>
-                  <span className="text-xs font-medium uppercase tracking-[0.3em] text-brand-cocoa/60 md:hidden">
+                  <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-brand-cocoa/60 md:hidden">
                     {subtitle}
                   </span>
                   <span className="hidden text-sm font-medium text-brand-cocoa/70 md:inline">
@@ -217,39 +235,55 @@ export const MarketingLayout = ({
                 </>
               ) : null}
             </RouterLink>
-            <div className="flex items-center gap-2">
+
+            <div className="flex items-center justify-end gap-2">
               {onPrimaryAction ? (
-                <>
-                  <button
-                    onClick={onPrimaryAction}
-                    type="button"
-                    className="hidden items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90 md:inline-flex"
-                  >
-                    {primaryLabel}
-                  </button>
-                  <button
-                    onClick={onPrimaryAction}
-                    type="button"
-                    className="inline-flex items-center justify-center rounded-full border border-brand-peach/60 bg-white px-3 py-1.5 text-xs font-semibold text-brand-cocoa shadow-sm transition hover:bg-brand-blush/40 md:hidden"
-                  >
-                    {primaryLabel}
-                  </button>
-                </>
-              ) : null}
-              <div className="relative" ref={menuRef}>
                 <button
-                  aria-label="Open menu"
-                  aria-expanded={menuOpen}
-                  onClick={() => { setActiveTab('menu'); setMenuOpen(true); track('nav_open') }}
-                  className="inline-flex items-center justify-center rounded-full border border-brand-blush/60 bg-white p-2 text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
+                  onClick={onPrimaryAction}
+                  type="button"
+                  className="hidden items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90 md:inline-flex"
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <line x1="3" y1="18" x2="21" y2="18" />
-                  </svg>
+                  {primaryLabel}
                 </button>
-              </div>
+              ) : null}
+
+              <SignedOut>
+                <RouterLink
+                  to="/sign-in"
+                  className="hidden rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa transition hover:bg-brand-blush/40 md:inline-flex"
+                >
+                  Sign in
+                </RouterLink>
+              </SignedOut>
+              <SignedIn>
+                <div className="hidden md:block">
+                  <UserButton
+                    afterSignOutUrl="/"
+                    appearance={{
+                      elements: {
+                        avatarBox: 'h-10 w-10',
+                      },
+                    }}
+                  />
+                </div>
+              </SignedIn>
+
+              <RouterLink
+                to={signedIn ? '/account' : '/sign-in'}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
+                aria-label={signedIn ? 'Account' : 'Sign in'}
+              >
+                <UserRound className="h-5 w-5" />
+              </RouterLink>
+
+              <button
+                type="button"
+                onClick={() => { setActiveTab('cart'); setMenuOpen(true); track('nav_open_cart') }}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
+                aria-label="Open cart"
+              >
+                <ShoppingBag className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </div>

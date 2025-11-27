@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { SectionHeading } from '@/components/SectionHeading'
-import { Search, Plus, Minus } from 'lucide-react'
+import { Plus, Minus } from 'lucide-react'
 
 type FAQItem = { q: string; a: string }
 
@@ -17,6 +17,7 @@ type Props = {
   sectionId?: string
   ctaHref?: string
   ctaLabel?: string
+  hideCta?: boolean
 }
 
 const defaultHeading: Heading = {
@@ -31,8 +32,8 @@ const defaultCta = {
   label: 'Chat with WhatsApp concierge',
 }
 
-export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel }: Props) => {
-  const [query, setQuery] = useState('')
+export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel, hideCta = false }: Props) => {
+  const [query] = useState('')
   const [openIndex, setOpenIndex] = useState(0)
 
   const normalizedQuery = query.toLowerCase().trim()
@@ -47,10 +48,12 @@ export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel }:
     ...heading,
     alignment: heading?.alignment ?? defaultHeading.alignment,
   }
-  const resolvedCta = {
-    href: ctaHref ?? defaultCta.href,
-    label: ctaLabel ?? defaultCta.label,
-  }
+  const resolvedCta = hideCta
+    ? null
+    : {
+        href: ctaHref ?? defaultCta.href,
+        label: ctaLabel ?? defaultCta.label,
+      }
 
   return (
     <section id={sectionId ?? 'faq'} className="bg-white py-16">
@@ -62,27 +65,18 @@ export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel }:
           alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
 
-        <div className="mt-6 flex flex-col gap-3 rounded-3xl border border-brand-peach/30 bg-brand-blush/10 p-4 md:flex-row md:items-center">
-          <label htmlFor="faq-search" className="flex flex-1 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm">
-            <Search className="h-5 w-5 text-brand-cocoa/50" />
-            <input
-              id="faq-search"
-              type="search"
-              placeholder="Search waterproofing, fit, travel..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full border-none bg-transparent text-sm text-brand-cocoa placeholder:text-brand-cocoa/50 focus:outline-none"
-            />
-          </label>
-          <a
-            href={resolvedCta.href}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-2xl bg-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft"
-          >
-            {resolvedCta.label}
-          </a>
-        </div>
+        {resolvedCta ? (
+          <div className="mt-6 flex justify-center">
+            <a
+              href={resolvedCta.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-2xl bg-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft"
+            >
+              {resolvedCta.label}
+            </a>
+          </div>
+        ) : null}
 
         <div className="mt-8 space-y-4">
           {visibleItems.map((f) => {
