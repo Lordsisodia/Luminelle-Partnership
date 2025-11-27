@@ -16,16 +16,5 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 900,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'react-vendor'
-            if (id.includes('@clerk')) return 'clerk-vendor'
-            return 'vendor'
-          }
-        },
-      },
-    },
   },
 })

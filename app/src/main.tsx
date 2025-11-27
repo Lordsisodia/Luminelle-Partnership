@@ -7,24 +7,18 @@ import App from './App.tsx'
 import { CartProvider } from './state/CartContext.tsx'
 import { AuthProvider } from './state/AuthContext.tsx'
 
-const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-const ClerkWrapper = clerkPublishableKey
-  ? ({ children }: { children: React.ReactNode }) => (
-      <ClerkProvider
-        publishableKey={clerkPublishableKey}
-        signInUrl="/sign-in"
-        signUpUrl="/sign-up"
-        afterSignInUrl="/account"
-        afterSignUpUrl="/account"
-      >
-        {children}
-      </ClerkProvider>
-    )
-  : ({ children }: { children: React.ReactNode }) => <>{children}</>
+// Always provide Clerk; fall back to a harmless placeholder key for preview/local.
+const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? 'pk_test_placeholder'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClerkWrapper>
+    <ClerkProvider
+      publishableKey={clerkPublishableKey}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      afterSignInUrl="/account"
+      afterSignUpUrl="/account"
+    >
       <BrowserRouter>
         <CartProvider>
           <AuthProvider>
@@ -32,6 +26,6 @@ createRoot(document.getElementById('root')!).render(
           </AuthProvider>
         </CartProvider>
       </BrowserRouter>
-    </ClerkWrapper>
+    </ClerkProvider>
   </StrictMode>
 )
