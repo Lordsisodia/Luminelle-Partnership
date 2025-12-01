@@ -19,12 +19,23 @@ type ReviewsAutoCarouselProps = {
 }
 
 const fallbackImages = [
-  '/uploads/luminele/product-feature-02.jpg',
-  '/uploads/luminele/product-feature-03.jpg',
-  '/uploads/luminele/product-feature-04.jpg',
-  '/uploads/luminele/product-feature-05.jpg',
-  '/uploads/luminele/product-feature-06.jpg',
-  '/uploads/luminele/product-feature-07.jpg',
+  '/reviews/Gemini_Generated_Image_1ohn881ohn881ohn.png',
+  '/reviews/Gemini_Generated_Image_2suo7c2suo7c2suo.png',
+  '/reviews/Gemini_Generated_Image_btzh5ubtzh5ubtzh.png',
+  '/reviews/Gemini_Generated_Image_crdb1mcrdb1mcrdb.png',
+  '/reviews/Gemini_Generated_Image_e9x1q9e9x1q9e9x1.png',
+  '/reviews/Gemini_Generated_Image_gaubrugaubrugaub.png',
+  '/reviews/Gemini_Generated_Image_gyw8k3gyw8k3gyw8.png',
+  '/reviews/Gemini_Generated_Image_l0ygmll0ygmll0yg.png',
+  '/reviews/Gemini_Generated_Image_nwz7cunwz7cunwz7.png',
+  '/reviews/Gemini_Generated_Image_o80p76o80p76o80p.png',
+  '/reviews/Gemini_Generated_Image_qpfy4yqpfy4yqpfy.png',
+  '/reviews/Gemini_Generated_Image_t2ay1yt2ay1yt2ay.png',
+  '/reviews/Gemini_Generated_Image_t9xqp9t9xqp9t9xq.png',
+  '/reviews/Gemini_Generated_Image_tcejrztcejrztcej.png',
+  '/reviews/Gemini_Generated_Image_vcg1r9vcg1r9vcg1.png',
+  '/reviews/Gemini_Generated_Image_wpf7igwpf7igwpf7.png',
+  '/reviews/Gemini_Generated_Image_ynux5pynux5pynux.png',
 ]
 
 const cardBase = 'relative h-72 w-44 shrink-0 overflow-hidden rounded-[24px] shadow-xl shadow-brand-cocoa/15'

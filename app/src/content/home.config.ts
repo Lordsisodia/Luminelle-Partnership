@@ -3,6 +3,7 @@ export type Review = {
   stars: number
   title: string
   body: string
+  image?: string
   date?: string
   source?: string
 }
@@ -71,15 +72,16 @@ export const homeConfig: HomeConfig = {
     offerChip: 'Buy 2, save 10%',
     secondaryCtaLabel: 'Join WhatsApp',
     secondaryCtaHref: '/affiliates',
-    image: '/uploads/luminele/photo-for-page-3v2.jpeg',
-    bgImage: '/uploads/luminele/photo-for-page-3v2.jpeg',
+    image: '/uploads/luminele/hero-logo-centered.svg',
+    bgImage: '/uploads/luminele/hero-logo-centered.svg',
     objectPosition: 'center center',
+    objectFit: 'cover',
     pill: 'Best seller',
     assurances: [
       { label: 'Free shipping £20+' },
       { label: '30-day money back' },
     ],
-    gallery: ['/uploads/luminele/photo-for-page-3v2.jpeg'],
+    gallery: ['/uploads/luminele/hero-logo-centered.svg'],
   },
   slides: [
     {
@@ -158,9 +160,125 @@ export const homeConfig: HomeConfig = {
     { title: 'Shipping & returns', body: 'Tracked worldwide shipping from the UK. 30‑day Luxe Guarantee with easy exchanges.' },
   ],
   reviews: [
-    { author: 'Amelia', stars: 5, title: 'Zero frizz', body: 'Finally a cap that actually works.' },
-    { author: 'Beth', stars: 5, title: 'So comfy', body: 'No marks on my forehead and looks cute.' },
-    { author: 'Cara', stars: 5, title: 'Worth it', body: 'Saved my blowout more than once.' }
+    {
+      author: 'Amelia',
+      stars: 5,
+      title: 'Zero frizz',
+      body: 'Finally a cap that actually works.',
+      image: '/reviews/Gemini_Generated_Image_1ohn881ohn881ohn.png',
+    },
+    {
+      author: 'Beth',
+      stars: 5,
+      title: 'So comfy',
+      body: 'No marks on my forehead and looks cute.',
+      image: '/reviews/Gemini_Generated_Image_2suo7c2suo7c2suo.png',
+    },
+    {
+      author: 'Cara',
+      stars: 5,
+      title: 'Worth it',
+      body: 'Saved my blowout more than once.',
+      image: '/reviews/Gemini_Generated_Image_btzh5ubtzh5ubtzh.png',
+    },
+    {
+      author: 'Danielle',
+      stars: 5,
+      title: 'Blowout saver',
+      body: 'Stayed smooth after a long, steamy shower.',
+      image: '/reviews/Gemini_Generated_Image_crdb1mcrdb1mcrdb.png',
+    },
+    {
+      author: 'Ella',
+      stars: 4.5,
+      title: 'Soft band',
+      body: 'No dents and super gentle on edges.',
+      image: '/reviews/Gemini_Generated_Image_e9x1q9e9x1q9e9x1.png',
+    },
+    {
+      author: 'Fiona',
+      stars: 5,
+      title: 'Looks luxe',
+      body: 'Finally a cap I’m not embarrassed to wear.',
+      image: '/reviews/Gemini_Generated_Image_gaubrugaubrugaub.png',
+    },
+    {
+      author: 'Grace',
+      stars: 5,
+      title: 'Curl friendly',
+      body: 'Fits over braids without tugging.',
+      image: '/reviews/Gemini_Generated_Image_gyw8k3gyw8k3gyw8.png',
+    },
+    {
+      author: 'Hana',
+      stars: 4.8,
+      title: 'Travel staple',
+      body: 'Packs flat and keeps styles intact on trips.',
+      image: '/reviews/Gemini_Generated_Image_l0ygmll0ygmll0yg.png',
+    },
+    {
+      author: 'Isla',
+      stars: 5,
+      title: 'Steam proof',
+      body: 'Tested in a sauna shower—no puffiness.',
+      image: '/reviews/Gemini_Generated_Image_nwz7cunwz7cunwz7.png',
+    },
+    {
+      author: 'Jade',
+      stars: 4.9,
+      title: 'Satin smooth',
+      body: 'Interior feels like a silk pillowcase.',
+      image: '/reviews/Gemini_Generated_Image_o80p76o80p76o80p.png',
+    },
+    {
+      author: 'Kara',
+      stars: 5,
+      title: 'Stretch fit',
+      body: 'Roomy enough for rollers and still sealed.',
+      image: '/reviews/Gemini_Generated_Image_qpfy4yqpfy4yqpfy.png',
+    },
+    {
+      author: 'Lena',
+      stars: 5,
+      title: 'Worth the upgrade',
+      body: 'Feels premium compared to plastic caps.',
+      image: '/reviews/Gemini_Generated_Image_t2ay1yt2ay1yt2ay.png',
+    },
+    {
+      author: 'Mara',
+      stars: 4.7,
+      title: 'Holds up',
+      body: 'Using daily for weeks—still perfect.',
+      image: '/reviews/Gemini_Generated_Image_t9xqp9t9xqp9t9xq.png',
+    },
+    {
+      author: 'Nia',
+      stars: 5,
+      title: 'Edge-safe',
+      body: 'No rubbing on baby hairs.',
+      image: '/reviews/Gemini_Generated_Image_tcejrztcejrztcej.png',
+    },
+    {
+      author: 'Opal',
+      stars: 5,
+      title: 'Great gift',
+      body: 'Bought for my mom—she loves it.',
+      image: '/reviews/Gemini_Generated_Image_vcg1r9vcg1r9vcg1.png',
+    },
+    {
+      author: 'Priya',
+      stars: 4.8,
+      title: 'Cute design',
+      body: 'Functional and actually stylish.',
+      image: '/reviews/Gemini_Generated_Image_wpf7igwpf7igwpf7.png',
+    },
+    {
+      author: 'Quinn',
+      stars: 5,
+      title: 'Frizz free',
+      body: 'Hair stays shiny even on wash day.',
+      image: '/reviews/Gemini_Generated_Image_ynux5pynux5pynux.png',
+    },
   ],
   pdpTeaser: {
     title: 'Lumelle Shower Cap',
@@ -170,7 +288,7 @@ export const homeConfig: HomeConfig = {
     rating: 4.9,
     reviews: 1240,
     pills: ['No-frizz seal', 'Luxury feel', 'Reusable + eco'],
-    price: 'From £24',
+    price: 'Was £19.99 • Now £15',
     bullets: [
       'Reusable waterproof',
       'Satin lined',

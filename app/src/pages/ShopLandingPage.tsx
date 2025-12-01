@@ -33,11 +33,11 @@ export const ShopLandingPage = () => {
         <section id="benefits">
           <BenefitsSection slides={homeConfig.slides} />
         </section>
-        <FinalCtaSection />
         <ReviewsAutoCarousel reviews={homeConfig.reviews} />
         <FeaturedTikTok />
         {/* UGC section removed per latest client request */}
         <BundleCards />
+        <FinalCtaSection />
         <FaqSectionShop
           items={homeConfig.faq}
           hideCta

@@ -5,9 +5,10 @@ import { HighlightsDots } from './HighlightsDots'
 const bundles = [
   {
     name: 'Single',
-    price: '£24.00',
+    oldPrice: '£19.99',
+    price: '£15.00',
     currencyLabel: 'GBP',
-    perUnit: '£24 / cap',
+    perUnit: 'Now £15 / cap',
     save: '',
     pill: '',
     description: 'One cap to keep every wash day camera-ready.',
@@ -15,9 +16,10 @@ const bundles = [
   },
   {
     name: 'Duo',
-    price: '£43.20',
+    oldPrice: '£39.98',
+    price: '£27.00',
     currencyLabel: 'GBP',
-    perUnit: '£21.60 / cap',
+    perUnit: '£13.50 / cap',
     save: 'Save 10%',
     pill: 'Popular',
     description: 'Grab one for you and a stylist partner, or rotate between showers.',
@@ -25,9 +27,10 @@ const bundles = [
   },
   {
     name: 'Gift set',
-    price: '£48.00',
+    oldPrice: '£59.97',
+    price: '£45.00',
     currencyLabel: 'GBP',
-    perUnit: 'Includes free gift wrap',
+    perUnit: '£15 / cap + gift wrap',
     save: 'Give one to a friend',
     pill: 'Giftable',
     description: 'Packaged for gifting with designer wrap and handwritten note.',
@@ -112,7 +115,8 @@ export const BundleCards = () => {
                       </div>
                       <img src="/uploads/luminele/product-feature-05.jpg" alt={`${b.name} pack`} className="h-24 w-24 rounded-2xl border border-brand-blush/60 object-cover shadow-inner" />
                     </div>
-                    <div className="mt-2 flex items-baseline gap-2 text-brand-cocoa">
+                    <div className="mt-2 flex items-baseline gap-3 text-brand-cocoa">
+                      <span className="text-sm font-semibold text-brand-cocoa/50 line-through">{b.oldPrice}</span>
                       <p className="text-2xl font-semibold">{b.price}</p>
                       <span className="text-xs font-semibold tracking-[0.3em] text-brand-cocoa/70">{b.currencyLabel}</span>
                     </div>

@@ -195,6 +195,11 @@ export const CheckoutPage = () => {
                       <div className="flex-1 text-sm text-brand-cocoa">
                         <div className="font-medium">{it.title}</div>
                         <div className="text-brand-cocoa/70">Qty {it.qty}</div>
+                        <div className="flex items-center gap-2 text-[11px] text-brand-cocoa/70">
+                          <span className="line-through text-brand-cocoa/50">£19.99</span>
+                          <span className="font-semibold text-brand-cocoa">£{it.price.toFixed(2)}</span>
+                          <span>each</span>
+                        </div>
                       </div>
                       <div className="text-sm font-semibold">£{(it.price * it.qty).toFixed(2)}</div>
                     </div>

@@ -45,7 +45,11 @@ export const CartPage = () => {
                     <img src="/uploads/luminele/product-feature-05.jpg" alt={item.title} className="h-20 w-20 rounded-xl border border-brand-blush/40 object-cover" />
                     <div className="text-sm text-brand-cocoa">
                       <p className="font-semibold">{item.title}</p>
-                      <p className="text-brand-cocoa/70">£{item.price.toFixed(2)} each</p>
+                      <p className="flex items-center gap-2 text-brand-cocoa/70">
+                        <span className="line-through text-brand-cocoa/50">£19.99</span>
+                        <span className="font-semibold text-brand-cocoa">£{item.price.toFixed(2)}</span>
+                        <span>each</span>
+                      </p>
                       <button className="mt-2 text-[11px] uppercase tracking-[0.25em] text-brand-cocoa/60" onClick={() => remove(item.id)}>
                         Remove
                       </button>

@@ -12,6 +12,7 @@ type Props = {
     bgImage?: string
     gallery?: string[]
     objectPosition?: string
+    objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
     pill?: string
   }
 }
@@ -44,14 +45,17 @@ export const HeroShop = ({ config }: Props) => {
               key={idx}
               src={src}
               alt=""
-              className="h-full w-full flex-[0_0_100%] object-cover brightness-95"
-              style={{ objectPosition: config.objectPosition || 'center center' }}
+              className="h-full w-full flex-[0_0_100%] brightness-95 object-cover scale-[1.08]"
+              style={{
+                objectPosition: config.objectPosition || 'center center',
+                objectFit: config.objectFit || 'cover',
+              }}
               loading={idx === 0 ? 'eager' : 'lazy'}
             />
           ))}
         </div>
         <div
-          className="absolute inset-0 pointer-events-none backdrop-blur-[2px]"
+          className="absolute inset-0 pointer-events-none backdrop-blur-[1px]"
           style={{
             backgroundImage:
               'linear-gradient(180deg, rgba(247,239,232,0.5) 0%, rgba(247,239,232,0.3) 32%, rgba(247,239,232,0.12) 55%, rgba(247,239,232,0) 78%)',
@@ -59,7 +63,7 @@ export const HeroShop = ({ config }: Props) => {
         />
       </div>
       <div className="absolute inset-0 z-10">
-        <div className="mx-auto flex h-full max-w-6xl items-center px-4 pt-[4.5rem] pb-[3.5rem] text-center md:px-6">
+        <div className="mx-auto flex h-full max-w-6xl items-center px-4 pt-[3.5rem] pb-[3.5rem] text-center md:px-6">
           <div className="mx-auto w-full max-w-xl md:max-w-2xl">
             <div className="inline-flex flex-wrap items-center gap-3 rounded-full bg-white/30 px-4 py-2 text-brand-cocoa backdrop-blur-md shadow-soft ring-1 ring-white/50">
               <div className="flex -space-x-1.5">

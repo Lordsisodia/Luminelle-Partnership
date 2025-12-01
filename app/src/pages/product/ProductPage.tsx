@@ -3,7 +3,6 @@ import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
 import { useCart } from '@/state/CartContext'
-import { useDrawer } from '@/state/DrawerContext'
 import { StarRating } from '@/components/StarRating'
 import { FeatureCallouts, DetailsAccordion, HeroProofStrip, ReviewsAutoCarousel, FaqSectionShop } from '@/sections/shop'
 import { FeaturedTikTok } from '@/sections/shop/FeaturedTikTok'
@@ -60,11 +59,10 @@ const navItems: NavItem[] = [
 
 export const ProductPage = () => {
   const { add } = useCart()
-  const { openCart } = useDrawer()
   const [activeImage, setActiveImage] = useState(0)
   const [infoTab, setInfoTab] = useState<'how' | 'care'>('how')
-  const addToCart = () => add({ id: 'lumelle-cap', title: 'Lumelle Shower Cap', price: 24 }, 1)
-  const addToCartAndOpen = () => { addToCart(); openCart() }
+  const addToCart = () => add({ id: 'lumelle-cap', title: 'Lumelle Shower Cap', price: 15 }, 1)
+  const addToCartAndOpen = () => { addToCart() }
   return (
     <MarketingLayout navItems={navItems} primaryLabel="Add to Cart" onPrimaryAction={addToCartAndOpen} subtitle="Product">
       {/* Hero media + info */}
@@ -113,7 +111,10 @@ export const ProductPage = () => {
                   Read reviews
                 </a>
               </div>
-              <div className="mt-2 text-3xl font-semibold">£24.00</div>
+              <div className="mt-2 flex items-baseline gap-2">
+                <span className="text-xl font-semibold text-brand-cocoa/50 line-through">£19.99</span>
+                <span className="text-3xl font-semibold text-brand-cocoa">£15.00</span>
+              </div>
               <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1 text-sm font-semibold uppercase tracking-[0.3em] text-brand-cocoa shadow-soft">
                 Buy 2, save 10%
               </div>
