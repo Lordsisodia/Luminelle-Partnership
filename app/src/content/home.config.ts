@@ -30,6 +30,7 @@ export type HomeConfig = {
     offerChip?: string
     image: string
     bgImage?: string
+    objectFit?: string
     gallery?: string[]
     objectPosition?: string
     pill?: string
