@@ -20,7 +20,7 @@ export const BlogPostPage = () => {
 
   const related = blogPosts
     .filter((p) => p.slug !== post.slug)
-    .sort((a, b) => (a.tag === post.tag ? -1 : 1))
+    .sort((a, b) => (a.tag === post.tag ? -1 : b.tag === post.tag ? 1 : 0))
     .slice(0, 3)
 
   useEffect(() => {
@@ -65,17 +65,6 @@ export const BlogPostPage = () => {
         name: qa.question,
         acceptedAnswer: { '@type': 'Answer', text: qa.answer },
       })),
-    }
-
-    const injectJsonLd = (id: string, json: object) => {
-      let script = document.getElementById(id) as HTMLScriptElement | null
-      if (!script) {
-        script = document.createElement('script')
-        script.type = 'application/ld+json'
-        script.id = id
-        document.head.appendChild(script)
-      }
-      script.textContent = JSON.stringify(json)
     }
 
     injectJsonLd('lumelle-article-ld', ldArticle)

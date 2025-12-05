@@ -94,7 +94,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
           ref={scrollerRef}
           className="relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
-          {stories.map((s, idx) => {
+          {stories.map((s) => {
             return (
               <article key={s.handle} data-tiktok-card className="min-w-[min(90vw,420px)] snap-center">
                 <div className="relative overflow-hidden rounded-3xl border border-brand-peach/40 pb-[177.77%] shadow-soft">
