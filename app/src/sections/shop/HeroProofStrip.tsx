@@ -9,14 +9,14 @@ type Props = {
 
 export const HeroProofStrip = ({ rating, count, tagline }: Props) => {
   const quickFacts = [
-    { label: 'Community', value: '100+ creators', icon: Users },
+    { label: 'Proven', value: 'Protects hair', icon: ShieldCheck },
     { label: 'Dispatch', value: '48 hrs ship time', icon: Truck },
-    { label: 'Guarantee', value: '30-day Luxe', icon: ShieldCheck },
+    { label: 'Guarantee', value: 'Free returns in 30 days', icon: Users },
   ]
 
   return (
     <div className="border-b border-brand-blush/40 bg-white/95">
-      <div className="mx-auto flex flex-col gap-4 px-4 py-5 md:max-w-6xl md:flex-row md:items-center md:justify-between md:px-6">
+      <div className="mx-auto flex flex-col gap-2 px-4 py-4 md:max-w-6xl md:flex-row md:items-center md:justify-between md:px-6">
         <div className="text-center text-brand-cocoa md:text-left">
           <div className="flex flex-col items-center gap-1 text-sm text-brand-cocoa/80 md:flex-row md:gap-3">
             <StarRating value={rating} size={18} />

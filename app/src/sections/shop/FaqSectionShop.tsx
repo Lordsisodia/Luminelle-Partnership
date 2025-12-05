@@ -98,7 +98,23 @@ export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel, h
                   <span className="text-base font-semibold text-brand-cocoa">{f.q}</span>
                   {isOpen ? <Minus className="h-5 w-5 text-brand-cocoa" /> : <Plus className="h-5 w-5 text-brand-cocoa/60" />}
                 </button>
-                {isOpen ? <p className="mt-3 text-sm leading-relaxed text-brand-cocoa/75">{f.a}</p> : null}
+                {isOpen ? (
+                  f.a.toLowerCase().startsWith('customer review') ? (
+                    <div className="mt-3 space-y-2 rounded-2xl bg-brand-blush/15 p-4">
+                      <div className="flex flex-wrap items-center gap-2 text-brand-cocoa">
+                        <span className="rounded-full bg-brand-peach/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-brand-cocoa">
+                          Customer review
+                        </span>
+                        <span className="text-sm font-semibold text-brand-cocoa">★★★★★</span>
+                      </div>
+                      <p className="text-sm leading-relaxed text-brand-cocoa/85">
+                        {f.a.replace(/^customer review\s*·?\s*5★:\s*/i, '')}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="mt-3 text-sm leading-relaxed text-brand-cocoa/75">{f.a}</p>
+                  )
+                ) : null}
               </div>
             )
           })}

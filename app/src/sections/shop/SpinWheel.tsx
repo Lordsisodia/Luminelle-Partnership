@@ -13,12 +13,10 @@ type SpinWheelProps = {
 }
 
 const defaultPrizes: Prize[] = [
-  { label: '10% off', helper: 'Any pack', color: '#F9A58A' },
-  { label: 'Free shipping', helper: '£20+ orders', color: '#F4C7B7' },
-  { label: '15% off', helper: 'Bundles only', color: '#FDD9C3' },
-  { label: 'Mystery gift', helper: 'Added at checkout', color: '#F7B9A3' },
-  { label: '£5 off', helper: 'Single cap', color: '#F3A48E' },
-  { label: 'Try again', helper: 'One more spin', color: '#FCE6DD' },
+  { label: '5% off', helper: 'Any pack', color: '#F9A58A' },
+  { label: '10% off', helper: 'Any pack', color: '#F4C7B7' },
+  { label: 'Free shipping', helper: 'UK & EU', color: '#FDD9C3' },
+  { label: '10% + free ship', helper: 'Best value', color: '#F7B8A0' },
 ]
 
 export const SpinWheel = ({ prizes = defaultPrizes, onResult, claimHref = '/sign-in' }: SpinWheelProps) => {
@@ -46,7 +44,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onResult, claimHref = '/sign
     setSpinning(true)
     setResult(null)
 
-    const targetIndex = Math.floor(Math.random() * prizes.length)
+    const targetIndex = prizes.length - 1 // always land on best reward after capture
     const spins = 6 + Math.floor(Math.random() * 4) // 6-9 full rotations
     // Pointer is at 12 o'clock; align segment center there
     const targetRotation = 360 - (targetIndex * slice + slice / 2)
@@ -78,30 +76,25 @@ export const SpinWheel = ({ prizes = defaultPrizes, onResult, claimHref = '/sign
           }}
           aria-live="polite"
         />
-        {/* Prize labels */}
-        <div className="absolute inset-0">
-          {prizes.map((prize, idx) => {
-            const angle = idx * slice + slice / 2
-            return (
-              <div
-                key={prize.label}
-                className="absolute left-1/2 top-1/2 w-[64px] -translate-x-1/2 -translate-y-1/2 text-center text-[11px] font-semibold leading-tight text-brand-cocoa drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]"
-                style={{
-                  transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-55%) rotate(-${angle}deg)`,
-                }}
-              >
-                {prize.label}
-              </div>
-            )
-          })}
-        </div>
-        {/* Center puck */}
+        {/* Center puck (blank for clean look) */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-16 w-16 rounded-full bg-white/90 text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-brand-cocoa shadow-soft backdrop-blur">
-            Spin
+          <div className="h-10 w-10 rounded-full bg-white/90 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa shadow-soft backdrop-blur">
+            <span className="sr-only">Spin</span>
           </div>
         </div>
       </div>
+      <div className="mt-4 grid w-full max-w-md grid-cols-2 gap-3 text-sm text-brand-cocoa/80">
+        {prizes.map((prize) => (
+          <div key={prize.label} className="flex items-center gap-3 rounded-2xl bg-white/70 p-3 shadow-[0_6px_18px_rgba(0,0,0,0.06)]">
+            <span className="h-4 w-4 shrink-0 rounded-full border border-brand-cocoa/20" style={{ backgroundColor: prize.color || '#F9A58A' }} />
+            <div>
+              <div className="font-semibold text-brand-cocoa">{prize.label}</div>
+              {prize.helper ? <div className="text-xs text-brand-cocoa/70">{prize.helper}</div> : null}
+            </div>
+          </div>
+        ))}
+      </div>
+
       {!spun ? (
         <button
           type="button"

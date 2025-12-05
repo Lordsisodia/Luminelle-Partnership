@@ -3,6 +3,8 @@ import type { NavItem } from '@/layouts/MarketingLayout'
 import { blogPosts } from '@/content/blog'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { setMetaTags, injectJsonLd } from '@/lib/seo'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Blog' },
@@ -15,10 +17,33 @@ export const BlogIndexPage = () => {
   const featured = blogPosts.filter((p) => p.featured).slice(0, 2)
   const rest = blogPosts.filter((p) => !p.featured)
 
+  useEffect(() => {
+    const title = 'Lumelle Journal | Blog'
+    const description =
+      'Guides, routines, and creator tips to keep your hair frizz-free and camera-ready with Lumelle.'
+    const heroImage = featured[0]?.cover || '/uploads/luminele/product-feature-01.jpg'
+    setMetaTags({ title, description, url: window.location.href, image: heroImage, type: 'website' })
+
+    // Simple Blog schema
+    const ld = {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Lumelle Journal',
+      url: window.location.href,
+      description,
+    }
+    injectJsonLd('lumelle-blog-ld', ld)
+  }, [])
+
   return (
     <MarketingLayout navItems={navItems} subtitle="Journal">
       <section id="hero" className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
+          <nav className="mb-4 flex items-center justify-center gap-2 text-sm text-brand-cocoa/60">
+            <Link to="/" className="hover:text-brand-cocoa">Home</Link>
+            <span>›</span>
+            <span className="text-brand-cocoa/80">Blog</span>
+          </nav>
           <div className="text-center">
             <span className="inline-flex rounded-full bg-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/70">
               Journal

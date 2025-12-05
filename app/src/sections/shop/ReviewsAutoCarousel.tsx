@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { StarRating } from '@/components/StarRating'
 import type { Review as ReviewType } from '@/content/home.config'
@@ -38,12 +38,10 @@ const fallbackImages = [
   '/reviews/Gemini_Generated_Image_ynux5pynux5pynux.png',
 ]
 
-const cardBase = 'relative h-72 w-44 shrink-0 overflow-hidden rounded-[24px] shadow-xl shadow-brand-cocoa/15'
-
 const defaultHeading: Required<Heading> = {
   eyebrow: 'Loved by thousands',
   title: 'Customer Stories',
-  description: 'Portrait stories from verified shoppers—scroll to peek at the glow-ups.',
+  description: 'Real experiences from people who use it every day. To see more reviews visit our TikTok shop product page.',
   alignment: 'center',
 }
 
@@ -57,67 +55,84 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
     [reviews]
   )
 
-  const rows = [
-    cards.filter((_, idx) => idx % 2 === 0),
-    cards.filter((_, idx) => idx % 2 === 1),
-  ]
-
-  const renderRow = (items: Review[], reverse = false) => {
-    // Loop 4x to eliminate visible gaps on wide viewports
-    const looped = items.length ? [...items, ...items, ...items, ...items] : []
-    if (!looped.length) return null
-    const duration = Math.max(10, items.length * 2.5)
-    return (
-      <div className="relative -mx-6 overflow-hidden px-6 md:mx-0 md:px-0">
-        <div
-          className="flex min-w-max gap-2"
-          style={{ animation: `marquee ${duration}s linear infinite${reverse ? ' reverse' : ''}` }}
-        >
-          {looped.map((review, idx) => (
-            <article
-              key={`${review.author}-${idx}-${reverse ? 'rev' : 'fwd'}`}
-              className={cardBase}
-              aria-hidden={idx >= items.length}
-            >
-              <img
-                src={review.image}
-                alt={review.title}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading={idx === 0 ? 'eager' : 'lazy'}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/35 to-black/85" />
-              <div className="relative flex h-full flex-col justify-end gap-2 p-5 text-white">
-                <StarRating value={review.stars} size={16} />
-                <p className="text-sm font-semibold leading-snug">{review.title}</p>
-                <p className="text-xs text-white/80">{review.body}</p>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-white/70">{review.author}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   const resolvedHeading = {
     ...defaultHeading,
     ...heading,
     alignment: heading?.alignment ?? defaultHeading.alignment,
   }
 
+  const [active, setActive] = useState(0)
+  const total = cards.length || 1
+  const go = (dir: 'prev' | 'next') => {
+    setActive((prev) => {
+      const next = dir === 'next' ? prev + 1 : prev - 1
+      return (next + total) % total
+    })
+  }
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActive((prev) => ((prev + 1) % total))
+    }, 5000)
+    return () => window.clearInterval(id)
+  }, [total])
+
+  const card = cards[active] ?? {
+    author: 'Lumelle Reviewer',
+    stars: 5,
+    title: 'Great cap',
+    body: 'This cap keeps my hair frizz-free and comfy.',
+    image: fallbackImages[0],
+  }
+
   return (
     <section id={sectionId ?? 'reviews'} className="bg-white py-16">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-5xl px-4 md:px-6">
         <SectionHeading
           eyebrow={resolvedHeading.eyebrow}
           title={resolvedHeading.title}
-          description={resolvedHeading.description}
+          description="Real experiences from people who use our product every day and love it."
           alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
-        <div className="mt-10 space-y-6">
-          {renderRow(rows[0], true)}
-          {renderRow(rows[1])}
+
+        <div className="relative mt-10">
+          <article className="mx-auto flex max-w-md flex-col gap-2 rounded-[24px] border border-brand-peach/60 bg-gradient-to-br from-white via-[#fff6f2] to-white p-5 text-center shadow-[0_16px_36px_rgba(0,0,0,0.08)]">
+            <div className="flex justify-center">
+              <StarRating value={card.stars} size={18} />
+            </div>
+            <p className="text-sm leading-relaxed text-brand-cocoa/90">{card.body}</p>
+            <div className="mt-2 flex items-center justify-center gap-3">
+              <img
+                src={card.image ?? fallbackImages[0]}
+                alt={card.author}
+                className="h-9 w-9 rounded-full border-2 border-white object-cover shadow-soft"
+              />
+              <p className="text-sm font-semibold text-brand-cocoa">- {card.author}</p>
+            </div>
+          </article>
+
+          <button
+            type="button"
+            aria-label="Previous review"
+            onClick={() => go('prev')}
+            className="absolute left-[-10px] top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-brand-cocoa text-white shadow-soft transition hover:-translate-y-1/2 hover:-translate-x-0.5"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          <button
+            type="button"
+            aria-label="Next review"
+            onClick={() => go('next')}
+            className="absolute right-[-10px] top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-brand-cocoa text-white shadow-soft transition hover:-translate-y-1/2 hover:translate-x-0.5"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
+
+        <p className="mt-6 text-center text-xs text-brand-cocoa/60">
+          To see more reviews, visit our TikTok shop product page.
+        </p>
       </div>
     </section>
   )

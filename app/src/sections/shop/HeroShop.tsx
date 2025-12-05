@@ -64,21 +64,26 @@ export const HeroShop = ({ config }: Props) => {
       </div>
       <div className="absolute inset-0 z-10">
         <div className="mx-auto flex h-full max-w-6xl items-center px-4 pt-[3.5rem] pb-[3.5rem] text-center md:px-6">
-          <div className="mx-auto w-full max-w-xl md:max-w-2xl">
-            <div className="inline-flex flex-wrap items-center gap-3 rounded-full bg-white/30 px-4 py-2 text-brand-cocoa backdrop-blur-md shadow-soft ring-1 ring-white/50">
-              <div className="flex -space-x-1.5">
-                {["https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=120","https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=120","https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=120&h=120&auto=format&fit=crop","https://randomuser.me/api/portraits/men/75.jpg"].map((src) => (
-                  <img
-                    key={src}
-                    src={src}
-                    alt="avatar"
-                    className="h-7 w-7 rounded-full border-2 border-white object-cover shadow-sm"
-                  />
-                ))}
-              </div>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-cocoa/80 whitespace-nowrap">
-                Trusted by 100k users
-              </span>
+          <div className="mx-auto w-full max-w-xl p-5 md:max-w-2xl">
+            <div className="inline-flex flex-nowrap items-center gap-3 rounded-full bg-white/30 px-6 py-2 text-brand-cocoa backdrop-blur-md shadow-soft ring-1 ring-white/50 min-w-[300px] justify-center">
+              <div className="flex -space-x-1.5 flex-shrink-0 pl-1">
+                {[
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&h=120&auto=format&fit=crop",
+                  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=120&h=120&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?q=80&w=120&h=120&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=120&h=120&auto=format&fit=crop"
+                  ].map((src) => (
+                    <img
+                      key={src}
+                      src={src}
+                      alt="avatar"
+                      className="h-7 w-7 rounded-full border-2 border-white object-cover shadow-sm"
+                    />
+                  ))}
+                </div>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-cocoa/80 whitespace-nowrap pl-1">
+                Trusted by 10k users
+                </span>
             </div>
             <h1 className="mt-4 font-heading text-3xl font-bold leading-tight text-brand-cocoa sm:text-4xl md:text-5xl lg:text-6xl">
               {config.headline}

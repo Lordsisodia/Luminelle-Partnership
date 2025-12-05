@@ -6,7 +6,6 @@ type Slide = { title: string; copy: string; image: string; ctaHref: string; tag?
 export const OfferCarousel = ({ slides }: { slides: Slide[] }) => {
   const trackRef = useRef<HTMLDivElement | null>(null)
   const [active, setActive] = useState(0)
-  const snapTimeout = useRef<number | null>(null)
 
   const goTo = useCallback(
     (i: number, behavior: ScrollBehavior = 'smooth') => {
@@ -27,12 +26,23 @@ export const OfferCarousel = ({ slides }: { slides: Slide[] }) => {
     const el = trackRef.current
     if (!el) return
     const onScroll = () => {
-      const cardWidth = el.firstElementChild?.clientWidth ?? el.clientWidth
-      const idx = Math.round(el.scrollLeft / (cardWidth + 16))
-      setActive(Math.max(0, Math.min(slides.length - 1, idx)))
+      const cards = Array.from(el.querySelectorAll<HTMLElement>('[data-benefit-card]'))
+      if (!cards.length) return
 
-      if (snapTimeout.current) window.clearTimeout(snapTimeout.current)
-      snapTimeout.current = window.setTimeout(() => goTo(idx, 'smooth'), 120)
+      const viewportCenter = el.scrollLeft + el.clientWidth / 2
+      let closestIdx = 0
+      let smallestDistance = Number.POSITIVE_INFINITY
+
+      cards.forEach((card, idx) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2
+        const distance = Math.abs(cardCenter - viewportCenter)
+        if (distance < smallestDistance) {
+          smallestDistance = distance
+          closestIdx = idx
+        }
+      })
+
+      setActive(closestIdx)
     }
     el.addEventListener('scroll', onScroll, { passive: true })
     return () => el.removeEventListener('scroll', onScroll)

@@ -37,7 +37,13 @@ export const ProductSpotlightSection = ({ teaser }: Props) => {
               ))}
             </ul>
             <div className="mt-2 flex flex-col gap-2 text-sm md:flex-row md:items-center md:justify-between">
-              <span className="text-base font-semibold text-brand-cocoa">{teaser.price}</span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm font-semibold text-rose-600">-25%</span>
+                <span className="text-3xl font-semibold text-brand-cocoa">£14.99</span>
+              </div>
+              <div className="text-xs font-semibold text-brand-cocoa/60">
+                RRP: <span className="line-through">£19.99</span>
+              </div>
               <a
                 href={teaser.href}
                 className="inline-flex items-center justify-center rounded-full border-2 border-brand-cocoa px-7 py-2.5 text-sm font-extrabold uppercase tracking-[0.08em] text-brand-cocoa shadow-[0_10px_18px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,0,0,0.14)] bg-white"

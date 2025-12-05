@@ -9,7 +9,7 @@ export const BenefitsSection = ({ slides }: { slides: Slide[] }) => (
       <SectionHeading
         eyebrow="Benefits"
         title="Why you’ll love it"
-        description="Every feature solves a creator pain point—from frizz control to durable finishes."
+        description="Effortless to put on, frizz-free when you take it off—your small daily luxury."
         alignment="center"
       />
       <div className="mt-6">
