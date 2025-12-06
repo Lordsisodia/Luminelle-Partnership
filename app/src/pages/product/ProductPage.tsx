@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
+import { cdnUrl } from '@/utils/cdn'
 import { useCart } from '@/state/CartContext'
 import { StarRating } from '@/components/StarRating'
 import { FeatureCallouts, DetailsAccordion, HeroProofStrip, ReviewsAutoCarousel, FaqSectionShop } from '@/sections/shop'
@@ -17,6 +18,19 @@ const galleryImages = [
   '/uploads/luminele/8TH PHOTO.jpg',
   'video://https://www.tiktok.com/embed/v2/7567328998158585110', // video slot
 ]
+
+const buildSources = (src: string) => {
+  if (src.startsWith('video://')) return null
+  const cdnSrc = cdnUrl(src)
+  const base = cdnSrc.replace(/\.[^.]+$/, '')
+  const widths = [640, 960, 1280]
+  return {
+    avif: widths.map((w) => `${base}-${w}.avif ${w}w`).join(', '),
+    webp: widths.map((w) => `${base}-${w}.webp ${w}w`).join(', '),
+    sizes: '(min-width: 1024px) 640px, 92vw',
+    fallback: cdnSrc,
+  }
+}
 
 const essentials = [
   { title: 'Reusable waterproof', body: 'Dual-layer satin with a waterproof TPU core and comfort-fit elastic band that seals out steam.' },
@@ -119,12 +133,28 @@ export const ProductPage = () => {
                   loading="lazy"
                 />
               ) : (
-                <img
-                  src={galleryImages[activeImage]}
-                  alt="Lumelle product detail"
-                  className="w-full h-auto max-h-[80vh] object-contain md:max-h-none"
-                  draggable="false"
-                />
+                (() => {
+                  const sources = buildSources(galleryImages[activeImage])
+                  const img = (
+                    <img
+                      src={sources?.fallback ?? galleryImages[activeImage]}
+                      alt="Lumelle product detail"
+                      className="w-full h-auto max-h-[80vh] object-contain md:max-h-none"
+                      draggable="false"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                    />
+                  )
+                  if (!sources) return img
+                  return (
+                    <picture>
+                      <source type="image/avif" srcSet={sources.avif} sizes={sources.sizes} />
+                      <source type="image/webp" srcSet={sources.webp} sizes={sources.sizes} />
+                      {img}
+                    </picture>
+                  )
+                })()
               )}
             </div>
             <div
@@ -134,6 +164,7 @@ export const ProductPage = () => {
               <div className="inline-flex max-w-full gap-2 px-1 snap-x snap-mandatory touch-pan-x">
                 {galleryImages.map((src, idx) => {
                   const isVideo = src.startsWith('video://')
+                  const sources = buildSources(src)
                   return (
                     <button
                       key={src}
@@ -153,8 +184,14 @@ export const ProductPage = () => {
                             </span>
                           </span>
                         </div>
+                      ) : sources ? (
+                        <picture>
+                          <source type="image/avif" srcSet={sources.avif} sizes="80px" />
+                          <source type="image/webp" srcSet={sources.webp} sizes="80px" />
+                          <img src={sources.fallback} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                        </picture>
                       ) : (
-                        <img src={src} alt="" className="h-full w-full object-cover" />
+                        <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
                       )}
                     </button>
                   )
@@ -221,13 +258,13 @@ export const ProductPage = () => {
                 </div>
                 <div className="grid gap-2">
                   <button
-                    className="inline-flex w-full items-center justify-center rounded-full bg-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.12)]"
+                    className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-peach to-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)]"
                     onClick={addToCartAndOpen}
                   >
                     Add to Basket
                   </button>
                   <button
-                    className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-peach to-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)]"
+                    className="inline-flex w-full items-center justify-center rounded-full bg-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.12)]"
                     onClick={addToCartAndOpen}
                   >
                     Buy Now

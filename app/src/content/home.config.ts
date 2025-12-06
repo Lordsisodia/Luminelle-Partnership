@@ -66,7 +66,7 @@ export type HomeConfig = {
 
 export const homeConfig: HomeConfig = {
   hero: {
-    headline: 'Keep hair dry. Keep styles flawless.',
+    headline: 'Keep hair dry,\nStyles flawless',
     subhead: 'A luxury shower cap that protects against frizz and preserves your look.',
     ctaLabel: 'Shop Now',
     ctaHref: '/product/shower-cap',
@@ -75,7 +75,7 @@ export const homeConfig: HomeConfig = {
     secondaryCtaHref: '/affiliates',
     image: '/uploads/luminele/hero-main.png',
     bgImage: '/uploads/luminele/hero-main.png',
-    objectPosition: 'center center',
+    objectPosition: 'center 30%',
     objectFit: 'cover',
     pill: 'Best seller',
     assurances: [

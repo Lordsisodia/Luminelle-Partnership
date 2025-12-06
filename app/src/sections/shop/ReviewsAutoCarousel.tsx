@@ -46,13 +46,18 @@ const defaultHeading: Required<Heading> = {
 }
 
 export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAutoCarouselProps) => {
+  const filteredReviews = useMemo(() => {
+    const onlyFiveStar = reviews.filter((review) => review.stars >= 5)
+    return onlyFiveStar.length ? onlyFiveStar : reviews
+  }, [reviews])
+
   const cards = useMemo(
     () =>
-      reviews.map((review, idx) => ({
+      filteredReviews.map((review, idx) => ({
         ...review,
         image: review.image ?? fallbackImages[idx % fallbackImages.length],
       })),
-    [reviews]
+    [filteredReviews]
   )
 
   const resolvedHeading = {
@@ -96,19 +101,16 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
         />
 
         <div className="relative mt-10">
-          <article className="mx-auto flex max-w-md flex-col gap-2 rounded-[24px] border border-brand-peach/60 bg-gradient-to-br from-white via-[#fff6f2] to-white p-5 text-center shadow-[0_16px_36px_rgba(0,0,0,0.08)]">
+          <article className="mx-auto flex max-w-md flex-col gap-3 rounded-[24px] border border-brand-peach/70 bg-gradient-to-br from-white via-[#fff2eb] to-white p-6 text-center shadow-[0_16px_36px_rgba(0,0,0,0.08)]">
             <div className="flex justify-center">
               <StarRating value={card.stars} size={18} />
             </div>
-            <p className="text-sm leading-relaxed text-brand-cocoa/90">{card.body}</p>
-            <div className="mt-2 flex items-center justify-center gap-3">
-              <img
-                src={card.image ?? fallbackImages[0]}
-                alt={card.author}
-                className="h-9 w-9 rounded-full border-2 border-white object-cover shadow-soft"
-              />
-              <p className="text-sm font-semibold text-brand-cocoa">- {card.author}</p>
-            </div>
+            <p className="text-base leading-relaxed text-brand-cocoa">
+              “{card.body}”
+            </p>
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-cocoa/90">
+              {card.author}
+            </p>
           </article>
 
           <button

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Star } from 'lucide-react'
+import { cdnUrl } from '@/utils/cdn'
 
 type Props = {
   config: {
@@ -18,8 +19,19 @@ type Props = {
 }
 
 export const HeroShop = ({ config }: Props) => {
-  const slides = config.gallery && config.gallery.length > 0 ? config.gallery.slice(0, 1) : [config.image]
+  const baseSlides = config.gallery && config.gallery.length > 0 ? config.gallery.slice(0, 1) : [config.image]
+  const slides = baseSlides.map((s) => cdnUrl(s))
   const [active, setActive] = useState(0)
+  const buildSources = (src: string) => {
+    if (!src.includes('hero-main')) return null
+    const base = src.replace(/\.[^.]+$/, '')
+    const widths = [640, 960, 1280]
+    return {
+      avif: widths.map((w) => `${base}-${w}.avif ${w}w`).join(', '),
+      webp: widths.map((w) => `${base}-${w}.webp ${w}w`).join(', '),
+      sizes: '100vw',
+    }
+  }
 
   useEffect(() => {
     // no auto-advance when single slide
@@ -33,26 +45,39 @@ export const HeroShop = ({ config }: Props) => {
   // controls removed; retain auto-advance only
 
   return (
-    <section className="relative min-h-[76vh] overflow-hidden bg-white md:min-h-[72vh]">
+    <section className="relative min-h-[70vh] overflow-hidden bg-white md:min-h-[76vh]">
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 flex transition-transform duration-700"
           style={{ transform: `translateX(-${active * 100}%)`, width: `${slides.length * 100}%` }}
           aria-hidden="true"
         >
-          {slides.map((src, idx) => (
-            <img
-              key={idx}
-              src={src}
-              alt=""
-              className="h-full w-full flex-[0_0_100%] brightness-95 object-cover scale-[1.08]"
-              style={{
-                objectPosition: config.objectPosition || 'center center',
-                objectFit: config.objectFit || 'cover',
-              }}
-              loading={idx === 0 ? 'eager' : 'lazy'}
-            />
-          ))}
+          {slides.map((src, idx) => {
+            const sources = buildSources(src)
+            const imgEl = (
+              <img
+                key={idx}
+                src={src}
+                alt=""
+                className="h-full w-full flex-[0_0_100%] brightness-95 object-cover scale-[1.08]"
+                style={{
+                  objectPosition: config.objectPosition || 'center center',
+                  objectFit: config.objectFit || 'cover',
+                }}
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                fetchPriority={idx === 0 ? 'high' : 'auto'}
+                decoding="async"
+              />
+            )
+            if (!sources) return imgEl
+            return (
+              <picture key={idx} className="h-full w-full flex-[0_0_100%]">
+                <source type="image/avif" srcSet={sources.avif} sizes={sources.sizes} />
+                <source type="image/webp" srcSet={sources.webp} sizes={sources.sizes} />
+                {imgEl}
+              </picture>
+            )
+          })}
         </div>
         <div
           className="absolute inset-0 pointer-events-none backdrop-blur-[1px]"
@@ -85,7 +110,7 @@ export const HeroShop = ({ config }: Props) => {
                 Trusted by 10k users
                 </span>
             </div>
-            <h1 className="mt-4 font-heading text-3xl font-bold leading-tight text-brand-cocoa sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 whitespace-pre-line font-heading text-3xl font-bold leading-tight text-brand-cocoa sm:text-4xl md:text-5xl lg:text-6xl">
               {config.headline}
             </h1>
             <p className="mt-4 text-base text-brand-cocoa/80 sm:text-lg">
@@ -99,11 +124,17 @@ export const HeroShop = ({ config }: Props) => {
                 {config.ctaLabel}
               </a>
             </div>
-            <div className="mt-3 flex items-center justify-center gap-1 text-brand-cocoa">
+            <div className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-full border border-white/80 bg-white/70 px-3 py-1 shadow-[0_0_18px_rgba(255,255,255,0.7)] backdrop-blur-sm">
               {Array.from({ length: 5 }).map((_, idx) => (
-                <Star key={idx} className="h-4 w-4 fill-brand-peach text-brand-peach" />
+                <Star
+                  key={idx}
+                  className="h-4 w-4 text-amber-500 drop-shadow-[0_0_8px_rgba(255,255,255,0.9)]"
+                  fill="currentColor"
+                  stroke="white"
+                  strokeWidth={1}
+                />
               ))}
-              <span className="ml-2 text-sm font-semibold">4.8 (100+)</span>
+              <span className="ml-2 text-sm font-semibold text-brand-cocoa">4.8 (100+)</span>
             </div>
           </div>
         </div>

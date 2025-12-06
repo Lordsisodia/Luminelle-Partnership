@@ -297,8 +297,8 @@ export const MarketingLayout = ({
             <RouterLink to="/privacy" className="hover:text-brand-cocoa">
               Privacy Policy
             </RouterLink>
-            <RouterLink to="/brief" className="hover:text-brand-cocoa">
-              Content Brief
+            <RouterLink to="/affiliates" className="hover:text-brand-cocoa">
+              Affiliates
             </RouterLink>
             <a
               href={`mailto:${SUPPORT_EMAIL}`}

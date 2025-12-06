@@ -10,5 +10,8 @@
     "build": "npm run build --workspace app",
     "preview": "npm run preview --workspace app",
     "lint": "npm run lint --workspace app"
+  },
+  "dependencies": {
+    "pg": "^8.12.0"
   }
 }
