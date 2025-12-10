@@ -52,15 +52,15 @@ export const OfferCarousel = ({ slides }: { slides: Slide[] }) => {
     <div className="relative">
       <div
         ref={trackRef}
-        className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory md:mx-0 md:px-0"
+        className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory md:-mx-20 md:px-0 lg:-mx-28"
       >
-        <div className="flex gap-4 pr-4">
+        <div className="flex gap-4 pr-8 md:gap-8 lg:gap-12">
           {slides.map((s, i) => (
             <a
               key={i}
               href={s.ctaHref}
               data-benefit-card
-              className="relative block w-[88%] shrink-0 snap-center snap-always overflow-visible sm:w-[75%] md:w-[48%]"
+              className="relative block w-[88%] shrink-0 snap-center snap-always overflow-visible sm:w-[75%] md:w-[48%] lg:w-[42%] xl:w-[38%]"
             >
               <img
                 src={s.image}
@@ -82,6 +82,8 @@ export const OfferCarousel = ({ slides }: { slides: Slide[] }) => {
           ))}
         </div>
       </div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-white via-white/95 to-transparent md:block" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-gradient-to-l from-white via-white/95 to-transparent md:block" />
       <div className="mt-4 flex items-center justify-center gap-2 text-sm text-brand-cocoa/80">
         {slides.map((_, i) => (
           <span

@@ -1,0 +1,91 @@
+import { useEffect, useState } from 'react'
+import { MarketingLayout } from '@/layouts/MarketingLayout'
+import { setNoIndexNoFollow } from '@/lib/seo'
+
+type Field = { key: string; value: string }
+
+export default function ContentPage() {
+  const [fields, setFields] = useState<Field[]>([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [handle, setHandle] = useState('shower-cap')
+
+  const [pass, setPass] = useState<string>(sessionStorage.getItem('lumelle_admin_pass') || '')
+  const authHeader = pass ? { Authorization: `Bearer ${pass}` } : undefined
+
+  const load = async () => {
+    setLoading(true)
+    try {
+      const res = await fetch(`/api/admin/sections/get?handle=${encodeURIComponent(handle)}`, { headers: { 'content-type': 'application/json', ...(authHeader as any) } })
+      const j = await res.json()
+      setFields(j.fields || [])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => { setNoIndexNoFollow(); load() /* on mount */ }, [])
+
+  const setField = (k: string, v: string) => {
+    setFields((prev) => {
+      const next = [...prev]
+      const i = next.findIndex((f) => f.key === k)
+      if (i >= 0) next[i] = { key: k, value: v }
+      else next.push({ key: k, value: v })
+      return next
+    })
+  }
+
+  const save = async () => {
+    setSaving(true)
+    try {
+      const fieldsObj = Object.fromEntries(fields.map((f) => [f.key, parseMaybeJSON(f.value)]))
+      sessionStorage.setItem('lumelle_admin_pass', pass)
+      await fetch(`/api/admin/sections/update?handle=${encodeURIComponent(handle)}`, { method: 'POST', headers: { 'content-type': 'application/json', ...(authHeader as any) }, body: JSON.stringify({ fields: fieldsObj }) })
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <MarketingLayout navItems={[]} subtitle="Content">
+      <section className="bg-white">
+        <div className="mx-auto max-w-5xl px-4 py-10 md:px-6">
+          <h1 className="font-heading text-2xl text-brand-cocoa">Product content</h1>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" value={handle} onChange={(e) => setHandle(e.target.value)} />
+            <button className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" onClick={load}>Load</button>
+            <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" type="password" placeholder="Admin pass" value={pass} onChange={(e) => setPass(e.target.value)} />
+          </div>
+          {loading ? (
+            <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading…</div>
+          ) : (
+            <div className="mt-6 grid gap-4">
+              {['heroSubtitle','essentials','reasons','how','care','faq','gallery'].map((k) => (
+                <div key={k} className="rounded-2xl border border-brand-blush/60 bg-white p-4">
+                  <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">{k}</div>
+                  <textarea
+                    className="mt-2 w-full rounded-xl border border-brand-blush/60 p-2 font-mono text-[12px]"
+                    rows={k === 'heroSubtitle' ? 2 : 6}
+                    value={fields.find((f) => f.key === k)?.value || ''}
+                    onChange={(e) => setField(k, e.target.value)}
+                    placeholder={k === 'heroSubtitle' ? 'Short text' : 'JSON'}
+                  />
+                </div>
+              ))}
+              <div>
+                <button className="rounded-full bg-brand-cocoa px-5 py-2 text-sm font-semibold text-white" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save changes'}</button>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    </MarketingLayout>
+  )
+}
+
+function parseMaybeJSON(v: string): any {
+  const trimmed = (v || '').trim()
+  if (!trimmed) return ''
+  try { return JSON.parse(trimmed) } catch { return v }
+}

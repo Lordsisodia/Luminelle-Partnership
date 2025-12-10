@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 .env
+reports
+critical-css
 
 # Editor directories and files
 .vscode/*

@@ -5,6 +5,7 @@ import { SectionHeading } from '@/components/SectionHeading'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { setMetaTags, injectJsonLd } from '@/lib/seo'
+import { cdnUrl } from '@/utils/cdn'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Blog' },
@@ -20,20 +21,29 @@ export const BlogIndexPage = () => {
   useEffect(() => {
     const title = 'Lumelle Journal | Blog'
     const description =
-      'Guides, routines, and creator tips to keep your hair frizz-free and camera-ready with Lumelle.'
-    const heroImage = featured[0]?.cover || '/uploads/luminele/product-feature-01.jpg'
-    setMetaTags({ title, description, url: window.location.href, image: heroImage, type: 'website' })
+      'Guides, routines, and creator tips to keep silk presses, curls, and braids frizz-free with Lumelle.'
+    const heroImage = cdnUrl(featured[0]?.cover || '/uploads/luminele/product-feature-01.jpg')
+    const url = 'https://lumelle.com/blog'
+    setMetaTags({ title, description, url, image: heroImage, type: 'website' })
 
     // Simple Blog schema
     const ld = {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: 'Lumelle Journal',
-      url: window.location.href,
+      url,
       description,
     }
     injectJsonLd('lumelle-blog-ld', ld)
-  }, [])
+    injectJsonLd('lumelle-blog-breadcrumb', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: url },
+      ],
+    })
+  }, [featured])
 
   return (
     <MarketingLayout navItems={navItems} subtitle="Journal">
@@ -79,7 +89,15 @@ export const BlogIndexPage = () => {
                 className="group overflow-hidden rounded-3xl border border-brand-peach/40 bg-white shadow-soft transition hover:-translate-y-1"
               >
                 <div className="aspect-[3/2] w-full overflow-hidden bg-brand-blush/20">
-                  <img src={post.cover} alt={post.title} className="h-full w-full object-cover" loading="lazy" />
+                  <img
+                    src={post.cover}
+                    alt={post.title}
+                    className="h-full w-full object-cover"
+                    width={800}
+                    height={533}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <div className="space-y-2 p-5">
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
@@ -110,7 +128,15 @@ export const BlogIndexPage = () => {
                 className="group overflow-hidden rounded-2xl border border-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
               >
                 <div className="aspect-[3/2] w-full overflow-hidden bg-brand-blush/20">
-                  <img src={post.cover} alt={post.title} className="h-full w-full object-cover" loading="lazy" />
+                  <img
+                    src={post.cover}
+                    alt={post.title}
+                    className="h-full w-full object-cover"
+                    width={600}
+                    height={400}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <div className="space-y-2 p-4">
                   <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">

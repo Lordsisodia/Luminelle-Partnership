@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
@@ -13,6 +14,8 @@ import {
   BenefitsSection,
 } from '@/sections/shop'
 import { FeaturedTikTok } from '@/sections/shop/FeaturedTikTok'
+import { setMetaTags, injectJsonLd } from '@/lib/seo'
+import { cdnUrl } from '@/utils/cdn'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Overview' },
@@ -22,6 +25,26 @@ const navItems: NavItem[] = [
 ]
 
 export const ShopLandingPage = () => {
+  useEffect(() => {
+    const image = cdnUrl(homeConfig.hero.image)
+    const url = 'https://lumelle.com/'
+    setMetaTags({
+      title: 'Luxury shower cap | Frizz-proof silk press & curls | Lumelle',
+      description: 'Satin-lined, waterproof cap that blocks steam to keep silk presses, curls, and braids glossy. Free shipping £20+, 30-day returns.',
+      image,
+      url,
+      type: 'website',
+    })
+
+    injectJsonLd('org-jsonld', {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Lumelle',
+      url,
+      logo: cdnUrl('/l-icon.svg'),
+    })
+  }, [])
+
   return (
     <>
       <MarketingLayout navItems={navItems} subtitle={null}>

@@ -4,8 +4,10 @@ export type BlogPost = {
   subtitle: string
   tag: string
   author: string
+  authorRole?: string
   authorAvatar?: string
   date: string
+  reviewed?: string
   readTime: string
   cover: string
   ogImage?: string
@@ -23,7 +25,9 @@ export const blogPosts: BlogPost[] = [
     subtitle: 'Your hub for frizz-free hair care, creator tips, and product know-how.',
     tag: 'Journal',
     author: 'Lumelle Studio',
+    authorRole: 'Editorial team',
     date: '2025-12-05',
+    reviewed: '2025-12-08',
     readTime: '3 min',
     cover: '/uploads/luminele/product-feature-01.jpg',
     ogImage: '/og/blog/lumelle-journal-launch.png',
@@ -52,7 +56,9 @@ export const blogPosts: BlogPost[] = [
     subtitle: 'Stop steam, keep shine, and protect edges every single shower.',
     tag: 'How-to',
     author: 'Lumelle Studio',
+    authorRole: 'Hair science editor',
     date: '2025-12-05',
+    reviewed: '2025-12-08',
     readTime: '5 min',
     cover: '/uploads/luminele/product-feature-03.jpg',
     ogImage: '/og/blog/frizz-free-showers-seo.png',
@@ -100,7 +106,9 @@ export const blogPosts: BlogPost[] = [
     subtitle: 'Stop steam, keep shine, and protect edges every shower.',
     tag: 'Frizz-free',
     author: 'Lumelle Studio',
+    authorRole: 'Beauty editor',
     date: '2025-11-10',
+    reviewed: '2025-12-01',
     readTime: '6 min',
     cover: '/uploads/luminele/product-feature-02.jpg',
     ogImage: '/og/blog/silk-press-shower-cap-guide.png',
@@ -146,7 +154,9 @@ export const blogPosts: BlogPost[] = [
     subtitle: 'Fit, liner, and seal techniques that actually keep humidity out.',
     tag: 'Protective styles',
     author: 'Lumelle Studio',
+    authorRole: 'Protective styles specialist',
     date: '2025-11-08',
+    reviewed: '2025-12-01',
     readTime: '6 min',
     cover: '/uploads/luminele/product-feature-06.jpg',
     ogImage: '/og/blog/protective-styles-in-the-shower.png',
@@ -191,7 +201,9 @@ export const blogPosts: BlogPost[] = [
     subtitle: 'A creator-tested checklist for wet environments.',
     tag: 'Lifestyle',
     author: 'Lumelle Studio',
+    authorRole: 'Lifestyle editor',
     date: '2025-11-05',
+    reviewed: '2025-12-01',
     readTime: '5 min',
     cover: '/uploads/luminele/product-feature-04.jpg',
     ogImage: '/og/blog/gym-sauna-spa.png',

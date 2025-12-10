@@ -3,6 +3,7 @@ import { useParams, Link as RouterLink } from 'react-router-dom'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { fetchOrderById, type Order } from '@/state/OrdersStore'
 import { useAuth as useClerkAuth } from '@clerk/clerk-react'
+import { setNoIndexNoFollow } from '@/lib/seo'
 
 export const OrderConfirmationPage = () => {
   const { orderId } = useParams()
@@ -11,6 +12,7 @@ export const OrderConfirmationPage = () => {
   const { getToken } = useClerkAuth()
 
   useEffect(() => {
+    setNoIndexNoFollow()
     if (!orderId) {
       setLoading(false)
       setOrder(null)

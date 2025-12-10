@@ -1,9 +1,12 @@
+import { useEffect } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useAuth } from '@/state/AuthContext'
 import { Link as RouterLink } from 'react-router-dom'
+import { setNoIndexNoFollow } from '@/lib/seo'
 
 export const AccountPage = () => {
   const { signedIn, user, signIn, signOut } = useAuth()
+  useEffect(() => { setNoIndexNoFollow() }, [])
 
   return (
     <MarketingLayout navItems={[]} subtitle="Account">

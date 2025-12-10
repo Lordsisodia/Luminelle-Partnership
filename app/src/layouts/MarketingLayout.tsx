@@ -7,6 +7,8 @@ import { SUPPORT_EMAIL } from '@/config/constants'
 import { useCart } from '@/state/CartContext'
 import { useAuth } from '@/state/AuthContext'
 import { DrawerContext } from '@/state/DrawerContext'
+import { env } from '@/utils/env'
+import { shopifyEnabled } from '@/lib/shopify'
 
 export type NavItem = {
   id: string
@@ -41,7 +43,13 @@ export const MarketingLayout = ({
   const contentRef = useRef<HTMLDivElement | null>(null)
   const drawerRef = useRef<HTMLDivElement | null>(null)
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
-  const { items, qty, subtotal, setQty, remove } = useCart()
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(min-width: 1024px)').matches
+  })
+  const { items, qty, subtotal, setQty, remove, checkoutUrl, setAttributes } = useCart()
+  // Always use onsite Clerk sign-in (avoid redirecting to Shopify hosted login)
+  const accountUrl = '/sign-in'
   const { signedIn, user, signIn } = useAuth()
   // --- V2 state: promo, cart ---
 
@@ -62,16 +70,42 @@ export const MarketingLayout = ({
     return () => document.removeEventListener('click', onClick)
   }, [menuOpen])
 
+  // keep track of desktop breakpoint to avoid shifting layout when drawer opens on large screens
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const listener = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    setIsDesktop(mq.matches)
+    mq.addEventListener('change', listener)
+    return () => mq.removeEventListener('change', listener)
+  }, [])
+
+  // Capture UTM params once and attach to cart
+  useEffect(() => {
+    try {
+      const ssKey = 'lumelle_utm_applied'
+      if (sessionStorage.getItem(ssKey)) return
+      const params = new URLSearchParams(window.location.search)
+      const utm: Record<string, string> = {}
+      const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+      keys.forEach(k => { const v = params.get(k); if (v) utm[k] = v })
+      if (Object.keys(utm).length) {
+        setAttributes?.(utm)
+        sessionStorage.setItem(ssKey, '1')
+      }
+    } catch { }
+  }, [setAttributes])
+
   // search removed (single product) – no recent searches to load
 
   // lock scroll when drawer open
   useEffect(() => {
     const original = document.documentElement.style.overflow
-    if (menuOpen) document.documentElement.style.overflow = 'hidden'
+    if (menuOpen && !isDesktop) document.documentElement.style.overflow = 'hidden'
     return () => {
       document.documentElement.style.overflow = original
     }
-  }, [menuOpen])
+  }, [menuOpen, isDesktop])
 
   // esc to close + basic focus trap in drawer
   useEffect(() => {
@@ -128,12 +162,23 @@ export const MarketingLayout = ({
     },
   }
 
-  // rotating promo banner messages
+  // rotating promo banner messages (show CA sign-in prompt if not signed in)
   const promoMessages = [
     { label: 'Free shipping over £19.99' },
     { label: '30-day money back guarantee' },
-    { label: 'Buy 2, save 10% — Shop now', href: '/product/shower-cap' },
+    { label: 'Buy 2, save 10% — Shop now', href: '/product/lumelle-shower-cap' },
   ]
+  useEffect(() => {
+    if (!shopifyEnabled) return
+    fetch('/api/customer/orders')
+      .then((r) => {
+        if (!r.ok) {
+          promoMessages.unshift({ label: 'Sign in to view orders', href: `/api/customer-auth/start?shop=${encodeURIComponent(env('SHOPIFY_STORE_DOMAIN') || '')}` })
+        }
+      })
+      .catch(() => undefined)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const [activePromo, setActivePromo] = useState(0)
 
   useEffect(() => {
@@ -171,313 +216,315 @@ export const MarketingLayout = ({
 
   return (
     <DrawerContext.Provider value={drawerApi}>
-    <div className="relative min-h-screen overflow-x-hidden bg-white text-brand-cocoa">
-      {/* Top announcement bar */}
-      <div className="overflow-hidden bg-brand-blush text-brand-cocoa">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="relative flex h-10 items-center justify-center text-[11px] font-semibold uppercase tracking-[0.26em] sm:text-xs">
-            {promoMessages.map((msg, idx) => (
-              <span
-                key={msg.label}
-                className={`absolute whitespace-nowrap transition-opacity duration-400 ${idx === activePromo ? 'opacity-100' : 'opacity-0'}`}
-                aria-hidden={idx !== activePromo}
-              >
-                {msg.href ? (
-                  <RouterLink to={msg.href} className="underline decoration-brand-cocoa/50 underline-offset-4 hover:text-brand-cocoa/80">
-                    {msg.label}
-                  </RouterLink>
-                ) : (
-                  msg.label
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div
-        ref={contentRef}
-        className="relative z-10 transition-transform duration-300 will-change-transform"
-        style={{ transform: menuOpen ? `translateX(-${DRAWER_WIDTH}px)` : 'translateX(0)' }}
-      >
-      <header
-        className={`sticky top-0 z-50 border-b border-brand-blush/40 bg-white/95 backdrop-blur transition-transform duration-250 ease-out ${
-          showHeader ? 'translate-y-0' : '-translate-y-full'
-        }`}
-      >
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 py-4">
-            <div className="flex items-center gap-2" ref={menuRef}>
-              <button
-                aria-label="Open menu"
-                aria-expanded={menuOpen}
-                onClick={() => { setActiveTab('menu'); setMenuOpen(true); track('nav_open') }}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
-              >
-                <Menu className="h-5 w-5" />
-              </button>
-            </div>
-
-            <RouterLink
-              to="/"
-              className="flex flex-col items-center justify-center gap-1 text-center"
-            >
-              <span className="font-heading text-2xl font-semibold uppercase tracking-[0.24em] text-brand-cocoa md:text-xl">
-                Lumelle
-              </span>
-              {subtitle ? (
-                <>
-                  <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-brand-cocoa/60 md:hidden">
-                    {subtitle}
-                  </span>
-                  <span className="hidden text-sm font-medium text-brand-cocoa/70 md:inline">
-                    {subtitle}
-                  </span>
-                </>
-              ) : null}
-            </RouterLink>
-
-            <div className="flex items-center justify-end gap-2">
-              {onPrimaryAction ? (
-                <button
-                  onClick={onPrimaryAction}
-                  type="button"
-                  className="hidden items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90 md:inline-flex"
+      <div className="relative min-h-screen overflow-x-hidden bg-white text-brand-cocoa">
+        {/* Top announcement bar */}
+        <div className="overflow-hidden bg-brand-blush text-brand-cocoa">
+          <div className="mx-auto max-w-6xl px-4">
+            <div className="relative flex h-10 items-center justify-center text-[11px] font-semibold uppercase tracking-[0.26em] sm:text-xs">
+              {promoMessages.map((msg, idx) => (
+                <span
+                  key={msg.label}
+                  className={`absolute whitespace-nowrap transition-opacity duration-400 ${idx === activePromo ? 'opacity-100' : 'opacity-0'}`}
+                  aria-hidden={idx !== activePromo}
                 >
-                  {primaryLabel}
-                </button>
-              ) : null}
-
-              <SignedOut>
-                <RouterLink
-                  to="/sign-in"
-                  className="hidden rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa transition hover:bg-brand-blush/40 md:inline-flex"
-                >
-                  Sign in
-                </RouterLink>
-              </SignedOut>
-              <SignedIn>
-                <div className="hidden md:block">
-                  <UserButton
-                    afterSignOutUrl="/"
-                    appearance={{
-                      elements: {
-                        avatarBox: 'h-10 w-10',
-                      },
-                    }}
-                  />
-                </div>
-              </SignedIn>
-
-              <RouterLink
-                to={signedIn ? '/account' : '/sign-in'}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
-                aria-label={signedIn ? 'Account' : 'Sign in'}
-              >
-                <UserRound className="h-5 w-5" />
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </header>
-      <main>{children}</main>
-      <footer className="border-t border-brand-blush/40 bg-brand-blush/20" data-sticky-buy-target>
-        <div className="mx-auto flex flex-col gap-6 px-4 py-12 md:max-w-6xl md:flex-row md:items-start md:justify-between md:px-6">
-          <div>
-            <p className="font-heading text-lg font-semibold uppercase tracking-[0.3em]">
-              Lumelle
-            </p>
-            <p className="mt-2 max-w-sm text-sm text-brand-cocoa/70">
-              Creator-grade shower caps designed to keep every silk press, curls, and braids flawless on camera.
-            </p>
-          </div>
-          <div className="flex flex-col items-start gap-2 text-sm text-brand-cocoa/70 md:items-end">
-            <RouterLink to="/terms" className="hover:text-brand-cocoa">
-              Terms &amp; Conditions
-            </RouterLink>
-            <RouterLink to="/privacy" className="hover:text-brand-cocoa">
-              Privacy Policy
-            </RouterLink>
-            <RouterLink to="/affiliates" className="hover:text-brand-cocoa">
-              Affiliates
-            </RouterLink>
-            <a
-              href={`mailto:${SUPPORT_EMAIL}`}
-              className="hover:text-brand-cocoa"
-            >
-              {SUPPORT_EMAIL}
-            </a>
-          </div>
-        </div>
-      </footer>
-      </div>
-      {/* Global drawer/overlay mounted outside content so page can shift */}
-      {menuOpen ? (
-        <>
-          <div className="fixed inset-0 z-40 bg-black/20" onClick={() => { setMenuOpen(false); track('nav_close') }} />
-          <aside
-            className="fixed inset-y-0 right-0 z-50 overflow-y-auto border-l border-brand-blush/60 bg-white shadow-2xl transition-transform duration-300"
-            style={{ width: DRAWER_WIDTH, transform: menuOpen ? 'translateX(0)' : 'translateX(100%)' }}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="drawer-title"
-            ref={drawerRef}
-          >
-            {/* Sticky header inside drawer */}
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-brand-blush/60 bg-white/95 px-4 py-3 backdrop-blur">
-              <div>
-                <div id="drawer-title" className="font-heading text-lg uppercase tracking-[0.24em] text-brand-cocoa">Lumelle</div>
-                {subtitle ? (
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">{subtitle}</div>
-                ) : null}
-              </div>
-              <button aria-label="Close" onClick={() => { setMenuOpen(false); track('nav_close') }} className="rounded-full border border-brand-blush/60 p-2">✕</button>
-            </div>
-            {/* Tabs: Menu | Cart */}
-            <div className="px-4 pt-3" role="tablist" aria-label="Navigation sections">
-              <div className="inline-grid grid-cols-2 rounded-full border border-brand-blush/60 p-0.5 text-sm font-semibold">
-                  <button
-                  role="tab"
-                  aria-selected={activeTab === 'menu'}
-                  className={`rounded-full px-4 py-1.5 transition ${activeTab === 'menu' ? 'bg-brand-blush/50 text-brand-cocoa' : 'text-brand-cocoa/70 hover:bg-brand-blush/30'}`}
-                  onClick={() => { setActiveTab('menu'); track('nav_tab_switch', { tab: 'menu' }) }}
-                >
-                  Menu
-                </button>
-                <button
-                  role="tab"
-                  aria-selected={activeTab === 'cart'}
-                  className={`rounded-full px-4 py-1.5 transition ${activeTab === 'cart' ? 'bg-brand-blush/50 text-brand-cocoa' : 'text-brand-cocoa/70 hover:bg-brand-blush/30'}`}
-                  onClick={() => { setActiveTab('cart'); track('nav_tab_switch', { tab: 'cart' }) }}
-                >
-                  Cart
-                </button>
-              </div>
-            </div>
-
-            {/* Content */}
-            {activeTab === 'menu' ? (
-              <div className="pb-24">{/* bottom padding so sticky cart in cart-tab doesn't overlap */}
-                {/* Search intentionally omitted (single product) */}
-
-                {/* Primary navigation */}
-                <nav className="px-2 py-2">
-                  <RouterLink to="/" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/' }) }}>Shop</RouterLink>
-                  <RouterLink to="/product/shower-cap" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/shower-cap' }) }}>
-                    Product <span className="ml-2 rounded-full bg-brand-blush/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-cocoa/70">Best seller</span>
-                  </RouterLink>
-                  {/* More group */}
-                  <div className="mt-1 rounded-xl">
-                    <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa/50">More</div>
-                    <RouterLink to="/affiliates" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/affiliates' }) }}>Affiliates</RouterLink>
-                    <RouterLink to="/brand" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}>Brand story</RouterLink>
-                    <RouterLink to="/blog" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}>Blog</RouterLink>
-                  </div>
-                </nav>
-
-                <div className="my-4 h-px bg-brand-blush/60" />
-
-                {/* Cart summary pill */}
-                {cartQty > 0 ? (
-                  <div className="px-4">
-                    <button onClick={() => { setActiveTab('cart'); track('nav_tab_switch', { tab: 'cart', via: 'summary_pill' }) }} className="flex w-full items-center justify-between rounded-xl border border-brand-blush/60 px-4 py-3 text-sm text-brand-cocoa/80 hover:bg-brand-blush/30">
-                      <span>Cart • {cartQty} item{cartQty === 1 ? '' : 's'}</span>
-                      <span className="font-semibold text-brand-cocoa">£{subtotal.toFixed(2)}</span>
-                    </button>
-                  </div>
-                ) : null}
-                <div className="my-4 h-px bg-brand-blush/60" />
-
-                {/* Profile block */}
-                <div className="px-4">
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Profile</p>
-                  {signedIn ? (
-                    <RouterLink to="/account/orders" onClick={() => setMenuOpen(false)} className="flex w-full items-center justify-between rounded-2xl border border-brand-blush/60 px-4 py-3 text-left text-sm">
-                      <span className="font-semibold text-brand-cocoa">Hi, {user?.firstName}</span>
-                      <span className="text-brand-cocoa/60">Orders ▸</span>
+                  {msg.href ? (
+                    <RouterLink to={msg.href} className="underline decoration-brand-cocoa/50 underline-offset-4 hover:text-brand-cocoa/80">
+                      {msg.label}
                     </RouterLink>
                   ) : (
-                    <button className="w-full rounded-2xl border border-brand-blush/60 px-4 py-3 text-left text-sm text-brand-cocoa/90" onClick={() => { track('profile_signin_click'); signIn('Jane') }}>
-                      Sign in or create account
-                    </button>
+                    msg.label
                   )}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div
+          ref={contentRef}
+          className="relative z-10 transition-transform duration-300 will-change-transform"
+          style={{ transform: menuOpen && !isDesktop ? `translateX(-100%)` : 'translateX(0)' }}
+        >
+          <header
+            className={`sticky top-0 z-50 border-b border-brand-blush/40 bg-white/95 backdrop-blur transition-transform duration-250 ease-out ${showHeader ? 'translate-y-0' : '-translate-y-full'
+              }`}
+          >
+            <div className="mx-auto max-w-6xl px-4 md:px-6">
+              <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 py-4">
+                <div className="flex items-center gap-2" ref={menuRef}>
+                  <button
+                    aria-label="Open menu"
+                    aria-expanded={menuOpen}
+                    onClick={() => { setActiveTab('menu'); setMenuOpen(true); track('nav_open') }}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </button>
                 </div>
 
-                <div className="my-4 h-px bg-brand-blush/60" />
-                {/* Utility links omitted for a leaner nav */}
+                <RouterLink
+                  to="/"
+                  className="flex flex-col items-center justify-center gap-1 text-center"
+                >
+                  <span className="font-heading text-2xl font-semibold uppercase tracking-[0.24em] text-brand-cocoa md:text-xl">
+                    Lumelle
+                  </span>
+                  {subtitle ? (
+                    <>
+                      <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-brand-cocoa/60 md:hidden">
+                        {subtitle}
+                      </span>
+                      <span className="hidden text-sm font-medium text-brand-cocoa/70 md:inline">
+                        {subtitle}
+                      </span>
+                    </>
+                  ) : null}
+                </RouterLink>
+
+                <div className="flex items-center justify-end gap-2">
+                  {onPrimaryAction ? (
+                    <button
+                      onClick={onPrimaryAction}
+                      type="button"
+                      className="hidden items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90 md:inline-flex"
+                    >
+                      {primaryLabel}
+                    </button>
+                  ) : null}
+
+                  <SignedOut>
+                    <a
+                      href={accountUrl}
+                      className="hidden rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa transition hover:bg-brand-blush/40 md:inline-flex"
+                    >
+                      Sign in
+                    </a>
+                  </SignedOut>
+                  <SignedIn>
+                    <div className="hidden md:block">
+                      <UserButton
+                        afterSignOutUrl="/"
+                        appearance={{
+                          elements: {
+                            avatarBox: 'h-10 w-10',
+                          },
+                        }}
+                      />
+                    </div>
+                  </SignedIn>
+
+                  <RouterLink
+                    to={signedIn ? '/account' : '/sign-in'}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-sm hover:bg-brand-blush/30"
+                    aria-label={signedIn ? 'Account' : 'Sign in'}
+                  >
+                    <UserRound className="h-5 w-5" />
+                  </RouterLink>
+                </div>
               </div>
-            ) : (
-              // Cart tab
-              <div className="pb-28">
-                <div className="px-4 pt-2">
-                  <div className="mb-2 flex items-center justify-between">
-                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Cart ({cartQty})</p>
-                    <button className="rounded-full border border-brand-blush/60 px-2 py-1 text-xs text-brand-cocoa/70" onClick={() => setActiveTab('menu')}>Continue shopping</button>
-                  </div>
-                  {/* Progress banner */}
-                  <div className="mb-2 rounded-xl bg-brand-blush/30 px-3 py-2 text-xs text-brand-cocoa/80">
-                    {remainingForFreeShip > 0 ? `You are £${remainingForFreeShip.toFixed(2)} away from free shipping.` : 'You’ve unlocked free shipping!'}
-                  </div>
-                  <div className="mb-3 h-2 w-full overflow-hidden rounded-full bg-brand-blush/40">
-                    <div className="h-full bg-brand-peach" style={{ width: `${freeShipProgress}%` }} />
-                  </div>
-                  <div className="rounded-2xl border border-brand-blush/60 p-3">
-                    {items.length === 0 ? (
-                      <div className="rounded-xl border border-brand-blush/60 p-3 text-sm text-brand-cocoa/70">Your cart is empty.</div>
+            </div>
+          </header>
+          <main>{children}</main>
+          <footer className="border-t border-brand-blush/40 bg-brand-blush/20" data-sticky-buy-target>
+            <div className="mx-auto flex flex-col gap-6 px-4 py-12 md:max-w-6xl md:flex-row md:items-start md:justify-between md:px-6">
+              <div>
+                <p className="font-heading text-lg font-semibold uppercase tracking-[0.3em]">
+                  Lumelle
+                </p>
+                <p className="mt-2 max-w-sm text-sm text-brand-cocoa/70">
+                  Creator-grade shower caps designed to keep every silk press, curls, and braids flawless on camera.
+                </p>
+              </div>
+              <div className="flex flex-col items-start gap-2 text-sm text-brand-cocoa/70 md:items-end">
+                <RouterLink to="/terms" className="hover:text-brand-cocoa">
+                  Terms &amp; Conditions
+                </RouterLink>
+                <RouterLink to="/privacy" className="hover:text-brand-cocoa">
+                  Privacy Policy
+                </RouterLink>
+                <RouterLink to="/affiliates" className="hover:text-brand-cocoa">
+                  Affiliates
+                </RouterLink>
+                <a
+                  href={`mailto:${SUPPORT_EMAIL}`}
+                  className="hover:text-brand-cocoa"
+                >
+                  {SUPPORT_EMAIL}
+                </a>
+              </div>
+            </div>
+          </footer>
+        </div>
+        {/* Global drawer/overlay mounted outside content so page can shift */}
+        {menuOpen ? (
+          <>
+            <div className="fixed inset-0 z-40 bg-black/20" onClick={() => { setMenuOpen(false); track('nav_close') }} />
+            <aside
+              className="fixed inset-y-0 right-0 z-50 overflow-y-auto border-l border-brand-blush/60 bg-white shadow-2xl transition-transform duration-300"
+              style={{ width: DRAWER_WIDTH, transform: menuOpen ? 'translateX(0)' : 'translateX(100%)' }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="drawer-title"
+              ref={drawerRef}
+            >
+              {/* Sticky header inside drawer */}
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-brand-blush/60 bg-white/95 px-4 py-3 backdrop-blur">
+                <div>
+                  <div id="drawer-title" className="font-heading text-lg uppercase tracking-[0.24em] text-brand-cocoa">Lumelle</div>
+                  {subtitle ? (
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">{subtitle}</div>
+                  ) : null}
+                </div>
+                <button aria-label="Close" onClick={() => { setMenuOpen(false); track('nav_close') }} className="rounded-full border border-brand-blush/60 p-2">✕</button>
+              </div>
+              {/* Tabs: Menu | Cart */}
+              <div className="px-4 pt-3" role="tablist" aria-label="Navigation sections">
+                <div className="inline-grid grid-cols-2 rounded-full border border-brand-blush/60 p-0.5 text-sm font-semibold">
+                  <button
+                    role="tab"
+                    aria-selected={activeTab === 'menu'}
+                    className={`rounded-full px-4 py-1.5 transition ${activeTab === 'menu' ? 'bg-brand-blush/50 text-brand-cocoa' : 'text-brand-cocoa/70 hover:bg-brand-blush/30'}`}
+                    onClick={() => { setActiveTab('menu'); track('nav_tab_switch', { tab: 'menu' }) }}
+                  >
+                    Menu
+                  </button>
+                  <button
+                    role="tab"
+                    aria-selected={activeTab === 'cart'}
+                    className={`rounded-full px-4 py-1.5 transition ${activeTab === 'cart' ? 'bg-brand-blush/50 text-brand-cocoa' : 'text-brand-cocoa/70 hover:bg-brand-blush/30'}`}
+                    onClick={() => { setActiveTab('cart'); track('nav_tab_switch', { tab: 'cart' }) }}
+                  >
+                    Cart
+                  </button>
+                </div>
+              </div>
+
+              {/* Content */}
+              {activeTab === 'menu' ? (
+                <div className="pb-24">{/* bottom padding so sticky cart in cart-tab doesn't overlap */}
+                  {/* Search intentionally omitted (single product) */}
+
+                  {/* Primary navigation */}
+                  <nav className="px-2 py-2">
+                    <RouterLink to="/" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/' }) }}>Home</RouterLink>
+                    <RouterLink to="/product/lumelle-shower-cap" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/lumelle-shower-cap' }) }}>
+                      Shower cap <span className="ml-2 rounded-full bg-brand-blush/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-cocoa/70">Best seller</span>
+                    </RouterLink>
+                    <RouterLink to="/product/satin-overnight-curler" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/satin-overnight-curler' }) }}>
+                      Satin curlers <span className="ml-2 rounded-full bg-brand-peach/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-cocoa/70">New</span>
+                    </RouterLink>
+                    {/* More group */}
+                    <div className="mt-1 rounded-xl">
+                      <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa/50">More</div>
+                      <RouterLink to="/affiliates" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/affiliates' }) }}>Affiliates</RouterLink>
+                      <RouterLink to="/brand" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}>Brand story</RouterLink>
+                      <RouterLink to="/blog" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}>Blog</RouterLink>
+                    </div>
+                  </nav>
+
+                  <div className="my-4 h-px bg-brand-blush/60" />
+
+                  {/* Cart summary pill */}
+                  {cartQty > 0 ? (
+                    <div className="px-4">
+                      <button onClick={() => { setActiveTab('cart'); track('nav_tab_switch', { tab: 'cart', via: 'summary_pill' }) }} className="flex w-full items-center justify-between rounded-xl border border-brand-blush/60 px-4 py-3 text-sm text-brand-cocoa/80 hover:bg-brand-blush/30">
+                        <span>Cart • {cartQty} item{cartQty === 1 ? '' : 's'}</span>
+                        <span className="font-semibold text-brand-cocoa">£{subtotal.toFixed(2)}</span>
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="my-4 h-px bg-brand-blush/60" />
+
+                  {/* Profile block */}
+                  <div className="px-4">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Profile</p>
+                    {signedIn ? (
+                      <RouterLink to="/account/orders" onClick={() => setMenuOpen(false)} className="flex w-full items-center justify-between rounded-2xl border border-brand-blush/60 px-4 py-3 text-left text-sm">
+                        <span className="font-semibold text-brand-cocoa">Hi, {user?.firstName}</span>
+                        <span className="text-brand-cocoa/60">Orders ▸</span>
+                      </RouterLink>
                     ) : (
-                      items.map((it) => (
-                        <div key={it.id} className="mb-4 grid grid-cols-[64px_1fr_auto] items-center gap-3 last:mb-0">
-                          <img src="/uploads/luminele/product-feature-05.jpg" alt={it.title} className="h-16 w-16 rounded-lg border border-brand-blush/60 object-cover" />
-                          <div className="text-sm text-brand-cocoa">
-                            <div className="font-medium">{it.title}</div>
-                            <div className="mt-1 text-xs text-brand-cocoa/70">£{it.price.toFixed(2)} each</div>
-                            <button className="mt-1 text-[11px] uppercase tracking-wide text-brand-cocoa/60" onClick={() => remove(it.id)}>Remove</button>
-                          </div>
-                          <div className="justify-self-end">
-                            <div className="inline-flex items-center gap-2">
-                              <button aria-label="Decrease quantity" className="h-8 w-8 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, Math.max(0, it.qty - 1))}>−</button>
-                              <span className="w-5 text-center text-brand-cocoa">{it.qty}</span>
-                              <button aria-label="Increase quantity" className="h-8 w-8 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, it.qty + 1)}>+</button>
+                      <button className="w-full rounded-2xl border border-brand-blush/60 px-4 py-3 text-left text-sm text-brand-cocoa/90" onClick={() => { track('profile_signin_click'); signIn('Jane') }}>
+                        Sign in or create account
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="my-4 h-px bg-brand-blush/60" />
+                  {/* Utility links omitted for a leaner nav */}
+                </div>
+              ) : (
+                // Cart tab
+                <div className="pb-28">
+                  <div className="px-4 pt-2">
+                    <div className="mb-2 flex items-center justify-between">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Cart ({cartQty})</p>
+                      <button className="rounded-full border border-brand-blush/60 px-2 py-1 text-xs text-brand-cocoa/70" onClick={() => setActiveTab('menu')}>Continue shopping</button>
+                    </div>
+                    {/* Progress banner */}
+                    <div className="mb-2 rounded-xl bg-brand-blush/30 px-3 py-2 text-xs text-brand-cocoa/80">
+                      {remainingForFreeShip > 0 ? `You are £${remainingForFreeShip.toFixed(2)} away from free shipping.` : 'You’ve unlocked free shipping!'}
+                    </div>
+                    <div className="mb-3 h-2 w-full overflow-hidden rounded-full bg-brand-blush/40">
+                      <div className="h-full bg-brand-peach" style={{ width: `${freeShipProgress}%` }} />
+                    </div>
+                    <div className="rounded-2xl border border-brand-blush/60 p-3">
+                      {items.length === 0 ? (
+                        <div className="rounded-xl border border-brand-blush/60 p-3 text-sm text-brand-cocoa/70">Your cart is empty.</div>
+                      ) : (
+                        items.map((it) => (
+                          <div key={it.id} className="mb-4 grid grid-cols-[64px_1fr_auto] items-center gap-3 last:mb-0">
+                            <img src="/uploads/luminele/product-feature-05.jpg" alt={it.title} className="h-16 w-16 rounded-lg border border-brand-blush/60 object-cover" />
+                            <div className="text-sm text-brand-cocoa">
+                              <div className="font-medium">{it.title}</div>
+                              <div className="mt-1 text-xs text-brand-cocoa/70">£{it.price.toFixed(2)} each</div>
+                              <button className="mt-1 text-[11px] uppercase tracking-wide text-brand-cocoa/60" onClick={() => remove(it.id)}>Remove</button>
+                            </div>
+                            <div className="justify-self-end">
+                              <div className="inline-flex items-center gap-2">
+                                <button aria-label="Decrease quantity" className="h-8 w-8 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, Math.max(0, it.qty - 1))}>−</button>
+                                <span className="w-5 text-center text-brand-cocoa">{it.qty}</span>
+                                <button aria-label="Increase quantity" className="h-8 w-8 rounded-full border border-brand-blush/60 text-sm" onClick={() => setQty(it.id, it.qty + 1)}>+</button>
+                              </div>
                             </div>
                           </div>
+                        ))
+                      )}
+
+                      {/* Free shipping progress */}
+                      <div className="mt-3">
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-brand-blush/40">
+                          <div className="h-full bg-brand-peach transition-[width]" style={{ width: `${freeShipProgress}%` }} />
                         </div>
-                      ))
-                    )}
+                        <div className="mt-1 text-center text-xs text-brand-cocoa/70">
+                          {remainingForFreeShip > 0 ? `£${remainingForFreeShip.toFixed(2)} away from free shipping` : 'You’ve unlocked free shipping!'}
+                        </div>
+                      </div>
 
-                    {/* Free shipping progress */}
-                    <div className="mt-3">
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-brand-blush/40">
-                        <div className="h-full bg-brand-peach transition-[width]" style={{ width: `${freeShipProgress}%` }} />
-                      </div>
-                      <div className="mt-1 text-center text-xs text-brand-cocoa/70">
-                        {remainingForFreeShip > 0 ? `£${remainingForFreeShip.toFixed(2)} away from free shipping` : 'You’ve unlocked free shipping!'}
-                      </div>
+                      {/* Reassurance pill */}
+                      <details className="mt-3">
+                        <summary className="mx-auto w-max cursor-pointer select-none rounded-full border border-brand-blush/60 px-3 py-1 text-[11px] text-brand-cocoa/80">Fast shipping • Easy returns • Secure checkout</summary>
+                        <div className="mt-2 text-center text-[11px] text-brand-cocoa/70">Orders ship within 24 hours. Free returns within 30 days. 256‑bit SSL secured checkout.</div>
+                      </details>
                     </div>
+                  </div>
 
-                    {/* Reassurance pill */}
-                    <details className="mt-3">
-                      <summary className="mx-auto w-max cursor-pointer select-none rounded-full border border-brand-blush/60 px-3 py-1 text-[11px] text-brand-cocoa/80">Fast shipping • Easy returns • Secure checkout</summary>
-                      <div className="mt-2 text-center text-[11px] text-brand-cocoa/70">Orders ship within 24 hours. Free returns within 30 days. 256‑bit SSL secured checkout.</div>
-                    </details>
+                  {/* Sticky cart footer */}
+                  <div className="sticky bottom-0 z-10 mt-4 border-t border-brand-blush/60 bg-white/95 px-4 py-3 backdrop-blur">
+                    <div className="mb-2 flex items-center justify-between text-sm text-brand-cocoa">
+                      <span>Subtotal</span>
+                      <span className="font-semibold">£{subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button disabled={cartQty === 0} className="flex-1 rounded-full bg-brand-peach px-4 py-2 text-sm font-semibold text-brand-cocoa shadow-soft disabled:opacity-50" onClick={() => { track('begin_checkout'); setMenuOpen(false); if (checkoutUrl) { window.location.href = checkoutUrl } else { window.location.href = '/checkout' } }}>Checkout</button>
+                      <RouterLink to="/cart" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/cart', source: 'cart_footer' }) }} className="flex-1 rounded-full border border-brand-blush/60 px-4 py-2 text-center text-sm font-semibold text-brand-cocoa">View cart</RouterLink>
+                    </div>
                   </div>
                 </div>
-
-                {/* Sticky cart footer */}
-                <div className="sticky bottom-0 z-10 mt-4 border-t border-brand-blush/60 bg-white/95 px-4 py-3 backdrop-blur">
-                  <div className="mb-2 flex items-center justify-between text-sm text-brand-cocoa">
-                    <span>Subtotal</span>
-                    <span className="font-semibold">£{subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <button disabled={cartQty === 0} className="flex-1 rounded-full bg-brand-peach px-4 py-2 text-sm font-semibold text-brand-cocoa shadow-soft disabled:opacity-50" onClick={() => { track('begin_checkout'); setMenuOpen(false); window.location.href = '/checkout' }}>Checkout</button>
-                    <RouterLink to="/cart" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/cart', source: 'cart_footer' }) }} className="flex-1 rounded-full border border-brand-blush/60 px-4 py-2 text-center text-sm font-semibold text-brand-cocoa">View cart</RouterLink>
-                  </div>
-                </div>
-              </div>
-            )}
-          </aside>
-        </>
-      ) : null}
-    </div>
+              )}
+            </aside>
+          </>
+        ) : null}
+      </div>
     </DrawerContext.Provider>
   )
 }

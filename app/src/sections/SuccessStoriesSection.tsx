@@ -1,8 +1,15 @@
 import { SectionHeading } from '@/components/SectionHeading'
 import { successStories } from '@/content/landing'
+import { useEffect, useState } from 'react'
+import { LazyVisible } from '@/components/LazyVisible'
 
 export const SuccessStoriesSection = () => {
   const [featured, ...others] = successStories
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
 
   return (
     <section
@@ -52,15 +59,29 @@ export const SuccessStoriesSection = () => {
               <blockquote className="rounded-2xl bg-brand-blush/40 p-4 text-sm leading-relaxed text-brand-cocoa/80">
                 “{featured.quote}”
               </blockquote>
-              <div className="relative overflow-hidden rounded-2xl border border-brand-peach/40 pb-[177.77%]">
-                <iframe
-                  src={`${featured.embedUrl}?lang=en`}
-                  title={`${featured.name} TikTok embed`}
-                  loading="lazy"
-                  allow="encrypted-media; fullscreen; clipboard-write"
-                  className="absolute inset-0 h-full w-full"
-                />
-              </div>
+              <LazyVisible
+                placeholder={
+                  <div className="relative overflow-hidden rounded-2xl border border-brand-peach/40 pb-[178%] bg-brand-blush/20" />
+                }
+              >
+                <div className="relative overflow-hidden rounded-2xl border border-brand-peach/40 pb-[178%] bg-black">
+                  {hydrated ? (
+                    <iframe
+                      src={featured.embedUrl.includes('lang=') ? featured.embedUrl : `${featured.embedUrl}&lang=en`}
+                      title={`${featured.name} TikTok embed`}
+                      loading="lazy"
+                      allow="encrypted-media; fullscreen; clipboard-write"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full"
+                      style={{ border: 0 }}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                      Loading…
+                    </div>
+                  )}
+                </div>
+              </LazyVisible>
             </div>
           </div>
         </article>
@@ -95,15 +116,29 @@ export const SuccessStoriesSection = () => {
                   <p className="text-sm text-brand-cocoa/75 leading-relaxed">
                     “{story.quote}”
                   </p>
-                  <div className="relative overflow-hidden rounded-xl border border-brand-peach/30 pb-[177.77%]">
-                    <iframe
-                      src={`${story.embedUrl}?lang=en`}
-                      title={`${story.name} TikTok embed`}
-                      loading="lazy"
-                      allow="encrypted-media; fullscreen; clipboard-write"
-                      className="absolute inset-0 h-full w-full"
-                    />
-                  </div>
+                  <LazyVisible
+                    placeholder={
+                      <div className="relative overflow-hidden rounded-xl border border-brand-peach/30 pb-[178%] bg-brand-blush/20" />
+                    }
+                  >
+                    <div className="relative overflow-hidden rounded-xl border border-brand-peach/30 pb-[178%] bg-black">
+                      {hydrated ? (
+                        <iframe
+                          src={story.embedUrl.includes('lang=') ? story.embedUrl : `${story.embedUrl}&lang=en`}
+                          title={`${story.name} TikTok embed`}
+                          loading="lazy"
+                          allow="encrypted-media; fullscreen; clipboard-write"
+                          allowFullScreen
+                          className="absolute inset-0 h-full w-full"
+                          style={{ border: 0 }}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                          Loading…
+                        </div>
+                      )}
+                    </div>
+                  </LazyVisible>
                 </div>
               </div>
             </article>

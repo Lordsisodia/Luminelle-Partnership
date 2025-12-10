@@ -95,6 +95,19 @@ export async function cartLinesRemove(cartId: string, lineIds: string[]): Promis
   return mapCart(data.cartLinesRemove.cart)
 }
 
+export async function cartDiscountCodesUpdate(cartId: string, codes: string[]): Promise<ShopifyCart> {
+  const data = await runStorefront<{ cartDiscountCodesUpdate: { cart: any } }>(
+    `
+    mutation CartDiscountCodesUpdate($cartId: ID!, $codes: [String!]!) {
+      cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $codes) { cart { ...CartFields } }
+    }
+    ${CART_FRAGMENT}
+  `,
+    { cartId, codes }
+  )
+  return mapCart(data.cartDiscountCodesUpdate.cart)
+}
+
 export async function cartFetch(cartId: string): Promise<ShopifyCart> {
   const data = await runStorefront<{ cart: any }>(
     `
@@ -107,6 +120,32 @@ export async function cartFetch(cartId: string): Promise<ShopifyCart> {
   )
   if (!data.cart) throw new Error('Cart not found')
   return mapCart(data.cart)
+}
+
+export async function cartAttributesUpdate(cartId: string, attributes: { key: string; value: string }[]): Promise<ShopifyCart> {
+  const data = await runStorefront<{ cartAttributesUpdate: { cart: any } }>(
+    `
+    mutation CartAttributesUpdate($cartId: ID!, $attributes: [AttributeInput!]!) {
+      cartAttributesUpdate(cartId: $cartId, attributes: $attributes) { cart { ...CartFields } }
+    }
+    ${CART_FRAGMENT}
+  `,
+    { cartId, attributes }
+  )
+  return mapCart(data.cartAttributesUpdate.cart)
+}
+
+export async function cartBuyerIdentityUpdate(cartId: string, email?: string): Promise<ShopifyCart> {
+  const data = await runStorefront<{ cartBuyerIdentityUpdate: { cart: any } }>(
+    `
+    mutation CartBuyerIdentityUpdate($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
+      cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) { cart { ...CartFields } }
+    }
+    ${CART_FRAGMENT}
+  `,
+    { cartId, buyerIdentity: { email } }
+  )
+  return mapCart(data.cartBuyerIdentityUpdate.cart)
 }
 
 function mapCart(cart: any): ShopifyCart {

@@ -1,15 +1,17 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useCart } from '@/state/CartContext'
 import { addOrder, type Order } from '@/state/OrdersStore'
 import { useAuth as useClerkAuth } from '@clerk/clerk-react'
+import { shopifyEnabled } from '@/lib/shopify'
+import { setNoIndex } from '@/lib/seo'
 
 const FREE_SHIP_THRESHOLD = 40
 const STANDARD_SHIPPING = 3.95
 const steps = ['Information', 'Payment', 'Review']
 
 const Stepper = ({ step }: { step: number }) => (
-  <div className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+  <div className="mb-6 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
     {steps.map((label, idx) => (
       <div key={label} className="flex items-center gap-2">
         <span className={`flex h-6 w-6 items-center justify-center rounded-full border text-[11px] ${idx <= step ? 'border-brand-cocoa bg-brand-cocoa text-white' : 'border-brand-blush/60 text-brand-cocoa/50'}`}>
@@ -23,10 +25,11 @@ const Stepper = ({ step }: { step: number }) => (
 )
 
 export const CheckoutPage = () => {
-  const { items, subtotal, qty, clear } = useCart()
+  const { items, subtotal, qty, clear, checkoutUrl } = useCart()
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || qty === 0 ? 0 : STANDARD_SHIPPING
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping])
-  const [emailOptIn, setEmailOptIn] = useState(true)
+  const [emailOptIn] = useState(true)
+  // const [email, setEmail] = useState('')
   const [step, setStep] = useState(0)
   const [placingOrder, setPlacingOrder] = useState(false)
   const disabled = qty === 0
@@ -34,6 +37,13 @@ export const CheckoutPage = () => {
 
   const placeOrder = async () => {
     if (disabled || placingOrder) return
+    // If Shopify is configured and we have a checkout URL, send shopper to Shopify checkout
+    if (shopifyEnabled && checkoutUrl && typeof window !== 'undefined') {
+      try {
+        window.location.href = checkoutUrl
+        return
+      } catch { }
+    }
     setPlacingOrder(true)
     const order: Order = {
       id: `LUM-${Date.now().toString(36).toUpperCase()}`,
@@ -58,6 +68,8 @@ export const CheckoutPage = () => {
     }
   }
 
+  useEffect(() => { setNoIndex() }, [])
+
   const goNext = () => setStep((s) => Math.min(s + 1, steps.length - 1))
   const goBack = () => setStep((s) => Math.max(0, s - 1))
 
@@ -66,24 +78,6 @@ export const CheckoutPage = () => {
       case 0:
         return (
           <div className="space-y-6">
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Express checkout</div>
-              <div className="mt-3 flex gap-3">
-                <button disabled className="flex-1 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white opacity-80">Shop Pay</button>
-                <button disabled className="flex-1 rounded-full bg-[#0F9D58] px-4 py-2 text-sm font-semibold text-white opacity-80">G Pay</button>
-              </div>
-              <p className="mt-2 text-[11px] text-brand-cocoa/60">Demo checkout — payments not connected yet.</p>
-            </div>
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Contact</div>
-              <div className="mt-3 grid gap-3">
-                <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" placeholder="Email or mobile" />
-                <label className="inline-flex items-center gap-2 text-sm text-brand-cocoa/80">
-                  <input checked={emailOptIn} onChange={(e) => setEmailOptIn(e.target.checked)} type="checkbox" />
-                  Email me news and offers
-                </label>
-              </div>
-            </div>
             <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
               <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Delivery</div>
               <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -101,11 +95,11 @@ export const CheckoutPage = () => {
               <div className="mt-4 rounded-xl border border-brand-blush/60 p-3 text-sm text-brand-cocoa/80">
                 Enter your address to view available shipping methods.
               </div>
-            </div>
-            <div className="flex justify-end gap-3">
-              <button className="rounded-full border border-brand-blush/60 px-5 py-2 text-sm font-semibold text-brand-cocoa" onClick={goNext} disabled={disabled}>
-                Continue to payment
-              </button>
+              <div className="mt-4 flex justify-end">
+                <button className="rounded-full border border-brand-blush/60 px-5 py-2 text-sm font-semibold text-brand-cocoa" onClick={goNext} disabled={disabled}>
+                  Continue to payment
+                </button>
+              </div>
             </div>
           </div>
         )
@@ -191,7 +185,13 @@ export const CheckoutPage = () => {
                 ) : (
                   items.map((it) => (
                     <div key={it.id} className="flex items-center gap-3">
-                      <img src="/uploads/luminele/product-feature-05.jpg" alt="" className="h-14 w-14 rounded-lg border border-brand-blush/60 object-cover" />
+                      <img
+                        src="/uploads/luminele/product-feature-05.jpg"
+                        alt=""
+                        className="h-14 w-14 rounded-lg border border-brand-blush/60 object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
                       <div className="flex-1 text-sm text-brand-cocoa">
                         <div className="font-medium">{it.title}</div>
                         <div className="text-brand-cocoa/70">Qty {it.qty}</div>
@@ -214,6 +214,17 @@ export const CheckoutPage = () => {
               </div>
               <p className="mt-4 text-[11px] text-brand-cocoa/60">Shipping, taxes, and discounts are calculated at checkout.</p>
             </div>
+
+            {step === 0 && (
+              <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Express checkout</div>
+                <div className="mt-3 flex gap-3">
+                  <button disabled className="flex-1 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white opacity-80">Shop Pay</button>
+                  <button disabled className="flex-1 rounded-full bg-[#0F9D58] px-4 py-2 text-sm font-semibold text-white opacity-80">G Pay</button>
+                </div>
+                <p className="mt-2 text-[11px] text-brand-cocoa/60">Demo checkout — payments not connected yet.</p>
+              </div>
+            )}
           </aside>
         </div>
       </section>

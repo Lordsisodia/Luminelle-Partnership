@@ -5,7 +5,7 @@ type Slide = { title: string; copy: string; image: string; ctaHref: string; tag?
 
 export const BenefitsSection = ({ slides }: { slides: Slide[] }) => (
   <section className="bg-white py-12">
-    <div className="mx-auto max-w-6xl px-4 md:px-6">
+    <div className="mx-auto max-w-6xl px-4 md:px-0 lg:px-0">
       <SectionHeading
         eyebrow="Benefits"
         title="Why you’ll love it"

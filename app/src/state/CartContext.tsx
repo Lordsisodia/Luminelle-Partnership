@@ -1,6 +1,16 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { shopifyEnabled } from '@/lib/shopify'
-import { cartCreate, cartFetch, cartLinesAdd, cartLinesRemove, cartLinesUpdate, type ShopifyCart } from '@/lib/shopifyCart'
+import {
+  cartCreate,
+  cartFetch,
+  cartLinesAdd,
+  cartLinesRemove,
+  cartLinesUpdate,
+  cartBuyerIdentityUpdate,
+  cartAttributesUpdate,
+  cartDiscountCodesUpdate,
+  type ShopifyCart,
+} from '@/lib/shopifyCart'
 
 export type CartItem = { id: string; title: string; price: number; qty: number; lineId?: string }
 
@@ -13,6 +23,9 @@ type CartState = {
   subtotal: number
   qty: number
   checkoutUrl?: string
+  setEmail?: (email: string) => void
+  setAttributes?: (attrs: Record<string, string>) => void
+  applyDiscount?: (code: string) => void
 }
 
 const CartCtx = createContext<CartState | null>(null)
@@ -32,20 +45,62 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   })
   const [checkoutUrl, setCheckoutUrl] = useState<string | undefined>(undefined)
 
+  const useServerCart = (import.meta.env.VITE_USE_SERVER_CART as any) === '1'
+
+  const serverCart = {
+    create: async (merchandiseId?: string, quantity = 1) => {
+      const res = await fetch('/api/storefront/cart/create', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ merchandiseId, quantity }),
+      })
+      const json = await res.json()
+      return mapServerCart(json.cart)
+    },
+    add: async (cartId: string, merchandiseId: string, quantity: number) => {
+      const res = await fetch('/api/storefront/cart/add-lines', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ cartId, merchandiseId, quantity }),
+      })
+      const json = await res.json()
+      return mapServerCart(json.cart)
+    },
+    update: async (cartId: string, lineId: string, quantity: number) => {
+      const res = await fetch('/api/storefront/cart/update-line', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ cartId, lineId, quantity }),
+      })
+      const json = await res.json()
+      return mapServerCart(json.cart)
+    },
+    remove: async (cartId: string, lineIds: string[]) => {
+      const res = await fetch('/api/storefront/cart/remove-lines', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ cartId, lineIds }),
+      })
+      const json = await res.json()
+      return mapServerCart(json.cart)
+    },
+    fetch: async (cartId: string) => {
+      const res = await fetch(`/api/storefront/cart/fetch?id=${encodeURIComponent(cartId)}`)
+      const json = await res.json()
+      return mapServerCart(json.cart)
+    },
+  }
+
   // hydrate from Shopify if configured and we have a cart id
   useEffect(() => {
     if (!shopifyEnabled || !shopifyCartId) return
-    cartFetch(shopifyCartId)
-      .then((cart) => {
-        applyShopifyCart(cart)
-      })
-      .catch(() => {
-        // if fetch fails, reset cart
-        setShopifyCartId(null)
-        setItems([])
-        setCheckoutUrl(undefined)
-        localStorage.removeItem('lumelle_shopify_cart_id')
-      })
+      ; (useServerCart ? serverCart.fetch(shopifyCartId) : cartFetch(shopifyCartId))
+        .then((cart) => {
+          applyShopifyCart(cart)
+        })
+        .catch(() => {
+          // if fetch fails, reset cart
+          setShopifyCartId(null)
+          setItems([])
+          setCheckoutUrl(undefined)
+          localStorage.removeItem('lumelle_shopify_cart_id')
+        })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -63,38 +118,98 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     localStorage.setItem('lumelle_shopify_cart_id', cart.id)
   }
 
-  const add: CartState['add'] = (item, qty = 1) => {
+  const setEmail: CartState['setEmail'] = (email) => {
+    if (!shopifyEnabled || !shopifyCartId) return
+    const run = async () => {
+      if (useServerCart) {
+        await fetch('/api/storefront/cart/set-buyer-identity', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ cartId: shopifyCartId, email }),
+        }).then((r) => r.json()).then((j) => applyShopifyCart(mapServerCart(j.cart)))
+      } else {
+        const cart = await cartBuyerIdentityUpdate(shopifyCartId, email)
+        applyShopifyCart(cart)
+      }
+    }
+    run().catch(() => undefined)
+  }
+
+  const setAttributes: CartState['setAttributes'] = (attrs) => {
+    if (!shopifyEnabled || !shopifyCartId) return
+    const pairs = Object.entries(attrs)
+      .filter(([, v]) => typeof v === 'string' && v)
+      .map(([key, value]) => ({ key, value }))
+    if (pairs.length === 0) return
+    const run = async () => {
+      if (useServerCart) {
+        const res = await fetch('/api/storefront/cart/attributes-update', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ cartId: shopifyCartId, attributes: pairs }),
+        })
+        const j = await res.json()
+        applyShopifyCart(mapServerCart(j.cart))
+      } else {
+        const cart = await cartAttributesUpdate(shopifyCartId, pairs)
+        applyShopifyCart(cart)
+      }
+    }
+    run().catch(() => undefined)
+  }
+
+  const applyDiscount: CartState['applyDiscount'] = (code) => {
+    if (!shopifyEnabled || !shopifyCartId || !code) return
+    const run = async () => {
+      if (useServerCart) {
+        const res = await fetch('/api/storefront/cart/discount-codes-update', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ cartId: shopifyCartId, codes: [code] }),
+        })
+        const j = await res.json()
+        applyShopifyCart(mapServerCart(j.cart))
+      } else {
+        const cart = await cartDiscountCodesUpdate(shopifyCartId, [code])
+        applyShopifyCart(cart)
+      }
+    }
+    run().catch(() => undefined)
+  }
+
+  const add = async (item: Omit<CartItem, 'qty'>, qty?: number) => {
+    const quantity = qty ?? 1
     if (shopifyEnabled) {
       const run = async () => {
-        if (!shopifyCartId) {
-          const cart = await cartCreate(item.id, qty)
+        let currentCartId = shopifyCartId
+
+        if (!currentCartId) {
+          const cart = useServerCart ? await serverCart.create(item.id, quantity) : await cartCreate(item.id, quantity)
           applyShopifyCart(cart)
           return
         }
+
         const existingLine = items.find((i) => i.id === item.id)
-        const nextQty = (existingLine?.qty ?? 0) + qty
+        const nextQty = (existingLine?.qty ?? 0) + quantity
         const cart = existingLine?.lineId
-          ? await cartLinesUpdate(shopifyCartId, existingLine.lineId, nextQty)
-          : await cartLinesAdd(shopifyCartId, item.id, qty)
+          ? (useServerCart ? await serverCart.update(currentCartId, existingLine.lineId, nextQty) : await cartLinesUpdate(currentCartId, existingLine.lineId, nextQty))
+          : (useServerCart ? await serverCart.add(currentCartId, item.id, quantity) : await cartLinesAdd(currentCartId, item.id, quantity))
         applyShopifyCart(cart)
       }
       run().catch((err) => console.error('Shopify add failed', err))
-      return
+    } else {
+      setItems((prev) => {
+        const existing = prev.find((i) => i.id === item.id)
+        if (existing) return prev.map((i) => (i.id === item.id ? { ...i, qty: i.qty + quantity } : i))
+        return [...prev, { ...item, qty: quantity }]
+      })
     }
-    setItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id)
-      if (existing) return prev.map((i) => (i.id === item.id ? { ...i, qty: i.qty + qty } : i))
-      return [...prev, { ...item, qty }]
-    })
   }
 
   const setQty: CartState['setQty'] = (id, qty) => {
     if (shopifyEnabled && shopifyCartId) {
       const line = items.find((i) => i.id === id)
       if (!line?.lineId) return
-      cartLinesUpdate(shopifyCartId, line.lineId, Math.max(0, qty))
-        .then(applyShopifyCart)
-        .catch((err) => console.error('Shopify setQty failed', err))
+        ; (useServerCart ? serverCart.update(shopifyCartId, line.lineId, Math.max(0, qty)) : cartLinesUpdate(shopifyCartId, line.lineId, Math.max(0, qty)))
+          .then(applyShopifyCart)
+          .catch((err) => console.error('Shopify setQty failed', err))
       return
     }
     setItems((prev) => prev.map((i) => (i.id === id ? { ...i, qty: Math.max(0, qty) } : i)))
@@ -104,9 +219,9 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     if (shopifyEnabled && shopifyCartId) {
       const line = items.find((i) => i.id === id)
       if (!line?.lineId) return
-      cartLinesRemove(shopifyCartId, [line.lineId])
-        .then(applyShopifyCart)
-        .catch((err) => console.error('Shopify remove failed', err))
+        ; (useServerCart ? serverCart.remove(shopifyCartId, [line.lineId]) : cartLinesRemove(shopifyCartId, [line.lineId]))
+          .then(applyShopifyCart)
+          .catch((err) => console.error('Shopify remove failed', err))
       return
     }
     setItems((prev) => prev.filter((i) => i.id !== id))
@@ -133,7 +248,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     }
   }, [items])
 
-  const value: CartState = { items, add, setQty, remove, clear, subtotal, qty, checkoutUrl }
+  const value: CartState = { items, add, setQty, remove, clear, subtotal, qty, checkoutUrl, setEmail, applyDiscount, setAttributes }
   return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>
 }
 
@@ -145,3 +260,20 @@ export const useCart = () => {
 }
 
 export const CartProvider = CartProviderBase
+
+function mapServerCart(raw: any): ShopifyCart {
+  return {
+    id: raw.id,
+    checkoutUrl: raw.checkoutUrl,
+    lines: (raw.lines?.edges || []).map((e: any) => ({
+      id: e.node.id,
+      quantity: e.node.quantity,
+      merchandise: {
+        id: e.node.merchandise.id,
+        title: e.node.merchandise.title,
+        product: { title: e.node.merchandise.product.title },
+        price: { amount: e.node.merchandise.price.amount, currencyCode: e.node.merchandise.price.currencyCode },
+      },
+    })),
+  }
+}

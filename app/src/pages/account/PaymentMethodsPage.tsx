@@ -3,6 +3,7 @@ import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useAuth } from '@/state/AuthContext'
 import type { PaymentMethod } from '@/state/AccountStore'
 import { deletePaymentMethod, getPaymentMethods, savePaymentMethod } from '@/state/AccountStore'
+import { setNoIndexNoFollow } from '@/lib/seo'
 
 const defaultForm: PaymentMethod = {
   id: '',
@@ -17,6 +18,7 @@ export const PaymentMethodsPage = () => {
   const [form, setForm] = useState<PaymentMethod>(defaultForm)
 
   useEffect(() => {
+    setNoIndexNoFollow()
     setMethods(getPaymentMethods())
   }, [])
 

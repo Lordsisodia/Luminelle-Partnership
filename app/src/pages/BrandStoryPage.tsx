@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { StarRating } from '@/components/StarRating'
 import { Sparkles, Leaf, Droplets, Users, MessageSquare } from 'lucide-react'
+import { setMetaTags, injectJsonLd } from '@/lib/seo'
 
 const stats = [
   { label: 'Creators protected', value: '12K+' },
@@ -78,6 +80,26 @@ const team = [
 ]
 
 export const BrandStoryPage = () => {
+  useEffect(() => {
+    const url = 'https://lumelle.com/brand'
+    const image = '/uploads/luminele/product-feature-07.jpg'
+    setMetaTags({
+      title: 'Lumelle story | Satin-lined waterproof caps built with creators',
+      description: 'How Lumelle co-designed a frizz-proof shower cap with creators to keep silk presses and curls camera-ready.',
+      image,
+      url,
+      type: 'website',
+    })
+    injectJsonLd('brand-breadcrumb', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Brand', item: url },
+      ],
+    })
+  }, [])
+
   return (
     <MarketingLayout navItems={[]} subtitle="Brand story">
       <section className="bg-white">
@@ -100,7 +122,15 @@ export const BrandStoryPage = () => {
               </div>
             </div>
             <div className="relative overflow-hidden rounded-[2rem] border border-brand-blush/60">
-              <img src="/uploads/luminele/product-feature-07.jpg" alt="Behind-the-scenes" className="h-full w-full object-cover" />
+              <img
+                src="/uploads/luminele/product-feature-07.jpg"
+                alt="Behind-the-scenes"
+                className="h-full w-full object-cover"
+                width={1200}
+                height={800}
+                loading="eager"
+                decoding="async"
+              />
             </div>
           </div>
 
@@ -110,7 +140,15 @@ export const BrandStoryPage = () => {
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {timeline.map((entry) => (
                 <article key={entry.year} className="grid gap-3 rounded-2xl border border-brand-blush/60 bg-white p-4 shadow-sm md:grid-cols-[0.65fr_1fr]">
-                  <img src={entry.media} alt={entry.title} className="h-28 w-full rounded-xl object-cover" />
+                  <img
+                    src={entry.media}
+                    alt={entry.title}
+                    className="h-28 w-full rounded-xl object-cover"
+                    width={560}
+                    height={280}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cocoa/60">{entry.year}</p>
                     <h2 className="font-heading text-xl">{entry.title}</h2>
@@ -156,7 +194,15 @@ export const BrandStoryPage = () => {
               <div className="mt-4 grid gap-4 md:grid-cols-3">
                 {team.map((member) => (
                   <div key={member.name} className="text-center text-sm">
-                    <img src={member.photo} alt={member.name} className="mx-auto h-24 w-24 rounded-full border border-brand-blush/60 object-cover" />
+                    <img
+                      src={member.photo}
+                      alt={member.name}
+                      className="mx-auto h-24 w-24 rounded-full border border-brand-blush/60 object-cover"
+                      width={96}
+                      height={96}
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <p className="mt-2 font-semibold text-brand-cocoa">{member.name}</p>
                     <p className="text-brand-cocoa/70">{member.role}</p>
                   </div>

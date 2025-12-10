@@ -1,27 +1,12 @@
-import { requireInternalAuth } from "../../../../app/src/server/internalAuth";
+import { verifyWebhook } from "../_verify";
 import { handleAppUninstalled } from "../../../../app/src/server/shopifyCore";
 
 export default async function handler(req: Request) {
-  const auth = requireInternalAuth(req);
-  if (!auth.ok) {
-    return new Response(JSON.stringify({ error: auth.message }), {
-      status: auth.status,
-      headers: { "content-type": "application/json" },
-    });
-  }
-  const payload = await req.json().catch(() => ({} as any));
-  const shop = (payload?.domain || payload?.shop_domain || payload?.shop) as
-    | string
-    | undefined;
-  if (!shop) {
-    return new Response(JSON.stringify({ error: "Missing shop domain" }), {
-      status: 400,
-      headers: { "content-type": "application/json" },
-    });
-  }
+  const verified = await verifyWebhook(req);
+  if (!verified) return new Response("Invalid HMAC", { status: 401 });
+  const body = await req.json();
+  const shop = body?.domain || body?.shop_domain || body?.shop;
+  if (!shop) return new Response("Missing shop", { status: 400 });
   const data = await handleAppUninstalled(shop);
-  return new Response(JSON.stringify(data), {
-    headers: { "content-type": "application/json" },
-  });
+  return new Response(JSON.stringify(data), { headers: { "content-type": "application/json" } });
 }
-

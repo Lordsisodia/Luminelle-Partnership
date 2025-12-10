@@ -1,0 +1,25 @@
+import { getPgPool } from "../../app/src/server/db";
+
+export default async function handler(req: Request) {
+  const url = new URL(req.url)
+  const days = Math.min(parseInt(url.searchParams.get('days') || '30', 10), 365)
+  const pool = getPgPool();
+  const { rows } = await pool.query('SELECT line_items FROM "ShopOrders" WHERE line_items IS NOT NULL AND coalesce(processed_at, created_at) >= now() - ($1 || \" days\")::interval', [days]);
+  const map = new Map<string, { units: number; revenue: number }>();
+  for (const r of rows) {
+    let items: any[] = []
+    try { items = Array.isArray(r.line_items) ? r.line_items : JSON.parse(r.line_items) } catch {}
+    for (const it of items) {
+      const key = String(it.title || it.variant?.title || 'Item')
+      const qty = Number(it.quantity || 1)
+      const price = Number((it.variant?.price?.shopMoney?.amount) ?? it.price ?? 0)
+      const prev = map.get(key) || { units: 0, revenue: 0 }
+      prev.units += qty
+      prev.revenue += qty * price
+      map.set(key, prev)
+    }
+  }
+  const out = Array.from(map.entries()).map(([title, v]) => ({ title, units: v.units, revenue: v.revenue }))
+  out.sort((a, b) => b.units - a.units)
+  return new Response(JSON.stringify(out.slice(0, 10)), { headers: { 'content-type': 'application/json' } })
+}

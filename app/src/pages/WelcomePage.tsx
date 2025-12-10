@@ -123,3 +123,5 @@ export const WelcomePage = () => {
     </div>
   )
 }
+
+export default WelcomePage

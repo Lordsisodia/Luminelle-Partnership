@@ -2,6 +2,7 @@ import type { ComponentType } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { Crown, Droplets, Leaf, Heart } from 'lucide-react'
 import { SectionHeading } from '@/components/SectionHeading'
+import { LazyVisible } from '@/components/LazyVisible'
 
 type FeatureCallout = {
   icon?: ComponentType<{ className?: string }>
@@ -86,19 +87,27 @@ export const FeatureCallouts = ({
             <div className="rounded-3xl border border-brand-peach/50 bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/30 p-4 shadow-[0_25px_70px_rgba(0,0,0,0.08)] backdrop-blur-sm">
               <div className="overflow-hidden rounded-2xl border border-white/40 bg-white">
                 <div className="relative aspect-[3/4] sm:aspect-[4/5]">
-                  {isVideo ? (
-                    <iframe
-                      src={media}
-                      title="Lumelle creator video"
-                      className="absolute inset-0 h-full w-full"
-                      allow="encrypted-media; fullscreen; clipboard-write"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      loading="lazy"
-                    />
-                  ) : (
-                    <img src={media} alt={mediaAlt ?? 'Lumelle shower cap in use'} className="h-full w-full object-cover" />
-                  )}
+                  <LazyVisible
+                    placeholder={
+                      <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                        Loading…
+                      </div>
+                    }
+                  >
+                    {isVideo ? (
+                      <iframe
+                        src={media}
+                        title="Lumelle creator video"
+                        className="absolute inset-0 h-full w-full"
+                        allow="encrypted-media; fullscreen; clipboard-write"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    ) : (
+                      <img src={media} alt={mediaAlt ?? 'Lumelle shower cap in use'} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                    )}
+                  </LazyVisible>
                   <div className="absolute bottom-3 left-3 rounded-full bg-white/85 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-cocoa shadow-soft backdrop-blur">
                     {mediaLabel ?? 'Less breakage'}
                   </div>

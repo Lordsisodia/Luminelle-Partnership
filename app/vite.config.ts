@@ -17,4 +17,9 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 900,
   },
+  server: {
+    port: 5173,
+    host: true,
+    allowedHosts: ['choir-holly-assist-cases.trycloudflare.com', 'localhost'],
+  },
 })

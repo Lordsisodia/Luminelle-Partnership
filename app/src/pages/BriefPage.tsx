@@ -44,3 +44,5 @@ export const BriefPage = () => {
     </SimpleLayout>
   )
 }
+
+export default BriefPage

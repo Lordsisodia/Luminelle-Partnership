@@ -29,3 +29,5 @@ createRoot(document.getElementById('root')!).render(
     </ClerkProvider>
   </StrictMode>
 )
+
+// PWA registration removed to avoid build issues; re-enable when Vite PWA plugin is configured and available.

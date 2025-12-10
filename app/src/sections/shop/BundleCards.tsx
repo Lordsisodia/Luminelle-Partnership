@@ -12,7 +12,7 @@ const bundles = [
     save: 'Best for trying',
     pill: 'Starter pick',
     description: 'Because it’s a small upgrade that makes your everyday routine easier.',
-    href: '/product/shower-cap',
+    href: '/product/lumelle-shower-cap',
   },
   {
     name: 'Duo',
@@ -23,7 +23,7 @@ const bundles = [
     save: 'Save 10%',
     pill: 'Popular',
     description: 'Grab one for you and a stylist partner, or rotate between showers.',
-    href: '/product/shower-cap',
+    href: '/product/lumelle-shower-cap',
   },
   {
     name: 'Gift set',
@@ -34,7 +34,7 @@ const bundles = [
     save: 'Give one to a friend',
     pill: 'Giftable',
     description: 'Trio gift: one for you, two for the people closest to you.',
-    href: '/product/shower-cap',
+    href: '/product/lumelle-shower-cap',
   },
 ]
 
@@ -125,8 +125,8 @@ export const BundleCards = () => {
                 ))}
               </div>
             </div>
-          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" />
-        </div>
+            <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" />
+          </div>
           <div className="mt-4 flex items-center justify-center">
             <HighlightsDots count={bundles.length} active={active} onSelect={goTo} />
           </div>

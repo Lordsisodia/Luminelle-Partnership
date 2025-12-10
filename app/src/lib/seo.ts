@@ -99,6 +99,20 @@ export const setMetaTags = ({ title, description, image, url, type = 'article' }
   }
 }
 
+export const setNoIndex = () => {
+  ensureTag('meta[name="robots"]', () => {
+    const m = document.createElement('meta')
+    m.name = 'robots'
+    return m
+  }, (el) => {
+    (el as HTMLMetaElement).content = 'noindex,nofollow'
+  })
+}
+
+export const setNoIndexNoFollow = () => {
+  setNoIndex()
+}
+
 export const injectJsonLd = (id: string, data: object) => {
   let script = document.getElementById(id) as HTMLScriptElement | null
   if (!script) {

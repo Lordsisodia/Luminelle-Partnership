@@ -3,6 +3,7 @@ import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useAuth } from '@/state/AuthContext'
 import type { Address } from '@/state/AccountStore'
 import { deleteAddress, getAddresses, saveAddress } from '@/state/AccountStore'
+import { setNoIndexNoFollow } from '@/lib/seo'
 
 const emptyForm: Address = {
   id: '',
@@ -20,6 +21,7 @@ export const AddressesPage = () => {
   const [form, setForm] = useState<Address>(emptyForm)
 
   useEffect(() => {
+    setNoIndexNoFollow()
     setAddresses(getAddresses())
   }, [])
 

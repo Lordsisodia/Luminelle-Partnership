@@ -15,3 +15,8 @@ app/dist/
 # component-library local installs
 components-library/node_modules/
 components-library/package-lock.json
+.env*.local
+
+# Nested repositories
+lumelle/
+components-library/

@@ -3,7 +3,9 @@ import { useParams, Link as RouterLink } from 'react-router-dom'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useAuth as useAppAuth } from '@/state/AuthContext'
 import { fetchOrderById, type Order } from '@/state/OrdersStore'
+import { shopifyEnabled } from '@/lib/shopify'
 import { useAuth as useClerkAuth } from '@clerk/clerk-react'
+import { setNoIndexNoFollow } from '@/lib/seo'
 
 export const OrderDetailPage = () => {
   const { orderId } = useParams()
@@ -13,14 +15,51 @@ export const OrderDetailPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setNoIndexNoFollow()
     if (!orderId) return
     let active = true
 
     const hydrate = async () => {
       setLoading(true)
       try {
-        const token = await getToken({ template: 'supabase' }).catch(() => null)
-        const found = await fetchOrderById(orderId, token ?? undefined)
+        let found: Order | null = null
+        if (shopifyEnabled && orderId.startsWith('#')) {
+          // Try Customer Accounts order detail first
+          const ca = await fetch(`/api/customer/order?name=${encodeURIComponent(orderId)}`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+          const o = ca?.order
+          if (o) {
+            found = {
+              id: o.name,
+              placedAt: o.processedAt,
+              status: 'processing',
+              items: (o.lineItems?.nodes || []).map((li: any) => ({ id: li.title, title: li.title, qty: li.quantity, price: Number(li.originalTotal?.amount || 0) / Math.max(1, li.quantity) })),
+              subtotal: 0,
+              shipping: 0,
+              total: Number(o.totalPrice?.amount || 0),
+              events: [{ at: o.processedAt, message: 'Order placed' }],
+            }
+            ;(found as any).shippingAddress = o.shippingAddress ? {
+              name: o.shippingAddress.displayName,
+              address1: o.shippingAddress.address1,
+              address2: o.shippingAddress.address2,
+              city: o.shippingAddress.city,
+              province: o.shippingAddress.province,
+              zip: o.shippingAddress.zip,
+              country: o.shippingAddress.country,
+            } : undefined
+            ;(found as any).fulfillmentStatus = o.fulfillmentStatus
+          }
+        }
+        if (!found) {
+          found = shopifyEnabled
+            ? (orderId.startsWith('#')
+                ? await fetch(`/api/orders/by-name?name=${encodeURIComponent(orderId)}`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+                : await fetch(`/api/orders/get?id=${encodeURIComponent(orderId)}`).then((r) => (r.ok ? r.json() : null)).catch(() => null))
+            : await (async () => {
+              const token = await getToken({ template: 'supabase' }).catch(() => null)
+              return fetchOrderById(orderId, token ?? undefined)
+            })()
+        }
         if (!active) return
         setOrder(found)
       } finally {
@@ -62,10 +101,28 @@ export const OrderDetailPage = () => {
                 </div>
                 <p className="text-lg font-semibold">£{order.total.toFixed(2)}</p>
               </div>
+              {Boolean((order as any).trackingUrl) ? (
+                <div className="rounded-xl border border-brand-blush/60 p-3 text-sm">
+                  <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Tracking</div>
+                  <a className="text-brand-cocoa underline" href={(order as any).trackingUrl} target="_blank" rel="noreferrer">Track shipment</a>
+                </div>
+              ) : null}
+              {Boolean((order as any).shippingAddress) ? (
+                <div className="rounded-xl border border-brand-blush/60 p-3 text-sm">
+                  <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Shipping address</div>
+                  <AddressBlock address={(order as any).shippingAddress} />
+                </div>
+              ) : null}
               <div className="space-y-3">
                 {order.items.map((item) => (
                   <div key={item.id} className="flex items-center gap-3 rounded-xl border border-brand-blush/60 p-3">
-                    <img src="/uploads/luminele/product-feature-05.jpg" alt="" className="h-14 w-14 rounded-lg border border-brand-blush/40 object-cover" />
+                    <img
+                      src="/uploads/luminele/product-feature-05.jpg"
+                      alt=""
+                      className="h-14 w-14 rounded-lg border border-brand-blush/40 object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <div className="flex-1 text-sm text-brand-cocoa">
                       <p className="font-semibold">{item.title}</p>
                       <p className="text-brand-cocoa/70">Qty {item.qty}</p>
@@ -89,6 +146,20 @@ export const OrderDetailPage = () => {
         </div>
       </section>
     </MarketingLayout>
+  )
+}
+
+function AddressBlock({ address }: { address: any }) {
+  return (
+    <div className="mt-2 text-brand-cocoa/80">
+      <div>{address.name}</div>
+      <div>{address.address1}</div>
+      {address.address2 ? <div>{address.address2}</div> : null}
+      <div>
+        {[address.city, address.province, address.zip].filter(Boolean).join(', ')}
+      </div>
+      <div>{address.country}</div>
+    </div>
   )
 }
 

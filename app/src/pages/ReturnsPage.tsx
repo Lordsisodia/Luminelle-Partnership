@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
+import { setMetaTags, injectJsonLd } from '@/lib/seo'
+import { useEffect } from 'react'
 
 export const ReturnsPage = () => {
   const [submitted, setSubmitted] = useState(false)
@@ -8,6 +10,24 @@ export const ReturnsPage = () => {
     e.preventDefault()
     setSubmitted(true)
   }
+
+  useEffect(() => {
+    const url = 'https://lumelle.com/returns'
+    setMetaTags({
+      title: 'Returns & 30-day Luxe Guarantee | Lumelle',
+      description: 'Start a return or exchange within 30 days. Free return shipping and easy labels.',
+      url,
+      type: 'website',
+    })
+    injectJsonLd('returns-breadcrumb', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Returns', item: url },
+      ],
+    })
+  }, [])
 
   return (
     <MarketingLayout navItems={[]} subtitle="Returns">

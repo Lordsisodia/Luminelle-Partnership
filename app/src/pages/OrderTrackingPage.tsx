@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { fetchOrderById, type Order } from '@/state/OrdersStore'
 import { useAuth as useClerkAuth } from '@clerk/clerk-react'
+import { setNoIndexNoFollow } from '@/lib/seo'
 
 export const OrderTrackingPage = () => {
   const [orderId, setOrderId] = useState('')
@@ -9,6 +10,8 @@ export const OrderTrackingPage = () => {
   const [error, setError] = useState('')
   const [checking, setChecking] = useState(false)
   const { getToken } = useClerkAuth()
+
+  useEffect(() => { setNoIndexNoFollow() }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

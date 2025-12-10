@@ -7,6 +7,7 @@ import { SectionHeading } from '@/components/SectionHeading'
 import { HeroProofStrip } from '@/sections/shop'
 import { homeConfig } from '@/content/home.config'
 import { setMetaTags, injectJsonLd } from '@/lib/seo'
+import { cdnUrl } from '@/utils/cdn'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Post' },
@@ -16,6 +17,7 @@ const navItems: NavItem[] = [
 export const BlogPostPage = () => {
   const { slug } = useParams()
   const post = blogPosts.find((p) => p.slug === slug)
+
   if (!post) return <Navigate to="/blog" replace />
 
   const related = blogPosts
@@ -26,35 +28,37 @@ export const BlogPostPage = () => {
   useEffect(() => {
     const title = `${post.title} | Lumelle Journal`
     const description =
-      post.teaser || post.subtitle || 'Frizz-free hair care, creator-tested routines, and product science from Lumelle.'
+      post.teaser || post.subtitle || 'Frizz-free hair care, creator routines, and product science from Lumelle.'
     const image = post.ogImage ?? post.cover
-    setMetaTags({ title, description, image, url: window.location.href, type: 'article' })
+    const absImage = cdnUrl(image)
+    const url = `https://lumelle.com/blog/${post.slug}`
+    setMetaTags({ title, description, image: absImage, url, type: 'article' })
 
     // Structured data: Article + FAQ (2 Qs)
     const faq = post.faqs && post.faqs.length
       ? post.faqs
       : [
-          {
-            question: 'How do I keep hair frizz-free in the shower?',
-            answer:
-              'Use a satin-lined, waterproof cap placed just beyond the hairline, angle spray forward, finish cool, and remove front-to-back after blotting.',
-          },
-          {
-            question: 'How should I care for the cap to keep the seal strong?',
-            answer: 'Rinse after each use, hand wash weekly with mild soap, air dry fully, and rotate caps so the liner stays dry and odor-free.',
-          },
-        ]
+        {
+          question: 'How do I keep hair frizz-free in the shower?',
+          answer:
+            'Use a satin-lined, waterproof cap placed just beyond the hairline, angle spray forward, finish cool, and remove front-to-back after blotting.',
+        },
+        {
+          question: 'How should I care for the cap to keep the seal strong?',
+          answer: 'Rinse after each use, hand wash weekly with mild soap, air dry fully, and rotate caps so the liner stays dry and odor-free.',
+        },
+      ]
 
     const ldArticle = {
       '@context': 'https://schema.org',
       '@type': 'Article',
       headline: post.title,
       description,
-      image: post.cover,
+      image: absImage,
       author: { '@type': 'Organization', name: post.author || 'Lumelle Studio' },
       datePublished: post.date,
       dateModified: post.date,
-      mainEntityOfPage: window.location.href,
+      mainEntityOfPage: url,
     }
 
     const ldFaq = {
@@ -69,7 +73,20 @@ export const BlogPostPage = () => {
 
     injectJsonLd('lumelle-article-ld', ldArticle)
     injectJsonLd('lumelle-faq-ld', ldFaq)
+    injectJsonLd('lumelle-breadcrumb-ld', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://lumelle.com/blog' },
+        { '@type': 'ListItem', position: 3, name: post.title, item: url },
+      ],
+    })
   }, [post])
+
+  if (!post) return <Navigate to="/blog" replace />
+
+  const reviewed = post.reviewed || post.date
 
   return (
     <MarketingLayout navItems={navItems} subtitle="Journal">
@@ -95,19 +112,47 @@ export const BlogPostPage = () => {
             <span>{post.readTime} read</span>
           </div>
           <div className="mt-6 overflow-hidden rounded-[2rem] border border-brand-blush/60">
-            <img src={post.cover} alt={post.title} className="w-full object-cover" />
+            <img
+              src={post.cover}
+              alt={post.title}
+              className="w-full object-cover"
+              width={1200}
+              height={800}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
           </div>
         </div>
       </section>
 
       <section className="bg-white">
         <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
+          <div className="rounded-2xl border border-brand-blush/60 bg-brand-blush/15 p-4 text-brand-cocoa">
+            <h2 className="text-lg font-semibold text-brand-cocoa">
+              {post.faqs?.[0]?.question || 'How do I keep hair frizz-free in the shower?'}
+            </h2>
+            <p className="mt-1 text-brand-cocoa/75">
+              {post.faqs?.[0]?.answer ||
+                'Use a satin-lined, waterproof cap placed just beyond the hairline, tuck sideburns, angle spray forward, finish with 60 seconds of cooler water, then blot and remove front-to-back.'}
+            </p>
+          </div>
+
           <div className="rounded-3xl border border-brand-blush/50 bg-brand-blush/10 p-6">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">TL;DR</p>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-brand-cocoa/80">
               <li>{post.teaser}</li>
               <li>Skim the subheads for quick wins and routines.</li>
             </ul>
+            <div className="mt-4">
+              <a
+                href="/product/lumelle-shower-cap"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
+              >
+                Shop the satin-lined waterproof cap
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+              </a>
+            </div>
           </div>
 
           {/* Body with structured sections */}
@@ -131,6 +176,23 @@ export const BlogPostPage = () => {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
+          <div className="flex items-center gap-4 rounded-3xl border border-brand-blush/60 bg-brand-blush/15 p-4">
+            <div className="h-12 w-12 rounded-full bg-brand-blush/40 text-center text-lg font-semibold text-brand-cocoa flex items-center justify-center">
+              {post.author.charAt(0)}
+            </div>
+            <div className="space-y-1 text-sm text-brand-cocoa/80">
+              <div className="font-semibold text-brand-cocoa">{post.author}{post.authorRole ? ` · ${post.authorRole}` : ''}</div>
+              <div>
+                Published {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · Last reviewed {new Date(reviewed).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </div>
+              <div>Have feedback? Email hello@lumelle.com</div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -3,29 +3,18 @@
   "buildCommand": "npm run build --workspace app",
   "outputDirectory": "app/dist",
   "installCommand": "npm install",
-  "framework": null,
   "env": {
     "VITE_ASSET_BASE_URL": "https://tmsbyiwqzesmirbargxv.supabase.co/storage/v1/object/public/public"
   },
   "headers": [
     {
-      "source": "/(.*)\\.(?:avif|webp|png|jpg|jpeg|svg)",
+      "source": "/(.*)\\.(avif|webp|png|jpg|jpeg|svg)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public,max-age=31536000,immutable"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ]
 }

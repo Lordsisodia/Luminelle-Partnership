@@ -1,0 +1,12 @@
+{
+  "name": "lumelle-reviews-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "extract": "node extract.mjs"
+  },
+  "dependencies": {
+    "glob": "^11.0.0",
+    "tesseract.js": "^4.1.1"
+  }
+}

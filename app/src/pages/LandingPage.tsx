@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { FloatingWhatsAppCta } from '@/components/FloatingWhatsAppCta'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
@@ -15,6 +15,7 @@ import { CompetitiveCallout } from '@/sections/CompetitiveCallout'
 import { FAQSection } from '@/sections/FAQSection'
 import { OnboardingFormSection } from '@/sections/OnboardingFormSection'
 import { WHATSAPP_INVITE_URL } from '@/config/constants'
+import { setMetaTags, injectJsonLd } from '@/lib/seo'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Overview' },
@@ -28,6 +29,25 @@ const navItems: NavItem[] = [
 export const LandingPage = () => {
   const sectionIds = navItems.map((item) => item.id)
   const activeId = useScrollSpy(sectionIds)
+
+  useEffect(() => {
+    const url = 'https://lumelle.com/affiliates'
+    setMetaTags({
+      title: 'Lumelle creators program | Earn with frizz-proof caps',
+      description: 'Apply to join Lumelle creators, get product, scripts, and commissions sharing satin-lined waterproof shower caps.',
+      image: '/uploads/luminele/hero-main.png',
+      url,
+      type: 'website',
+    })
+    injectJsonLd('affiliates-breadcrumb', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Affiliates', item: url },
+      ],
+    })
+  }, [])
 
   const handleJoinClick = useCallback(() => {
     try {
@@ -71,3 +91,5 @@ export const LandingPage = () => {
     </MarketingLayout>
   )
 }
+
+export default LandingPage

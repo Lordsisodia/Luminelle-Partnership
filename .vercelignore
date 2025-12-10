@@ -1,0 +1,9 @@
+# Vercel Ignore
+node_modules
+*/node_modules
+dist
+*/dist
+.env
+.env.*
+.git
+.DS_Store

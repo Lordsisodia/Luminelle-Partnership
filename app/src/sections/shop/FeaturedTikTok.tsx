@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { successStories } from '@/content/landing'
 import { SectionHeading } from '@/components/SectionHeading'
+import { LazyVisible } from '@/components/LazyVisible'
 
 type Heading = {
   eyebrow?: string
@@ -25,6 +26,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
   const stories = successStories.slice(0, 6).map((s) => ({ kind: 'embed' as const, ...s }))
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const [active, setActive] = useState(0)
+  const [hydrated, setHydrated] = useState(false)
 
   const goTo = useCallback(
     (idx: number, behavior: ScrollBehavior = 'smooth') => {
@@ -46,6 +48,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
   }
 
   useEffect(() => {
+    setHydrated(true)
     const el = scrollerRef.current
     if (!el) return
 
@@ -97,16 +100,30 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
           {stories.map((s) => {
             return (
               <article key={s.handle} data-tiktok-card className="min-w-[min(90vw,420px)] snap-center">
-                <div className="relative overflow-hidden rounded-3xl border border-brand-peach/40 pb-[177.77%] shadow-soft">
-                  <iframe
-                    src={`${s.embedUrl}?lang=en`}
-                    title={`${s.name} TikTok embed`}
-                    loading="lazy"
-                    allow="encrypted-media; fullscreen; clipboard-write"
-                    scrolling="no"
-                    className="absolute inset-0 h-full w-full"
-                  />
-                </div>
+                <LazyVisible
+                  placeholder={
+                    <div className="relative overflow-hidden rounded-3xl border border-brand-peach/40 pb-[178%] shadow-soft bg-brand-blush/20" />
+                  }
+                >
+                  <div className="relative overflow-hidden rounded-3xl border border-brand-peach/40 pb-[178%] shadow-soft bg-black">
+                    {hydrated ? (
+                      <iframe
+                        src={s.embedUrl.includes('lang=') ? s.embedUrl : `${s.embedUrl}&lang=en`}
+                        title={`${s.name} TikTok embed`}
+                        loading="lazy"
+                        allow="encrypted-media; fullscreen; clipboard-write"
+                        allowFullScreen
+                        scrolling="no"
+                        className="absolute inset-0 h-full w-full"
+                        style={{ border: 0 }}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                        Loading…
+                      </div>
+                    )}
+                  </div>
+                </LazyVisible>
                 <div className="mt-3 text-center text-sm text-brand-cocoa/70">{s.name} • {s.handle}</div>
                 <div className="mt-1 hidden text-center md:block">
                   <a

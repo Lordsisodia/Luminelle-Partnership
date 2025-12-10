@@ -56,7 +56,7 @@ export const HeroShop = ({ config }: Props) => {
             const sources = buildSources(src)
             const imgEl = (
               <img
-                key={idx}
+                key={`${src}-${idx}`}
                 src={src}
                 alt=""
                 className="h-full w-full flex-[0_0_100%] brightness-95 object-cover scale-[1.08]"
@@ -64,8 +64,9 @@ export const HeroShop = ({ config }: Props) => {
                   objectPosition: config.objectPosition || 'center center',
                   objectFit: config.objectFit || 'cover',
                 }}
+                width={1920}
+                height={1080}
                 loading={idx === 0 ? 'eager' : 'lazy'}
-                fetchPriority={idx === 0 ? 'high' : 'auto'}
                 decoding="async"
               />
             )
@@ -93,13 +94,13 @@ export const HeroShop = ({ config }: Props) => {
             <div className="inline-flex flex-nowrap items-center gap-3 rounded-full bg-white/30 px-6 py-2 text-brand-cocoa backdrop-blur-md shadow-soft ring-1 ring-white/50 min-w-[300px] justify-center">
               <div className="flex -space-x-1.5 flex-shrink-0 pl-1">
                 {[
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&h=120&auto=format&fit=crop",
-                  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=120&h=120&auto=format&fit=crop",
-                    "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?q=80&w=120&h=120&auto=format&fit=crop",
-                    "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=120&h=120&auto=format&fit=crop"
-                  ].map((src) => (
+                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&h=120&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=120&h=120&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?q=80&w=120&h=120&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=120&h=120&auto=format&fit=crop',
+                ].map((src, idx) => (
                     <img
-                      key={src}
+                      key={`${src}-${idx}`}
                       src={src}
                       alt="avatar"
                       className="h-7 w-7 rounded-full border-2 border-white object-cover shadow-sm"
