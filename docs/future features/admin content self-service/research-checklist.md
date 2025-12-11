@@ -1,0 +1,22 @@
+# Admin Content Self-Service — Research Checklist
+
+- [ ] Map editable surface areas: hero banners, section headers, CTAs, nav/footer links, promo bars.
+- [ ] Inventory product copy fields: titles, descriptions, bullets, specs, pricing blurbs, badges, FAQs, SEO meta.
+- [ ] Inventory media needs: hero/background images, product galleries, blog hero/inline, author avatars, icons/logos.
+- [ ] Define content models + types in Supabase (tables/views) and align IDs with frontend components.
+- [ ] Decide rich-text strategy (WYSIWYG vs structured blocks); sanitize/serialize pipeline to React.
+- [ ] Image pipeline on Supabase Storage: upload limits, formats, auto WebP/AVIF, focal point, cropping presets, responsive renditions.
+- [ ] CDN and caching policy: public/private buckets, signed URLs where needed, cache headers, revalidation triggers.
+- [ ] Draft/preview flow: preview tokens, environment separation, “preview in app” links.
+- [ ] Publishing workflow: statuses (draft/published/archived), approval steps, scheduling, rollback/version history.
+- [ ] Roles & permissions: admin vs editor vs contributor; per-collection ACL; audit log.
+- [ ] Validation rules: required alt text, character limits, link/URL validation, color contrast warnings for banners.
+- [ ] Localization/variants: language strategy, default fallbacks, per-locale media overrides (if needed).
+- [ ] Blog authoring: categories/tags, reading time, canonical URLs, OG/meta fields, embed policy.
+- [ ] Product media governance: ensure replacement without breaking references; orphan cleanup job.
+- [ ] Migration plan: extract current hardcoded copy/images, seed Supabase, maintain stable slugs/IDs.
+- [ ] Developer ergonomics: schema-as-code, type generation for frontend, fixtures for local dev, CI checks.
+- [ ] Error handling/fallbacks on frontend when content missing or unpublished; empty states.
+- [ ] Performance guardrails: LCP/CLS budgets when authors upload assets; automated image compression checks.
+- [ ] Security reviews: XSS sanitization for rich text, rate limits on uploads, storage bucket hardening.
+- [ ] Success metrics & SLA: time-to-publish, cache flush time (<5 min target), auditability, rollback success rate.

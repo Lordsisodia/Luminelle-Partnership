@@ -1,0 +1,43 @@
+{
+  "meta": { "brand": "Fresh Mint", "version": 1 },
+  "base": {
+    "brandPrimary": "#9BE7C4",
+    "brandSecondary": "#0F2C2C",
+    "brandTertiary": "#CFF5E7",
+    "neutral": { "0": "#FFFFFF", "50": "#F5FBF8", "900": "#0B1313" },
+    "accent": { "promo": "#14B8A6", "info": "#3B82F6" },
+    "states": { "success": "#16A34A", "warning": "#EAB308", "danger": "#DC2626" },
+    "radius": { "sm": "8px", "md": "16px", "lg": "24px", "pill": "999px" },
+    "spacing": { "0": "0px", "1": "4px", "2": "8px", "3": "12px", "4": "16px", "5": "20px", "6": "24px", "8": "32px", "10": "40px", "12": "48px", "16": "64px" },
+    "typography": {
+      "fontFamilies": { "heading": "'Inter', sans-serif", "body": "'Inter', ui-sans-serif, system-ui, sans-serif" },
+      "fontWeights": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 },
+      "lineHeights": { "tight": 1.2, "normal": 1.5, "relaxed": 1.7 },
+      "fontSizes": { "xs": "12px", "sm": "14px", "base": "16px", "lg": "18px", "xl": "20px", "2xl": "24px", "3xl": "30px", "4xl": "36px" }
+    },
+    "assets": {
+      "logo": { "primary": "/images/logo-mint.svg", "onDark": "/images/logo-mint-inverse.svg" },
+      "fonts": {
+        "headingUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap",
+        "bodyUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      }
+    }
+  },
+  "semantic": {
+    "text.primary": "{base.brandSecondary}",
+    "text.muted": "color-mix(in srgb, {base.brandSecondary} 70%, white)",
+    "text.inverse": "#FFFFFF",
+    "bg.canvas": "{base.neutral.0}",
+    "bg.surface": "{base.neutral.0}",
+    "bg.subtle": "color-mix(in srgb, {base.brandTertiary} 25%, white)",
+    "bg.heroGradient": "linear-gradient(135deg, #E6FFF4 0%, #CFF5E7 50%, #9BE7C4 100%)",
+    "border.subtle": "color-mix(in srgb, {base.brandTertiary} 65%, white)",
+    "accent.cta": "{base.brandPrimary}",
+    "accent.ctaText": "{base.brandSecondary}",
+    "accent.badge": "{base.accent.promo}",
+    "promo.highlight": "{base.accent.promo}",
+    "state.success": "{base.states.success}",
+    "state.warning": "{base.states.warning}",
+    "state.danger": "{base.states.danger}"
+  }
+}

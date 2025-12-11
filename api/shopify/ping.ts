@@ -1,5 +1,5 @@
-import { requireInternalAuth } from "../../app/src/server/internalAuth";
-import { handlePing } from "../../app/src/server/shopifyCore";
+import { requireInternalAuth } from "../_lib/internalAuth";
+import { handlePing } from "../_lib/shopifyCore";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req);

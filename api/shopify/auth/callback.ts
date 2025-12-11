@@ -1,5 +1,5 @@
 import { buildMessageFromQuery, signHmac, safeCompare } from "../_lib/crypto";
-import { getPgPool } from "../../../app/src/server/db";
+import { getPgPool } from "../../_lib/db";
 
 function bad(status = 400, msg = "Bad request") {
   return new Response(msg, { status });

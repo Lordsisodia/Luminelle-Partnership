@@ -1,4 +1,4 @@
-import { getPgPool } from "../../app/src/server/db";
+import { getPgPool } from "../_lib/db";
 
 export async function getAdminToken(shop: string) {
   const pool = getPgPool();

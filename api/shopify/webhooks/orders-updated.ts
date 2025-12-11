@@ -1,7 +1,7 @@
 import { verifyWebhook } from "./_verify";
-import { upsertOrder } from "../../../app/src/server/orders";
-import { isProcessed, markProcessed } from "../../../app/src/server/webhooks";
-import { renderOrderEmail, sendOrderConfirmation } from "../../../app/src/server/email";
+import { upsertOrder } from "../../_lib/orders";
+import { isProcessed, markProcessed } from "../../_lib/webhooks";
+import { renderOrderEmail, sendOrderConfirmation } from "../../_lib/email";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 

@@ -1,5 +1,5 @@
-import { requireInternalAuth } from "../../app/src/server/internalAuth";
-import { getPgPool } from "../../app/src/server/db";
+import { requireInternalAuth } from "../_lib/internalAuth";
+import { getPgPool } from "../_lib/db";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req);

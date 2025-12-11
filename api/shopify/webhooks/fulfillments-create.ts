@@ -1,6 +1,6 @@
 import { verifyWebhook } from "./_verify";
-import { getPgPool } from "../../../app/src/server/db";
-import { renderShipmentEmail, sendOrderConfirmation } from "../../../app/src/server/email";
+import { getPgPool } from "../../_lib/db";
+import { renderShipmentEmail, sendOrderConfirmation } from "../../_lib/email";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 

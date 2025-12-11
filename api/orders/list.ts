@@ -1,4 +1,4 @@
-import { getPgPool } from "../../app/src/server/db";
+import { getPgPool } from "../_lib/db";
 import { mapShopOrderRowToOrder } from "./_map";
 
 export default async function handler(_req: Request) {

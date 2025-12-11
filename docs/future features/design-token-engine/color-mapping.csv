@@ -1,0 +1,17 @@
+role,color,value
+base.brandPrimary,color,#FBC7B2
+base.brandSecondary,color,#55362A
+base.brandTertiary,color,#FDD4DC
+accent.promo,color,#E0724A
+accent.info,color,#8B5CF6
+state.success,color,#0F9D58
+state.warning,color,#FACC15
+state.danger,color,#E16F5C
+gradient.hero,gradient,"#F9D8D0;#FCEBE3;#FDE7DA"
+bg.tint1,color,#fff2eb
+bg.tint2,color,#FFF6F2
+bg.tint3,color,#fff7f3
+bg.tint4,color,#FFE8DC
+bg.tint5,color,#FDD9C3
+bg.tint6,color,#F7B8A0
+bg.tint7,color,#F4C7B7

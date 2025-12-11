@@ -1,6 +1,6 @@
-import { requireInternalAuth } from "../../../app/src/server/internalAuth";
+import { requireInternalAuth } from "../../_lib/internalAuth";
 import { getAdminToken, adminGraphQL } from "../_admin";
-import { upsertCustomer } from "../../../app/src/server/customers";
+import { upsertCustomer } from "../../_lib/customers";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req);

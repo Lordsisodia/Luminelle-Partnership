@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumelle.dev/schemas/tokens.schema.json",
+  "title": "Design Tokens",
+  "type": "object",
+  "required": ["meta", "base", "semantic"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["brand", "version"],
+      "properties": {
+        "brand": { "type": "string", "minLength": 1 },
+        "version": { "type": "integer", "minimum": 0 },
+        "mode": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "base": { "type": "object" },
+    "semantic": { "type": "object" },
+    "modes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "base": { "type": "object" },
+          "semantic": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "aliases": { "type": "object" }
+  }
+}

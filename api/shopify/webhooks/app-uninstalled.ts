@@ -1,5 +1,5 @@
 import { verifyWebhook } from "../_verify";
-import { handleAppUninstalled } from "../../../../app/src/server/shopifyCore";
+import { handleAppUninstalled } from "../../_lib/shopifyCore";
 
 export default async function handler(req: Request) {
   const verified = await verifyWebhook(req);

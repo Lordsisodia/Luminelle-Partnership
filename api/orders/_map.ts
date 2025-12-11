@@ -1,4 +1,4 @@
-import { type Order } from "../../app/src/state/OrdersStore";
+import { type Order } from "../src/domains/account/state/OrdersStore";
 
 export function mapShopOrderRowToOrder(row: any): Order {
   const items = Array.isArray(row.line_items)

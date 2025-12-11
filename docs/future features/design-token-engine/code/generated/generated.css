@@ -1,0 +1,16 @@
+:root
+  --text-primary: #55362A;
+  --text-muted: color-mix(in srgb, #55362A 70%, white);
+  --text-inverse: #FFFFFF;
+  --bg-canvas: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: color-mix(in srgb, #FDD4DC 25%, white);
+  --bg-heroGradient: linear-gradient(135deg, #F9D8D0 0%, #FCEBE3 45%, #FDE7DA 100%);
+  --border-subtle: color-mix(in srgb, #FDD4DC 65%, white);
+  --accent-cta: #FBC7B2;
+  --accent-ctaText: #55362A;
+  --accent-badge: #FBC7B2;
+  --promo-highlight: #E0724A;
+  --state-success: #0F9D58;
+  --state-warning: #FACC15;
+  --state-danger: #E16F5C;

@@ -1,4 +1,4 @@
-import { getPgPool } from "../../app/src/server/db";
+import { getPgPool } from "../_lib/db";
 
 export default async function handler(_req: Request) {
   const pool = getPgPool();

@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "types": ["vite/client", "node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@landing/*": ["src/domains/landing/*"],
+      "@cart/*": ["src/domains/cart/*"],
+      "@checkout/*": ["src/domains/checkout/*"],
+      "@products/*": ["src/domains/products/*"],
+      "@blog/*": ["src/domains/blog/*"],
+      "@admin/*": ["src/domains/admin/*"],
+      "@auth/*": ["src/domains/auth/*"],
+      "@account/*": ["src/domains/account/*"],
+      "@shared/*": ["src/domains/shared/*"],
+      "@content/*": ["src/content/*"],
+      "@utils/*": ["src/utils/*"],
+      "@ui/*": ["src/ui/*"],
+      "@ui-lib/*": ["../components-library/packages/ui/dist/*"]
+    },
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": [
+    "src/main.tsx",
+    "src/App.tsx",
+    "src/domains/**/ui/**/*",
+    "src/lib/**/*",
+    "src/ui/**/*",
+    "src/content/**/*",
+    "src/theme/**/*"
+  ],
+  "exclude": []
+}

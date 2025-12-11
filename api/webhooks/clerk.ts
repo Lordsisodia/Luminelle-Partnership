@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { Webhook } from 'svix'
-import { upsertCustomer } from '../../app/src/server/customers'
+import { upsertCustomer } from '../_lib/customers'
 
 export const config = { api: { bodyParser: false } };
 

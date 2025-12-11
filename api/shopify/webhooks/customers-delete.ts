@@ -1,6 +1,6 @@
 import { verifyWebhook } from "./_verify";
-import { deleteCustomer } from "../../../app/src/server/customers";
-import { isProcessed, markProcessed } from "../../../app/src/server/webhooks";
+import { deleteCustomer } from "../../_lib/customers";
+import { isProcessed, markProcessed } from "../../_lib/webhooks";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 

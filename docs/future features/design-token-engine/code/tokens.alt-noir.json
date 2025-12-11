@@ -1,0 +1,40 @@
+{
+  "meta": { "brand": "Noir", "version": 1 },
+  "base": {
+    "brandPrimary": "#222831",
+    "brandSecondary": "#F5F7FA",
+    "brandTertiary": "#3A4750",
+    "neutral": {
+      "0": "#0D0F11",
+      "50": "#16191D",
+      "900": "#F8FAFC"
+    },
+    "accent": {
+      "promo": "#00ADB5",
+      "info": "#4ECDC4"
+    },
+    "states": {
+      "success": "#2ECC71",
+      "warning": "#F1C40F",
+      "danger": "#E74C3C"
+    },
+    "radius": { "sm": "8px", "md": "16px", "lg": "24px", "pill": "999px" }
+  },
+  "semantic": {
+    "text.primary": "{base.brandSecondary}",
+    "text.muted": "color-mix(in srgb, {base.brandSecondary} 70%, {base.brandPrimary})",
+    "text.inverse": "{base.brandPrimary}",
+    "bg.canvas": "{base.neutral.0}",
+    "bg.surface": "{base.neutral.50}",
+    "bg.subtle": "color-mix(in srgb, {base.brandTertiary} 35%, {base.neutral.0})",
+    "bg.heroGradient": "linear-gradient(135deg, #16191D 0%, #1F242A 45%, #2A3139 100%)",
+    "border.subtle": "color-mix(in srgb, {base.brandTertiary} 55%, {base.neutral.0})",
+    "accent.cta": "{base.accent.promo}",
+    "accent.ctaText": "{base.neutral.900}",
+    "accent.badge": "{base.accent.info}",
+    "promo.highlight": "{base.accent.promo}",
+    "state.success": "{base.states.success}",
+    "state.warning": "{base.states.warning}",
+    "state.danger": "{base.states.danger}"
+  }
+}

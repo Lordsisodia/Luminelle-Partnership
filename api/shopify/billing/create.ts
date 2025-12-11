@@ -1,4 +1,4 @@
-import { getPgPool } from "../../../app/src/server/db";
+import { getPgPool } from "../../_lib/db";
 
 const API_VERSION = process.env.SHOPIFY_API_VERSION || "2025-01";
 

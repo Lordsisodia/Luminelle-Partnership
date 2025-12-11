@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "brand": "Lumelle",
+    "version": 1
+  },
+  "base": {
+    "brandPrimary": "#FBC7B2",
+    "brandSecondary": "#55362A",
+    "brandTertiary": "#FDD4DC",
+    "neutral": {
+      "0": "#FFFFFF",
+      "50": "#FDF8F6",
+      "900": "#12100F"
+    },
+    "accent": {
+      "promo": "#E0724A",
+      "info": "#8B5CF6"
+    },
+    "states": {
+      "success": "#0F9D58",
+      "warning": "#FACC15",
+      "danger": "#E16F5C"
+    },
+    "radius": {
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "pill": "999px"
+    },
+    "spacing": {
+      "0": "0px",
+      "1": "4px",
+      "2": "8px",
+      "3": "12px",
+      "4": "16px",
+      "5": "20px",
+      "6": "24px",
+      "8": "32px",
+      "10": "40px",
+      "12": "48px",
+      "16": "64px"
+    },
+    "typography": {
+      "fontFamilies": {
+        "heading": "'The Seasons', serif",
+        "body": "'Inter', ui-sans-serif, system-ui, sans-serif"
+      },
+      "fontWeights": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      },
+      "lineHeights": {
+        "tight": 1.2,
+        "normal": 1.5,
+        "relaxed": 1.7
+      },
+      "fontSizes": {
+        "xs": "12px",
+        "sm": "14px",
+        "base": "16px",
+        "lg": "18px",
+        "xl": "20px",
+        "2xl": "24px",
+        "3xl": "30px",
+        "4xl": "36px"
+      }
+    },
+    "assets": {
+      "logo": {
+        "primary": "/images/logo.svg",
+        "onDark": "/images/logo-inverse.svg"
+      },
+      "fonts": {
+        "headingUrl": "https://fonts.googleapis.com/css2?family=The+Seasons:wght@400;600;700&display=swap",
+        "bodyUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      }
+    }
+  },
+  "semantic": {
+    "text.primary": "#55362A",
+    "text.muted": "color-mix(in srgb, #55362A 70%, white)",
+    "text.inverse": "#FFFFFF",
+    "bg.canvas": "#FFFFFF",
+    "bg.surface": "#FFFFFF",
+    "bg.subtle": "color-mix(in srgb, #FDD4DC 25%, white)",
+    "bg.heroGradient": "linear-gradient(135deg, #F9D8D0 0%, #FCEBE3 45%, #FDE7DA 100%)",
+    "border.subtle": "color-mix(in srgb, #FDD4DC 65%, white)",
+    "accent.cta": "#FBC7B2",
+    "accent.ctaText": "#55362A",
+    "accent.badge": "#FBC7B2",
+    "promo.highlight": "#E0724A",
+    "state.success": "#0F9D58",
+    "state.warning": "#FACC15",
+    "state.danger": "#E16F5C"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "status": "draft",
+      "sections": [
+        {
+          "kind": "hero",
+          "order_index": 0,
+          "data": {
+            "title": "Glow with Lumelle",
+            "subtitle": "Radiant skin, simplified.",
+            "cta": { "label": "Shop now", "href": "/products" },
+            "image": { "path": "pages/home/hero.webp", "alt": "Model with glowing skin", "focal": { "x": 0.5, "y": 0.4 } },
+            "background": { "color": "#f5f3ff" }
+          }
+        },
+        {
+          "kind": "feature_grid",
+          "order_index": 1,
+          "data": {
+            "eyebrow": "Why Lumelle",
+            "title": "Clinically backed, creator loved",
+            "items": [
+              { "icon": "icons/lab.svg", "title": "Derm-tested", "desc": "Safe for sensitive skin" },
+              { "icon": "icons/leaf.svg", "title": "Clean formulas", "desc": "No parabens or sulfates" },
+              { "icon": "icons/sparkle.svg", "title": "Visible glow", "desc": "Results in 14 days" }
+            ]
+          }
+        },
+        {
+          "kind": "cta_footer",
+          "order_index": 2,
+          "data": {
+            "title": "Ready to glow?",
+            "subtitle": "Start with our essentials kit.",
+            "cta": { "label": "View products", "href": "/products" }
+          }
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "handle": "rose-serum",
+      "title": "Radiance Rose Serum",
+      "short_desc": "Hydrating serum with rosehip and vitamin C.",
+      "long_desc": "A lightweight serum that brightens and smooths.",
+      "price": 38.0,
+      "badges": ["new"],
+      "status": "draft",
+      "media": [
+        { "path": "products/rose-serum/1.webp", "alt": "Bottle front", "sort": 0, "is_primary": true },
+        { "path": "products/rose-serum/2.webp", "alt": "Texture swatch", "sort": 1, "is_primary": false }
+      ]
+    }
+  ],
+  "blogs": [
+    {
+      "slug": "winter-skin-guide",
+      "title": "Winter Skin Survival Guide",
+      "summary": "Keep your skin hydrated and glowing all winter long.",
+      "status": "draft",
+      "hero_media_path": "blogs/winter/hero.webp",
+      "tags": ["skincare", "winter"],
+      "blocks": [
+        { "type": "heading", "sort": 0, "data": { "level": 2, "text": "Hydration is key" } },
+        { "type": "paragraph", "sort": 1, "data": { "text": "Layer humectants with occlusives to lock in moisture." } },
+        { "type": "list", "sort": 2, "data": { "ordered": false, "items": ["Use lukewarm water", "Pat dry, don't rub", "Seal with oil"] } },
+        { "type": "image", "sort": 3, "data": { "path": "blogs/winter/inline1.webp", "alt": "Moisturizer texture", "caption": null } },
+        { "type": "youtube", "sort": 4, "data": { "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" } }
+      ]
+    }
+  ],
+  "globals": {
+    "nav": { "links": [{ "label": "Home", "href": "/" }, { "label": "Products", "href": "/products" }, { "label": "Blog", "href": "/blog" }] },
+    "footer": { "links": [{ "label": "Privacy", "href": "/privacy" }, { "label": "Terms", "href": "/terms" }] },
+    "promo": { "message": "Free shipping over $50", "cta": null, "bg": "#0f172a", "fg": "#f8fafc" },
+    "seo_default": { "title": "Lumelle", "description": "Glow-forward skincare", "image": null }
+  }
+}

@@ -1,5 +1,5 @@
 import { getAdminToken, adminGraphQL } from "../../shopify/_admin";
-import { requireInternalAuth } from "../../../app/src/server/internalAuth";
+import { requireInternalAuth } from "../../_lib/internalAuth";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req)

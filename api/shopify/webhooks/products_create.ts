@@ -1,5 +1,5 @@
 import { verifyWebhook } from "./_verify";
-import { getPgPool } from "../../../app/src/server/db";
+import { getPgPool } from "../../_lib/db";
 import { signHmac, safeCompare } from "../_lib/crypto";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'

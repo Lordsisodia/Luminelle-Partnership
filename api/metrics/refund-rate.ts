@@ -1,4 +1,4 @@
-import { getPgPool } from "../../app/src/server/db";
+import { getPgPool } from "../_lib/db";
 
 export default async function handler(req: Request) {
   const url = new URL(req.url)

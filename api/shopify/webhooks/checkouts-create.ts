@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { verifyWebhook } from './_verify'
-import { upsertCheckout } from '../../../app/src/server/checkouts'
+import { upsertCheckout } from '../../_lib/checkouts'
 
 export const config = { api: { bodyParser: false } };
 

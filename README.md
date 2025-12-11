@@ -1,51 +1,28 @@
-# Lumelle Affiliate Landing
+# Lumelle App (Domain-first Vite/React)
 
-This is the marketing experience for the Lumelle creator program. Built with React + Vite + Tailwind and powered by the SISO App Factory component workspace.
+Modernized, AI-friendly layout with domain isolation and UI/logic/data separation.
 
-## Getting started
-
+## Quick start
 ```bash
 npm install
-npm run dev
+npm run dev      # start Vite dev server
+npm run typecheck
+npm run build
 ```
 
-Create a `.env` file based on `.env.example` to configure the WhatsApp invite link, support email, and content brief URL used throughout the flow.
+## Key paths
+- `src/domains/` – bounded contexts:
+  - `landing`, `blog`, `shop` (products/cart/checkout/shared), `account`, `auth`, `admin`, `shopify`.
+  - Each domain uses `ui/{pages,sections,components,layouts}`, plus `logic/`, `data/`, `hooks/`, `providers/` as needed.
+- `src/lib/` – shared helpers (`lib/utils/*`, `lib/ui.ts`).
+- `api/_lib/` – backend/server helpers (moved out of `src` to avoid client bundling).
+- `docs/` – project knowledge base; see `docs/ARCHITECTURE-HOWTO.md` and `docs/domains-README.md`.
 
-## Project structure
+## Conventions
+- If it renders, it lives in `ui/`.  
+- Behavior belongs in `logic/`; data fetching in `data/`; co-locate types with their code.  
+- Use domain aliases: `@landing`, `@shop`, `@blog`, `@admin`, `@auth`, `@account`, `@shopify`, `@/lib/*`.
+- Shared UI comes from `@siso/ui` (see `src/lib/ui.ts`).
 
-- `app/` – Vite application source (views, sections, data models). All npm
-  commands are proxied through the root workspace.
-- `components-library/` – Local clone of `siso-app-factory` component workspace (used for future UI imports).
-- `docs/` – Client documentation and requirements.
-
-### App folders
-
-- `src/content` – Typed content models for each section/page.
-- `src/sections` – Landing page sections composed with Tailwind.
-- `src/pages` – Route-level components (landing, welcome, brief, legal).
-- `src/hooks` – Shared hooks (scroll spy, WhatsApp fallback).
-- `src/layouts` – Shells shared across pages.
-
-## Available scripts
-
-At the root (workspace-aware):
-
-- `npm run dev` – Start Vite dev server.
-- `npm run build` – Type-check and build for production.
-- `npm run preview` – Preview production build locally.
-
-## Supabase orders storage
-
-- Copy `app/.env.example` → `app/.env` and add `VITE_SUPABASE_URL` plus `VITE_SUPABASE_ANON_KEY` from the Lumelle Supabase project (`tmsbyiwqzesmirbargxv`).
-- Run the SQL in `docs/supabase-orders.sql` to create the `orders` table (details in `docs/SUPABASE-SETUP.md`).
-- Place a checkout order locally to push real data into Supabase; the orders + tracking pages now hydrate from that data with a localStorage fallback when offline.
-
-## Next steps
-
-- Wire in selected components from `@siso/ui` to replace bespoke Tailwind blocks once we pick candidates.
-- Swap placeholder imagery for approved assets (hero, creator avatars, brand photography).
-- Configure analytics + conversion tracking to monitor CTA interactions and drop-off.
-
-## Temporary imagery
-
-Development placeholders live in `app/public/images` using royalty-free photos from Pexels (IDs 934069, 3735641, 3865674, 3184396, 3760858, 415829, 1448971). Replace with client-approved assets before launch and verify licensing.
+## Environment
+Copy `.env.example` to `.env` and fill Shopify/Supabase/Clerk keys as needed. See `docs/ARCHITECTURE-HOWTO.md` for details.

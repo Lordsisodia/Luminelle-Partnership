@@ -1,5 +1,5 @@
-import { getPgPool } from "../../app/src/server/db";
-import { requireInternalAuth } from "../../app/src/server/internalAuth";
+import { getPgPool } from "../_lib/db";
+import { requireInternalAuth } from "../_lib/internalAuth";
 
 function toCsvRow(values: (string | number | null | undefined)[]) {
   return values

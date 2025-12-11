@@ -3,6 +3,12 @@ node_modules/
 npm-debug.log*
 package-lock.json
 
+# Root Vite build output
+dist/
+dist-ssr/
+reports/
+critical-css/
+
 # Vite build output (root workspace triggers build inside /app)
 app/dist/
 

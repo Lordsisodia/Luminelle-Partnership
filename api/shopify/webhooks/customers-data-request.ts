@@ -1,5 +1,5 @@
 import { verifyWebhook } from "./_verify";
-import { redactCustomer } from "../../../app/src/server/customers";
+import { redactCustomer } from "../../_lib/customers";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 

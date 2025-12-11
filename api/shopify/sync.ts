@@ -1,5 +1,5 @@
-import { requireInternalAuth } from "../../app/src/server/internalAuth";
-import { handleSyncForShop } from "../../app/src/server/shopifyCore";
+import { requireInternalAuth } from "../_lib/internalAuth";
+import { handleSyncForShop } from "../_lib/shopifyCore";
 
 export const config = { runtime: "edge" };
 
