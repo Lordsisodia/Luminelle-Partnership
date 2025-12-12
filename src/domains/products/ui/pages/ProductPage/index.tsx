@@ -16,11 +16,9 @@ const navItems: NavItem[] = [
 ]
 
 
-import { useDrawer } from '@ui/providers/DrawerContext'
 
 export const ProductPage = () => {
   const { add } = useCart()
-  const { openCart } = useDrawer()
   const params = useParams<{ handle: string }>()
   const [quantity, setQuantity] = useState(1)
   const handleKey = params.handle ?? 'shower-cap'
@@ -38,8 +36,15 @@ export const ProductPage = () => {
     productDesc,
     heroImage,
   } = useProductContent(handleKey)
+  const [justAdded, setJustAdded] = useState(false)
 
   const canonicalUrl = useMemo(() => `https://lumelle.com/product/${config.handle}`, [config.handle])
+
+  const ratingValue = config.ratingValueOverride ?? homeConfig.socialProof.rating
+  const ratingCountLabel =
+    config.ratingCountLabelOverride ??
+    homeConfig.socialProof.count?.toString() ??
+    '100+'
 
   const navigate = useNavigate()
 
@@ -52,7 +57,9 @@ export const ProductPage = () => {
         title: productTitle || config.defaultTitle,
         price: price
       }, quantity)
-      openCart()
+      window.dispatchEvent(new CustomEvent('lumelle:open-cart'))
+      setJustAdded(true)
+      window.setTimeout(() => setJustAdded(false), 800)
     } catch (error) {
       console.error('Add to cart failed:', error)
     } finally {
@@ -138,11 +145,26 @@ export const ProductPage = () => {
     })
   }, [canonicalUrl, heroImage, price, productDesc, productTitle])
 
-  const essentials = sections?.essentials ?? config.essentials
-  const reasons = sections?.reasons ?? config.reasons
-  const faqs = sections?.faq ?? config.qa
-  const how = sections?.how ?? config.how ?? []
-  const care = sections?.care ?? config.care ?? []
+  const essentials =
+    sections?.essentials && sections.essentials.length > 0
+      ? sections.essentials
+      : config.essentials
+  const reasons =
+    sections?.reasons && sections.reasons.length > 0
+      ? sections.reasons
+      : config.reasons
+  const faqs =
+    sections?.faq && sections.faq.length > 0
+      ? sections.faq
+      : config.qa
+  const how =
+    sections?.how && sections.how.length > 0
+      ? sections.how
+      : config.how ?? []
+  const care =
+    sections?.care && sections.care.length > 0
+      ? sections.care
+      : config.care ?? []
   const featureCopy = config.featureCallouts ?? null
   const featuredTikTokHeading = config.featuredTikTokHeading
 
@@ -155,19 +177,23 @@ export const ProductPage = () => {
         setActiveImage,
         price,
         compareAtPrice: config.compareAtPrice,
+        discountPercentOverride: config.discountPercentOverride,
         badge: config.badge,
         productTitle,
         productDesc,
-        ratingValue: homeConfig.socialProof.rating,
-        ratingCountLabel: homeConfig.socialProof.count?.toString() ?? '100+',
+        ratingValue,
+        ratingCountLabel,
         canonicalUrl,
         onAdd: handleAddToCart,
         onBuy: handleBuyNow,
         isAdding,
+        justAdded,
         quantity,
         setQuantity,
         how,
         care,
+        careLabel: config.careLabelOverride,
+        hideDetailsAccordion: config.hideDetailsAccordion,
         featureCopy,
         reasons,
         essentials,

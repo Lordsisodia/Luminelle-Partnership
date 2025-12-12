@@ -12,7 +12,7 @@ if (!SUPABASE_SERVICE_ROLE_KEY || !SUPABASE_URL) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-const roots = ['public/uploads/luminele', 'public/images', 'public/reviews']
+const roots = ['public/uploads/luminele', 'public/uploads/curler', 'public/images', 'public/reviews']
 const exts = new Set(['.webp', '.avif', '.jpg', '.jpeg', '.png'])
 
 const toContentType = (file) => {

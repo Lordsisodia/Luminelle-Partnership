@@ -6,6 +6,7 @@ type Props = {
   productDesc: string
   price: number
   compareAtPrice?: number
+  discountPercentOverride?: number
   badge?: string
   ratingValue: number
   ratingLabel: string
@@ -13,15 +14,35 @@ type Props = {
   onAdd: () => void
   onBuy: () => void
   isAdding: boolean
+  justAdded: boolean
   quantity: number
   setQuantity: (qty: number) => void
 }
+
+type TrustMicroProps = {
+  ratingValue: number
+  reviewCountLabel: string
+  showShipping?: boolean
+  compact?: boolean
+}
+
+export const TrustMicro = ({ ratingValue, reviewCountLabel, showShipping = true, compact = false }: TrustMicroProps) => (
+  <div className={`flex items-center gap-2 text-sm font-semibold text-brand-cocoa/80 ${compact ? 'justify-center' : ''}`}>
+    <div className="flex items-center gap-1.5">
+      <StarRating value={ratingValue} size={15} />
+      <span className="text-base font-semibold text-brand-cocoa">{ratingValue.toFixed(1)}</span>
+    </div>
+    <span className="text-brand-cocoa/75">({reviewCountLabel})</span>
+    {showShipping ? <span className="text-brand-cocoa/70">• Free returns • Ships in 48h</span> : null}
+  </div>
+)
 
 export const PriceBlock = ({
   productTitle,
   productDesc,
   price,
   compareAtPrice,
+  discountPercentOverride,
   badge,
   ratingValue,
   ratingLabel,
@@ -29,11 +50,10 @@ export const PriceBlock = ({
   onAdd,
   onBuy,
   isAdding,
+  justAdded,
   quantity,
   setQuantity,
 }: Props) => {
-  const reviewCountDisplay = 103
-
   const [isQtyOpen, setIsQtyOpen] = useState(false)
 
   const deliveryInfo = useMemo(() => {
@@ -94,21 +114,17 @@ export const PriceBlock = ({
         <button
           type="button"
           onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-          className="mt-2 flex w-full items-center gap-3 text-sm font-semibold text-brand-cocoa hover:text-brand-cocoa/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/40 rounded-md p-0"
+          className="mt-2 w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/40"
           aria-label="Jump to reviews"
         >
-          <div className="flex items-center gap-1.5">
-            <StarRating value={ratingValue} size={15} />
-            <span className="text-base font-semibold">{ratingValue.toFixed(1)}</span>
-          </div>
-          <span className="text-base font-semibold text-brand-cocoa/80">({reviewCountDisplay})</span>
+          <TrustMicro ratingValue={ratingValue} reviewCountLabel={ratingLabel} showShipping={false} />
         </button>
         <div className="mt-2">
           {compareAtPrice && compareAtPrice > price ? (
             <>
               <div className="flex items-baseline gap-3">
                 <span className="text-xl font-semibold text-rose-600 md:text-2xl">
-                  -{Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
+                  -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
                 </span>
                 <span className="text-4xl font-bold text-brand-cocoa leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
               </div>
@@ -171,7 +187,7 @@ export const PriceBlock = ({
         </div>
         <div className="mt-4 grid gap-3">
           <button
-            className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-peach to-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)]"
+            className={`inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-peach to-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)] ${justAdded ? 'animate-pulse' : ''}`}
             onClick={onAdd}
             disabled={isAdding}
           >

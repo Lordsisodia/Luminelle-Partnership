@@ -1,7 +1,8 @@
-import { Link as RouterLink } from 'react-router-dom'
 import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
+import { Link as RouterLink } from 'react-router-dom'
 import { UserRound, Menu } from 'lucide-react'
 import { useAuth } from '@auth/ui/providers/AuthContext'
+import { useDrawer } from '@ui/providers/DrawerContext'
 
 type Promo = { label: string; href?: string }
 
@@ -11,7 +12,7 @@ type GlobalHeaderProps = {
   subtitle?: string | null
   primaryLabel?: string
   onPrimaryAction?: () => void
-  onOpenMenu: () => void
+  onOpenMenu?: () => void
 }
 
 export function GlobalHeader({
@@ -23,6 +24,8 @@ export function GlobalHeader({
   onOpenMenu,
 }: GlobalHeaderProps) {
   const { signedIn } = useAuth()
+  const { openMenu } = useDrawer()
+  const handleOpenMenu = onOpenMenu ?? openMenu
 
   return (
     <>
@@ -54,7 +57,7 @@ export function GlobalHeader({
         <div className="flex items-center justify-between gap-4 py-4">
           <button
             aria-label="Open menu"
-            onClick={onOpenMenu}
+            onClick={handleOpenMenu}
             className="inline-flex h-10 w-10 items-center justify-center text-brand-cocoa hover:text-brand-cocoa/80"
           >
             <Menu className="h-6 w-6" />

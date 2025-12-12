@@ -38,7 +38,7 @@ export const DetailsAccordion = ({ items, heading, sectionId }: DetailsAccordion
               </div>
               <span className="text-brand-cocoa/60 group-open:rotate-90">▸</span>
             </summary>
-            <div className="px-4 pb-4 text-sm text-brand-cocoa/80">{d.body}</div>
+            <div className="px-4 pb-4 text-sm text-brand-cocoa/80 whitespace-pre-line">{d.body}</div>
           </details>
         ))}
       </div>

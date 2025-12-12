@@ -7,6 +7,7 @@ import './index.css'
 import App from './App.tsx'
 import { CartProvider } from './domains/cart/providers/CartContext'
 import { AuthProvider } from './domains/auth/ui/providers/AuthContext'
+import { DrawerProvider } from './ui/providers/DrawerProvider'
 
 // Always provide Clerk; fall back to a harmless placeholder key for preview/local.
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? 'pk_test_placeholder'
@@ -24,7 +25,9 @@ createRoot(document.getElementById('root')!).render(
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <CartProvider>
             <AuthProvider>
-              <App />
+              <DrawerProvider>
+                <App />
+              </DrawerProvider>
             </AuthProvider>
           </CartProvider>
         </BrowserRouter>

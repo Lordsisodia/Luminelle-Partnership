@@ -42,9 +42,9 @@ const qaCap = [
 ]
 
 const howCap = [
-  'Slip on before your shower; tuck flyaways inside.',
-  'After showering, rinse the lining and shake off water.',
-  'Hang to air-dry; ready for tomorrow.',
+  'Your silk press stays smooth — the cap seals out steam and frizz in daily showers.',
+  'Roomy fit for curls, braids, and bum-length hair without creasing your edges.',
+  'Reusable satin + waterproof core wipes clean in seconds, ready for tomorrow.',
 ]
 
 const careCap = [
@@ -76,45 +76,113 @@ const curlerGallery = [
 ]
 
 const essentialsCurler = [
-  { title: 'Heatless, satin-wrapped', body: 'Soft foam core wrapped in satin shapes curls without heat damage.' },
-  { title: 'Complete overnight kit', body: 'Includes curler rod, 2 satin scrunchies, and a claw clip to secure your wrap.' },
-  { title: 'Sleep-friendly comfort', body: 'Flexible core you can sleep on—no hard plastic or pull on roots.' },
-  { title: 'Works on damp or dry hair', body: 'Best on 70–90% dry hair for smooth, frizz-free waves by morning.' },
+  {
+    title: "What’s inside",
+    body:
+      'Satin heatless curling rod\n' +
+      '• Luxury satin bonnet\n' +
+      '• 2× matching satin scrunchies\n' +
+      '• Claw clip',
+  },
+  {
+    title: 'Works on all hair types',
+    body: 'Straight, wavy, thick or fine — for smooth, long‑lasting curls.',
+  },
+  {
+    title: 'Curls last all day',
+    body:
+      'Many customers say theirs hold for up to 2–3 days depending on hair type, how tightly they wrap, and the products they use.',
+  },
 ]
 
 const reasonsCurler = [
-  { title: 'Zero heat damage', desc: 'Wake up to soft curls without irons or blow-dryers.' },
-  { title: 'Set it & forget it', desc: 'Wrap once at night, reveal bouncy waves in the morning.' },
-  { title: 'Gentle on hairlines', desc: 'Satin finish reduces friction and keeps edges smooth.' },
-  { title: 'Travel-ready', desc: 'Lightweight set rolls into your carry-on for hotel or gym nights.' },
+  {
+    title: 'Wrap',
+    desc: 'Start with dry or slightly damp hair, divide into two sections, and wrap each piece tightly around the satin rod. Full tutorial here (link to how to use video).',
+  },
+  {
+    title: 'Secure',
+    desc: 'Use the scrunchies to fasten the ends, then pop on the bonnet to keep everything in place.',
+  },
+  {
+    title: 'Set & reveal',
+    desc: 'Leave overnight or for a few hours, unwrap gently, and enjoy soft, bouncy, heat‑free curls.',
+  },
 ]
 
 const qaCurler = [
-  { q: 'How long do I leave it in?', a: 'Wrap for 4–8 hours; overnight gives the longest-lasting curls.' },
-  { q: 'Does it work on short hair?', a: 'Best from shoulder-length and longer; use smaller sections for medium lengths.' },
-  { q: 'What’s included?', a: 'One satin curler rod, two satin scrunchies, and a claw clip.' },
-  { q: 'How do I clean it?', a: 'Spot clean by hand with mild soap, then air dry flat.' },
+  {
+    q: 'Will it work for my hair type?',
+    a: 'Yes — the Lumelle Heatless Curler is designed for all hair types. Whether your hair is straight, wavy, thick, or fine, the flexible satin rod shapes smooth, lasting curls without heat damage.',
+  },
+  {
+    q: 'How long do the curls last?',
+    a: 'Most customers enjoy beautiful curls all day, and many say theirs last up to 2–3 days. Smaller sections and tighter wrapping can help your curls stay defined even longer.',
+  },
+  {
+    q: 'Is it comfortable to sleep in?',
+    a: 'Absolutely. Our satin-wrapped rod and lightweight bonnet are designed for soft, overnight comfort, so you wake up with curls — not discomfort.',
+  },
+  {
+    q: 'Does it help with frizz?',
+    a: 'Yes. Satin naturally reduces friction, leaving your hair smoother, shinier, and noticeably frizz-free after styling.',
+  },
+  {
+    q: 'Will it damage my hair?',
+    a: 'Not at all. Our heatless system avoids the breakage and dryness caused by hot tools, keeping your hair healthier with every use.',
+  },
+  {
+    q: 'Do I use it on wet or dry hair?',
+    a: 'For the best results, use on dry or slightly damp hair. Damp hair creates a stronger curl, while dry hair gives softer, looser waves.',
+  },
+  {
+    q: 'How long do I leave it in?',
+    a: 'Leave it in overnight or for at least a few hours. The longer it sets, the more defined your curls will be.',
+  },
 ]
 
 const howCurler = [
-  'Start on slightly damp hair; place the satin curler across your crown and secure with the claw clip.',
-  'Wrap 1–2" sections around each side away from your face, keeping tension even.',
-  'Secure the ends with the satin scrunchies, sleep or wait 4–8 hours, then unwrap for soft curls.',
+  'Wake up to soft, effortless curls — no heat, no damage.',
+  'Frizz‑free and helps protect your hair from breakage.',
+  'Comfortable to sleep in and easy to wrap in minutes.',
 ]
 
 const careCurler = [
-  { icon: 'Shield', title: 'Heatless by design', body: 'Protects against heat damage while creating curls overnight.' },
-  { icon: 'RefreshCcw', title: 'Reusable satin', body: 'Spot clean and air dry; built to reuse week after week.' },
-  { icon: 'Feather', title: 'Soft sleep fit', body: 'Flexible foam core stays comfy on your pillow and gentle on roots.' },
+  {
+    icon: 'Shield',
+    title: "What's inside",
+    body:
+      '• Satin heatless curling rod\n' +
+      '• Luxury satin bonnet\n' +
+      '• 2x matching satin scrunchies\n' +
+      '• Claw clip',
+  },
+  {
+    icon: 'RefreshCcw',
+    title: 'Works on all hair types',
+    body: 'Straight, wavy, thick or fine for smooth, long‑lasting curls.',
+  },
+  {
+    icon: 'Feather',
+    title: 'Curls last all day',
+    body:
+      'Many customers say that theirs hold up to 2–3 days depending on hair type and how tightly they wrap and the products they use.',
+  },
 ]
 
 const curlerConfig: ProductConfig = {
   handle: 'satin-overnight-curler',
   fallbackItemId: 'satin-overnight-curler-set',
-  defaultTitle: 'Satin Overnight Curler Set',
-  defaultSubtitle: 'Heatless satin curling set that delivers soft, frizz-free waves by morning.',
-  defaultPrice: 24,
-  badge: 'New viral heatless curlers',
+  fallbackVariantId: 'gid://shopify/ProductVariant/56852779696502',
+  defaultTitle: 'Lumelle Satin Overnight Curler Set',
+  defaultSubtitle: 'Comfortable overnight curls, zero damage.',
+  defaultPrice: 16.99,
+  compareAtPrice: 21.99,
+  discountPercentOverride: 20,
+  ratingValueOverride: 4.8,
+  ratingCountLabelOverride: '50+',
+  careLabelOverride: "What's included",
+  hideDetailsAccordion: true,
   gallery: curlerGallery,
   videoSlot: DEFAULT_VIDEO_SLOT,
   essentials: essentialsCurler,
@@ -128,16 +196,16 @@ const curlerConfig: ProductConfig = {
     mediaLabel: 'Heatless overnight curls',
     mediaNote: 'Soft satin set that stays comfy all night',
     heading: {
-      eyebrow: 'Why you’ll love it',
-      title: 'Soft waves with zero heat damage',
-      description: 'Wrap at night, wake up to smooth curls and no hot tools.',
+      eyebrow: "How you'll use it",
+      title: 'Wrap it once, wake up flawless curls',
+      description: "You'll get effortless, frizz-free curls that last, with a comfy design that keeps your hair healthier every time you use it.",
       alignment: 'left',
     },
   },
   featuredTikTokHeading: {
-    eyebrow: 'Creator in action',
-    title: 'See the heatless set at work',
-    description: 'Watch quick wrap tutorials and morning reveals.',
+    eyebrow: undefined,
+    title: 'Watch How These Curls Came Out Flawless',
+    description: "See How Long Creators' Curls Last and How Effortlessly Gorgeous They Look.",
     alignment: 'center',
   },
 }
@@ -177,6 +245,8 @@ export const productConfigs: Record<string, ProductConfig> = {
       description: 'See how creators keep their silk press perfect after every shower.',
       alignment: 'center',
     },
+    ratingValueOverride: 4.8,
+    ratingCountLabelOverride: '100+',
   },
   'satin-overnight-curler': curlerConfig,
   'satin-overnight-curler-set': { ...curlerConfig, handle: 'satin-overnight-curler-set' },

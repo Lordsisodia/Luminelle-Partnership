@@ -6,6 +6,7 @@ type SectionHeadingProps = {
   description?: string
   alignment?: 'left' | 'center'
   actions?: ReactNode
+  className?: string
 }
 
 export const SectionHeading = ({
@@ -14,13 +15,14 @@ export const SectionHeading = ({
   description,
   alignment = 'left',
   actions,
+  className,
 }: SectionHeadingProps) => {
   const alignmentClass =
     alignment === 'center' ? 'items-center text-center' : 'items-start'
 
   return (
     <div
-      className={`flex flex-col gap-4 ${alignmentClass} text-brand-cocoa`}
+      className={`flex flex-col gap-4 ${alignmentClass} text-brand-cocoa ${className ?? ''}`}
     >
       {eyebrow ? (
         <span className="inline-flex rounded-full bg-brand-blush/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/70">
@@ -32,7 +34,7 @@ export const SectionHeading = ({
           alignment === 'center' ? 'items-center' : ''
         }`}
       >
-        <h2 className="font-heading text-3xl font-bold md:text-4xl">
+        <h2 className="font-heading text-3xl font-bold md:text-4xl whitespace-pre-line">
           {title}
         </h2>
         {description ? (

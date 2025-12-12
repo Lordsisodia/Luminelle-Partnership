@@ -2,13 +2,13 @@ import { useMemo, useState, useEffect } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useCart } from '@cart/providers/CartContext'
 import { addOrder, type Order } from '@account/state/OrdersStore'
-import { useAuth as useClerkAuth } from '@clerk/clerk-react'
+import { useAuth as useClerkAuth, useUser } from '@clerk/clerk-react'
 import { shopifyEnabled } from '@/lib/shopify/shopify'
 import { setNoIndex } from '@/lib/seo'
 
 const FREE_SHIP_THRESHOLD = 40
 const STANDARD_SHIPPING = 3.95
-const steps = ['Information', 'Payment', 'Review']
+const steps = ['Review']
 
 const Stepper = ({ step }: { step: number }) => (
   <div className="mb-6 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
@@ -25,7 +25,7 @@ const Stepper = ({ step }: { step: number }) => (
 )
 
 export const CheckoutPage = () => {
-  const { items, subtotal, qty, clear, checkoutUrl } = useCart()
+  const { items, subtotal, qty, clear, checkoutUrl, setEmail } = useCart()
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || qty === 0 ? 0 : STANDARD_SHIPPING
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping])
   const [emailOptIn] = useState(true)
@@ -34,6 +34,7 @@ export const CheckoutPage = () => {
   const [placingOrder, setPlacingOrder] = useState(false)
   const disabled = qty === 0
   const { getToken } = useClerkAuth()
+  const { user } = useUser()
 
   const placeOrder = async () => {
     if (disabled || placingOrder) return
@@ -70,99 +71,24 @@ export const CheckoutPage = () => {
 
   useEffect(() => { setNoIndex() }, [])
 
+  // Prefill Shopify cart with the signed-in user's email to avoid Shopify login prompt.
+  useEffect(() => {
+    const email = user?.primaryEmailAddress?.emailAddress
+    if (email && setEmail) {
+      setEmail(email)
+    }
+  }, [user, setEmail])
+
   const goNext = () => setStep((s) => Math.min(s + 1, steps.length - 1))
   const goBack = () => setStep((s) => Math.max(0, s - 1))
 
   const renderStepContent = () => {
     switch (step) {
-      case 0:
-        return (
-          <div className="space-y-6">
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Delivery</div>
-              <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
-                <select className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm"><option>United Kingdom</option><option>United States</option></select>
-                <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" placeholder="Phone" />
-                <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm md:col-span-2" placeholder="First name" />
-                <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm md:col-span-2" placeholder="Last name" />
-                <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm md:col-span-2" placeholder="Address" />
-                <div className="grid grid-cols-3 gap-3 md:col-span-2">
-                  <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" placeholder="City" />
-                  <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" placeholder="County/State" />
-                  <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" placeholder="Postcode" />
-                </div>
-              </div>
-              <div className="mt-4 rounded-xl border border-brand-blush/60 p-3 text-sm text-brand-cocoa/80">
-                Enter your address to view available shipping methods.
-              </div>
-              <div className="mt-4 flex justify-end">
-                <button className="rounded-full border border-brand-blush/60 px-5 py-2 text-sm font-semibold text-brand-cocoa" onClick={goNext} disabled={disabled}>
-                  Continue to payment
-                </button>
-              </div>
-            </div>
-          </div>
-        )
-      case 1:
-        return (
-          <div className="space-y-6">
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Delivery method</div>
-              <div className="mt-3 space-y-2 text-sm text-brand-cocoa">
-                <label className="flex items-center justify-between rounded-xl border border-brand-blush/60 px-3 py-2">
-                  <span>Standard shipping (2-3 days)</span>
-                  <span>{shipping === 0 ? 'Free' : `£${shipping.toFixed(2)}`}</span>
-                </label>
-                <label className="flex items-center justify-between rounded-xl border border-brand-blush/60 px-3 py-2 opacity-60">
-                  <span>Express shipping (1 day)</span>
-                  <span>£6.95</span>
-                </label>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Payment</div>
-              <div className="mt-3 grid gap-3">
-                <div className="rounded-xl border border-brand-blush/60 p-3 text-sm text-brand-cocoa/70">Payments are secure and encrypted. (Demo UI)</div>
-                <input disabled className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm opacity-60" placeholder="Card number" />
-                <div className="grid grid-cols-3 gap-3">
-                  <input disabled className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm opacity-60" placeholder="MM / YY" />
-                  <input disabled className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm opacity-60" placeholder="CVC" />
-                  <input disabled className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm opacity-60" placeholder="Name on card" />
-                </div>
-                <label className="inline-flex items-center gap-2 text-sm text-brand-cocoa/80">
-                  <input type="checkbox" defaultChecked />
-                  Use shipping address as billing address
-                </label>
-              </div>
-            </div>
-            <div className="flex justify-between gap-3">
-              <button className="rounded-full border border-brand-blush/60 px-5 py-2 text-sm font-semibold text-brand-cocoa" onClick={goBack}>
-                Back
-              </button>
-              <button className="rounded-full bg-brand-cocoa px-5 py-2 text-sm font-semibold text-white" onClick={goNext}>
-                Review order
-              </button>
-            </div>
-          </div>
-        )
-      case 2:
       default:
         return (
           <div className="space-y-4 rounded-2xl border border-brand-blush/60 bg-white p-4 text-sm text-brand-cocoa">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Review</p>
-            <p>We’ll ship to the address you entered above. Need to make a change? Go back a step.</p>
-            <ul className="space-y-2 text-brand-cocoa/80">
-              <li>• Shipping: {shipping === 0 ? 'Free standard' : `£${shipping.toFixed(2)} standard shipping`}.</li>
-              <li>• Email updates will be sent {emailOptIn ? 'with' : 'without'} marketing tips.</li>
-            </ul>
-            <div className="flex flex-wrap gap-3">
-              <button className="rounded-full border border-brand-blush/60 px-5 py-2 text-sm font-semibold text-brand-cocoa" onClick={goBack}>
-                Edit details
-              </button>
-              <button onClick={placeOrder} disabled={disabled || placingOrder} className="rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa disabled:opacity-50">
-                {placingOrder ? 'Saving order…' : 'Place order'}
-              </button>
-            </div>
+            <p>Review your order summary, then continue to checkout to finish payment securely in Shopify.</p>
           </div>
         )
     }
@@ -215,16 +141,17 @@ export const CheckoutPage = () => {
               <p className="mt-4 text-[11px] text-brand-cocoa/60">Shipping, taxes, and discounts are calculated at checkout.</p>
             </div>
 
-            {step === 0 && (
-              <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Express checkout</div>
-                <div className="mt-3 flex gap-3">
-                  <button disabled className="flex-1 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white opacity-80">Shop Pay</button>
-                  <button disabled className="flex-1 rounded-full bg-[#0F9D58] px-4 py-2 text-sm font-semibold text-white opacity-80">G Pay</button>
-                </div>
-                <p className="mt-2 text-[11px] text-brand-cocoa/60">Demo checkout — payments not connected yet.</p>
-              </div>
-            )}
+            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Continue to checkout</div>
+              <p className="mt-2 text-sm text-brand-cocoa/75">Review your items and totals, then continue to Shopify to pay securely.</p>
+              <button
+                onClick={placeOrder}
+                disabled={disabled || placingOrder}
+                className="mt-4 w-full rounded-full bg-brand-peach px-5 py-3 text-sm font-semibold text-brand-cocoa shadow-soft disabled:opacity-50"
+              >
+                {placingOrder ? 'Redirecting…' : 'Continue to checkout'}
+              </button>
+            </div>
           </aside>
         </div>
       </section>

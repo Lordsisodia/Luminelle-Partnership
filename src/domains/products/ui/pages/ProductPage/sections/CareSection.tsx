@@ -1,6 +1,6 @@
 type CareItem = { icon?: string; title: string; body: string }
 
-type Props = { items: CareItem[] }
+type Props = { items: CareItem[]; label?: string }
 
 const Icon = ({ name }: { name?: string }) => {
   if (name === 'Shield')
@@ -12,10 +12,10 @@ const Icon = ({ name }: { name?: string }) => {
   return null
 }
 
-export const CareSection = ({ items }: Props) => (
+export const CareSection = ({ items, label = 'Care & materials' }: Props) => (
   <div className="rounded-3xl border border-brand-peach/60 bg-white/95 p-5 shadow-[0_16px_40px_rgba(0,0,0,0.06)]">
     <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-brand-peach/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa">
-      Care & materials
+      {label}
     </div>
     <div className="space-y-3">
       {items.map((item) => (
@@ -28,7 +28,7 @@ export const CareSection = ({ items }: Props) => (
           </span>
           <div>
             <p className="font-heading text-base font-semibold text-brand-cocoa">{item.title}</p>
-            <p className="mt-1 text-[14px] leading-snug text-brand-cocoa/80">{item.body}</p>
+            <p className="mt-1 text-[14px] leading-snug text-brand-cocoa/80 whitespace-pre-line">{item.body}</p>
           </div>
         </div>
       ))}

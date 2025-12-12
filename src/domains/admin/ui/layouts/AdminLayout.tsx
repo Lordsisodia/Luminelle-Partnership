@@ -14,7 +14,6 @@ export const AdminLayout = ({ children, title, subtitle }: AdminLayoutProps) => 
       <GlobalHeader
         promoMessages={[{ label: 'Admin console' }]}
         activePromo={0}
-        onOpenMenu={() => {}}
         primaryLabel=""
       />
       <main className="mx-auto max-w-6xl px-4 pb-16 pt-10 md:px-6">

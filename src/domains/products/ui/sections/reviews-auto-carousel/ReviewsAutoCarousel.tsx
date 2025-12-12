@@ -69,16 +69,17 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
   }
 
   return (
-    <section id={sectionId ?? 'reviews'} className="bg-white py-16">
+    <section id={sectionId ?? 'reviews'} className="bg-white py-12 md:py-14">
       <div className="mx-auto max-w-5xl px-4 md:px-6">
         <SectionHeading
           eyebrow={resolvedHeading.eyebrow}
           title={resolvedHeading.title}
-          description="Real experiences from people who use our product every day and love it."
+          description={resolvedHeading.description}
           alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
+          className="gap-3 md:gap-4"
         />
 
-        <div className="mt-10">
+        <div className="mt-10 md:mt-12">
           <ThreeDPhotoCarousel reviews={cards} />
         </div>
       </div>

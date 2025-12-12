@@ -89,7 +89,7 @@ const Carousel = memo(
     isCarouselActive: boolean
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
-    const cylinderWidth = isScreenSizeSm ? 1200 : 1800
+    const cylinderWidth = isScreenSizeSm ? 1800 : 2500
     const faceCount = cards.length
     const faceWidth = cylinderWidth / faceCount
     const radius = cylinderWidth / (2 * Math.PI)
@@ -141,18 +141,18 @@ const Carousel = memo(
               className="absolute flex origin-center items-center justify-center rounded-xl bg-white p-3 shadow-soft border border-brand-peach/50"
               style={{
                 width: `${faceWidth}px`,
-                maxWidth: isScreenSizeSm ? 220 : 260,
-                height: "240px",
+                maxWidth: isScreenSizeSm ? 280 : 360,
+                height: "170px",
                 transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`,
               }}
               onClick={() => handleClick(card.body, i)}
             >
-              <div className="pointer-events-none flex h-full w-full flex-col justify-between rounded-lg bg-white">
+              <div className="pointer-events-none flex h-full w-full flex-col justify-between rounded-lg bg-white text-center py-2.5 px-2">
                 <div className="flex justify-center">
-                  <StarRating value={card.stars ?? 5} size={18} />
+                  <StarRating value={card.stars ?? 5} size={16} />
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-brand-cocoa">“{card.body}”</p>
-                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-brand-cocoa/80">
+                <p className="mt-2 text-[13px] leading-snug text-brand-cocoa">“{card.body}”</p>
+                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-cocoa/80">
                   {card.author}
                 </p>
               </div>
@@ -219,7 +219,7 @@ function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="relative h-[320px] w-full overflow-hidden rounded-3xl bg-white md:h-[400px]">
+      <div className="relative min-h-[340px] w-full overflow-visible rounded-3xl bg-white pt-8 pb-6 md:min-h-[400px]">
         <Carousel
           handleClick={handleClick}
           controls={controls}

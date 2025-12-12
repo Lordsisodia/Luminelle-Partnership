@@ -19,3 +19,4 @@ Added today
 - Added comms plan, acceptance criteria, and a (non-wired) Vercel middleware snippet reference.
 - Added rollout plan and timeline estimate (post-approval, post-pilot guidance).
 - Added open-source framework survey (open-source-frameworks.md) with recommendations to leverage Style Dictionary + Tokens Studio/Brücke.
+- Added color taxonomy, per-page token map, Fresh Mint demo tokens, self-host font example, and status snapshot.

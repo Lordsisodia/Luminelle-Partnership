@@ -15,7 +15,6 @@ const AccountLayout = ({ children, title = 'Your account', subtitle, sidebar }: 
       <GlobalHeader
         promoMessages={[{ label: 'Free returns within 30 days' }, { label: 'Buy 2, save 10%' }]}
         activePromo={0}
-        onOpenMenu={() => {}}
       />
       <main className="mx-auto flex max-w-6xl gap-8 px-4 pb-16 pt-10 md:px-6">
         {sidebar && (

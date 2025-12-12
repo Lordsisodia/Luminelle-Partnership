@@ -24,7 +24,10 @@ export const HeroShop = ({ config }: Props) => {
   const [active, setActive] = useState(0)
   const buildSources = (src: string) => {
     if (!src.includes('hero-main')) return null
-    const base = src.replace(/\.[^.]+$/, '')
+    const baseWithExtStripped = src.replace(/\.[^.]+$/, '')
+    // If the filename already includes a known width suffix (e.g. hero-main-960),
+    // strip it so we build srcsets like hero-main-640.webp, hero-main-960.webp, etc.
+    const base = baseWithExtStripped.replace(/-(640|960|1280|1920)$/, '')
     const widths = [640, 960, 1280]
     return {
       avif: widths.map((w) => `${base}-${w}.avif ${w}w`).join(', '),

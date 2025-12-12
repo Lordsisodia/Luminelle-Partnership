@@ -6,14 +6,19 @@ export type ProductConfig = {
   defaultSubtitle: string
   defaultPrice?: number
   compareAtPrice?: number
+  discountPercentOverride?: number
+  ratingValueOverride?: number
+  ratingCountLabelOverride?: string
   badge?: string
   gallery?: string[]
   videoSlot?: string
+  hideDetailsAccordion?: boolean
   essentials?: { title: string; body: string }[]
   reasons?: { title: string; desc: string }[]
   qa?: { q: string; a: string }[]
   how?: string[]
   care?: { icon?: string; title: string; body: string }[]
+  careLabelOverride?: string
   featureCallouts?: {
     mediaSrc?: string
     mediaAlt?: string
