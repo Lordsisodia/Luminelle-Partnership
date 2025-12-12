@@ -1,6 +1,12 @@
 # Checkout domain
 
-Optional local checkout/returns/order-tracking pages. If using Shopify-hosted checkout exclusively, this domain can be disabled.
-Imports: `@checkout/*`
-
-Structure: ui/pages (Checkout, OrderConfirmation, OrderTracking, Returns).
+Current structure is minimal (ui/pages). To align with other domains, add as needed:
+- data/
+- hooks/
+- logic/
+- ui/
+  - components/
+  - sections/
+  - layouts/
+  - pages/
+- providers/state if checkout context is introduced.

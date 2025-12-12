@@ -69,7 +69,7 @@ export const FeatureCallouts = ({
 
   if (variant === 'story') {
     const isVideo = mediaSrc?.startsWith('video://')
-    const media = mediaSrc?.replace('video://', '') ?? '/uploads/luminele/product-feature-06.jpg'
+    const media = mediaSrc?.replace('video://', '') ?? '/uploads/luminele/product-feature-06.webp'
     return (
       <section
         id={sectionId}
@@ -86,8 +86,9 @@ export const FeatureCallouts = ({
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.08fr]">
             <div className="rounded-3xl border border-brand-peach/50 bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/30 p-4 shadow-[0_25px_70px_rgba(0,0,0,0.08)] backdrop-blur-sm">
               <div className="overflow-hidden rounded-2xl border border-white/40 bg-white">
-                <div className="relative aspect-[3/4] sm:aspect-[4/5]">
+                <div className="relative aspect-[9/16] sm:aspect-[9/16]">
                   <LazyVisible
+                    className="h-full w-full"
                     placeholder={
                       <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
                         Loading…
@@ -99,6 +100,8 @@ export const FeatureCallouts = ({
                         src={media}
                         title="Lumelle creator video"
                         className="absolute inset-0 h-full w-full"
+                        scrolling="no"
+                        frameBorder="0"
                         allow="encrypted-media; fullscreen; clipboard-write"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen

@@ -2,7 +2,17 @@
 <html lang="en">
 
 <head>
-  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+  <!-- Load Shopify App Bridge only when embedded (shop + host present) to avoid missing-config errors on public pages -->
+  <script>
+    (() => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('shop') && params.get('host')) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.shopify.com/shopifycloud/app-bridge.js';
+        document.head.appendChild(script);
+      }
+    })();
+  </script>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/l-icon.svg" />
   <link rel="apple-touch-icon" href="/l-icon.svg" />
@@ -20,9 +30,6 @@
   <meta property="og:url" content="https://lumelle.com/" />
   <meta property="og:image" content="https://lumelle.com/uploads/luminele/hero-main.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" as="image" href="/uploads/luminele/hero-main.png"
-    imagesrcset="/uploads/luminele/hero-main.png 1280w, /uploads/luminele/hero-main-960.webp 960w, /uploads/luminele/hero-main-640.webp 640w"
-    imagesizes="100vw" fetchpriority="high" />
   <script type="application/ld+json">
       {
         "@context": "https://schema.org",

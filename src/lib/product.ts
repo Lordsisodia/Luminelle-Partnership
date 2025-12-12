@@ -12,7 +12,7 @@ export const fetchProduct = async (id: string): Promise<Product> => ({
   title: 'Stub product',
   description: 'Placeholder description',
   price: { amount: 0, currencyCode: 'GBP' },
-  images: ['/uploads/luminele/product-main.jpg'],
+  images: ['/uploads/luminele/product-main.webp'],
   variantId: id,
 })
 

@@ -6,9 +6,10 @@ type Props = {
   rootMargin?: string
   once?: boolean
   placeholder?: ReactNode
+  className?: string
 }
 
-export const LazyVisible = ({ children, rootMargin = '200px', once = true, placeholder = null }: Props) => {
+export const LazyVisible = ({ children, rootMargin = '200px', once = true, placeholder = null, className }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null)
   const [visible, setVisible] = useState(false)
 
@@ -32,7 +33,7 @@ export const LazyVisible = ({ children, rootMargin = '200px', once = true, place
     return () => obs.disconnect()
   }, [rootMargin, once, visible])
 
-  return <div ref={ref}>{visible ? children : placeholder}</div>
+  return <div ref={ref} className={className}>{visible ? children : placeholder}</div>
 }
 
 export default LazyVisible

@@ -14,7 +14,7 @@ export function SEO({ title, description, image, url, type = 'website', jsonLd }
     const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 
     // Default to the main hero image if no specific image is provided
-    const metaImage = image || 'https://lumelle.com/uploads/luminele/hero-main.png';
+    const metaImage = image || 'https://lumelle.com/uploads/luminele/hero-main.webp';
     const metaDescription = description || 'Luxury satin-lined, waterproof shower cap that keeps silk presses, curls, and braids frizz-free.';
     const metaUrl = url || window.location.href;
 

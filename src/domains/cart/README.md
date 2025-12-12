@@ -1,10 +1,14 @@
 # Cart domain
 
-Owns cart state, logic, providers, recovery, and cart UI pages.
-Imports: `@cart/*`
-
-Structure:
-- logic/ — cart + Shopify cart helpers
-- providers/ — CartContext
-- recovery/ — local cart recovery helpers
-- ui/pages — CartPage
+Cart logic, UI, and providers.
+Suggested structure (to align with other domains):
+- data/ (create when needed)
+- hooks/ (e.g., cart selectors)
+- logic/ (already present)
+- state/ (if separate store is introduced)
+- providers/ (existing)
+- ui/
+  - pages/
+  - components/
+  - sections/
+  - layouts/

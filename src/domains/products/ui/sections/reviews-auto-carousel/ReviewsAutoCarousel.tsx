@@ -1,7 +1,8 @@
 /* @ts-nocheck */
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { StarRating } from '@ui/components/StarRating'
+import { ThreeDPhotoCarousel } from '@/components/ui/3d-carousel'
 import type { Review as ReviewType } from '@landing/data/home.config'
 
 type Review = ReviewType & { image?: string }
@@ -67,30 +68,6 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
     alignment: heading?.alignment ?? defaultHeading.alignment,
   }
 
-  const [active, setActive] = useState(0)
-  const total = cards.length || 1
-  const go = (dir: 'prev' | 'next') => {
-    setActive((prev) => {
-      const next = dir === 'next' ? prev + 1 : prev - 1
-      return (next + total) % total
-    })
-  }
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setActive((prev) => ((prev + 1) % total))
-    }, 5000)
-    return () => window.clearInterval(id)
-  }, [total])
-
-  const card = cards[active] ?? {
-    author: 'Lumelle Reviewer',
-    stars: 5,
-    title: 'Great cap',
-    body: 'This cap keeps my hair frizz-free and comfy.',
-    image: fallbackImages[0],
-  }
-
   return (
     <section id={sectionId ?? 'reviews'} className="bg-white py-16">
       <div className="mx-auto max-w-5xl px-4 md:px-6">
@@ -101,41 +78,9 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
           alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
 
-        <div className="relative mt-10">
-          <article className="mx-auto flex max-w-md flex-col gap-3 rounded-[24px] border border-brand-peach/70 bg-gradient-to-br from-white via-[#fff2eb] to-white p-6 text-center shadow-[0_16px_36px_rgba(0,0,0,0.08)]">
-            <div className="flex justify-center">
-              <StarRating value={card.stars} size={18} />
-            </div>
-            <p className="text-base leading-relaxed text-brand-cocoa">
-              “{card.body}”
-            </p>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-cocoa/90">
-              {card.author}
-            </p>
-          </article>
-
-          <button
-            type="button"
-            aria-label="Previous review"
-            onClick={() => go('prev')}
-            className="absolute left-[-10px] top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-brand-cocoa text-white shadow-soft transition hover:-translate-y-1/2 hover:-translate-x-0.5"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-
-          <button
-            type="button"
-            aria-label="Next review"
-            onClick={() => go('next')}
-            className="absolute right-[-10px] top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-brand-cocoa text-white shadow-soft transition hover:-translate-y-1/2 hover:translate-x-0.5"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
+        <div className="mt-10">
+          <ThreeDPhotoCarousel reviews={cards} />
         </div>
-
-        <p className="mt-6 text-center text-xs text-brand-cocoa/60">
-          To see more reviews, visit our TikTok shop product page.
-        </p>
       </div>
     </section>
   )

@@ -4,10 +4,10 @@ import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { setMetaTags, injectJsonLd } from '@/lib/seo'
 
 const CATALOG = [
-  { id: 'lumelle-cap', title: 'Lumelle Shower Cap', price: 24, image: '/uploads/luminele/product-feature-06.jpg', href: '/product/lumelle-shower-cap' },
-  { id: 'satin-overnight-curler', title: 'Satin Overnight Curler Set', price: 24, image: '/uploads/curler/1.png', href: '/product/satin-overnight-curler' },
-  { id: 'microfiber-towel', title: 'Microfiber Hair Towel', price: 14, image: '/uploads/luminele/product-feature-05.jpg', href: '#' },
-  { id: 'travel-case', title: 'Travel Case', price: 12, image: '/uploads/luminele/product-feature-04.jpg', href: '#' },
+  { id: 'lumelle-cap', title: 'Lumelle Shower Cap', price: 24, image: '/uploads/luminele/product-feature-06.webp', href: '/product/lumelle-shower-cap' },
+  { id: 'satin-overnight-curler', title: 'Satin Overnight Curler Set', price: 24, image: '/uploads/curler/1.webp', href: '/product/satin-overnight-curler' },
+  { id: 'microfiber-towel', title: 'Microfiber Hair Towel', price: 14, image: '/uploads/luminele/product-feature-05.webp', href: '#' },
+  { id: 'travel-case', title: 'Travel Case', price: 12, image: '/uploads/luminele/product-feature-04.webp', href: '#' },
 ]
 
 export const SearchResultsPage = () => {

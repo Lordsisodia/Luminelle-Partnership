@@ -117,7 +117,7 @@ export const OrderDetailPage = () => {
                 {order.items.map((item: any) => (
                   <div key={item.id} className="flex items-center gap-3 rounded-xl border border-brand-blush/60 p-3">
                     <img
-                      src="/uploads/luminele/product-feature-05.jpg"
+                      src="/uploads/luminele/product-feature-05.webp"
                       alt=""
                       className="h-14 w-14 rounded-lg border border-brand-blush/40 object-cover"
                       loading="lazy"

@@ -1,10 +1,15 @@
 # Auth domain
 
-## Public surface (import via @auth/*)
-- Pages: `@auth/ui/pages/SignInPage`, `SignUpPage`, `SSOCallbackPage`
-- Provider: `@auth/ui/providers/AuthContext` (`AuthProvider`, `useAuth`)
-- Hooks: `@auth/hooks/useSyncUserToSupabase`
-
-## Layout
-- data/, logic/, hooks/
-- ui/ (components/layouts/pages/sections/providers)
+Authentication flows.
+Structure:
+- data/
+- hooks/
+- logic/
+- providers/
+- ui/
+  - components/
+  - layouts/
+  - pages/
+  - providers/
+  - sections/
+- state/ (add if a shared auth state store is needed)

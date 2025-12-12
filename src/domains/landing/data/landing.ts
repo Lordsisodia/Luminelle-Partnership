@@ -82,14 +82,14 @@ export const heroContent = {
   primaryCta: 'Join WhatsApp',
   secondaryCta: 'See how it works',
   imageAlt: 'Creator wearing a pink checker Lumelle shower cap',
-  imageSrc: '/uploads/luminele/photo-for-page-3v2.jpeg',
+  imageSrc: '/uploads/luminele/photo-for-page-3v2.webp',
 }
 
 export const heroSpotlightSlides: HeroSpotlightSlide[] = [
   {
     id: 'hero-product',
-    backgroundSrc: '/uploads/luminele/photo-for-page-3v2.jpeg',
-    imageSrc: '/uploads/luminele/photo-for-page-3v2.jpeg',
+    backgroundSrc: '/uploads/luminele/photo-for-page-3v2.webp',
+    imageSrc: '/uploads/luminele/photo-for-page-3v2.webp',
     label: 'Creator highlight',
     title: 'Meet the Lumelle cap',
     description: 'See the exact cap creators love—full shot, no crop.',

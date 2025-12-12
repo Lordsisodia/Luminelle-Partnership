@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-05',
     reviewed: '2025-12-08',
     readTime: '3 min',
-    cover: '/uploads/luminele/product-feature-01.jpg',
+    cover: '/uploads/luminele/product-feature-01.webp',
     ogImage: '/og/blog/lumelle-journal-launch.png',
     teaser: 'We’re opening up our playbook: routines that keep styles flawless, creator scripts that convert, and the science behind our satin-lined caps.',
     body:
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-05',
     reviewed: '2025-12-08',
     readTime: '5 min',
-    cover: '/uploads/luminele/product-feature-03.jpg',
+    cover: '/uploads/luminele/product-feature-03.webp',
     ogImage: '/og/blog/frizz-free-showers-seo.png',
     teaser:
       'Steam lifts cuticles and wrecks silk presses. Use this five-step routine—placement, spray angle, cool-down, removal, and care—to keep hair glassy and frizz-free.',
@@ -110,7 +110,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-10',
     reviewed: '2025-12-01',
     readTime: '6 min',
-    cover: '/uploads/luminele/product-feature-02.jpg',
+    cover: '/uploads/luminele/product-feature-02.webp',
     ogImage: '/og/blog/silk-press-shower-cap-guide.png',
     teaser: 'A step-by-step routine to keep silk presses flawless with steam-proof protection.',
     body:
@@ -158,7 +158,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-08',
     reviewed: '2025-12-01',
     readTime: '6 min',
-    cover: '/uploads/luminele/product-feature-06.jpg',
+    cover: '/uploads/luminele/product-feature-06.webp',
     ogImage: '/og/blog/protective-styles-in-the-shower.png',
     teaser: 'Sizing, seal, and care tips to keep braids, twists, and locs frizz-free—plus what to look for in a 2025-worthy shower cap.',
     body:
@@ -205,7 +205,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-05',
     reviewed: '2025-12-01',
     readTime: '5 min',
-    cover: '/uploads/luminele/product-feature-04.jpg',
+    cover: '/uploads/luminele/product-feature-04.webp',
     ogImage: '/og/blog/gym-sauna-spa.png',
     teaser: 'The gear and habits that protect your style beyond the shower.',
     body:
@@ -250,7 +250,7 @@ export const blogPosts: BlogPost[] = [
     author: 'Lumelle Studio',
     date: '2025-11-03',
     readTime: '6 min',
-    cover: '/uploads/luminele/product-feature-05.jpg',
+    cover: '/uploads/luminele/product-feature-05.webp',
     ogImage: '/og/blog/why-satin-matters.png',
     teaser: 'A quick look at why satin + waterproof cores beat plastic caps.',
     body:
@@ -294,7 +294,7 @@ export const blogPosts: BlogPost[] = [
     author: 'Lumelle Studio',
     date: '2025-11-01',
     readTime: '4 min',
-    cover: '/uploads/luminele/product-feature-07.jpg',
+    cover: '/uploads/luminele/product-feature-07.webp',
     ogImage: '/og/blog/creator-tiktok-scripts.png',
     teaser: 'Steal these scripts to film hair-protection content that sells.',
     body:
@@ -330,7 +330,7 @@ export const blogPosts: BlogPost[] = [
     author: 'Lumelle Studio',
     date: '2025-10-29',
     readTime: '5 min',
-    cover: '/uploads/luminele/product-feature-03.jpg',
+    cover: '/uploads/luminele/product-feature-03.webp',
     ogImage: '/og/blog/travel-ready-hair-kit.png',
     teaser: 'Exactly what to bring so hotel steam and plane air don’t wreck your style.',
     body:
@@ -374,7 +374,7 @@ export const blogPosts: BlogPost[] = [
     author: 'Lumelle Studio',
     date: '2025-10-27',
     readTime: '5 min',
-    cover: '/uploads/luminele/product-feature-01.jpg',
+    cover: '/uploads/luminele/product-feature-01.webp',
     ogImage: '/og/blog/wash-day-mistakes.png',
     teaser: 'Avoid these common traps to protect curls and blowouts.',
     body:
@@ -418,7 +418,7 @@ export const blogPosts: BlogPost[] = [
     author: 'Lumelle Studio',
     date: '2025-10-25',
     readTime: '4 min',
-    cover: '/uploads/luminele/product-feature-05.jpg',
+    cover: '/uploads/luminele/product-feature-05.webp',
     ogImage: '/og/blog/refresh-and-clean-cap.png',
     teaser: 'Quick maintenance that keeps your cap fresh and leak-proof.',
     body:
@@ -458,7 +458,7 @@ export const blogPosts: BlogPost[] = [
     author: 'Lumelle Studio',
     date: '2025-10-20',
     readTime: '4 min',
-    cover: '/uploads/luminele/product-feature-04.jpg',
+    cover: '/uploads/luminele/product-feature-04.webp',
     ogImage: '/og/blog/steam-proof-bathroom.png',
     teaser: 'Micro-adjustments that keep humidity from ruining your style.',
     body:
@@ -500,7 +500,7 @@ export const blogPosts: BlogPost[] = [
     author: 'Lumelle Studio',
     date: '2025-10-18',
     readTime: '5 min',
-    cover: '/uploads/luminele/product-feature-02.jpg',
+    cover: '/uploads/luminele/product-feature-02.webp',
     ogImage: '/og/blog/hairline-health-bands.png',
     teaser: 'What to look for in a band to keep your edges safe.',
     body:

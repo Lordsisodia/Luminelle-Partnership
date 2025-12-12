@@ -22,7 +22,7 @@ export const BlogIndexPage = () => {
     const title = 'Lumelle Journal | Blog'
     const description =
       'Guides, routines, and creator tips to keep silk presses, curls, and braids frizz-free with Lumelle.'
-    const heroImage = cdnUrl(featured[0]?.cover || '/uploads/luminele/product-feature-01.jpg')
+    const heroImage = cdnUrl(featured[0]?.cover || '/uploads/luminele/product-feature-01.webp')
     const url = 'https://lumelle.com/blog'
     setMetaTags({ title, description, url, image: heroImage, type: 'website' })
 

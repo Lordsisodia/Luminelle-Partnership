@@ -47,7 +47,7 @@ export const CartPage = () => {
                 {items.map((item: any) => (
                   <article key={item.id} className="grid grid-cols-[80px_1fr_auto] gap-4 rounded-2xl border border-brand-blush/60 bg-white p-4 shadow-sm">
                     <img
-                      src="/uploads/luminele/product-feature-05.jpg"
+                      src="/uploads/luminele/product-feature-05.webp"
                       alt={item.title}
                       className="h-20 w-20 rounded-xl border border-brand-blush/40 object-cover"
                       loading="lazy"

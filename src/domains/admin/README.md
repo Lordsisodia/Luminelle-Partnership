@@ -1,9 +1,13 @@
 # Admin domain
 
-## Public surface (import via @admin/*)
-- Pages: `@admin/ui/pages/AnalyticsPage`, `@admin/ui/pages/ContentPage`
-- Components: `@admin/ui/components/AdminGuard`
-
-## Layout
-- data/, logic/, hooks/ (currently stubs)
-- ui/ (components/layouts/pages/sections)
+Internal admin surfaces.
+Structure:
+- data/
+- hooks/
+- logic/
+- ui/
+  - components/
+  - layouts/
+  - pages/
+  - sections/
+  - providers/ (add if shared context is introduced)

@@ -1,10 +1,13 @@
 # Blog domain
 
-## Public surface (import via @blog/*)
-- Pages: `@blog/ui/pages/BlogIndexPage`, `@blog/ui/pages/BlogPostPage`
-- Data: `@blog/data/blog`
-
-## Layout
-- data/ (blog posts)
-- logic/, hooks/
-- ui/ (components/layouts/pages/sections)
+Editorial content pages.
+Structure:
+- data/
+- hooks/
+- logic/
+- ui/
+  - components/
+  - layouts/
+  - pages/
+  - sections/
+- state/providers: add if blog context/state emerges.

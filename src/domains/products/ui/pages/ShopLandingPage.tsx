@@ -2,18 +2,14 @@ import { useEffect } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
-import {
-  HeroShop,
-  ProductSpotlightSection,
-  TrustBar,
-  ReviewsAutoCarousel,
-  FinalCtaSection,
-  FaqSectionShop,
-  BundleCards,
-  EmailCaptureBand,
-  BenefitsSection,
-} from '@products/ui/sections'
-import { FeaturedTikTok } from '@products/ui/sections/featured-tik-tok/FeaturedTikTok'
+import { ReviewsAutoCarousel, FaqSectionShop, FeaturedTikTok } from '@products/ui/sections'
+import { HeroShop } from '@/domains/landing/ui/sections/shop/hero-shop/HeroShop'
+import { ProductSpotlightSection } from '@/domains/landing/ui/sections/shop/product-spotlight-section/ProductSpotlightSection'
+import { TrustBar } from '@/domains/landing/ui/sections/shop/trust-bar/TrustBar'
+import { FinalCtaSection } from '@/domains/landing/ui/sections/shop/final-cta-section/FinalCtaSection'
+import { BundleCards } from '@/domains/landing/ui/sections/shop/bundle-cards/BundleCards'
+import { EmailCaptureBand } from '@/domains/landing/ui/sections/shop/email-capture-band/EmailCaptureBand'
+import { BenefitsSection } from '@/domains/landing/ui/sections/shop/benefits-section/BenefitsSection'
 import { setMetaTags, injectJsonLd } from '@/lib/seo'
 import { cdnUrl } from '@/utils/cdn'
 

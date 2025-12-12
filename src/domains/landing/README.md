@@ -1,9 +1,14 @@
 # Landing domain
 
-## Public surface (import via @landing/*)
-- Pages: `LandingPage`, `BrandStoryPage`, `TermsPage`, `PrivacyPage`, `BriefPage`, `WelcomePage`, `BlogIndexPage`, `BlogPostPage`
-- Layout: `MarketingLayout`
+Landing/marketing pages and their reusable sections.
 
-## Layout
-- data/, logic/, hooks/
-- ui/ (components/layouts/pages/sections)
+Structure (aligned):
+- data/
+- hooks/
+- logic/
+- ui/
+  - components/
+  - layouts/
+  - pages/
+  - sections/
+  - providers/ (add if needed)

@@ -73,8 +73,8 @@ export const homeConfig: HomeConfig = {
     offerChip: 'Buy 2, save 10%',
     secondaryCtaLabel: 'Join WhatsApp',
     secondaryCtaHref: '/affiliates',
-    image: '/uploads/luminele/hero-main.png',
-    bgImage: '/uploads/luminele/hero-main.png',
+    image: '/uploads/luminele/hero-main-960.webp',
+    bgImage: '/uploads/luminele/hero-main-960.webp',
     objectPosition: 'center 30%',
     objectFit: 'cover',
     pill: 'Best seller',
@@ -82,13 +82,13 @@ export const homeConfig: HomeConfig = {
       { label: 'Free shipping £20+' },
       { label: '30-day money back' },
     ],
-    gallery: ['/uploads/luminele/hero-main.png'],
+    gallery: ['/uploads/luminele/hero-main-960.webp'],
   },
   slides: [
     {
       title: 'Luxury Self Care',
       copy: 'The design lets you fit your hair in easily and seal it comfortably for your shower.',
-      image: '/uploads/luminele/product-feature-04.jpg',
+      image: '/uploads/luminele/product-feature-04.webp',
       ctaHref: '/product/lumelle-shower-cap',
       tag: 'Daily luxury',
       proof: '',
@@ -96,7 +96,7 @@ export const homeConfig: HomeConfig = {
     {
       title: 'Designed To Last',
       copy: 'It’s fully reusable, made with durable materials that hold their shape and last shower after shower.',
-      image: '/uploads/luminele/product-feature-05.jpg',
+      image: '/uploads/luminele/product-feature-05.webp',
       ctaHref: '/product/lumelle-shower-cap',
       tag: 'Durability',
       proof: '',
@@ -104,7 +104,7 @@ export const homeConfig: HomeConfig = {
     {
       title: 'Fits All Hair Sizes',
       copy: 'Designed for all hair types—it even fits thick, curly, or bum-length hair.',
-      image: '/uploads/luminele/product-feature-06.jpg',
+      image: '/uploads/luminele/product-feature-06.webp',
       ctaHref: '/product/lumelle-shower-cap',
       tag: 'All hair welcome',
       proof: '',
@@ -112,7 +112,7 @@ export const homeConfig: HomeConfig = {
     {
       title: 'Frizz-Free Protection',
       copy: 'The satin lining reduces friction to keep your hair frizz-free while you’re in your steamy shower.',
-      image: '/uploads/luminele/steam-shield-new.png',
+      image: '/uploads/luminele/steam-shield-new.webp',
       ctaHref: '/product/lumelle-shower-cap',
       tag: 'Frizz guard',
       proof: '',
@@ -120,7 +120,7 @@ export const homeConfig: HomeConfig = {
     {
       title: 'The Perfect Gift',
       copy: 'A simple gift that makes daily showers easier.',
-      image: '/uploads/luminele/product-feature-07.jpg',
+      image: '/uploads/luminele/product-feature-07.webp',
       ctaHref: '/product/lumelle-shower-cap',
       tag: 'Giftable',
       proof: '',
@@ -140,9 +140,9 @@ export const homeConfig: HomeConfig = {
     ]
   },
   ugc: [
-    { src: '/uploads/luminele/product-feature-07.jpg', type: 'image', caption: 'Morning routine ready' },
-    { src: '/uploads/luminele/product-feature-02.jpg', type: 'image' },
-    { src: '/uploads/luminele/product-feature-04.jpg', type: 'image' }
+    { src: '/uploads/luminele/product-feature-07.webp', type: 'image', caption: 'Morning routine ready' },
+    { src: '/uploads/luminele/product-feature-02.webp', type: 'image' },
+    { src: '/uploads/luminele/product-feature-04.webp', type: 'image' }
   ],
   benefits3: [
     { title: 'Seal out steam', body: 'Waterproof core protects styles from moisture and frizz.' },
@@ -150,33 +150,33 @@ export const homeConfig: HomeConfig = {
     { title: 'Reusable luxe', body: 'Dual‑layer satin built to last 100+ uses.' },
   ],
   realWorldUse: [
-    { src: '/uploads/luminele/product-feature-03.jpg', alt: 'Creator mirror selfie wearing cap', caption: 'After a hot shower — blowout stays smooth.' },
-    { src: '/uploads/luminele/product-feature-07.jpg', alt: 'Comfort band macro', caption: 'Comfort band sits softly — no marks.' },
-    { src: '/uploads/luminele/product-feature-02.jpg', alt: 'Bathroom lifestyle shot', caption: 'Fits curls and braids comfortably.' },
+    { src: '/uploads/luminele/product-feature-03.webp', alt: 'Creator mirror selfie wearing cap', caption: 'After a hot shower — blowout stays smooth.' },
+    { src: '/uploads/luminele/product-feature-07.webp', alt: 'Comfort band macro', caption: 'Comfort band sits softly — no marks.' },
+    { src: '/uploads/luminele/product-feature-02.webp', alt: 'Bathroom lifestyle shot', caption: 'Fits curls and braids comfortably.' },
   ],
   details: [
     {
       title: 'Reusable & waterproof',
       body: 'Dual‑layer satin exterior + waterproof TPU core. Wipes clean daily; rinse after use, air dry fully, and hand wash weekly with mild soap to keep the seal strong for 100+ uses.',
-      thumbSrc: '/uploads/luminele/product-feature-05.jpg',
+      thumbSrc: '/uploads/luminele/product-feature-05.webp',
       thumbAlt: 'Satin lining macro',
     },
     {
       title: 'Satin lined',
       body: 'Smooth inner lining protects styles while blocking steam—reduces friction on silk presses, curls, braids, and locs so hair stays glossy.',
-      thumbSrc: '/uploads/luminele/product-feature-07.jpg',
+      thumbSrc: '/uploads/luminele/product-feature-07.webp',
       thumbAlt: 'Soft satin lining detail',
     },
     {
       title: 'Fit & sizing',
       body: 'Roomy silhouette fits curls, coils, braids, and bum‑length hair. Comfort band stretches to 24\"+ with a secure, no‑crease seal. 5★ customer: “Super long hair past my butt… hair stays bone dry and the band fits snug.”',
-      thumbSrc: '/uploads/luminele/product-feature-04.jpg',
+      thumbSrc: '/uploads/luminele/product-feature-04.webp',
       thumbAlt: 'Comfort band detail',
     },
     {
       title: 'Adjustable & fresh',
       body: 'Plush band flexes without denting edges; deep crown tucks volume easily. Air‑dries fast to stay odor‑free—keep it in the pouch between uses.',
-      thumbSrc: '/uploads/luminele/product-feature-06.jpg',
+      thumbSrc: '/uploads/luminele/product-feature-06.webp',
       thumbAlt: 'Cap depth and stretch',
     },
   ],
@@ -316,7 +316,7 @@ export const homeConfig: HomeConfig = {
       'Large wide shower cap',
       'Adjustable',
     ],
-    image: '/uploads/luminele/page9-image.jpeg',
+    image: '/uploads/luminele/page9-image.webp',
     href: '/product/lumelle-shower-cap',
     ctaLabel: 'Shop the cap',
   },
@@ -361,7 +361,7 @@ export const homeConfig: HomeConfig = {
     title: 'Our studio lead sets the tone',
     description: 'Go behind the scenes with the core Lumelle creator as she maps out look-book shots and scripts that everyone in the program riffs on.',
     stat: 'Shot inside the Lumelle content studio',
-    image: '/uploads/luminele/product-main.jpg',
+    image: '/uploads/luminele/product-main.webp',
     imageAlt: 'Lumelle studio lead planning a shoot with the signature cap',
     ctaLabel: 'See the full brief',
     ctaHref: '/affiliates',

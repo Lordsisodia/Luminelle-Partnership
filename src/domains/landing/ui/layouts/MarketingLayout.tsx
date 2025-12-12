@@ -289,7 +289,7 @@ export const MarketingLayout = ({
                       ) : (
                         items.map((it) => (
                           <div key={it.id} className="mb-4 grid grid-cols-[64px_1fr_auto] items-center gap-3 last:mb-0">
-                            <img src="/uploads/luminele/product-feature-05.jpg" alt={it.title} className="h-16 w-16 rounded-lg border border-brand-blush/60 object-cover" />
+                            <img src="/uploads/luminele/product-feature-05.webp" alt={it.title} className="h-16 w-16 rounded-lg border border-brand-blush/60 object-cover" />
                             <div className="text-sm text-brand-cocoa">
                               <div className="font-medium">{it.title}</div>
                               <div className="mt-1 text-xs text-brand-cocoa/70">£{it.price.toFixed(2)} each</div>
