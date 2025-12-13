@@ -7,11 +7,15 @@ const toCdn = (src: string) => encodeURI(cdnUrl(src))
 const buildSources = (src: string) => {
   if (src.startsWith('video://')) return null
   const cdnSrc = toCdn(src)
+  // Only generate responsive sources when we actually have the resized assets.
+  // Currently only the curler gallery has -640/-960/-1280 variants.
+  if (!src.startsWith('/uploads/curler/')) return null
   const base = cdnSrc.replace(/\.[^.]+$/, '')
   const widths = [640, 960, 1280]
   return {
     avif: widths.map((w) => `${base}-${w}.avif ${w}w`).join(', '),
-    webp: widths.map((w) => `${base}-${w}.webp ${w}w`).join(', '),
+    // The unsuffixed curler `.webp` files are 960w already, so we can use them as the 960 candidate.
+    webp: [`${base}-640.webp 640w`, `${cdnSrc} 960w`, `${base}-1280.webp 1280w`].join(', '),
     sizes: '(min-width: 1024px) 640px, 92vw',
     fallback: cdnSrc,
   }
