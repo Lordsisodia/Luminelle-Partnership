@@ -14,7 +14,9 @@ SHOPIFY_STOREFRONT_PUBLIC_TOKEN=shpua_xxx
 SHOPIFY_STOREFRONT_PRIVATE_TOKEN=
 SHOPIFY_API_VERSION=2025-10
 ```
-(CDN already set: `VITE_ASSET_BASE_URL=https://tmsbyiwqzesmirbargxv.supabase.co/storage/v1/object/public/public`)
+Note: Images for marketing pages are served from `public/**` by default. If you later move static assets to an external host (e.g., Cloudflare R2), enable it with:
+- `VITE_USE_ASSET_CDN=1`
+- `VITE_ASSET_BASE_URL=https://assets.yourdomain.com`
 
 ## 3) Code wiring (already added)
 - `src/lib/shopify.ts` – Storefront GraphQL client (reads env, throws if missing).
@@ -74,5 +76,5 @@ product(handle: $handle) {
 
 ## 10) Current status (Dec 6, 2025)
 - Shopify wiring in code is complete and gated by envs.
-- Image optimization & CDN already live via Supabase.
+- Image CDN is optional (default is local `public/**`; enable with `VITE_USE_ASSET_CDN=1` + `VITE_ASSET_BASE_URL`).
 - Awaiting Storefront token + shop domain to activate live cart/checkout.
