@@ -22,19 +22,9 @@ export const HeroShop = ({ config }: Props) => {
   const baseSlides = config.gallery && config.gallery.length > 0 ? config.gallery.slice(0, 1) : [config.image]
   const slides = baseSlides.map((s) => encodeURI(cdnUrl(s)))
   const [active, setActive] = useState(0)
-  const buildSources = (src: string) => {
-    if (!src.includes('hero-main')) return null
-    const baseWithExtStripped = src.replace(/\.[^.]+$/, '')
-    // If the filename already includes a known width suffix (e.g. hero-main-960),
-    // strip it so we build srcsets like hero-main-640.webp, hero-main-960.webp, etc.
-    const base = baseWithExtStripped.replace(/-(640|960|1280|1920)$/, '')
-    const widths = [640, 960, 1280]
-    return {
-      avif: widths.map((w) => `${base}-${w}.avif ${w}w`).join(', '),
-      webp: widths.map((w) => `${base}-${w}.webp ${w}w`).join(', '),
-      sizes: '100vw',
-    }
-  }
+  type SourceSets = { avif: string; webp: string; sizes: string } | null
+  // Use the single hero asset; we don't ship resized AVIF/WEBP variants for this image.
+  const buildSources = (_src: string): SourceSets => null
 
   useEffect(() => {
     // no auto-advance when single slide
