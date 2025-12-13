@@ -1,4 +1,4 @@
-import { CART_FRAGMENT, runStorefront } from '../_client'
+import { CART_FRAGMENT, runStorefront } from '../_client.js'
 
 export default async function handler(req: Request) {
   const body = await req.json().catch(() => ({}))
@@ -12,4 +12,3 @@ export default async function handler(req: Request) {
   )
   return new Response(JSON.stringify({ cart: data.cartAttributesUpdate.cart }), { headers: { 'content-type': 'application/json' } })
 }
-

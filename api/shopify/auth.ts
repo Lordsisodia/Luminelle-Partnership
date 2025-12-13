@@ -1,5 +1,5 @@
 import { randomBytes } from "crypto";
-import { buildMessageFromQuery, signHmac } from "./_lib/crypto";
+import { buildMessageFromQuery, signHmac } from "./_lib/crypto.js";
 
 function isValidShopDomain(shop?: string | null) {
   if (!shop) return false;
@@ -39,4 +39,3 @@ export default async function handler(req: Request) {
   );
   return res;
 }
-

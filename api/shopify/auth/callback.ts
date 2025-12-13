@@ -1,11 +1,11 @@
-import { buildMessageFromQuery, signHmac, safeCompare } from "../_lib/crypto";
-import { getPgPool } from "../../_lib/db";
-
-function bad(status = 400, msg = "Bad request") {
-  return new Response(msg, { status });
-}
-
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+
+import { buildMessageFromQuery, signHmac, safeCompare } from "../_lib/crypto.js";
+import { getPgPool } from "../../_lib/db.js";
+
+function bad(res: VercelResponse, status = 400, msg = "Bad request") {
+  return res.status(status).send(msg)
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const url = new URL(req.url!, `http://${req.headers.host}`);
@@ -23,13 +23,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .filter(([k]) => k)
   );
 
-  if (!shop || !code || !hmac || !state) return bad();
-  if (!cookies["shopify_state"] || cookies["shopify_state"] !== state) return bad(401, "Invalid state");
+  if (!shop || !code || !hmac || !state) return bad(res);
+  if (!cookies["shopify_state"] || cookies["shopify_state"] !== state) return bad(res, 401, "Invalid state");
 
   // Verify HMAC from query
   const message = buildMessageFromQuery(url);
   const expected = signHmac(message, process.env.SHOPIFY_API_SECRET || "");
-  if (!safeCompare(hmac, expected)) return bad(401, "Invalid HMAC");
+  if (!safeCompare(hmac, expected)) return bad(res, 401, "Invalid HMAC");
 
   // Exchange code for token
   const tokenRes = await fetch(`https://${shop}/admin/oauth/access_token`, {
@@ -41,7 +41,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       code,
     }),
   });
-  if (!tokenRes.ok) return bad(502, "Token exchange failed");
+  if (!tokenRes.ok) return bad(res, 502, "Token exchange failed");
   const tokenJson = (await tokenRes.json()) as { access_token: string; scope?: string };
 
   // Persist offline session (simple model)
@@ -79,15 +79,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Clear short-lived cookies
-  const res = new Response(null, {
-    status: 302,
-    headers: {
-      Location: `/shopify/app${hostPath}`,
-      "Set-Cookie": [
-        "shopify_state=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0",
-        "shopify_shop=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0",
-      ].join(", "),
-    },
-  });
-  return res;
+  res.setHeader('Set-Cookie', [
+    "shopify_state=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0",
+    "shopify_shop=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0",
+  ])
+  res.setHeader('Location', `/shopify/app${hostPath}`)
+  return res.status(302).send('')
 }

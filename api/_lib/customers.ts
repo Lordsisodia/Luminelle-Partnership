@@ -1,4 +1,4 @@
-import { getPgPool } from "./db";
+import { getPgPool } from "./db.js";
 
 export async function ensureCustomersTable() {
   const pool = getPgPool();
@@ -69,4 +69,3 @@ export async function redactCustomer(shop: string, emailOrId: { email?: string; 
     await pool.query('DELETE FROM "ShopCustomers" WHERE shop = $1 AND email = $2', [shop, emailOrId.email]);
   }
 }
-

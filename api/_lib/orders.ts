@@ -1,4 +1,4 @@
-import { getPgPool } from "./db";
+import { getPgPool } from "./db.js";
 
 export async function ensureOrdersTable() {
   const pool = getPgPool();
@@ -81,4 +81,3 @@ export async function upsertOrder(payload: any) {
     ]
   );
 }
-

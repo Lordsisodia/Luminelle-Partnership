@@ -1,7 +1,7 @@
-import { verifyWebhook } from "./_verify";
-import { upsertOrder } from "../../_lib/orders";
-import { isProcessed, markProcessed } from "../../_lib/webhooks";
-import { renderOrderEmail, sendOrderConfirmation } from "../../_lib/email";
+import { verifyWebhook } from "./_verify.js";
+import { upsertShopOrder } from "../../_lib/shopOrders.js";
+import { isProcessed, markProcessed } from "../../_lib/webhooks.js";
+import { renderOrderEmail, sendOrderConfirmation } from "../../_lib/email.js";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
@@ -11,6 +11,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { valid, body } = await verifyWebhook(req);
   if (!valid) return res.status(401).send("Invalid HMAC");
   const deliveryId = (req.headers['x-shopify-delivery-id'] || '') as string
+  if (deliveryId && (await isProcessed(deliveryId))) return res.status(200).send('OK')
   // The original instruction had a copy-paste error in the email section,
   // specifically `— if (!shop) return res.status(400).send("Missing shop");`.
   // I'm assuming the intent was to keep the shop check as it was,
@@ -19,7 +20,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // The `body` is now provided by `verifyWebhook`, so `req.json()` is not needed.
   const shop = (req.headers['x-shopify-shop-domain'] || body?.shop_domain || body?.domain) as string
   if (!shop) return res.status(400).send("Missing shop");
-  await upsertOrder(shop, body);
+  await upsertShopOrder(shop, body);
   try {
     if (process.env.EMAIL_SEND === '1' && String(body?.financial_status).toLowerCase() === 'refunded' && body?.email) {
       const total = Number(body?.total_price || 0)

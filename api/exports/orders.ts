@@ -1,5 +1,5 @@
-import { getPgPool } from "../_lib/db";
-import { requireInternalAuth } from "../_lib/internalAuth";
+import { getPgPool } from "../_lib/db.js";
+import { requireInternalAuth } from "../_lib/internalAuth.js";
 
 function toCsvRow(values: (string | number | null | undefined)[]) {
   return values
@@ -59,4 +59,3 @@ export default async function handler(req: Request) {
   })
   return new Response(body, { headers })
 }
-

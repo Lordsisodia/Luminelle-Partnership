@@ -1,4 +1,4 @@
-import { getPgPool } from './db'
+import { getPgPool } from './db.js'
 
 export async function ensureWebhookTable() {
   const pool = getPgPool()
@@ -19,4 +19,3 @@ export async function markProcessed(deliveryId: string) {
   const pool = getPgPool()
   await pool.query('INSERT INTO "ShopWebhookDeliveries" (id) VALUES ($1) ON CONFLICT DO NOTHING', [deliveryId])
 }
-

@@ -1,5 +1,5 @@
-import { requireInternalAuth } from "../_lib/internalAuth";
-import { getPgPool } from "../_lib/db";
+import { requireInternalAuth } from "../_lib/internalAuth.js";
+import { getPgPool } from "../_lib/db.js";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req);
@@ -54,4 +54,3 @@ export default async function handler(req: Request) {
 
   return new Response("Method not allowed", { status: 405 });
 }
-

@@ -1,20 +1,25 @@
-import { base64url } from './pkce'
-
-function getCookie(req: Request, name: string) {
-  const cookies = (req.headers.cookie || '') as string
-  const map = new Map(cookies.split(';').map(v => v.trim().split('=')))
-  return map.get(name)
-}
-
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
+function getCookie(req: VercelRequest, name: string) {
+  const cookies = req.headers.cookie || ''
+  const parts = cookies.split(';').map((value) => value.trim())
+  for (const part of parts) {
+    if (!part) continue
+    const eq = part.indexOf('=')
+    if (eq === -1) continue
+    const key = part.slice(0, eq)
+    if (key !== name) continue
+    return part.slice(eq + 1)
+  }
+  return undefined
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const url = new URL(req.url!, `http://${req.headers.host}`)
+  const host = req.headers.host || 'localhost'
+  const url = new URL(req.url || '/', `https://${host}`)
   const code = url.searchParams.get('code')
   const state = url.searchParams.get('state')
   const shop = getCookie(req, 'cust_shop')
-  if (!code || !state || !shop) return new Response('Bad request', { status: 400 })
-  if (state !== getCookie(req, 'cust_state')) return new Response('State mismatch', { status: 400 })
   if (!code || !state || !shop) return res.status(400).send('Bad request')
   if (state !== getCookie(req, 'cust_state')) return res.status(400).send('State mismatch')
 
@@ -40,19 +45,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     headers: { 'content-type': 'application/x-www-form-urlencoded', authorization: `Basic ${basic}` },
     body,
   })
-  if (!tokenRes.ok) return new Response('Token exchange failed', { status: 400 })
-  const tokenJson = await tokenRes.json()
+  if (!tokenRes.ok) return res.status(400).send('Token exchange failed')
+  const tokenJson = await tokenRes.json().catch(() => null)
+  if (!tokenJson?.access_token) return res.status(400).send('Token exchange failed')
 
   const at = tokenJson.access_token as string
   const rt = tokenJson.refresh_token as string | undefined
   const cookieBase = 'Path=/; HttpOnly; Secure; SameSite=None'
-  const headers = new Headers({ Location: '/account/orders?ca=1' })
-  headers.append('Set-Cookie', `cust_at=${at}; ${cookieBase}; Max-Age=3600`)
-  if (rt) headers.append('Set-Cookie', `cust_rt=${rt}; ${cookieBase}; Max-Age=2592000`)
-  // clear temp cookies
-  headers.append('Set-Cookie', 'cust_state=; Path=/; Max-Age=0')
-  headers.append('Set-Cookie', 'cust_verifier=; Path=/; Max-Age=0')
-  headers.append('Set-Cookie', 'cust_shop=; Path=/; Max-Age=0')
-  return new Response(null, { status: 302, headers })
-}
+  const setCookies = [
+    `cust_at=${at}; ${cookieBase}; Max-Age=3600`,
+    rt ? `cust_rt=${rt}; ${cookieBase}; Max-Age=2592000` : null,
+    // clear temp cookies
+    'cust_state=; Path=/; Max-Age=0',
+    'cust_verifier=; Path=/; Max-Age=0',
+    'cust_shop=; Path=/; Max-Age=0',
+  ].filter(Boolean) as string[]
 
+  res.setHeader('Set-Cookie', setCookies)
+  res.setHeader('Location', '/account/orders?ca=1')
+  return res.status(302).send('')
+}

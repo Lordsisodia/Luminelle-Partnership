@@ -1,4 +1,4 @@
-import { getPgPool } from "../_lib/db";
+import { getPgPool } from "../_lib/db.js";
 
 export default async function handler(_req: Request) {
   const pool = getPgPool();
@@ -36,4 +36,3 @@ export default async function handler(_req: Request) {
     { headers: { 'content-type': 'application/json' } },
   );
 }
-

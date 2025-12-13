@@ -1,4 +1,4 @@
-import { getSessionByShop } from "./db";
+import { getSessionByShop } from "./db.js";
 
 export async function handlePing() {
   return { ok: true, service: "lumelle-core" } as const;
@@ -18,4 +18,3 @@ export async function handleAppUninstalled(shop: string) {
   // For now, we just acknowledge.
   return { ok: true, shop } as const;
 }
-

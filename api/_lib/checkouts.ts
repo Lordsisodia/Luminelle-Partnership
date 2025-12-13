@@ -1,4 +1,4 @@
-import { getPgPool } from "./db";
+import { getPgPool } from "./db.js";
 
 export async function ensureCheckoutsTable() {
     const pool = getPgPool();

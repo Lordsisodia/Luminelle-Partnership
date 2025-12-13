@@ -1,4 +1,4 @@
-import { CART_RECOVERY_CRON_ENABLED } from '@/domains/shop/cart/recovery/env'
+import { CART_RECOVERY_CRON_ENABLED } from '../_lib/cartRecovery/env.js'
 
 export default async function handler(_req: Request) {
   if (!CART_RECOVERY_CRON_ENABLED) return new Response('cron disabled', { status: 204 })

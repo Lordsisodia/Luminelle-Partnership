@@ -1,4 +1,4 @@
-import { getPgPool } from "../_lib/db";
+import { getPgPool } from "../_lib/db.js";
 
 export async function getAdminToken(shop: string) {
   const pool = getPgPool();
@@ -25,4 +25,3 @@ export async function adminGraphQL<T>(shop: string, token: string, query: string
   if (json.errors) throw new Error(JSON.stringify(json.errors));
   return json.data as T;
 }
-

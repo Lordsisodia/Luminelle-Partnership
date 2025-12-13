@@ -1,12 +1,17 @@
-import { verifyWebhook } from "../_verify";
-import { handleAppUninstalled } from "../../_lib/shopifyCore";
+import { verifyWebhook } from "./_verify.js";
+import { handleAppUninstalled } from "../../_lib/shopifyCore.js";
 
-export default async function handler(req: Request) {
-  const verified = await verifyWebhook(req);
-  if (!verified) return new Response("Invalid HMAC", { status: 401 });
-  const body = await req.json();
-  const shop = body?.domain || body?.shop_domain || body?.shop;
-  if (!shop) return new Response("Missing shop", { status: 400 });
+import type { VercelRequest, VercelResponse } from '@vercel/node'
+
+export const config = { api: { bodyParser: false } };
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  const { valid, body } = await verifyWebhook(req);
+  if (!valid) return res.status(401).send("Invalid HMAC");
+
+  const shop = (req.headers['x-shopify-shop-domain'] || body?.domain || body?.shop_domain || body?.shop) as string
+  if (!shop) return res.status(400).send("Missing shop");
+
   const data = await handleAppUninstalled(shop);
-  return new Response(JSON.stringify(data), { headers: { "content-type": "application/json" } });
+  return res.status(200).json(data);
 }

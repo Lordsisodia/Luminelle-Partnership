@@ -1,6 +1,6 @@
-import { requireInternalAuth } from "../../_lib/internalAuth";
-import { getAdminToken, adminGraphQL } from "../_admin";
-import { upsertCustomer } from "../../_lib/customers";
+import { requireInternalAuth } from "../../_lib/internalAuth.js";
+import { getAdminToken, adminGraphQL } from "../_admin.js";
+import { upsertShopCustomer } from "../../_lib/shopCustomers.js";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req);
@@ -14,7 +14,7 @@ export default async function handler(req: Request) {
   let count = 0;
   // Paginate customers
   for (;;) {
-    const data = await adminGraphQL<any>(
+    const data: any = await adminGraphQL<any>(
       shop,
       token,
       `#graphql
@@ -41,7 +41,7 @@ export default async function handler(req: Request) {
     const edges = data.customers.edges as any[];
     for (const { node } of edges) {
       const id = Number(String(node.id).split("/").pop());
-      await upsertCustomer(shop, {
+      await upsertShopCustomer(shop, {
         id,
         email: node.email,
         first_name: node.firstName,
@@ -60,4 +60,3 @@ export default async function handler(req: Request) {
   }
   return new Response(JSON.stringify({ ok: true, count }), { headers: { "content-type": "application/json" } });
 }
-

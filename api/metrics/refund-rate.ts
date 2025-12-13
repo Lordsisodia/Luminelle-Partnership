@@ -1,4 +1,4 @@
-import { getPgPool } from "../_lib/db";
+import { getPgPool } from "../_lib/db.js";
 
 export default async function handler(req: Request) {
   const url = new URL(req.url)
@@ -9,4 +9,3 @@ export default async function handler(req: Request) {
   const t = total[0]?.cnt || 0; const r = refunded[0]?.cnt || 0;
   return new Response(JSON.stringify({ last30: { total: t, refunded: r, rate: t ? r / t : 0 } }), { headers: { 'content-type': 'application/json' } });
 }
-

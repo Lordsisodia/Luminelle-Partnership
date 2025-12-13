@@ -1,4 +1,23 @@
-import { type Order } from "../src/domains/account/state/OrdersStore";
+export type OrderItem = { id: string; title: string; price: number; qty: number }
+export type OrderEvent = { at: string; message: string }
+export type OrderStatus = 'processing' | 'shipped' | 'delivered' | 'cancelled'
+
+export type Order = {
+  id: string
+  placedAt: string
+  status: OrderStatus
+  items: OrderItem[]
+  subtotal: number
+  shipping: number
+  total: number
+  events: OrderEvent[]
+  tracking?: string
+  // Extra fields the app UI may read when present.
+  shippingAddress?: unknown
+  trackingUrl?: unknown
+  fulfillmentStatus?: unknown
+  financialStatus?: unknown
+}
 
 export function mapShopOrderRowToOrder(row: any): Order {
   const items = Array.isArray(row.line_items)

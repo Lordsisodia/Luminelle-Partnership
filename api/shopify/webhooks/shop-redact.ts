@@ -1,5 +1,5 @@
-import { verifyWebhook } from "./_verify";
-import { getPgPool } from "../../_lib/db";
+import { verifyWebhook } from "./_verify.js";
+import { getPgPool } from "../../_lib/db.js";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 

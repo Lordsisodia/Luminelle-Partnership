@@ -1,6 +1,6 @@
-import { requireInternalAuth } from "../../_lib/internalAuth";
-import { getAdminToken, adminGraphQL } from "../_admin";
-import { upsertOrder } from "../../_lib/orders";
+import { requireInternalAuth } from "../../_lib/internalAuth.js";
+import { getAdminToken, adminGraphQL } from "../_admin.js";
+import { upsertShopOrder } from "../../_lib/shopOrders.js";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req);
@@ -13,7 +13,7 @@ export default async function handler(req: Request) {
   let cursor: string | null = null;
   let count = 0;
   for (;;) {
-    const data = await adminGraphQL<any>(
+    const data: any = await adminGraphQL<any>(
       shop,
       token,
       `#graphql
@@ -52,7 +52,7 @@ export default async function handler(req: Request) {
           currency: e.node.variant?.price?.shopMoney?.currencyCode,
         },
       }));
-      await upsertOrder(shop, {
+      await upsertShopOrder(shop, {
         id,
         name: node.name,
         email: node.email,
@@ -73,4 +73,3 @@ export default async function handler(req: Request) {
   }
   return new Response(JSON.stringify({ ok: true, count }), { headers: { "content-type": "application/json" } });
 }
-

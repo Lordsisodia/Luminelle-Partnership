@@ -1,5 +1,5 @@
-import { verifyWebhook } from "./_verify";
-import { redactCustomer } from "../../_lib/customers";
+import { verifyWebhook } from "./_verify.js";
+import { redactShopCustomer } from "../../_lib/shopCustomers.js";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
@@ -11,7 +11,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const shop = (req.headers['x-shopify-shop-domain'] || body?.domain || body?.shop_domain) as string
   const customer = body?.customer || {};
   if (shop && (customer.id || customer.email)) {
-    await redactCustomer(shop, { id: customer.id ? Number(customer.id) : undefined, email: customer.email });
+    await redactShopCustomer(shop, { id: customer.id ? Number(customer.id) : undefined, email: customer.email });
   }
   return res.status(200).send("OK");
 }

@@ -1,5 +1,5 @@
-import { getPgPool } from "../_lib/db";
-import { mapShopOrderRowToOrder } from "./_map";
+import { getPgPool } from "../_lib/db.js";
+import { mapShopOrderRowToOrder } from "./_map.js";
 
 export default async function handler(_req: Request) {
   const pool = getPgPool();
@@ -7,4 +7,3 @@ export default async function handler(_req: Request) {
   const orders = rows.map(mapShopOrderRowToOrder);
   return new Response(JSON.stringify(orders), { headers: { "content-type": "application/json" } });
 }
-

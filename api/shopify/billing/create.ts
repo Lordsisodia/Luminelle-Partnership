@@ -1,4 +1,4 @@
-import { getPgPool } from "../../_lib/db";
+import { getPgPool } from "../../_lib/db.js";
 
 const API_VERSION = process.env.SHOPIFY_API_VERSION || "2025-01";
 
@@ -46,4 +46,3 @@ export default async function handler(req: Request) {
 
   return new Response(null, { status: 302, headers: { Location: urlRedirect } });
 }
-

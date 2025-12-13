@@ -1,5 +1,5 @@
-import { CART_RECOVERY_ENABLED, CART_RECOVERY_SECRET } from '@/domains/shop/cart/recovery/env'
-import { verifyRestoreToken } from '@/domains/shop/cart/recovery/token'
+import { CART_RECOVERY_ENABLED, CART_RECOVERY_SECRET } from '../../_lib/cartRecovery/env.js'
+import { verifyRestoreToken } from '../../_lib/cartRecovery/token.js'
 
 export default async function handler(req: Request) {
   if (!CART_RECOVERY_ENABLED) return new Response('disabled', { status: 404 })

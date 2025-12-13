@@ -1,16 +1,19 @@
-import { challengeFromVerifier, generateVerifier, randomState } from './pkce'
+import { challengeFromVerifier, generateVerifier, randomState } from './pkce.js'
 
-export default async function handler(req: Request) {
-  const url = new URL(req.url)
+import type { VercelRequest, VercelResponse } from '@vercel/node'
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  const host = req.headers.host || 'localhost'
+  const url = new URL(req.url || '/', `https://${host}`)
   const shop = (url.searchParams.get('shop') || process.env.SHOPIFY_STORE_DOMAIN || '').trim()
-  if (!shop) return new Response('Missing shop', { status: 400 })
+  if (!shop) return res.status(400).send('Missing shop')
   const clientId = process.env.CUSTOMER_CLIENT_ID || ''
   const clientSecret = process.env.CUSTOMER_CLIENT_SECRET || ''
-  if (!clientId || !clientSecret) return new Response('Customer client not configured', { status: 500 })
+  if (!clientId || !clientSecret) return res.status(500).send('Customer client not configured')
 
   const wellKnown = await fetch(`https://${shop}/.well-known/openid-configuration`).then(r => r.json())
   const authorization_endpoint = wellKnown.authorization_endpoint as string
-  if (!authorization_endpoint) return new Response('No authorization endpoint', { status: 500 })
+  if (!authorization_endpoint) return res.status(500).send('No authorization endpoint')
 
   const verifier = generateVerifier()
   const challenge = challengeFromVerifier(verifier)
@@ -28,11 +31,12 @@ export default async function handler(req: Request) {
   authUrl.searchParams.set('state', state)
   authUrl.searchParams.set('nonce', nonce)
 
-  const headers = new Headers({ Location: authUrl.toString() })
   const cookieBase = 'Path=/; HttpOnly; Secure; SameSite=None; Max-Age=600'
-  headers.append('Set-Cookie', `cust_state=${state}; ${cookieBase}`)
-  headers.append('Set-Cookie', `cust_verifier=${verifier}; ${cookieBase}`)
-  headers.append('Set-Cookie', `cust_shop=${shop}; ${cookieBase}`)
-  return new Response(null, { status: 302, headers })
+  res.setHeader('Set-Cookie', [
+    `cust_state=${state}; ${cookieBase}`,
+    `cust_verifier=${verifier}; ${cookieBase}`,
+    `cust_shop=${shop}; ${cookieBase}`,
+  ])
+  res.setHeader('Location', authUrl.toString())
+  return res.status(302).send('')
 }
-

@@ -1,4 +1,4 @@
-import { CART_FRAGMENT, runStorefront } from '../_client'
+import { CART_FRAGMENT, runStorefront } from '../_client.js'
 
 export default async function handler(req: Request) {
   const url = new URL(req.url)
@@ -14,4 +14,3 @@ export default async function handler(req: Request) {
   if (!data.cart) return new Response('Not found', { status: 404 })
   return new Response(JSON.stringify({ cart: data.cart }), { headers: { 'content-type': 'application/json' } })
 }
-

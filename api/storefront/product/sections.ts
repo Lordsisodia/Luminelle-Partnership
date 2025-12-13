@@ -1,4 +1,4 @@
-import { runStorefront } from '../../storefront/_client'
+import { runStorefront } from '../../storefront/_client.js'
 
 export default async function handler(req: Request) {
   const url = new URL(req.url)
@@ -18,4 +18,3 @@ export default async function handler(req: Request) {
   )
   return new Response(JSON.stringify({ sections: data?.product?.metafield?.reference?.fields || [] }), { headers: { 'content-type': 'application/json' } })
 }
-

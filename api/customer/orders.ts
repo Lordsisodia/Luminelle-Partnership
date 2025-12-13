@@ -34,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   let setCookie: string[] = []
   if (response.status === 401 && rt) {
     // try refresh
-    const token = await (await import('../customer-auth/utils')).refreshAccessToken(shop, rt)
+    const token = await (await import('../customer-auth/utils.js')).refreshAccessToken(shop, rt)
     if (token?.access_token) {
       const cookieBase = 'Path=/; HttpOnly; Secure; SameSite=None'
       setCookie.push(`cust_at=${token.access_token}; ${cookieBase}; Max-Age=3600`)

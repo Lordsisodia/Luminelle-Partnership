@@ -1,7 +1,5 @@
-import { requireInternalAuth } from "../_lib/internalAuth";
-import { handleSyncForShop } from "../_lib/shopifyCore";
-
-export const config = { runtime: "edge" };
+import { requireInternalAuth } from "../_lib/internalAuth.js";
+import { handleSyncForShop } from "../_lib/shopifyCore.js";
 
 export default async function handler(req: Request) {
   const auth = requireInternalAuth(req);
@@ -24,4 +22,3 @@ export default async function handler(req: Request) {
     headers: { "content-type": "application/json" },
   });
 }
-
