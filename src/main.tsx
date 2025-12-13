@@ -1,38 +1,23 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { ClerkProvider } from '@clerk/clerk-react'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.tsx'
 import { CartProvider } from './domains/cart/providers/CartContext'
-import { AuthProvider } from './domains/auth/ui/providers/AuthContext'
 import { DrawerProvider } from './ui/providers/DrawerProvider'
-
-// Always provide Clerk; fall back to a harmless placeholder key for preview/local.
-const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? 'pk_test_placeholder'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClerkProvider
-      publishableKey={clerkPublishableKey}
-      signInUrl="/sign-in"
-      signUpUrl="/sign-up"
-      afterSignInUrl="/account"
-      afterSignUpUrl="/account"
-    >
-      <HelmetProvider>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <CartProvider>
-            <AuthProvider>
-              <DrawerProvider>
-                <App />
-              </DrawerProvider>
-            </AuthProvider>
-          </CartProvider>
-        </BrowserRouter>
-      </HelmetProvider>
-    </ClerkProvider>
+    <HelmetProvider>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <CartProvider>
+          <DrawerProvider>
+            <App />
+          </DrawerProvider>
+        </CartProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </StrictMode>
 )
 

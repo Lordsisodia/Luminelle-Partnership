@@ -1,6 +1,6 @@
 /* @ts-nocheck */
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { successStories } from '@landing/data/landing'
+import { successStories } from '@/content/landing'
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { LazyVisible } from '@ui/components/LazyVisible'
 

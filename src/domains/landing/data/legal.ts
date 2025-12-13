@@ -3,7 +3,7 @@ export const legalIntro = {
     title: 'Lumelle Affiliate Terms & Conditions',
     updated: 'Updated October 30, 2025',
     summary:
-      'These terms outline how affiliates partner with Lumelle Beauty, including commission structure, payout cadence, and community standards.',
+      'These terms outline how creators partner with Lumelle Beauty, including commission structure, payout cadence, and community standards.',
   },
   privacy: {
     title: 'Lumelle Privacy Policy',

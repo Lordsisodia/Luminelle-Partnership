@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { fetchOrderById, type Order } from '@account/state/OrdersStore'
-import { useAuth as useClerkAuth } from '@clerk/clerk-react'
 import { setNoIndexNoFollow } from '@/lib/seo'
 
 export const OrderTrackingPage = () => {
@@ -9,7 +8,6 @@ export const OrderTrackingPage = () => {
   const [result, setResult] = useState<Order | null>(null)
   const [error, setError] = useState('')
   const [checking, setChecking] = useState(false)
-  const { getToken } = useClerkAuth()
 
   useEffect(() => { setNoIndexNoFollow() }, [])
 
@@ -24,8 +22,7 @@ export const OrderTrackingPage = () => {
 
     setChecking(true)
     try {
-      const token = await getToken({ template: 'supabase' }).catch(() => null)
-      const found = await fetchOrderById(lookup, token ?? undefined)
+      const found = await fetchOrderById(lookup)
       if (!found) {
         setError('We couldn’t find that order. Double-check the ID from your confirmation email.')
         setResult(null)

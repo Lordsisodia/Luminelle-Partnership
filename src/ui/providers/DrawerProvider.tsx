@@ -1,9 +1,7 @@
-import type { ReactNode } from 'react'
 import { useEffect, useMemo, useRef, useState, type PropsWithChildren } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { UserRound, ArrowRight } from 'lucide-react'
 import { useCart } from '@cart/providers/CartContext'
-import { useAuth } from '@auth/ui/providers/AuthContext'
 import { DrawerContext } from './DrawerContext'
 
 type DrawerProviderProps = PropsWithChildren<{
@@ -21,7 +19,6 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
 
   const { items, qty, subtotal, setQty, remove } = useCart()
-  const { signedIn, user, signIn } = useAuth()
 
   const FREE_SHIP_THRESHOLD = 40
   const cartQty = qty
@@ -168,7 +165,7 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                   </RouterLink>
                   <div className="mt-1 rounded-xl">
                     <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa/50">More</div>
-                    <RouterLink to="/affiliates" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/affiliates' }) }}>Affiliates</RouterLink>
+                    <RouterLink to="/creators" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/creators' }) }}>Creators</RouterLink>
                     <RouterLink to="/brand" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}>Brand story</RouterLink>
                     <RouterLink to="/blog" className="block h-12 rounded-xl px-3 text-sm font-medium text-brand-cocoa hover:bg-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}>Blog</RouterLink>
                   </div>
@@ -188,38 +185,20 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
 
                 <div className="px-4">
                   <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Profile</p>
-                  {signedIn ? (
-                    <RouterLink
-                      to="/account/orders"
-                      onClick={() => setMenuOpen(false)}
-                      className="flex w-full items-center justify-between rounded-2xl border border-brand-blush/60 px-4 py-3 text-left text-sm shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
-                    >
-                      <span className="flex items-center gap-3">
-                        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-blush/50 text-sm font-bold uppercase text-brand-cocoa">
-                          {user?.firstName?.[0] ?? 'U'}
-                        </span>
-                        <span className="leading-tight">
-                          <span className="font-semibold text-brand-cocoa">Hi, {user?.firstName ?? 'there'}</span>
-                          <span className="block text-[12px] font-medium text-brand-cocoa/70">View orders & details</span>
-                        </span>
+                  <RouterLink
+                    to="/account"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex w-full items-center justify-between rounded-2xl bg-brand-peach px-4 py-3 text-left text-sm font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5 hover:bg-brand-peach/90 hover:shadow-md"
+                  >
+                    <span className="flex items-center gap-2">
+                      <UserRound className="h-5 w-5" />
+                      <span className="leading-tight">
+                        Account & orders
+                        <span className="block text-[12px] font-medium text-brand-cocoa/80">Sign in to view history</span>
                       </span>
-                      <ArrowRight className="h-5 w-5 text-brand-cocoa/60" />
-                    </RouterLink>
-                  ) : (
-                    <button
-                      className="flex w-full items-center justify-between rounded-2xl bg-brand-peach px-4 py-3 text-left text-sm font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5 hover:bg-brand-peach/90 hover:shadow-md"
-                      onClick={() => { track('profile_signin_click'); signIn('Jane') }}
-                    >
-                      <span className="flex items-center gap-2">
-                        <UserRound className="h-5 w-5" />
-                        <span className="leading-tight">
-                          Sign in or create account
-                          <span className="block text-[12px] font-medium text-brand-cocoa/80">Faster checkout & order history</span>
-                        </span>
-                      </span>
-                      <ArrowRight className="h-5 w-5" />
-                    </button>
-                  )}
+                    </span>
+                    <ArrowRight className="h-5 w-5" />
+                  </RouterLink>
                 </div>
 
                 <div className="my-4 h-px bg-brand-blush/60" />

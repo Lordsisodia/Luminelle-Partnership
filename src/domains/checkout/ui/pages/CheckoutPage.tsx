@@ -2,7 +2,6 @@ import { useMemo, useState, useEffect } from 'react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useCart } from '@cart/providers/CartContext'
 import { addOrder, type Order } from '@account/state/OrdersStore'
-import { useAuth as useClerkAuth, useUser } from '@clerk/clerk-react'
 import { shopifyEnabled } from '@/lib/shopify/shopify'
 import { setNoIndex } from '@/lib/seo'
 
@@ -25,16 +24,13 @@ const Stepper = ({ step }: { step: number }) => (
 )
 
 export const CheckoutPage = () => {
-  const { items, subtotal, qty, clear, checkoutUrl, setEmail } = useCart()
+  const { items, subtotal, qty, clear, checkoutUrl } = useCart()
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || qty === 0 ? 0 : STANDARD_SHIPPING
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping])
-  const [emailOptIn] = useState(true)
   // const [email, setEmail] = useState('')
-  const [step, setStep] = useState(0)
+  const step = 0
   const [placingOrder, setPlacingOrder] = useState(false)
   const disabled = qty === 0
-  const { getToken } = useClerkAuth()
-  const { user } = useUser()
 
   const placeOrder = async () => {
     if (disabled || placingOrder) return
@@ -60,8 +56,7 @@ export const CheckoutPage = () => {
       ],
     }
     try {
-      const token = await getToken({ template: 'supabase' }).catch(() => null)
-      await addOrder(order, token ?? undefined)
+      await addOrder(order)
       clear()
       window.location.href = `/order/${order.id}/confirm`
     } finally {
@@ -70,17 +65,6 @@ export const CheckoutPage = () => {
   }
 
   useEffect(() => { setNoIndex() }, [])
-
-  // Prefill Shopify cart with the signed-in user's email to avoid Shopify login prompt.
-  useEffect(() => {
-    const email = user?.primaryEmailAddress?.emailAddress
-    if (email && setEmail) {
-      setEmail(email)
-    }
-  }, [user, setEmail])
-
-  const goNext = () => setStep((s) => Math.min(s + 1, steps.length - 1))
-  const goBack = () => setStep((s) => Math.max(0, s - 1))
 
   const renderStepContent = () => {
     switch (step) {

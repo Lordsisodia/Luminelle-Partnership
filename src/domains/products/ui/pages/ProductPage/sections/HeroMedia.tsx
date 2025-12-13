@@ -58,7 +58,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
                     height={960}
                     draggable="false"
                     loading="eager"
-                    fetchpriority="high"
+                    fetchPriority="high"
                     decoding="async"
                   />
                 )

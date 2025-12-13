@@ -1,6 +1,6 @@
 /* @ts-nocheck */
 import { StarRating } from '@ui/components/StarRating'
-import type { HomeConfig } from '@landing/data/home.config'
+import type { HomeConfig } from '@content/home.types'
 import { cdnUrl } from '@/lib/utils/cdn'
 
 type Props = {

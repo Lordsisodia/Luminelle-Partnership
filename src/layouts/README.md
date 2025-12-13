@@ -1,3 +1,3 @@
-# src/layouts
+# Layouts
 
-Page-level shells that compose shared chrome (header/footer) and slots for domain content. Keep layouts presentational; business logic stays in domains.
+Shared layout shells used across domains. `MarketingLayout` was moved here from the landing domain because many pages (products, cart, checkout, blog, account) reuse it.

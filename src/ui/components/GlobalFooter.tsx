@@ -17,7 +17,7 @@ export function GlobalFooter({ supportEmail }: GlobalFooterProps) {
         <div className="flex flex-col items-start gap-2 text-sm text-brand-cocoa/70 md:items-end">
           <RouterLink to="/terms" className="hover:text-brand-cocoa">Terms &amp; Conditions</RouterLink>
           <RouterLink to="/privacy" className="hover:text-brand-cocoa">Privacy Policy</RouterLink>
-          <RouterLink to="/affiliates" className="hover:text-brand-cocoa">Affiliates</RouterLink>
+          <RouterLink to="/creators" className="hover:text-brand-cocoa">Creators</RouterLink>
           <a href={`mailto:${supportEmail}`} className="hover:text-brand-cocoa">{supportEmail}</a>
         </div>
       </div>

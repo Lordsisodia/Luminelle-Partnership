@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react'
 import { useParams, Link as RouterLink } from 'react-router-dom'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { fetchOrderById, type Order } from '@account/state/OrdersStore'
-import { useAuth as useClerkAuth } from '@clerk/clerk-react'
 import { setNoIndexNoFollow } from '@/lib/seo'
 
 export const OrderConfirmationPage = () => {
   const { orderId } = useParams()
   const [order, setOrder] = useState<Order | null>(null)
   const [loading, setLoading] = useState(true)
-  const { getToken } = useClerkAuth()
 
   useEffect(() => {
     setNoIndexNoFollow()
@@ -23,8 +21,7 @@ export const OrderConfirmationPage = () => {
     const hydrate = async () => {
       setLoading(true)
       try {
-        const token = await getToken({ template: 'supabase' }).catch(() => null)
-        const found = await fetchOrderById(orderId, token ?? undefined)
+        const found = await fetchOrderById(orderId)
         if (!active) return
         setOrder(found)
       } finally {
@@ -36,7 +33,7 @@ export const OrderConfirmationPage = () => {
     return () => {
       active = false
     }
-  }, [getToken, orderId])
+  }, [orderId])
 
   return (
     <MarketingLayout navItems={[]} subtitle="Order confirmed">

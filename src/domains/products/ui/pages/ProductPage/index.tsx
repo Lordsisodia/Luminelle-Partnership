@@ -4,7 +4,6 @@ import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
 import { useCart } from '@cart/providers/CartContext'
-import { setMetaTags, injectJsonLd } from '@/lib/seo'
 import { renderSections } from './sections/SectionsMap'
 import { useProductContent } from '@/domains/products/hooks/useProductContent'
 
@@ -16,6 +15,8 @@ const navItems: NavItem[] = [
 ]
 
 
+
+import { Seo } from '@/components/Seo'
 
 export const ProductPage = () => {
   const { add } = useCart()
@@ -85,14 +86,6 @@ export const ProductPage = () => {
   }
 
   useEffect(() => {
-    setMetaTags({
-      title: `${productTitle} | Satin-lined waterproof shower cap`,
-      description: `${productDesc} • Blocks steam for silk presses, curls, and braids. Free returns in 30 days.`,
-      image: heroImage,
-      url: canonicalUrl,
-      type: 'product',
-    })
-
     if (heroImage) {
       const existing = document.querySelector('link[rel="preload"][data-hero="pdp-hero"]') as HTMLLinkElement | null
       if (!existing) {
@@ -104,46 +97,46 @@ export const ProductPage = () => {
         document.head.appendChild(l)
       }
     }
+  }, [heroImage])
 
-    injectJsonLd('pdp-jsonld', {
-      '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: productTitle,
-      description: `${productDesc} • Blocks steam for silk presses, curls, and braids. Free returns in 30 days.`,
-      image: heroImage ? [heroImage] : undefined,
-      brand: { '@type': 'Brand', name: 'Lumelle' },
-      offers: {
-        '@type': 'Offer',
-        priceCurrency: 'GBP',
-        price: price.toFixed(2),
-        availability: 'https://schema.org/InStock',
-        url: canonicalUrl,
-        itemCondition: 'https://schema.org/NewCondition',
-        merchantReturnPolicy: {
-          '@type': 'MerchantReturnPolicy',
-          applicableCountry: 'GB',
-          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-          merchantReturnDays: 30,
-          returnFees: 'https://schema.org/FreeReturn',
-          returnMethod: 'https://schema.org/ReturnByMail',
-        },
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: productTitle,
+    description: `${productDesc} • Blocks steam for silk presses, curls, and braids. Free returns in 30 days.`,
+    image: heroImage ? [heroImage] : undefined,
+    brand: { '@type': 'Brand', name: 'Lumelle' },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'GBP',
+      price: price.toFixed(2),
+      availability: 'https://schema.org/InStock',
+      url: canonicalUrl,
+      itemCondition: 'https://schema.org/NewCondition',
+      merchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'GB',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        merchantReturnDays: 30,
+        returnFees: 'https://schema.org/FreeReturn',
+        returnMethod: 'https://schema.org/ReturnByMail',
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        reviewCount: '100',
-      },
-    })
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '100',
+    },
+  }
 
-    injectJsonLd('pdp-breadcrumb', {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Product', item: canonicalUrl },
-      ],
-    })
-  }, [canonicalUrl, heroImage, price, productDesc, productTitle])
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Product', item: canonicalUrl },
+    ],
+  }
 
   const essentials =
     sections?.essentials && sections.essentials.length > 0
@@ -170,6 +163,14 @@ export const ProductPage = () => {
 
   return (
     <MarketingLayout navItems={navItems} primaryLabel="Add to Cart" onPrimaryAction={handleAddToCart} subtitle="Product">
+      <Seo
+        title={`${productTitle} | Satin-lined waterproof shower cap`}
+        description={`${productDesc} • Blocks steam for silk presses, curls, and braids. Free returns in 30 days.`}
+        image={heroImage}
+        url={canonicalUrl}
+        type="product"
+        jsonLd={[productJsonLd, breadcrumbJsonLd]}
+      />
       {/* Hero media + info */}
       {renderSections({
         gallery,

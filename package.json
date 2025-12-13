@@ -16,7 +16,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@shopify/app-bridge-react": "^4.1.6",
     "@shopify/polaris": "^12.0.0",
-    "@siso/ui": "file:./siso-app-factory/packages/ui",
+    "@siso/ui": "file:./.siso-app-factory/packages/ui",
     "@supabase/supabase-js": "^2.83.0",
     "@tanstack/react-query": "^5.90.12",
     "@vercel/node": "^2.3.0",

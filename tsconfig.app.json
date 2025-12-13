@@ -20,6 +20,8 @@
       "@/*": ["src/*"],
       "@landing/*": ["src/domains/landing/*"],
       "@cart/*": ["src/domains/cart/*"],
+      "@creators/*": ["src/domains/creators/*"],
+      "@brand/*": ["src/domains/brand/*"],
       "@checkout/*": ["src/domains/checkout/*"],
       "@products/*": ["src/domains/products/*"],
       "@blog/*": ["src/domains/blog/*"],
@@ -29,6 +31,7 @@
       "@shared/*": ["src/domains/shared/*"],
       "@content/*": ["src/content/*"],
       "@utils/*": ["src/utils/*"],
+      "@layouts/*": ["src/layouts/*"],
       "@ui/*": ["src/ui/*"],
       "@ui-lib/*": ["../components-library/packages/ui/dist/*"]
     },

@@ -1,0 +1,4 @@
+[submodule ".siso-app-factory"]
+	path = .siso-app-factory
+	url = https://github.com/Lordsisodia/siso-app-factory
+	branch = main

@@ -5,7 +5,11 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 const buildClient = (authToken?: string) =>
   createClient(supabaseUrl!, supabaseAnonKey!, {
-    auth: { persistSession: false },
+    // Separate storage keys to avoid GoTrue instance collisions in the browser.
+    auth: {
+      persistSession: false,
+      storageKey: authToken ? 'sb-lumelle-auth-token' : 'sb-lumelle-auth-anon',
+    },
     global: authToken
       ? {
           headers: {
@@ -20,6 +24,7 @@ export const createSupabaseClient = (authToken?: string) => {
   return buildClient(authToken)
 }
 
+// Singleton base client to reuse across the app.
 export const supabase = createSupabaseClient()
 
 export const isSupabaseConfigured = Boolean(supabase)

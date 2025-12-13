@@ -1,6 +1,6 @@
 # Products domain
 
-Owns storefront merchandising pages (Shop landing, PDP, search). Imports: `@products/*`.
+Owns storefront merchandising pages (PDP, search). Imports: `@products/*`.
 
 Standard structure (aligned with other domains):
 - data/            – hard-coded configs, types, loaders
@@ -10,11 +10,11 @@ Standard structure (aligned with other domains):
 - ui/
   - components/    – shared atoms/molecules for product UI
   - layouts/       – layout wrappers if product pages need custom chrome
-  - pages/         – ProductPage, ShopLandingPage, SearchResultsPage
+  - pages/         – ProductPage, SearchResultsPage
   - providers/     – domain-scoped providers (currently empty)
-  - sections/      – reusable PDP/landing sections
-  - archive/       – parked/unused sections
+  - sections/      – reusable PDP sections
+  - archive/       – parked/unused sections (now in `src/archive/products/ui`)
 
 Notes:
 - Configs live in data/product-config.ts; loaders in data/product-loaders.ts.
-- Sections are split for PDP; landing-specific sections moved to landing/ui/sections/shop.
+- Sections are split for PDP; landing-specific sections live in `@landing/ui/sections/shop`.

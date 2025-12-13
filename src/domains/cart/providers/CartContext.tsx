@@ -101,7 +101,6 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
           setCheckoutUrl(undefined)
           localStorage.removeItem('lumelle_shopify_cart_id')
         })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const applyShopifyCart = (cart: ShopifyCart) => {
@@ -252,7 +251,6 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => {
   const ctx = useContext(CartCtx)
   if (!ctx) throw new Error('useCart must be used within CartProvider')
