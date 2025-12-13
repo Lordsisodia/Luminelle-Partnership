@@ -115,11 +115,11 @@ export const OrdersPage = () => {
                 <div className="mt-2 flex gap-2">
                   <a
                     className="rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white"
-                    href={`/api/customer-auth/start?shop=${encodeURIComponent(import.meta.env.SHOPIFY_STORE_DOMAIN || '')}`}
+                    href={`/api/customer-auth/start?shop=${encodeURIComponent(import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || '')}`}
                   >
                     Sign in securely
                   </a>
-                  <a className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" href={`https://${import.meta.env.SHOPIFY_STORE_DOMAIN}/account`}>Open hosted account</a>
+                  <a className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" href={`https://${import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || ''}/account`}>Open hosted account</a>
                   {isCASignedIn ? (
                     <a className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" href="/api/customer-auth/logout">Sign out</a>
                   ) : null}
