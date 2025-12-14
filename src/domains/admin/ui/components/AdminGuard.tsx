@@ -1,11 +1,67 @@
-import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, useAuth, useUser } from '@clerk/clerk-react'
+import { useEffect, useMemo, useState } from 'react'
+import { decodeClerkJwtPayload, hasAdminRole } from '@admin/logic/clerkJwt'
 
-// Thin guard that restricts admin routes to emails listed in VITE_ADMIN_EMAILS (comma-separated).
-export default function AdminGuard({ children }: { children: React.ReactNode }) {
-  const { user } = useUser()
-  const admins = (import.meta.env.VITE_ADMIN_EMAILS as string | undefined)?.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean) || []
+type AdminGuardProps = {
+  children: React.ReactNode
+}
+
+// Clerk-first admin gate:
+// - Read roles from the Clerk JWT template `supabase` (preferred; aligns with Supabase RLS + Edge Functions).
+// - Optionally fall back to `VITE_ADMIN_EMAILS` if set (helps local/dev bootstrap).
+export default function AdminGuard({ children }: AdminGuardProps) {
+  const { user, isLoaded: userLoaded } = useUser()
+  const { getToken, isLoaded: authLoaded, isSignedIn } = useAuth()
+
   const email = (user?.primaryEmailAddress?.emailAddress || '').toLowerCase()
-  const allowed = admins.length === 0 ? true : admins.includes(email)
+  const emailAllowlist = useMemo(() => {
+    const raw = (import.meta.env.VITE_ADMIN_EMAILS as string | undefined) || ''
+    return raw
+      .split(',')
+      .map((s) => s.trim().toLowerCase())
+      .filter(Boolean)
+  }, [])
+
+  const [checking, setChecking] = useState(true)
+  const [allowed, setAllowed] = useState(false)
+  const [reason, setReason] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!authLoaded || !userLoaded) return
+    if (!isSignedIn) return
+
+    let cancelled = false
+    const check = async () => {
+      setChecking(true)
+      setReason(null)
+
+      // Prefer JWT roles so UI access matches Supabase RLS + Edge Functions.
+      const token = await getToken({ template: 'supabase' }).catch(() => null)
+      const payload = token ? decodeClerkJwtPayload(token) : null
+      const isAdmin = hasAdminRole(payload?.app_metadata?.roles)
+
+      // Optional fallback (bootstrap/dev only): allowlist by email.
+      // In prod, prefer Clerk roles so access matches Supabase RLS + Edge Functions.
+      const hasAllowlistedEmail = import.meta.env.DEV && emailAllowlist.length > 0 && emailAllowlist.includes(email)
+
+      const nextAllowed = isAdmin || hasAllowlistedEmail
+      const nextReason = nextAllowed
+        ? null
+        : token
+          ? 'Missing admin role. Configure Clerk JWT template `supabase` to include `app_metadata.roles: [\"admin\"]`.'
+          : 'Missing Clerk JWT template `supabase` token. Configure Clerk → JWT Templates to enable Supabase auth.'
+
+      if (cancelled) return
+      setAllowed(nextAllowed)
+      setReason(nextReason)
+      setChecking(false)
+    }
+
+    void check()
+    return () => {
+      cancelled = true
+    }
+  }, [authLoaded, email, emailAllowlist, getToken, isSignedIn, userLoaded])
 
   return (
     <>
@@ -22,12 +78,22 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
         </div>
       </SignedOut>
       <SignedIn>
-        {allowed ? (
+        {checking ? (
+          <div className="mx-auto max-w-2xl p-6 text-brand-cocoa">
+            <h2 className="text-xl font-semibold">Checking admin access…</h2>
+            <p className="mt-2 text-brand-cocoa/70">Verifying your Clerk roles.</p>
+          </div>
+        ) : allowed ? (
           <>{children}</>
         ) : (
           <div className="mx-auto max-w-2xl p-6 text-brand-cocoa">
             <h2 className="text-xl font-semibold">Access denied</h2>
             <p className="mt-2">Your account does not have admin access.</p>
+            {reason ? (
+              <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-4 text-sm text-brand-cocoa/80">
+                {reason}
+              </div>
+            ) : null}
           </div>
         )}
       </SignedIn>

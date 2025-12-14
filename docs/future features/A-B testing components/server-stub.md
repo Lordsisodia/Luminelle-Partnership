@@ -5,9 +5,10 @@ Purpose: show exactly how we’ll implement endpoints with env kill switches, wi
 ## Env flags
 ```
 EXPERIMENTS_ENABLED=false
-HEATMAP_ENABLED=false
 SUPABASE_URL=...
-SUPABASE_SERVICE_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
+POSTHOG_API_KEY=... (optional)
+POSTHOG_HOST=... (optional, e.g. https://us.i.posthog.com or https://eu.i.posthog.com)
 ```
 
 ## Express route skeleton
@@ -20,7 +21,7 @@ import { createClient } from '@supabase/supabase-js'
 const router = express.Router()
 const enabled = process.env.EXPERIMENTS_ENABLED === 'true'
 const supabase = enabled
-  ? createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
+  ? createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
   : null
 
 router.get('/config', async (_req, res) => {
@@ -50,7 +51,9 @@ const TrackItem = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('event'),
-    name: z.enum(['view_item','add_to_cart','begin_checkout','purchase','email_capture_submit','click','scroll_depth','exit']),
+    // Keep this list small to avoid free-tier and DB bloat.
+    // Heatmaps/replay should come from Clarity/Hotjar/OpenReplay, not from storing x/y click coords here.
+    name: z.enum(['page_view','view_item','add_to_cart','begin_checkout','purchase','email_capture_submit','cta_click']),
     experiment_key: z.string().optional(),
     variant: z.string().optional(),
     anon_id: z.string(),
@@ -81,8 +84,16 @@ router.post('/track', async (req, res) => {
     if (error) return res.status(400).json({ error: error.message })
   }
   if (events.length) {
+    // Option A (simple): store minimal events in DB (no click coords; only key conversions + CTA clicks).
     const { error } = await supabase.from('events').insert(events)
     if (error) return res.status(400).json({ error: error.message })
+
+    // Option B (recommended if Supabase storage is tight): forward events to PostHog and do not store raw events in DB.
+    // - PostHog becomes the event warehouse (free-tier-safe if you avoid autocapture/replay).
+    // - Supabase remains focused on core app data + experiment config/rollups.
+    //
+    // Pseudocode only:
+    // if (process.env.POSTHOG_API_KEY) await forwardToPosthog(events)
   }
   return res.json({ accepted: parsed.length, rejected: [] })
 })

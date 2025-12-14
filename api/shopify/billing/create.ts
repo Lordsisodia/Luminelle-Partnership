@@ -1,4 +1,4 @@
-import { getPgPool } from "../../_lib/db.js";
+import { ensureShopifySessionTable, getPgPool } from "../../_lib/db.js";
 
 const API_VERSION = process.env.SHOPIFY_API_VERSION || "2025-01";
 
@@ -9,10 +9,11 @@ export default async function handler(req: Request) {
   if (!shop) return new Response("Missing shop", { status: 400 });
 
   const pool = getPgPool();
-  const { rows } = await pool.query('SELECT accessToken FROM "Session" WHERE id = $1 LIMIT 1', [
+  await ensureShopifySessionTable()
+  const { rows } = await pool.query('SELECT accesstoken FROM "Session" WHERE id = $1 LIMIT 1', [
     `offline_${shop}`,
   ]);
-  const token = rows[0]?.accesstoken || rows[0]?.accessToken; // pg lowercases unless quoted; we used quoted table/columns
+  const token = rows[0]?.accesstoken;
   if (!token) return new Response("No session", { status: 401 });
 
   const mutation = `#graphql\nmutation CreateSub($name: String!, $returnUrl: URL!, $lineItems: [AppSubscriptionLineItemInput!]!, $test: Boolean!) {\n  appSubscriptionCreate(name: $name, returnUrl: $returnUrl, lineItems: $lineItems, test: $test) {\n    confirmationUrl\n    userErrors { field message }\n  }\n}`;

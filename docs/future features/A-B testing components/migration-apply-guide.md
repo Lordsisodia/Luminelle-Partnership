@@ -10,7 +10,7 @@ Use this when ready; keep prod last.
 1) Set env locally for staging:
    ```
    export SUPABASE_URL="<staging-db-connection-string>"
-   export SUPABASE_SERVICE_KEY="<staging-service-key>"
+   export SUPABASE_SERVICE_ROLE_KEY="<staging-service-role-key>"
    ```
 2) Apply migration:
    - Using psql: `psql "$SUPABASE_URL" -f server/migrations/2025-12-11_experiments.sql`

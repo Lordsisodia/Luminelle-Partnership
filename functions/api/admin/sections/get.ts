@@ -1,0 +1,43 @@
+import type { PagesFunction } from '../../../_lib/types'
+import { requireInternalAuth } from '../../../_lib/internalAuth'
+import { json, methodNotAllowed, text } from '../../../_lib/response'
+import { adminGraphQL, getAdminToken } from '../../../_lib/shopifyAdmin'
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'GET') return methodNotAllowed(['GET'])
+
+  const auth = requireInternalAuth(request, env)
+  if (!auth.ok) return json({ error: auth.message }, { status: auth.status })
+
+  const url = new URL(request.url)
+  const handle = url.searchParams.get('handle') || 'shower-cap'
+  const shop = url.searchParams.get('shop') || env.SHOPIFY_STORE_DOMAIN || ''
+  if (!shop) return text('Missing shop', { status: 400 })
+
+  const token = await getAdminToken(env, shop)
+  const data = await adminGraphQL<any>(
+    env,
+    shop,
+    token,
+    `#graphql
+      query($q:String!) {
+        products(first:1, query:$q) {
+          edges {
+            node {
+              id
+              metafield(namespace:"custom", key:"sections") {
+                reference { ... on Metaobject { id fields { key value } } }
+              }
+            }
+          }
+        }
+      }
+    `,
+    { q: `handle:${handle}` },
+  )
+
+  const product = data?.products?.edges?.[0]?.node
+  const meta = product?.metafield?.reference
+  return json({ metaobjectId: meta?.id, fields: meta?.fields || [] })
+}
+

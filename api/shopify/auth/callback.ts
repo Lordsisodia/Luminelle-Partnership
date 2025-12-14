@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 import { buildMessageFromQuery, signHmac, safeCompare } from "../_lib/crypto.js";
-import { getPgPool } from "../../_lib/db.js";
+import { ensureShopifySessionTable, getPgPool } from "../../_lib/db.js";
 
 function bad(res: VercelResponse, status = 400, msg = "Bad request") {
   return res.status(status).send(msg)
@@ -46,8 +46,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Persist offline session (simple model)
   const pool = getPgPool();
+  await ensureShopifySessionTable()
   await pool.query(
-    'INSERT INTO "Session" (id, shop, state, isOnline, scope, accessToken) VALUES ($1,$2,$3,$4,$5,$6)\n     ON CONFLICT (id) DO UPDATE SET accessToken = excluded.accessToken, scope = excluded.scope',
+    'INSERT INTO "Session" (id, shop, state, isonline, scope, accesstoken) VALUES ($1,$2,$3,$4,$5,$6)\n     ON CONFLICT (id) DO UPDATE SET accesstoken = excluded.accesstoken, scope = excluded.scope',
     [`offline_${shop}`, shop, state, false, tokenJson.scope || null, tokenJson.access_token],
   );
 

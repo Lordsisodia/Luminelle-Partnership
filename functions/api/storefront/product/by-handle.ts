@@ -1,0 +1,28 @@
+import type { PagesFunction } from '../../../_lib/types'
+import { json, methodNotAllowed, text } from '../../../_lib/response'
+import { runStorefront } from '../../../_lib/storefront'
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'GET') return methodNotAllowed(['GET'])
+  const url = new URL(request.url)
+  const handle = url.searchParams.get('handle')
+  if (!handle) return text('Missing handle', { status: 400 })
+  const data = await runStorefront<any>(
+    env,
+    `#graphql
+      query ProductByHandle($handle: String!) {
+        product(handle: $handle) {
+          id
+          title
+          description
+          featuredImage { url }
+          images(first: 10) { edges { node { url } } }
+          variants(first: 5) { edges { node { id title price: priceV2 { amount currencyCode } } } }
+        }
+      }
+    `,
+    { handle },
+  )
+  return json({ product: data.product })
+}
+

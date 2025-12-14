@@ -26,7 +26,7 @@ export const Avatar = ({ name, size = 40 }: AvatarProps) => {
   }
   return (
     <div
-      className="flex items-center justify-center rounded-full text-sm font-semibold text-brand-cocoa"
+      className="flex items-center justify-center rounded-full text-sm font-semibold text-semantic-text-primary"
       aria-label={`${name} avatar`}
       style={style}
     >
@@ -34,4 +34,3 @@ export const Avatar = ({ name, size = 40 }: AvatarProps) => {
     </div>
   )
 }
-

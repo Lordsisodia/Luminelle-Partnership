@@ -24,7 +24,7 @@ type CartState = {
   qty: number
   checkoutUrl?: string
   setEmail?: (email: string) => void
-  setAttributes?: (attrs: Record<string, string>) => void
+  setAttributes?: (attrs: Record<string, string>) => Promise<void>
   applyDiscount?: (code: string) => void
 }
 
@@ -133,13 +133,13 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     run().catch(() => undefined)
   }
 
-  const setAttributes: CartState['setAttributes'] = (attrs) => {
+  const setAttributes: CartState['setAttributes'] = async (attrs) => {
     if (!shopifyEnabled || !shopifyCartId) return
     const pairs = Object.entries(attrs)
       .filter(([, v]) => typeof v === 'string' && v)
       .map(([key, value]) => ({ key, value }))
     if (pairs.length === 0) return
-    const run = async () => {
+    try {
       if (useServerCart) {
         const res = await fetch('/api/storefront/cart/attributes-update', {
           method: 'POST', headers: { 'content-type': 'application/json' },
@@ -147,12 +147,14 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
         })
         const j = await res.json()
         applyShopifyCart(mapServerCart(j.cart))
-      } else {
-        const cart = await cartAttributesUpdate(shopifyCartId, pairs)
-        applyShopifyCart(cart)
+        return
       }
+
+      const cart = await cartAttributesUpdate(shopifyCartId, pairs)
+      applyShopifyCart(cart)
+    } catch {
+      // best-effort only (should never block checkout)
     }
-    run().catch(() => undefined)
   }
 
   const applyDiscount: CartState['applyDiscount'] = (code) => {
@@ -172,6 +174,25 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     }
     run().catch(() => undefined)
   }
+
+  // If a user unlocks a welcome reward before they have a cart,
+  // we persist a pending discount code and apply it once the cart exists.
+  useEffect(() => {
+    if (!shopifyEnabled || !shopifyCartId) return
+    let pending: string | null = null
+    try {
+      pending = localStorage.getItem('lumelle_pending_discount_code')
+    } catch {
+      pending = null
+    }
+    if (!pending) return
+    try {
+      localStorage.removeItem('lumelle_pending_discount_code')
+    } catch {
+      // ignore
+    }
+    applyDiscount?.(pending)
+  }, [shopifyCartId])
 
   const add = async (item: Omit<CartItem, 'qty'>, qty?: number) => {
     const quantity = qty ?? 1

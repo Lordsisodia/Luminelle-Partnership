@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { setNoIndexNoFollow } from '@/lib/seo'
-import { AdminLayout } from '@admin/ui/layouts'
+import { AdminPageLayout } from '@admin/ui/layouts'
 
 type Summary = {
   totalOrders: number
@@ -21,7 +20,6 @@ export default function AnalyticsPage() {
   const [adminPass, setAdminPass] = useState<string>(() => sessionStorage.getItem('lumelle_admin_pass') || '')
   const [days, setDays] = useState(30)
 
-  useEffect(() => { setNoIndexNoFollow() }, [])
   useEffect(() => {
     fetch('/api/metrics/summary').then((r) => r.json()).then(setData).catch(() => setData(null))
     fetch(`/api/metrics/daily?days=${days}`).then((r) => r.json()).then(setDaily).catch(() => setDaily([]))
@@ -34,61 +32,72 @@ export default function AnalyticsPage() {
   }, [days])
 
   return (
-    <AdminLayout title="Analytics">
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa"
-          onClick={async () => {
-            try {
-              const pass = adminPass || prompt('Admin pass (INTERNAL_SHARED_SECRET)') || ''
-              if (!pass) return
-              sessionStorage.setItem('lumelle_admin_pass', pass)
-              setAdminPass(pass)
-              const res = await fetch('/api/exports/orders', { headers: { Authorization: `Bearer ${pass}` } })
-              const blob = await res.blob()
-              const url = URL.createObjectURL(blob)
-              const a = document.createElement('a')
-              a.href = url
-              a.download = 'orders.csv'
-              document.body.appendChild(a)
-              a.click()
-              a.remove()
-              URL.revokeObjectURL(url)
-            } catch {}
-          }}
-        >
-          Export orders CSV
-        </button>
-        <button
-          className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa"
-          onClick={async () => {
-            try {
-              const pass = adminPass || prompt('Admin pass (INTERNAL_SHARED_SECRET)') || ''
-              if (!pass) return
-              sessionStorage.setItem('lumelle_admin_pass', pass)
-              setAdminPass(pass)
-              const res = await fetch('/api/exports/customers', { headers: { Authorization: `Bearer ${pass}` } })
-              const blob = await res.blob()
-              const url = URL.createObjectURL(blob)
-              const a = document.createElement('a')
-              a.href = url
-              a.download = 'customers.csv'
-              document.body.appendChild(a)
-              a.click()
-              a.remove()
-              URL.revokeObjectURL(url)
-            } catch {}
-          }}
-        >
-          Export customers CSV
-        </button>
-        <div className="ml-auto inline-flex items-center gap-2 text-sm text-brand-cocoa/80">
-          <span>Range:</span>
-          {[7,30,90].map((d) => (
-            <button key={d} onClick={() => setDays(d)} className={`rounded-full border px-3 py-1 ${days===d?'border-brand-cocoa':'border-brand-blush/60'}`}>{d}d</button>
-          ))}
+    <AdminPageLayout
+      title="Analytics"
+      subtitle="Orders, revenue, cohorts, and refunds."
+      actions={
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            className="rounded-full border border-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-brand-cocoa"
+            onClick={async () => {
+              try {
+                const pass = adminPass || prompt('Admin pass (INTERNAL_SHARED_SECRET)') || ''
+                if (!pass) return
+                sessionStorage.setItem('lumelle_admin_pass', pass)
+                setAdminPass(pass)
+                const res = await fetch('/api/exports/orders', { headers: { Authorization: `Bearer ${pass}` } })
+                const blob = await res.blob()
+                const url = URL.createObjectURL(blob)
+                const a = document.createElement('a')
+                a.href = url
+                a.download = 'orders.csv'
+                document.body.appendChild(a)
+                a.click()
+                a.remove()
+                URL.revokeObjectURL(url)
+              } catch {}
+            }}
+          >
+            Export orders
+          </button>
+          <button
+            className="rounded-full border border-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-brand-cocoa"
+            onClick={async () => {
+              try {
+                const pass = adminPass || prompt('Admin pass (INTERNAL_SHARED_SECRET)') || ''
+                if (!pass) return
+                sessionStorage.setItem('lumelle_admin_pass', pass)
+                setAdminPass(pass)
+                const res = await fetch('/api/exports/customers', { headers: { Authorization: `Bearer ${pass}` } })
+                const blob = await res.blob()
+                const url = URL.createObjectURL(blob)
+                const a = document.createElement('a')
+                a.href = url
+                a.download = 'customers.csv'
+                document.body.appendChild(a)
+                a.click()
+                a.remove()
+                URL.revokeObjectURL(url)
+              } catch {}
+            }}
+          >
+            Export customers
+          </button>
+          <div className="inline-flex items-center gap-2 text-sm text-brand-cocoa/80">
+            <span className="hidden sm:inline">Range:</span>
+            {[7, 30, 90].map((d) => (
+              <button
+                key={d}
+                onClick={() => setDays(d)}
+                className={`rounded-full border px-3 py-1 ${days === d ? 'border-brand-cocoa' : 'border-brand-blush/60'}`}
+              >
+                {d}d
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      }
+    >
 
       {!data ? (
         <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading…</div>
@@ -210,7 +219,7 @@ export default function AnalyticsPage() {
           ) : null}
         </div>
       )}
-    </AdminLayout>
+    </AdminPageLayout>
   )
 }
 

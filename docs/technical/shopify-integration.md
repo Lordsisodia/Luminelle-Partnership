@@ -74,6 +74,15 @@ product(handle: $handle) {
 - Redeploy; verify Network calls go to `…/api/2025-10/graphql.json` with 200 responses.
 - QA: add item, reload (cart persists), click Buy Now → Shopify checkout shows line item.
 
+### Domain gotcha (important for headless)
+Shopify’s Storefront API returns `cart.checkoutUrl` on the shop’s **primary domain** (often a custom domain like `yourbrand.com`), and on newer checkouts it can look like:
+
+- `https://your-primary-domain.com/cart/c/<cartId>?key=...`
+
+If your **headless storefront** is deployed on the same domain (and your host rewrites unknown routes to `index.html`), then visiting that URL will load the SPA instead of Shopify, often presenting as a **white screen**.
+
+Fix: In Shopify Admin → **Settings → Domains**, set Shopify’s **primary domain** to a Shopify-served domain (recommended: a dedicated subdomain like `shop.yourbrand.com`) and point that subdomain’s DNS to Shopify. Alternatively, proxy Shopify checkout routes (at minimum `/cart/c/*` and usually `/checkouts/*`) to Shopify at the edge.
+
 ## 10) Current status (Dec 6, 2025)
 - Shopify wiring in code is complete and gated by envs.
 - Image CDN is optional (default is local `public/**`; enable with `VITE_USE_ASSET_CDN=1` + `VITE_ASSET_BASE_URL`).

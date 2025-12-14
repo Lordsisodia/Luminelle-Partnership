@@ -4,6 +4,7 @@ import { useCart } from '@cart/providers/CartContext'
 import { addOrder, type Order } from '@account/state/OrdersStore'
 import { shopifyEnabled } from '@/lib/shopify/shopify'
 import { setNoIndex } from '@/lib/seo'
+import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
 
 const FREE_SHIP_THRESHOLD = 40
 const STANDARD_SHIPPING = 3.95
@@ -24,7 +25,7 @@ const Stepper = ({ step }: { step: number }) => (
 )
 
 export const CheckoutPage = () => {
-  const { items, subtotal, qty, clear, checkoutUrl } = useCart()
+  const { items, subtotal, qty, clear, checkoutUrl, setAttributes } = useCart()
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || qty === 0 ? 0 : STANDARD_SHIPPING
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping])
   // const [email, setEmail] = useState('')
@@ -36,10 +37,21 @@ export const CheckoutPage = () => {
     if (disabled || placingOrder) return
     // If Shopify is configured and we have a checkout URL, send shopper to Shopify checkout
     if (shopifyEnabled && checkoutUrl && typeof window !== 'undefined') {
+      setPlacingOrder(true)
       try {
+        captureEvent('begin_checkout', { source: 'checkout_page', href: checkoutUrl })
+        await initPosthogOnce()
+        const attrs = buildCheckoutAttributionAttributes()
+        await Promise.race([
+          setAttributes?.(attrs),
+          new Promise((resolve) => setTimeout(resolve, 800)),
+        ])
         window.location.href = checkoutUrl
         return
-      } catch { }
+      } catch {
+        // fall through to local fallback below
+        setPlacingOrder(false)
+      }
     }
     setPlacingOrder(true)
     const order: Order = {

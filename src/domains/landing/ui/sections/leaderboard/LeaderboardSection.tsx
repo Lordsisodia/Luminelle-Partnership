@@ -11,7 +11,7 @@ export const LeaderboardSection = ({
   return (
     <section
       id="leaderboard"
-      className="scroll-mt-24 bg-brand-blush/15 py-20 text-brand-cocoa md:scroll-mt-32"
+      className="scroll-mt-24 bg-semantic-legacy-brand-blush/15 py-20 text-semantic-text-primary md:scroll-mt-32"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
@@ -22,15 +22,15 @@ export const LeaderboardSection = ({
             <button
               type="button"
               onClick={onJoinClick}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft hover:-translate-y-0.5 hover:bg-brand-peach/90"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-5 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90"
             >
               Claim your slot
             </button>
           }
         />
-        <div className="mt-10 overflow-hidden rounded-3xl border border-brand-peach/40 bg-white/95 shadow-sm">
-          <table className="min-w-full divide-y divide-brand-blush/40 text-left text-sm">
-            <thead className="bg-brand-blush/30 text-xs uppercase tracking-[0.28em] text-brand-cocoa/60">
+        <div className="mt-10 overflow-hidden rounded-3xl border border-semantic-accent-cta/40 bg-white/95 shadow-sm">
+          <table className="min-w-full divide-y divide-semantic-legacy-brand-blush/40 text-left text-sm">
+            <thead className="bg-semantic-legacy-brand-blush/30 text-xs uppercase tracking-[0.28em] text-semantic-text-primary/60">
               <tr>
                 <th className="px-4 py-3">Rank</th>
                 <th className="px-4 py-3">Creator</th>
@@ -39,10 +39,10 @@ export const LeaderboardSection = ({
                 <th className="px-4 py-3 text-right">Trend</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-brand-blush/30 text-brand-cocoa/80">
+            <tbody className="divide-y divide-semantic-legacy-brand-blush/30 text-semantic-text-primary/80">
               {leaderboardEntries.map((entry) => (
                 <tr key={entry.handle}>
-                  <td className="px-4 py-4 font-heading text-xl text-brand-cocoa">
+                  <td className="px-4 py-4 font-heading text-xl text-semantic-text-primary">
                     #{entry.rank}
                   </td>
                   <td className="px-4 py-4">
@@ -53,15 +53,15 @@ export const LeaderboardSection = ({
                         className="h-12 w-12 rounded-full object-cover"
                         loading="lazy"
                       />
-                      <span className="font-semibold text-brand-cocoa">
+                      <span className="font-semibold text-semantic-text-primary">
                         {entry.name}
                       </span>
                     </div>
                   </td>
-                  <td className="px-4 py-4 text-brand-cocoa">
+                  <td className="px-4 py-4 text-semantic-text-primary">
                     {entry.handle}
                   </td>
-                  <td className="px-4 py-4 text-right font-semibold text-brand-cocoa">
+                  <td className="px-4 py-4 text-right font-semibold text-semantic-text-primary">
                     {entry.sold}
                   </td>
                   <td className="px-4 py-4 text-right">
@@ -70,7 +70,7 @@ export const LeaderboardSection = ({
                         Rising
                       </span>
                     ) : (
-                      <span className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+                      <span className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
                         Steady
                       </span>
                     )}
@@ -80,7 +80,7 @@ export const LeaderboardSection = ({
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-xs uppercase tracking-[0.28em] text-brand-cocoa/50">
+        <p className="mt-4 text-xs uppercase tracking-[0.28em] text-semantic-text-primary/50">
           Updated daily · Join WhatsApp for the live leaderboard
         </p>
       </div>

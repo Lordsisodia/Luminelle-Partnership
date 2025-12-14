@@ -20,7 +20,7 @@ This is a practical guide to wire the endpoints and client SDK that were scaffol
 Pseudo-code outline to drop into `server/index.ts` or a router:
 ```ts
 import { createClient } from '@supabase/supabase-js'
-const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
+const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
 app.get('/api/experiment/config', async (_req, res) => {
   const { data, error } = await supabase
@@ -62,7 +62,7 @@ app.post('/api/experiment/track', async (req, res) => {
 - Add debug aids: query param `?exp_disable=1` to short-circuit provider; `?exp_key=variant` override for QA.
 
 ## Deployment & env
-- Add env vars: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY` for server; `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` already used client-side.
+- Add env vars: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` for server; `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` already used client-side.
 - Ensure service key is never shipped to client bundles.
 
 ## Observability

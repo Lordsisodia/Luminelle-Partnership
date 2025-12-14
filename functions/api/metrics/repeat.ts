@@ -1,0 +1,12 @@
+import type { PagesFunction } from '../../_lib/types'
+import { getSupabase } from '../../_lib/supabase'
+import { json, methodNotAllowed } from '../../_lib/response'
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'GET') return methodNotAllowed(['GET'])
+  const supabase = getSupabase(env)
+  const { data, error } = await supabase.rpc('lumelle_metrics_repeat')
+  if (error) throw error
+  return json(data ?? {})
+}
+

@@ -13,10 +13,10 @@ const enableAdmin = import.meta.env.VITE_ENABLE_ADMIN_UI === 'true';
 
 export const AdminGate = ({ children }) => {
   if (!enableAdmin) return <Navigate to="/" replace />;
-  const session = useSupabaseAdminSession(); // staging project
-  if (!session) return <LoginScreen />;
-  const roles = session?.user?.app_metadata?.roles || [];
-  if (!roles.includes('admin')) return <Forbidden />;
+  // Clerk-first: get the Clerk JWT template `supabase` and verify roles from claims.
+  const token = await getClerkToken({ template: 'supabase' })
+  const roles = decodeJwt(token)?.app_metadata?.roles || []
+  if (!roles.includes('admin')) return <Forbidden />
   return <AdminLayout>{children}</AdminLayout>;
 };
 ```

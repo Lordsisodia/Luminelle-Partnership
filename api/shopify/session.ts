@@ -1,10 +1,11 @@
-import { getPgPool } from "../_lib/db.js";
+import { ensureShopifySessionTable, getPgPool } from "../_lib/db.js";
 
 export default async function handler(req: Request) {
   const url = new URL(req.url);
   const shop = url.searchParams.get("shop");
   if (!shop) return new Response(JSON.stringify({ installed: false }), { headers: { "content-type": "application/json" } });
   const pool = getPgPool();
+  await ensureShopifySessionTable()
   const { rows } = await pool.query('SELECT 1 FROM "Session" WHERE id = $1 LIMIT 1', [
     `offline_${shop}`,
   ]);

@@ -6,6 +6,11 @@ import './index.css'
 import App from './App.tsx'
 import { CartProvider } from './domains/cart/providers/CartContext'
 import { DrawerProvider } from './ui/providers/DrawerProvider'
+import { initPosthogOnce } from '@/lib/analytics/posthog'
+
+// Start PostHog init early (feature flags may be needed during first render).
+// Actual event capture remains gated by `VITE_ANALYTICS_ENABLED`.
+void initPosthogOnce()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -20,10 +20,10 @@ export const SectionHeading = ({
 
   return (
     <div
-      className={`flex flex-col gap-4 ${alignmentClass} text-brand-cocoa`}
+      className={`flex flex-col gap-4 ${alignmentClass} text-semantic-text-primary`}
     >
       {eyebrow ? (
-        <span className="inline-flex rounded-full bg-brand-blush/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/70">
+        <span className="inline-flex rounded-full bg-semantic-legacy-brand-blush/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
           {eyebrow}
         </span>
       ) : null}
@@ -36,7 +36,7 @@ export const SectionHeading = ({
           {title}
         </h2>
         {description ? (
-          <p className="max-w-2xl text-base leading-relaxed text-brand-cocoa/80 font-serif">
+          <p className="max-w-2xl text-base leading-relaxed text-semantic-text-primary/80 font-serif">
             {description}
           </p>
         ) : null}

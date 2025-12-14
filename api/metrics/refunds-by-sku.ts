@@ -1,8 +1,10 @@
 import { getPgPool } from "../_lib/db.js";
+import { ensureShopOrdersTable } from "../_lib/shopOrders.js";
 
 export default async function handler(req: Request) {
   const url = new URL(req.url)
   const days = Math.min(parseInt(url.searchParams.get('days') || '30', 10), 365)
+  await ensureShopOrdersTable()
   const pool = getPgPool();
   const { rows } = await pool.query('SELECT line_items FROM "ShopOrders" WHERE coalesce(processed_at, created_at) >= now() - ($1 || \" days\")::interval AND lower(coalesce(financial_status,\'\')) = \"refunded\" AND line_items IS NOT NULL', [days]);
   const map = new Map<string, { units: number; value: number }>();

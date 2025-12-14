@@ -84,13 +84,13 @@ export const FeatureCallouts = ({
             alignment="center"
           />
           <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:items-start lg:justify-center lg:mx-auto lg:max-w-[1100px]">
-            <div className="rounded-3xl border border-brand-peach/50 bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/30 p-4 shadow-[0_25px_70px_rgba(0,0,0,0.08)] backdrop-blur-sm lg:h-full lg:max-w-[440px] lg:mx-auto">
+            <div className="rounded-3xl border border-semantic-accent-cta/50 bg-gradient-to-br from-semantic-legacy-brand-blush/70 via-white to-semantic-accent-cta/30 p-4 shadow-[0_25px_70px_rgba(0,0,0,0.08)] backdrop-blur-sm lg:h-full lg:max-w-[440px] lg:mx-auto">
               <div className="overflow-hidden rounded-2xl border border-white/40 bg-white lg:h-full">
                 <div className="relative aspect-[9/16] sm:aspect-[9/16] lg:h-full lg:aspect-auto">
                   <LazyVisible
                     className="h-full w-full"
                     placeholder={
-                      <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                      <div className="absolute inset-0 flex items-center justify-center bg-semantic-legacy-brand-blush/20 text-semantic-text-primary/60 text-xs">
                         Loading…
                       </div>
                     }
@@ -117,34 +117,34 @@ export const FeatureCallouts = ({
                       />
                     )}
                   </LazyVisible>
-                  <div className="absolute bottom-3 left-3 rounded-full bg-white/85 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-cocoa shadow-soft backdrop-blur">
+                  <div className="absolute bottom-3 left-3 rounded-full bg-white/85 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-semantic-text-primary shadow-soft backdrop-blur">
                     {mediaLabel ?? 'Less breakage'}
                   </div>
-                  <div className="absolute top-3 right-3 inline-flex items-center gap-2 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-brand-cocoa shadow-soft backdrop-blur">
-                    <span className="h-2 w-2 rounded-full bg-brand-peach" />
+                  <div className="absolute top-3 right-3 inline-flex items-center gap-2 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft backdrop-blur">
+                    <span className="h-2 w-2 rounded-full bg-semantic-accent-cta" />
                     Safe for silk press
                   </div>
                 </div>
-                <div className="flex items-center justify-between gap-3 border-t border-brand-blush/50 px-4 py-3 text-sm text-brand-cocoa/80">
+                <div className="flex items-center justify-between gap-3 border-t border-semantic-legacy-brand-blush/50 px-4 py-3 text-sm text-semantic-text-primary/80">
                   <span className="font-semibold">{mediaNote ?? 'Soft satin band prevents pulling'}</span>
-                  <span className="rounded-full bg-brand-peach/20 px-3 py-1 text-xs font-semibold text-brand-cocoa">Creator-tested</span>
+                  <span className="rounded-full bg-semantic-accent-cta/20 px-3 py-1 text-xs font-semibold text-semantic-text-primary">Creator-tested</span>
                 </div>
               </div>
             </div>
 
-            <div className="relative rounded-3xl border border-brand-peach/60 bg-white/85 p-5 shadow-[0_22px_60px_rgba(0,0,0,0.08)] sm:p-6 lg:max-w-[540px] lg:mx-auto">
-              <div className="absolute left-6 top-4 bottom-4 w-px bg-gradient-to-b from-brand-peach/60 via-brand-peach/30 to-transparent" />
+            <div className="relative rounded-3xl border border-semantic-accent-cta/60 bg-white/85 p-5 shadow-[0_22px_60px_rgba(0,0,0,0.08)] sm:p-6 lg:max-w-[540px] lg:mx-auto">
+              <div className="absolute left-6 top-4 bottom-4 w-px bg-gradient-to-b from-semantic-accent-cta/60 via-semantic-accent-cta/30 to-transparent" />
               <div className="flex flex-col gap-4">
                 {list.map(({ title, desc, image }, idx) => (
                   <div
                     key={title}
-                    className="relative flex gap-4 rounded-2xl border border-brand-peach/60 bg-gradient-to-br from-[#FFF6F2] via-white to-[#FFE8DC] p-4 shadow-[0_10px_26px_rgba(0,0,0,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]"
+                    className="relative flex gap-4 rounded-2xl border border-semantic-accent-cta/60 bg-gradient-to-br from-[#FFF6F2] via-white to-[#FFE8DC] p-4 shadow-[0_10px_26px_rgba(0,0,0,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]"
                   >
                     <div className="relative flex-shrink-0">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-peach to-brand-blush text-base font-extrabold text-brand-cocoa shadow-soft ring-2 ring-white">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-semantic-accent-cta to-semantic-legacy-brand-blush text-base font-extrabold text-semantic-text-primary shadow-soft ring-2 ring-white">
                         {idx + 1}
                       </span>
-                      <span className="absolute left-1/2 top-10 h-6 w-px -translate-x-1/2 bg-brand-peach/30" />
+                      <span className="absolute left-1/2 top-10 h-6 w-px -translate-x-1/2 bg-semantic-accent-cta/30" />
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
                       <div className="flex items-center gap-3">
@@ -156,21 +156,21 @@ export const FeatureCallouts = ({
                             loading="lazy"
                           />
                         ) : null}
-                        <div className="font-heading text-xl font-extrabold text-brand-cocoa leading-tight">{title}</div>
+                        <div className="font-heading text-xl font-extrabold text-semantic-text-primary leading-tight">{title}</div>
                       </div>
-                      <p className="text-[15px] leading-relaxed text-brand-cocoa/90">{desc}</p>
+                      <p className="text-[15px] leading-relaxed text-semantic-text-primary/90">{desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 flex items-center justify-between rounded-2xl border border-brand-peach/50 bg-white/80 px-4 py-3 text-sm font-semibold text-brand-cocoa shadow-soft">
+              <div className="mt-6 flex items-center justify-between rounded-2xl border border-semantic-accent-cta/50 bg-white/80 px-4 py-3 text-sm font-semibold text-semantic-text-primary shadow-soft">
                 <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-brand-peach" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-semantic-accent-cta" />
                   See it in action
                 </div>
                 <RouterLink
                   to="/blog/frizz-free-showers-seo"
-                  className="rounded-full bg-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-cocoa/90"
+                  className="rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-cocoa/90"
                 >
                   Watch routine
                 </RouterLink>
@@ -191,19 +191,19 @@ export const FeatureCallouts = ({
           description={resolvedHeading.description}
           alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
-        <div className="mt-8 rounded-3xl border border-brand-peach/40 bg-white/90 p-6 shadow-soft md:p-8">
+        <div className="mt-8 rounded-3xl border border-semantic-accent-cta/40 bg-white/90 p-6 shadow-soft md:p-8">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             {list.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-2xl border border-brand-blush/60 bg-brand-blush/20 p-5">
+              <div key={title} className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/20 p-5">
                 <div className="flex items-start gap-3">
                   {Icon ? (
-                    <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-peach/60 text-brand-cocoa">
+                    <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-semantic-accent-cta/60 text-semantic-text-primary">
                       <Icon className="h-5 w-5" />
                     </span>
                   ) : null}
                   <div>
-                    <div className="font-heading text-lg font-bold text-brand-cocoa">{title}</div>
-                    <p className="mt-1 text-sm text-brand-cocoa/75">{desc}</p>
+                    <div className="font-heading text-lg font-bold text-semantic-text-primary">{title}</div>
+                    <p className="mt-1 text-sm text-semantic-text-primary/75">{desc}</p>
                   </div>
                 </div>
               </div>

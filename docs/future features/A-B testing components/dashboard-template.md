@@ -1,4 +1,8 @@
-# Dashboard Template (Metabase/Notebook)
+# Dashboard Template (Metabase/Notebook) — Optional
+
+If we adopt the free-first hybrid (`hybrid-analytics-heatmaps-stack.md`), the default dashboard surface is usually **PostHog** (funnels/cohorts).
+
+This file exists for the cases where we keep a SQL‑queryable audit trail in a database (Supabase or otherwise) and want Metabase/notebook cards.
 
 ## Cards
 1) Conversion by variant
@@ -47,6 +51,11 @@ group by v.variant, weight;
 ```
 
 5) Heatmap bins
+
+> ⚠️ Note (free-first hybrid): If we’re using Clarity/Hotjar for heatmaps, **do not** store raw click coordinates in our DB (storage grows too fast). Prefer the vendor heatmap UI.
+>
+> Only use the query below if we intentionally implement **sampled** click logging + retention limits (e.g., store 1% of clicks and delete after 30–90 days).
+
 ```sql
 select page_path,
        floor((metadata->>'x')::float / 40) as bin_x,

@@ -1,6 +1,8 @@
 import { getPgPool } from "../_lib/db.js";
+import { ensureShopOrdersTable } from "../_lib/shopOrders.js";
 
 export default async function handler(_req: Request) {
+  await ensureShopOrdersTable()
   const pool = getPgPool();
   const { rows: firstOrder } = await pool.query(
     `select lower(email) as email, min(coalesce(processed_at, created_at)) as first_order

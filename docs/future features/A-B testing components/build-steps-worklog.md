@@ -19,7 +19,7 @@ Goal: stage implementation safely in docs; when ready, copy into codebase behind
   - `EXPERIMENTS_ENABLED=false`
   - `HEATMAP_ENABLED=false`
   - `SUPABASE_URL=`
-  - `SUPABASE_SERVICE_KEY=`
+  - `SUPABASE_SERVICE_ROLE_KEY=`
 - Server: place `server/routes/experiments.ts` from stub; import in `server/index.ts` under `/api/experiment`.
 - Client: wrap app shell with `ExperimentProvider` only if `VITE_EXPERIMENTS_ENABLED==='true'` and consent ok.
 - Heatmap: call `enableHeatmapTracking(trackEvent)` only when `HEATMAP_ENABLED` true.

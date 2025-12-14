@@ -158,21 +158,37 @@ This avoids using Supabase Storage egress for high-traffic images.
 
 Either works. Pick one and keep it consistent.
 
+### 4.1.1 Quick smoke test endpoint
+After deploying, hit:
+- `/api/health`
+
+It should return JSON like `{ "ok": true, ... }`.
+
 ### 4.2 Worker environment variables (server-only secrets)
 These must be stored as **Worker secrets** (not `VITE_` variables):
 
 - `SUPABASE_URL` (or reuse your Supabase URL)
 - `SUPABASE_SERVICE_ROLE_KEY` (server-only!)
 - `SHOPIFY_STORE_DOMAIN`
-- `SHOPIFY_WEBHOOK_SECRET`
+- `SHOPIFY_API_SECRET` (used for webhook HMAC + OAuth verification)
+- `SHOPIFY_WEBHOOK_SECRET` (optional alias; if set, used instead of `SHOPIFY_API_SECRET` for webhooks)
+- `SHOPIFY_API_KEY` (only needed if you use `/api/shopify/auth` OAuth install flow)
+- `SHOPIFY_API_VERSION` (optional; default in code is `2025-10`)
 - Shopify Customer Accounts:
   - `CUSTOMER_CLIENT_ID`
   - `CUSTOMER_CLIENT_SECRET`
+- Analytics (optional):
+  - `POSTHOG_API_KEY` (server-side capture key; used by Shopify webhooks → `purchase`)
+  - `POSTHOG_HOST` (ingestion host, e.g. `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
 - Optional:
   - `EMAIL_SEND` (if you send confirmation emails)
   - `INTERNAL_SHARED_SECRET` (if you keep internal admin endpoints)
+  - `SHOPIFY_STOREFRONT_PRIVATE_TOKEN` (only needed if you enable server-side cart or call `/api/storefront/*`)
+  - `CLERK_WEBHOOK_SECRET` (only needed if you use `/api/webhooks/clerk`)
 
 ### 4.3 Port the required endpoints (high level)
+
+> Update: This repo now includes a Cloudflare Pages Functions implementation under `functions/api/**` which replaces the legacy Vercel-style `api/**` folder for Cloudflare deployments.
 
 #### A) Shopify webhooks
 Endpoints like:
@@ -183,10 +199,10 @@ Endpoints like:
 
 Requirements:
 - Verify Shopify webhook HMAC using the raw request body.
-- Implement **idempotency** using a table like `ShopWebhookDeliveries` in Supabase.
+- Implement **idempotency** using a table like `ShopWebhookDeliveries` in Supabase (recommended), or keep handlers fast so Shopify doesn’t retry.
 - Write/update orders/customers into Supabase tables (`ShopOrders`, `ShopCustomers`).
 
-> Note: Your current webhook implementation uses `pg` and `@vercel/node`. In Workers, use `fetch()` to Supabase (service role) instead.
+Update: `orders/create` is already implemented for Cloudflare in `functions/api/shopify/webhooks/orders-create.ts` and (optionally) sends a server-side `purchase` event to PostHog when `POSTHOG_API_KEY` is set.
 
 #### B) Shopify Customer Accounts auth
 Endpoints:
@@ -218,6 +234,10 @@ Requirements:
 ## 5) Supabase (DB tables + indexes)
 
 Because Workers won’t be running `pg` migrations automatically, create tables in Supabase once.
+
+This repo includes ready-to-run SQL migrations in `server/migrations/`:
+- `server/migrations/2025-12-14_shopify_tables_and_metrics.sql` (Shopify sync tables + analytics RPCs)
+- `server/migrations/2025-12-14_customers_table.sql` (optional: Clerk/customer sync table)
 
 Minimum recommended tables:
 - `ShopOrders`

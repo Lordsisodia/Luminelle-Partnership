@@ -28,7 +28,7 @@ export const TrustBar = () => {
   }, [])
 
   return (
-    <div className="overflow-hidden bg-brand-blush text-brand-cocoa">
+    <div className="overflow-hidden bg-semantic-legacy-brand-blush text-semantic-text-primary">
       <div className="relative">
         <div
           ref={trackRef}
@@ -42,13 +42,13 @@ export const TrustBar = () => {
           {[...items, ...items].map((item, idx) => (
             <span key={`${item.label}-${idx}`} className="inline-flex items-center gap-2 whitespace-nowrap">
               {item.href ? (
-                <a href={item.href} className="underline decoration-brand-cocoa/50 underline-offset-4 hover:text-brand-cocoa/80">
+                <a href={item.href} className="underline decoration-semantic-text-primary/50 underline-offset-4 hover:text-semantic-text-primary/80">
                   {item.label}
                 </a>
               ) : (
                 item.label
               )}
-              <span className="h-1 w-1 rounded-full bg-brand-cocoa/35" aria-hidden />
+              <span className="h-1 w-1 rounded-full bg-semantic-legacy-brand-cocoa/35" aria-hidden />
             </span>
           ))}
         </div>

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import { Star } from 'lucide-react'
 import { cdnUrl } from '@/lib/utils/cdn'
+import { captureEvent, captureExperimentExposure } from '@/lib/analytics/posthog'
+import { useFeatureFlagVariant } from '@/lib/analytics/useFeatureFlagVariant'
 
 type Props = {
   config: {
@@ -19,6 +22,10 @@ type Props = {
 }
 
 export const HeroShop = ({ config }: Props) => {
+  const experimentKey = 'hero_cta_copy'
+  const rawVariant = useFeatureFlagVariant(experimentKey, 'control')
+  const variant = rawVariant === 'bold' ? 'bold' : 'control'
+
   const baseSlides = config.gallery && config.gallery.length > 0 ? config.gallery.slice(0, 1) : [config.image]
   const slides = baseSlides.map((s) => encodeURI(cdnUrl(s)))
   const [active, setActive] = useState(0)
@@ -35,7 +42,14 @@ export const HeroShop = ({ config }: Props) => {
     return () => window.clearInterval(id)
   }, [slides.length])
 
+  useEffect(() => {
+    captureExperimentExposure(experimentKey, variant, { component: 'HeroShop' })
+  }, [variant])
+
   // controls removed; retain auto-advance only
+
+  const ctaLabel = variant === 'bold' ? 'Shop now' : config.ctaLabel
+  const isInternalCta = config.ctaHref.startsWith('/')
 
   return (
     <section className="relative min-h-[70vh] overflow-hidden bg-white md:min-h-[76vh]">
@@ -84,7 +98,7 @@ export const HeroShop = ({ config }: Props) => {
       <div className="absolute inset-0 z-10">
         <div className="mx-auto flex h-full max-w-6xl items-center px-4 pt-[3.5rem] pb-[3.5rem] text-center md:px-6">
           <div className="mx-auto w-full max-w-xl p-5 md:max-w-2xl">
-            <div className="inline-flex flex-nowrap items-center gap-3 rounded-full bg-white/30 px-6 py-2 text-brand-cocoa backdrop-blur-md shadow-soft ring-1 ring-white/50 min-w-[300px] justify-center">
+            <div className="inline-flex flex-nowrap items-center gap-3 rounded-full bg-white/30 px-6 py-2 text-semantic-text-primary backdrop-blur-md shadow-soft ring-1 ring-white/50 min-w-[300px] justify-center">
               <div className="flex -space-x-1.5 flex-shrink-0 pl-1">
                 {[
                   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&h=120&auto=format&fit=crop',
@@ -100,23 +114,56 @@ export const HeroShop = ({ config }: Props) => {
                     />
                   ))}
                 </div>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-cocoa/80 whitespace-nowrap pl-1">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/80 whitespace-nowrap pl-1">
                 Trusted by 10k users
                 </span>
             </div>
-            <h1 className="mt-4 whitespace-pre-line font-heading text-3xl font-bold leading-tight text-brand-cocoa sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 whitespace-pre-line font-heading text-3xl font-bold leading-tight text-semantic-text-primary sm:text-4xl md:text-5xl lg:text-6xl">
               {config.headline}
             </h1>
-            <p className="mt-4 text-base text-brand-cocoa/80 sm:text-lg">
+            <p className="mt-4 text-base text-semantic-text-primary/80 sm:text-lg">
               {config.subhead}
             </p>
             <div className="mt-6 flex justify-center">
-              <a
-                href={config.ctaHref}
-                className="inline-flex items-center justify-center rounded-full bg-brand-cocoa px-7 py-3 text-base font-semibold text-white shadow-soft transition hover:-translate-y-0.5"
-              >
-                {config.ctaLabel}
-              </a>
+              {isInternalCta ? (
+                <RouterLink
+                  to={config.ctaHref}
+                  data-click-id="hero-cta"
+                  onClick={() =>
+                    captureEvent('cta_click', {
+                      click_id: 'hero-cta',
+                      experiment_key: experimentKey,
+                      variant,
+                      href: config.ctaHref,
+                    })
+                  }
+                  className={`inline-flex items-center justify-center rounded-full px-7 py-3 text-base font-semibold shadow-soft transition hover:-translate-y-0.5 ${variant === 'bold'
+                    ? 'bg-semantic-legacy-brand-cocoa text-white ring-2 ring-white/70'
+                    : 'bg-semantic-legacy-brand-cocoa text-white'
+                    }`}
+                >
+                  {ctaLabel}
+                </RouterLink>
+              ) : (
+                <a
+                  href={config.ctaHref}
+                  data-click-id="hero-cta"
+                  onClick={() =>
+                    captureEvent('cta_click', {
+                      click_id: 'hero-cta',
+                      experiment_key: experimentKey,
+                      variant,
+                      href: config.ctaHref,
+                    })
+                  }
+                  className={`inline-flex items-center justify-center rounded-full px-7 py-3 text-base font-semibold shadow-soft transition hover:-translate-y-0.5 ${variant === 'bold'
+                    ? 'bg-semantic-legacy-brand-cocoa text-white ring-2 ring-white/70'
+                    : 'bg-semantic-legacy-brand-cocoa text-white'
+                    }`}
+                >
+                  {ctaLabel}
+                </a>
+              )}
             </div>
             <div className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-full border border-white/80 bg-white/70 px-3 py-1 shadow-[0_0_18px_rgba(255,255,255,0.7)] backdrop-blur-sm">
               {Array.from({ length: 5 }).map((_, idx) => (
@@ -128,7 +175,7 @@ export const HeroShop = ({ config }: Props) => {
                   strokeWidth={1}
                 />
               ))}
-              <span className="ml-2 text-sm font-semibold text-brand-cocoa">4.8 (100+)</span>
+              <span className="ml-2 text-sm font-semibold text-semantic-text-primary">4.8 (100+)</span>
             </div>
           </div>
         </div>

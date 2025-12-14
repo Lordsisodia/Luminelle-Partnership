@@ -1,5 +1,6 @@
 import { getPgPool } from "../_lib/db.js";
 import { requireInternalAuth } from "../_lib/internalAuth.js";
+import { ensureShopOrdersTable } from "../_lib/shopOrders.js";
 
 function toCsvRow(values: (string | number | null | undefined)[]) {
   return values
@@ -15,6 +16,7 @@ export default async function handler(req: Request) {
   const auth = requireInternalAuth(req)
   if (!auth.ok) return new Response('Unauthorized', { status: auth.status })
 
+  await ensureShopOrdersTable()
   const pool = getPgPool()
   const { rows } = await pool.query(
     'SELECT order_id, name, email, currency, total, subtotal, financial_status, fulfillment_status, coalesce(processed_at, created_at) as date, raw FROM "ShopOrders" ORDER BY date DESC LIMIT 5000'

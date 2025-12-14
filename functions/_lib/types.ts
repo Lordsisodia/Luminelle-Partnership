@@ -1,0 +1,48 @@
+export type Env = {
+  // Supabase (server-side)
+  SUPABASE_URL?: string
+  SUPABASE_SERVICE_ROLE_KEY?: string
+
+  // PostHog (server-side capture, e.g. Shopify webhooks → purchase)
+  POSTHOG_API_KEY?: string
+  POSTHOG_HOST?: string
+
+  // Internal auth (server-side)
+  INTERNAL_SHARED_SECRET?: string
+
+  // Shopify (app + webhooks)
+  SHOPIFY_STORE_DOMAIN?: string
+  SHOPIFY_API_KEY?: string
+  SHOPIFY_API_SECRET?: string
+  SHOPIFY_API_VERSION?: string
+  SHOPIFY_SCOPES?: string
+  SCOPES?: string
+  SHOPIFY_APP_URL?: string
+  SHOPIFY_WEBHOOK_SECRET?: string
+
+  // Shopify Storefront (private token used server-side)
+  SHOPIFY_STOREFRONT_PRIVATE_TOKEN?: string
+
+  // Shopify Customer Accounts
+  CUSTOMER_CLIENT_ID?: string
+  CUSTOMER_CLIENT_SECRET?: string
+
+  // Clerk webhooks
+  CLERK_WEBHOOK_SECRET?: string
+
+  // Cart recovery (optional / currently stubbed)
+  CART_RECOVERY_ENABLED?: string
+  CART_RECOVERY_CRON_ENABLED?: string
+  CART_RECOVERY_DISCOUNT_ENABLED?: string
+  CART_RECOVERY_SECRET?: string
+}
+
+export type PagesContext<EnvBindings = Env> = {
+  request: Request
+  env: EnvBindings
+  params: Record<string, string>
+  waitUntil(promise: Promise<unknown>): void
+  next(): Promise<Response>
+}
+
+export type PagesFunction<EnvBindings = Env> = (context: PagesContext<EnvBindings>) => Response | Promise<Response>

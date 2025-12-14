@@ -18,7 +18,7 @@
 }
 
 body {
-  @apply min-h-screen bg-white text-brand-cocoa font-body antialiased overflow-x-hidden;
+  @apply min-h-screen bg-white text-semantic-text-primary font-body antialiased overflow-x-hidden;
 }
 
 /* Hide horizontal scrollbar for snap carousels */

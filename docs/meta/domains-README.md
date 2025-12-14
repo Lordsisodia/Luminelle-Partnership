@@ -14,13 +14,13 @@
 - Use `shared/` only when code is truly cross-domain. Current shared bits:
   - `src/utils/env.ts`, `src/utils/cdn.ts`
   - `src/lib/utils.ts` (tailwind `cn` helper)
-  - `src/lib/ui.ts` (re-export from `@siso/ui`)
+  - `src/lib/ui.ts` (shared UI helpers)
 - Prefer domain paths in imports: `@/domains/shop/pages/ProductPage` etc.
 
 ## When to keep code shared
 - Used by 2+ domains and not tied to domain concepts.
 - Pure utilities (no side effects) or framework wrappers.
-- Shared design system atoms come from `@siso/ui` (see `src/lib/ui.ts`).
+- Shared UI helpers live in `src/lib/ui.ts`.
 
 ## Pending cleanups
 - Populate empty placeholders (`logic/`, `data/`, `hooks/`, `types/`) as we migrate code.
@@ -32,5 +32,5 @@
   - `shared/utils/cdn.ts` (asset URL helper)
   - `shared/utils/env.ts` (env accessor)
   - `shared/utils/cn.ts` (Tailwind class merge)
-  - `shared/ui.ts` (re-export `@siso/ui`)
+  - `shared/ui.ts` (shared UI helpers)
 - Path alias added: `@/shared/*` → `src/shared/*`.

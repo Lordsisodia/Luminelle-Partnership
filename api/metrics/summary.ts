@@ -1,6 +1,9 @@
 import { getPgPool } from "../_lib/db.js";
+import { ensureShopOrdersTable } from "../_lib/shopOrders.js";
+import { ensureShopCustomersTable } from "../_lib/shopCustomers.js";
 
 export default async function handler(_req: Request) {
+  await Promise.all([ensureShopOrdersTable(), ensureShopCustomersTable()])
   const pool = getPgPool();
   const [{ rows: orows }, { rows: crows }] = await Promise.all([
     pool.query('SELECT count(*)::int as count, coalesce(sum(total),0)::numeric as revenue FROM "ShopOrders"'),

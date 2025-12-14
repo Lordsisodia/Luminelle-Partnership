@@ -1,11 +1,12 @@
-import { getPgPool } from "../_lib/db.js";
+import { ensureShopifySessionTable, getPgPool } from "../_lib/db.js";
 
 export async function getAdminToken(shop: string) {
+  await ensureShopifySessionTable()
   const pool = getPgPool();
-  const { rows } = await pool.query('SELECT "accessToken" FROM "Session" WHERE id = $1 LIMIT 1', [
+  const { rows } = await pool.query('SELECT accesstoken FROM "Session" WHERE id = $1 LIMIT 1', [
     `offline_${shop}`,
   ]);
-  const token = rows[0]?.accessToken || rows[0]?.accesstoken;
+  const token = rows[0]?.accesstoken;
   if (!token) throw new Error(`No admin token for ${shop}`);
   return token as string;
 }

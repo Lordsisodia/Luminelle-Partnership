@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 const LandingPage = lazy(() => import('@creators/ui/pages/CreatorsPage'))
 const WelcomePage = lazy(() => import('@landing/ui/pages/WelcomePage'))
@@ -22,17 +22,27 @@ const SearchResultsPage = lazy(() => import('@products/ui/pages/SearchResultsPag
 const AccountPage = lazy(() => import('@account/ui/pages/AccountPage'))
 const OrdersPage = lazy(() => import('@account/ui/pages/OrdersPage'))
 const BrandStoryPage = lazy(() => import('@brand/ui/pages/BrandStoryPage'))
+const ShopifyCheckoutHandoffPage = lazy(() => import('@cart/ui/pages/ShopifyCheckoutHandoffPage'))
 const SignInPage = lazy(() => import('@auth/ui/pages/SignInPage'))
 const SignUpPage = lazy(() => import('@auth/ui/pages/SignUpPage'))
 const SSOCallbackPage = lazy(() => import('@auth/ui/pages/SSOCallbackPage'))
+const AdminShell = lazy(() => import('@admin/ui/layouts/AdminShell'))
+const DashboardPage = lazy(() => import('@admin/ui/pages/DashboardPage'))
 const AnalyticsPage = lazy(() => import('@admin/ui/pages/AnalyticsPage'))
 const ContentPage = lazy(() => import('@admin/ui/pages/ContentPage'))
+const PagesPage = lazy(() => import('@admin/ui/pages/PagesPage'))
+const ProductsPage = lazy(() => import('@admin/ui/pages/ProductsPage'))
+const BlogsPage = lazy(() => import('@admin/ui/pages/BlogsPage'))
+const MediaPage = lazy(() => import('@admin/ui/pages/MediaPage'))
+const GlobalsPage = lazy(() => import('@admin/ui/pages/GlobalsPage'))
+const ActivityPage = lazy(() => import('@admin/ui/pages/ActivityPage'))
 const AdminGuard = lazy(() => import('@admin/ui/components/AdminGuard'))
 const ClerkShell = lazy(() => import('@/shells/ClerkShell'))
+const NotFoundPage = lazy(() => import('@ui/pages/NotFoundPage'))
 
 const App = () => {
   return (
-    <Suspense fallback={<div className="p-6 text-center text-brand-cocoa/70">Loading…</div>}>
+    <Suspense fallback={<div className="p-6 text-center text-semantic-text-primary/70">Loading…</div>}>
       <Routes>
         {/* Store landing is root */}
         <Route path="/" element={<ShopLandingPage />} />
@@ -40,6 +50,8 @@ const App = () => {
         <Route path="/creators" element={<LandingPage />} />
         <Route path="/brand" element={<BrandStoryPage />} />
         <Route path="/product/:handle" element={<ProductPage />} />
+        {/* Shopify cart checkout URLs can look like /cart/c/<id>?key=... */}
+        <Route path="/cart/c/*" element={<ShopifyCheckoutHandoffPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order/:orderId/confirm" element={<OrderConfirmationPage />} />
@@ -66,10 +78,23 @@ const App = () => {
           <Route path="/account/addresses" element={<AddressesPage />} />
           <Route path="/account/payments" element={<PaymentMethodsPage />} />
 
-          {/* Embedded Shopify Admin pages */}
-          <Route path="/admin/analytics" element={<AdminGuard><AnalyticsPage /></AdminGuard>} />
-          <Route path="/admin/content" element={<AdminGuard><ContentPage /></AdminGuard>} />
+          {/* Admin */}
+          <Route path="/admin" element={<AdminGuard><AdminShell /></AdminGuard>}>
+            <Route index element={<DashboardPage />} />
+            <Route path="analytics" element={<AnalyticsPage />} />
+            <Route path="content" element={<ContentPage />} />
+            <Route path="pages" element={<PagesPage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="blogs" element={<BlogsPage />} />
+            <Route path="media" element={<MediaPage />} />
+            <Route path="globals" element={<GlobalsPage />} />
+            <Route path="activity" element={<ActivityPage />} />
+            <Route path="*" element={<Navigate to="/admin" replace />} />
+          </Route>
         </Route>
+
+        {/* Fallback for unknown routes (prevents white screen) */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   )

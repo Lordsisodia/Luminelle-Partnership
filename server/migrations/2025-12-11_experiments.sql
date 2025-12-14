@@ -83,23 +83,17 @@ values (
 )
 on conflict (key) do nothing;
 
--- basic RLS stubs (adjust role names)
+-- basic RLS stubs
 alter table public.experiments enable row level security;
 alter table public.experiment_exposures enable row level security;
 alter table public.events enable row level security;
 alter table public.sessions enable row level security;
 
--- allow inserts from service role only (replace 'service_role' with actual role name if needed)
+-- allow inserts from Supabase service role only
 create policy if not exists "service inserts experiments" on public.experiments for insert to service_role using (true) with check (true);
 create policy if not exists "service inserts exposures" on public.experiment_exposures for insert to service_role using (true) with check (true);
 create policy if not exists "service inserts events" on public.events for insert to service_role using (true) with check (true);
 create policy if not exists "service inserts sessions" on public.sessions for insert to service_role using (true) with check (true);
-
--- readonly select for reporting role (replace reporting_role name)
-create policy if not exists "reporting reads experiments" on public.experiments for select to reporting_role using (true);
-create policy if not exists "reporting reads exposures" on public.experiment_exposures for select to reporting_role using (true);
-create policy if not exists "reporting reads events" on public.events for select to reporting_role using (true);
-create policy if not exists "reporting reads sessions" on public.sessions for select to reporting_role using (true);
 
 -- updated_at trigger
 create or replace function public.set_updated_at()

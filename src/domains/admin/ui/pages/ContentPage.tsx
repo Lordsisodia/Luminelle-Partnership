@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { setNoIndexNoFollow } from '@/lib/seo'
-import { AdminLayout } from '@admin/ui/layouts'
+import { AdminPageLayout } from '@admin/ui/layouts'
 
 type Field = { key: string; value: string }
 
@@ -16,7 +15,7 @@ export default function ContentPage() {
   const load = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/admin/ui/sections/get?handle=${encodeURIComponent(handle)}`, { headers: { 'content-type': 'application/json', ...(authHeader as any) } })
+      const res = await fetch(`/api/admin/sections/get?handle=${encodeURIComponent(handle)}`, { headers: { 'content-type': 'application/json', ...(authHeader as any) } })
       const j = await res.json()
       setFields(j.fields || [])
     } finally {
@@ -24,7 +23,7 @@ export default function ContentPage() {
     }
   }
 
-  useEffect(() => { setNoIndexNoFollow(); load() /* on mount */ }, [])
+  useEffect(() => { load() /* on mount */ }, [])
 
   const setField = (k: string, v: string) => {
     setFields((prev) => {
@@ -41,7 +40,7 @@ export default function ContentPage() {
     try {
       const fieldsObj = Object.fromEntries(fields.map((f) => [f.key, parseMaybeJSON(f.value)]))
       sessionStorage.setItem('lumelle_admin_pass', pass)
-      await fetch(`/api/admin/ui/sections/update?handle=${encodeURIComponent(handle)}`, {
+      await fetch(`/api/admin/sections/update?handle=${encodeURIComponent(handle)}`, {
         method: 'POST',
         headers: { 'content-type': 'application/json', ...(authHeader as any) },
         body: JSON.stringify({ fields: fieldsObj }),
@@ -52,7 +51,7 @@ export default function ContentPage() {
   }
 
   return (
-    <AdminLayout title="Product content" subtitle="Edit landing/PDP copy blocks">
+    <AdminPageLayout title="Product content" subtitle="Edit landing/PDP copy blocks (Shopify metafield-backed).">
       <div className="flex flex-wrap gap-2">
         <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" value={handle} onChange={(e) => setHandle(e.target.value)} />
         <button className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" onClick={load}>Load</button>
@@ -79,7 +78,7 @@ export default function ContentPage() {
           </div>
         </div>
       )}
-    </AdminLayout>
+    </AdminPageLayout>
   )
 }
 

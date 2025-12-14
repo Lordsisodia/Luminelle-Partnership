@@ -4,6 +4,7 @@
 - `VITE_ENABLE_ADMIN_UI` present and default false.
 - Staging Supabase URL/anon keys available in `.env.admin`; prod env untouched.
 - Supabase types generated for staging schema and committed (or generated on CI).
+- Clerk JWT template `supabase` includes admin role claims (see Security).
 
 ## App wiring steps (later)
 - Add admin Supabase client factory using staging env vars.
@@ -24,5 +25,7 @@
 - If admin flag causes issues, set `VITE_ENABLE_ADMIN_UI=false` and redeploy; no schema rollback needed.
 
 ## Security
-- Confirm admin user roles exist; RLS enforced; Edge Functions restricted to admin JWT.
+- Auth is Clerk-first; Supabase is protected via RLS + Edge Functions.
+- Configure Clerk JWT template `supabase` to include `app_metadata.roles` (array) and include `"admin"` for admin users.
+- Confirm admin roles exist; RLS enforced; Edge Functions restricted to admin JWT.
 - No service role keys in client bundles; service keys only on server (Edge Functions/scripts).

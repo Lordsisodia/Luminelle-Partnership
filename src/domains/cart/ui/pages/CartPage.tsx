@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { useCart } from '@cart/providers/CartContext'
 import { setNoIndex } from '@/lib/seo'
+import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
 
 const FREE_SHIP_THRESHOLD = 40
 const STANDARD_SHIPPING = 3.95
@@ -17,13 +18,31 @@ const EmptyCartState = () => (
 )
 
 export const CartPage = () => {
-  const { items, subtotal, setQty, remove, checkoutUrl, applyDiscount } = useCart()
+  const { items, subtotal, setQty, remove, checkoutUrl, applyDiscount, setAttributes } = useCart()
   useEffect(() => setNoIndex(), [])
   const [promo, setPromo] = useState('')
+  const [redirecting, setRedirecting] = useState(false)
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || items.length === 0 ? 0 : STANDARD_SHIPPING
   const total = subtotal + shipping
   const remainingForFreeShip = Math.max(0, FREE_SHIP_THRESHOLD - subtotal)
   const progress = Math.min(100, Math.round((subtotal / FREE_SHIP_THRESHOLD) * 100))
+
+  const beginCheckout = async (url: string) => {
+    if (!url || redirecting) return
+    setRedirecting(true)
+    captureEvent('begin_checkout', { source: 'cart_page', href: url })
+    try {
+      await initPosthogOnce()
+      const attrs = buildCheckoutAttributionAttributes()
+      // Best-effort: don't block checkout forever if Shopify is slow.
+      await Promise.race([
+        setAttributes?.(attrs),
+        new Promise((resolve) => setTimeout(resolve, 800)),
+      ])
+    } finally {
+      window.location.href = url
+    }
+  }
 
   return (
     <MarketingLayout navItems={[]} subtitle="Cart">
@@ -113,13 +132,15 @@ export const CartPage = () => {
                 </div>
               </div>
               {items.length > 0 && checkoutUrl ? (
-                <a
-                  href={checkoutUrl}
+                <button
+                  type="button"
                   data-checkout-url
-                  className="mt-5 block rounded-full bg-brand-cocoa px-5 py-3 text-center text-sm font-semibold text-white hover:-translate-y-0.5 transition"
+                  onClick={() => void beginCheckout(checkoutUrl)}
+                  disabled={redirecting}
+                  className="mt-5 block w-full rounded-full bg-brand-cocoa px-5 py-3 text-center text-sm font-semibold text-white hover:-translate-y-0.5 transition disabled:opacity-60"
                 >
-                  Continue to checkout
-                </a>
+                  {redirecting ? 'Redirecting…' : 'Continue to checkout'}
+                </button>
               ) : (
                 <RouterLink
                   to="/checkout"

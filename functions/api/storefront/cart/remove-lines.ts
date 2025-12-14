@@ -1,0 +1,20 @@
+import type { PagesFunction } from '../../../_lib/types'
+import { CART_FRAGMENT, runStorefront } from '../../../_lib/storefront'
+import { json, methodNotAllowed } from '../../../_lib/response'
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'POST') return methodNotAllowed(['POST'])
+  const body = await request.json().catch(() => ({} as any))
+  const data = await runStorefront<any>(
+    env,
+    `#graphql
+      mutation CartLinesRemove($cartId:ID!, $lineIds:[ID!]!) {
+        cartLinesRemove(cartId:$cartId, lineIds:$lineIds) { cart { ...CartFields } }
+      }
+      ${CART_FRAGMENT}
+    `,
+    { cartId: body.cartId, lineIds: body.lineIds || [] },
+  )
+  return json({ cart: data.cartLinesRemove.cart })
+}
+

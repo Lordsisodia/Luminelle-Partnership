@@ -34,7 +34,7 @@ export const FloatingBuyCta = ({ label = 'Buy Now', href }: Props) => {
 
   return (
     <div className={`pointer-events-none fixed inset-x-0 bottom-6 z-50 px-4 transition-opacity duration-300 md:hidden ${show ? 'opacity-100' : 'opacity-0'}`}>
-      <a href={href} className="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-brand-peach px-6 py-4 text-lg font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5">
+      <a href={href} className="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-6 py-4 text-lg font-semibold text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5">
         {label}
       </a>
     </div>

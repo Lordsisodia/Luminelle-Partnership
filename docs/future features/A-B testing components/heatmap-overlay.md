@@ -2,6 +2,9 @@
 
 Data source: `events` where `name='click'` and metadata contains x/y + viewport.
 
+> ⚠️ Note (recommended hybrid): If we adopt Clarity/Hotjar/OpenReplay for heatmaps, this internal overlay becomes **optional**.
+> It’s only worth building if we explicitly want a vendor-free heatmap, and even then it should be **sampled** to avoid database bloat.
+
 ## Steps
 1) Query binned clicks (SQL in `dashboard-template.md`): returns `page_path, bin_x, bin_y, clicks`.
 2) Fetch a reference screenshot per page (static asset or playwright shot) sized to same viewport grid.
@@ -24,5 +27,5 @@ for (const bin of bins) {
 
 ## Notes
 - Keep payload small: pre-aggregate in SQL before sending to client.
-- If using OpenReplay instead, this overlay is optional; still keep SQL for numeric hotspots.
+- If using Clarity/Hotjar/OpenReplay instead, this overlay is optional; prefer their built-in heatmaps.
 - Match viewport: if pages are responsive, generate separate bins per viewport bucket (mobile/desktop).

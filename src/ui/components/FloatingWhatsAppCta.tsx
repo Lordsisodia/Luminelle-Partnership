@@ -52,7 +52,7 @@ export const FloatingWhatsAppCta = ({
       <button
         onClick={onClick}
         type="button"
-        className="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-brand-peach px-6 py-4 text-lg font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5"
+        className="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-6 py-4 text-lg font-semibold text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5"
       >
         {label}
       </button>

@@ -2,10 +2,24 @@ import { verifyWebhook } from "./_verify.js";
 import { upsertShopOrder } from "../../_lib/shopOrders.js";
 import { renderOrderEmail, sendOrderConfirmation } from "../../_lib/email.js";
 import { isProcessed, markProcessed } from "../../_lib/webhooks.js";
+import { capturePosthogEvent } from "../../_lib/posthog.js";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 export const config = { api: { bodyParser: false } };
+
+function extractNoteAttributes(body: any): Record<string, string> {
+  const attrs: Record<string, string> = {}
+  const raw = body?.note_attributes
+  if (!Array.isArray(raw)) return attrs
+  for (const item of raw) {
+    const key = (item?.name || item?.key || item?.Name || item?.Key) as string | undefined
+    const value = (item?.value || item?.Value) as string | undefined
+    if (!key || typeof value !== 'string' || !value) continue
+    attrs[String(key)] = value
+  }
+  return attrs
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { valid, body } = await verifyWebhook(req);
@@ -15,6 +29,41 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const shop = (req.headers['x-shopify-shop-domain'] || body?.shop_domain || body?.domain) as string
   if (!shop) return res.status(400).send("Missing shop");
   await upsertShopOrder(shop, body);
+
+  // Capture a server-side purchase event (joins back to the browser via cart/order attributes)
+  try {
+    const attrs = extractNoteAttributes(body)
+    const distinctId = attrs.ph_distinct_id || attrs.lumelle_anon_id
+    if (distinctId) {
+      const expProps: Record<string, string> = {}
+      for (const [k, v] of Object.entries(attrs)) {
+        if (k.startsWith('exp_') && v) expProps[k] = v
+      }
+
+      await capturePosthogEvent({
+        distinctId,
+        event: 'purchase',
+        properties: {
+          source: 'shopify_webhook',
+          // Keep server-side events anonymous by default (avoids creating person profiles for every order).
+          $process_person_profile: false,
+          shopify_delivery_id: deliveryId || undefined,
+          shop,
+          order_id: body?.id,
+          order_name: body?.name,
+          value: Number(body?.total_price || 0),
+          currency: body?.currency || body?.presentment_currency,
+          lumelle_anon_id: attrs.lumelle_anon_id,
+          lumelle_session_id: attrs.lumelle_session_id,
+          ...expProps,
+        },
+        timestamp: body?.processed_at || body?.created_at || undefined,
+      })
+    }
+  } catch (e) {
+    console.error('PostHog purchase capture failed', e)
+  }
+
   // Optional email confirmation via Resend if enabled and we have an email
   try {
     if (process.env.EMAIL_SEND === '1' && body?.email) {

@@ -1,0 +1,16 @@
+export function json(data: unknown, init?: ResponseInit & { headers?: HeadersInit }) {
+  const headers = new Headers(init?.headers)
+  if (!headers.has('content-type')) headers.set('content-type', 'application/json; charset=utf-8')
+  return new Response(JSON.stringify(data), { ...init, headers })
+}
+
+export function text(body: string, init?: ResponseInit & { headers?: HeadersInit }) {
+  const headers = new Headers(init?.headers)
+  if (!headers.has('content-type')) headers.set('content-type', 'text/plain; charset=utf-8')
+  return new Response(body, { ...init, headers })
+}
+
+export function methodNotAllowed(allowed: string[]) {
+  return text('Method Not Allowed', { status: 405, headers: { Allow: allowed.join(', ') } })
+}
+

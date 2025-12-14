@@ -44,9 +44,9 @@ export const MarketingLayout = ({
   }, [promoMessages.length])
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-white text-brand-cocoa">
+    <div className="relative min-h-screen overflow-x-hidden bg-white text-semantic-text-primary">
       <header
-        className="border-b border-brand-blush/40 bg-white/95 backdrop-blur"
+        className="border-b border-semantic-legacy-brand-blush/40 bg-white/95 backdrop-blur"
       >
         <PublicHeader
           promoMessages={promoMessages}

@@ -6,6 +6,7 @@ import { homeConfig } from '@/content/home.config'
 import { useCart } from '@cart/providers/CartContext'
 import { renderSections } from './sections/SectionsMap'
 import { useProductContent } from '@/domains/products/hooks/useProductContent'
+import { captureEvent } from '@/lib/analytics/posthog'
 
 const navItems: NavItem[] = [
   { id: 'media', label: 'Product' },
@@ -58,6 +59,12 @@ export const ProductPage = () => {
         title: productTitle || config.defaultTitle,
         price: price
       }, quantity)
+      captureEvent('add_to_cart', {
+        product_handle: config.handle,
+        variant_id: variantId,
+        quantity,
+        price_gbp: price,
+      })
       window.dispatchEvent(new CustomEvent('lumelle:open-cart'))
       setJustAdded(true)
       window.setTimeout(() => setJustAdded(false), 800)
@@ -77,6 +84,14 @@ export const ProductPage = () => {
         title: productTitle || config.defaultTitle,
         price: price
       }, quantity)
+      captureEvent('add_to_cart', {
+        product_handle: config.handle,
+        variant_id: variantId,
+        quantity,
+        price_gbp: price,
+        source: 'buy_now',
+      })
+      captureEvent('cta_click', { click_id: 'pdp-buy-now', product_handle: config.handle })
       navigate('/checkout')
     } catch (error) {
       console.error('Buy now failed:', error)

@@ -30,9 +30,9 @@ export function GlobalHeader({
   return (
     <>
       {/* Promo strip */}
-      <div className="overflow-hidden bg-brand-blush text-brand-cocoa">
+      <div className="overflow-hidden bg-semantic-legacy-brand-blush text-semantic-text-primary">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="relative flex h-10 items-center justify-center text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa sm:text-[13px]">
+          <div className="relative flex h-10 items-center justify-center text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary sm:text-[13px]">
             {promoMessages.map((msg, idx) => (
               <span
                 key={msg.label}
@@ -40,7 +40,7 @@ export function GlobalHeader({
                 aria-hidden={idx !== activePromo}
               >
                 {msg.href ? (
-                  <RouterLink to={msg.href} className="underline decoration-brand-cocoa/50 underline-offset-4 hover:text-brand-cocoa/80">
+                  <RouterLink to={msg.href} className="underline decoration-semantic-text-primary/50 underline-offset-4 hover:text-semantic-text-primary/80">
                     {msg.label}
                   </RouterLink>
                 ) : (
@@ -58,21 +58,21 @@ export function GlobalHeader({
           <button
             aria-label="Open menu"
             onClick={handleOpenMenu}
-            className="inline-flex h-10 w-10 items-center justify-center text-brand-cocoa hover:text-brand-cocoa/80"
+            className="inline-flex h-10 w-10 items-center justify-center text-semantic-text-primary hover:text-semantic-text-primary/80"
           >
             <Menu className="h-6 w-6" />
           </button>
 
           <RouterLink to="/" className="flex flex-1 flex-col items-center justify-center gap-1 text-center">
-            <span className="font-heading text-2xl font-semibold uppercase tracking-[0.24em] text-brand-cocoa md:text-xl">
+            <span className="font-heading text-2xl font-semibold uppercase tracking-[0.24em] text-semantic-text-primary md:text-xl">
               Lumelle
             </span>
             {subtitle ? (
               <>
-                <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-brand-cocoa/60 md:hidden">
+                <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-semantic-text-primary/60 md:hidden">
                   {subtitle}
                 </span>
-                <span className="hidden text-sm font-medium text-brand-cocoa/70 md:inline">{subtitle}</span>
+                <span className="hidden text-sm font-medium text-semantic-text-primary/70 md:inline">{subtitle}</span>
               </>
             ) : null}
           </RouterLink>
@@ -82,7 +82,7 @@ export function GlobalHeader({
               <button
                 onClick={onPrimaryAction}
                 type="button"
-                className="hidden items-center justify-center gap-2 rounded-full bg-brand-peach px-5 py-2 text-sm font-semibold text-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-brand-peach/90 md:inline-flex"
+                className="hidden items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-5 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90 md:inline-flex"
               >
                 {primaryLabel}
               </button>
@@ -91,7 +91,7 @@ export function GlobalHeader({
             <SignedOut>
               <RouterLink
                 to="/sign-in"
-                className="hidden rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa transition hover:bg-brand-blush/40 md:inline-flex"
+                className="hidden rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary transition hover:bg-semantic-legacy-brand-blush/40 md:inline-flex"
               >
                 Sign in
               </RouterLink>
@@ -104,7 +104,7 @@ export function GlobalHeader({
 
             <RouterLink
               to={signedIn ? '/account' : '/sign-in'}
-              className="inline-flex h-10 w-10 items-center justify-center text-brand-cocoa hover:text-brand-cocoa/80"
+              className="inline-flex h-10 w-10 items-center justify-center text-semantic-text-primary hover:text-semantic-text-primary/80"
               aria-label={signedIn ? 'Account' : 'Sign in'}
             >
               <UserRound className="h-6 w-6" />

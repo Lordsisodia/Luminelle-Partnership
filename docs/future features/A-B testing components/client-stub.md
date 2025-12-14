@@ -3,6 +3,8 @@
 ## Env/flags
 ```
 VITE_EXPERIMENTS_ENABLED=false
+VITE_ANALYTICS_ENABLED=false
+VITE_HEATMAP_ENABLED=false
 ```
 Provider attaches only when flag true and consent granted.
 
@@ -37,7 +39,7 @@ export function HeroCTA() {
     <button
       data-click-id="hero-cta"
       className={style}
-      onClick={() => trackEvent('click', { click_id: 'hero-cta' })}
+      onClick={() => trackEvent('cta_click', { click_id: 'hero-cta' })}
     >
       {copy}
     </button>
@@ -45,35 +47,33 @@ export function HeroCTA() {
 }
 ```
 
-## Heatmap/TTFC capture (draft, gated)
-```ts
-// src/experiments/heatmap.ts
-let firstClickTs: number | null = null
-let firstCtaTs: number | null = null
+## Heatmaps & replay (recommended: Clarity, gated)
 
-export function enableHeatmapTracking(trackEvent: any) {
-  if (typeof window === 'undefined') return
-  const start = performance.now()
-  const handler = (e: MouseEvent) => {
-    const target = e.target as HTMLElement
-    const clickId = target.closest('[data-click-id]')?.getAttribute('data-click-id') ?? 'unknown'
-    const now = performance.now()
-    if (firstClickTs === null) firstClickTs = now - start
-    if (!firstCtaTs && clickId.includes('cta')) firstCtaTs = now - start
-    trackEvent('click', {
-      click_id: clickId,
-      x: e.clientX,
-      y: e.clientY,
-      viewport_w: window.innerWidth,
-      viewport_h: window.innerHeight,
-      scroll_y: window.scrollY,
-      ttfc_ms: firstClickTs,
-      ttfcta_ms: firstCtaTs ?? undefined,
-    })
-  }
-  document.addEventListener('click', handler, { passive: true })
+Recommended approach for heatmaps/replay is **not** “store click coordinates in our DB”.
+Instead:
+- Use Clarity/Hotjar for heatmaps + replays.
+- Use our experiment assignment to **tag** sessions/recordings by variant (so you can filter “control vs variant”).
+
+Clarity tagging snippet (draft):
+```ts
+// Example: after we know anonId + sessionId + variant
+if (typeof window !== 'undefined' && typeof (window as any).clarity === 'function') {
+  // Identify ties recordings to our anon/session ids (Clarity hashes custom-id client-side)
+  ;(window as any).clarity('identify', anonId, sessionId)
+
+  // Tag recordings/heatmaps by experiment + variant
+  ;(window as any).clarity('set', `exp_${experimentKey}`, variant)
 }
 ```
+
+## Optional: vendor-free click telemetry (only if required)
+
+If we truly need our own heatmap overlay, we must:
+- sample heavily (e.g., 1% of sessions), and
+- log **only** clicks with a `data-click-id` (not every document click), and
+- enforce retention (delete after 30–90 days).
+
+Otherwise, analytics tables will bloat quickly (especially on the Supabase free tier).
 
 ## Notes
 - All snippets live in docs; not imported into the live bundle yet.

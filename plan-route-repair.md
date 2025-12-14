@@ -5,7 +5,7 @@ Goal: remove stubs, realign imports/exports after refactor, and get `npm run bui
 ## Prep
 1. Snapshot current git status for reference.
 2. Remove all stub files added during triage (landing pages/sections, shop sections, shared/cart/lib stubs, placeholder wrappers).
-3. Decide on `@siso/ui`: install it or replace usages with local helpers; update package.json accordingly.
+3. Remove `@siso/ui` dependency (done); use local helpers instead.
 
 ## Alias & Config Hygiene
 4. Verify `tsconfig.app.json` paths (one `ui` segment) and remove broad excludes/ts-nocheck reliance.
@@ -33,7 +33,7 @@ Goal: remove stubs, realign imports/exports after refactor, and get `npm run bui
 ## Shared Helpers
 19. Restore real `src/lib/seo.ts` (setMetaTags, injectJsonLd, setNoIndex/NoFollow) and `src/lib/supabase.ts` implementations.
 20. Consolidate Shopify helper to a single source (e.g., `src/shared/shopify.ts` or `src/domains/shop/shared/shopify.ts`) and update all imports.
-21. Ensure `src/lib/ui.ts` uses either `@siso/ui` or local utilities; remove placeholder content.
+21. Ensure `src/lib/ui.ts` uses local utilities; remove placeholder content.
 
 ## Blog/Admin/Auth/Account
 22. Restore blog pages to `src/domains/blog/ui/pages/*` and verify SectionHeading/Layout imports.

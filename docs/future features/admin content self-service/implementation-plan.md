@@ -33,7 +33,8 @@ Date: Dec 11 2025
 
 ## Admin UI (to be dropped in later)
 - Feature flag: `VITE_ENABLE_ADMIN_UI` controls import of `/admin` route.
-- Auth: Supabase auth with admin-only access.
+- Auth: Clerk-first. Supabase access is enforced via RLS and authenticated using a Clerk JWT template named `supabase`.
+- Roles: include `"admin"` in the JWT claim `app_metadata.roles` for admin users (used by `cms_*` RLS and Edge Functions).
 - Screens: Dashboard, Pages/Sections, Products, Blogs, Media Library, Globals, Preview/Publish, Activity Log.
 - Upload UX: client-side WebP conversion; allow SVG only if source is vector; enforce ≤25MB and ≤2500px; collect alt + focal.
 

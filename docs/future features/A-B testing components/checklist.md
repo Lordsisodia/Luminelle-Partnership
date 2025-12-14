@@ -2,6 +2,39 @@
 
 Goal: ship a reliable, privacy-safe experimentation system for component/UI layout tests, with data you can trust. Follow in order; mark done as you go.
 
+## Track A (recommended): PostHog-first + server-side purchase
+
+This is the “ship now” checklist for the hybrid stack:
+- PostHog = experiments + funnels (minimal events; no autocapture/replay)
+- Shopify webhook = purchase event (server-side)
+- Clarity (optional) = heatmaps/replay
+
+1) Create a PostHog project (per client) and confirm the ingest host (US/EU).
+2) Create feature flag / experiment `hero_cta_copy` with variants (`control`, `bold`) and a 50/50 split (staging first).
+3) Set staging env vars (Pages/Vite):
+   - `VITE_EXPERIMENTS_ENABLED=true`
+   - `VITE_ANALYTICS_ENABLED=true`
+   - `VITE_POSTHOG_KEY`, `VITE_POSTHOG_HOST`
+4) Deploy staging and confirm you see:
+   - `experiment_exposure`, `cta_click`, `add_to_cart`, `begin_checkout`
+5) Validate attribution plumbing:
+   - cart attributes include `ph_distinct_id`, `lumelle_anon_id`, and `exp_*`
+6) Place a staging test order and confirm webhook payload contains the attributes (note attributes/additional details).
+7) Configure webhook env vars and verify server-side `purchase` lands in PostHog:
+   - `POSTHOG_API_KEY`, `POSTHOG_HOST`
+8) Validate funnel in PostHog:
+   - exposure → CTA click → begin checkout → purchase
+9) Production rollout:
+   - run “control-only” for 24h
+   - then run 50/50
+10) Decide winner + ship + log the decision (dates + KPI delta + Clarity notes if used).
+
+---
+
+## Track B (legacy/fallback): DB-first custom experiments
+
+Only do this if we can’t use PostHog flags for some reason.
+
 1) Define objectives & metrics per surface (hero, PDP, pop-ups); pick primary KPI and guardrails.
 2) Draft experiment charters (hypothesis, variants, success metric, min duration) for first 3 tests.
 3) Quantify sample size/power using current traffic & baseline conversion; set minimum detectable effect.
