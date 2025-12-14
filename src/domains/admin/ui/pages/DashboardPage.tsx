@@ -28,8 +28,8 @@ export default function DashboardPage() {
       subtitle="Quick links to content and tools. This is the starting point for the admin content self-service rollout."
     >
       <div className="grid gap-4 md:grid-cols-2">
-        <section className="rounded-2xl border border-brand-blush/60 bg-white p-5">
-          <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+        <section className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
+          <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
             Content
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -37,22 +37,22 @@ export default function DashboardPage() {
               <Link
                 key={card.to}
                 to={card.to}
-                className="group rounded-2xl border border-brand-blush/60 bg-brand-porcelain/60 p-4 transition hover:bg-white"
+                className="group rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 transition hover:bg-white"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <div className="text-sm font-semibold text-brand-cocoa">{card.title}</div>
-                  <span className="text-xs text-brand-cocoa/60 transition group-hover:text-brand-cocoa/90">
+                  <div className="text-sm font-semibold text-semantic-text-primary">{card.title}</div>
+                  <span className="text-xs text-semantic-text-primary/60 transition group-hover:text-semantic-text-primary/90">
                     →
                   </span>
                 </div>
-                <p className="mt-2 text-xs text-brand-cocoa/70">{card.description}</p>
+                <p className="mt-2 text-xs text-semantic-text-primary/70">{card.description}</p>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="rounded-2xl border border-brand-blush/60 bg-white p-5">
-          <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+        <section className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
+          <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
             Tools
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -60,43 +60,43 @@ export default function DashboardPage() {
               <Link
                 key={card.to}
                 to={card.to}
-                className="group rounded-2xl border border-brand-blush/60 bg-brand-porcelain/60 p-4 transition hover:bg-white"
+                className="group rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 transition hover:bg-white"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <div className="text-sm font-semibold text-brand-cocoa">{card.title}</div>
-                  <span className="text-xs text-brand-cocoa/60 transition group-hover:text-brand-cocoa/90">
+                  <div className="text-sm font-semibold text-semantic-text-primary">{card.title}</div>
+                  <span className="text-xs text-semantic-text-primary/60 transition group-hover:text-semantic-text-primary/90">
                     →
                   </span>
                 </div>
-                <p className="mt-2 text-xs text-brand-cocoa/70">{card.description}</p>
+                <p className="mt-2 text-xs text-semantic-text-primary/70">{card.description}</p>
               </Link>
             ))}
           </div>
         </section>
       </div>
 
-      <section className="rounded-2xl border border-brand-blush/60 bg-white p-5">
+      <section className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
               Next build targets
             </div>
-            <div className="mt-2 text-sm text-brand-cocoa/80">
+            <div className="mt-2 text-sm text-semantic-text-primary/80">
               Based on `docs/future features/admin content self-service/`:
             </div>
           </div>
         </div>
-        <ul className="mt-4 grid gap-2 text-sm text-brand-cocoa/80 md:grid-cols-2">
-          <li className="rounded-xl border border-brand-blush/60 bg-brand-porcelain/40 p-3">
+        <ul className="mt-4 grid gap-2 text-sm text-semantic-text-primary/80 md:grid-cols-2">
+          <li className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/40 p-3">
             Pages list + detail editor (sections reorder + JSON schema forms)
           </li>
-          <li className="rounded-xl border border-brand-blush/60 bg-brand-porcelain/40 p-3">
+          <li className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/40 p-3">
             Media uploader with guardrails (≤25MB, ≤2500px, alt required)
           </li>
-          <li className="rounded-xl border border-brand-blush/60 bg-brand-porcelain/40 p-3">
+          <li className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/40 p-3">
             Preview / publish / rollback actions (Edge Functions)
           </li>
-          <li className="rounded-xl border border-brand-blush/60 bg-brand-porcelain/40 p-3">
+          <li className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/40 p-3">
             Activity log backed by `cms_audits` + version history UI
           </li>
         </ul>

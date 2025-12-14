@@ -118,7 +118,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
           alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
 
-        <div className="mt-6 rounded-3xl border border-brand-peach/40 bg-gradient-to-r from-[#FDEBE3] via-white to-[#FDEBE3] p-4 shadow-soft">
+        <div className="mt-6 rounded-3xl border border-semantic-accent-cta/40 bg-gradient-to-r from-[#FDEBE3] via-white to-[#FDEBE3] p-4 shadow-soft">
           <div
             ref={scrollerRef}
             onMouseDown={handleMouseDown}
@@ -132,10 +132,10 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
                 <article key={s.handle} data-tiktok-card className="min-w-[min(72vw,300px)] snap-center lg:min-w-[min(340px,26vw)]">
                   <LazyVisible
                     placeholder={
-                      <div className="relative overflow-hidden rounded-2xl border border-brand-peach/40 pb-[158%] shadow-soft bg-brand-blush/20" />
+                      <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/40 pb-[158%] shadow-soft bg-semantic-legacy-brand-blush/20" />
                     }
                   >
-                    <div className="relative overflow-hidden rounded-2xl border border-brand-peach/40 pb-[158%] shadow-soft bg-black">
+                    <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/40 pb-[158%] shadow-soft bg-black">
                       {hydrated ? (
                         <iframe
                           src={s.embedUrl.includes('lang=') ? s.embedUrl : `${s.embedUrl}&lang=en`}
@@ -148,19 +148,19 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
                           style={{ border: 0 }}
                         />
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                        <div className="absolute inset-0 flex items-center justify-center bg-semantic-legacy-brand-blush/20 text-semantic-text-primary/60 text-xs">
                           Loading…
                         </div>
                       )}
                     </div>
                   </LazyVisible>
-                  <div className="mt-2 text-center text-sm text-brand-cocoa/70">{s.name} • {s.handle}</div>
+                  <div className="mt-2 text-center text-sm text-semantic-text-primary/70">{s.name} • {s.handle}</div>
                   <div className="mt-1 hidden text-center md:block">
                     <a
                       href={s.videoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold text-brand-cocoa/80 hover:bg-brand-blush/40"
+                      className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold text-semantic-text-primary/80 hover:bg-semantic-legacy-brand-blush/40"
                     >
                       Watch on TikTok
                       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
@@ -174,7 +174,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
               <button
                 aria-label="Scroll videos left"
                 onClick={() => nudge('left')}
-                className="pointer-events-auto ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
+                className="pointer-events-auto ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-semantic-legacy-brand-cocoa"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
               </button>
@@ -183,7 +183,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
               <button
                 aria-label="Scroll videos right"
                 onClick={() => nudge('right')}
-                className="pointer-events-auto mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
+                className="pointer-events-auto mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-semantic-legacy-brand-cocoa"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
               </button>
@@ -191,13 +191,13 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-2 text-sm text-brand-cocoa/80">
+        <div className="mt-4 flex items-center justify-center gap-2 text-sm text-semantic-text-primary/80">
           {successStories.map((_, i) => (
             <button
               key={i}
               aria-label={`Go to TikTok slide ${i + 1}`}
               onClick={() => goTo(i)}
-              className={`h-2.5 w-2.5 rounded-full transition ${i === active ? 'bg-brand-cocoa' : 'bg-brand-cocoa/30'}`}
+              className={`h-2.5 w-2.5 rounded-full transition ${i === active ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-cocoa/30'}`}
             />
           ))}
         </div>

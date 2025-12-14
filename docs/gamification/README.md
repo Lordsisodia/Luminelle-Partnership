@@ -8,6 +8,16 @@ This folder is the home for **all planning related to gamification** inside Lume
 
 The goal is to keep this work **research-backed**, **ethical**, and **shippable** (starting with an MVP).
 
+## What’s live right now (Dec 2025)
+
+- `/rewards` page: points summary + claimable actions + recent history
+- Supabase MVP:
+  - `loyalty_points_ledger` (append-only points)
+  - `loyalty_task_claims` (one claim per action per account)
+  - RPC helpers: `get_loyalty_points_summary`, `claim_loyalty_task`
+- Purchase points: awarded on Shopify `fulfillments/create` when the checkout includes `lumelle_user_id` (reversed on full refunds)
+- Welcome wheel: 1× per account unlock tracked in `welcome_wheel_claims`
+
 ## Why we’re doing this
 
 Lumelle is already “gamified” in spirit (creator proof, leaderboards, social momentum). The next step is to make that

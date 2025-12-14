@@ -21,11 +21,18 @@ export default defineConfig({
       '@admin': path.resolve(__dirname, 'src/domains/admin'),
       '@auth': path.resolve(__dirname, 'src/domains/auth'),
       '@account': path.resolve(__dirname, 'src/domains/account'),
+      '@rewards': path.resolve(__dirname, 'src/domains/rewards'),
       '@content': path.resolve(__dirname, 'src/content'),
       '@layouts': path.resolve(__dirname, 'src/layouts'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@lib': path.resolve(__dirname, 'src/lib'),
+      // Force a single React copy when consuming local builds (e.g., @ui-lib dist)
+      react: path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+      'react/jsx-runtime': path.resolve(__dirname, 'node_modules/react/jsx-runtime'),
     },
+    // Avoid duplicate React copies when consuming local packages (e.g., @ui-lib dist)
+    dedupe: ['react', 'react-dom'],
   },
   build: {
     chunkSizeWarningLimit: 900,
@@ -37,7 +44,8 @@ export default defineConfig({
     hmr: {
       port: 5174,
       host: 'localhost',
+      clientPort: 5174,
     },
-    allowedHosts: ['choir-holly-assist-cases.trycloudflare.com', 'localhost'],
+    allowedHosts: ['choir-holly-assist-cases.trycloudflare.com', 'localhost', '127.0.0.1'],
   },
 })

@@ -19,7 +19,7 @@ export const HeroSection = ({
   return (
     <section
       id="hero"
-      className="relative overflow-hidden scroll-mt-24 bg-brand-blush/10 pb-20 pt-24 text-brand-cocoa md:scroll-mt-32 md:pb-24 md:pt-32"
+      className="relative overflow-hidden scroll-mt-24 bg-semantic-legacy-brand-blush/10 pb-20 pt-24 text-semantic-text-primary md:scroll-mt-32 md:pb-24 md:pt-32"
     >
         <div className="absolute inset-0">
             {slides.map((slide, index) => (
@@ -33,7 +33,7 @@ export const HeroSection = ({
                 }`}
               />
             ))}
-        <div className="absolute inset-0 bg-brand-cocoa/20 md:bg-brand-cocoa/50 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-semantic-legacy-brand-cocoa/20 md:bg-semantic-legacy-brand-cocoa/50 backdrop-blur-[2px]" />
       </div>
       <div className="relative">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 px-4 text-center md:items-start md:px-6 md:text-left">
@@ -50,7 +50,7 @@ export const HeroSection = ({
             <button
               type="button"
               onClick={onPrimaryAction}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-peach px-8 py-3 text-sm font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5 hover:bg-brand-peach/90"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-8 py-3 text-sm font-semibold text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90"
             >
               {heroContent.primaryCta}
             </button>
@@ -68,13 +68,13 @@ export const HeroSection = ({
                 key={metric.label}
                 className="rounded-3xl border border-white/40 bg-white/85 px-4 py-5 text-center shadow-soft backdrop-blur"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
                   {metric.label}
                 </p>
-                <p className="mt-2 font-heading text-2xl text-brand-cocoa">
+                <p className="mt-2 font-heading text-2xl text-semantic-text-primary">
                   {metric.value}
                 </p>
-                <p className="mt-1 text-sm text-brand-cocoa/70">
+                <p className="mt-1 text-sm text-semantic-text-primary/70">
                   {metric.description}
                 </p>
               </div>
@@ -83,24 +83,24 @@ export const HeroSection = ({
           <div className="w-full rounded-[2.5rem] border border-white/40 bg-white/90 p-6 text-left shadow-soft backdrop-blur md:max-w-3xl">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
               {currentSlide.imageSrc ? (
-                <div className="relative h-32 w-full overflow-hidden rounded-2xl border border-brand-peach/40 bg-brand-blush/30 md:h-40 md:w-56">
+                <div className="relative h-32 w-full overflow-hidden rounded-2xl border border-semantic-accent-cta/40 bg-semantic-legacy-brand-blush/30 md:h-40 md:w-56">
                   <img
                     src={currentSlide.imageSrc}
                     alt=""
                     aria-hidden="true"
                     className="h-full w-full object-contain object-center"
                   />
-                  <div className="absolute inset-0 bg-brand-cocoa/15 backdrop-blur-[1px]" />
+                  <div className="absolute inset-0 bg-semantic-legacy-brand-cocoa/15 backdrop-blur-[1px]" />
                 </div>
               ) : null}
               <div className="flex-1 space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cocoa/60">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-semantic-text-primary/60">
                   {currentSlide.label}
                 </p>
-                <p className="font-heading text-2xl text-brand-cocoa">
+                <p className="font-heading text-2xl text-semantic-text-primary">
                   {currentSlide.title}
                 </p>
-                <p className="text-sm text-brand-cocoa/70">
+                <p className="text-sm text-semantic-text-primary/70">
                   {currentSlide.description}
                 </p>
               </div>

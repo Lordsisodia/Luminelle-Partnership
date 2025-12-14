@@ -6,6 +6,68 @@ The guiding constraint: **keep it auditable and hard to break**.
 
 ---
 
+## Current implementation (Dec 2025)
+
+This is what’s already live in the codebase:
+
+### Rewards page (UI)
+
+- Route: `/rewards`
+- File: `src/domains/rewards/ui/pages/RewardsPage.tsx`
+- Shows:
+  - points summary (balance / earned / spent)
+  - claimable “earn actions” (manual for now; one per task per account)
+  - recent points history
+  - welcome wheel status + apply-to-cart shortcut
+
+### Supabase schema (MVP)
+
+- Migration: `server/migrations/2025-12-14_loyalty_points.sql`
+- Tables:
+  - `loyalty_points_ledger` (append-only points)
+  - `loyalty_task_claims` (one claim per `task_key` per user)
+- RPC:
+  - `get_loyalty_points_summary()` → `{ balance, lifetime_earned, lifetime_spent }`
+  - `claim_loyalty_task(p_task_key, p_meta?)` → atomic claim + ledger insert
+
+### Welcome wheel (direct issuance)
+
+- Supabase table: `welcome_wheel_claims` (1× per account)
+- UI: `src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx`
+- Auto-apply to cart: `src/domains/cart/providers/CartContext.tsx`
+
+### Purchase points (Shopify webhooks)
+
+We now award points from Shopify events (authoritative) instead of trusting the client.
+
+How it works:
+
+1) **Checkout attaches identity**
+   - On `/checkout`, if the shopper is signed in with Clerk, we attach:
+     - `lumelle_user_id` (Clerk user id)
+     - `lumelle_user_email` (optional)
+   - This is written into Shopify order `note_attributes` via cart attributes update.
+
+2) **Award on fulfillment**
+   - Webhook: `fulfillments/create`
+   - If an order has `lumelle_user_id`, we insert a positive entry into `loyalty_points_ledger` with source:
+     - `shopify:fulfillment:{shop}:{order_id}`
+   - Idempotency: we use `ShopWebhookDeliveries` to dedupe by order (`loyalty:award:fulfillment:{shop}:{order_id}`)
+
+3) **Reverse on full refund**
+   - Webhook: `orders/updated`
+   - If `financial_status=refunded`, we insert a negative ledger entry with source:
+     - `shopify:refund:{shop}:{order_id}`
+   - Idempotency: `loyalty:reverse:refund:{shop}:{order_id}`
+
+Files:
+- `src/domains/checkout/ui/pages/CheckoutPage.tsx`
+- `api/shopify/webhooks/fulfillments-create.ts`
+- `api/shopify/webhooks/orders-updated.ts`
+- (Cloudflare parity) `functions/api/shopify/webhooks/*`
+
+---
+
 ## 0) Architecture summary (MVP)
 
 **Data store**: Supabase Postgres  

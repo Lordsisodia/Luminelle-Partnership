@@ -31,8 +31,8 @@ function NavItemLink({ to, label, onNavigate }: { to: string; label: string; onN
         [
           'flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold transition',
           isActive
-            ? 'bg-white text-brand-cocoa shadow-sm ring-1 ring-brand-blush/60'
-            : 'text-brand-cocoa/80 hover:bg-white/60 hover:text-brand-cocoa',
+            ? 'bg-white text-semantic-text-primary shadow-sm ring-1 ring-semantic-legacy-brand-blush/60'
+            : 'text-semantic-text-primary/80 hover:bg-white/60 hover:text-semantic-text-primary',
         ].join(' ')
       }
     >
@@ -56,16 +56,16 @@ export default function AdminShell() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-brand-porcelain text-brand-cocoa">
+    <div className="min-h-screen bg-brand-porcelain text-semantic-text-primary">
       <div className="mx-auto flex min-h-screen w-full max-w-[1400px]">
         {/* Desktop sidebar */}
-        <aside className="hidden w-72 shrink-0 border-r border-brand-blush/60 p-4 md:block">
-          <div className="flex items-center justify-between rounded-2xl border border-brand-blush/60 bg-white p-4">
+        <aside className="hidden w-72 shrink-0 border-r border-semantic-legacy-brand-blush/60 p-4 md:block">
+          <div className="flex items-center justify-between rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
             <div>
-              <div className="text-sm font-semibold text-brand-cocoa">Lumelle</div>
-              <div className="text-xs text-brand-cocoa/70">Admin console</div>
+              <div className="text-sm font-semibold text-semantic-text-primary">Lumelle</div>
+              <div className="text-xs text-semantic-text-primary/70">Admin console</div>
             </div>
-            <span className="rounded-full border border-brand-blush/60 px-2 py-1 text-[11px] text-brand-cocoa/70">
+            <span className="rounded-full border border-semantic-legacy-brand-blush/60 px-2 py-1 text-[11px] text-semantic-text-primary/70">
               {import.meta.env.MODE}
             </span>
           </div>
@@ -73,7 +73,7 @@ export default function AdminShell() {
           <nav className="mt-4 space-y-4">
             {(['Core', 'Content', 'Tools'] as const).map((group) => (
               <div key={group}>
-                <div className="px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
+                <div className="px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
                   {group}
                 </div>
                 <div className="mt-2 space-y-1">
@@ -85,23 +85,23 @@ export default function AdminShell() {
             ))}
           </nav>
 
-          <div className="mt-6 rounded-2xl border border-brand-blush/60 bg-white p-4">
-            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
+          <div className="mt-6 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
+            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
               Signed in
             </div>
             <div className="mt-2 text-sm font-semibold">{user?.fullName || user?.email || 'Admin'}</div>
-            {user?.email ? <div className="mt-1 text-xs text-brand-cocoa/70">{user.email}</div> : null}
+            {user?.email ? <div className="mt-1 text-xs text-semantic-text-primary/70">{user.email}</div> : null}
             <div className="mt-3 flex flex-wrap gap-2">
               <a
                 href="/"
-                className="inline-flex items-center rounded-full border border-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-brand-cocoa"
+                className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
               >
                 View storefront
               </a>
               {signedIn ? (
                 <button
                   onClick={signOut}
-                  className="inline-flex items-center rounded-full bg-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
+                  className="inline-flex items-center rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
                 >
                   Sign out
                 </button>
@@ -113,32 +113,32 @@ export default function AdminShell() {
         {/* Main */}
         <div className="min-w-0 flex-1">
           {/* Mobile top bar */}
-          <header className="sticky top-0 z-20 flex items-center justify-between border-b border-brand-blush/60 bg-brand-porcelain/95 px-4 py-3 backdrop-blur md:hidden">
+          <header className="sticky top-0 z-20 flex items-center justify-between border-b border-semantic-legacy-brand-blush/60 bg-brand-porcelain/95 px-4 py-3 backdrop-blur md:hidden">
             <button
               onClick={() => setMobileNavOpen((v) => !v)}
-              className="inline-flex items-center rounded-full border border-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-brand-cocoa"
+              className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
               aria-expanded={mobileNavOpen}
               aria-controls="admin-mobile-nav"
             >
               Menu
             </button>
             <div className="text-sm font-semibold">Admin</div>
-            <span className="rounded-full border border-brand-blush/60 px-2 py-1 text-[11px] text-brand-cocoa/70">
+            <span className="rounded-full border border-semantic-legacy-brand-blush/60 px-2 py-1 text-[11px] text-semantic-text-primary/70">
               {import.meta.env.MODE}
             </span>
           </header>
 
           {mobileNavOpen ? (
-            <div id="admin-mobile-nav" className="border-b border-brand-blush/60 bg-white p-3 md:hidden">
+            <div id="admin-mobile-nav" className="border-b border-semantic-legacy-brand-blush/60 bg-white p-3 md:hidden">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-sm font-semibold">Lumelle admin</div>
-                  <div className="text-xs text-brand-cocoa/70">{user?.email || 'Signed in'}</div>
+                  <div className="text-xs text-semantic-text-primary/70">{user?.email || 'Signed in'}</div>
                 </div>
                 {signedIn ? (
                   <button
                     onClick={signOut}
-                    className="inline-flex items-center rounded-full bg-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
+                    className="inline-flex items-center rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
                   >
                     Sign out
                   </button>

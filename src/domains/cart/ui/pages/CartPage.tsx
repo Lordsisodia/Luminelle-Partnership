@@ -9,9 +9,12 @@ const FREE_SHIP_THRESHOLD = 40
 const STANDARD_SHIPPING = 3.95
 
 const EmptyCartState = () => (
-  <div className="rounded-2xl border border-brand-blush/60 bg-white p-6 text-center text-brand-cocoa/70">
+  <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-center text-semantic-text-primary/70">
     <p>Your cart is empty.</p>
-    <RouterLink to="/product/lumelle-shower-cap" className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-cocoa px-6 py-2.5 text-sm font-semibold text-white">
+    <RouterLink
+      to="/product/lumelle-shower-cap"
+      className="mt-4 inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-6 py-2.5 text-sm font-semibold text-white"
+    >
       Browse the shop
     </RouterLink>
   </div>
@@ -49,14 +52,14 @@ export const CartPage = () => {
       <section className="bg-white">
         <div className="mx-auto max-w-6xl gap-8 px-4 py-12 md:grid md:grid-cols-[1.1fr_0.9fr] md:px-6">
           <div className="space-y-4">
-            <div className="rounded-2xl border border-brand-blush/60 bg-brand-blush/20 p-4 text-sm text-brand-cocoa">
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/20 p-4 text-sm text-semantic-text-primary">
               {remainingForFreeShip > 0 ? (
                 <p>£{remainingForFreeShip.toFixed(2)} away from free UK shipping.</p>
               ) : (
                 <p>You’ve unlocked free UK shipping!</p>
               )}
-              <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-brand-blush/40">
-                <div className="h-full bg-brand-peach transition-[width]" style={{ width: `${progress}%` }} />
+              <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-semantic-legacy-brand-blush/40">
+                <div className="h-full bg-semantic-accent-cta transition-[width]" style={{ width: `${progress}%` }} />
               </div>
             </div>
             {items.length === 0 ? (
@@ -64,30 +67,30 @@ export const CartPage = () => {
             ) : (
               <div className="space-y-3">
                 {items.map((item: any) => (
-                  <article key={item.id} className="grid grid-cols-[80px_1fr_auto] gap-4 rounded-2xl border border-brand-blush/60 bg-white p-4 shadow-sm">
+                  <article key={item.id} className="grid grid-cols-[80px_1fr_auto] gap-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-sm">
                     <img
                       src="/uploads/luminele/product-feature-05.webp"
                       alt={item.title}
-                      className="h-20 w-20 rounded-xl border border-brand-blush/40 object-cover"
+                      className="h-20 w-20 rounded-xl border border-semantic-legacy-brand-blush/40 object-cover"
                       loading="lazy"
                       decoding="async"
                     />
-                    <div className="text-sm text-brand-cocoa">
+                    <div className="text-sm text-semantic-text-primary">
                       <p className="font-semibold">{item.title}</p>
-                      <p className="flex items-center gap-2 text-brand-cocoa/70">
-                        <span className="line-through text-brand-cocoa/50">£19.99</span>
-                        <span className="font-semibold text-brand-cocoa">£{item.price.toFixed(2)}</span>
+                      <p className="flex items-center gap-2 text-semantic-text-primary/70">
+                        <span className="line-through text-semantic-text-primary/50">£19.99</span>
+                        <span className="font-semibold text-semantic-text-primary">£{item.price.toFixed(2)}</span>
                         <span>each</span>
                       </p>
-                      <button className="mt-2 text-[11px] uppercase tracking-[0.25em] text-brand-cocoa/60" onClick={() => remove(item.id)}>
+                      <button className="mt-2 text-[11px] uppercase tracking-[0.25em] text-semantic-text-primary/60" onClick={() => remove(item.id)}>
                         Remove
                       </button>
                     </div>
                     <div className="justify-self-end">
                       <div className="inline-flex items-center gap-2">
-                        <button className="h-8 w-8 rounded-full border border-brand-blush/60" onClick={() => setQty(item.id, Math.max(1, item.qty - 1))}>−</button>
-                        <span className="w-6 text-center text-brand-cocoa">{item.qty}</span>
-                        <button className="h-8 w-8 rounded-full border border-brand-blush/60" onClick={() => setQty(item.id, item.qty + 1)}>+</button>
+                        <button className="h-8 w-8 rounded-full border border-semantic-legacy-brand-blush/60" onClick={() => setQty(item.id, Math.max(1, item.qty - 1))}>−</button>
+                        <span className="w-6 text-center text-semantic-text-primary">{item.qty}</span>
+                        <button className="h-8 w-8 rounded-full border border-semantic-legacy-brand-blush/60" onClick={() => setQty(item.id, item.qty + 1)}>+</button>
                       </div>
                       <div className="mt-2 text-right text-sm font-semibold">£{(item.qty * item.price).toFixed(2)}</div>
                     </div>
@@ -98,9 +101,9 @@ export const CartPage = () => {
           </div>
 
           <aside className="mt-8 space-y-4 md:mt-0">
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 shadow-soft">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Order summary</p>
-              <div className="mt-4 space-y-3 text-sm text-brand-cocoa">
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 shadow-soft">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Order summary</p>
+              <div className="mt-4 space-y-3 text-sm text-semantic-text-primary">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
                   <span>£{subtotal.toFixed(2)}</span>
@@ -120,10 +123,10 @@ export const CartPage = () => {
                     value={promo}
                     onChange={(e) => setPromo(e.target.value)}
                     placeholder="Promo code"
-                    className="flex-1 rounded-xl border border-brand-blush/60 px-3 py-2 text-sm"
+                    className="flex-1 rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm"
                   />
                   <button
-                    className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa"
+                    className="rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary"
                     onClick={() => applyDiscount?.(promo)}
                     disabled={!promo}
                   >
@@ -137,25 +140,25 @@ export const CartPage = () => {
                   data-checkout-url
                   onClick={() => void beginCheckout(checkoutUrl)}
                   disabled={redirecting}
-                  className="mt-5 block w-full rounded-full bg-brand-cocoa px-5 py-3 text-center text-sm font-semibold text-white hover:-translate-y-0.5 transition disabled:opacity-60"
+                  className="mt-5 block w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-center text-sm font-semibold text-white hover:-translate-y-0.5 transition disabled:opacity-60"
                 >
                   {redirecting ? 'Redirecting…' : 'Continue to checkout'}
                 </button>
               ) : (
                 <RouterLink
                   to="/checkout"
-                  className={`mt-5 block rounded-full px-5 py-3 text-center text-sm font-semibold text-white ${items.length === 0 ? 'bg-brand-cocoa/40 cursor-not-allowed' : 'bg-brand-cocoa hover:-translate-y-0.5 transition'}`}
+                  className={`mt-5 block rounded-full px-5 py-3 text-center text-sm font-semibold text-white ${items.length === 0 ? 'bg-semantic-legacy-brand-cocoa/40 cursor-not-allowed' : 'bg-semantic-legacy-brand-cocoa hover:-translate-y-0.5 transition'}`}
                 >
                   Proceed to checkout
                 </RouterLink>
               )}
-              <p className="mt-3 text-center text-xs text-brand-cocoa/60">
+              <p className="mt-3 text-center text-xs text-semantic-text-primary/60">
                 Need help? <RouterLink to="/returns" className="underline">View returns</RouterLink> or <RouterLink to="/account/orders" className="underline">track an order</RouterLink>.
               </p>
             </div>
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4 text-brand-cocoa/80">
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-semantic-text-primary/80">
               <p className="text-sm font-semibold">Secure checkout</p>
-              <p className="text-xs text-brand-cocoa/60">256-bit SSL. Apple Pay, Shop Pay, and major cards accepted.</p>
+              <p className="text-xs text-semantic-text-primary/60">256-bit SSL. Apple Pay, Shop Pay, and major cards accepted.</p>
             </div>
           </aside>
         </div>

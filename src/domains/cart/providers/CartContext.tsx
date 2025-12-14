@@ -46,6 +46,22 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   const [checkoutUrl, setCheckoutUrl] = useState<string | undefined>(undefined)
 
   const useServerCart = (import.meta.env.VITE_USE_SERVER_CART as any) === '1'
+  const checkoutProxyEnabled = (import.meta.env.VITE_SHOPIFY_CHECKOUT_PROXY as any) === '1'
+
+  const maybeProxyCheckoutUrl = (url: string): string => {
+    if (!checkoutProxyEnabled) return url
+    if (typeof window === 'undefined') return url
+    try {
+      const u = new URL(url)
+      // Shopify checkout URLs can be /cart/c/... or /checkouts/... depending on version/flow.
+      if (u.pathname.startsWith('/cart/c/') || u.pathname.startsWith('/checkouts/')) {
+        return `${window.location.origin}${u.pathname}${u.search}${u.hash}`
+      }
+    } catch {
+      // ignore invalid URLs
+    }
+    return url
+  }
 
   const serverCart = {
     create: async (merchandiseId?: string, quantity = 1) => {
@@ -105,7 +121,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const applyShopifyCart = (cart: ShopifyCart) => {
     setShopifyCartId(cart.id)
-    setCheckoutUrl(cart.checkoutUrl)
+    setCheckoutUrl(cart.checkoutUrl ? maybeProxyCheckoutUrl(cart.checkoutUrl) : undefined)
     const mapped: CartItem[] = cart.lines.map((l) => ({
       id: l.merchandise.id,
       title: `${l.merchandise.product.title} – ${l.merchandise.title}`,

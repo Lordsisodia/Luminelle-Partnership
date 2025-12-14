@@ -82,6 +82,20 @@ Create `public/_redirects` with:
 
 Cloudflare Pages will include this in the final build.
 
+### 2.3.1 Don’t accidentally disable Pages Functions (`_routes.json`)
+This repo also uses Cloudflare Pages Functions under `functions/**`.
+
+Cloudflare Pages can optionally use `public/_routes.json` to **limit which paths invoke Functions**.
+
+If `/api/*` is not included, requests like `/api/health` will be served by the SPA fallback (`index.html`) instead of hitting the function handler.
+
+This repo ships a `public/_routes.json` that includes:
+- `/api/*` (API + webhooks)
+- `/cart/c/*` and `/checkouts/*` (Shopify checkout proxy routes)
+
+Quick sanity check after deploy:
+- `GET /api/health` should return JSON (`{ ok: true, ... }`), not HTML.
+
 ### 2.4 Pages environment variables (build-time)
 Set these in Cloudflare Pages → Settings → Environment variables.
 
@@ -174,6 +188,7 @@ These must be stored as **Worker secrets** (not `VITE_` variables):
 - `SHOPIFY_WEBHOOK_SECRET` (optional alias; if set, used instead of `SHOPIFY_API_SECRET` for webhooks)
 - `SHOPIFY_API_KEY` (only needed if you use `/api/shopify/auth` OAuth install flow)
 - `SHOPIFY_API_VERSION` (optional; default in code is `2025-10`)
+- `SHOPIFY_ADMIN_API_ACCESS_TOKEN` (optional; if set, `/api/admin/sections/*` uses this instead of reading `public."Session"` from Supabase)
 - Shopify Customer Accounts:
   - `CUSTOMER_CLIENT_ID`
   - `CUSTOMER_CLIENT_SECRET`
@@ -185,6 +200,32 @@ These must be stored as **Worker secrets** (not `VITE_` variables):
   - `INTERNAL_SHARED_SECRET` (if you keep internal admin endpoints)
   - `SHOPIFY_STOREFRONT_PRIVATE_TOKEN` (only needed if you enable server-side cart or call `/api/storefront/*`)
   - `CLERK_WEBHOOK_SECRET` (only needed if you use `/api/webhooks/clerk`)
+
+### 4.2.1 Where to get these credentials
+
+**Supabase**
+- `SUPABASE_URL`: copy your project URL (same value as `VITE_SUPABASE_URL`, but server-side).
+  - Supabase dashboard → Project → **Settings** → **API** → **Project URL**
+- `SUPABASE_SERVICE_ROLE_KEY`: copy the **service_role** key.
+  - Supabase dashboard → Project → **Settings** → **API** → **Project API keys** → **service_role**
+  - Keep this secret; it bypasses RLS and must never be exposed to the browser.
+
+**Internal endpoints**
+- `INTERNAL_SHARED_SECRET`: this is **your own** randomly generated secret (not provided by Shopify/Cloudflare).
+  - Generate a strong value, e.g. `openssl rand -base64 32` (or any 32+ byte random string).
+  - Used as `Authorization: Bearer <INTERNAL_SHARED_SECRET>` for `/api/admin/*`, `/api/exports/*`, and any backfill endpoints.
+
+**Shopify Customer Accounts**
+- Only needed if you **use Shopify Customer Accounts** (aka “new customer accounts”) for the “My orders” experience.
+- If you use **Clerk** (or another auth) and do **not** want Shopify accounts (to avoid double-login), you can leave these unset and rely on:
+  - `/api/orders/by-email`, `/api/orders/by-name`, `/api/orders/get` (backed by Supabase tables populated by webhooks).
+- `CUSTOMER_CLIENT_ID` / `CUSTOMER_CLIENT_SECRET` come from Shopify’s **Customer Account API** settings.
+  - Shopify Admin → **Apps and sales channels** → **Hydrogen** (or **Headless**) → pick your storefront → **Storefront settings** → **Customer Account API**
+  - Create/select a **Confidential client** (this is what gives you a client secret; “Public client” typically won’t).
+  - Add redirect URLs:
+    - `https://<your-domain>/api/customer-auth/callback`
+    - include the `www.` variant if you serve both domains
+  - Copy the generated **Client ID** and **Client secret** into Cloudflare Pages runtime secrets.
 
 ### 4.3 Port the required endpoints (high level)
 
@@ -237,6 +278,7 @@ Because Workers won’t be running `pg` migrations automatically, create tables 
 
 This repo includes ready-to-run SQL migrations in `server/migrations/`:
 - `server/migrations/2025-12-14_shopify_tables_and_metrics.sql` (Shopify sync tables + analytics RPCs)
+- `server/migrations/2025-12-14_shopify_rls_lockdown.sql` (enables RLS so Shopify tables aren’t exposed via anon key)
 - `server/migrations/2025-12-14_customers_table.sql` (optional: Clerk/customer sync table)
 
 Minimum recommended tables:

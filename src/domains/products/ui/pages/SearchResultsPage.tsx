@@ -40,11 +40,11 @@ export const SearchResultsPage = () => {
       <MarketingLayout navItems={[]} subtitle="Search">
         <section className="bg-white">
           <div className="mx-auto max-w-6xl px-4 py-8">
-            <h1 className="font-heading text-xl text-brand-cocoa">Search results</h1>
-            <p className="mt-1 text-sm text-brand-cocoa/70">Query: “{params.get('q') || ''}” — {results.length} result{results.length === 1 ? '' : 's'}</p>
+            <h1 className="font-heading text-xl text-semantic-text-primary">Search results</h1>
+            <p className="mt-1 text-sm text-semantic-text-primary/70">Query: “{params.get('q') || ''}” — {results.length} result{results.length === 1 ? '' : 's'}</p>
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
               {results.map((p) => (
-                <a key={p.id} href={p.href} className="rounded-2xl border border-brand-blush/60 bg-white p-3 hover:shadow-soft">
+                <a key={p.id} href={p.href} className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-3 hover:shadow-soft">
                   <img
                     src={p.image}
                     alt={p.title}
@@ -54,8 +54,8 @@ export const SearchResultsPage = () => {
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="mt-3 font-semibold text-brand-cocoa">{p.title}</div>
-                  <div className="text-brand-cocoa/70">£{p.price.toFixed(2)}</div>
+                  <div className="mt-3 font-semibold text-semantic-text-primary">{p.title}</div>
+                  <div className="text-semantic-text-primary/70">£{p.price.toFixed(2)}</div>
                 </a>
               ))}
             </div>

@@ -5,13 +5,22 @@ This runbook assumes the **recommended hybrid**:
 - PostHog for funnels/experiments (event-budgeted)
 - No raw click/event tables stored in Supabase by default
 
+Quick reference (Cloudflare + PostHog setup details):
+- `posthog-cloudflare-setup.md`
+
+0) Preflight: confirm Cloudflare Pages Functions are invoked for `/api/*`
+   - `GET /api/health` must return JSON (not the SPA HTML).
+   - This repo uses `public/_routes.json` to control function routing and it must include `/api/*`.
+
 1) Set env in staging (browser / Pages env vars):
    - `VITE_EXPERIMENTS_ENABLED=true` (only if running UI variants)
    - `VITE_ANALYTICS_ENABLED=true` (PostHog)
    - `VITE_HEATMAP_ENABLED=true` (Clarity)
    - `VITE_POSTHOG_KEY=...`
-   - `VITE_POSTHOG_HOST=...`
+   - `VITE_POSTHOG_HOST=...` (use ingestion host: `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
    - `VITE_CLARITY_PROJECT_ID=...`
+   - Cloudflare UI: Pages → Project → Settings → Variables and Secrets
+     - `VITE_*` vars are build-time; redeploy required to take effect.
 
 2) Decide experiment assignment path:
    - **Path A (recommended):** PostHog feature flags/experiments (no DB migration needed).
@@ -42,6 +51,8 @@ This runbook assumes the **recommended hybrid**:
      - `lumelle_anon_id`, `lumelle_session_id`, `ph_distinct_id`, and `exp_<key>=<variant>`
    - Place a test order in staging store.
    - Verify the Shopify order webhook payload includes the attributes.
+   - Shopify webhook URL should be:
+     - `https://<your-staging-domain>/api/shopify/webhooks/orders-create`
    - Set webhook env vars:
      - `POSTHOG_API_KEY` (PostHog project key)
      - `POSTHOG_HOST` (e.g. https://us.i.posthog.com or https://eu.i.posthog.com)

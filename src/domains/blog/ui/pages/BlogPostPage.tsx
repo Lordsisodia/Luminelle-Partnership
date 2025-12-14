@@ -127,45 +127,49 @@ export const BlogPostPage = () => {
       <MarketingLayout navItems={navItems} subtitle="Journal">
         <section id="hero" className="bg-white">
           <div className="mx-auto max-w-4xl px-4 py-12 md:px-6">
-            <nav className="mb-4 flex items-center gap-2 text-sm text-brand-cocoa/60">
-              <RouterLink to="/" className="hover:text-brand-cocoa">Home</RouterLink>
+            <nav className="mb-4 flex items-center gap-2 text-sm text-semantic-text-primary/60">
+              <RouterLink to="/" className="hover:text-semantic-text-primary">Home</RouterLink>
               <span>›</span>
-              <RouterLink to="/blog" className="hover:text-brand-cocoa">Blog</RouterLink>
+              <RouterLink to="/blog" className="hover:text-semantic-text-primary">Blog</RouterLink>
               <span>›</span>
-              <span className="text-brand-cocoa/80">{post.title}</span>
+              <span className="text-semantic-text-primary/80">{post.title}</span>
             </nav>
-            <span className="inline-flex rounded-full bg-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/70">
+            <span className="inline-flex rounded-full bg-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
               {post.tag}
             </span>
-            <h1 className="mt-3 font-heading text-4xl text-brand-cocoa">{post.title}</h1>
-            <p className="mt-3 text-lg text-brand-cocoa/75">{post.subtitle}</p>
-            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-brand-cocoa/80">
+            <h1 className="mt-3 font-heading text-4xl text-semantic-text-primary">{post.title}</h1>
+            <p className="mt-3 text-lg text-semantic-text-primary/75">{post.subtitle}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-semantic-text-primary/80">
               <div className="flex items-center gap-2">
                 {post.authorAvatar ? (
-                  <a href={post.authorLink || '#'} className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-brand-blush/60 shadow-soft hover:-translate-y-0.5 transition">
+                  <a href={post.authorLink || '#'} className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-semantic-legacy-brand-blush/60 shadow-soft hover:-translate-y-0.5 transition">
                     <img src={post.authorAvatar} alt={post.author} className="h-full w-full object-cover" loading="lazy" />
                   </a>
                 ) : (
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blush/50 text-sm font-semibold text-brand-cocoa">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-semantic-legacy-brand-blush/50 text-sm font-semibold text-semantic-text-primary">
                     {post.author.charAt(0)}
                   </span>
                 )}
-                <a href={post.authorLink || '#'} className="font-semibold text-brand-cocoa hover:text-brand-cocoa/80" title={post.authorRoleLong || post.authorRole}>
+                <a
+                  href={post.authorLink || '#'}
+                  className="font-semibold text-semantic-text-primary hover:text-semantic-text-primary/80"
+                  title={post.authorRoleLong || post.authorRole}
+                >
                   {post.author}
                 </a>
-                {post.authorRole ? <span className="text-brand-cocoa/70">· {post.authorRole}</span> : null}
+                {post.authorRole ? <span className="text-semantic-text-primary/70">· {post.authorRole}</span> : null}
               </div>
-              {post.authorRoleLong ? <span className="text-brand-cocoa/60">{post.authorRoleLong}</span> : null}
+              {post.authorRoleLong ? <span className="text-semantic-text-primary/60">{post.authorRoleLong}</span> : null}
               <span>•</span>
               <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               <span>•</span>
               <span>{post.readTime} read</span>
               <span>•</span>
-              <div className="flex items-center gap-2 text-brand-cocoa/70">
+              <div className="flex items-center gap-2 text-semantic-text-primary/70">
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold hover:-translate-y-0.5 hover:shadow-soft transition"
+                  className="rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold hover:-translate-y-0.5 hover:shadow-soft transition"
                 >
                   {copied ? 'Link copied' : 'Copy link'}
                 </button>
@@ -173,13 +177,13 @@ export const BlogPostPage = () => {
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(url)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold hover:-translate-y-0.5 hover:shadow-soft transition"
+                  className="rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold hover:-translate-y-0.5 hover:shadow-soft transition"
                 >
                   Share
                 </a>
               </div>
             </div>
-            <div className="mt-6 overflow-hidden rounded-[2rem] border border-brand-blush/60">
+            <div className="mt-6 overflow-hidden rounded-[2rem] border border-semantic-legacy-brand-blush/60">
               <img
                 src={post.cover}
                 alt={post.title}
@@ -196,25 +200,25 @@ export const BlogPostPage = () => {
 
         <section className="bg-white">
           <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
-            <div className="rounded-2xl border border-brand-blush/60 bg-brand-blush/15 p-4 text-brand-cocoa">
-              <h2 className="text-lg font-semibold text-brand-cocoa">
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/15 p-4 text-semantic-text-primary">
+              <h2 className="text-lg font-semibold text-semantic-text-primary">
                 {post.faqs?.[0]?.question || 'How do I keep hair frizz-free in the shower?'}
               </h2>
-              <p className="mt-1 text-brand-cocoa/75">
+              <p className="mt-1 text-semantic-text-primary/75">
                 {post.faqs?.[0]?.answer ||
                   'Use a satin-lined, waterproof cap placed just beyond the hairline, tuck sideburns, angle spray forward, finish with 60 seconds of cooler water, then blot and remove front-to-back.'}
               </p>
             </div>
 
-            <div className="rounded-3xl border border-brand-blush/50 bg-brand-blush/10 p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">TL;DR</p>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-brand-cocoa/80">
+            <div className="rounded-3xl border border-semantic-legacy-brand-blush/50 bg-semantic-legacy-brand-blush/10 p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">TL;DR</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-semantic-text-primary/80">
                 <li>{post.teaser}</li>
                 <li>Skim the subheads for quick wins and routines.</li>
               </ul>
               <div className="mt-4">
                 {post.productCard ? (
-                  <div className="flex items-center gap-3 rounded-2xl border border-brand-blush/60 bg-white p-3 shadow-soft">
+                  <div className="flex items-center gap-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-3 shadow-soft">
                     <img
                       src={post.productCard.image}
                       alt={post.productCard.title}
@@ -223,21 +227,21 @@ export const BlogPostPage = () => {
                     />
                     <div className="flex flex-1 flex-col gap-1 text-left">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-brand-cocoa">{post.productCard.title}</span>
+                        <span className="text-sm font-semibold text-semantic-text-primary">{post.productCard.title}</span>
                         {post.productCard.badge ? (
-                          <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-cocoa/80">
+                          <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
                             {post.productCard.badge}
                           </span>
                         ) : null}
                       </div>
                       {post.productCard.caption ? (
-                        <p className="text-xs text-brand-cocoa/70">{post.productCard.caption}</p>
+                        <p className="text-xs text-semantic-text-primary/70">{post.productCard.caption}</p>
                       ) : null}
-                      <div className="flex items-center gap-2 text-sm font-semibold text-brand-cocoa">
+                      <div className="flex items-center gap-2 text-sm font-semibold text-semantic-text-primary">
                         {post.productCard.price ? <span>{post.productCard.price}</span> : null}
                         <a
                           href={post.productCard.href}
-                          className="inline-flex items-center gap-1 rounded-full bg-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                          className="inline-flex items-center gap-1 rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
                         >
                           Shop now
                           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
@@ -248,7 +252,7 @@ export const BlogPostPage = () => {
                 ) : (
                   <a
                     href="/product/lumelle-shower-cap"
-                    className="inline-flex items-center gap-2 rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
                   >
                     Shop the satin-lined waterproof cap
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
@@ -259,10 +263,10 @@ export const BlogPostPage = () => {
 
             {/* Body with structured sections */}
             {post.sections?.length ? (
-              <div className="mb-4 block rounded-xl border border-brand-blush/60 bg-white/90 p-3 text-sm text-brand-cocoa/75 shadow-soft md:hidden">
-                <label className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-cocoa/60">Jump to</label>
+              <div className="mb-4 block rounded-xl border border-semantic-legacy-brand-blush/60 bg-white/90 p-3 text-sm text-semantic-text-primary/75 shadow-soft md:hidden">
+                <label className="text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">Jump to</label>
                 <select
-                  className="mt-2 w-full rounded-lg border border-brand-blush/60 bg-white px-3 py-2 text-sm text-brand-cocoa outline-none focus:ring-2 focus:ring-brand-cocoa/30"
+                  className="mt-2 w-full rounded-lg border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm text-semantic-text-primary outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30"
                   onChange={(e) => {
                     const id = e.target.value
                     if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -284,16 +288,16 @@ export const BlogPostPage = () => {
               </div>
             ) : null}
             {post.sections ? (
-              <div className="mt-8 grid gap-8 text-brand-cocoa lg:grid-cols-[220px_1fr]">
+              <div className="mt-8 grid gap-8 text-semantic-text-primary lg:grid-cols-[220px_1fr]">
                 <aside className="hidden lg:block">
-                  <div className="sticky top-28 rounded-2xl border border-brand-blush/60 bg-white/85 p-4 text-sm text-brand-cocoa/75 shadow-soft">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-cocoa/60">Jump to</p>
+                  <div className="sticky top-28 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white/85 p-4 text-sm text-semantic-text-primary/75 shadow-soft">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">Jump to</p>
                     <ul className="mt-2 space-y-2">
                       {post.sections.map((section) => {
                         const id = slugify(section.heading)
                         return (
                           <li key={id}>
-                            <a href={`#${id}`} className="hover:text-brand-cocoa">
+                            <a href={`#${id}`} className="hover:text-semantic-text-primary">
                               {section.heading}
                             </a>
                           </li>
@@ -307,17 +311,17 @@ export const BlogPostPage = () => {
                     const id = slugify(section.heading)
                     return (
                       <article key={section.heading + idx} id={id} className="space-y-4 scroll-mt-24">
-                        <h2 className="font-heading text-2xl text-brand-cocoa">{section.heading}</h2>
+                        <h2 className="font-heading text-2xl text-semantic-text-primary">{section.heading}</h2>
                         {section.paragraphs.map((para, pIdx) => (
                           <div
                             key={pIdx}
-                            className="prose prose-lg text-brand-cocoa prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-brand-cocoa prose-li:marker:text-brand-cocoa/60"
+                            className="prose prose-lg text-semantic-text-primary prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-semantic-text-primary prose-li:marker:text-semantic-text-primary/60"
                           >
                             <Markdown>{para}</Markdown>
                           </div>
                         ))}
                         {section.productCard ? (
-                          <div className="mt-3 flex flex-col gap-2 rounded-2xl border border-brand-blush/60 bg-white p-3 shadow-soft md:flex-row md:items-center">
+                          <div className="mt-3 flex flex-col gap-2 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-3 shadow-soft md:flex-row md:items-center">
                             <img
                               src={section.productCard.image}
                               alt={section.productCard.title}
@@ -326,21 +330,21 @@ export const BlogPostPage = () => {
                             />
                             <div className="flex flex-1 flex-col gap-1 text-left">
                               <div className="flex items-center gap-2">
-                                <span className="text-sm font-semibold text-brand-cocoa">{section.productCard.title}</span>
+                                <span className="text-sm font-semibold text-semantic-text-primary">{section.productCard.title}</span>
                                 {section.productCard.badge ? (
-                                  <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-cocoa/80">
+                                  <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
                                     {section.productCard.badge}
                                   </span>
                                 ) : null}
                               </div>
                               {section.productCard.caption ? (
-                                <p className="text-xs text-brand-cocoa/70">{section.productCard.caption}</p>
+                                <p className="text-xs text-semantic-text-primary/70">{section.productCard.caption}</p>
                               ) : null}
-                              <div className="flex items-center gap-2 text-sm font-semibold text-brand-cocoa">
+                              <div className="flex items-center gap-2 text-sm font-semibold text-semantic-text-primary">
                                 {section.productCard.price ? <span>{section.productCard.price}</span> : null}
                                 <a
                                   href={section.productCard.href}
-                                  className="inline-flex items-center gap-1 rounded-full bg-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                                  className="inline-flex items-center gap-1 rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
                                 >
                                   Shop now
                                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
@@ -350,23 +354,27 @@ export const BlogPostPage = () => {
                           </div>
                         ) : null}
                         {section.relatedLinks?.length ? (
-                          <div className="mt-2 flex flex-wrap items-center gap-2 text-sm font-semibold text-brand-cocoa/75">
-                            <span className="text-brand-cocoa/60">Related:</span>
+                          <div className="mt-2 flex flex-wrap items-center gap-2 text-sm font-semibold text-semantic-text-primary/75">
+                            <span className="text-semantic-text-primary/60">Related:</span>
                             {section.relatedLinks.map((link) => (
-                              <a key={link.href} href={link.href} className="underline decoration-brand-cocoa/50 underline-offset-4 hover:text-brand-cocoa">
+                              <a
+                                key={link.href}
+                                href={link.href}
+                                className="underline decoration-semantic-text-primary/50 underline-offset-4 hover:text-semantic-text-primary"
+                              >
                                 {link.label}
                               </a>
                             ))}
                           </div>
                         ) : null}
                         {section.image ? (
-                          <figure className="mt-3 overflow-hidden rounded-2xl border border-brand-blush/50 bg-white shadow-soft">
+                          <figure className="mt-3 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/50 bg-white shadow-soft">
                             <img src={section.image} alt={section.imageAlt ?? section.heading} className="w-full object-cover" loading="lazy" />
-                            {section.imageAlt ? <figcaption className="px-4 py-2 text-sm text-brand-cocoa/70">{section.imageAlt}</figcaption> : null}
+                            {section.imageAlt ? <figcaption className="px-4 py-2 text-sm text-semantic-text-primary/70">{section.imageAlt}</figcaption> : null}
                           </figure>
                         ) : null}
                         {section.embedUrl ? (
-                          <div className="relative mt-3 overflow-hidden rounded-2xl border border-brand-blush/50 pb-[56.25%] shadow-soft">
+                          <div className="relative mt-3 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/50 pb-[56.25%] shadow-soft">
                             <iframe
                               src={section.embedUrl}
                               title={`${section.heading} video`}
@@ -377,18 +385,18 @@ export const BlogPostPage = () => {
                             />
                           </div>
                         ) : null}
-                      </article>
-                    )
-                  })}
-                </div>
-              </div>
-            ) : (
-              <div className="prose prose-lg mt-8 text-brand-cocoa prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-brand-cocoa">
-                <Markdown>{post.body ?? ''}</Markdown>
-              </div>
-            )}
-          </div>
-        </section>
+	                      </article>
+	                    )
+	                  })}
+	                </div>
+	              </div>
+	            ) : (
+	              <div className="prose prose-lg mt-8 text-semantic-text-primary prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-semantic-text-primary">
+	                <Markdown>{post.body ?? ''}</Markdown>
+	              </div>
+	            )}
+	          </div>
+	        </section>
 
         <section className="bg-white">
           <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
@@ -398,22 +406,22 @@ export const BlogPostPage = () => {
 
         <section className="bg-white">
           <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
-            <div className="flex items-center gap-4 rounded-3xl border border-brand-blush/60 bg-brand-blush/15 p-4">
+            <div className="flex items-center gap-4 rounded-3xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/15 p-4">
               <a
                 href={post.authorLink || '#'}
-                className="h-12 w-12 rounded-full bg-brand-blush/40 text-center text-lg font-semibold text-brand-cocoa flex items-center justify-center hover:-translate-y-0.5 transition"
+                className="h-12 w-12 rounded-full bg-semantic-legacy-brand-blush/40 text-center text-lg font-semibold text-semantic-text-primary flex items-center justify-center hover:-translate-y-0.5 transition"
               >
                 {post.author.charAt(0)}
               </a>
-              <div className="space-y-1 text-sm text-brand-cocoa/80">
-                <div className="font-semibold text-brand-cocoa">
-                  <a href={post.authorLink || '#'} className="hover:text-brand-cocoa">
+              <div className="space-y-1 text-sm text-semantic-text-primary/80">
+                <div className="font-semibold text-semantic-text-primary">
+                  <a href={post.authorLink || '#'} className="hover:text-semantic-text-primary">
                     {post.author}
                   </a>
                   {post.authorRole ? ` · ${post.authorRole}` : ''}
                 </div>
                 {post.authorRoleLong ? (
-                  <div className="text-brand-cocoa/70">{post.authorRoleLong}</div>
+                  <div className="text-semantic-text-primary/70">{post.authorRoleLong}</div>
                 ) : null}
                 <div>
                   Published {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · Last reviewed {new Date(reviewed).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
@@ -442,18 +450,18 @@ export const BlogPostPage = () => {
                     <RouterLink
                       key={item.slug}
                       to={`/blog/${item.slug}`}
-                      className="group relative flex min-w-[17rem] max-w-[17rem] flex-1 shrink-0 flex-col overflow-hidden rounded-2xl border border-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
+                      className="group relative flex min-w-[17rem] max-w-[17rem] flex-1 shrink-0 flex-col overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
                     >
-                      <div className="aspect-[3/2] w-full overflow-hidden bg-brand-blush/20">
+                      <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
                         <img src={item.cover} alt={item.title} className="h-full w-full object-cover" loading="lazy" />
                       </div>
                       <div className="space-y-2 p-4">
-                        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
-                          <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-brand-cocoa/80">{item.tag}</span>
+                        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+                          <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{item.tag}</span>
                           <span>{item.readTime}</span>
                         </div>
-                        <h3 className="font-heading text-lg text-brand-cocoa">{item.title}</h3>
-                        <p className="text-sm text-brand-cocoa/75 line-clamp-2">{item.teaser}</p>
+                        <h3 className="font-heading text-lg text-semantic-text-primary">{item.title}</h3>
+                        <p className="text-sm text-semantic-text-primary/75 line-clamp-2">{item.teaser}</p>
                       </div>
                     </RouterLink>
                   ))}
@@ -463,7 +471,7 @@ export const BlogPostPage = () => {
                 {related.map((item, idx) => (
                   <span
                     key={item.slug}
-                    className={`h-2 w-2 rounded-full transition-all duration-200 ${currentRelatedIndex === idx ? 'bg-brand-cocoa' : 'bg-brand-blush/60'}`}
+                    className={`h-2 w-2 rounded-full transition-all duration-200 ${currentRelatedIndex === idx ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-blush/60'}`}
                     aria-hidden
                   />
                 ))}

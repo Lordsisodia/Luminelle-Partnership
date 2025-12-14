@@ -53,19 +53,19 @@ export default function ContentPage() {
   return (
     <AdminPageLayout title="Product content" subtitle="Edit landing/PDP copy blocks (Shopify metafield-backed).">
       <div className="flex flex-wrap gap-2">
-        <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" value={handle} onChange={(e) => setHandle(e.target.value)} />
-        <button className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" onClick={load}>Load</button>
-        <input className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm" type="password" placeholder="Admin pass" value={pass} onChange={(e) => setPass(e.target.value)} />
+        <input className="rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm" value={handle} onChange={(e) => setHandle(e.target.value)} />
+        <button className="rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary" onClick={load}>Load</button>
+        <input className="rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm" type="password" placeholder="Admin pass" value={pass} onChange={(e) => setPass(e.target.value)} />
       </div>
       {loading ? (
-        <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading…</div>
+        <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-semantic-text-primary/80">Loading…</div>
       ) : (
         <div className="mt-6 grid gap-4">
           {['heroSubtitle','essentials','reasons','how','care','faq','gallery'].map((k) => (
-            <div key={k} className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">{k}</div>
+            <div key={k} className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">{k}</div>
               <textarea
-                className="mt-2 w-full rounded-xl border border-brand-blush/60 p-2 font-mono text-[12px]"
+                className="mt-2 w-full rounded-xl border border-semantic-legacy-brand-blush/60 p-2 font-mono text-[12px]"
                 rows={k === 'heroSubtitle' ? 2 : 6}
                 value={fields.find((f) => f.key === k)?.value || ''}
                 onChange={(e) => setField(k, e.target.value)}
@@ -74,7 +74,7 @@ export default function ContentPage() {
             </div>
           ))}
           <div>
-            <button className="rounded-full bg-brand-cocoa px-5 py-2 text-sm font-semibold text-white" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save changes'}</button>
+            <button className="rounded-full bg-semantic-legacy-brand-cocoa px-5 py-2 text-sm font-semibold text-white" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save changes'}</button>
           </div>
         </div>
       )}

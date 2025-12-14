@@ -28,10 +28,26 @@ const loadTokens = () => {
   }
 }
 
+// Supports nested token objects (e.g. `base.neutral.0`) and dotted semantic keys stored as literal strings
+// (e.g. `semantic: { "text.primary": "..." }` referenced via `{semantic.text.primary}`).
+const getToken = (root, dotted) => {
+  const nested = dotted.split('.').reduce((acc, key) => (acc && typeof acc === 'object' ? acc[key] : undefined), root)
+  if (nested !== undefined) return nested
+
+  const [topKey, ...rest] = dotted.split('.')
+  if (!topKey || rest.length < 2) return undefined
+
+  const parent = root?.[topKey]
+  if (!parent || typeof parent !== 'object') return undefined
+
+  const dottedKey = rest.join('.')
+  return Object.prototype.hasOwnProperty.call(parent, dottedKey) ? parent[dottedKey] : undefined
+}
+
 const resolveRef = (val, root) =>
   typeof val === 'string'
     ? val.replace(/\{([^}]+)\}/g, (_, ref) => {
-        const value = ref.split('.').reduce((acc, key) => (acc ? acc[key] : undefined), root)
+        const value = getToken(root, ref.trim())
         if (value === undefined) throw new Error(`Unresolved token: {${ref}}`)
         return value
       })

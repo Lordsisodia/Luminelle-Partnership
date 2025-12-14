@@ -13,7 +13,7 @@ export const SuccessStoriesSection = () => {
   return (
     <section
       id="success"
-      className="mx-auto max-w-6xl scroll-mt-24 px-4 py-20 text-brand-cocoa md:scroll-mt-32 md:px-6"
+      className="mx-auto max-w-6xl scroll-mt-24 px-4 py-20 text-semantic-text-primary md:scroll-mt-32 md:px-6"
     >
       <SectionHeading
         eyebrow="Creator Proof"
@@ -28,7 +28,7 @@ export const SuccessStoriesSection = () => {
         {successStories.map((story) => (
           <article
             key={story.handle}
-            className="min-w-[min(82vw,360px)] snap-center rounded-3xl border border-brand-peach/35 bg-white/92 p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] md:min-w-[340px] lg:min-w-[360px]"
+            className="min-w-[min(82vw,360px)] snap-center rounded-3xl border border-semantic-accent-cta/35 bg-white/92 p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] md:min-w-[340px] lg:min-w-[360px]"
           >
             <div className="flex items-center gap-3">
               <img
@@ -38,23 +38,23 @@ export const SuccessStoriesSection = () => {
                 loading="lazy"
               />
               <div className="flex-1">
-                <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-cocoa/60">
-                  <span className="text-brand-cocoa/60">{story.handle}</span>
+                <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">
+                  <span className="text-semantic-text-primary/60">{story.handle}</span>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-brand-cocoa leading-tight">{story.name}</h3>
-                <p className="text-sm text-brand-cocoa/70">{story.stats} · {story.earnings}</p>
+                <h3 className="font-heading text-xl font-bold text-semantic-text-primary leading-tight">{story.name}</h3>
+                <p className="text-sm text-semantic-text-primary/70">{story.stats} · {story.earnings}</p>
               </div>
             </div>
 
-            <p className="mt-3 text-sm font-semibold text-brand-cocoa/90 leading-relaxed">{story.highlight}</p>
-            <p className="mt-2 text-sm text-brand-cocoa/75 leading-relaxed">“{story.quote}”</p>
+            <p className="mt-3 text-sm font-semibold text-semantic-text-primary/90 leading-relaxed">{story.highlight}</p>
+            <p className="mt-2 text-sm text-semantic-text-primary/75 leading-relaxed">“{story.quote}”</p>
 
             <LazyVisible
               placeholder={
-                <div className="relative overflow-hidden rounded-2xl border border-brand-peach/30 pb-[158%] bg-brand-blush/20" />
+                <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/30 pb-[158%] bg-semantic-legacy-brand-blush/20" />
               }
             >
-              <div className="relative overflow-hidden rounded-2xl border border-brand-peach/30 pb-[158%] bg-black">
+              <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/30 pb-[158%] bg-black">
                 {hydrated ? (
                   <iframe
                     src={story.embedUrl.includes('lang=') ? story.embedUrl : `${story.embedUrl}&lang=en`}
@@ -67,7 +67,7 @@ export const SuccessStoriesSection = () => {
                     style={{ border: 0 }}
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                  <div className="absolute inset-0 flex items-center justify-center bg-semantic-legacy-brand-blush/20 text-semantic-text-primary/60 text-xs">
                     Loading…
                   </div>
                 )}

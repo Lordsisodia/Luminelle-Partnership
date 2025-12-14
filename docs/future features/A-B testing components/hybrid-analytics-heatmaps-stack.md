@@ -209,7 +209,7 @@ Where to wire:
 Minimum env flags (example naming; decide final names in `env-flags.md`):
 - `VITE_CLARITY_PROJECT_ID=...`
 - `VITE_POSTHOG_KEY=...`
-- `VITE_POSTHOG_HOST=...` (EU/US host if needed)
+- `VITE_POSTHOG_HOST=...` (use ingestion host: `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
 - `VITE_ANALYTICS_ENABLED=true|false`
 - `VITE_HEATMAP_ENABLED=true|false`
 

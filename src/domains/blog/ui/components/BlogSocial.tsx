@@ -229,11 +229,11 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
   const disabledSocial = !isSupabaseConfigured || !supabase
 
   return (
-    <section id="comments" className="mt-10 rounded-2xl border border-brand-blush/60 bg-white shadow-soft">
+    <section id="comments" className="mt-10 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white shadow-soft">
       <div className="flex flex-col gap-3 px-5 py-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Community</p>
-          <h3 className="text-lg font-heading text-brand-cocoa">Show some love or drop a note.</h3>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Community</p>
+          <h3 className="text-lg font-heading text-semantic-text-primary">Show some love or drop a note.</h3>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {isSignedIn ? (
@@ -243,8 +243,8 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
               disabled={disabledSocial || likeLoading}
               className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
                 liked
-                  ? 'border-brand-cocoa bg-brand-cocoa text-white shadow-soft'
-                  : 'border-brand-blush/80 bg-brand-blush/20 text-brand-cocoa hover:-translate-y-0.5'
+                  ? 'border-semantic-legacy-brand-cocoa bg-semantic-legacy-brand-cocoa text-white shadow-soft'
+                  : 'border-semantic-legacy-brand-blush/80 bg-semantic-legacy-brand-blush/20 text-semantic-text-primary hover:-translate-y-0.5'
               } ${disabledSocial ? 'cursor-not-allowed opacity-60' : ''}`}
             >
               {likeLoading ? (
@@ -257,16 +257,16 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
           ) : (
             <Link
               to={signInHref}
-              className={`inline-flex items-center gap-2 rounded-full border border-brand-blush/80 bg-brand-blush/20 px-3 py-2 text-sm font-semibold text-brand-cocoa transition hover:-translate-y-0.5 ${
+              className={`inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/80 bg-semantic-legacy-brand-blush/20 px-3 py-2 text-sm font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 ${
                 disabledSocial ? 'pointer-events-none opacity-60' : ''
               }`}
             >
               <Heart className="h-4 w-4" />
               <span>{likesCount}</span>
-              <span className="text-xs font-semibold text-brand-cocoa/60">Sign in to like</span>
+              <span className="text-xs font-semibold text-semantic-text-primary/60">Sign in to like</span>
             </Link>
           )}
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand-peach/60 bg-brand-blush/20 px-3 py-2 text-sm font-semibold text-brand-cocoa">
+          <div className="inline-flex items-center gap-2 rounded-full border border-semantic-accent-cta/60 bg-semantic-legacy-brand-blush/20 px-3 py-2 text-sm font-semibold text-semantic-text-primary">
             <MessageCircle className="h-4 w-4" />
             <span>{commentCount} Comment{commentCount === 1 ? '' : 's'}</span>
           </div>
@@ -275,7 +275,7 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
       <div className="px-5 pb-5 space-y-4">
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
         {isSignedIn ? (
-          <div className="rounded-2xl border border-brand-blush/60 bg-brand-blush/10 p-4">
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-4">
             <label className="sr-only" htmlFor="comment-box">
               Comment
             </label>
@@ -284,10 +284,10 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
               value={commentBody}
               onChange={(e) => setCommentBody(e.target.value)}
               placeholder="Add a quick thought…"
-              className="min-h-[90px] w-full resize-none rounded-xl border border-brand-blush/60 bg-white px-3 py-2 text-sm text-brand-cocoa outline-none focus:ring-2 focus:ring-brand-peach"
+              className="min-h-[90px] w-full resize-none rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm text-semantic-text-primary outline-none focus:ring-2 focus:ring-semantic-accent-cta"
               maxLength={MAX_COMMENT_LENGTH}
             />
-            <div className="mt-2 flex items-center justify-between text-xs text-brand-cocoa/60">
+            <div className="mt-2 flex items-center justify-between text-xs text-semantic-text-primary/60">
               <span>
                 {commentBody.length}/{MAX_COMMENT_LENGTH}
               </span>
@@ -295,7 +295,7 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
                 type="button"
                 disabled={commentLoading || disabledSocial}
                 onClick={handleSubmitComment}
-                className="inline-flex items-center gap-2 rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5 disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5 disabled:opacity-60"
               >
                 {commentLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -307,21 +307,21 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
             </div>
           </div>
         ) : (
-          <div className="rounded-2xl border border-brand-blush/60 bg-brand-blush/10 p-4">
-            <p className="text-sm font-semibold text-brand-cocoa">Sign in to join the conversation</p>
-            <p className="mt-1 text-sm text-brand-cocoa/70">
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-4">
+            <p className="text-sm font-semibold text-semantic-text-primary">Sign in to join the conversation</p>
+            <p className="mt-1 text-sm text-semantic-text-primary/70">
               Comments are creator-only. Sign in to post and see your name next to your tips.
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <Link
                 to={signInHref}
-                className="inline-flex items-center gap-2 rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
               >
                 Sign in
               </Link>
               <Link
                 to={signUpHref}
-                className="inline-flex items-center gap-2 rounded-full border border-brand-blush/80 bg-white px-4 py-2 text-sm font-semibold text-brand-cocoa shadow-soft hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/80 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:-translate-y-0.5"
               >
                 Create account
               </Link>
@@ -332,9 +332,9 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
         <div className="space-y-3">
           {comments.length ? (
             comments.map((c) => (
-              <div key={c.id} className="rounded-2xl border border-brand-blush/60 bg-brand-blush/10 p-4">
+              <div key={c.id} className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-4">
                 <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-brand-blush/40">
+                  <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-semantic-legacy-brand-blush/40">
                     {c.avatar_url ? (
                       <img
                         src={c.avatar_url}
@@ -343,25 +343,25 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
                         loading="lazy"
                       />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-brand-cocoa">
+                      <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-semantic-text-primary">
                         {(c.display_name || 'R').slice(0, 1).toUpperCase()}
                       </div>
                     )}
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center justify-between text-sm text-brand-cocoa/80">
-                      <div className="font-semibold text-brand-cocoa">{c.display_name || 'Reader'}</div>
-                      <div className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa/50">
+                    <div className="flex items-center justify-between text-sm text-semantic-text-primary/80">
+                      <div className="font-semibold text-semantic-text-primary">{c.display_name || 'Reader'}</div>
+                      <div className="text-[11px] uppercase tracking-[0.18em] text-semantic-text-primary/50">
                         {new Date(c.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
                       </div>
                     </div>
-                    <p className="mt-2 whitespace-pre-line text-brand-cocoa/90">{c.body}</p>
+                    <p className="mt-2 whitespace-pre-line text-semantic-text-primary/90">{c.body}</p>
                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <div className="rounded-2xl border border-dashed border-brand-blush/60 bg-brand-blush/10 p-4 text-sm text-brand-cocoa/70">
+            <div className="rounded-2xl border border-dashed border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-4 text-sm text-semantic-text-primary/70">
               <div className="flex items-center gap-2">
                 <MessageCircle className="h-4 w-4" />
                 <span>Be the first to comment.</span>
@@ -371,7 +371,7 @@ export const BlogSocial = ({ slug }: { slug: string }) => {
         </div>
 
         {disabledSocial ? (
-          <p className="text-sm text-brand-cocoa/70">
+          <p className="text-sm text-semantic-text-primary/70">
             Social features need Supabase env vars (`VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`). Add them to enable likes & comments.
           </p>
         ) : null}

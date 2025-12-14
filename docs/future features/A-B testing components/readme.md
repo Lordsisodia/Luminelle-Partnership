@@ -55,3 +55,7 @@
 
 ## Where to look
 `docs/future features/A-B testing components/` contains all planning, stubs, runbooks, SQL, and status files.
+
+## Setup (Cloudflare + PostHog)
+Step-by-step setup and verification:
+- `posthog-cloudflare-setup.md`

@@ -11,6 +11,9 @@ This roadmap keeps gamification **shippable** and reduces risk by proving value 
   - “earn X points” line on PDP
 - Instrument events (view rewards, click redeem) even before backend
 
+Status (Dec 2025):
+- ✅ `/rewards` page shipped with points summary + earn actions + history (manual claims for now)
+
 ## Phase 1 — Points ledger MVP (3–7 days)
 
 - Add Supabase tables:
@@ -23,6 +26,11 @@ This roadmap keeps gamification **shippable** and reduces risk by proving value 
   - rewards list
 - Award points via Shopify webhook (fulfilled → award, refund → reverse)
 - Display points in account + cart
+
+Status (Dec 2025):
+- ✅ `loyalty_points_ledger` + `loyalty_task_claims` + RPC helpers are live
+- ✅ Shopify webhook awarding (fulfillment → award, refunded → reverse) is live
+- ⏳ Redemption catalog + issuing rewards still pending
 
 Exit criteria:
 - points reliably credit once per order (idempotent)

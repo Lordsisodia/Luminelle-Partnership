@@ -38,7 +38,7 @@ export default function AnalyticsPage() {
       actions={
         <div className="flex flex-wrap items-center gap-2">
           <button
-            className="rounded-full border border-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-brand-cocoa"
+            className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary"
             onClick={async () => {
               try {
                 const pass = adminPass || prompt('Admin pass (INTERNAL_SHARED_SECRET)') || ''
@@ -61,7 +61,7 @@ export default function AnalyticsPage() {
             Export orders
           </button>
           <button
-            className="rounded-full border border-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-brand-cocoa"
+            className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary"
             onClick={async () => {
               try {
                 const pass = adminPass || prompt('Admin pass (INTERNAL_SHARED_SECRET)') || ''
@@ -83,13 +83,13 @@ export default function AnalyticsPage() {
           >
             Export customers
           </button>
-          <div className="inline-flex items-center gap-2 text-sm text-brand-cocoa/80">
+          <div className="inline-flex items-center gap-2 text-sm text-semantic-text-primary/80">
             <span className="hidden sm:inline">Range:</span>
             {[7, 30, 90].map((d) => (
               <button
                 key={d}
                 onClick={() => setDays(d)}
-                className={`rounded-full border px-3 py-1 ${days === d ? 'border-brand-cocoa' : 'border-brand-blush/60'}`}
+                className={`rounded-full border px-3 py-1 ${days === d ? 'border-semantic-legacy-brand-cocoa' : 'border-semantic-legacy-brand-blush/60'}`}
               >
                 {d}d
               </button>
@@ -100,23 +100,23 @@ export default function AnalyticsPage() {
     >
 
       {!data ? (
-        <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading…</div>
+        <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-semantic-text-primary/80">Loading…</div>
       ) : (
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Total revenue</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Total revenue</div>
             <div className="mt-2 text-2xl font-semibold">£{data.totalRevenue.toFixed(2)}</div>
           </div>
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Total orders</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Total orders</div>
             <div className="mt-2 text-2xl font-semibold">{data.totalOrders}</div>
           </div>
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Customers</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Customers</div>
             <div className="mt-2 text-2xl font-semibold">{data.customers}</div>
           </div>
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Last 30 days</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Last 30 days</div>
             <div className="mt-2 grid gap-4 md:grid-cols-3">
               <div className="text-lg"><span className="font-semibold">Orders:</span> {data.last30.orders}</div>
               <div className="text-lg"><span className="font-semibold">Revenue:</span> £{data.last30.revenue.toFixed(2)}</div>
@@ -124,19 +124,19 @@ export default function AnalyticsPage() {
             </div>
           </div>
           {/* Simple SVG line chart for daily revenue */}
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Revenue vs Orders (30d)</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Revenue vs Orders (30d)</div>
             <ComboLineChart revenue={daily.map(d => ({ x: d.day, y: Number(d.revenue) }))} orders={daily.map(d => ({ x: d.day, y: Number(d.orders) }))} />
           </div>
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Top SKUs</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Top SKUs</div>
             <table className="mt-2 w-full text-sm">
               <thead>
-                <tr className="text-left text-[12px] text-brand-cocoa/60"><th className="py-1">Title</th><th className="py-1">Units</th><th className="py-1 text-right">Revenue</th></tr>
+                <tr className="text-left text-[12px] text-semantic-text-primary/60"><th className="py-1">Title</th><th className="py-1">Units</th><th className="py-1 text-right">Revenue</th></tr>
               </thead>
               <tbody>
                 {topSkus.map((s) => (
-                  <tr key={s.title} className="border-t border-brand-blush/40">
+                  <tr key={s.title} className="border-t border-semantic-legacy-brand-blush/40">
                     <td className="py-1 pr-3">{s.title}</td>
                     <td className="py-1 pr-3">{s.units}</td>
                     <td className="py-1 text-right">£{s.revenue.toFixed(2)}</td>
@@ -145,15 +145,15 @@ export default function AnalyticsPage() {
               </tbody>
             </table>
           </div>
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Top Sources (UTM)</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Top Sources (UTM)</div>
             <table className="mt-2 w-full text-sm">
               <thead>
-                <tr className="text-left text-[12px] text-brand-cocoa/60"><th className="py-1">utm_source</th><th className="py-1 text-right">Orders</th></tr>
+                <tr className="text-left text-[12px] text-semantic-text-primary/60"><th className="py-1">utm_source</th><th className="py-1 text-right">Orders</th></tr>
               </thead>
               <tbody>
                 {utmSources.map((s) => (
-                  <tr key={s.utm_source} className="border-top border-brand-blush/40">
+                  <tr key={s.utm_source} className="border-top border-semantic-legacy-brand-blush/40">
                     <td className="py-1 pr-3">{s.utm_source}</td>
                     <td className="py-1 text-right">{s.orders}</td>
                   </tr>
@@ -162,20 +162,20 @@ export default function AnalyticsPage() {
             </table>
           </div>
           {refund ? (
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Refund rate (30d)</div>
-              <div className="mt-2 text-2xl font-semibold">{Math.round(refund.last30.rate * 100)}% <span className="text-sm text-brand-cocoa/60">({refund.last30.refunded}/{refund.last30.total})</span></div>
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Refund rate (30d)</div>
+              <div className="mt-2 text-2xl font-semibold">{Math.round(refund.last30.rate * 100)}% <span className="text-sm text-semantic-text-primary/60">({refund.last30.refunded}/{refund.last30.total})</span></div>
             </div>
           ) : null}
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Revenue by source (30d)</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Revenue by source (30d)</div>
             <table className="mt-2 w-full text-sm">
               <thead>
-                <tr className="text-left text-[12px] text-brand-cocoa/60"><th className="py-1">utm_source</th><th className="py-1">Orders</th><th className="py-1 text-right">Revenue</th></tr>
+                <tr className="text-left text-[12px] text-semantic-text-primary/60"><th className="py-1">utm_source</th><th className="py-1">Orders</th><th className="py-1 text-right">Revenue</th></tr>
               </thead>
               <tbody>
                 {sourceRevenue.map((s) => (
-                  <tr key={s.utm_source} className="border-t border-brand-blush/40">
+                  <tr key={s.utm_source} className="border-t border-semantic-legacy-brand-blush/40">
                     <td className="py-1 pr-3">{s.utm_source}</td>
                     <td className="py-1 pr-3">{s.orders}</td>
                     <td className="py-1 text-right">£{Number(s.revenue || 0).toFixed(2)}</td>
@@ -184,15 +184,15 @@ export default function AnalyticsPage() {
               </tbody>
             </table>
           </div>
-          <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Refunds by SKU ({days}d)</div>
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Refunds by SKU ({days}d)</div>
             <table className="mt-2 w-full text-sm">
               <thead>
-                <tr className="text-left text-[12px] text-brand-cocoa/60"><th className="py-1">Title</th><th className="py-1">Units</th><th className="py-1 text-right">Value</th></tr>
+                <tr className="text-left text-[12px] text-semantic-text-primary/60"><th className="py-1">Title</th><th className="py-1">Units</th><th className="py-1 text-right">Value</th></tr>
               </thead>
               <tbody>
                 {refundsBySku.map((s) => (
-                  <tr key={s.title} className="border-t border-brand-blush/40">
+                  <tr key={s.title} className="border-t border-semantic-legacy-brand-blush/40">
                     <td className="py-1 pr-3">{s.title}</td>
                     <td className="py-1 pr-3">{s.units}</td>
                     <td className="py-1 text-right">£{Number(s.value || 0).toFixed(2)}</td>
@@ -203,14 +203,14 @@ export default function AnalyticsPage() {
           </div>
           {/* Repeat rate */}
           {repeat ? (
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-5 md:col-span-3">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Repeat rate (90d)</div>
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 md:col-span-3">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Repeat rate (90d)</div>
               <div className="mt-2 text-2xl font-semibold">{Math.round(repeat.repeatRate90 * 100)}%</div>
-              <div className="mt-4 text-sm text-brand-cocoa/70">Cohorts (first orders per month)</div>
+              <div className="mt-4 text-sm text-semantic-text-primary/70">Cohorts (first orders per month)</div>
               <ul className="mt-1 grid grid-cols-2 gap-2 md:grid-cols-6">
                 {repeat.cohorts.map((c) => (
-                  <li key={c.cohort} className="rounded-xl border border-brand-blush/60 p-2 text-center">
-                    <div className="text-[11px] text-brand-cocoa/60">{c.cohort}</div>
+                  <li key={c.cohort} className="rounded-xl border border-semantic-legacy-brand-blush/60 p-2 text-center">
+                    <div className="text-[11px] text-semantic-text-primary/60">{c.cohort}</div>
                     <div className="text-sm font-semibold">{c.customers}</div>
                   </li>
                 ))}

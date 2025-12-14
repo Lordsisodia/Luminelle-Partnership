@@ -66,12 +66,12 @@ export default function AdminGuard({ children }: AdminGuardProps) {
   return (
     <>
       <SignedOut>
-        <div className="mx-auto max-w-2xl p-6 text-brand-cocoa">
+        <div className="mx-auto max-w-2xl p-6 text-semantic-text-primary">
           <h2 className="text-xl font-semibold">Admin access</h2>
           <p className="mt-2">Please sign in to view this page.</p>
           <a
             href="/sign-in"
-            className="mt-3 inline-block rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white"
+            className="mt-3 inline-block rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white"
           >
             Sign in
           </a>
@@ -79,18 +79,18 @@ export default function AdminGuard({ children }: AdminGuardProps) {
       </SignedOut>
       <SignedIn>
         {checking ? (
-          <div className="mx-auto max-w-2xl p-6 text-brand-cocoa">
+          <div className="mx-auto max-w-2xl p-6 text-semantic-text-primary">
             <h2 className="text-xl font-semibold">Checking admin access…</h2>
-            <p className="mt-2 text-brand-cocoa/70">Verifying your Clerk roles.</p>
+            <p className="mt-2 text-semantic-text-primary/70">Verifying your Clerk roles.</p>
           </div>
         ) : allowed ? (
           <>{children}</>
         ) : (
-          <div className="mx-auto max-w-2xl p-6 text-brand-cocoa">
+          <div className="mx-auto max-w-2xl p-6 text-semantic-text-primary">
             <h2 className="text-xl font-semibold">Access denied</h2>
             <p className="mt-2">Your account does not have admin access.</p>
             {reason ? (
-              <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-4 text-sm text-brand-cocoa/80">
+              <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-sm text-semantic-text-primary/80">
                 {reason}
               </div>
             ) : null}

@@ -28,6 +28,7 @@
       "@admin/*": ["src/domains/admin/*"],
       "@auth/*": ["src/domains/auth/*"],
       "@account/*": ["src/domains/account/*"],
+      "@rewards/*": ["src/domains/rewards/*"],
       "@shared/*": ["src/domains/shared/*"],
       "@content/*": ["src/content/*"],
       "@utils/*": ["src/utils/*"],

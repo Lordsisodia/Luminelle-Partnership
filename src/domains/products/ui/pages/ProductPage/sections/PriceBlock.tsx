@@ -27,13 +27,13 @@ type TrustMicroProps = {
 }
 
 export const TrustMicro = ({ ratingValue, reviewCountLabel, showShipping = true, compact = false }: TrustMicroProps) => (
-  <div className={`flex items-center gap-2 text-sm font-semibold text-brand-cocoa/80 ${compact ? 'justify-center' : ''}`}>
+  <div className={`flex items-center gap-2 text-sm font-semibold text-semantic-text-primary/80 ${compact ? 'justify-center' : ''}`}>
     <div className="flex items-center gap-1.5">
       <StarRating value={ratingValue} size={15} />
-      <span className="text-base font-semibold text-brand-cocoa">{ratingValue.toFixed(1)}</span>
+      <span className="text-base font-semibold text-semantic-text-primary">{ratingValue.toFixed(1)}</span>
     </div>
-    <span className="text-brand-cocoa/75">({reviewCountLabel})</span>
-    {showShipping ? <span className="text-brand-cocoa/70">• Free returns • Ships in 48h</span> : null}
+    <span className="text-semantic-text-primary/75">({reviewCountLabel})</span>
+    {showShipping ? <span className="text-semantic-text-primary/70">• Free returns • Ships in 48h</span> : null}
   </div>
 )
 
@@ -77,14 +77,14 @@ export const PriceBlock = ({
   }, [])
 
   return (
-    <div className="space-y-5 text-brand-cocoa min-w-0 w-full md:pl-0">
+    <div className="space-y-5 text-semantic-text-primary min-w-0 w-full md:pl-0">
       <div>
         <div className="mt-2 flex items-start gap-3">
           <h1 className="font-heading text-[1.95rem] font-bold leading-tight md:text-4xl">{productTitle}</h1>
           <button
             type="button"
             aria-label="Share product"
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
+            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
             onClick={() => {
               if (navigator.share) {
                 navigator.share({ title: productTitle, url: canonicalUrl }).catch(() => undefined)
@@ -110,11 +110,11 @@ export const PriceBlock = ({
             </svg>
           </button>
         </div>
-        <p className="mt-2 text-brand-cocoa/70">{productDesc}</p>
+        <p className="mt-2 text-semantic-text-primary/70">{productDesc}</p>
         <button
           type="button"
           onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-          className="mt-2 w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/40"
+          className="mt-2 w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/40"
           aria-label="Jump to reviews"
         >
           <TrustMicro ratingValue={ratingValue} reviewCountLabel={ratingLabel} showShipping={false} />
@@ -126,57 +126,57 @@ export const PriceBlock = ({
                 <span className="text-xl font-semibold text-rose-600 md:text-2xl">
                   -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
                 </span>
-                <span className="text-4xl font-bold text-brand-cocoa leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
+                <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
               </div>
-              <div className="mt-1 text-sm font-semibold text-brand-cocoa/70">
+              <div className="mt-1 text-sm font-semibold text-semantic-text-primary/70">
                 RRP: <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
               </div>
             </>
           ) : (
-            <span className="text-4xl font-bold text-brand-cocoa leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
+            <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
           )}
         </div>
         {badge && badge.toLowerCase() !== 'buy 2, save 10%' && (
-          <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1 text-sm font-semibold uppercase tracking-[0.3em] text-brand-cocoa shadow-soft">
+          <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1 text-sm font-semibold uppercase tracking-[0.3em] text-semantic-text-primary shadow-soft">
             {badge}
           </div>
         )}
-        <div className="mt-3 text-sm text-brand-cocoa text-left">
+        <div className="mt-3 text-sm text-semantic-text-primary text-left">
           <div className="font-semibold tracking-[0.02em]"><span className="uppercase">Free</span> delivery {deliveryInfo.deliveryLabel}</div>
-          <div className="text-brand-cocoa/80">Order within {deliveryInfo.hours} hrs {deliveryInfo.minutes.toString().padStart(2, '0')} mins for earliest dispatch</div>
+          <div className="text-semantic-text-primary/80">Order within {deliveryInfo.hours} hrs {deliveryInfo.minutes.toString().padStart(2, '0')} mins for earliest dispatch</div>
         </div>
         <div className="mt-3 space-y-1">
           <div className="relative">
             <button
               type="button"
-              className="flex w-full items-center justify-between rounded-2xl border border-brand-blush/60 bg-white px-4 py-3 text-base font-semibold text-brand-cocoa shadow-soft focus:outline-none focus:ring-2 focus:ring-brand-cocoa/30"
+              className="flex w-full items-center justify-between rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3 text-base font-semibold text-semantic-text-primary shadow-soft focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30"
               onClick={() => setIsQtyOpen((v) => !v)}
               aria-haspopup="listbox"
               aria-expanded={isQtyOpen}
             >
               <div className="flex flex-col items-start leading-snug">
                 <span>{`Quantity: ${quantity}`}</span>
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-cocoa/70">Buy 2, save 10%</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/70">Buy 2, save 10%</span>
               </div>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${isQtyOpen ? 'rotate-180' : ''} transition-transform`}>
                 <path d="M6 9l6 6 6-6" />
               </svg>
             </button>
             {isQtyOpen && (
-              <div className="absolute left-0 right-0 z-10 mt-2 rounded-2xl border border-brand-blush/70 bg-white shadow-lg">
-                <ul role="listbox" className="max-h-56 overflow-auto py-2 text-brand-cocoa">
+              <div className="absolute left-0 right-0 z-10 mt-2 rounded-2xl border border-semantic-legacy-brand-blush/70 bg-white shadow-lg">
+                <ul role="listbox" className="max-h-56 overflow-auto py-2 text-semantic-text-primary">
                   {[1, 2, 3, 4, 5].map((qty) => (
                     <li key={qty} role="option" aria-selected={qty === quantity}>
                       <button
                         type="button"
-                        className={`flex w-full items-center justify-between px-4 py-2 text-left hover:bg-brand-blush/10 ${qty === quantity ? 'font-semibold' : ''}`}
+                        className={`flex w-full items-center justify-between px-4 py-2 text-left hover:bg-semantic-legacy-brand-blush/10 ${qty === quantity ? 'font-semibold' : ''}`}
                         onClick={() => {
                           setQuantity(qty)
                           setIsQtyOpen(false)
                         }}
                       >
                         <span>{`Quantity: ${qty}`}</span>
-                        {qty >= 2 ? <span className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-600">Save 10%</span> : <span className="text-xs text-brand-cocoa/60">Standard</span>}
+                        {qty >= 2 ? <span className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-600">Save 10%</span> : <span className="text-xs text-semantic-text-primary/60">Standard</span>}
                       </button>
                     </li>
                   ))}
@@ -187,14 +187,14 @@ export const PriceBlock = ({
         </div>
         <div className="mt-4 grid gap-3">
           <button
-            className={`inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-peach to-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)] ${justAdded ? 'animate-pulse' : ''}`}
+            className={`inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-semantic-accent-cta to-semantic-legacy-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)] ${justAdded ? 'animate-pulse' : ''}`}
             onClick={onAdd}
             disabled={isAdding}
           >
             {isAdding ? 'Adding...' : 'Add to Basket'}
           </button>
           <button
-            className="inline-flex w-full items-center justify-center rounded-full bg-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.12)]"
+            className="inline-flex w-full items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.12)]"
             onClick={onBuy}
             disabled={isAdding}
           >

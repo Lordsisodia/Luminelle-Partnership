@@ -2,6 +2,8 @@ import type { PagesFunction } from '../../../_lib/types'
 import { methodNotAllowed, text } from '../../../_lib/response'
 import { hmacSha256Base64, safeEqual } from '../../../_lib/crypto'
 import { capturePosthogEvent } from '../../../_lib/posthog'
+import { upsertShopOrder } from '../../../_lib/shopOrders'
+import { isProcessed, markProcessed } from '../../../_lib/webhooks'
 
 function extractNoteAttributes(body: any): Record<string, string> {
   const attrs: Record<string, string> = {}
@@ -39,8 +41,12 @@ export const onRequest: PagesFunction = async ({ request, env, waitUntil }) => {
   }
 
   const deliveryId = request.headers.get('x-shopify-delivery-id')?.trim() || ''
+  if (deliveryId && (await isProcessed(env, deliveryId))) return text('OK', { status: 200 })
   const shop = (request.headers.get('x-shopify-shop-domain') || body?.shop_domain || body?.domain || '').toString()
   if (!shop) return text('Missing shop', { status: 400 })
+
+  // Persist order snapshot for analytics + downstream fulfillment processing.
+  await upsertShopOrder(env, shop, body)
 
   // Capture a server-side purchase event (joins back to the browser via cart/order attributes)
   try {
@@ -78,6 +84,6 @@ export const onRequest: PagesFunction = async ({ request, env, waitUntil }) => {
     console.error('PostHog purchase capture failed', e)
   }
 
+  if (deliveryId) await markProcessed(env, deliveryId)
   return text('OK', { status: 200 })
 }
-

@@ -128,7 +128,7 @@ const Carousel = memo(
           {cards.map((card, i) => (
             <motion.div
               key={`key-${card.author}-${i}`}
-              className="absolute flex origin-center items-center justify-center rounded-xl bg-white p-3 shadow-soft border border-brand-peach/50"
+              className="absolute flex origin-center items-center justify-center rounded-xl bg-white p-3 shadow-soft border border-semantic-accent-cta/50"
               style={{
                 width: `${faceWidth}px`,
                 maxWidth: isScreenSizeSm ? 280 : 360,
@@ -140,8 +140,8 @@ const Carousel = memo(
                 <div className="flex justify-center">
                   <StarRating value={card.stars ?? 5} size={16} />
                 </div>
-                <p className="mt-2 text-[13px] leading-snug text-brand-cocoa">“{card.body}”</p>
-                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-cocoa/80">
+                <p className="mt-2 text-[13px] leading-snug text-semantic-text-primary">“{card.body}”</p>
+                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
                   {card.author}
                 </p>
               </div>

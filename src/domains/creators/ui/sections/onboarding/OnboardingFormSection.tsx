@@ -13,7 +13,7 @@ export const OnboardingFormSection = () => {
   return (
     <section
       id="join"
-      className="scroll-mt-24 bg-brand-blush/15 py-20 text-brand-cocoa md:scroll-mt-32 md:py-24"
+      className="scroll-mt-24 bg-semantic-legacy-brand-blush/15 py-20 text-semantic-text-primary md:scroll-mt-32 md:py-24"
     >
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 text-center md:px-6">
         <SectionHeading
@@ -25,15 +25,15 @@ export const OnboardingFormSection = () => {
         <button
           type="button"
           onClick={handleJoin}
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-peach px-10 py-3 text-sm font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5 hover:bg-brand-peach/90"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-10 py-3 text-sm font-semibold text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90"
         >
           Join WhatsApp
         </button>
-        <p className="text-sm text-brand-cocoa/70">
+        <p className="text-sm text-semantic-text-primary/70">
           Already in the group or need a fresh invite? Email{' '}
           <a
             href={`mailto:${SUPPORT_EMAIL}`}
-            className="font-semibold text-brand-cocoa underline decoration-brand-peach/60 underline-offset-4 hover:text-brand-cocoa"
+            className="font-semibold text-semantic-text-primary underline decoration-semantic-accent-cta/60 underline-offset-4 hover:text-semantic-text-primary"
           >
             {SUPPORT_EMAIL}
           </a>{' '}

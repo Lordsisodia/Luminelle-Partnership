@@ -10,8 +10,8 @@ const ShopLandingPage = lazy(() => import('@landing/ui/pages/ShopLandingPage'))
 const ProductPage = lazy(() => import('@products/ui/pages/ProductPage/index'))
 const BlogIndexPage = lazy(() => import('@blog/ui/pages/BlogIndexPage'))
 const BlogPostPage = lazy(() => import('@blog/ui/pages/BlogPostPage'))
-const CheckoutPage = lazy(() => import('@checkout/ui/pages/CheckoutPage'))
 const CartPage = lazy(() => import('@cart/ui/pages/CartPage'))
+const CheckoutPage = lazy(() => import('@checkout/ui/pages/CheckoutPage'))
 const OrderConfirmationPage = lazy(() => import('@checkout/ui/pages/OrderConfirmationPage'))
 const OrderTrackingPage = lazy(() => import('@checkout/ui/pages/OrderTrackingPage'))
 const ReturnsPage = lazy(() => import('@checkout/ui/pages/ReturnsPage'))
@@ -23,6 +23,7 @@ const AccountPage = lazy(() => import('@account/ui/pages/AccountPage'))
 const OrdersPage = lazy(() => import('@account/ui/pages/OrdersPage'))
 const BrandStoryPage = lazy(() => import('@brand/ui/pages/BrandStoryPage'))
 const ShopifyCheckoutHandoffPage = lazy(() => import('@cart/ui/pages/ShopifyCheckoutHandoffPage'))
+const RewardsPage = lazy(() => import('@rewards/ui/pages/RewardsPage'))
 const SignInPage = lazy(() => import('@auth/ui/pages/SignInPage'))
 const SignUpPage = lazy(() => import('@auth/ui/pages/SignUpPage'))
 const SSOCallbackPage = lazy(() => import('@auth/ui/pages/SSOCallbackPage'))
@@ -53,7 +54,6 @@ const App = () => {
         {/* Shopify cart checkout URLs can look like /cart/c/<id>?key=... */}
         <Route path="/cart/c/*" element={<ShopifyCheckoutHandoffPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order/:orderId/confirm" element={<OrderConfirmationPage />} />
         <Route path="/order/track" element={<OrderTrackingPage />} />
         <Route path="/search" element={<SearchResultsPage />} />
@@ -67,6 +67,9 @@ const App = () => {
         <Route element={<ClerkShell />}>
           <Route path="/blog" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+
+          <Route path="/rewards" element={<RewardsPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />

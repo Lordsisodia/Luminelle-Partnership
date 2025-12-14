@@ -57,8 +57,8 @@ create index if not exists idx_events_anon_time on public.events(anon_id, occurr
 -- view joining exposures to conversions within same session
 create or replace view public.vw_experiment_conversions as
 select
-  e.experiment_key,
-  e.variant,
+  ex.experiment_key,
+  ex.variant,
   ex.session_id,
   sum(case when ev.name = 'purchase' then 1 else 0 end) as purchases,
   sum(case when ev.name = 'add_to_cart' then 1 else 0 end) as add_to_cart,
@@ -67,9 +67,8 @@ select
   sum(coalesce(ev.cart_value,0)) as revenue,
   count(distinct ex.id) as exposures
 from public.experiment_exposures ex
-join public.experiments e on e.key = ex.experiment_key
-left join public.events ev on ev.session_id = ex.session_id and ev.experiment_key = ex.experiment_key
-group by e.experiment_key, e.variant, ex.session_id;
+left join public.events ev on ev.session_id = ex.session_id and ev.experiment_key = ex.experiment_key and ev.variant = ex.variant
+group by ex.experiment_key, ex.variant, ex.session_id;
 
 -- seed first experiment (hero CTA copy)
 insert into public.experiments(key, name, status, default_split, targeting, start_at)
@@ -90,10 +89,10 @@ alter table public.events enable row level security;
 alter table public.sessions enable row level security;
 
 -- allow inserts from Supabase service role only
-create policy if not exists "service inserts experiments" on public.experiments for insert to service_role using (true) with check (true);
-create policy if not exists "service inserts exposures" on public.experiment_exposures for insert to service_role using (true) with check (true);
-create policy if not exists "service inserts events" on public.events for insert to service_role using (true) with check (true);
-create policy if not exists "service inserts sessions" on public.sessions for insert to service_role using (true) with check (true);
+create policy "service inserts experiments" on public.experiments for insert to service_role with check (true);
+create policy "service inserts exposures" on public.experiment_exposures for insert to service_role with check (true);
+create policy "service inserts events" on public.events for insert to service_role with check (true);
+create policy "service inserts sessions" on public.sessions for insert to service_role with check (true);
 
 -- updated_at trigger
 create or replace function public.set_updated_at()

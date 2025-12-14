@@ -78,7 +78,7 @@ export function renderSections(props: SectionProps): ReactNode {
 
       <FeatureCallouts
         sectionId="details"
-        className="bg-brand-blush/10"
+        className="bg-semantic-legacy-brand-blush/10"
         variant="story"
         mediaSrc={props.featureCopy?.mediaSrc}
         mediaAlt={props.featureCopy?.mediaAlt}
@@ -125,16 +125,16 @@ export function renderSections(props: SectionProps): ReactNode {
       />
 
       {/* Bottom CTA just above footer */}
-      <section className="border-t border-brand-blush/50 bg-brand-blush/10 py-10">
+      <section className="border-t border-semantic-legacy-brand-blush/50 bg-semantic-legacy-brand-blush/10 py-10">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 px-4 text-center md:px-6">
           <div className="flex flex-col gap-1">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-cocoa/60">Last chance today</p>
-            <h3 className="font-heading text-2xl font-bold text-brand-cocoa md:text-[28px]">Keep style frizz-free this week.</h3>
-            <p className="text-sm font-semibold text-brand-cocoa/65">Free 30-day returns · Ships in 48h · 4.8★ from 100+</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">Last chance today</p>
+            <h3 className="font-heading text-2xl font-bold text-semantic-text-primary md:text-[28px]">Keep style frizz-free this week.</h3>
+            <p className="text-sm font-semibold text-semantic-text-primary/65">Free 30-day returns · Ships in 48h · 4.8★ from 100+</p>
           </div>
           <div className="flex w-full max-w-lg flex-col items-center gap-3">
             <button
-              className={`inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-peach to-brand-cocoa px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/30 ${props.justAdded ? 'animate-pulse' : ''}`}
+              className={`inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-semantic-accent-cta to-semantic-legacy-brand-cocoa px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 ${props.justAdded ? 'animate-pulse' : ''}`}
               onClick={props.onAdd}
               disabled={props.isAdding}
             >
@@ -142,13 +142,13 @@ export function renderSections(props: SectionProps): ReactNode {
             </button>
             <button
               type="button"
-              className="inline-flex w-full items-center justify-center rounded-full border border-brand-cocoa px-6 py-3 text-base font-semibold text-brand-cocoa transition hover:-translate-y-0.5 hover:bg-brand-cocoa/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/30 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center rounded-full border border-semantic-legacy-brand-cocoa px-6 py-3 text-base font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-cocoa/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 disabled:cursor-not-allowed disabled:opacity-60"
               onClick={props.onBuy}
               disabled={props.isAdding}
             >
               {props.isAdding ? 'Processing…' : 'Buy Now'}
             </button>
-            <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand-cocoa/70">
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-semantic-text-primary/70">
               <span className="rounded-full bg-white px-3 py-1 shadow-soft">Waterproof satin</span>
               <span className="rounded-full bg-white px-3 py-1 shadow-soft">No-frizz seal</span>
               <span className="rounded-full bg-white px-3 py-1 shadow-soft">UK free returns</span>

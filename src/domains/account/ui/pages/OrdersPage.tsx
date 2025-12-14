@@ -102,63 +102,95 @@ export const OrdersPage = () => {
     <MarketingLayout navItems={[]} subtitle="Orders">
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
-          <h1 className="font-heading text-2xl text-brand-cocoa">Your orders</h1>
+          <h1 className="font-heading text-2xl text-semantic-text-primary">Your orders</h1>
           {!signedIn ? (
-            <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6">
-              <p className="text-brand-cocoa/80">Sign in to view orders and tracking updates.</p>
-              <button className="mt-3 rounded-full bg-brand-peach px-5 py-2 font-semibold text-brand-cocoa" onClick={() => signIn('Jane')}>Sign in</button>
+            <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6">
+              <p className="text-semantic-text-primary/80">Sign in to view orders and tracking updates.</p>
+              <button
+                className="mt-3 rounded-full bg-semantic-accent-cta px-5 py-2 font-semibold text-semantic-text-primary"
+                onClick={() => signIn('Jane')}
+              >
+                Sign in
+              </button>
             </div>
           ) : shopifyEnabled ? (
             <div className="mt-4 space-y-4">
-              <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Sign in with Shopify Accounts</div>
+              <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
+                  Sign in with Shopify Accounts
+                </div>
                 <div className="mt-2 flex gap-2">
                   <a
-                    className="rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white"
+                    className="rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white"
                     href={`/api/customer-auth/start?shop=${encodeURIComponent(import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || '')}`}
                   >
                     Sign in securely
                   </a>
-                  <a className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" href={`https://${import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || ''}/account`}>Open hosted account</a>
+                  <a
+                    className="rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary"
+                    href={`https://${import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || ''}/account`}
+                  >
+                    Open hosted account
+                  </a>
                   {isCASignedIn ? (
-                    <a className="rounded-full border border-brand-blush/60 px-4 py-2 text-sm font-semibold text-brand-cocoa" href="/api/customer-auth/logout">Sign out</a>
+                    <a
+                      className="rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary"
+                      href="/api/customer-auth/logout"
+                    >
+                      Sign out
+                    </a>
                   ) : null}
                 </div>
-                <p className="mt-2 text-[11px] text-brand-cocoa/60">{isCASignedIn ? 'Signed in with Shopify Customer Accounts.' : 'Once signed in, your orders will load automatically.'}</p>
+                <p className="mt-2 text-[11px] text-semantic-text-primary/60">
+                  {isCASignedIn ? 'Signed in with Shopify Customer Accounts.' : 'Once signed in, your orders will load automatically.'}
+                </p>
               </div>
-              <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Find your orders</div>
+              <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Find your orders</div>
                 <div className="mt-3 grid gap-2 md:grid-cols-2">
                   <div className="flex gap-2">
                     <input
-                      className="flex-1 rounded-xl border border-brand-blush/60 px-3 py-2 text-sm"
+                      className="flex-1 rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm"
                       placeholder="Order number (e.g., #1001)"
                       value={orderNameLookup}
                       onChange={(e) => setOrderNameLookup(e.target.value)}
                     />
-                    <button className="rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white" onClick={() => setLoading(true)}>Find</button>
+                    <button
+                      className="rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white"
+                      onClick={() => setLoading(true)}
+                    >
+                      Find
+                    </button>
                   </div>
                   <input
-                    className="rounded-xl border border-brand-blush/60 px-3 py-2 text-sm"
+                    className="rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm"
                     placeholder="Or enter your order email"
                     value={emailLookup}
                     onChange={(e) => setEmailLookup(e.target.value)}
                   />
                 </div>
-                <p className="mt-2 text-[11px] text-brand-cocoa/60">Tip: use the email you used at checkout.</p>
+                <p className="mt-2 text-[11px] text-semantic-text-primary/60">Tip: use the email you used at checkout.</p>
               </div>
               {loading ? (
-                <div className="rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading your orders…</div>
+                <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-semantic-text-primary/80">
+                  Loading your orders…
+                </div>
               ) : orders.length === 0 ? (
-                <div className="rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">No orders found for that email yet.</div>
+                <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-semantic-text-primary/80">
+                  No orders found for that email yet.
+                </div>
               ) : (
                 <div className="space-y-4">
                   {orders.map((o) => (
-                    <RouterLink to={`/account/orders/${o.id}`} key={o.id} className="block rounded-2xl border border-brand-blush/60 bg-white p-4 hover:shadow-soft">
+                    <RouterLink
+                      to={`/account/orders/${o.id}`}
+                      key={o.id}
+                      className="block rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 hover:shadow-soft"
+                    >
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <div className="text-sm text-brand-cocoa">
+                        <div className="text-sm text-semantic-text-primary">
                           <div className="font-semibold">Order {o.id}</div>
-                          <div className="text-brand-cocoa/70">Placed {new Date(o.placedAt).toLocaleString()}</div>
+                          <div className="text-semantic-text-primary/70">Placed {new Date(o.placedAt).toLocaleString()}</div>
                         </div>
                         <div className="flex items-center gap-3">
                           <StatusBadge status={o.status} />
@@ -171,19 +203,25 @@ export const OrdersPage = () => {
               )}
             </div>
           ) : loading ? (
-            <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">Loading your orders…</div>
+            <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-semantic-text-primary/80">
+              Loading your orders…
+            </div>
           ) : orders.length === 0 ? (
-            <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-white p-6 text-brand-cocoa/80">
+            <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-semantic-text-primary/80">
               You haven’t placed any orders yet.
             </div>
           ) : (
             <div className="mt-6 space-y-4">
               {orders.map((o) => (
-                <RouterLink to={`/account/orders/${o.id}`} key={o.id} className="block rounded-2xl border border-brand-blush/60 bg-white p-4 hover:shadow-soft">
+                <RouterLink
+                  to={`/account/orders/${o.id}`}
+                  key={o.id}
+                  className="block rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 hover:shadow-soft"
+                >
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="text-sm text-brand-cocoa">
+                    <div className="text-sm text-semantic-text-primary">
                       <div className="font-semibold">Order {o.id}</div>
-                      <div className="text-brand-cocoa/70">Placed {new Date(o.placedAt).toLocaleString()}</div>
+                      <div className="text-semantic-text-primary/70">Placed {new Date(o.placedAt).toLocaleString()}</div>
                     </div>
                     <div className="flex items-center gap-3">
                       <StatusBadge status={o.status} />
@@ -197,21 +235,21 @@ export const OrdersPage = () => {
                           <img
                             src="/uploads/luminele/product-feature-05.webp"
                             alt=""
-                            className="h-12 w-12 rounded-lg border border-brand-blush/60 object-cover"
+                            className="h-12 w-12 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover"
                             loading="lazy"
                             decoding="async"
                           />
-                          <div className="flex-1 text-sm text-brand-cocoa">
+                          <div className="flex-1 text-sm text-semantic-text-primary">
                             <div className="font-medium">{it.title}</div>
-                            <div className="text-brand-cocoa/70">Qty {it.qty}</div>
+                            <div className="text-semantic-text-primary/70">Qty {it.qty}</div>
                           </div>
                           <div className="text-sm font-semibold">£{(it.price * it.qty).toFixed(2)}</div>
                         </div>
                       ))}
                     </div>
-                    <div className="rounded-xl border border-brand-blush/60 p-3">
-                      <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Updates</div>
-                      <ol className="mt-2 space-y-1 text-sm text-brand-cocoa/80">
+                    <div className="rounded-xl border border-semantic-legacy-brand-blush/60 p-3">
+                      <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Updates</div>
+                      <ol className="mt-2 space-y-1 text-sm text-semantic-text-primary/80">
                         {o.events.map((ev: any, i: number) => (
                           <li key={i}>• {new Date(ev.at).toLocaleString()} — {ev.message}</li>
                         ))}

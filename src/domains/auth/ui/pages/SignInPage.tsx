@@ -46,28 +46,28 @@ export const SignInPage = () => {
     <div className="px-4 py-16">
       <div className="mx-auto flex max-w-5xl flex-col gap-10 rounded-[32px] bg-white p-6 shadow-2xl md:flex-row md:p-12">
         <div className="md:w-1/2">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-cocoa/60">Lumelle</p>
-          <h1 className="mt-4 font-heading text-3xl font-bold text-brand-cocoa md:text-4xl">Welcome back, creator</h1>
-          <p className="mt-3 text-brand-cocoa/70">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-semantic-text-primary/60">Lumelle</p>
+          <h1 className="mt-4 font-heading text-3xl font-bold text-semantic-text-primary md:text-4xl">Welcome back, creator</h1>
+          <p className="mt-3 text-semantic-text-primary/70">
             Sign in to track drops, manage orders, and unlock exclusive perks with the Lumelle creator program.
           </p>
-          <ul className="mt-6 space-y-3 text-brand-cocoa/80">
+          <ul className="mt-6 space-y-3 text-semantic-text-primary/80">
             <li>• Check shipping progress in real-time</li>
             <li>• Save preferred delivery addresses</li>
             <li>• Access member-only bundles before they sell out</li>
           </ul>
-          <p className="mt-8 text-sm text-brand-cocoa/70">
+          <p className="mt-8 text-sm text-semantic-text-primary/70">
             Need an account?{' '}
-            <Link to={`/sign-up?redirect=${encodeURIComponent(redirectTo)}`} className="font-semibold text-brand-cocoa">
+            <Link to={`/sign-up?redirect=${encodeURIComponent(redirectTo)}`} className="font-semibold text-semantic-text-primary">
               Join Lumelle
             </Link>
           </p>
         </div>
 
         <div className="md:w-1/2">
-          <div className="rounded-3xl border border-brand-blush/60 bg-white/60 p-6 shadow-soft">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Choose your sign-in</p>
-            <h2 className="mt-2 text-2xl font-semibold text-brand-cocoa">Sign in with Google</h2>
+          <div className="rounded-3xl border border-semantic-legacy-brand-blush/60 bg-white/60 p-6 shadow-soft">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Choose your sign-in</p>
+            <h2 className="mt-2 text-2xl font-semibold text-semantic-text-primary">Sign in with Google</h2>
 
             {error ? <p className="mt-3 rounded-2xl bg-red-50 px-4 py-2 text-sm text-red-700">{error}</p> : null}
 
@@ -75,13 +75,13 @@ export const SignInPage = () => {
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-brand-blush/80 py-3 text-sm font-semibold text-brand-cocoa transition hover:border-brand-cocoa"
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-semantic-legacy-brand-blush/80 py-3 text-sm font-semibold text-semantic-text-primary transition hover:border-semantic-legacy-brand-cocoa"
                 disabled={submitting}
               >
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="" className="h-4 w-4" />
                 Continue with Google
               </button>
-              <p className="text-xs text-brand-cocoa/60">
+              <p className="text-xs text-semantic-text-primary/60">
                 One-click sign in powered by Google. No passwords, no codes.
               </p>
             </div>

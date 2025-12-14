@@ -21,7 +21,7 @@ export const BrandStorySection = () => {
   return (
     <section
       id="story"
-      className="scroll-mt-24 bg-brand-blush/15 py-20 text-brand-cocoa md:scroll-mt-32"
+      className="scroll-mt-24 bg-semantic-legacy-brand-blush/15 py-20 text-semantic-text-primary md:scroll-mt-32"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
@@ -31,7 +31,7 @@ export const BrandStorySection = () => {
           alignment="center"
         />
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr,0.85fr] lg:items-start">
-          <div className="relative min-h-[32rem] overflow-hidden rounded-[2.5rem] border border-brand-peach/40 bg-white shadow-soft">
+          <div className="relative min-h-[32rem] overflow-hidden rounded-[2.5rem] border border-semantic-accent-cta/40 bg-white shadow-soft">
             {slides.map((slide, index) => {
               const isActive = index === activeIndex
               return (
@@ -49,16 +49,16 @@ export const BrandStorySection = () => {
                       className="h-full w-full object-cover"
                       loading="lazy"
                     />
-                    <figcaption className="absolute bottom-4 left-4 rounded-full bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa">
+                    <figcaption className="absolute bottom-4 left-4 rounded-full bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary">
                       {slide.mediaAlt}
                     </figcaption>
                   </figure>
                   <div className="space-y-4 p-8">
-                    <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cocoa/50">
+                    <span className="text-xs font-semibold uppercase tracking-[0.3em] text-semantic-text-primary/50">
                       {slide.title}
                     </span>
                     <h3 className="font-heading text-3xl">{slide.headline}</h3>
-                    <p className="text-base text-brand-cocoa/75">{slide.body}</p>
+                    <p className="text-base text-semantic-text-primary/75">{slide.body}</p>
                   </div>
                 </article>
               )
@@ -72,15 +72,15 @@ export const BrandStorySection = () => {
                   onClick={() => goToSlide(index)}
                   className={`pointer-events-auto h-2.5 rounded-full transition-all ${
                     index === activeIndex
-                      ? 'w-8 bg-brand-cocoa'
-                      : 'w-2.5 bg-brand-cocoa/30 hover:bg-brand-cocoa/70'
+                      ? 'w-8 bg-semantic-legacy-brand-cocoa'
+                      : 'w-2.5 bg-semantic-legacy-brand-cocoa/30 hover:bg-semantic-legacy-brand-cocoa/70'
                   }`}
                 />
               ))}
             </div>
           </div>
-          <div className="rounded-3xl border border-brand-peach/30 bg-white/90 p-6 shadow-inner lg:sticky lg:top-28">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+          <div className="rounded-3xl border border-semantic-accent-cta/30 bg-white/90 p-6 shadow-inner lg:sticky lg:top-28">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
               Explore the story
             </p>
             <div className="mt-4 space-y-3">
@@ -91,12 +91,12 @@ export const BrandStorySection = () => {
                   type="button"
                   className={`w-full rounded-2xl border px-4 py-3 text-left transition ${
                     index === activeIndex
-                      ? 'border-brand-peach bg-brand-peach/20 text-brand-cocoa'
-                      : 'border-transparent bg-brand-blush/20 text-brand-cocoa/70 hover:border-brand-peach/40'
+                      ? 'border-semantic-accent-cta bg-semantic-accent-cta/20 text-semantic-text-primary'
+                      : 'border-transparent bg-semantic-legacy-brand-blush/20 text-semantic-text-primary/70 hover:border-semantic-accent-cta/40'
                   }`}
                 >
                   <span className="block text-sm font-semibold">{slide.headline}</span>
-                  <span className="text-xs uppercase tracking-[0.28em] text-brand-cocoa/60">
+                  <span className="text-xs uppercase tracking-[0.28em] text-semantic-text-primary/60">
                     {slide.title}
                   </span>
                 </button>

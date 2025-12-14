@@ -79,22 +79,22 @@ export const BlogIndexPage = () => {
       <BlogLayout navItems={navItems} subtitle="Journal">
         <section id="hero" className="bg-white">
           <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-            <nav className="mb-4 flex items-center justify-center gap-2 text-sm text-brand-cocoa/60">
-              <Link to="/" className="hover:text-brand-cocoa">Home</Link>
+            <nav className="mb-4 flex items-center justify-center gap-2 text-sm text-semantic-text-primary/60">
+              <Link to="/" className="hover:text-semantic-text-primary">Home</Link>
               <span>›</span>
-              <span className="text-brand-cocoa/80">Blog</span>
+              <span className="text-semantic-text-primary/80">Blog</span>
             </nav>
             <div className="text-center">
-              <span className="inline-flex rounded-full bg-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/70">
+              <span className="inline-flex rounded-full bg-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/70">
                 Journal
               </span>
-              <h1 className="mt-3 font-heading text-4xl text-brand-cocoa md:text-5xl">Frizz-free hair, creator-tested</h1>
-              <p className="mt-3 text-base text-brand-cocoa/75 md:text-lg">
+              <h1 className="mt-3 font-heading text-4xl text-semantic-text-primary md:text-5xl">Frizz-free hair, creator-tested</h1>
+              <p className="mt-3 text-base text-semantic-text-primary/75 md:text-lg">
                 Guides, routines, and creator scripts that keep your style flawless—plus launches and behind-the-scenes.
               </p>
-              <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/70">
+              <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
                 {tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-brand-blush/40 px-3 py-1">
+                  <span key={tag} className="rounded-full bg-semantic-legacy-brand-blush/40 px-3 py-1">
                     {tag}
                   </span>
                 ))}
@@ -103,7 +103,7 @@ export const BlogIndexPage = () => {
           </div>
         </section>
 
-        <section id="posts" className="bg-brand-blush/10">
+        <section id="posts" className="bg-semantic-legacy-brand-blush/10">
           <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
             <SectionHeading
               eyebrow="Featured"
@@ -116,9 +116,9 @@ export const BlogIndexPage = () => {
                 <Link
                   key={post.slug}
                   to={`/blog/${post.slug}`}
-                  className="group overflow-hidden rounded-3xl border border-brand-peach/40 bg-white shadow-soft transition hover:-translate-y-1"
+                  className="group overflow-hidden rounded-3xl border border-semantic-accent-cta/40 bg-white shadow-soft transition hover:-translate-y-1"
                 >
-                  <div className="aspect-[3/2] w-full overflow-hidden bg-brand-blush/20">
+                  <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
                     <img
                       src={post.cover}
                       alt={post.title}
@@ -130,13 +130,13 @@ export const BlogIndexPage = () => {
                     />
                   </div>
                   <div className="space-y-2 p-5">
-                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
-                      <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-brand-cocoa/80">{post.tag}</span>
+                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{post.tag}</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="font-heading text-xl text-brand-cocoa">{post.title}</h3>
-                    <p className="text-sm text-brand-cocoa/75">{post.teaser}</p>
-                    <div className="text-xs text-brand-cocoa/60">
+                    <h3 className="font-heading text-xl text-semantic-text-primary">{post.title}</h3>
+                    <p className="text-sm text-semantic-text-primary/75">{post.teaser}</p>
+                    <div className="text-xs text-semantic-text-primary/60">
                       {post.author} • {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </div>
                   </div>
@@ -152,21 +152,21 @@ export const BlogIndexPage = () => {
               className="mt-8 pt-2 md:mt-12"
             />
             {import.meta.env.DEV ? (
-              <div className="mt-2 text-xs text-brand-cocoa/60">
+              <div className="mt-2 text-xs text-semantic-text-primary/60">
                 <label className="inline-flex items-center gap-2 cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={includeDrafts}
                     onChange={(e) => setIncludeDrafts(e.target.checked)}
-                    className="h-4 w-4 accent-brand-cocoa"
+                    className="h-4 w-4 accent-semantic-legacy-brand-cocoa"
                   />
                   Show drafts (dev only)
                 </label>
               </div>
             ) : null}
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-cocoa/70">
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/70">
               <button
-                className={`rounded-full px-3 py-1 transition ${tagFilter === null ? 'bg-brand-cocoa text-white' : 'bg-white text-brand-cocoa border border-brand-blush/60'
+                className={`rounded-full px-3 py-1 transition ${tagFilter === null ? 'bg-semantic-legacy-brand-cocoa text-white' : 'bg-white text-semantic-text-primary border border-semantic-legacy-brand-blush/60'
                   }`}
                 onClick={() => setTagFilter(null)}
               >
@@ -176,8 +176,8 @@ export const BlogIndexPage = () => {
                 <button
                   key={tag}
                   className={`rounded-full px-3 py-1 transition border ${tagFilter === tag
-                    ? 'bg-brand-cocoa text-white border-brand-cocoa'
-                    : 'bg-white text-brand-cocoa border-brand-blush/60'
+                    ? 'bg-semantic-legacy-brand-cocoa text-white border-semantic-legacy-brand-cocoa'
+                    : 'bg-white text-semantic-text-primary border-semantic-legacy-brand-blush/60'
                     }`}
                   onClick={() => setTagFilter(tagFilter === tag ? null : tag)}
                 >
@@ -190,9 +190,9 @@ export const BlogIndexPage = () => {
                 <Link
                   key={post.slug}
                   to={`/blog/${post.slug}`}
-                  className="group overflow-hidden rounded-2xl border border-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
+                  className="group overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
                 >
-                  <div className="aspect-[3/2] w-full overflow-hidden bg-brand-blush/20">
+                  <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
                     <img
                       src={post.cover}
                       alt={post.title}
@@ -204,13 +204,13 @@ export const BlogIndexPage = () => {
                     />
                   </div>
                   <div className="space-y-2 p-4">
-                    <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">
-                      <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-brand-cocoa/80">{post.tag}</span>
+                    <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{post.tag}</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="font-heading text-lg text-brand-cocoa">{post.title}</h3>
-                    <p className="text-sm text-brand-cocoa/75 line-clamp-2">{post.teaser}</p>
-                    <div className="text-xs text-brand-cocoa/60">
+                    <h3 className="font-heading text-lg text-semantic-text-primary">{post.title}</h3>
+                    <p className="text-sm text-semantic-text-primary/75 line-clamp-2">{post.teaser}</p>
+                    <div className="text-xs text-semantic-text-primary/60">
                       {post.author} • {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
                     </div>
                   </div>

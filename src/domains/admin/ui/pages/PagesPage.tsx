@@ -183,27 +183,27 @@ export default function PagesPage() {
       title="Pages"
       subtitle="Pages + sections are stored in Supabase (cms_pages + cms_sections). This screen verifies Clerk role claims and RLS end-to-end."
     >
-      <section className="rounded-2xl border border-brand-blush/60 bg-white p-5">
+      <section className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Connection check</div>
-            <div className="mt-2 text-sm text-brand-cocoa/80">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Connection check</div>
+            <div className="mt-2 text-sm text-semantic-text-primary/80">
               Supabase: {supabaseHost || 'Not configured'} · Table: <span className="font-mono text-[12px]">cms_pages</span>
             </div>
-            <div className="mt-1 text-xs text-brand-cocoa/60">
+            <div className="mt-1 text-xs text-semantic-text-primary/60">
               Clerk user: {user?.primaryEmailAddress?.emailAddress || user?.id || '—'} · Roles: {roleDebug.length ? roleDebug.join(', ') : '—'}
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <button
-              className="rounded-full border border-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-brand-cocoa"
+              className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary"
               onClick={loadPages}
               disabled={loading}
             >
               {loading ? 'Loading…' : 'Reload'}
             </button>
             <button
-              className="rounded-full border border-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-brand-cocoa disabled:opacity-60"
+              className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary disabled:opacity-60"
               onClick={testPreviewContent}
               disabled={loading || previewDebug.loading || !isSupabaseConfigured}
               title="Calls Supabase Edge Function preview-content to verify Clerk JWT role claims."
@@ -214,7 +214,7 @@ export default function PagesPage() {
         </div>
 
         {!isSupabaseConfigured ? (
-          <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-brand-cocoa/80">
+          <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-semantic-text-primary/80">
             Supabase is not configured for the frontend (missing <span className="font-mono text-[12px]">VITE_SUPABASE_URL</span> /{' '}
             <span className="font-mono text-[12px]">VITE_SUPABASE_ANON_KEY</span>).
           </div>
@@ -227,22 +227,22 @@ export default function PagesPage() {
         ) : null}
 
         <div className="mt-4 grid gap-3 md:grid-cols-2">
-          <div className="rounded-2xl border border-brand-blush/60 bg-brand-porcelain/50 p-4">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">RLS status</div>
-            <div className="mt-2 text-sm text-brand-cocoa/80">
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/50 p-4">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">RLS status</div>
+            <div className="mt-2 text-sm text-semantic-text-primary/80">
               {loading ? 'Checking…' : error ? 'Blocked (see error)' : 'OK (admin role can read cms_pages)'}
             </div>
-            <div className="mt-1 text-xs text-brand-cocoa/60">
+            <div className="mt-1 text-xs text-semantic-text-primary/60">
               Rows visible: {loading ? '…' : total === null ? '—' : total}
             </div>
           </div>
 
-          <div className="rounded-2xl border border-brand-blush/60 bg-brand-porcelain/50 p-4">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Next</div>
-            <div className="mt-2 text-sm text-brand-cocoa/80">
+          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/50 p-4">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Next</div>
+            <div className="mt-2 text-sm text-semantic-text-primary/80">
               After this list, we wire page detail: sections reorder + preview/publish.
             </div>
-            <div className="mt-3 grid gap-2 text-xs text-brand-cocoa/70">
+            <div className="mt-3 grid gap-2 text-xs text-semantic-text-primary/70">
               <div>• Detail route: <span className="font-mono text-[12px]">/admin/pages/:slug</span></div>
               <div>• Tables: <span className="font-mono text-[12px]">cms_sections</span>, <span className="font-mono text-[12px]">cms_versions</span>, <span className="font-mono text-[12px]">cms_audits</span></div>
             </div>
@@ -256,40 +256,40 @@ export default function PagesPage() {
         ) : null}
 
         {typeof previewDebug.result !== 'undefined' ? (
-          <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-brand-porcelain/40 p-4">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+          <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/40 p-4">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
               preview-content result
             </div>
-            <pre className="mt-2 max-h-64 overflow-auto rounded-xl border border-brand-blush/60 bg-white p-3 text-[12px] text-brand-cocoa">
+            <pre className="mt-2 max-h-64 overflow-auto rounded-xl border border-semantic-legacy-brand-blush/60 bg-white p-3 text-[12px] text-semantic-text-primary">
               {JSON.stringify(previewDebug.result, null, 2)}
             </pre>
           </div>
         ) : null}
       </section>
 
-      <section className="rounded-2xl border border-brand-blush/60 bg-white p-5">
+      <section className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Create page</div>
-            <div className="mt-2 text-sm text-brand-cocoa/80">Adds a new draft page row in <span className="font-mono text-[12px]">cms_pages</span>.</div>
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Create page</div>
+            <div className="mt-2 text-sm text-semantic-text-primary/80">Adds a new draft page row in <span className="font-mono text-[12px]">cms_pages</span>.</div>
           </div>
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-[220px_1fr_auto]">
           <div>
-            <label className="text-xs font-semibold text-brand-cocoa/70">Slug</label>
+            <label className="text-xs font-semibold text-semantic-text-primary/70">Slug</label>
             <input
-              className="mt-1 w-full rounded-xl border border-brand-blush/60 bg-white px-3 py-2 text-sm"
+              className="mt-1 w-full rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm"
               placeholder="e.g. home"
               value={newSlug}
               onChange={(e) => setNewSlug(e.target.value)}
               autoComplete="off"
             />
-            <div className="mt-1 text-[11px] text-brand-cocoa/60">Lowercase letters/numbers/hyphens.</div>
+            <div className="mt-1 text-[11px] text-semantic-text-primary/60">Lowercase letters/numbers/hyphens.</div>
           </div>
           <div>
-            <label className="text-xs font-semibold text-brand-cocoa/70">Title</label>
+            <label className="text-xs font-semibold text-semantic-text-primary/70">Title</label>
             <input
-              className="mt-1 w-full rounded-xl border border-brand-blush/60 bg-white px-3 py-2 text-sm"
+              className="mt-1 w-full rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm"
               placeholder="Home"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
@@ -298,7 +298,7 @@ export default function PagesPage() {
           </div>
           <div className="flex items-end">
             <button
-              className="rounded-full bg-brand-cocoa px-5 py-2 text-sm font-semibold text-white disabled:opacity-60"
+              className="rounded-full bg-semantic-legacy-brand-cocoa px-5 py-2 text-sm font-semibold text-white disabled:opacity-60"
               onClick={createPage}
               disabled={saving || loading || !newSlug.trim() || !newTitle.trim()}
             >
@@ -308,28 +308,28 @@ export default function PagesPage() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-brand-blush/60 bg-white p-5">
+      <section className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Pages</div>
-            <div className="mt-2 text-sm text-brand-cocoa/80">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Pages</div>
+            <div className="mt-2 text-sm text-semantic-text-primary/80">
               {loading ? 'Loading…' : total === null ? `${pages.length} loaded` : `${total} total (showing ${pages.length})`}
             </div>
           </div>
         </div>
 
         {loading ? (
-          <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-brand-cocoa/80">
+          <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-semantic-text-primary/80">
             Loading pages…
           </div>
         ) : pages.length === 0 ? (
-          <div className="mt-4 rounded-2xl border border-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-brand-cocoa/80">
+          <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-semantic-text-primary/80">
             No pages found.
           </div>
         ) : (
-          <div className="mt-4 overflow-hidden rounded-2xl border border-brand-blush/60">
+          <div className="mt-4 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60">
             <table className="w-full text-sm">
-              <thead className="bg-brand-porcelain/70 text-left text-[12px] text-brand-cocoa/70">
+              <thead className="bg-brand-porcelain/70 text-left text-[12px] text-semantic-text-primary/70">
                 <tr>
                   <th className="px-4 py-3">Title</th>
                   <th className="px-4 py-3">Slug</th>
@@ -339,15 +339,15 @@ export default function PagesPage() {
               </thead>
               <tbody className="bg-white">
                 {pages.map((p) => (
-                  <tr key={p.id} className="border-t border-brand-blush/40">
-                    <td className="px-4 py-3 font-semibold text-brand-cocoa">{p.title}</td>
-                    <td className="px-4 py-3 font-mono text-[12px] text-brand-cocoa/80">{p.slug}</td>
+                  <tr key={p.id} className="border-t border-semantic-legacy-brand-blush/40">
+                    <td className="px-4 py-3 font-semibold text-semantic-text-primary">{p.title}</td>
+                    <td className="px-4 py-3 font-mono text-[12px] text-semantic-text-primary/80">{p.slug}</td>
                     <td className="px-4 py-3">
-                      <span className="inline-flex rounded-full border border-brand-blush/60 bg-brand-porcelain/60 px-2 py-1 text-[12px] font-semibold text-brand-cocoa">
+                      <span className="inline-flex rounded-full border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-2 py-1 text-[12px] font-semibold text-semantic-text-primary">
                         {p.status}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-brand-cocoa/70">{formatDateTime(p.updated_at)}</td>
+                    <td className="px-4 py-3 text-semantic-text-primary/70">{formatDateTime(p.updated_at)}</td>
                   </tr>
                 ))}
               </tbody>

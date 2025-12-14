@@ -70,6 +70,9 @@ This is fine *as long as reward costs are priced accordingly* (i.e., 1,000 point
 - Earn points on eligible spend: `points = floor(order_subtotal_gbp * 50)`
 - Award when order is **fulfilled** (reduces fraud/returns complexity)
 
+Implemented now:
+- Points are awarded from Shopify webhooks (fulfillment) into `loyalty_points_ledger` when the order includes `lumelle_user_id`.
+
 ### Welcome bonus (logged-in only)
 
 Recommended:
@@ -198,11 +201,11 @@ If the wheel always grants “10% off + free shipping”, treat it as a **single
   - shipping applies to eligible zones only
   - non-stackable with other % promos (define precedence)
 
-### Current Shopify discount code: `LUMINEL10`
+### Current Shopify discount code: `LUMELLE10`
 
 We can implement the welcome wheel as a **one-time unlock** that auto-applies a Shopify discount code.
 
-Client-provided parameters for `LUMINEL10`:
+Client-requested parameters for `LUMELLE10`:
 - Minimum spend: **£20**
 - Expiry: **none**
 - Should stack with “Buy 2 save 10%”
@@ -211,6 +214,32 @@ Implementation notes:
 - If “free shipping over £19.99” is already a store rule, then a `£20` minimum makes the welcome deal feel like
   “10% off + free shipping” without needing a separate shipping code.
 - If “Buy 2 save 10%” is a real Shopify discount, the `combinesWith` settings must allow stacking accordingly.
+
+> Note: we should re-check the Shopify discount config so it matches the requested rules (min spend + stacking).
+
+---
+
+## Implemented now (Dec 2025)
+
+### 1) Rewards page
+
+- Route: `/rewards`
+- Shows:
+  - current points summary (balance / earned / spent)
+  - “How to earn” actions (manual claims; verification deferred)
+  - a small points history list
+
+### 2) Manual “earn actions” (honor system for now)
+
+- One claim per action per account
+- Stored in Supabase:
+  - `loyalty_task_claims` (unique on `user_id + task_key`)
+  - `loyalty_points_ledger` (append-only points)
+
+### 3) Welcome wheel (direct issuance)
+
+- Stored in Supabase: `welcome_wheel_claims` (1× per user)
+- Outcome: deterministic “10% + free shipping” messaging; Shopify code currently used: `LUMELLE10`
 
 ---
 

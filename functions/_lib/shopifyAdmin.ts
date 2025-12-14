@@ -2,6 +2,10 @@ import type { Env } from './types'
 import { getSupabase } from './supabase'
 
 export async function getAdminToken(env: Env, shop: string) {
+  // Preferred: a pre-generated Admin API access token (custom app token, `shpat_...`)
+  // This avoids having to run the Shopify OAuth install flow just to read/write admin metafields.
+  if (env.SHOPIFY_ADMIN_API_ACCESS_TOKEN) return env.SHOPIFY_ADMIN_API_ACCESS_TOKEN
+
   const supabase = getSupabase(env)
   const { data, error } = await supabase.from('Session').select('accesstoken').eq('id', `offline_${shop}`).limit(1).maybeSingle()
   if (error) throw error
@@ -31,4 +35,3 @@ export async function adminGraphQL<T>(
   if (json.errors) throw new Error(JSON.stringify(json.errors))
   return json.data as T
 }
-

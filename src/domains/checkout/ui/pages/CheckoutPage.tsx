@@ -5,20 +5,22 @@ import { addOrder, type Order } from '@account/state/OrdersStore'
 import { shopifyEnabled } from '@/lib/shopify/shopify'
 import { setNoIndex } from '@/lib/seo'
 import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
+import { useUser } from '@clerk/clerk-react'
+import { useAuth as useAppAuth } from '@auth/ui/providers/AuthContext'
 
 const FREE_SHIP_THRESHOLD = 40
 const STANDARD_SHIPPING = 3.95
 const steps = ['Review']
 
 const Stepper = ({ step }: { step: number }) => (
-  <div className="mb-6 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">
+  <div className="mb-6 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
     {steps.map((label, idx) => (
       <div key={label} className="flex items-center gap-2">
-        <span className={`flex h-6 w-6 items-center justify-center rounded-full border text-[11px] ${idx <= step ? 'border-brand-cocoa bg-brand-cocoa text-white' : 'border-brand-blush/60 text-brand-cocoa/50'}`}>
+        <span className={`flex h-6 w-6 items-center justify-center rounded-full border text-[11px] ${idx <= step ? 'border-semantic-legacy-brand-cocoa bg-semantic-legacy-brand-cocoa text-white' : 'border-semantic-legacy-brand-blush/60 text-semantic-text-primary/50'}`}>
           {idx + 1}
         </span>
-        <span className={idx === step ? 'text-brand-cocoa' : 'text-brand-cocoa/50'}>{label}</span>
-        {idx < steps.length - 1 ? <span className="text-brand-blush/60">─</span> : null}
+        <span className={idx === step ? 'text-semantic-text-primary' : 'text-semantic-text-primary/50'}>{label}</span>
+        {idx < steps.length - 1 ? <span className="text-semantic-legacy-brand-blush/60">─</span> : null}
       </div>
     ))}
   </div>
@@ -26,8 +28,11 @@ const Stepper = ({ step }: { step: number }) => (
 
 export const CheckoutPage = () => {
   const { items, subtotal, qty, clear, checkoutUrl, setAttributes } = useCart()
+  const { signedIn, signIn } = useAppAuth()
+  const { isLoaded, isSignedIn, user } = useUser()
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || qty === 0 ? 0 : STANDARD_SHIPPING
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping])
+  const estimatedPoints = useMemo(() => Math.max(0, Math.floor(subtotal * 50)), [subtotal])
   // const [email, setEmail] = useState('')
   const step = 0
   const [placingOrder, setPlacingOrder] = useState(false)
@@ -42,6 +47,11 @@ export const CheckoutPage = () => {
         captureEvent('begin_checkout', { source: 'checkout_page', href: checkoutUrl })
         await initPosthogOnce()
         const attrs = buildCheckoutAttributionAttributes()
+        if (isLoaded && isSignedIn && user) {
+          attrs.lumelle_user_id = user.id
+          const email = user.primaryEmailAddress?.emailAddress
+          if (email) attrs.lumelle_user_email = email
+        }
         await Promise.race([
           setAttributes?.(attrs),
           new Promise((resolve) => setTimeout(resolve, 800)),
@@ -82,8 +92,8 @@ export const CheckoutPage = () => {
     switch (step) {
       default:
         return (
-          <div className="space-y-4 rounded-2xl border border-brand-blush/60 bg-white p-4 text-sm text-brand-cocoa">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Review</p>
+          <div className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-sm text-semantic-text-primary">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Review</p>
             <p>Review your order summary, then continue to checkout to finish payment securely in Shopify.</p>
           </div>
         )
@@ -99,27 +109,27 @@ export const CheckoutPage = () => {
             {renderStepContent()}
           </div>
           <aside className="mt-10 space-y-4 md:mt-0">
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Order summary</div>
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Order summary</div>
               <div className="mt-3 space-y-3">
                 {items.length === 0 ? (
-                  <div className="rounded-xl border border-brand-blush/60 p-3 text-sm text-brand-cocoa/70">Your cart is empty.</div>
+                  <div className="rounded-xl border border-semantic-legacy-brand-blush/60 p-3 text-sm text-semantic-text-primary/70">Your cart is empty.</div>
                 ) : (
                   items.map((it) => (
                     <div key={it.id} className="flex items-center gap-3">
                       <img
                         src="/uploads/luminele/product-feature-05.webp"
                         alt=""
-                        className="h-14 w-14 rounded-lg border border-brand-blush/60 object-cover"
+                        className="h-14 w-14 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover"
                         loading="lazy"
                         decoding="async"
                       />
-                      <div className="flex-1 text-sm text-brand-cocoa">
+                      <div className="flex-1 text-sm text-semantic-text-primary">
                         <div className="font-medium">{it.title}</div>
-                        <div className="text-brand-cocoa/70">Qty {it.qty}</div>
-                        <div className="flex items-center gap-2 text-[11px] text-brand-cocoa/70">
-                          <span className="line-through text-brand-cocoa/50">£19.99</span>
-                          <span className="font-semibold text-brand-cocoa">£{it.price.toFixed(2)}</span>
+                        <div className="text-semantic-text-primary/70">Qty {it.qty}</div>
+                        <div className="flex items-center gap-2 text-[11px] text-semantic-text-primary/70">
+                          <span className="line-through text-semantic-text-primary/50">£19.99</span>
+                          <span className="font-semibold text-semantic-text-primary">£{it.price.toFixed(2)}</span>
                           <span>each</span>
                         </div>
                       </div>
@@ -128,22 +138,42 @@ export const CheckoutPage = () => {
                   ))
                 )}
               </div>
-              <div className="mt-4 h-px bg-brand-blush/60" />
-              <div className="mt-3 space-y-2 text-sm text-brand-cocoa">
+              <div className="mt-4 h-px bg-semantic-legacy-brand-blush/60" />
+              <div className="mt-3 space-y-2 text-sm text-semantic-text-primary">
                 <div className="flex justify-between"><span>Subtotal</span><span>£{subtotal.toFixed(2)}</span></div>
                 <div className="flex justify-between"><span>Shipping</span><span>{shipping === 0 ? 'Free' : `£${shipping.toFixed(2)}`}</span></div>
-                <div className="flex justify-between font-semibold text-brand-cocoa"><span>Total</span><span>£{total.toFixed(2)}</span></div>
+                <div className="flex justify-between font-semibold text-semantic-text-primary"><span>Total</span><span>£{total.toFixed(2)}</span></div>
               </div>
-              <p className="mt-4 text-[11px] text-brand-cocoa/60">Shipping, taxes, and discounts are calculated at checkout.</p>
+              <p className="mt-4 text-[11px] text-semantic-text-primary/60">Shipping, taxes, and discounts are calculated at checkout.</p>
             </div>
 
-            <div className="rounded-2xl border border-brand-blush/60 bg-white p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-cocoa/60">Continue to checkout</div>
-              <p className="mt-2 text-sm text-brand-cocoa/75">Review your items and totals, then continue to Shopify to pay securely.</p>
+            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Continue to checkout</div>
+              <p className="mt-2 text-sm text-semantic-text-primary/75">Review your items and totals, then continue to Shopify to pay securely.</p>
+              {!signedIn ? (
+                <div className="mt-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/20 p-3 text-sm text-semantic-text-primary/80">
+                  <div className="font-semibold text-semantic-text-primary">Want points on this purchase?</div>
+                  <div className="mt-1 text-semantic-text-primary/70">
+                    Sign in before checkout to earn rewards points automatically.
+                  </div>
+                  <button
+                    type="button"
+                    className="mt-3 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5"
+                    onClick={() => signIn()}
+                  >
+                    Sign in to earn points
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/15 p-3 text-sm text-semantic-text-primary/80">
+                  <div className="font-semibold text-semantic-text-primary">You’ll earn {estimatedPoints.toLocaleString()} points</div>
+                  <div className="mt-1 text-semantic-text-primary/70">Points are awarded when your order ships.</div>
+                </div>
+              )}
               <button
                 onClick={placeOrder}
                 disabled={disabled || placingOrder}
-                className="mt-4 w-full rounded-full bg-brand-peach px-5 py-3 text-sm font-semibold text-brand-cocoa shadow-soft disabled:opacity-50"
+                className="mt-4 w-full rounded-full bg-semantic-accent-cta px-5 py-3 text-sm font-semibold text-semantic-text-primary shadow-soft disabled:opacity-50"
               >
                 {placingOrder ? 'Redirecting…' : 'Continue to checkout'}
               </button>

@@ -26,19 +26,19 @@ export const DetailsAccordion = ({ items, heading, sectionId }: DetailsAccordion
           alignment={heading.alignment === 'right' ? 'center' : heading.alignment}
         />
       ) : null}
-      <div className={`divide-y divide-brand-blush/60 rounded-2xl border border-brand-blush/60 bg-white ${heading ? 'mt-8' : 'mt-0'}`}>
+      <div className={`divide-y divide-semantic-legacy-brand-blush/60 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white ${heading ? 'mt-8' : 'mt-0'}`}>
         {items.map((d, i) => (
           <details key={i} className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 text-brand-cocoa">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 text-semantic-text-primary">
               <div className="flex items-center gap-3">
                 {d.thumbSrc ? (
-                  <img src={d.thumbSrc} alt={d.thumbAlt || ''} loading="lazy" className="h-10 w-10 rounded-lg border border-brand-blush/60 object-cover" />
+                  <img src={d.thumbSrc} alt={d.thumbAlt || ''} loading="lazy" className="h-10 w-10 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover" />
                 ) : null}
                 <span className="font-semibold">{d.title}</span>
               </div>
-              <span className="text-brand-cocoa/60 group-open:rotate-90">▸</span>
+              <span className="text-semantic-text-primary/60 group-open:rotate-90">▸</span>
             </summary>
-            <div className="px-4 pb-4 text-sm text-brand-cocoa/80 whitespace-pre-line">{d.body}</div>
+            <div className="px-4 pb-4 text-sm text-semantic-text-primary/80 whitespace-pre-line">{d.body}</div>
           </details>
         ))}
       </div>

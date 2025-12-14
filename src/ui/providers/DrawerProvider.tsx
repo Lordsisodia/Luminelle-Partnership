@@ -167,6 +167,7 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                     <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">More</div>
                     <RouterLink to="/creators" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/creators' }) }}>Creators</RouterLink>
                     <RouterLink to="/brand" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}>Brand story</RouterLink>
+                    <RouterLink to="/rewards" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/rewards' }) }}>Rewards</RouterLink>
                     <RouterLink to="/blog" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}>Blog</RouterLink>
                   </div>
                 </nav>

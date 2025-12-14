@@ -33,14 +33,14 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
       <div className="w-full flex flex-col gap-3">
           <Link
             to="/product/satin-overnight-curler"
-            className="mb-2 inline-flex w-auto max-w-fit items-center gap-2 rounded-full bg-white px-3.5 py-1.25 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-cocoa shadow-soft ring-1 ring-brand-peach/50 transition hover:-translate-y-[1px] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/50"
+            className="mb-2 inline-flex w-auto max-w-fit items-center gap-2 rounded-full bg-white px-3.5 py-1.25 text-[11px] font-semibold uppercase tracking-[0.22em] text-semantic-text-primary shadow-soft ring-1 ring-semantic-accent-cta/50 transition hover:-translate-y-[1px] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/50"
             aria-label="New eyelash curler launched — view the satin overnight curler set"
           >
-            <span className="h-2 w-2 rounded-full bg-brand-cocoa" aria-hidden />
+            <span className="h-2 w-2 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden />
             New Eyelash Curler Launched
             <span aria-hidden>→</span>
           </Link>
-          <div className="relative w-full overflow-hidden rounded-[2rem] border border-brand-blush/60 bg-white md:bg-brand-blush/20">
+          <div className="relative w-full overflow-hidden rounded-[2rem] border border-semantic-legacy-brand-blush/60 bg-white md:bg-semantic-legacy-brand-blush/20">
             {gallery[activeImage]?.startsWith('video://') ? (
               <iframe
                 src={gallery[activeImage].replace('video://', '')}
@@ -89,14 +89,14 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
                     key={src}
                     type="button"
                     onClick={() => onSelect(idx)}
-                    className={`h-14 w-14 shrink-0 overflow-hidden rounded-2xl border snap-start ${idx === activeImage ? 'border-brand-cocoa' : 'border-brand-blush/60'}`}
+                    className={`h-14 w-14 shrink-0 overflow-hidden rounded-2xl border snap-start ${idx === activeImage ? 'border-semantic-legacy-brand-cocoa' : 'border-semantic-legacy-brand-blush/60'}`}
                     aria-label={`Show media ${idx + 1}`}
                   >
                     {isVideo ? (
-                      <div className="relative h-full w-full bg-brand-blush/40">
+                      <div className="relative h-full w-full bg-semantic-legacy-brand-blush/40">
                         <img src="/uploads/luminele/product-feature-03.webp" alt="Video" className="h-full w-full object-cover" />
                         <span className="absolute inset-0 flex items-center justify-center">
-                          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-brand-cocoa shadow-soft">
+                          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-semantic-text-primary shadow-soft">
                             ▶
                           </span>
                         </span>

@@ -5,7 +5,7 @@ type AuthLayoutProps = {
 }
 
 export const AuthLayout = ({ children }: AuthLayoutProps) => {
-  return <div className="min-h-screen bg-brand-blush/20 text-brand-cocoa">{children}</div>
+  return <div className="min-h-screen bg-semantic-legacy-brand-blush/20 text-semantic-text-primary">{children}</div>
 }
 
 export default AuthLayout

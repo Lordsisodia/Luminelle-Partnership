@@ -13,22 +13,22 @@ const Icon = ({ name }: { name?: string }) => {
 }
 
 export const CareSection = ({ items, label = 'Care & materials' }: Props) => (
-  <div className="rounded-3xl border border-brand-peach/60 bg-white/95 p-5 shadow-[0_16px_40px_rgba(0,0,0,0.06)]">
-    <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-brand-peach/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-cocoa">
+  <div className="rounded-3xl border border-semantic-accent-cta/60 bg-white/95 p-5 shadow-[0_16px_40px_rgba(0,0,0,0.06)]">
+    <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-semantic-accent-cta/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary">
       {label}
     </div>
     <div className="space-y-3">
       {items.map((item) => (
         <div
           key={item.title}
-          className="flex gap-3 rounded-2xl border border-brand-blush/60 bg-brand-blush/10 p-4 shadow-[0_8px_18px_rgba(0,0,0,0.04)]"
+          className="flex gap-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-4 shadow-[0_8px_18px_rgba(0,0,0,0.04)]"
         >
-          <span className="mt-0.5 inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white text-brand-cocoa shadow-soft">
+          <span className="mt-0.5 inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white text-semantic-text-primary shadow-soft">
             <Icon name={item.icon} />
           </span>
           <div>
-            <p className="font-heading text-base font-semibold text-brand-cocoa">{item.title}</p>
-            <p className="mt-1 text-[14px] leading-snug text-brand-cocoa/80 whitespace-pre-line">{item.body}</p>
+            <p className="font-heading text-base font-semibold text-semantic-text-primary">{item.title}</p>
+            <p className="mt-1 text-[14px] leading-snug text-semantic-text-primary/80 whitespace-pre-line">{item.body}</p>
           </div>
         </div>
       ))}

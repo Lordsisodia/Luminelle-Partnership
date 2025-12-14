@@ -42,18 +42,28 @@ export const PaymentMethodsPage = () => {
   return (
     <AccountLayout sidebar={<AccountNav />} title="Payment methods" subtitle="Save cards for faster checkout.">
       {!signedIn ? (
-        <div className="rounded-2xl border border-brand-blush/60 bg-white p-6">
-          <p className="text-brand-cocoa/80">Sign in to save cards for faster checkout.</p>
-          <button className="mt-3 rounded-full bg-brand-peach px-5 py-2 font-semibold text-brand-cocoa" onClick={() => signIn('Jane')}>
+        <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6">
+          <p className="text-semantic-text-primary/80">Sign in to save cards for faster checkout.</p>
+          <button
+            className="mt-3 rounded-full bg-semantic-accent-cta px-5 py-2 font-semibold text-semantic-text-primary"
+            onClick={() => signIn('Jane')}
+          >
             Sign in
           </button>
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
-          <form onSubmit={handleSubmit} className="rounded-2xl border border-brand-blush/60 bg-brand-blush/10 p-4 shadow-soft">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cocoa/60">Add card</p>
-            <div className="mt-4 space-y-3 text-sm text-brand-cocoa">
-              <select value={form.brand} onChange={(e) => updateField('brand', e.target.value)} className="w-full rounded-xl border border-brand-blush/60 px-3 py-2">
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-4 shadow-soft"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-semantic-text-primary/60">Add card</p>
+            <div className="mt-4 space-y-3 text-sm text-semantic-text-primary">
+              <select
+                value={form.brand}
+                onChange={(e) => updateField('brand', e.target.value)}
+                className="w-full rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2"
+              >
                 <option>Visa</option>
                 <option>Mastercard</option>
                 <option>AmEx</option>
@@ -61,34 +71,41 @@ export const PaymentMethodsPage = () => {
               <input
                 value={form.last4}
                 onChange={(e) => updateField('last4', e.target.value.replace(/\\D/g, '').slice(-4))}
-                className="w-full rounded-xl border border-brand-blush/60 px-3 py-2"
+                className="w-full rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2"
                 placeholder="Last 4 digits"
                 required
               />
               <input
                 value={form.exp}
                 onChange={(e) => updateField('exp', e.target.value)}
-                className="w-full rounded-xl border border-brand-blush/60 px-3 py-2"
+                className="w-full rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2"
                 placeholder="Expiry MM/YY"
                 required
               />
             </div>
-            <button className="mt-4 w-full rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white">Save card</button>
+            <button className="mt-4 w-full rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white">
+              Save card
+            </button>
           </form>
           <div className="space-y-4">
             {methods.length === 0 ? (
-              <div className="rounded-2xl border border-brand-blush/60 bg-white p-4 text-brand-cocoa/70">No cards saved yet.</div>
+              <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-semantic-text-primary/70">
+                No cards saved yet.
+              </div>
             ) : (
               methods.map((card) => (
-                <article key={card.id} className="rounded-2xl border border-brand-blush/60 bg-white p-4 text-brand-cocoa">
+                <article key={card.id} className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-semantic-text-primary">
                   <div className="flex items-center justify-between text-sm">
                     <div>
                       <p className="font-semibold">
                         {card.brand} ending in {card.last4}
                       </p>
-                      <p className="text-brand-cocoa/70">Exp {card.exp}</p>
+                      <p className="text-semantic-text-primary/70">Exp {card.exp}</p>
                     </div>
-                    <button className="text-xs uppercase tracking-[0.3em] text-brand-cocoa/50" onClick={() => handleDelete(card.id)}>
+                    <button
+                      className="text-xs uppercase tracking-[0.3em] text-semantic-text-primary/50"
+                      onClick={() => handleDelete(card.id)}
+                    >
                       Delete
                     </button>
                   </div>

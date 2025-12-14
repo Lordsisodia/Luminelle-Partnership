@@ -9,14 +9,14 @@ const links = [
 ]
 
 export const AccountNav = () => (
-  <nav className="flex flex-col gap-1 text-sm text-brand-cocoa/80">
+  <nav className="flex flex-col gap-1 text-sm text-semantic-text-primary/80">
     {links.map((link) => (
       <NavLink
         key={link.to}
         to={link.to}
         className={({ isActive }) =>
-          `rounded-lg px-3 py-2 transition hover:bg-brand-blush/40 ${
-            isActive ? 'bg-brand-blush/60 text-brand-cocoa font-semibold' : ''
+          `rounded-lg px-3 py-2 transition hover:bg-semantic-legacy-brand-blush/40 ${
+            isActive ? 'bg-semantic-legacy-brand-blush/60 text-semantic-text-primary font-semibold' : ''
           }`
         }
       >

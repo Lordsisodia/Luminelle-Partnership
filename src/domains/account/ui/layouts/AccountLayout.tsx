@@ -11,7 +11,7 @@ type Props = {
 
 const AccountLayout = ({ children, title = 'Your account', subtitle, sidebar }: Props) => {
   return (
-    <div className="min-h-screen bg-brand-porcelain text-brand-cocoa">
+    <div className="min-h-screen bg-brand-porcelain text-semantic-text-primary">
       <GlobalHeader
         promoMessages={[{ label: 'Free returns within 30 days' }, { label: 'Buy 2, save 10%' }]}
         activePromo={0}
@@ -26,9 +26,9 @@ const AccountLayout = ({ children, title = 'Your account', subtitle, sidebar }: 
         )}
         <section className="flex-1 space-y-6">
           <header className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa/60">Account</p>
-            <h1 className="font-heading text-3xl text-brand-cocoa">{title}</h1>
-            {subtitle ? <p className="text-brand-cocoa/70">{subtitle}</p> : null}
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Account</p>
+            <h1 className="font-heading text-3xl text-semantic-text-primary">{title}</h1>
+            {subtitle ? <p className="text-semantic-text-primary/70">{subtitle}</p> : null}
           </header>
           <div className="space-y-6">{children}</div>
         </section>

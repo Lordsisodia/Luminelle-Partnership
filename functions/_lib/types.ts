@@ -12,8 +12,12 @@ export type Env = {
 
   // Shopify (app + webhooks)
   SHOPIFY_STORE_DOMAIN?: string
+  // Optional: explicitly choose the upstream host for checkout proxying (e.g. myshopify.com).
+  // If omitted, falls back to SHOPIFY_STORE_DOMAIN / VITE_SHOPIFY_STORE_DOMAIN.
+  SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN?: string
   SHOPIFY_API_KEY?: string
   SHOPIFY_API_SECRET?: string
+  SHOPIFY_ADMIN_API_ACCESS_TOKEN?: string
   SHOPIFY_API_VERSION?: string
   SHOPIFY_SCOPES?: string
   SCOPES?: string

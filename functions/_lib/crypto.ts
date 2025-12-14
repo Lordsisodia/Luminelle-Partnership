@@ -16,7 +16,7 @@ export function randomBase64Url(lengthBytes: number) {
 
 export async function sha256(data: string | Uint8Array) {
   const bytes = typeof data === 'string' ? utf8ToBytes(data) : data
-  return crypto.subtle.digest('SHA-256', bytes)
+  return crypto.subtle.digest('SHA-256', bytes as unknown as BufferSource)
 }
 
 export async function sha256Base64Url(data: string | Uint8Array) {
@@ -27,12 +27,12 @@ export async function sha256Base64Url(data: string | Uint8Array) {
 export async function hmacSha256(secret: string, message: string) {
   const key = await crypto.subtle.importKey(
     'raw',
-    utf8ToBytes(secret),
+    utf8ToBytes(secret) as unknown as BufferSource,
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign'],
   )
-  return crypto.subtle.sign('HMAC', key, utf8ToBytes(message))
+  return crypto.subtle.sign('HMAC', key, utf8ToBytes(message) as unknown as BufferSource)
 }
 
 export async function hmacSha256Hex(secret: string, message: string) {
@@ -49,4 +49,3 @@ export function safeEqual(a: string, b: string) {
   for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i)
   return diff === 0
 }
-
