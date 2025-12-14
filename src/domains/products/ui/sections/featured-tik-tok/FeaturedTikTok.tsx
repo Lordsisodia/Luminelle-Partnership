@@ -27,6 +27,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const [active, setActive] = useState(0)
   const [hydrated, setHydrated] = useState(false)
+  const dragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 })
 
   const goTo = useCallback(
     (idx: number, behavior: ScrollBehavior = 'smooth') => {
@@ -45,6 +46,30 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
 
   const nudge = (dir: 'left' | 'right') => {
     goTo(active + (dir === 'right' ? 1 : -1))
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current
+    if (!el) return
+    dragState.current.isDown = true
+    dragState.current.startX = e.pageX - el.offsetLeft
+    dragState.current.scrollLeft = el.scrollLeft
+    el.classList.add('dragging')
+  }
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current
+    if (!el || !dragState.current.isDown) return
+    e.preventDefault()
+    const x = e.pageX - el.offsetLeft
+    const walk = x - dragState.current.startX
+    el.scrollLeft = dragState.current.scrollLeft - walk
+  }
+
+  const endDrag = () => {
+    const el = scrollerRef.current
+    dragState.current.isDown = false
+    if (el) el.classList.remove('dragging')
   }
 
   useEffect(() => {
@@ -85,7 +110,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
 
   return (
     <section id={sectionId} className="bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6">
+      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-10">
         <SectionHeading
           eyebrow={resolvedHeading.eyebrow}
           title={resolvedHeading.title ?? ''}
@@ -93,70 +118,76 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
           alignment={resolvedHeading.alignment === 'right' ? 'center' : resolvedHeading.alignment}
         />
 
-        <div
-          ref={scrollerRef}
-          className="relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {successStories.map((s) => {
-            return (
-              <article key={s.handle} data-tiktok-card className="min-w-[min(90vw,420px)] snap-center">
-                <LazyVisible
-                  placeholder={
-                    <div className="relative overflow-hidden rounded-3xl border border-brand-peach/40 pb-[178%] shadow-soft bg-brand-blush/20" />
-                  }
-                >
-                  <div className="relative overflow-hidden rounded-3xl border border-brand-peach/40 pb-[178%] shadow-soft bg-black">
-                    {hydrated ? (
-                      <iframe
-                        src={s.embedUrl.includes('lang=') ? s.embedUrl : `${s.embedUrl}&lang=en`}
-                        title={`${s.name} TikTok embed`}
-                        loading="lazy"
-                        allow="encrypted-media; fullscreen; clipboard-write"
-                        allowFullScreen
-                        scrolling="no"
-                        className="absolute inset-0 h-full w-full"
-                        style={{ border: 0 }}
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
-                        Loading…
-                      </div>
-                    )}
-                  </div>
-                </LazyVisible>
-                <div className="mt-3 text-center text-sm text-brand-cocoa/70">{s.name} • {s.handle}</div>
-                <div className="mt-1 hidden text-center md:block">
-                  <a
-                    href={s.videoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold text-brand-cocoa/80 hover:bg-brand-blush/40"
+        <div className="mt-6 rounded-3xl border border-brand-peach/40 bg-gradient-to-r from-[#FDEBE3] via-white to-[#FDEBE3] p-4 shadow-soft">
+          <div
+            ref={scrollerRef}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={endDrag}
+            onMouseUp={endDrag}
+            onMouseMove={handleMouseMove}
+            className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-2 sm:px-2 lg:gap-4 lg:px-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing dragging:cursor-grabbing select-none"
+          >
+            {successStories.map((s) => {
+              return (
+                <article key={s.handle} data-tiktok-card className="min-w-[min(72vw,300px)] snap-center lg:min-w-[min(340px,26vw)]">
+                  <LazyVisible
+                    placeholder={
+                      <div className="relative overflow-hidden rounded-2xl border border-brand-peach/40 pb-[158%] shadow-soft bg-brand-blush/20" />
+                    }
                   >
-                    Watch on TikTok
-                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-                  </a>
-                </div>
-              </article>
-            )
-          })}
-          {/* Desktop-only arrow nudges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 hidden items-center md:flex">
-            <button
-              aria-label="Scroll videos left"
-              onClick={() => nudge('left')}
-              className="pointer-events-auto ml-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center md:flex">
-            <button
-              aria-label="Scroll videos right"
-              onClick={() => nudge('right')}
-              className="pointer-events-auto mr-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
+                    <div className="relative overflow-hidden rounded-2xl border border-brand-peach/40 pb-[158%] shadow-soft bg-black">
+                      {hydrated ? (
+                        <iframe
+                          src={s.embedUrl.includes('lang=') ? s.embedUrl : `${s.embedUrl}&lang=en`}
+                          title={`${s.name} TikTok embed`}
+                          loading="lazy"
+                          allow="encrypted-media; fullscreen; clipboard-write"
+                          allowFullScreen
+                          scrolling="no"
+                          className="absolute inset-0 h-full w-full"
+                          style={{ border: 0 }}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-brand-blush/20 text-brand-cocoa/60 text-xs">
+                          Loading…
+                        </div>
+                      )}
+                    </div>
+                  </LazyVisible>
+                  <div className="mt-2 text-center text-sm text-brand-cocoa/70">{s.name} • {s.handle}</div>
+                  <div className="mt-1 hidden text-center md:block">
+                    <a
+                      href={s.videoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold text-brand-cocoa/80 hover:bg-brand-blush/40"
+                    >
+                      Watch on TikTok
+                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                  </div>
+                </article>
+              )
+            })}
+            {/* Desktop-only arrow nudges */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 hidden items-center md:flex">
+              <button
+                aria-label="Scroll videos left"
+                onClick={() => nudge('left')}
+                className="pointer-events-auto ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center md:flex">
+              <button
+                aria-label="Scroll videos right"
+                onClick={() => nudge('right')}
+                className="pointer-events-auto mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-blush/60 bg-white text-brand-cocoa shadow-soft hover:bg-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cocoa"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
           </div>
         </div>
 

@@ -77,7 +77,7 @@ export const PriceBlock = ({
   }, [])
 
   return (
-    <div className="space-y-5 text-brand-cocoa min-w-0 mx-auto max-w-6xl px-4 md:px-6">
+    <div className="space-y-5 text-brand-cocoa min-w-0 w-full md:pl-0">
       <div>
         <div className="mt-2 flex items-start gap-3">
           <h1 className="font-heading text-[1.95rem] font-bold leading-tight md:text-4xl">{productTitle}</h1>

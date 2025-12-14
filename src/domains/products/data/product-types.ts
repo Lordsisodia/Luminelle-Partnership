@@ -16,7 +16,7 @@ export type ProductConfig = {
   essentials?: { title: string; body: string }[]
   reasons?: { title: string; desc: string }[]
   qa?: { q: string; a: string }[]
-  how?: string[]
+  how?: { title: string; body: string }[]
   care?: { icon?: string; title: string; body: string }[]
   careLabelOverride?: string
   featureCallouts?: {

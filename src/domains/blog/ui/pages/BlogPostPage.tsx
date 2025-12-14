@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
 import { useParams, Navigate, Link as RouterLink } from 'react-router-dom'
+import Markdown from 'markdown-to-jsx'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
 import { blogPosts } from '@/content/blog'
@@ -7,6 +7,7 @@ import { SectionHeading } from '@ui/components/SectionHeading'
 import { cdnUrl } from '@/utils/cdn'
 import { BlogSocial } from '../components/BlogSocial'
 import { Seo } from '@/components/Seo'
+import { useCallback, useState, useEffect, useRef } from 'react'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Post' },
@@ -18,6 +19,7 @@ export const BlogPostPage = () => {
   const post = blogPosts.find((p) => p.slug === slug)
   const [currentRelatedIndex, setCurrentRelatedIndex] = useState(0)
   const relatedTrackRef = useRef<HTMLDivElement | null>(null)
+  const [copied, setCopied] = useState(false)
 
   if (!post) return <Navigate to="/blog" replace />
   if (post.status === 'draft' && !import.meta.env.DEV) return <Navigate to="/blog" replace />
@@ -26,6 +28,12 @@ export const BlogPostPage = () => {
     .filter((p) => p.slug !== post.slug && (import.meta.env.DEV ? true : p.status !== 'draft'))
     .sort((a, b) => (a.tag === post.tag ? -1 : b.tag === post.tag ? 1 : 0))
     .slice(0, 3)
+
+  const slugify = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '') || 'section'
 
   // Track horizontal scroll progress on the related carousel for the dots indicator
   useEffect(() => {
@@ -48,6 +56,12 @@ export const BlogPostPage = () => {
   const image = post.ogImage ?? post.cover
   const absImage = cdnUrl(image)
   const url = `https://lumelle.com/blog/${post.slug}`
+  const handleCopy = useCallback(() => {
+    navigator.clipboard?.writeText(url).then(() => {
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1200)
+    })
+  }, [url])
 
   // Structured data: Article + FAQ (2 Qs)
   const faq = post.faqs && post.faqs.length
@@ -125,12 +139,45 @@ export const BlogPostPage = () => {
             </span>
             <h1 className="mt-3 font-heading text-4xl text-brand-cocoa">{post.title}</h1>
             <p className="mt-3 text-lg text-brand-cocoa/75">{post.subtitle}</p>
-            <div className="mt-3 flex flex-wrap gap-3 text-sm text-brand-cocoa/70">
-              <span>{post.author}</span>
+            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-brand-cocoa/80">
+              <div className="flex items-center gap-2">
+                {post.authorAvatar ? (
+                  <a href={post.authorLink || '#'} className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-brand-blush/60 shadow-soft hover:-translate-y-0.5 transition">
+                    <img src={post.authorAvatar} alt={post.author} className="h-full w-full object-cover" loading="lazy" />
+                  </a>
+                ) : (
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blush/50 text-sm font-semibold text-brand-cocoa">
+                    {post.author.charAt(0)}
+                  </span>
+                )}
+                <a href={post.authorLink || '#'} className="font-semibold text-brand-cocoa hover:text-brand-cocoa/80" title={post.authorRoleLong || post.authorRole}>
+                  {post.author}
+                </a>
+                {post.authorRole ? <span className="text-brand-cocoa/70">· {post.authorRole}</span> : null}
+              </div>
+              {post.authorRoleLong ? <span className="text-brand-cocoa/60">{post.authorRoleLong}</span> : null}
               <span>•</span>
               <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               <span>•</span>
               <span>{post.readTime} read</span>
+              <span>•</span>
+              <div className="flex items-center gap-2 text-brand-cocoa/70">
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold hover:-translate-y-0.5 hover:shadow-soft transition"
+                >
+                  {copied ? 'Link copied' : 'Copy link'}
+                </button>
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(url)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-brand-blush/60 px-3 py-1 text-xs font-semibold hover:-translate-y-0.5 hover:shadow-soft transition"
+                >
+                  Share
+                </a>
+              </div>
             </div>
             <div className="mt-6 overflow-hidden rounded-[2rem] border border-brand-blush/60">
               <img
@@ -166,38 +213,178 @@ export const BlogPostPage = () => {
                 <li>Skim the subheads for quick wins and routines.</li>
               </ul>
               <div className="mt-4">
-                <a
-                  href="/product/lumelle-shower-cap"
-                  className="inline-flex items-center gap-2 rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
-                >
-                  Shop the satin-lined waterproof cap
-                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                </a>
+                {post.productCard ? (
+                  <div className="flex items-center gap-3 rounded-2xl border border-brand-blush/60 bg-white p-3 shadow-soft">
+                    <img
+                      src={post.productCard.image}
+                      alt={post.productCard.title}
+                      className="h-14 w-14 rounded-xl object-cover"
+                      loading="lazy"
+                    />
+                    <div className="flex flex-1 flex-col gap-1 text-left">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold text-brand-cocoa">{post.productCard.title}</span>
+                        {post.productCard.badge ? (
+                          <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-cocoa/80">
+                            {post.productCard.badge}
+                          </span>
+                        ) : null}
+                      </div>
+                      {post.productCard.caption ? (
+                        <p className="text-xs text-brand-cocoa/70">{post.productCard.caption}</p>
+                      ) : null}
+                      <div className="flex items-center gap-2 text-sm font-semibold text-brand-cocoa">
+                        {post.productCard.price ? <span>{post.productCard.price}</span> : null}
+                        <a
+                          href={post.productCard.href}
+                          className="inline-flex items-center gap-1 rounded-full bg-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                        >
+                          Shop now
+                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    href="/product/lumelle-shower-cap"
+                    className="inline-flex items-center gap-2 rounded-full bg-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                  >
+                    Shop the satin-lined waterproof cap
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                  </a>
+                )}
               </div>
             </div>
 
             {/* Body with structured sections */}
+            {post.sections?.length ? (
+              <div className="mb-4 block rounded-xl border border-brand-blush/60 bg-white/90 p-3 text-sm text-brand-cocoa/75 shadow-soft md:hidden">
+                <label className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-cocoa/60">Jump to</label>
+                <select
+                  className="mt-2 w-full rounded-lg border border-brand-blush/60 bg-white px-3 py-2 text-sm text-brand-cocoa outline-none focus:ring-2 focus:ring-brand-cocoa/30"
+                  onChange={(e) => {
+                    const id = e.target.value
+                    if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }}
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select a section
+                  </option>
+                  {post.sections.map((section) => {
+                    const id = slugify(section.heading)
+                    return (
+                      <option key={id} value={id}>
+                        {section.heading}
+                      </option>
+                    )
+                  })}
+                </select>
+              </div>
+            ) : null}
             {post.sections ? (
-              <div className="mt-8 space-y-8 text-brand-cocoa">
-                {post.sections.map((section, idx) => (
-                  <div key={section.heading + idx} className="space-y-3">
-                    <h2 className="font-heading text-2xl text-brand-cocoa">{section.heading}</h2>
-                    {section.paragraphs.map((para, pIdx) => (
-                      <p key={pIdx} className="text-lg leading-relaxed text-brand-cocoa/85">
-                        {para}
-                      </p>
-                    ))}
+              <div className="mt-8 grid gap-8 text-brand-cocoa lg:grid-cols-[220px_1fr]">
+                <aside className="hidden lg:block">
+                  <div className="sticky top-28 rounded-2xl border border-brand-blush/60 bg-white/85 p-4 text-sm text-brand-cocoa/75 shadow-soft">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-cocoa/60">Jump to</p>
+                    <ul className="mt-2 space-y-2">
+                      {post.sections.map((section) => {
+                        const id = slugify(section.heading)
+                        return (
+                          <li key={id}>
+                            <a href={`#${id}`} className="hover:text-brand-cocoa">
+                              {section.heading}
+                            </a>
+                          </li>
+                        )
+                      })}
+                    </ul>
                   </div>
-                ))}
+                </aside>
+                <div className="space-y-10">
+                  {post.sections.map((section, idx) => {
+                    const id = slugify(section.heading)
+                    return (
+                      <article key={section.heading + idx} id={id} className="space-y-4 scroll-mt-24">
+                        <h2 className="font-heading text-2xl text-brand-cocoa">{section.heading}</h2>
+                        {section.paragraphs.map((para, pIdx) => (
+                          <div
+                            key={pIdx}
+                            className="prose prose-lg text-brand-cocoa prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-brand-cocoa prose-li:marker:text-brand-cocoa/60"
+                          >
+                            <Markdown>{para}</Markdown>
+                          </div>
+                        ))}
+                        {section.productCard ? (
+                          <div className="mt-3 flex flex-col gap-2 rounded-2xl border border-brand-blush/60 bg-white p-3 shadow-soft md:flex-row md:items-center">
+                            <img
+                              src={section.productCard.image}
+                              alt={section.productCard.title}
+                              className="h-14 w-14 rounded-xl object-cover"
+                              loading="lazy"
+                            />
+                            <div className="flex flex-1 flex-col gap-1 text-left">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-semibold text-brand-cocoa">{section.productCard.title}</span>
+                                {section.productCard.badge ? (
+                                  <span className="rounded-full bg-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-cocoa/80">
+                                    {section.productCard.badge}
+                                  </span>
+                                ) : null}
+                              </div>
+                              {section.productCard.caption ? (
+                                <p className="text-xs text-brand-cocoa/70">{section.productCard.caption}</p>
+                              ) : null}
+                              <div className="flex items-center gap-2 text-sm font-semibold text-brand-cocoa">
+                                {section.productCard.price ? <span>{section.productCard.price}</span> : null}
+                                <a
+                                  href={section.productCard.href}
+                                  className="inline-flex items-center gap-1 rounded-full bg-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                                >
+                                  Shop now
+                                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        ) : null}
+                        {section.relatedLinks?.length ? (
+                          <div className="mt-2 flex flex-wrap items-center gap-2 text-sm font-semibold text-brand-cocoa/75">
+                            <span className="text-brand-cocoa/60">Related:</span>
+                            {section.relatedLinks.map((link) => (
+                              <a key={link.href} href={link.href} className="underline decoration-brand-cocoa/50 underline-offset-4 hover:text-brand-cocoa">
+                                {link.label}
+                              </a>
+                            ))}
+                          </div>
+                        ) : null}
+                        {section.image ? (
+                          <figure className="mt-3 overflow-hidden rounded-2xl border border-brand-blush/50 bg-white shadow-soft">
+                            <img src={section.image} alt={section.imageAlt ?? section.heading} className="w-full object-cover" loading="lazy" />
+                            {section.imageAlt ? <figcaption className="px-4 py-2 text-sm text-brand-cocoa/70">{section.imageAlt}</figcaption> : null}
+                          </figure>
+                        ) : null}
+                        {section.embedUrl ? (
+                          <div className="relative mt-3 overflow-hidden rounded-2xl border border-brand-blush/50 pb-[56.25%] shadow-soft">
+                            <iframe
+                              src={section.embedUrl}
+                              title={`${section.heading} video`}
+                              className="absolute inset-0 h-full w-full"
+                              loading="lazy"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                          </div>
+                        ) : null}
+                      </article>
+                    )
+                  })}
+                </div>
               </div>
             ) : (
-              <div className="prose prose-lg mt-8 text-brand-cocoa prose-headings:font-heading prose-p:leading-relaxed">
-                {(post.body ?? '')
-                  .split('\n\n')
-                  .filter(Boolean)
-                  .map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))}
+              <div className="prose prose-lg mt-8 text-brand-cocoa prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-brand-cocoa">
+                <Markdown>{post.body ?? ''}</Markdown>
               </div>
             )}
           </div>
@@ -212,11 +399,22 @@ export const BlogPostPage = () => {
         <section className="bg-white">
           <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
             <div className="flex items-center gap-4 rounded-3xl border border-brand-blush/60 bg-brand-blush/15 p-4">
-              <div className="h-12 w-12 rounded-full bg-brand-blush/40 text-center text-lg font-semibold text-brand-cocoa flex items-center justify-center">
+              <a
+                href={post.authorLink || '#'}
+                className="h-12 w-12 rounded-full bg-brand-blush/40 text-center text-lg font-semibold text-brand-cocoa flex items-center justify-center hover:-translate-y-0.5 transition"
+              >
                 {post.author.charAt(0)}
-              </div>
+              </a>
               <div className="space-y-1 text-sm text-brand-cocoa/80">
-                <div className="font-semibold text-brand-cocoa">{post.author}{post.authorRole ? ` · ${post.authorRole}` : ''}</div>
+                <div className="font-semibold text-brand-cocoa">
+                  <a href={post.authorLink || '#'} className="hover:text-brand-cocoa">
+                    {post.author}
+                  </a>
+                  {post.authorRole ? ` · ${post.authorRole}` : ''}
+                </div>
+                {post.authorRoleLong ? (
+                  <div className="text-brand-cocoa/70">{post.authorRoleLong}</div>
+                ) : null}
                 <div>
                   Published {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · Last reviewed {new Date(reviewed).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </div>

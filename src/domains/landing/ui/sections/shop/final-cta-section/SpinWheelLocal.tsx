@@ -53,8 +53,11 @@ export const SpinWheel = ({ prizes = defaultPrizes }: { prizes?: Prize[] }) => {
 
   const uniqueOptions = useMemo(() => {
     const seen = new Set<string>()
+    const hiddenLabels = new Set(['get 10% off'])
+
     return prizes.filter((prize) => {
       const key = prize.label.toLowerCase()
+      if (hiddenLabels.has(key)) return false
       if (seen.has(key)) return false
       seen.add(key)
       return true

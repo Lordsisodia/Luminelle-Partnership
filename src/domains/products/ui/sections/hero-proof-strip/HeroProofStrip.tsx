@@ -16,9 +16,9 @@ export const HeroProofStrip = ({ rating, count, tagline }: Props) => {
 
   return (
     <div className="border-b border-brand-blush/40 bg-white/95">
-      <div className="mx-auto flex flex-col gap-3 px-4 py-5 md:max-w-6xl md:flex-row md:items-center md:justify-between md:px-6 md:gap-4">
-        <div className="text-center text-brand-cocoa md:text-left md:min-w-[260px]">
-          <div className="flex flex-col items-center gap-1 text-sm text-brand-cocoa/80 md:flex-row md:gap-3">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 md:px-6">
+        <div className="text-center text-brand-cocoa md:text-center md:flex md:flex-col md:items-center">
+          <div className="flex flex-col items-center gap-1 text-sm text-brand-cocoa/80 md:flex-row md:gap-3 md:justify-center">
             <StarRating value={rating} size={18} />
             <span className="font-semibold">
               {rating.toFixed(1)} ({count.toLocaleString()}) — {tagline}
@@ -28,6 +28,7 @@ export const HeroProofStrip = ({ rating, count, tagline }: Props) => {
             Source: TikTok Shop + verified store reviews
           </p>
         </div>
+
         <div className="grid w-full gap-3 text-brand-cocoa/80 md:grid-cols-3 md:gap-4">
           {quickFacts.map((fact) => {
             const Icon = fact.icon

@@ -31,8 +31,13 @@ export default defineConfig({
     chunkSizeWarningLimit: 900,
   },
   server: {
-    port: 5173,
+    port: 5174,
     host: true,
+    strictPort: true,
+    hmr: {
+      port: 5174,
+      host: 'localhost',
+    },
     allowedHosts: ['choir-holly-assist-cases.trycloudflare.com', 'localhost'],
   },
 })

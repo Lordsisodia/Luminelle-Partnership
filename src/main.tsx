@@ -21,4 +21,11 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 )
 
-// PWA registration removed to avoid build issues; re-enable when Vite PWA plugin is configured and available.
+// Basic service worker registration for PWA install/offline
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .catch((err) => console.error('SW registration failed', err))
+  })
+}

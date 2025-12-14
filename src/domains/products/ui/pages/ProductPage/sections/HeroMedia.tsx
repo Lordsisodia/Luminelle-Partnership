@@ -30,23 +30,22 @@ type Props = {
 const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
   return (
     <section id="media" className="bg-white">
-      <div className="mx-auto grid max-w-6xl gap-6 px-3 pb-6 pt-6 md:grid-cols-[1.1fr_0.9fr] md:gap-8 md:px-4 md:py-10">
-        <div className="min-w-0">
+      <div className="w-full flex flex-col gap-3">
           <Link
             to="/product/satin-overnight-curler"
-            className="mb-2 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.25 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-cocoa shadow-soft ring-1 ring-brand-peach/50 transition hover:-translate-y-[1px] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/50"
+            className="mb-2 inline-flex w-auto max-w-fit items-center gap-2 rounded-full bg-white px-3.5 py-1.25 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-cocoa shadow-soft ring-1 ring-brand-peach/50 transition hover:-translate-y-[1px] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cocoa/50"
             aria-label="New eyelash curler launched — view the satin overnight curler set"
           >
             <span className="h-2 w-2 rounded-full bg-brand-cocoa" aria-hidden />
             New Eyelash Curler Launched
             <span aria-hidden>→</span>
           </Link>
-          <div className="relative w-full overflow-hidden rounded-[2.25rem] border border-brand-blush/60 bg-white md:flex md:items-center md:justify-center md:bg-brand-blush/20">
+          <div className="relative w-full overflow-hidden rounded-[2rem] border border-brand-blush/60 bg-white md:bg-brand-blush/20">
             {gallery[activeImage]?.startsWith('video://') ? (
               <iframe
                 src={gallery[activeImage].replace('video://', '')}
                 title="Lumelle product video"
-                className="h-[60vh] w-full max-h-[80vh] rounded-[2.5rem] md:max-h-none"
+                className="absolute inset-0 h-full w-full rounded-[2rem]"
                 allowFullScreen
                 loading="lazy"
               />
@@ -57,7 +56,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
                   <img
                     src={sources?.fallback ?? toCdn(gallery[activeImage])}
                     alt="Lumelle product detail"
-                    className="w-full h-auto max-h-[80vh] object-contain md:max-h-none"
+                    className="w-full h-full object-contain"
                     width={960}
                     height={960}
                     draggable="false"
@@ -125,7 +124,6 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
             </div>
           </div>
         </div>
-      </div>
     </section>
   )
 })

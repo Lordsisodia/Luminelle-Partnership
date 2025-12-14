@@ -81,12 +81,12 @@ export const FeatureCallouts = ({
             eyebrow={resolvedHeading.eyebrow}
             title={resolvedHeading.title}
             description={resolvedHeading.description}
-            alignment="left"
+            alignment="center"
           />
-          <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.08fr]">
-            <div className="rounded-3xl border border-brand-peach/50 bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/30 p-4 shadow-[0_25px_70px_rgba(0,0,0,0.08)] backdrop-blur-sm">
-              <div className="overflow-hidden rounded-2xl border border-white/40 bg-white">
-                <div className="relative aspect-[9/16] sm:aspect-[9/16]">
+          <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:items-start lg:justify-center lg:mx-auto lg:max-w-[1100px]">
+            <div className="rounded-3xl border border-brand-peach/50 bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/30 p-4 shadow-[0_25px_70px_rgba(0,0,0,0.08)] backdrop-blur-sm lg:h-full lg:max-w-[440px] lg:mx-auto">
+              <div className="overflow-hidden rounded-2xl border border-white/40 bg-white lg:h-full">
+                <div className="relative aspect-[9/16] sm:aspect-[9/16] lg:h-full lg:aspect-auto">
                   <LazyVisible
                     className="h-full w-full"
                     placeholder={
@@ -108,7 +108,13 @@ export const FeatureCallouts = ({
                         loading="lazy"
                       />
                     ) : (
-                      <img src={media} alt={mediaAlt ?? 'Lumelle shower cap in use'} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                      <img
+                        src={media}
+                        alt={mediaAlt ?? 'Lumelle shower cap in use'}
+                        className="h-full w-full object-cover lg:h-full lg:object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     )}
                   </LazyVisible>
                   <div className="absolute bottom-3 left-3 rounded-full bg-white/85 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-cocoa shadow-soft backdrop-blur">
@@ -126,7 +132,7 @@ export const FeatureCallouts = ({
               </div>
             </div>
 
-            <div className="relative rounded-3xl border border-brand-peach/60 bg-white/85 p-5 shadow-[0_22px_60px_rgba(0,0,0,0.08)] sm:p-6">
+            <div className="relative rounded-3xl border border-brand-peach/60 bg-white/85 p-5 shadow-[0_22px_60px_rgba(0,0,0,0.08)] sm:p-6 lg:max-w-[540px] lg:mx-auto">
               <div className="absolute left-6 top-4 bottom-4 w-px bg-gradient-to-b from-brand-peach/60 via-brand-peach/30 to-transparent" />
               <div className="flex flex-col gap-4">
                 {list.map(({ title, desc, image }, idx) => (

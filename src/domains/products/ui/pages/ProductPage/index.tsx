@@ -150,10 +150,15 @@ export const ProductPage = () => {
     sections?.faq && sections.faq.length > 0
       ? sections.faq
       : config.qa
-  const how =
+  const howRaw =
     sections?.how && sections.how.length > 0
       ? sections.how
       : config.how ?? []
+  const how = howRaw.map((item: any, idx: number) =>
+    typeof item === 'string'
+      ? { title: `Reason ${idx + 1}`, body: item }
+      : item
+  )
   const care =
     sections?.care && sections.care.length > 0
       ? sections.care
@@ -162,7 +167,7 @@ export const ProductPage = () => {
   const featuredTikTokHeading = config.featuredTikTokHeading
 
   return (
-    <MarketingLayout navItems={navItems} primaryLabel="Add to Cart" onPrimaryAction={handleAddToCart} subtitle="Product">
+    <MarketingLayout navItems={navItems} subtitle="Product">
       <Seo
         title={`${productTitle} | Satin-lined waterproof shower cap`}
         description={`${productDesc} • Blocks steam for silk presses, curls, and braids. Free returns in 30 days.`}

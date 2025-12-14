@@ -42,9 +42,18 @@ const qaCap = [
 ]
 
 const howCap = [
-  'Your silk press stays smooth — the cap seals out steam and frizz in daily showers.',
-  'Roomy fit for curls, braids, and bum-length hair without creasing your edges.',
-  'Reusable satin + waterproof core wipes clean in seconds, ready for tomorrow.',
+  {
+    title: 'Steam-proof shine',
+    body: 'Your silk press stays smooth — the cap seals out steam and frizz in daily showers.',
+  },
+  {
+    title: 'Room for every style',
+    body: 'Roomy fit for curls, braids, and bum-length hair without creasing your edges.',
+  },
+  {
+    title: 'Ready again tomorrow',
+    body: 'Reusable satin + waterproof core wipes clean in seconds, ready for tomorrow.',
+  },
 ]
 
 const careCap = [
@@ -142,9 +151,9 @@ const qaCurler = [
 ]
 
 const howCurler = [
-  'Wake up to soft, effortless curls — no heat, no damage.',
-  'Frizz‑free and helps protect your hair from breakage.',
-  'Comfortable to sleep in and easy to wrap in minutes.',
+  { title: 'Heatless, healthy curls', body: 'Wake up to soft, effortless curls — no heat, no damage.' },
+  { title: 'Frizz defense built in', body: 'Frizz‑free and helps protect your hair from breakage.' },
+  { title: 'Sleep-easy design', body: 'Comfortable to sleep in and easy to wrap in minutes.' },
 ]
 
 const careCurler = [

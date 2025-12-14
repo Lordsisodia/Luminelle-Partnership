@@ -22,7 +22,32 @@ export type BlogPost = {
   ogImage?: string
   teaser: string
   body?: string
-  sections?: { heading: string; paragraphs: string[] }[]
+  sections?: {
+    heading: string
+    paragraphs: string[]
+    image?: string
+    imageAlt?: string
+    embedUrl?: string
+    productCard?: {
+      title: string
+      price?: string
+      badge?: string
+      href: string
+      image: string
+      caption?: string
+    }
+    relatedLinks?: { label: string; href: string }[]
+  }[]
   featured?: boolean
   faqs?: { question: string; answer: string }[]
+  productCard?: {
+    title: string
+    price?: string
+    badge?: string
+    href: string
+    image: string
+    caption?: string
+  }
+  authorLink?: string
+  authorRoleLong?: string
 }
