@@ -27,6 +27,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const [active, setActive] = useState(0)
   const [hydrated, setHydrated] = useState(false)
+  const [readyIndexes, setReadyIndexes] = useState<Set<number>>(new Set([0]))
   const dragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 })
 
   const goTo = useCallback(
@@ -95,6 +96,15 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
       })
 
       setActive(closestIdx)
+      setReadyIndexes((prev) => {
+        if (prev.has(closestIdx)) return prev
+        const next = new Set(prev)
+        // keep nearest neighbours warm
+        next.add(closestIdx)
+        next.add(Math.max(0, closestIdx - 1))
+        next.add(Math.min(cards.length - 1, closestIdx + 1))
+        return next
+      })
     }
 
     handleScroll()
@@ -128,6 +138,8 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
             className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-2 sm:px-2 lg:gap-4 lg:px-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing dragging:cursor-grabbing select-none"
           >
             {successStories.map((s) => {
+              const idx = successStories.indexOf(s)
+              const shouldLoad = hydrated && readyIndexes.has(idx)
               return (
                 <article key={s.handle} data-tiktok-card className="min-w-[min(72vw,300px)] snap-center lg:min-w-[min(340px,26vw)]">
                   <LazyVisible
@@ -136,7 +148,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
                     }
                   >
                     <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/40 pb-[158%] shadow-soft bg-black">
-                      {hydrated ? (
+                      {shouldLoad ? (
                         <iframe
                           src={s.embedUrl.includes('lang=') ? s.embedUrl : `${s.embedUrl}&lang=en`}
                           title={`${s.name} TikTok embed`}

@@ -19,6 +19,7 @@ What’s built
 - CI lint: `.github/workflows/ci.yml` runs `npm run lint` (eslint) on PRs/pushes.
 - Audit (report-only): `npm run report:colors` lists remaining raw hex literals in `src/` (excluding `src/archive/` and token files).
 - Audit (contexts): `npm run report:colors:contexts` reports Tailwind `bg-[...gradient...]` and SVG `fill/stroke="#..."` hex literals, grouped by file.
+- Audit snapshots saved (2025-12-15): `audit/raw-colors-2025-12-15.json`, `audit/color-contexts-2025-12-15.json`.
 - Docs bundle (still available): tokens (Lumelle/Noir/Fresh Mint), Style Dictionary config + reference outputs, custom generator, Ajv schema/validator, Tailwind plugin, runtime applier, audit + VRT samples.
 - Plans/guardrails: research checklist, rollout plan, timeline, governance proposal, risk register, comms, acceptance criteria, pilot checklist, VRT plan, codemod plan, per-page token map.
 

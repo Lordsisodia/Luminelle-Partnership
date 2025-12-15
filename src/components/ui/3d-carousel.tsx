@@ -1,7 +1,7 @@
 "use client"
 
-import { memo, useEffect, useLayoutEffect, useMemo, useState } from "react"
-import { motion, useAnimation, useMotionValue, useTransform } from "framer-motion"
+import { memo, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { motion, useAnimation, useMotionValue, useTransform, useReducedMotion } from "framer-motion"
 import { StarRating } from "@ui/components/StarRating"
 
 export const useIsomorphicLayoutEffect =
@@ -79,7 +79,7 @@ const Carousel = memo(
     isCarouselActive: boolean
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
-    const cylinderWidth = isScreenSizeSm ? 1800 : 2500
+    const cylinderWidth = isScreenSizeSm ? 1200 : 1600
     const faceCount = cards.length
     const faceWidth = cylinderWidth / faceCount
     const radius = cylinderWidth / (2 * Math.PI)
@@ -106,6 +106,7 @@ const Carousel = memo(
             rotateY: rotation,
             width: cylinderWidth,
             transformStyle: "preserve-3d",
+            willChange: isCarouselActive ? "transform" : "auto",
           }}
           onDrag={(_, info) =>
             isCarouselActive &&
@@ -128,12 +129,13 @@ const Carousel = memo(
           {cards.map((card, i) => (
             <motion.div
               key={`key-${card.author}-${i}`}
-              className="absolute flex origin-center items-center justify-center rounded-xl bg-white p-3 shadow-soft border border-semantic-accent-cta/50"
+              className="absolute flex origin-center items-center justify-center rounded-xl bg-white p-3 shadow-md border border-semantic-accent-cta/50"
               style={{
                 width: `${faceWidth}px`,
-                maxWidth: isScreenSizeSm ? 280 : 360,
-                height: "170px",
+                maxWidth: isScreenSizeSm ? 240 : 320,
+                height: "160px",
                 transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`,
+                backfaceVisibility: "hidden",
               }}
             >
               <div className="pointer-events-none flex h-full w-full flex-col justify-between rounded-lg bg-white text-center py-2.5 px-2">
@@ -154,16 +156,26 @@ const Carousel = memo(
 )
 
 function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
-  const isCarouselActive = true
+  const prefersReducedMotion = useReducedMotion()
+  const [isVisible, setIsVisible] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!wrapperRef.current || prefersReducedMotion) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "0px 0px -20% 0px", threshold: 0.15 }
+    )
+    observer.observe(wrapperRef.current)
+    return () => observer.disconnect()
+  }, [prefersReducedMotion])
+
+  const isCarouselActive = !prefersReducedMotion && isVisible
   const controls = useAnimation()
   const cards = useMemo(() => (reviews?.length ? reviews : reviewFallbacks), [reviews])
 
-  useEffect(() => {
-    console.log("Cards loaded:", cards)
-  }, [cards])
-
   return (
-    <motion.div layout className="relative">
+    <motion.div layout className="relative" ref={wrapperRef}>
       <div className="relative min-h-[340px] w-full overflow-visible rounded-3xl bg-white pt-8 pb-6 md:min-h-[400px]">
         <Carousel
           controls={controls}

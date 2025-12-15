@@ -22,18 +22,23 @@ export const HeroSection = ({
       className="relative overflow-hidden scroll-mt-24 bg-semantic-legacy-brand-blush/10 pb-20 pt-24 text-semantic-text-primary md:scroll-mt-32 md:pb-24 md:pt-32"
     >
         <div className="absolute inset-0">
-            {slides.map((slide, index) => (
+          {slides.map((slide, index) => (
+            <picture
+              key={slide.id}
+              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${
+                index === activeSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <source media="(min-width: 1024px)" srcSet={slide.backgroundSrcDesktop ?? slide.backgroundSrc} />
               <img
-                key={slide.id}
                 src={slide.backgroundSrc}
                 alt=""
                 aria-hidden="true"
-                className={`absolute inset-0 h-full w-full object-contain object-center md:object-cover transition-opacity duration-700 ${
-                  index === activeSlide ? 'opacity-100' : 'opacity-0'
-                }`}
+                className="h-full w-full max-w-[1800px] object-cover object-center md:h-auto md:w-full md:object-contain md:object-center"
               />
-            ))}
-        <div className="absolute inset-0 bg-semantic-legacy-brand-cocoa/20 md:bg-semantic-legacy-brand-cocoa/50 backdrop-blur-[2px]" />
+            </picture>
+          ))}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/35 via-white/10 to-white/0 md:from-semantic-legacy-brand-blush/18 md:via-white/8" />
       </div>
       <div className="relative">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 px-4 text-center md:items-start md:px-6 md:text-left">

@@ -19,31 +19,17 @@ export const HeroSection = ({
   return (
     <section
       id="hero"
-      className="relative overflow-hidden scroll-mt-24 bg-semantic-legacy-brand-blush/10 pb-20 pt-24 text-semantic-text-primary md:scroll-mt-32 md:pb-24 md:pt-32"
+      className="relative overflow-hidden scroll-mt-20 bg-semantic-legacy-brand-blush/25 pb-20 pt-24 text-semantic-text-primary md:scroll-mt-28 md:pb-24 md:pt-32"
     >
-        <div className="absolute inset-0">
-            {slides.map((slide, index) => (
-              <img
-                key={slide.id}
-                src={slide.backgroundSrc}
-                alt=""
-                aria-hidden="true"
-                className={`absolute inset-0 h-full w-full object-contain object-center md:object-cover transition-opacity duration-700 ${
-                  index === activeSlide ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
-            ))}
-        <div className="absolute inset-0 bg-semantic-legacy-brand-cocoa/20 md:bg-semantic-legacy-brand-cocoa/50 backdrop-blur-[2px]" />
-      </div>
       <div className="relative">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 px-4 text-center md:items-start md:px-6 md:text-left">
-          <span className="inline-flex rounded-full bg-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-white/80 backdrop-blur">
+          <span className="inline-flex rounded-full bg-semantic-legacy-brand-blush/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/70">
             {heroContent.eyebrow}
           </span>
-          <h1 className="font-heading text-4xl leading-tight text-white md:text-5xl">
+          <h1 className="font-heading text-4xl leading-tight text-semantic-text-primary md:text-5xl">
             {heroContent.headline}
           </h1>
-          <p className="max-w-2xl text-lg text-white/80 md:text-xl">
+          <p className="max-w-2xl text-lg text-semantic-text-primary/80 md:text-xl">
             {heroContent.subheadline}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -57,7 +43,7 @@ export const HeroSection = ({
             <button
               type="button"
               onClick={onSecondaryAction}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-3 text-sm font-semibold text-white/80 transition hover:border-white hover:text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-semantic-text-primary/20 px-8 py-3 text-sm font-semibold text-semantic-text-primary/80 transition hover:border-semantic-text-primary/40 hover:text-semantic-text-primary"
             >
               {heroContent.secondaryCta}
             </button>
@@ -66,7 +52,7 @@ export const HeroSection = ({
             {metricBadges.map((metric) => (
               <div
                 key={metric.label}
-                className="rounded-3xl border border-white/40 bg-white/85 px-4 py-5 text-center shadow-soft backdrop-blur"
+                className="rounded-3xl border border-semantic-text-primary/10 bg-white/90 px-4 py-5 text-center shadow-soft backdrop-blur"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
                   {metric.label}
@@ -80,7 +66,7 @@ export const HeroSection = ({
               </div>
             ))}
           </div>
-          <div className="w-full rounded-[2.5rem] border border-white/40 bg-white/90 p-6 text-left shadow-soft backdrop-blur md:max-w-3xl">
+          <div className="w-full rounded-[2.5rem] border border-semantic-text-primary/10 bg-white p-6 text-left shadow-soft backdrop-blur md:max-w-3xl">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
               {currentSlide.imageSrc ? (
                 <div className="relative h-32 w-full overflow-hidden rounded-2xl border border-semantic-accent-cta/40 bg-semantic-legacy-brand-blush/30 md:h-40 md:w-56">
@@ -90,7 +76,6 @@ export const HeroSection = ({
                     aria-hidden="true"
                     className="h-full w-full object-contain object-center"
                   />
-                  <div className="absolute inset-0 bg-semantic-legacy-brand-cocoa/15 backdrop-blur-[1px]" />
                 </div>
               ) : null}
               <div className="flex-1 space-y-2">

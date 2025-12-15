@@ -40,8 +40,9 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 )
 
-// Basic service worker registration for PWA install/offline
-if ('serviceWorker' in navigator) {
+// Basic service worker registration for PWA install/offline.
+// Only enable in production to avoid stale caches during local development.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')

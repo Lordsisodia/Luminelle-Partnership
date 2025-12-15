@@ -161,4 +161,3 @@ main().catch((err) => {
   console.error('Raw color report failed:', err)
   process.exitCode = 1
 })
-

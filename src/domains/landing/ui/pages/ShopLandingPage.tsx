@@ -48,7 +48,7 @@ export const ShopLandingPage = () => {
           <HeroShop config={homeConfig.hero} />
         </section>
         <TrustBar />
-        <ProductSpotlightSection teaser={homeConfig.pdpTeaser} />
+        <ProductSpotlightSection teasers={homeConfig.pdpTeasers ?? [homeConfig.pdpTeaser]} />
         <section id="benefits">
           <BenefitsSection slides={homeConfig.slides} />
         </section>

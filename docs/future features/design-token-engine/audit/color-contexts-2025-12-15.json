@@ -1,0 +1,141 @@
+{
+  "summary": {
+    "scannedFiles": 229,
+    "totalMatches": 9,
+    "filesWithMatches": 3,
+    "byKind": {
+      "svg:fill-hex": 5,
+      "svg:stroke-hex": 3,
+      "tailwind:bg-arbitrary-gradient": 1
+    },
+    "topFiles": [
+      {
+        "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+        "count": 6
+      },
+      {
+        "file": "src/domains/landing/ui/components/demo.tsx",
+        "count": 2
+      },
+      {
+        "file": "src/domains/products/ui/sections/feature-callouts/FeatureCallouts.tsx",
+        "count": 1
+      }
+    ],
+    "topHexes": [
+      {
+        "hex": "#5B3A2E",
+        "count": 3
+      },
+      {
+        "hex": "#C39A8D",
+        "count": 3
+      },
+      {
+        "hex": "#FACC15",
+        "count": 2
+      },
+      {
+        "hex": "#FFF7F3",
+        "count": 1
+      },
+      {
+        "hex": "#FFFFFF",
+        "count": 1
+      }
+    ]
+  },
+  "matches": [
+    {
+      "kind": "svg:stroke-hex",
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 240,
+      "value": "stroke=\"#5B3A2E\"",
+      "hexes": [
+        "#5B3A2E"
+      ],
+      "snippet": "<path d={path(pR)} fill=\"none\" stroke=\"#5B3A2E\" strokeWidth={2} />"
+    },
+    {
+      "kind": "svg:stroke-hex",
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 241,
+      "value": "stroke=\"#C39A8D\"",
+      "hexes": [
+        "#C39A8D"
+      ],
+      "snippet": "<path d={path(pO)} fill=\"none\" stroke=\"#C39A8D\" strokeWidth={2} />"
+    },
+    {
+      "kind": "svg:fill-hex",
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 243,
+      "value": "fill=\"#5B3A2E\"",
+      "hexes": [
+        "#5B3A2E"
+      ],
+      "snippet": "{pR.map((p, i) => (<circle key={`r${i}`} cx={p[0]} cy={p[1]} r={2} fill=\"#5B3A2E\" />))}"
+    },
+    {
+      "kind": "svg:fill-hex",
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 244,
+      "value": "fill=\"#C39A8D\"",
+      "hexes": [
+        "#C39A8D"
+      ],
+      "snippet": "{pO.map((p, i) => (<circle key={`o${i}`} cx={p[0]} cy={p[1]} r={2} fill=\"#C39A8D\" />))}"
+    },
+    {
+      "kind": "svg:fill-hex",
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 247,
+      "value": "fill=\"#5B3A2E\"",
+      "hexes": [
+        "#5B3A2E"
+      ],
+      "snippet": "<rect x={padding} y={8} width={12} height={2} fill=\"#5B3A2E\" /><text x={padding+16} y={12} fontSize=\"10\">Revenue</text>"
+    },
+    {
+      "kind": "svg:fill-hex",
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 248,
+      "value": "fill=\"#C39A8D\"",
+      "hexes": [
+        "#C39A8D"
+      ],
+      "snippet": "<rect x={padding+90} y={8} width={12} height={2} fill=\"#C39A8D\" /><text x={padding+106} y={12} fontSize=\"10\">Orders</text>"
+    },
+    {
+      "kind": "svg:fill-hex",
+      "file": "src/domains/landing/ui/components/demo.tsx",
+      "line": 35,
+      "value": "fill=\"#FACC15\"",
+      "hexes": [
+        "#FACC15"
+      ],
+      "snippet": "fill=\"#FACC15\""
+    },
+    {
+      "kind": "svg:stroke-hex",
+      "file": "src/domains/landing/ui/components/demo.tsx",
+      "line": 36,
+      "value": "stroke=\"#FACC15\"",
+      "hexes": [
+        "#FACC15"
+      ],
+      "snippet": "stroke=\"#FACC15\""
+    },
+    {
+      "kind": "tailwind:bg-arbitrary-gradient",
+      "file": "src/domains/products/ui/sections/feature-callouts/FeatureCallouts.tsx",
+      "line": 78,
+      "value": "bg-[radial-gradient(circle_at_20%_20%,rgba(255,214,194,0.45),transparent_42%),radial-gradient(circle_at_80%_0%,rgba(255,232,220,0.55),transparent_38%),linear-gradient(135deg,#fff7f3,#fff)]",
+      "hexes": [
+        "#FFF7F3",
+        "#FFFFFF"
+      ],
+      "snippet": "<div className=\"pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,214,194,0.45),transparent_42%),radial-gradient(circle_at_80%_0%,rgba(255,232,220,0.55),transparent_38%),linear-gradient(135deg,#fff7f3,#fff)]\" />"
+    }
+  ]
+}

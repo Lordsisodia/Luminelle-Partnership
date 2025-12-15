@@ -29,6 +29,7 @@
   - Token validation: added `npm run validate:tokens` (script `scripts/validate-design-tokens.mjs`) and wired it into `.github/workflows/ci.yml` to fail fast on invalid JSON or unresolved `{refs}`.
   - Audit tooling: added `npm run report:colors` (script `scripts/report-raw-color-usage.mjs`) to inventory remaining raw hex literals in `src/` (excluding `src/archive/` + `src/theme/`) for the next tokenization wave.
   - Audit tooling (contexts): added `npm run report:colors:contexts` (script `scripts/report-color-contexts.mjs`) to specifically track Tailwind arbitrary gradients (`bg-[...gradient...]`) and SVG `fill/stroke="#..."` hex usage, grouped by file.
+  - Audit snapshots (2025-12-15): saved `audit/raw-colors-2025-12-15.json` and `audit/color-contexts-2025-12-15.json` for drift tracking (report-only, no enforcement).
   - Kept raw hex gradients intact for now (no tokenization yet) to avoid unintended visual diffs.
 
 Next queued

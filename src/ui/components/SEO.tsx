@@ -10,12 +10,13 @@ interface SEOProps {
 }
 
 export function SEO({ title, description, image, url, type = 'website', jsonLd }: SEOProps) {
-    const siteTitle = 'Lumelle';
+    // Brand mark intentionally includes the trademark symbol for social previews
+    const siteTitle = 'LUMELLE™';
     const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 
-    // Default to the main hero image if no specific image is provided
-    const metaImage = image || 'https://lumelle.com/uploads/luminele/hero-main.webp';
-    const metaDescription = description || 'Luxury satin-lined, waterproof shower cap that keeps silk presses, curls, and braids frizz-free.';
+    // Default to brand mark on pink background if no specific image is provided
+    const metaImage = image || 'https://lumelle.com/icons/icon-512.png';
+    const metaDescription = description || 'Luxury satin hair essentials designed for effortless, protective, everyday self-care.';
     const metaUrl = url || window.location.href;
 
     return (

@@ -7,6 +7,7 @@ export type MetricBadge = {
 export type HeroSpotlightSlide = {
   id: string
   backgroundSrc: string
+  backgroundSrcDesktop?: string
   label: string
   title: string
   description: string
@@ -88,8 +89,9 @@ export const heroContent = {
 export const heroSpotlightSlides: HeroSpotlightSlide[] = [
   {
     id: 'hero-product',
-    backgroundSrc: '/uploads/luminele/photo-for-page-3v2.webp',
-    imageSrc: '/uploads/luminele/photo-for-page-3v2.webp',
+    backgroundSrc: '/images/hero.jpg',
+    backgroundSrcDesktop: '/uploads/luminele/product-main.webp',
+    imageSrc: '/images/hero.jpg',
     label: 'Creator highlight',
     title: 'Meet the Lumelle cap',
     description: 'See the exact cap creators love—full shot, no crop.',
@@ -178,22 +180,22 @@ export const storyCards: StoryCard[] = [
     title: 'Our Vision',
     headline: 'Luxury self-care, made iconic',
     body: 'We pair heritage beauty craftsmanship with creator-first design so every launch feels like a brand moment.',
-    mediaAlt: 'Founder presenting Lumelle products',
-    imageSrc: '/images/brand-lifestyle.jpg',
+    mediaAlt: 'Creator wearing the satin bonnet and heatless curler',
+    imageSrc: '/uploads/curler/5.webp',
   },
   {
     title: 'Product Proof',
     headline: 'Built for creators and their audiences',
     body: 'Waterproof, satin-lined, and TikTok beloved—every detail photographs beautifully, ships quickly, and delivers results.',
-    mediaAlt: 'Close-up of Lumelle shower cap details',
-    imageSrc: '/images/product.jpg',
+    mediaAlt: 'Creator demonstrating the heatless curler set',
+    imageSrc: '/uploads/curler/6.webp',
   },
   {
     title: 'Community Wins',
     headline: 'Creators growing together',
     body: 'Weekly labs, analytics drops, and peer breakdowns keep you ahead of trends before they explode.',
-    mediaAlt: 'Creators celebrating Lumelle milestone',
-    imageSrc: '/images/community.jpg',
+    mediaAlt: 'Creator showing finished curls from the curler set',
+    imageSrc: '/uploads/curler/3.webp',
   },
 ]
 

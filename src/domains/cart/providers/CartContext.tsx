@@ -124,7 +124,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     setCheckoutUrl(cart.checkoutUrl ? maybeProxyCheckoutUrl(cart.checkoutUrl) : undefined)
     const mapped: CartItem[] = cart.lines.map((l) => ({
       id: l.merchandise.id,
-      title: `${l.merchandise.product.title} – ${l.merchandise.title}`,
+      title: l.merchandise.product.title,
       price: Number(l.merchandise.price.amount),
       qty: l.quantity,
       lineId: l.id,

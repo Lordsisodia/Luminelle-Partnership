@@ -34,10 +34,10 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
           <Link
             to="/product/satin-overnight-curler"
             className="mb-2 inline-flex w-auto max-w-fit items-center gap-2 rounded-full bg-white px-3.5 py-1.25 text-[11px] font-semibold uppercase tracking-[0.22em] text-semantic-text-primary shadow-soft ring-1 ring-semantic-accent-cta/50 transition hover:-translate-y-[1px] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/50"
-            aria-label="New eyelash curler launched — view the satin overnight curler set"
+            aria-label="New heatless curler launched — view the satin overnight heatless curler set"
           >
             <span className="h-2 w-2 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden />
-            New Eyelash Curler Launched
+            New Heatless Curler Launched
             <span aria-hidden>→</span>
           </Link>
           <div className="relative w-full overflow-hidden rounded-[2rem] border border-semantic-legacy-brand-blush/60 bg-white md:bg-semantic-legacy-brand-blush/20">
@@ -61,7 +61,6 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect }: Props) => {
                     height={960}
                     draggable="false"
                     loading="eager"
-                    fetchPriority="high"
                     decoding="async"
                   />
                 )

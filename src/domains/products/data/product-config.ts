@@ -183,7 +183,7 @@ const curlerConfig: ProductConfig = {
   handle: 'satin-overnight-curler',
   fallbackItemId: 'satin-overnight-curler-set',
   fallbackVariantId: 'gid://shopify/ProductVariant/56852779696502',
-  defaultTitle: 'Lumelle Satin Overnight Curler Set',
+  defaultTitle: 'Satin Overnight Heatless Curler Set',
   defaultSubtitle: 'Comfortable overnight curls, zero damage.',
   defaultPrice: 16.99,
   compareAtPrice: 21.99,

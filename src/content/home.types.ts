@@ -58,6 +58,7 @@ export type HomeConfig = {
     href: string
     ctaLabel: string
   }
+  pdpTeasers?: HomeConfig['pdpTeaser'][]
   faq: { q: string; a: string }[]
   stats: { value: string; label: string; helper?: string }[]
   comparison: { feature: string; lumelle: string; other: string }[]

@@ -1,0 +1,382 @@
+{
+  "summary": {
+    "scannedFiles": 229,
+    "totalOccurrences": 41,
+    "uniqueColors": 21,
+    "topColors": [
+      {
+        "hex": "#FFF8F4",
+        "count": 4
+      },
+      {
+        "hex": "#F7B8A0",
+        "count": 4
+      },
+      {
+        "hex": "#5B3A2E",
+        "count": 3
+      },
+      {
+        "hex": "#C39A8D",
+        "count": 3
+      },
+      {
+        "hex": "#8B5CF6",
+        "count": 3
+      },
+      {
+        "hex": "#E0724A",
+        "count": 3
+      },
+      {
+        "hex": "#9938CA",
+        "count": 3
+      },
+      {
+        "hex": "#FACC15",
+        "count": 2
+      },
+      {
+        "hex": "#F9A58A",
+        "count": 2
+      },
+      {
+        "hex": "#FDD9C3",
+        "count": 2
+      },
+      {
+        "hex": "#FDEBE3",
+        "count": 2
+      },
+      {
+        "hex": "#FFF0E8",
+        "count": 1
+      },
+      {
+        "hex": "#FFE9DD",
+        "count": 1
+      },
+      {
+        "hex": "#F9D8D0",
+        "count": 1
+      },
+      {
+        "hex": "#FCEBE3",
+        "count": 1
+      },
+      {
+        "hex": "#FDE7DA",
+        "count": 1
+      },
+      {
+        "hex": "#F4C7B7",
+        "count": 1
+      },
+      {
+        "hex": "#FFF7F3",
+        "count": 1
+      },
+      {
+        "hex": "#FFFFFF",
+        "count": 1
+      },
+      {
+        "hex": "#FFF6F2",
+        "count": 1
+      },
+      {
+        "hex": "#FFE8DC",
+        "count": 1
+      }
+    ]
+  },
+  "matches": [
+    {
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 240,
+      "hex": "#5B3A2E",
+      "normalized": "#5B3A2E",
+      "snippet": "<path d={path(pR)} fill=\"none\" stroke=\"#5B3A2E\" strokeWidth={2} />"
+    },
+    {
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 241,
+      "hex": "#C39A8D",
+      "normalized": "#C39A8D",
+      "snippet": "<path d={path(pO)} fill=\"none\" stroke=\"#C39A8D\" strokeWidth={2} />"
+    },
+    {
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 243,
+      "hex": "#5B3A2E",
+      "normalized": "#5B3A2E",
+      "snippet": "{pR.map((p, i) => (<circle key={`r${i}`} cx={p[0]} cy={p[1]} r={2} fill=\"#5B3A2E\" />))}"
+    },
+    {
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 244,
+      "hex": "#C39A8D",
+      "normalized": "#C39A8D",
+      "snippet": "{pO.map((p, i) => (<circle key={`o${i}`} cx={p[0]} cy={p[1]} r={2} fill=\"#C39A8D\" />))}"
+    },
+    {
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 247,
+      "hex": "#5B3A2E",
+      "normalized": "#5B3A2E",
+      "snippet": "<rect x={padding} y={8} width={12} height={2} fill=\"#5B3A2E\" /><text x={padding+16} y={12} fontSize=\"10\">Revenue</text>"
+    },
+    {
+      "file": "src/domains/admin/ui/pages/AnalyticsPage.tsx",
+      "line": 248,
+      "hex": "#C39A8D",
+      "normalized": "#C39A8D",
+      "snippet": "<rect x={padding+90} y={8} width={12} height={2} fill=\"#C39A8D\" /><text x={padding+106} y={12} fontSize=\"10\">Orders</text>"
+    },
+    {
+      "file": "src/domains/brand/ui/pages/BrandStoryPage.tsx",
+      "line": 65,
+      "hex": "#fff8f4",
+      "normalized": "#FFF8F4",
+      "snippet": "<section className=\"bg-gradient-to-b from-[#fff8f4] via-white to-[#fff8f4]\">"
+    },
+    {
+      "file": "src/domains/brand/ui/pages/BrandStoryPage.tsx",
+      "line": 65,
+      "hex": "#fff8f4",
+      "normalized": "#FFF8F4",
+      "snippet": "<section className=\"bg-gradient-to-b from-[#fff8f4] via-white to-[#fff8f4]\">"
+    },
+    {
+      "file": "src/domains/brand/ui/pages/BrandStoryPage.tsx",
+      "line": 232,
+      "hex": "#fff0e8",
+      "normalized": "#FFF0E8",
+      "snippet": "<div className=\"mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-semantic-accent-cta/50 bg-gradient-to-r from-[#fff0e8] via-white to-[#ffe9dd] p-8 shadow-[0_22px_60px_rgba(0,0,0,0.08)]\">"
+    },
+    {
+      "file": "src/domains/brand/ui/pages/BrandStoryPage.tsx",
+      "line": 232,
+      "hex": "#ffe9dd",
+      "normalized": "#FFE9DD",
+      "snippet": "<div className=\"mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-semantic-accent-cta/50 bg-gradient-to-r from-[#fff0e8] via-white to-[#ffe9dd] p-8 shadow-[0_22px_60px_rgba(0,0,0,0.08)]\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/demo.tsx",
+      "line": 35,
+      "hex": "#FACC15",
+      "normalized": "#FACC15",
+      "snippet": "fill=\"#FACC15\""
+    },
+    {
+      "file": "src/domains/landing/ui/components/demo.tsx",
+      "line": 36,
+      "hex": "#FACC15",
+      "normalized": "#FACC15",
+      "snippet": "stroke=\"#FACC15\""
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 26,
+      "hex": "#8B5CF6",
+      "normalized": "#8B5CF6",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 26,
+      "hex": "#E0724A",
+      "normalized": "#E0724A",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 26,
+      "hex": "#9938CA",
+      "normalized": "#9938CA",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 45,
+      "hex": "#8B5CF6",
+      "normalized": "#8B5CF6",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 45,
+      "hex": "#E0724A",
+      "normalized": "#E0724A",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 45,
+      "hex": "#9938CA",
+      "normalized": "#9938CA",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 64,
+      "hex": "#8B5CF6",
+      "normalized": "#8B5CF6",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 64,
+      "hex": "#E0724A",
+      "normalized": "#E0724A",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/components/testimonial.tsx",
+      "line": 64,
+      "hex": "#9938CA",
+      "normalized": "#9938CA",
+      "snippet": "<p className=\"bg-gradient-to-r from-[#8B5CF6] via-[#E0724A] to-[#9938CA] bg-clip-text text-sm font-medium text-transparent\">"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/FinalCtaSection.tsx",
+      "line": 6,
+      "hex": "#F9D8D0",
+      "normalized": "#F9D8D0",
+      "snippet": "<div className=\"mx-auto max-w-5xl rounded-[3rem] border border-semantic-accent-cta/40 bg-gradient-to-br from-[#F9D8D0] via-[#FCEBE3] to-[#FDE7DA] p-8 text-center shadow-[0_25px_80px_rgba(249,165,138,0.35)] md:p-12\">"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/FinalCtaSection.tsx",
+      "line": 6,
+      "hex": "#FCEBE3",
+      "normalized": "#FCEBE3",
+      "snippet": "<div className=\"mx-auto max-w-5xl rounded-[3rem] border border-semantic-accent-cta/40 bg-gradient-to-br from-[#F9D8D0] via-[#FCEBE3] to-[#FDE7DA] p-8 text-center shadow-[0_25px_80px_rgba(249,165,138,0.35)] md:p-12\">"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/FinalCtaSection.tsx",
+      "line": 6,
+      "hex": "#FDE7DA",
+      "normalized": "#FDE7DA",
+      "snippet": "<div className=\"mx-auto max-w-5xl rounded-[3rem] border border-semantic-accent-cta/40 bg-gradient-to-br from-[#F9D8D0] via-[#FCEBE3] to-[#FDE7DA] p-8 text-center shadow-[0_25px_80px_rgba(249,165,138,0.35)] md:p-12\">"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 16,
+      "hex": "#F9A58A",
+      "normalized": "#F9A58A",
+      "snippet": "{ label: 'Get 5% off', helper: 'Any pack', color: '#F9A58A' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 17,
+      "hex": "#F4C7B7",
+      "normalized": "#F4C7B7",
+      "snippet": "{ label: 'Get 10% off', helper: 'Any pack', color: '#F4C7B7' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 18,
+      "hex": "#FDD9C3",
+      "normalized": "#FDD9C3",
+      "snippet": "{ label: 'Free shipping', helper: 'UK & EU', color: '#FDD9C3' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 19,
+      "hex": "#F7B8A0",
+      "normalized": "#F7B8A0",
+      "snippet": "{ label: 'Get a free cap', helper: 'Lucky you', color: '#F7B8A0' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 20,
+      "hex": "#F9A58A",
+      "normalized": "#F9A58A",
+      "snippet": "{ label: 'Get 5% off', helper: 'Any pack', color: '#F9A58A' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 21,
+      "hex": "#F7B8A0",
+      "normalized": "#F7B8A0",
+      "snippet": "{ label: '10% + free shipping', helper: 'Best value', color: '#F7B8A0' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 22,
+      "hex": "#FDD9C3",
+      "normalized": "#FDD9C3",
+      "snippet": "{ label: 'Free shipping', helper: 'UK & EU', color: '#FDD9C3' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 23,
+      "hex": "#F7B8A0",
+      "normalized": "#F7B8A0",
+      "snippet": "{ label: 'Get a free cap', helper: 'Lucky you', color: '#F7B8A0' },"
+    },
+    {
+      "file": "src/domains/landing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx",
+      "line": 29,
+      "hex": "#F7B8A0",
+      "normalized": "#F7B8A0",
+      "snippet": "color: '#F7B8A0',"
+    },
+    {
+      "file": "src/domains/products/ui/sections/feature-callouts/FeatureCallouts.tsx",
+      "line": 78,
+      "hex": "#fff7f3",
+      "normalized": "#FFF7F3",
+      "snippet": "<div className=\"pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,214,194,0.45),transparent_42%),radial-gradient(circle_at_80%_0%,rgba(255,232,220,0.55),transparent_38%),linear-gradient(135deg,#fff7f3,#fff)]\" />"
+    },
+    {
+      "file": "src/domains/products/ui/sections/feature-callouts/FeatureCallouts.tsx",
+      "line": 78,
+      "hex": "#fff",
+      "normalized": "#FFFFFF",
+      "snippet": "<div className=\"pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,214,194,0.45),transparent_42%),radial-gradient(circle_at_80%_0%,rgba(255,232,220,0.55),transparent_38%),linear-gradient(135deg,#fff7f3,#fff)]\" />"
+    },
+    {
+      "file": "src/domains/products/ui/sections/feature-callouts/FeatureCallouts.tsx",
+      "line": 141,
+      "hex": "#FFF6F2",
+      "normalized": "#FFF6F2",
+      "snippet": "className=\"relative flex gap-4 rounded-2xl border border-semantic-accent-cta/60 bg-gradient-to-br from-[#FFF6F2] via-white to-[#FFE8DC] p-4 shadow-[0_10px_26px_rgba(0,0,0,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]\""
+    },
+    {
+      "file": "src/domains/products/ui/sections/feature-callouts/FeatureCallouts.tsx",
+      "line": 141,
+      "hex": "#FFE8DC",
+      "normalized": "#FFE8DC",
+      "snippet": "className=\"relative flex gap-4 rounded-2xl border border-semantic-accent-cta/60 bg-gradient-to-br from-[#FFF6F2] via-white to-[#FFE8DC] p-4 shadow-[0_10px_26px_rgba(0,0,0,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]\""
+    },
+    {
+      "file": "src/domains/products/ui/sections/featured-tik-tok/FeaturedTikTok.tsx",
+      "line": 121,
+      "hex": "#FDEBE3",
+      "normalized": "#FDEBE3",
+      "snippet": "<div className=\"mt-6 rounded-3xl border border-semantic-accent-cta/40 bg-gradient-to-r from-[#FDEBE3] via-white to-[#FDEBE3] p-4 shadow-soft\">"
+    },
+    {
+      "file": "src/domains/products/ui/sections/featured-tik-tok/FeaturedTikTok.tsx",
+      "line": 121,
+      "hex": "#FDEBE3",
+      "normalized": "#FDEBE3",
+      "snippet": "<div className=\"mt-6 rounded-3xl border border-semantic-accent-cta/40 bg-gradient-to-r from-[#FDEBE3] via-white to-[#FDEBE3] p-4 shadow-soft\">"
+    },
+    {
+      "file": "src/domains/rewards/ui/pages/RewardsPage.tsx",
+      "line": 319,
+      "hex": "#fff8f4",
+      "normalized": "#FFF8F4",
+      "snippet": "<section className=\"bg-gradient-to-b from-[#fff8f4] via-white to-[#fff8f4]\">"
+    },
+    {
+      "file": "src/domains/rewards/ui/pages/RewardsPage.tsx",
+      "line": 319,
+      "hex": "#fff8f4",
+      "normalized": "#FFF8F4",
+      "snippet": "<section className=\"bg-gradient-to-b from-[#fff8f4] via-white to-[#fff8f4]\">"
+    }
+  ]
+}

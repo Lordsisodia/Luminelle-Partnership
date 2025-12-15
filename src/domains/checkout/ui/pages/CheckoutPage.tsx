@@ -8,7 +8,7 @@ import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } fro
 import { useUser } from '@clerk/clerk-react'
 import { useAuth as useAppAuth } from '@auth/ui/providers/AuthContext'
 
-const FREE_SHIP_THRESHOLD = 40
+const FREE_SHIP_THRESHOLD = 19.99
 const STANDARD_SHIPPING = 3.95
 const steps = ['Review']
 

@@ -57,11 +57,52 @@ export type HomeConfig = {
     href: string
     ctaLabel: string
   }
+  pdpTeasers?: HomeConfig['pdpTeaser'][]
   faq: { q: string; a: string }[]
   stats: { value: string; label: string; helper?: string }[]
   comparison: { feature: string; lumelle: string; other: string }[]
   finalCta: { headline: string; subhead: string; bullets: string[]; ctaLabel: string; ctaHref: string }
   mainCreatorClip: MainCreatorClip
+}
+
+const pdpTeaserCap: HomeConfig['pdpTeaser'] = {
+  title: 'Lumelle Shower Cap',
+  subtitle: 'Creator-loved protection for every style',
+  description:
+    'Dual-layer satin with a waterproof core keeps silk presses, curls, and braids flawless through every steamy shower.',
+  rating: 4.9,
+  reviews: 1240,
+  pills: ['No-frizz seal', 'Luxury feel', 'Reusable + eco'],
+  price: '£14.99 (was £19.99)',
+  bullets: [
+    'Reusable waterproof',
+    'Satin lined',
+    'Large wide shower cap',
+    'Adjustable',
+  ],
+  image: '/uploads/luminele/page9-image.webp',
+  href: '/product/lumelle-shower-cap',
+  ctaLabel: 'Shop the cap',
+}
+
+const pdpTeaserCurler: HomeConfig['pdpTeaser'] = {
+  title: 'Satin Overnight Heatless Curler Set',
+  subtitle: 'Wake up to curls—no heat, no damage',
+  description:
+    'A satin-wrapped rod + bonnet set designed for smooth, bouncy curls overnight—without heat damage.',
+  rating: 4.8,
+  reviews: 50,
+  pills: ['Heatless curls', 'Overnight set', 'Satin smooth'],
+  price: '£16.99 (was £21.99)',
+  bullets: [
+    'Satin heatless curling rod',
+    'Luxury satin bonnet',
+    '2× matching satin scrunchies',
+    'Claw clip',
+  ],
+  image: '/uploads/curler/1.webp',
+  href: '/product/satin-overnight-curler',
+  ctaLabel: 'Shop the curler',
 }
 
 export const homeConfig: HomeConfig = {
@@ -73,7 +114,7 @@ export const homeConfig: HomeConfig = {
     offerChip: 'Buy 2, save 10%',
     secondaryCtaLabel: 'Join WhatsApp',
     secondaryCtaHref: '/creators',
-    image: '/uploads/luminele/hero-main-960.webp',
+    image: '/uploads/luminele/product-main.webp',
     bgImage: '/uploads/luminele/hero-main-960.webp',
     objectPosition: 'center 30%',
     objectFit: 'cover',
@@ -284,25 +325,8 @@ export const homeConfig: HomeConfig = {
       body: 'Hair stays shiny even on wash day.',
     },
   ],
-  pdpTeaser: {
-    title: 'Lumelle Shower Cap',
-    subtitle: 'Creator-loved protection for every style',
-    description:
-      'Dual-layer satin with a waterproof core keeps silk presses, curls, and braids flawless through every steamy shower.',
-    rating: 4.9,
-    reviews: 1240,
-    pills: ['No-frizz seal', 'Luxury feel', 'Reusable + eco'],
-    price: '£14.99 (was £19.99)',
-    bullets: [
-      'Reusable waterproof',
-      'Satin lined',
-      'Large wide shower cap',
-      'Adjustable',
-    ],
-    image: '/uploads/luminele/page9-image.webp',
-    href: '/product/lumelle-shower-cap',
-    ctaLabel: 'Shop the cap',
-  },
+  pdpTeaser: pdpTeaserCap,
+  pdpTeasers: [pdpTeaserCap, pdpTeaserCurler],
   faq: [
     {
       q: 'Will it fit my hair?',

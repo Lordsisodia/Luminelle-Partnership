@@ -5,7 +5,7 @@ import { useCart } from '@cart/providers/CartContext'
 import { setNoIndex } from '@/lib/seo'
 import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
 
-const FREE_SHIP_THRESHOLD = 40
+const FREE_SHIP_THRESHOLD = 19.99
 const STANDARD_SHIPPING = 3.95
 
 const EmptyCartState = () => (
