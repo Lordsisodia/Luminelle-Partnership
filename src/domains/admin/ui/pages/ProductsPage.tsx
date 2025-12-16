@@ -689,7 +689,7 @@ export default function ProductsPage() {
           {product.creators_in_action.map((vid, idx) => (
             <div key={idx} className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3">
               <TextInput
-                value{vid.embed_url}
+                value={vid.embed_url}
                 onChange={(v) =>
                   setProduct((p) => ({
                     ...p,

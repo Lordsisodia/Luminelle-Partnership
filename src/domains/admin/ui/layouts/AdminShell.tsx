@@ -11,7 +11,6 @@ import {
   Image as ImageIcon,
   Globe2,
   BarChart3,
-  Wand2,
   History,
 } from 'lucide-react'
 
