@@ -21,17 +21,27 @@ function extractNoteAttributes(body: any): Record<string, string> {
 export const onRequest: PagesFunction = async ({ request, env, waitUntil }) => {
   if (request.method !== 'POST') return methodNotAllowed(['POST'])
 
-  const secret = env.SHOPIFY_WEBHOOK_SECRET || env.SHOPIFY_API_SECRET || ''
-  if (!secret) return text('Missing SHOPIFY_WEBHOOK_SECRET', { status: 500 })
-
-  const hmacHeader = request.headers.get('x-shopify-hmac-sha256')?.trim() || ''
+  const hmacHeader =
+    request.headers.get('x-shopify-hmac-sha256')?.trim() || request.headers.get('X-Shopify-Hmac-Sha256')?.trim() || ''
   if (!hmacHeader) return text('Missing HMAC', { status: 401 })
 
   const rawBody = await request.text().catch(() => '')
   if (!rawBody) return text('Missing body', { status: 400 })
 
-  const computed = await hmacSha256Base64(secret, rawBody)
-  if (!safeEqual(computed, hmacHeader)) return text('Invalid HMAC', { status: 401 })
+  // Shopify signs webhook payloads with the app secret (`SHOPIFY_API_SECRET`).
+  // Some deployments historically used a separate env var name (`SHOPIFY_WEBHOOK_SECRET`) which
+  // may or may not match. To avoid an env mismatch silently breaking all webhooks, accept either.
+  const apiSecret = env.SHOPIFY_API_SECRET || ''
+  const webhookSecret = env.SHOPIFY_WEBHOOK_SECRET || ''
+  if (!apiSecret && !webhookSecret) return text('Missing Shopify webhook secret', { status: 500 })
+
+  const computedApi = apiSecret ? await hmacSha256Base64(apiSecret, rawBody) : null
+  const computedWebhook =
+    webhookSecret && webhookSecret !== apiSecret ? await hmacSha256Base64(webhookSecret, rawBody) : null
+  const ok = Boolean(
+    (computedApi && safeEqual(computedApi, hmacHeader)) || (computedWebhook && safeEqual(computedWebhook, hmacHeader)),
+  )
+  if (!ok) return text('Invalid HMAC', { status: 401 })
 
   let body: any
   try {

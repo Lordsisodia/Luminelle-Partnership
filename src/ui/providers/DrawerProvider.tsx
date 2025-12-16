@@ -4,6 +4,7 @@ import { UserRound, ArrowRight } from 'lucide-react'
 import { useSignIn, useUser } from '@clerk/clerk-react'
 import { useCart } from '@cart/providers/CartContext'
 import { useAuth } from '@auth/ui/providers/AuthContext'
+import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
 import { DrawerContext } from './DrawerContext'
 
 type DrawerProviderProps = PropsWithChildren<{
@@ -27,7 +28,7 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
   const SHOW_REWARDS = false
   const SHOW_LOYALTY = false
 
-  const { items, qty, setQty, remove, add } = useCart()
+  const { items, qty, setQty, remove, add, checkoutUrl, setAttributes } = useCart()
   const { signedIn } = useAuth()
   const location = useLocation()
   const { isLoaded: signInLoaded, signIn } = useSignIn()
@@ -75,6 +76,23 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
     const options = [87, 121, 205, 240, 310, 480]
     return options[Math.floor(Math.random() * options.length)]
   }, [])
+
+  const [redirecting, setRedirecting] = useState(false)
+  const beginCheckout = useCallback(async () => {
+    if (!checkoutUrl || redirecting) return
+    setRedirecting(true)
+    captureEvent('begin_checkout', { source: 'drawer', href: checkoutUrl })
+    try {
+      await initPosthogOnce()
+      const attrs = buildCheckoutAttributionAttributes()
+      await Promise.race([
+        setAttributes?.(attrs),
+        new Promise((resolve) => setTimeout(resolve, 800)),
+      ])
+    } finally {
+      window.location.href = checkoutUrl
+    }
+  }, [checkoutUrl, redirecting, setAttributes])
   const loyaltyPoints = SHOW_LOYALTY
     ? useMemo(() => {
         const raw = user?.publicMetadata?.loyaltyPoints
@@ -126,7 +144,7 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
             loading="lazy"
             decoding="async"
           />
-          <div className="flex-1 text-left">
+          <div className="flex-1 text-left pr-16">
             <div className="text-sm font-semibold text-semantic-text-primary leading-tight">{p.title}</div>
             <div className="text-[11px] text-semantic-text-primary/70">
               {rating.toFixed(1)} ★ · {reviews} reviews
@@ -138,7 +156,7 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
           </div>
           <button
             onClick={() => add({ id: p.variantId, title: p.title, price: p.price }, 1)}
-            className="absolute right-3 top-3 rounded-full border border-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-semantic-legacy-brand-cocoa hover:bg-semantic-legacy-brand-blush/30"
+            className="absolute right-3 top-1/2 -translate-y-1/2 transform rounded-full border border-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-semantic-legacy-brand-cocoa hover:bg-semantic-legacy-brand-blush/30"
           >
             Add
           </button>
@@ -547,11 +565,6 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                                     className="inline-flex w-full items-center justify-between gap-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/20"
                                   >
                                     <span className="text-sm font-semibold">Qty: {it.qty}</span>
-                                    {discountForQty(it.qty) > 0 ? (
-                                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary">
-                                        Save {discountForQty(it.qty)}%
-                                      </span>
-                                    ) : null}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                                   </button>
                                   {qtyOpen === it.id ? (
@@ -626,9 +639,10 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                 </div>
                 <button
                   className="mt-1 w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
-                  onClick={() => track('cart_checkout')}
+                  disabled={!checkoutUrl || redirecting || items.length === 0}
+                  onClick={beginCheckout}
                 >
-                  Checkout
+                  {redirecting ? 'Redirecting…' : 'Checkout'}
                 </button>
               </div>
             ) : null}

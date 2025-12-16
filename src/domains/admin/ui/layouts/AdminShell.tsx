@@ -2,26 +2,38 @@ import { useEffect, useMemo, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { setNoIndexNoFollow } from '@/lib/seo'
 import { useAuth } from '@auth/ui/providers/AuthContext'
+import type { LucideIcon } from 'lucide-react'
+import {
+  LayoutDashboard,
+  FileText,
+  Boxes,
+  PenLine,
+  Image as ImageIcon,
+  Globe2,
+  BarChart3,
+  Wand2,
+  History,
+} from 'lucide-react'
 
 type NavItem = {
   label: string
   to: string
   group: 'Core' | 'Content' | 'Tools'
+  icon: LucideIcon
 }
 
 const navItems: NavItem[] = [
-  { group: 'Core', label: 'Dashboard', to: '/admin' },
-  { group: 'Content', label: 'Pages', to: '/admin/pages' },
-  { group: 'Content', label: 'Products', to: '/admin/products' },
-  { group: 'Content', label: 'Blogs', to: '/admin/blogs' },
-  { group: 'Content', label: 'Media', to: '/admin/media' },
-  { group: 'Content', label: 'Globals', to: '/admin/globals' },
-  { group: 'Tools', label: 'Analytics', to: '/admin/analytics' },
-  { group: 'Tools', label: 'Product content', to: '/admin/content' },
-  { group: 'Tools', label: 'Activity', to: '/admin/activity' },
+  { group: 'Core', label: 'Dashboard', to: '/admin', icon: LayoutDashboard },
+  { group: 'Content', label: 'Products', to: '/admin/products', icon: Boxes },
+  { group: 'Content', label: 'Blogs', to: '/admin/blogs', icon: PenLine },
+  { group: 'Content', label: 'Media', to: '/admin/media', icon: ImageIcon },
+  { group: 'Content', label: 'Pages', to: '/admin/pages', icon: FileText },
+  { group: 'Content', label: 'Globals (nav, footer, etc.)', to: '/admin/globals', icon: Globe2 },
+  { group: 'Tools', label: 'Analytics', to: '/admin/analytics', icon: BarChart3 },
+  { group: 'Tools', label: 'Activity', to: '/admin/activity', icon: History },
 ]
 
-function NavItemLink({ to, label, onNavigate }: { to: string; label: string; onNavigate?: () => void }) {
+function NavItemLink({ to, label, icon: Icon, onNavigate }: { to: string; label: string; icon: LucideIcon; onNavigate?: () => void }) {
   return (
     <NavLink
       to={to}
@@ -36,7 +48,10 @@ function NavItemLink({ to, label, onNavigate }: { to: string; label: string; onN
         ].join(' ')
       }
     >
-      <span>{label}</span>
+      <span className="flex items-center gap-2">
+        <Icon className="h-4 w-4" aria-hidden="true" />
+        {label}
+      </span>
     </NavLink>
   )
 }
@@ -94,7 +109,7 @@ export default function AdminShell() {
                 </div>
                 <div className="mt-2 space-y-1">
                   {grouped[group].map((item) => (
-                    <NavItemLink key={item.to} to={item.to} label={item.label} />
+                    <NavItemLink key={item.to} to={item.to} label={item.label} icon={item.icon} />
                   ))}
                 </div>
               </div>
@@ -148,7 +163,7 @@ export default function AdminShell() {
           {/* Mobile/overlay drawer */}
           <div
             id="admin-drawer"
-            className={`fixed inset-y-0 left-0 z-40 w-72 translate-x-[-110%] transform bg-white shadow-xl transition-transform duration-200 md:hidden ${drawerOpen ? 'translate-x-0' : ''}`}
+            className={`fixed inset-y-0 left-0 z-40 w-72 max-w-[80vw] transform bg-white shadow-xl transition-transform duration-200 md:hidden ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
           >
             <div className="flex items-center justify-between border-b border-semantic-legacy-brand-blush/60 px-4 py-3">
               <div>
@@ -174,6 +189,7 @@ export default function AdminShell() {
                         key={item.to}
                         to={item.to}
                         label={item.label}
+                        icon={item.icon}
                         onNavigate={() => setDrawerOpen(false)}
                       />
                     ))}
@@ -213,11 +229,11 @@ export default function AdminShell() {
             </div>
           </div>
 
-          {/* Overlay when drawer is open on mobile */}
+          {/* Overlay when drawer is open */}
           {drawerOpen ? (
             <button
               aria-label="Close navigation"
-              className="fixed inset-0 z-20 bg-black/25 md:hidden"
+              className="fixed inset-0 z-30 bg-black/25 md:hidden"
               onClick={() => setDrawerOpen(false)}
             />
           ) : null}
