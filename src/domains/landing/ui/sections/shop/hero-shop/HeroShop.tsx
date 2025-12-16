@@ -29,6 +29,7 @@ export const HeroShop = ({ config }: Props) => {
   const baseSlides =
     config.gallery && config.gallery.length > 0 ? config.gallery.slice(0, 1) : [config.bgImage ?? config.image]
   const slides = baseSlides.map((s) => encodeURI(cdnUrl(s)))
+  const desktopBg = encodeURI(cdnUrl(config.bgImage ?? config.gallery?.[0] ?? config.image))
   const productImage = encodeURI(cdnUrl(config.image))
   const [active, setActive] = useState(0)
   type SourceSets = { avif: string; webp: string; sizes: string } | null
@@ -57,6 +58,18 @@ export const HeroShop = ({ config }: Props) => {
     <section className="relative min-h-[70vh] overflow-hidden bg-semantic-legacy-brand-blush/10 md:min-h-[76vh]">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-semantic-legacy-brand-blush/10 to-semantic-legacy-brand-blush/25" />
+        <div className="absolute inset-0 hidden lg:block">
+          <img
+            src={desktopBg}
+            alt=""
+            className="h-full w-full brightness-95 object-cover object-right"
+            width={2400}
+            height={1350}
+            loading="eager"
+            decoding="async"
+          />
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
+        </div>
         <div className="absolute inset-0 lg:hidden">
           <div
             className="absolute inset-0 flex transition-transform duration-700"

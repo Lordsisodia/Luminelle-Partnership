@@ -12,7 +12,19 @@ import {
   type ShopifyCart,
 } from '@/lib/shopify/shopifyCart'
 
-export type CartItem = { id: string; title: string; price: number; qty: number; lineId?: string }
+export type CartItem = {
+  id: string
+  title: string
+  price: number
+  displayPrice?: number
+  compareAt?: number
+  displayCompareAt?: number
+  qty: number
+  lineId?: string
+  image?: string
+  rating?: number
+  reviewsCount?: number
+}
 
 type CartState = {
   items: CartItem[]
@@ -122,13 +134,32 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   const applyShopifyCart = (cart: ShopifyCart) => {
     setShopifyCartId(cart.id)
     setCheckoutUrl(cart.checkoutUrl ? maybeProxyCheckoutUrl(cart.checkoutUrl) : undefined)
-    const mapped: CartItem[] = cart.lines.map((l) => ({
-      id: l.merchandise.id,
-      title: l.merchandise.product.title,
-      price: Number(l.merchandise.price.amount),
-      qty: l.quantity,
-      lineId: l.id,
-    }))
+    const mapped: CartItem[] = cart.lines.map((l) => {
+      const basePrice = Number(l.merchandise.price.amount)
+      const baseCompare = l.merchandise.compareAtPrice ? Number(l.merchandise.compareAtPrice.amount) : undefined
+      let title = l.merchandise.product.title
+      if (title === 'Lumelle Satin Overnight Curler Set') title = 'Satin Overnight Curler Set'
+      const fallbackImage =
+        title.toLowerCase().includes('curler') || title.toLowerCase().includes('overnight')
+          ? '/images/brand-lifestyle.jpg'
+          : '/uploads/luminele/product-feature-05.webp'
+      const overridePrice = title === 'Lumelle Shower Cap' ? 14.99 : basePrice
+      const overrideCompare = title === 'Lumelle Shower Cap' ? 19.99 : baseCompare
+
+      return {
+        id: l.merchandise.id,
+        title,
+        price: basePrice,
+        compareAt: baseCompare,
+        displayPrice: overridePrice,
+        displayCompareAt: overrideCompare,
+        image: l.merchandise.product.featuredImage?.url ?? fallbackImage,
+        rating: 4.8, // placeholder until product reviews integrated
+        reviewsCount: title === 'Lumelle Shower Cap' ? 187 : title.toLowerCase().includes('curler') ? 92 : 103,
+        qty: l.quantity,
+        lineId: l.id,
+      }
+    })
     setItems(mapped)
     localStorage.setItem('lumelle_shopify_cart_id', cart.id)
   }
@@ -272,7 +303,10 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     setCheckoutUrl(undefined)
   }
 
-  const subtotal = useMemo(() => items.reduce((sum, i) => sum + i.price * i.qty, 0), [items])
+  const subtotal = useMemo(
+    () => items.reduce((sum, i) => sum + (i.displayPrice ?? i.price) * i.qty, 0),
+    [items]
+  )
   const qty = useMemo(() => items.reduce((sum, i) => sum + i.qty, 0), [items])
 
   useEffect(() => {
@@ -306,8 +340,9 @@ function mapServerCart(raw: any): ShopifyCart {
       merchandise: {
         id: e.node.merchandise.id,
         title: e.node.merchandise.title,
-        product: { title: e.node.merchandise.product.title },
+        product: { title: e.node.merchandise.product.title, featuredImage: e.node.merchandise.product.featuredImage },
         price: { amount: e.node.merchandise.price.amount, currencyCode: e.node.merchandise.price.currencyCode },
+        compareAtPrice: e.node.merchandise.compareAtPrice,
       },
     })),
   }

@@ -9,8 +9,9 @@ export type ShopifyCart = {
     merchandise: {
       id: string
       title: string
-      product: { title: string }
+      product: { title: string; featuredImage?: { url: string | null } }
       price: { amount: string; currencyCode: string }
+      compareAtPrice?: { amount: string; currencyCode: string } | null
     }
   }[]
 }
@@ -28,8 +29,9 @@ fragment CartFields on Cart {
           ... on ProductVariant {
             id
             title
-            product { title }
+            product { title featuredImage { url } }
             price: priceV2 { amount currencyCode }
+            compareAtPrice: compareAtPriceV2 { amount currencyCode }
           }
         }
       }
@@ -158,11 +160,12 @@ function mapCart(cart: any): ShopifyCart {
       merchandise: {
         id: e.node.merchandise.id,
         title: e.node.merchandise.title,
-        product: { title: e.node.merchandise.product.title },
+        product: { title: e.node.merchandise.product.title, featuredImage: e.node.merchandise.product.featuredImage },
         price: {
           amount: e.node.merchandise.price.amount,
           currencyCode: e.node.merchandise.price.currencyCode,
         },
+        compareAtPrice: e.node.merchandise.compareAtPrice,
       },
     })),
   }

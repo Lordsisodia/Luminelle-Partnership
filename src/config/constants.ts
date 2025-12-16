@@ -1,6 +1,6 @@
 export const WHATSAPP_INVITE_URL =
   import.meta.env.VITE_WHATSAPP_INVITE_URL ??
-  'https://chat.whatsapp.com/placeholder'
+  'https://chat.whatsapp.com/DDxJHZzpW003WZhayKJnWd'
 
 export const INSTAGRAM_URL =
   import.meta.env.VITE_INSTAGRAM_URL ??

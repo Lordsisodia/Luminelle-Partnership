@@ -79,9 +79,10 @@ const Carousel = memo(
     isCarouselActive: boolean
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
-    const cylinderWidth = isScreenSizeSm ? 1200 : 1600
     const faceCount = cards.length
-    const faceWidth = cylinderWidth / faceCount
+    // Use a fixed card width so they stay legible on mobile instead of shrinking
+    const faceWidth = isScreenSizeSm ? 220 : 280
+    const cylinderWidth = faceWidth * faceCount
     const radius = cylinderWidth / (2 * Math.PI)
     const rotation = useMotionValue(0)
     const transform = useTransform(

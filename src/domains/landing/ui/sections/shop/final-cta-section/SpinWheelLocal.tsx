@@ -10,6 +10,11 @@ type Prize = {
   color: string
 }
 
+type SpinWheelProps = {
+  prizes?: Prize[]
+  onSpun?: () => void
+}
+
 // 8 slices with 4 core options, plus a special "best value" slice.
 // The wheel always lands on the special slice, and we always award it after email capture.
 const defaultPrizes: Prize[] = [
@@ -39,7 +44,7 @@ type WheelClaim = {
   claimed_at: string
 }
 
-export const SpinWheel = ({ prizes = defaultPrizes }: { prizes?: Prize[] }) => {
+export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) => {
   const { isLoaded, isSignedIn, user } = useUser()
   const { getToken } = useClerkAuth()
   const { signedIn, signIn } = useAuth()
@@ -54,6 +59,7 @@ export const SpinWheel = ({ prizes = defaultPrizes }: { prizes?: Prize[] }) => {
   const [claiming, setClaiming] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [applyStatus, setApplyStatus] = useState<'idle' | 'saved' | 'applied'>('idle')
+  const [notified, setNotified] = useState(false)
 
   const slice = 360 / prizes.length
 
@@ -164,6 +170,13 @@ export const SpinWheel = ({ prizes = defaultPrizes }: { prizes?: Prize[] }) => {
       cancelled = true
     }
   }, [getToken, isLoaded, isSignedIn, user])
+
+  useEffect(() => {
+    if (hasSpun && onSpun && !notified) {
+      onSpun()
+      setNotified(true)
+    }
+  }, [hasSpun, notified, onSpun])
 
   const spin = () => {
     if (spinning || hasSpun || loadingClaim || claiming) return

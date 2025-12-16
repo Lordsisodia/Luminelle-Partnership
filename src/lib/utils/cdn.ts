@@ -7,7 +7,7 @@ export const cdnUrl = (path: string) => {
   // Force this asset to load from the local `/public` folder instead of the CDN
   // until the bucket is populated. Keep the match flexible so resized variants
   // (e.g. page9-image-640.webp) also bypass the CDN.
-  const cdnBypass = ['/uploads/luminele/page9-image']
+  const cdnBypass = ['/uploads/luminele/page9-image', '/uploads/luminele/hero-desktop']
   if (cdnBypass.some((p) => path.includes(p))) return path
 
   // During local dev, prefer local public assets for curler previews

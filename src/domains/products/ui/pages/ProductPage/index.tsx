@@ -7,6 +7,7 @@ import { useCart } from '@cart/providers/CartContext'
 import { renderSections } from './sections/SectionsMap'
 import { useProductContent } from '@/domains/products/hooks/useProductContent'
 import { captureEvent } from '@/lib/analytics/posthog'
+import SpinWheelPrompt from '@/domains/products/ui/components/SpinWheelPrompt'
 
 const navItems: NavItem[] = [
   { id: 'media', label: 'Product' },
@@ -191,6 +192,7 @@ export const ProductPage = () => {
         type="product"
         jsonLd={[productJsonLd, breadcrumbJsonLd]}
       />
+      <SpinWheelPrompt />
       {/* Hero media + info */}
       {renderSections({
         gallery,

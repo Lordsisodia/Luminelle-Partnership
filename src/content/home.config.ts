@@ -115,7 +115,7 @@ export const homeConfig: HomeConfig = {
     secondaryCtaLabel: 'Join WhatsApp',
     secondaryCtaHref: '/creators',
     image: '/uploads/luminele/product-main.webp',
-    bgImage: '/uploads/luminele/hero-main-960.webp',
+    bgImage: '/uploads/luminele/hero-desktop.webp',
     objectPosition: 'center 30%',
     objectFit: 'cover',
     pill: 'Best seller',

@@ -41,6 +41,9 @@ const AdminGuard = lazy(() => import('@admin/ui/components/AdminGuard'))
 const ClerkShell = lazy(() => import('@/shells/ClerkShell'))
 const NotFoundPage = lazy(() => import('@ui/pages/NotFoundPage'))
 
+// Rewards temporarily disabled per client request; toggle to re-enable.
+const ENABLE_REWARDS = false
+
 const App = () => {
   return (
     <Suspense fallback={<div className="p-6 text-center text-semantic-text-primary/70">Loading…</div>}>
@@ -68,7 +71,11 @@ const App = () => {
           <Route path="/blog" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
 
-          <Route path="/rewards" element={<RewardsPage />} />
+          {ENABLE_REWARDS ? (
+            <Route path="/rewards" element={<RewardsPage />} />
+          ) : (
+            <Route path="/rewards" element={<Navigate to="/" replace />} />
+          )}
           <Route path="/checkout" element={<CheckoutPage />} />
 
           <Route path="/sign-in" element={<SignInPage />} />

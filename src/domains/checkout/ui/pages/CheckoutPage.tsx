@@ -32,7 +32,7 @@ export const CheckoutPage = () => {
   const { isLoaded, isSignedIn, user } = useUser()
   const shipping = subtotal >= FREE_SHIP_THRESHOLD || qty === 0 ? 0 : STANDARD_SHIPPING
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping])
-  const estimatedPoints = useMemo(() => Math.max(0, Math.floor(subtotal * 50)), [subtotal])
+  // Rewards temporarily disabled; keep placeholder for future reinstatement.
   // const [email, setEmail] = useState('')
   const step = 0
   const [placingOrder, setPlacingOrder] = useState(false)
@@ -152,24 +152,19 @@ export const CheckoutPage = () => {
               <p className="mt-2 text-sm text-semantic-text-primary/75">Review your items and totals, then continue to Shopify to pay securely.</p>
               {!signedIn ? (
                 <div className="mt-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/20 p-3 text-sm text-semantic-text-primary/80">
-                  <div className="font-semibold text-semantic-text-primary">Want points on this purchase?</div>
+                  <div className="font-semibold text-semantic-text-primary">Sign in for faster checkout</div>
                   <div className="mt-1 text-semantic-text-primary/70">
-                    Sign in before checkout to earn rewards points automatically.
+                    Save addresses and payment methods so your next order is one tap.
                   </div>
                   <button
                     type="button"
                     className="mt-3 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5"
                     onClick={() => signIn()}
                   >
-                    Sign in to earn points
+                    Continue with Google
                   </button>
                 </div>
-              ) : (
-                <div className="mt-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/15 p-3 text-sm text-semantic-text-primary/80">
-                  <div className="font-semibold text-semantic-text-primary">You’ll earn {estimatedPoints.toLocaleString()} points</div>
-                  <div className="mt-1 text-semantic-text-primary/70">Points are awarded when your order ships.</div>
-                </div>
-              )}
+              ) : null}
               <button
                 onClick={placeOrder}
                 disabled={disabled || placingOrder}

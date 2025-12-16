@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState, type PropsWithChildren } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type PropsWithChildren } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { UserRound, ArrowRight } from 'lucide-react'
-import { useSignIn } from '@clerk/clerk-react'
+import { useSignIn, useUser } from '@clerk/clerk-react'
 import { useCart } from '@cart/providers/CartContext'
 import { useAuth } from '@auth/ui/providers/AuthContext'
 import { DrawerContext } from './DrawerContext'
@@ -11,6 +11,11 @@ type DrawerProviderProps = PropsWithChildren<{
 }>
 
 export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProps) => {
+  const reviewMeta: Record<string, { rating: number; reviews: number }> = {
+    'Lumelle Shower Cap': { rating: 4.8, reviews: 187 },
+    'Satin Overnight Curler Set': { rating: 4.6, reviews: 92 },
+    'Luxe Essentials Bundle': { rating: 4.9, reviews: 64 },
+  }
   const track = (event?: string, props?: Record<string, unknown>) => {
     void event
     void props
@@ -19,11 +24,14 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
   const [menuOpen, setMenuOpen] = useState(false)
   const drawerRef = useRef<HTMLDivElement | null>(null)
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
+  const SHOW_REWARDS = false
+  const SHOW_LOYALTY = false
 
-  const { items, qty, subtotal, setQty, remove } = useCart()
+  const { items, qty, setQty, remove, add } = useCart()
   const { signedIn } = useAuth()
   const location = useLocation()
   const { isLoaded: signInLoaded, signIn } = useSignIn()
+  const { user } = useUser()
   const [signInSubmitting, setSignInSubmitting] = useState(false)
   const [signInError, setSignInError] = useState<string | null>(null)
 
@@ -62,45 +70,113 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
 
   const FREE_SHIP_THRESHOLD = 19.99
   const cartQty = qty
-  const remainingForFreeShip = Math.max(0, FREE_SHIP_THRESHOLD - subtotal)
-  const freeShipProgress = Math.min(100, Math.round((subtotal / FREE_SHIP_THRESHOLD) * 100))
   const DRAWER_WIDTH = 320
   const viewersNow = useMemo(() => {
     const options = [87, 121, 205, 240, 310, 480]
     return options[Math.floor(Math.random() * options.length)]
   }, [])
-
-  const savings = useMemo(() => {
-    // Placeholder: in real setup use compare-at or discounts. For now show zero.
-    return 0
-  }, [])
+  const loyaltyPoints = SHOW_LOYALTY
+    ? useMemo(() => {
+        const raw = user?.publicMetadata?.loyaltyPoints
+        return typeof raw === 'number' ? raw : 0
+      }, [user?.publicMetadata?.loyaltyPoints])
+    : 0
+  const nextTier = 500
+  const loyaltyProgress = SHOW_LOYALTY ? Math.min(100, Math.round((loyaltyPoints / nextTier) * 100)) : 0
 
   const upsellProducts = useMemo(
     () => [
       {
+        variantId: 'gid://shopify/ProductVariant/56829020504438',
         id: 'shower-cap',
         title: 'Lumelle Shower Cap',
-        price: 24.0,
-        image: '/images/product.jpg',
-        href: '/product/shower-cap',
+        price: 14.99,
+        image: '/uploads/luminele/product-feature-05.webp',
+        href: '/product/lumelle-shower-cap',
       },
       {
+        variantId: 'gid://shopify/ProductVariant/56852779696502',
         id: 'heatless-curler',
-        title: 'Heatless Curler Set',
-        price: 18.0,
-        image: '/images/brand-lifestyle.jpg',
+        title: 'Satin Overnight Curler Set',
+        price: 16.99,
+        image: '/uploads/curler/3.webp',
         href: '/product/satin-overnight-curler',
-      },
-      {
-        id: 'bundle-luxe',
-        title: 'Luxe Essentials Bundle',
-        price: 39.0,
-        image: '/images/brand-lifestyle-640.webp',
-        href: '/product/luxe-essentials-bundle',
       },
     ],
     []
   )
+  const cartIds = useMemo(() => new Set(items.map((i) => i.id)), [items])
+  const filteredUpsells = useMemo(() => {
+    return upsellProducts.filter((p) => !cartIds.has(p.variantId))
+  }, [upsellProducts, cartIds])
+
+  const renderUpsellCard = useCallback(
+    (p: typeof upsellProducts[number]) => {
+      const rating = reviewMeta[p.title]?.rating ?? 4.8
+      const reviews = reviewMeta[p.title]?.reviews ?? 100
+      return (
+        <div
+          key={p.id}
+          className="relative flex items-center gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white p-3 shadow-soft"
+        >
+          <img
+            src={p.image}
+            alt={p.title}
+            className="h-14 w-14 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="flex-1 text-left">
+            <div className="text-sm font-semibold text-semantic-text-primary leading-tight">{p.title}</div>
+            <div className="text-[11px] text-semantic-text-primary/70">
+              {rating.toFixed(1)} ★ · {reviews} reviews
+            </div>
+            <div className="mt-1 flex items-center gap-2">
+              <span className="text-xs font-semibold text-semantic-text-primary">£{p.price.toFixed(2)}</span>
+              <span className="text-[11px] text-semantic-text-primary/50 line-through">£{(p.price * 1.3).toFixed(2)}</span>
+            </div>
+          </div>
+          <button
+            onClick={() => add({ id: p.variantId, title: p.title, price: p.price }, 1)}
+            className="absolute right-3 top-3 rounded-full border border-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-semantic-legacy-brand-cocoa hover:bg-semantic-legacy-brand-blush/30"
+          >
+            Add
+          </button>
+        </div>
+      )
+    },
+    [add, reviewMeta]
+  )
+
+  const getUnitPricing = useCallback(
+    (item: { id: string; price: number; displayPrice?: number; compareAt?: number; displayCompareAt?: number }) => {
+      const unitPrice = item.displayPrice ?? item.price
+      const unitCompareAt = item.displayCompareAt ?? item.compareAt ?? Math.round(unitPrice * 1.3 * 100) / 100
+      return { unitPrice, unitCompareAt }
+    },
+    []
+  )
+
+  const displaySubtotal = useMemo(() => {
+    return items.reduce((sum, item) => {
+      const { unitPrice } = getUnitPricing(item)
+      return sum + unitPrice * item.qty
+    }, 0)
+  }, [getUnitPricing, items])
+
+  const displayCompareAtTotal = useMemo(() => {
+    return items.reduce((sum, item) => {
+      const { unitCompareAt } = getUnitPricing(item)
+      return sum + unitCompareAt * item.qty
+    }, 0)
+  }, [getUnitPricing, items])
+
+  const savings = useMemo(() => {
+    return Math.max(0, displayCompareAtTotal - displaySubtotal)
+  }, [displayCompareAtTotal, displaySubtotal])
+
+  const remainingForFreeShip = Math.max(0, FREE_SHIP_THRESHOLD - displaySubtotal)
+  const freeShipProgress = Math.min(100, Math.round((displaySubtotal / FREE_SHIP_THRESHOLD) * 100))
   const [qtyOpen, setQtyOpen] = useState<string | null>(null)
 
   const discountForQty = (qty: number) => {
@@ -188,7 +264,6 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
         setMenuOpen(true)
       },
       openMenu: () => {
-        setActiveTab('menu')
         setMenuOpen(true)
       },
     }),
@@ -236,60 +311,115 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
               </div>
             </div>
 
-            <div className="flex-1">
+            <div className="flex-1 min-h-0 overflow-hidden">
             {activeTab === 'menu' ? (
               <div className="flex h-full flex-col">
-                <div className="flex-1 overflow-y-auto pb-6">
+              <div className="flex-1 min-h-0 overflow-y-auto pb-4">
                   <nav className="px-2 py-2">
                   <div className="rounded-xl">
-                    <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">Products</div>
+                    <div className="px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">Products</div>
                     <RouterLink
                       to="/product/shower-cap"
-                      className="block rounded-xl px-3 py-3 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
                       onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/shower-cap' }) }}
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="leading-tight">The Shower Cap</div>
-                        <span className="ml-2 rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-semantic-text-primary/70">
-                          Best Seller
-                        </span>
+                      <div className="leading-tight">
+                        <div>Lumelle Shower Cap</div>
+                        <div className="text-xs font-medium text-semantic-text-primary/60 whitespace-nowrap">Satin-lined, steam-blocking</div>
                       </div>
+                      <span className="ml-2 rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-semantic-text-primary/70 whitespace-nowrap">
+                        Best Seller
+                      </span>
                     </RouterLink>
                     <RouterLink
                       to="/product/satin-overnight-curler"
-                      className="mt-1 block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]"
+                      className="mt-1 flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
                       onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/satin-overnight-curler' }) }}
                     >
-                      Heatless Curler Set
+                      <div className="leading-tight">
+                        <div>Satin Overnight Heatless Curler Set</div>
+                        <div className="text-xs font-medium text-semantic-text-primary/60">Crease-free curls while you sleep</div>
+                      </div>
                     </RouterLink>
                   </div>
                   <div className="mt-2 rounded-xl">
-                    <div className="px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">More</div>
-                    <RouterLink to="/creators" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/creators' }) }}>Creators</RouterLink>
-                    <RouterLink to="/brand" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}>Brand story</RouterLink>
-                    <RouterLink to="/rewards" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/rewards' }) }}>Rewards</RouterLink>
-                    <RouterLink to="/blog" className="block h-12 rounded-xl px-3 text-sm font-medium text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40 leading-[48px]" onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}>Blog</RouterLink>
+                    <div className="px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">More</div>
+                    <RouterLink
+                      to="/creators"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/creators' }) }}
+                    >
+                      <div className="flex flex-col leading-tight">
+                        <span>Creators</span>
+                        <span className="text-xs font-medium text-semantic-text-primary/60">Collabs, scripts, and payouts</span>
+                      </div>
+                      <span className="text-semantic-text-primary/60">›</span>
+                    </RouterLink>
+                    <RouterLink
+                      to="/brand"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}
+                    >
+                      <div className="flex flex-col leading-tight">
+                        <span>Brand story</span>
+                        <span className="text-xs font-medium text-semantic-text-primary/60">Origins, values, and build</span>
+                      </div>
+                      <span className="text-semantic-text-primary/60">›</span>
+                    </RouterLink>
+                    <RouterLink
+                      to="/blog"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}
+                    >
+                      <div className="flex flex-col leading-tight">
+                        <span>Blog</span>
+                        <span className="text-xs font-medium text-semantic-text-primary/60">Care tips, launches, routines</span>
+                      </div>
+                      <span className="text-semantic-text-primary/60">›</span>
+                    </RouterLink>
                   </div>
                 </nav>
 
               </div>
-                <div className="border-t border-semantic-legacy-brand-blush/60 bg-white/95 px-4 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur">
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Profile</p>
+                <div className="border-t border-semantic-legacy-brand-blush/60 bg-white/95 px-4 pb-[calc(1.2rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur">
                   {signedIn ? (
-                    <RouterLink
-                      to="/account"
-                      onClick={() => setMenuOpen(false)}
-                      className="flex w-full items-center justify-between rounded-2xl bg-semantic-accent-cta px-4 py-3 text-left text-sm font-semibold text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90 hover:shadow-md"
-                    >
-                      <span className="flex items-center gap-2">
-                        <UserRound className="h-5 w-5" />
-                        <span className="leading-tight">
-                          Account & orders
-                          <span className="block text-[12px] font-medium text-semantic-text-primary/80">View history & manage details</span>
-                        </span>
-                      </span>
-                      <ArrowRight className="h-5 w-5" />
-                    </RouterLink>
+                    <div className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-soft">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={user?.imageUrl ?? 'https://placekitten.com/80/80'}
+                          alt="Profile"
+                          className="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div className="flex-1 leading-tight">
+                          <div className="text-sm font-semibold text-semantic-text-primary">
+                            Welcome back{user?.firstName ? `, ${user.firstName}` : ''}!
+                          </div>
+                          <RouterLink
+                            to="/account"
+                            onClick={() => setMenuOpen(false)}
+                            className="text-[12px] font-medium text-semantic-text-primary/70 underline decoration-semantic-text-primary/40 underline-offset-4"
+                          >
+                            View account & orders
+                          </RouterLink>
+                        </div>
+                      </div>
+                      {SHOW_LOYALTY && (
+                        <div>
+                          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/70">
+                            <span>Points</span>
+                            <span>{loyaltyPoints} pts</span>
+                          </div>
+                          <div className="mt-1 h-2 rounded-full bg-semantic-legacy-brand-blush/40">
+                            <div className="h-full rounded-full bg-semantic-accent-cta" style={{ width: `${loyaltyProgress}%` }} />
+                          </div>
+                          <div className="mt-1 text-[11px] text-semantic-text-primary/60">
+                            {loyaltyPoints >= nextTier
+                              ? 'You have rewards ready to redeem.'
+                              : `${nextTier - loyaltyPoints} pts to next perk.`}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   ) : (
                     <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-soft">
                       <div className="flex items-center gap-2 text-sm font-semibold text-semantic-text-primary">
@@ -297,7 +427,7 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                         <span className="leading-tight">
                           Sign in
                           <span className="block text-[12px] font-medium text-semantic-text-primary/70">
-                            Track orders, save addresses, and earn rewards.
+                            Track orders, save addresses, and manage subscriptions.
                           </span>
                         </span>
                       </div>
@@ -324,7 +454,7 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                 </div>
               </div>
             ) : (
-              <div className="h-full overflow-y-auto pb-4">
+              <div className="flex-1 min-h-0 overflow-y-auto pb-4">
                 <div className="px-4 pt-2">
                   <div className="mb-2 rounded-xl bg-semantic-legacy-brand-blush/30 px-3 py-2 text-xs text-semantic-text-primary/80">
                     {remainingForFreeShip > 0 ? `You are £${remainingForFreeShip.toFixed(2)} away from free shipping.` : 'You’ve unlocked free shipping!'}
@@ -334,26 +464,55 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                   </div>
                   <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 p-3">
                     {items.length === 0 ? (
-                      <div className="rounded-xl border border-semantic-legacy-brand-blush/60 p-3 text-sm text-semantic-text-primary/70">Your cart is empty.</div>
+                      <div className="space-y-3">
+                        <div className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-5 text-center shadow-soft">
+                          <p className="text-sm font-semibold text-semantic-text-primary">Your cart is empty.</p>
+                          <p className="mt-1 text-xs text-semantic-text-primary/70">Add a bestseller to unlock free shipping faster.</p>
+                        </div>
+                        <div className="space-y-2">
+                          {upsellProducts.map((p) => renderUpsellCard(p))}
+                        </div>
+                      </div>
                     ) : (
-                      items.map((it) => (
-                        <div key={it.id} className="relative mb-4 grid grid-cols-[80px_1fr] items-start gap-3 last:mb-0">
-                          <img src="/uploads/luminele/product-feature-05.webp" alt={it.title} className="h-20 w-20 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover" />
-                          <div className="text-sm text-semantic-text-primary pr-2">
-                            <div className="flex items-start justify-between gap-2">
-                              <div className="font-medium leading-tight">{it.title}</div>
-                              <button
-                                aria-label="Remove item"
-                                className="mt-0.5 inline-flex h-6 w-6 items-center justify-center self-start text-semantic-text-primary/60 transition hover:text-semantic-text-primary"
-                                onClick={() => remove(it.id)}
-                              >
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-.867 12.142A2 2 0 0 1 16.138 20H7.862a2 2 0 0 1-1.995-1.858L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
-                              </button>
-                            </div>
-                            <div className="mt-1 flex items-center gap-2 text-[11px] text-semantic-text-primary/70">
-                              <span className="inline-flex items-center gap-1 text-amber-500" aria-label="Rating 4.8 out of 5">
-                                {Array.from({ length: 5 }).map((_, idx) => {
-                                  if (idx < 4) {
+                      items.map((it) => {
+                        const displayTitle = it.title === 'Heatless Curler Set' ? 'Satin Overnight Curler Set' : it.title
+                        return (
+                          <div key={it.id} className="relative mb-4 grid grid-cols-[92px_1fr] items-start gap-3 pr-1 last:mb-0">
+                            <img src={it.image ?? '/uploads/luminele/product-feature-05.webp'} alt={displayTitle} className="h-24 w-24 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover" />
+                            <div className="text-sm text-semantic-text-primary">
+                              <div className="flex items-start gap-2">
+                                <div className="flex-1 font-medium leading-tight">{displayTitle}</div>
+                                <button
+                                  aria-label="Remove item"
+                                  className="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center text-semantic-text-primary/60 transition hover:text-semantic-text-primary"
+                                  onClick={() => remove(it.id)}
+                                >
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-.867 12.142A2 2 0 0 1 16.138 20H7.862a2 2 0 0 1-1.995-1.858L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                                </button>
+                              </div>
+                              <div className="mt-1 flex items-center gap-2 text-[11px] text-semantic-text-primary/70">
+                                <span className="inline-flex items-center gap-1 text-amber-500" aria-label={`Rating ${reviewMeta[displayTitle]?.rating ?? it.rating ?? 4.8} out of 5`}>
+                                  {Array.from({ length: 5 }).map((_, idx) => {
+                                    const rating = reviewMeta[displayTitle]?.rating ?? it.rating ?? 4.8
+                                    const fullStars = Math.floor(rating)
+                                    const remainder = Math.max(0, Math.min(1, rating - fullStars))
+                                    if (idx < fullStars) {
+                                      return (
+                                        <svg
+                                          key={idx}
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 24 24"
+                                          width="12"
+                                          height="12"
+                                          fill="currentColor"
+                                          stroke="currentColor"
+                                          strokeWidth="1.5"
+                                        >
+                                          <path d="M12 2.5l2.9 6.1 6.6.6-5 4.5 1.5 6.5L12 16.8 6 20.2l1.5-6.5-5-4.5 6.6-.6z" />
+                                        </svg>
+                                      )
+                                    }
+                                    const gradId = `star-grad-${it.id}-${idx}`
                                     return (
                                       <svg
                                         key={idx}
@@ -361,85 +520,77 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                                         viewBox="0 0 24 24"
                                         width="12"
                                         height="12"
-                                        fill="currentColor"
                                         stroke="currentColor"
                                         strokeWidth="1.5"
                                       >
-                                        <path d="M12 2.5l2.9 6.1 6.6.6-5 4.5 1.5 6.5L12 16.8 6 20.2l1.5-6.5-5-4.5 6.6-.6z" />
+                                        <defs>
+                                          <linearGradient id={gradId}>
+                                            <stop offset={`${remainder * 100}%`} stopColor="currentColor" />
+                                            <stop offset={`${remainder * 100}%`} stopColor="transparent" />
+                                          </linearGradient>
+                                        </defs>
+                                        <path
+                                          d="M12 2.5l2.9 6.1 6.6.6-5 4.5 1.5 6.5L12 16.8 6 20.2l1.5-6.5-5-4.5 6.6-.6z"
+                                          fill={`url(#${gradId})`}
+                                        />
                                       </svg>
                                     )
-                                  }
-                                  const gradId = `star-grad-${it.id}`
-                                  return (
-                                    <svg
-                                      key={idx}
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 24 24"
-                                      width="12"
-                                      height="12"
-                                      stroke="currentColor"
-                                      strokeWidth="1.5"
-                                    >
-                                      <defs>
-                                        <linearGradient id={gradId}>
-                                          <stop offset="80%" stopColor="currentColor" />
-                                          <stop offset="80%" stopColor="transparent" />
-                                        </linearGradient>
-                                      </defs>
-                                      <path
-                                        d="M12 2.5l2.9 6.1 6.6.6-5 4.5 1.5 6.5L12 16.8 6 20.2l1.5-6.5-5-4.5 6.6-.6z"
-                                        fill={`url(#${gradId})`}
-                                      />
-                                    </svg>
-                                  )
-                                })}
-                              </span>
-                              <span className="text-semantic-text-primary/70">103 reviews</span>
-                            </div>
-                            <div className="mt-3 flex items-start justify-between gap-3 relative" id={`qty-menu-${it.id}`}>
-                              <div className="flex w-full flex-col gap-1">
-                                <button
-                                  type="button"
-                                  onClick={() => setQtyOpen(qtyOpen === it.id ? null : it.id)}
-                                  className="inline-flex w-full items-center justify-between gap-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/20"
-                                >
-                                  <span className="text-sm font-semibold">Qty: {it.qty}</span>
-                                  {discountForQty(it.qty) > 0 ? (
-                                    <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary">
-                                      Save {discountForQty(it.qty)}%
-                                    </span>
-                                  ) : null}
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                                </button>
-                                {qtyOpen === it.id ? (
-                                  <div className="absolute z-30 mt-1 w-full max-w-full rounded-lg border border-semantic-legacy-brand-blush/60 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] overflow-hidden left-0">
-                                    {[1,2,3,4,5,6,7,8,9,10].map((n) => (
-                                      <button
-                                        key={n}
-                                        className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm ${n === it.qty ? 'bg-semantic-legacy-brand-blush/30 font-semibold text-semantic-text-primary' : 'text-semantic-text-primary/80 hover:bg-semantic-legacy-brand-blush/20'}`}
-                                        onClick={() => { setQty(it.id, n); setQtyOpen(null) }}
-                                      >
-                                        <span>{n}</span>
-                                        {discountForQty(n) > 0 ? (
-                                          <span className="rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary">
-                                            Save {discountForQty(n)}%
-                                          </span>
-                                        ) : (
-                                          <span className="text-[11px] text-semantic-text-primary/60">—</span>
-                                        )}
-                                      </button>
-                                    ))}
-                                  </div>
-                                ) : null}
+                                  })}
+                                </span>
+                                <span className="text-semantic-text-primary/70">{reviewMeta[displayTitle]?.reviews ?? it.reviewsCount ?? 103} reviews</span>
                               </div>
-                              <div className="text-right leading-tight">
-                                <div className="text-sm font-semibold text-semantic-legacy-brand-cocoa">£{it.price.toFixed(2)}</div>
-                                <div className="text-xs text-semantic-text-primary/50 line-through">£{(it.price * 1.3).toFixed(2)}</div>
+                              <div className="mt-3 flex items-start justify-between gap-3 relative" id={`qty-menu-${it.id}`}>
+                                <div className="flex w-full flex-col gap-1">
+                                  <button
+                                    type="button"
+                                    onClick={() => setQtyOpen(qtyOpen === it.id ? null : it.id)}
+                                    className="inline-flex w-full items-center justify-between gap-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/20"
+                                  >
+                                    <span className="text-sm font-semibold">Qty: {it.qty}</span>
+                                    {discountForQty(it.qty) > 0 ? (
+                                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary">
+                                        Save {discountForQty(it.qty)}%
+                                      </span>
+                                    ) : null}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                  </button>
+                                  {qtyOpen === it.id ? (
+                                    <div className="absolute z-30 mt-1 w-full max-w-full rounded-lg border border-semantic-legacy-brand-blush/60 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] overflow-hidden left-0">
+                                      {[1,2,3,4,5,6,7,8,9,10].map((n) => (
+                                        <button
+                                          key={n}
+                                          className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm ${n === it.qty ? 'bg-semantic-legacy-brand-blush/30 font-semibold text-semantic-text-primary' : 'text-semantic-text-primary/80 hover:bg-semantic-legacy-brand-blush/20'}`}
+                                          onClick={() => { setQty(it.id, n); setQtyOpen(null) }}
+                                        >
+                                          <span>{n}</span>
+                                          {discountForQty(n) > 0 ? (
+                                            <span className="rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary">
+                                              Save {discountForQty(n)}%
+                                            </span>
+                                          ) : (
+                                            <span className="text-[11px] text-semantic-text-primary/60">—</span>
+                                          )}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  ) : null}
+                                </div>
+                                <div className="text-right leading-tight">
+                                  {(() => {
+                                    const { unitPrice, unitCompareAt } = getUnitPricing(it)
+                                    return (
+                                      <>
+                                        <div className="text-sm font-semibold text-semantic-legacy-brand-cocoa">£{unitPrice.toFixed(2)}</div>
+                                        <div className="text-xs text-semantic-text-primary/50 line-through">£{unitCompareAt.toFixed(2)}</div>
+                                      </>
+                                    )
+                                  })()}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ))
+                        )
+                      })
                     )}
 
                   </div>
@@ -449,23 +600,11 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70 font-sans">
                     {remainingForFreeShip > 0 ? 'You’re close to free shipping. Try these.' : 'Complete your routine'}
                   </p>
-                  <div className="mt-2 space-y-3">
-                    {upsellProducts.map((p) => (
-                      <RouterLink
-                        key={p.id}
-                        to={p.href}
-                        className="flex items-center gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 p-3 shadow-soft transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-blush/30"
-                        onClick={() => { setActiveTab('menu'); setMenuOpen(false); track('cart_upsell_click', { id: p.id }) }}
-                      >
-                        <img src={p.image} alt={p.title} className="h-14 w-14 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover" loading="lazy" />
-                        <div className="flex-1">
-                          <div className="text-sm font-semibold text-semantic-text-primary leading-tight">{p.title}</div>
-                          <div className="text-xs text-semantic-text-primary/70">£{p.price.toFixed(2)}</div>
-                        </div>
-                        <span className="rounded-full bg-semantic-accent-cta px-3 py-1 text-xs font-semibold text-semantic-text-primary">Add</span>
-                      </RouterLink>
-                    ))}
-                  </div>
+                  {filteredUpsells.length > 0 ? (
+                    <div className="mt-2 space-y-3">
+                      {filteredUpsells.map((p) => renderUpsellCard(p))}
+                    </div>
+                  ) : null}
                 </div>
               </div>
             )}
@@ -482,8 +621,8 @@ export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProp
                   <span className="font-semibold text-red-700">£{savings.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm text-semantic-text-primary/80">
-                  <span>Total</span>
-                  <span className="font-semibold text-semantic-text-primary">£{subtotal.toFixed(2)}</span>
+                  <span>Subtotal</span>
+                  <span className="font-semibold text-semantic-text-primary">£{displaySubtotal.toFixed(2)}</span>
                 </div>
                 <button
                   className="mt-1 w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
