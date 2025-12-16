@@ -7,11 +7,9 @@ import { useAuth } from '@auth/ui/providers/AuthContext'
 import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
 import { DrawerContext } from './DrawerContext'
 
-type DrawerProviderProps = PropsWithChildren<{
-  subtitle?: string | null
-}>
+type DrawerProviderProps = PropsWithChildren<Record<string, unknown>>
 
-export const DrawerProvider = ({ children, subtitle = null }: DrawerProviderProps) => {
+export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   const reviewMeta: Record<string, { rating: number; reviews: number }> = {
     'Lumelle Shower Cap': { rating: 4.8, reviews: 187 },
     'Satin Overnight Curler Set': { rating: 4.6, reviews: 92 },
