@@ -9,6 +9,7 @@ import { CartProvider } from './domains/cart/providers/CartContext'
 import { DrawerProvider } from './ui/providers/DrawerProvider'
 import { AuthProvider } from './domains/auth/ui/providers/AuthContext'
 import { initPosthogOnce } from '@/lib/analytics/posthog'
+import ScrollToTop from './ui/components/ScrollToTop'
 
 // Start PostHog init early (feature flags may be needed during first render).
 // Actual event capture remains gated by `VITE_ANALYTICS_ENABLED`.
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
     >
       <HelmetProvider>
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <ScrollToTop />
           <CartProvider>
             <AuthProvider>
               <DrawerProvider>

@@ -9,7 +9,7 @@ import {
   Boxes,
   PenLine,
   Image as ImageIcon,
-  Globe2,
+  PanelsTopLeft,
   BarChart3,
   History,
 } from 'lucide-react'
@@ -24,10 +24,10 @@ type NavItem = {
 const navItems: NavItem[] = [
   { group: 'Core', label: 'Dashboard', to: '/admin', icon: LayoutDashboard },
   { group: 'Content', label: 'Products', to: '/admin/products', icon: Boxes },
-  { group: 'Content', label: 'Blogs', to: '/admin/blogs', icon: PenLine },
-  { group: 'Content', label: 'Media', to: '/admin/media', icon: ImageIcon },
   { group: 'Content', label: 'Pages', to: '/admin/pages', icon: FileText },
-  { group: 'Content', label: 'Globals (nav, footer, etc.)', to: '/admin/globals', icon: Globe2 },
+  { group: 'Content', label: 'Components', to: '/admin/globals', icon: PanelsTopLeft },
+  { group: 'Content', label: 'Media', to: '/admin/media', icon: ImageIcon },
+  { group: 'Content', label: 'Blogs', to: '/admin/blogs', icon: PenLine },
   { group: 'Tools', label: 'Analytics', to: '/admin/analytics', icon: BarChart3 },
   { group: 'Tools', label: 'Activity', to: '/admin/activity', icon: History },
 ]
