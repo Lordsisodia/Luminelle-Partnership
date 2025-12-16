@@ -23,7 +23,6 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const drawerRef = useRef<HTMLDivElement | null>(null)
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
-  const SHOW_REWARDS = false
   const SHOW_LOYALTY = false
 
   const { items, qty, setQty, remove, add, checkoutUrl, setAttributes } = useCart()
