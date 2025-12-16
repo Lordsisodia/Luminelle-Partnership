@@ -221,6 +221,60 @@ export default function ProductsPage() {
     setProducts((prev) => prev.map((p) => (p.id === product.id ? updater(p) : p)))
   }
 
+  // Lazy-load Cloudinary upload widget
+  const loadCloudinaryWidget = async () => {
+    if (typeof window === 'undefined') return null
+    const w = window as any
+    if (w.cloudinary?.createUploadWidget) return w.cloudinary
+    await new Promise<void>((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = 'https://widget.cloudinary.com/v2.0/global/all.js'
+      script.onload = () => resolve()
+      script.onerror = () => reject(new Error('Failed to load Cloudinary widget'))
+      document.body.appendChild(script)
+    })
+    return (window as any).cloudinary
+  }
+
+  const handleUpload = async () => {
+    if (!product) return
+    const cld = await loadCloudinaryWidget()
+    if (!cld) return
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME as string
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET as string
+    const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY as string
+    cld.createUploadWidget(
+      {
+        cloudName,
+        uploadPreset,
+        apiKey,
+        folder: `products/${product.handle}`,
+        cropping: false,
+        multiple: true,
+        showAdvancedOptions: false,
+        sources: ['local', 'camera', 'url'],
+        maxFiles: 10,
+        uploadSignature: async (cb: any, paramsToSign: any) => {
+          const res = await fetch('/api/cloudinary/sign', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ folder: paramsToSign.folder }),
+          })
+          const data = await res.json()
+          cb(data)
+        },
+      },
+      (error: any, result: any) => {
+        if (error) return
+        if (result?.event === 'success') {
+          const url = result.info.secure_url as string
+          updateProduct((p) => ({ ...p, gallery: [...p.gallery, url] }))
+        }
+      },
+    ).open()
+  }
+
+
   // Send draft to iframe preview for live mobile render
   useEffect(() => {
     if (!product || !iframeRef.current) return
@@ -310,20 +364,6 @@ export default function ProductsPage() {
               </button>
               <div className="text-sm font-semibold text-semantic-text-primary/80">{product.title}</div>
               <Pill>Handle: {product.handle}</Pill>
-              <div className="flex items-center gap-2 text-sm text-semantic-text-primary/70">
-                <span>Switch:</span>
-                <select
-                  className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm"
-                  value={product.id}
-                  onChange={(e) => setSelectedId(e.target.value)}
-                >
-                  {products.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
             </div>
 
             {/* Hero basics */}
@@ -391,13 +431,23 @@ export default function ProductsPage() {
             </section>
             {/* Gallery */}
             <section className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Gallery</p>
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Gallery</p>
+                <button
+                  type="button"
+                  className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
+                  onClick={handleUpload}
+                >
+                  Upload to Cloudinary
+                </button>
+              </div>
               <div className="space-y-2">
                 {product.gallery.map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-3 py-2"
+                    className="flex items-center gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-3 py-2"
                   >
+                    <img src={item} alt="" className="h-14 w-14 rounded-lg object-cover" loading="lazy" />
                     <TextInput
                       value={item}
                       onChange={(v) =>
@@ -416,48 +466,23 @@ export default function ProductsPage() {
                     </button>
                   </div>
                 ))}
-                <button
-                  className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                  onClick={() => updateProduct((p) => ({ ...p, gallery: [...p.gallery, ''] }))}
-                >
-                  + Add media
-                </button>
               </div>
             </section>
 
-            {/* Pricing */}
-            <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Pricing</p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Price">
-                  <TextInput
-                    value={product.price.toString()}
-                    onChange={(v) => updateProduct((p) => ({ ...p, price: Number(v) || 0 }))}
-                  />
-                </Field>
-                <Field label="Compare at (discounted from)">
-                  <TextInput
-                    value={product.compare_at_price?.toString() || ''}
-                    onChange={(v) => updateProduct((p) => ({ ...p, compare_at_price: v ? Number(v) : undefined }))}
-                  />
-                </Field>
-              </div>
-            </section>
-
-                      </div>
-
-          {/* Live preview (desktop only) */}
-          <div className="hidden xl:block">
-            <iframe
-              ref={iframeRef}
-              title="Product mobile preview"
-              src={`/admin/preview/product/${product.handle}`}
-              className="w-[340px] max-w-full rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white"
-              style={{ height: iframeHeight, display: "block" }}
-              scrolling="yes"
-            />
-          </div>
         </div>
+
+        {/* Live preview (desktop only) */}
+        <div className="hidden xl:block">
+          <iframe
+            ref={iframeRef}
+            title="Product mobile preview"
+            src={`/admin/preview/product/${product.handle}`}
+            className="w-[340px] max-w-full rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white"
+            style={{ height: iframeHeight, display: 'block' }}
+            scrolling="yes"
+          />
+        </div>
+      </div>
       ) : null}
 
       {/* Save bar duplicate for mobile */}

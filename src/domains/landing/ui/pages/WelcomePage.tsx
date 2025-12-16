@@ -28,7 +28,7 @@ const WelcomePage = () => {
   return (
     <>
       <Seo
-        title="Welcome to LUMELLE™"
+        title="Welcome"
         description="Start here for your first Lumelle shower cap: fit guide, care steps, and creator tips for frizz-free styles."
         url="https://lumelle.com/welcome"
         type="website"

@@ -18,8 +18,36 @@ const post: BlogPost = {
   date: '2025-12-16',
   reviewed: '2025-12-16',
   readTime: '8 min',
-  cover: '/uploads/curler/2.webp',
+  cover: '/uploads/blog/covers/is-satin-good-for-your-hair.webp',
+  ogImage: '/og/blog/is-satin-good-for-your-hair.png',
   teaser: 'Satin can help reduce frizz and breakage because it’s smooth and low-friction. Here’s how it works, who benefits most, and how to use it.',
+  faqs: [
+    {
+      question: 'Is satin actually good for your hair?',
+      answer:
+        'Satin can be helpful because it’s smooth and low-friction, which may reduce tangling, frizz, and breakage compared with rougher fabrics.',
+    },
+    {
+      question: 'Is satin the same as silk?',
+      answer:
+        'No. “Satin” describes a weave (how fabric is made) and can be polyester, nylon, or silk; “silk” is a natural fibre. Both can feel smooth—quality depends on construction.',
+    },
+    {
+      question: 'Who benefits most from satin?',
+      answer:
+        'People with curly/coily hair, textured hair, bleached/heat-styled hair, and anyone prone to tangles or frizz often notice the biggest difference.',
+    },
+    {
+      question: 'Is a satin bonnet better than a satin pillowcase?',
+      answer:
+        'Bonnets reduce friction more consistently because your hair stays covered, while pillowcases are more breathable and low-fuss. Many people use both depending on comfort.',
+    },
+    {
+      question: 'How do I wash satin hair accessories?',
+      answer:
+        'Follow the care label where possible; in general, use cool water + mild detergent, avoid harsh heat, and air dry to keep the fabric smooth.',
+    },
+  ],
   body: stripFrontmatter(raw),
   productCard: {
     title: 'Lumelle Shower Cap',
@@ -31,4 +59,3 @@ const post: BlogPost = {
 }
 
 export default post
-

@@ -135,7 +135,7 @@ const TermsPage = () => {
   return (
     <>
       <Seo
-        title="Terms & Conditions | LUMELLE™"
+        title="Terms & Conditions"
         description="Read the LUMELLE™ website and purchase terms, including shipping, returns, warranties, and your consumer rights."
         url="https://lumelle.com/terms"
         type="article"

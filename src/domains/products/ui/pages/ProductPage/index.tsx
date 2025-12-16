@@ -206,25 +206,46 @@ export const ProductPage = () => {
 
   useEffect(() => {
     // Report height to admin iframe preview (if embedded)
+    const isEmbedded = (() => {
+      try {
+        return window.self !== window.top
+      } catch {
+        return true
+      }
+    })()
+
+    if (!isEmbedded) return
+
+    const html = document.documentElement
+    const body = document.body
+    const previous = {
+      htmlOverflowX: html.style.overflowX,
+      bodyOverflowX: body.style.overflowX,
+    }
+
     const sendHeight = () => {
       const h = document.body.scrollHeight
       window.parent?.postMessage({ type: 'pdpHeight', height: h }, '*')
     }
-    document.documentElement.style.overflowX = 'hidden'
-    document.documentElement.style.maxWidth = '340px'
-    document.body.style.overflowX = 'hidden'
-    document.body.style.margin = '0 auto'
-    document.body.style.maxWidth = '340px'
+
+    // Prevent horizontal scrollbars in the embedded preview without affecting desktop layout.
+    html.style.overflowX = 'hidden'
+    body.style.overflowX = 'hidden'
+
     sendHeight()
     const observer = new ResizeObserver(() => sendHeight())
     observer.observe(document.body)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      html.style.overflowX = previous.htmlOverflowX
+      body.style.overflowX = previous.bodyOverflowX
+    }
   }, [])
 
   return (
     <MarketingLayout navItems={navItems} subtitle="Product">
       <Seo
-        title={`${productTitle} | Satin-lined waterproof shower cap`}
+        title={productTitle || config.defaultTitle}
         description={`${productDesc} • Blocks steam for silk presses, curls, and braids. Free returns in 30 days.`}
         image={heroImage}
         url={canonicalUrl}

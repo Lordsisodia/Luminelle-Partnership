@@ -11,7 +11,7 @@ export const ReturnsPage = () => {
   }
 
   const url = 'https://lumelle.com/returns'
-  const title = 'Returns & 30-day Luxe Guarantee | Lumelle'
+  const title = 'Returns & 30-day Luxe Guarantee'
   const description = 'Start a return or exchange within 30 days. Free return shipping and easy labels.'
 
   const ldBreadcrumb = {

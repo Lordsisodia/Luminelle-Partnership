@@ -16,7 +16,7 @@ export const SearchResultsPage = () => {
   const results = useMemo(() => CATALOG.filter((p) => p.title.toLowerCase().includes(q)), [q])
 
   const url = 'https://lumelle.com/search'
-  const title = 'Search | Lumelle'
+  const title = 'Search'
   const description = 'Find Lumelle products and guides to keep hair frizz-free.'
 
   const ldBreadcrumb = {

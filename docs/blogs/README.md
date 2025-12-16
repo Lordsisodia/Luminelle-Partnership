@@ -21,3 +21,6 @@ Notes:
 - `is-satin-good-for-your-hair.md`
 - `satin-vs-silk-for-hair.md`
 
+## Source ideas
+
+The original list of client-provided ideas is saved in `docs/blogs/ideas.md`.
