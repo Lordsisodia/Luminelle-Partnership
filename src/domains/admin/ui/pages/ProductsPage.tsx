@@ -200,6 +200,7 @@ function ProductCard({ product, onOpen }: { product: ProductContent; onOpen: () 
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<ProductContent[]>(initialProducts)
+  const [mediaItems, setMediaItems] = useState<{ url: string; publicId?: string }[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
@@ -220,6 +221,26 @@ export default function ProductsPage() {
     if (!product) return
     setProducts((prev) => prev.map((p) => (p.id === product.id ? updater(p) : p)))
   }
+
+  const syncGallery = (items: { url: string; publicId?: string }[]) => {
+    updateProduct((p) => ({ ...p, gallery: items.map((m) => m.url) }))
+  }
+
+  const handleRemoveMedia = async (idx: number) => {
+    if (!product) return
+    const item = mediaItems[idx]
+    if (item?.publicId) {
+      await fetch('/api/admin/media/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ public_id: item.publicId, handle: product.handle }),
+      }).catch(() => undefined)
+    }
+    const next = mediaItems.filter((_, i) => i !== idx)
+    setMediaItems(next)
+    syncGallery(next)
+  }
+
 
   // Lazy-load Cloudinary upload widget
   const loadCloudinaryWidget = async () => {
@@ -268,12 +289,53 @@ export default function ProductsPage() {
         if (error) return
         if (result?.event === 'success') {
           const url = result.info.secure_url as string
-          updateProduct((p) => ({ ...p, gallery: [...p.gallery, url] }))
+          const publicId = result.info.public_id as string
+          const sortOrder = mediaItems.length
+          setMediaItems((items) => {
+            const next = [...items, { url, publicId }]
+            syncGallery(next)
+            return next
+          })
+          // Persist record (best-effort)
+          fetch('/api/admin/media/upsert', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              product_handle: product.handle,
+              public_id: publicId,
+              secure_url: url,
+              sort_order: sortOrder,
+              kind: 'image',
+            }),
+          }).catch(() => undefined)
         }
       },
     ).open()
   }
 
+
+  // Load media for selected product (DB) and fallback to local gallery
+  useEffect(() => {
+    if (!product) return
+    // seed from local gallery first
+    setMediaItems(product.gallery.map((url) => ({ url })))
+    ;(async () => {
+      try {
+        const res = await fetch(`/api/admin/media/list?handle=${product.handle}`)
+        if (!res.ok) return
+        const data = await res.json()
+        if (Array.isArray(data.media) && data.media.length) {
+          const items = data.media
+            .sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+            .map((m: any) => ({ url: m.secure_url as string, publicId: m.public_id as string }))
+          setMediaItems(items)
+          syncGallery(items)
+        }
+      } catch (err) {
+        console.warn('media load failed', err)
+      }
+    })()
+  }, [product?.handle])
 
   // Send draft to iframe preview for live mobile render
   useEffect(() => {
@@ -442,25 +504,24 @@ export default function ProductsPage() {
                 </button>
               </div>
               <div className="space-y-2">
-                {product.gallery.map((item, idx) => (
+                {mediaItems.map((item, idx) => (
                   <div
                     key={idx}
                     className="flex items-center gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-3 py-2"
                   >
-                    <img src={item} alt="" className="h-14 w-14 rounded-lg object-cover" loading="lazy" />
+                    <img src={item.url} alt="" className="h-14 w-14 rounded-lg object-cover" loading="lazy" />
                     <TextInput
-                      value={item}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          gallery: p.gallery.map((g, i) => (i === idx ? v : g)),
-                        }))
-                      }
+                      value={item.url}
+                      onChange={(v) => {
+                        const next = mediaItems.map((m, i) => (i === idx ? { ...m, url: v } : m))
+                        setMediaItems(next)
+                        syncGallery(next)
+                      }}
                       placeholder="Image or video URL"
                     />
                     <button
                       className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                      onClick={() => updateProduct((p) => ({ ...p, gallery: p.gallery.filter((_, i) => i !== idx) }))}
+                      onClick={() => handleRemoveMedia(idx)}
                     >
                       <Trash2 className="h-4 w-4" /> Remove
                     </button>
