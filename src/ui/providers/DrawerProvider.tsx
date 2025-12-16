@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type PropsWithChildren } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
-import { UserRound, ArrowRight } from 'lucide-react'
+import { UserRound } from 'lucide-react'
 import { useSignIn, useUser } from '@clerk/clerk-react'
 import { useCart } from '@cart/providers/CartContext'
 import { useAuth } from '@auth/ui/providers/AuthContext'
