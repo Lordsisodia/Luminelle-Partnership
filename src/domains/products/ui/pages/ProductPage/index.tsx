@@ -28,15 +28,19 @@ export const ProductPage = () => {
   const {
     config,
     gallery,
+    setGallery,
     activeImage,
     setActiveImage,
     isAdding,
     setIsAdding,
     variantId,
     price,
+    setPrice,
     sections,
     productTitle,
+    setProductTitle,
     productDesc,
+    setProductDesc,
     heroImage,
   } = useProductContent(handleKey)
   const [justAdded, setJustAdded] = useState(false)
@@ -183,11 +187,34 @@ export const ProductPage = () => {
   const featuredTikTokHeading = config.featuredTikTokHeading
 
   useEffect(() => {
+    // Allow the admin products editor to "live preview" draft changes in an iframe without saving.
+    const handler = (event: MessageEvent) => {
+      const data = event.data as any
+      if (!data || data.type !== 'admin-draft-product') return
+      if (data.handle !== handleKey) return
+
+      const draft = data.payload || {}
+      if (Array.isArray(draft.gallery)) setGallery(draft.gallery)
+      if (draft.price != null) setPrice(Number(draft.price))
+      if (typeof draft.productTitle === 'string') setProductTitle(draft.productTitle)
+      if (typeof draft.productDesc === 'string') setProductDesc(draft.productDesc)
+    }
+
+    window.addEventListener('message', handler)
+    return () => window.removeEventListener('message', handler)
+  }, [handleKey, setGallery, setPrice, setProductDesc, setProductTitle])
+
+  useEffect(() => {
     // Report height to admin iframe preview (if embedded)
     const sendHeight = () => {
       const h = document.body.scrollHeight
       window.parent?.postMessage({ type: 'pdpHeight', height: h }, '*')
     }
+    document.documentElement.style.overflowX = 'hidden'
+    document.documentElement.style.maxWidth = '340px'
+    document.body.style.overflowX = 'hidden'
+    document.body.style.margin = '0 auto'
+    document.body.style.maxWidth = '340px'
     sendHeight()
     const observer = new ResizeObserver(() => sendHeight())
     observer.observe(document.body)

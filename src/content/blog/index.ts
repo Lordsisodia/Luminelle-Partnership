@@ -24,6 +24,16 @@ import deepCleanCap from './posts/deep-clean-cap'
 import dryStoreCap from './posts/dry-store-cap'
 import replaceCapSigns from './posts/replace-cap-signs'
 import wideBandCare from './posts/wide-band-care'
+import howToStopFrizzInTheShower from './posts/how-to-stop-frizz-in-the-shower'
+import isSatinGoodForYourHair from './posts/is-satin-good-for-your-hair'
+import doShowerCapsReallyProtectHair from './posts/do-shower-caps-really-protect-hair'
+import howToProtectHairWhileSleeping from './posts/how-to-protect-hair-while-sleeping'
+import doHeatlessCurlersWork from './posts/do-heatless-curlers-work'
+import satinVsSilkForHair from './posts/satin-vs-silk-for-hair'
+import bestShowerCapForFrizzProneHair from './posts/best-shower-cap-for-frizz-prone-hair'
+import howToMakeHeatlessCurlsLastLonger from './posts/how-to-make-heatless-curls-last-longer'
+import howToProtectABlowDryInTheShower from './posts/how-to-protect-a-blow-dry-in-the-shower'
+import howToReduceFrizzWithoutHeat from './posts/how-to-reduce-frizz-without-heat'
 
 export const blogPosts: BlogPost[] = [
   lumelleJournalLaunch,
@@ -50,6 +60,16 @@ export const blogPosts: BlogPost[] = [
   dryStoreCap,
   replaceCapSigns,
   wideBandCare,
+  howToStopFrizzInTheShower,
+  isSatinGoodForYourHair,
+  doShowerCapsReallyProtectHair,
+  howToProtectHairWhileSleeping,
+  doHeatlessCurlersWork,
+  satinVsSilkForHair,
+  bestShowerCapForFrizzProneHair,
+  howToMakeHeatlessCurlsLastLonger,
+  howToProtectABlowDryInTheShower,
+  howToReduceFrizzWithoutHeat,
 ]
 
 export * from './types'

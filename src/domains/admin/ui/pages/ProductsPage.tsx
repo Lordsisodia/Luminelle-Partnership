@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AdminPageLayout } from '@admin/ui/layouts'
 import { CheckCircle2, Save, Star, Trash2 } from 'lucide-react'
+import { DEFAULT_VIDEO_SLOT, productConfigs } from '@/domains/products/data/product-config'
+import type { ProductConfig } from '@/domains/products/data/product-types'
 
 type QtyDiscount = { min_qty: number; type: 'percent' | 'fixed'; value: number }
 type Bullet = { title: string; subtext: string }
@@ -28,106 +30,74 @@ type ProductContent = {
   faq: Faq[]
 }
 
-const initialProducts: ProductContent[] = [
-  {
-    id: 'cloudsoft',
-    title: 'CloudSoft™ Heatless Curl Kit',
-    // Use real storefront handle so preview pulls the right PDP.
-    handle: 'satin-overnight-curler',
-    subtext: 'Wake up to glossy, frizz-free waves with zero heat damage.',
-    price: 54,
-    compare_at_price: 68,
-    review_count: 50,
-    average_rating: 4.8,
-    badges: ['Best seller', 'Derm-tested'],
-    gallery: [
-      '/uploads/curler/1-960.avif',
-      '/uploads/curler/2-960.avif',
-      '/uploads/curler/3-960.avif',
-      '/uploads/curler/4-960.avif',
-    ],
-    quantity_discounts: [
-      { min_qty: 2, type: 'percent', value: 10 },
-      { min_qty: 3, type: 'percent', value: 15 },
-    ],
-    sign_to_try: {
-      title: 'Sign to try risk-free',
-      subtext: '30-day returns. Free exchanges. Ships in 48 hours.',
-    },
+const parseCountLabel = (label?: string): number | undefined => {
+  if (!label) return undefined
+  const n = Number(label.replace(/[^0-9]/g, ''))
+  if (!Number.isFinite(n) || n <= 0) return undefined
+  return n
+}
+
+const uniq = <T,>(list: T[]) => Array.from(new Set(list))
+
+const videoToEmbedUrl = (value: string) => value.replace(/^video:\/\//, '')
+
+const toAdminProduct = (cfg: ProductConfig): ProductContent => {
+  const videoSlot = cfg.videoSlot ?? DEFAULT_VIDEO_SLOT
+  const baseGallery = cfg.gallery ?? []
+  const gallery = uniq([...baseGallery.filter((src) => src !== videoSlot), videoSlot])
+
+  const qtyDiscountPercent = (() => {
+    const badge = (cfg.badge ?? '').toLowerCase()
+    const m = badge.match(/save\s+(\d{1,2})%/)
+    if (!m) return undefined
+    const v = Number(m[1])
+    return Number.isFinite(v) ? v : undefined
+  })()
+
+  const reasons = cfg.reasons ?? []
+  const care = cfg.care ?? []
+  const feature = cfg.featureCallouts
+
+  const featureVideo = feature?.mediaSrc?.startsWith('video://')
+    ? [{ embed_url: videoToEmbedUrl(feature.mediaSrc), caption: feature.mediaLabel ?? feature.mediaNote }]
+    : []
+
+  return {
+    id: cfg.handle,
+    title: cfg.defaultTitle,
+    handle: cfg.handle,
+    subtext: cfg.defaultSubtitle,
+    price: cfg.defaultPrice ?? 0,
+    compare_at_price: cfg.compareAtPrice,
+    review_count: parseCountLabel(cfg.ratingCountLabelOverride),
+    average_rating: cfg.ratingValueOverride,
+    badges: cfg.badge ? [cfg.badge] : [],
+    gallery,
+    quantity_discounts: qtyDiscountPercent ? [{ min_qty: 2, type: 'percent', value: qtyDiscountPercent }] : [],
+    sign_to_try: { title: 'Your sign to try this', subtext: 'Free 30-day returns · Ships in 48h' },
     why_love: {
-      title: "Why you'll love it",
-      subtext: 'Salon results without heat — proven to protect hair.',
-      bullets: [
-        { title: 'Effortless to put on', subtext: 'Wrap in 30 seconds, sleep, unveil.' },
-        { title: 'Happy hair days', subtext: 'No breakage, less frizz, more shine.' },
-        { title: 'Stays comfy all night', subtext: 'Cloud-soft fill + breathable silk.' },
-        { title: 'Results in one sleep', subtext: 'Defined waves by morning.' },
-      ],
-      videos: [
-        { embed_url: 'https://www.tiktok.com/@lumelle/video/123', caption: 'Real results, zero heat' },
-        { embed_url: 'https://www.tiktok.com/@lumelle/video/456', caption: 'Wrap tutorial' },
-      ],
+      title: feature?.heading?.title ?? "Why you'll love it",
+      subtext: feature?.heading?.description ?? '',
+      bullets: reasons.map((r) => ({ title: r.title, subtext: r.desc })),
+      videos: featureVideo,
     },
     materials: {
-      title: 'Materials & care',
-      bullets: [
-        { title: 'Mulberry silk exterior', subtext: 'Gentle on hair, reduces friction.' },
-        { title: 'Cloud-fill core', subtext: 'Plush support keeps shape overnight.' },
-      ],
-      care_notes: 'Hand-wash cold. Lay flat to dry. Do not tumble dry.',
+      title: cfg.careLabelOverride ?? 'Care & materials',
+      bullets: care.map((c) => ({ title: c.title, subtext: c.body })),
+      care_notes: '',
     },
-    testimonials: [
-      { quote: 'My curls finally last all day without heat.', creator: '@sloane.b', role: 'Creator' },
-      { quote: 'Clients ask what changed — it was this kit.', creator: 'Jess M', role: 'Stylist' },
-    ],
-    creators_in_action: [{ embed_url: 'https://www.tiktok.com/@lumelle/video/789', caption: 'Before/after' }],
-    faq: [
-      { question: 'Will it work on short hair?', answer: 'Best for shoulder-length or longer; results vary.' },
-      { question: 'How long do curls last?', answer: 'Most report 24-48 hours with light hairspray.' },
-    ],
-  },
-  {
-    id: 'shower-cap',
-    title: 'CloudSoft™ Shower Cap',
-    handle: 'shower-cap',
-    subtext: 'Keeps blowouts dry and frizz-free with cloud-soft seal.',
-    price: 38,
-    compare_at_price: 44,
-    review_count: 100,
-    average_rating: 4.7,
-    badges: ['New'],
-    gallery: [
-      '/uploads/luminele/hero-main-960.webp',
-      '/uploads/luminele/2ND PHOTO.webp',
-      '/uploads/luminele/3RD PHOTO.webp',
-      '/uploads/luminele/4TH PHOTO.webp',
-    ],
-    quantity_discounts: [{ min_qty: 2, type: 'percent', value: 10 }],
-    sign_to_try: { title: 'Try it for 30 days', subtext: 'Free exchanges. Ships in 48 hours.' },
-    why_love: {
-      title: "Why you'll love it",
-      subtext: 'Protects hair between wash days.',
-      bullets: [
-        { title: 'Leak-proof seal', subtext: 'Stays put without creasing hair.' },
-        { title: 'Quick-dry lining', subtext: 'No mildew, no odors.' },
-        { title: 'Travel-friendly', subtext: 'Packs flat in the pouch.' },
-        { title: 'One size fits most', subtext: 'Adjustable soft strap.' },
-      ],
-      videos: [{ embed_url: 'https://www.tiktok.com/@lumelle/video/999', caption: 'Shower test' }],
-    },
-    materials: {
-      title: 'Materials & care',
-      bullets: [
-        { title: 'Waterproof exterior', subtext: 'Repels steam and splashes.' },
-        { title: 'Soft mesh lining', subtext: 'Gentle on curls.' },
-      ],
-      care_notes: 'Rinse after use. Hang to dry. Hand-wash weekly.',
-    },
-    testimonials: [{ quote: 'Finally a cap that doesn’t crush curls.', creator: '@liv.l', role: 'Creator' }],
+    testimonials: [],
     creators_in_action: [],
-    faq: [{ question: 'Does it fit braids?', answer: 'Yes, the elastic is adjustable.' }],
-  },
-]
+    faq: (cfg.qa ?? []).map((q) => ({ question: q.q, answer: q.a })),
+  }
+}
+
+const ADMIN_HIDDEN_HANDLES = new Set<string>(['satin-overnight-curler-set'])
+
+const initialProducts: ProductContent[] = Object.values(productConfigs)
+  .filter((cfg) => !ADMIN_HIDDEN_HANDLES.has(cfg.handle))
+  .map(toAdminProduct)
+  .sort((a, b) => a.title.localeCompare(b.title))
 
 function Field({ label, description, children }: { label: string; description?: string; children: React.ReactNode }) {
   return (
@@ -317,18 +287,20 @@ export default function ProductsPage() {
         </div>
       }
     >
-      {/* Product list */}
-      <div className="grid gap-3 md:grid-cols-2">
-        {products.map((p) => (
-          <ProductCard key={p.id} product={p} onOpen={() => setSelectedId(p.id)} />
-        ))}
-      </div>
+      {/* Product list (only when none selected) */}
+      {!product ? (
+        <div className="grid gap-3 md:grid-cols-2">
+          {products.map((p) => (
+            <ProductCard key={p.id} product={p} onOpen={() => setSelectedId(p.id)} />
+          ))}
+        </div>
+      ) : null}
 
       {/* Detail view */}
       {product ? (
       <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr)_360px]">
           <div className="space-y-6">
-            {/* Breadcrumb + back */}
+            {/* Breadcrumb + back + switcher */}
             <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3">
               <button
                 onClick={() => setSelectedId(null)}
@@ -338,6 +310,20 @@ export default function ProductsPage() {
               </button>
               <div className="text-sm font-semibold text-semantic-text-primary/80">{product.title}</div>
               <Pill>Handle: {product.handle}</Pill>
+              <div className="flex items-center gap-2 text-sm text-semantic-text-primary/70">
+                <span>Switch:</span>
+                <select
+                  className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm"
+                  value={product.id}
+                  onChange={(e) => setSelectedId(e.target.value)}
+                >
+                  {products.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Hero basics */}
@@ -439,7 +425,7 @@ export default function ProductsPage() {
               </div>
             </section>
 
-            {/* Pricing / offers minimal */}
+            {/* Pricing */}
             <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Pricing</p>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -458,11 +444,7 @@ export default function ProductsPage() {
               </div>
             </section>
 
-            {/* Reviews metadata */}
-            <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Reviews</p>
-          </section>
-          </div>
+                      </div>
 
           {/* Live preview (desktop only) */}
           <div className="hidden xl:block">
@@ -470,8 +452,8 @@ export default function ProductsPage() {
               ref={iframeRef}
               title="Product mobile preview"
               src={`/admin/preview/product/${product.handle}`}
-              className="w-[393px] max-w-full rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white"
-              style={{ height: iframeHeight }}
+              className="w-[340px] max-w-full rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white"
+              style={{ height: iframeHeight, display: "block" }}
               scrolling="yes"
             />
           </div>
