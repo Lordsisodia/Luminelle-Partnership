@@ -37,6 +37,7 @@ const BlogsPage = lazy(() => import('@admin/ui/pages/BlogsPage'))
 const MediaPage = lazy(() => import('@admin/ui/pages/MediaPage'))
 const GlobalsPage = lazy(() => import('@admin/ui/pages/GlobalsPage'))
 const ActivityPage = lazy(() => import('@admin/ui/pages/ActivityPage'))
+const ProductPreviewFramePage = lazy(() => import('@admin/ui/pages/ProductPreviewFramePage'))
 const AdminGuard = lazy(() => import('@admin/ui/components/AdminGuard'))
 const ClerkShell = lazy(() => import('@/shells/ClerkShell'))
 const NotFoundPage = lazy(() => import('@ui/pages/NotFoundPage'))
@@ -87,6 +88,9 @@ const App = () => {
           <Route path="/account/orders/:orderId" element={<OrderDetailPage />} />
           <Route path="/account/addresses" element={<AddressesPage />} />
           <Route path="/account/payments" element={<PaymentMethodsPage />} />
+
+          {/* Admin mobile preview (uses real PDP component) */}
+          <Route path="/admin/preview/product/:handle" element={<ProductPreviewFramePage />} />
 
           {/* Admin */}
           <Route path="/admin" element={<AdminGuard><AdminShell /></AdminGuard>}>

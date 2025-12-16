@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { AdminPageLayout } from '@admin/ui/layouts'
 import { CheckCircle2, Save, Star, Trash2 } from 'lucide-react'
 
@@ -32,14 +32,20 @@ const initialProducts: ProductContent[] = [
   {
     id: 'cloudsoft',
     title: 'CloudSoft™ Heatless Curl Kit',
-    handle: 'cloudsoft-heatless-curl-kit',
+    // Use real storefront handle so preview pulls the right PDP.
+    handle: 'satin-overnight-curler',
     subtext: 'Wake up to glossy, frizz-free waves with zero heat damage.',
     price: 54,
     compare_at_price: 68,
-    review_count: 1426,
+    review_count: 50,
     average_rating: 4.8,
     badges: ['Best seller', 'Derm-tested'],
-    gallery: ['hero.jpg', 'wrap-demo.mp4', 'texture-closeup.jpg'],
+    gallery: [
+      '/uploads/curler/1-960.avif',
+      '/uploads/curler/2-960.avif',
+      '/uploads/curler/3-960.avif',
+      '/uploads/curler/4-960.avif',
+    ],
     quantity_discounts: [
       { min_qty: 2, type: 'percent', value: 10 },
       { min_qty: 3, type: 'percent', value: 15 },
@@ -83,14 +89,19 @@ const initialProducts: ProductContent[] = [
   {
     id: 'shower-cap',
     title: 'CloudSoft™ Shower Cap',
-    handle: 'cloudsoft-shower-cap',
+    handle: 'shower-cap',
     subtext: 'Keeps blowouts dry and frizz-free with cloud-soft seal.',
     price: 38,
     compare_at_price: 44,
-    review_count: 612,
+    review_count: 100,
     average_rating: 4.7,
     badges: ['New'],
-    gallery: ['hero-cap.jpg', 'seal-detail.jpg'],
+    gallery: [
+      '/uploads/luminele/hero-main-960.webp',
+      '/uploads/luminele/2ND PHOTO.webp',
+      '/uploads/luminele/3RD PHOTO.webp',
+      '/uploads/luminele/4TH PHOTO.webp',
+    ],
     quantity_discounts: [{ min_qty: 2, type: 'percent', value: 10 }],
     sign_to_try: { title: 'Try it for 30 days', subtext: 'Free exchanges. Ships in 48 hours.' },
     why_love: {
@@ -171,106 +182,47 @@ function Pill({ children }: { children: React.ReactNode }) {
   )
 }
 
-function ProductPreview({ product }: { product: ProductContent }) {
-  const hasDiscount = product.compare_at_price && product.compare_at_price > product.price
-  const savings = hasDiscount ? product.compare_at_price! - product.price : 0
-  return (
-    <div className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Preview</div>
-        <Pill>Unsaved changes shown</Pill>
-      </div>
-      <div className="space-y-3">
-        <div className="flex flex-wrap items-center gap-2">
-          {product.badges.map((b) => (
-            <span
-              key={b}
-              className="rounded-full bg-semantic-legacy-brand-blush/15 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary"
-            >
-              {b}
-            </span>
-          ))}
-        </div>
-        <div className="space-y-1">
-          <h3 className="text-lg font-semibold text-semantic-text-primary">{product.title}</h3>
-          <p className="text-sm text-semantic-text-primary/75">{product.subtext}</p>
-        </div>
-        <div className="flex items-end gap-2 text-semantic-text-primary">
-          <div className="text-2xl font-semibold">${product.price.toFixed(2)}</div>
-          {hasDiscount ? (
-            <div className="text-sm text-semantic-text-primary/60 line-through">${product.compare_at_price?.toFixed(2)}</div>
-          ) : null}
-          {hasDiscount ? <span className="text-xs font-semibold text-green-700">Save ${savings.toFixed(0)}</span> : null}
-        </div>
-        <div className="flex items-center gap-2 text-sm text-semantic-text-primary/80">
-          {product.average_rating ? (
-            <>
-              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-              <span>{product.average_rating.toFixed(1)}</span>
-              {product.review_count ? <span>({product.review_count} reviews)</span> : null}
-            </>
-          ) : null}
-        </div>
-        <div className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-3 py-2 text-sm text-semantic-text-primary">
-          {product.sign_to_try.title}
-          <div className="text-semantic-text-primary/70">{product.sign_to_try.subtext}</div>
-        </div>
-        <div className="space-y-2">
-          <div className="text-sm font-semibold text-semantic-text-primary">Why you'll love it</div>
-          <ul className="space-y-1 text-sm text-semantic-text-primary/80">
-            {product.why_love.bullets.slice(0, 4).map((b, i) => (
-              <li key={i} className="flex gap-2">
-                <span className="mt-1 block h-1.5 w-1.5 rounded-full bg-semantic-legacy-brand-cocoa/80" />
-                <span>
-                  <span className="font-semibold text-semantic-text-primary">{b.title}</span>
-                  {b.subtext ? <span className="text-semantic-text-primary/70"> — {b.subtext}</span> : null}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {product.gallery[0] ? (
-          <div className="rounded-xl border border-dashed border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-3 py-2 text-xs text-semantic-text-primary/70">
-            Primary media: {product.gallery[0]}
-          </div>
-        ) : null}
-      </div>
-    </div>
-  )
-}
+// (legacy preview removed; iframe handles preview rendering)
 
 function ProductCard({ product, onOpen }: { product: ProductContent; onOpen: () => void }) {
   const hasDiscount = product.compare_at_price && product.compare_at_price > product.price
   return (
     <button
-      className="flex w-full flex-col gap-2 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+      className="flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow"
       onClick={onOpen}
     >
-      <div className="flex items-center justify-between gap-2">
-        <div className="text-sm font-semibold text-semantic-text-primary">{product.title}</div>
-        <Pill>{product.handle}</Pill>
-      </div>
-      <div className="text-xs text-semantic-text-primary/70 line-clamp-2">{product.subtext}</div>
-      <div className="flex items-baseline gap-2 text-semantic-text-primary">
-        <span className="text-lg font-semibold">${product.price.toFixed(2)}</span>
-        {hasDiscount ? (
-          <span className="text-sm text-semantic-text-primary/60 line-through">${product.compare_at_price?.toFixed(2)}</span>
-        ) : null}
-      </div>
-      <div className="flex flex-wrap items-center gap-2 text-xs text-semantic-text-primary/70">
-        {product.average_rating ? (
-          <span className="inline-flex items-center gap-1">
-            <Star className="h-4 w-4 fill-amber-400 text-amber-400" /> {product.average_rating.toFixed(1)}
-          </span>
-        ) : null}
-        {product.review_count ? <span>• {product.review_count} reviews</span> : null}
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {product.badges.slice(0, 3).map((b) => (
-          <span key={b} className="rounded-full bg-brand-porcelain px-2 py-1 text-[11px] font-semibold text-semantic-text-primary/80">
-            {b}
-          </span>
-        ))}
+      {product.gallery[0] ? (
+        <div className="h-40 w-full overflow-hidden bg-brand-porcelain">
+          <img src={product.gallery[0]} alt={product.title} className="h-full w-full object-cover" loading="lazy" />
+        </div>
+      ) : null}
+      <div className="space-y-2 px-4 py-3">
+        <div className="flex items-center justify-between gap-2">
+          <div className="text-sm font-semibold text-semantic-text-primary">{product.title}</div>
+          <Pill>{product.handle}</Pill>
+        </div>
+        <div className="text-xs text-semantic-text-primary/70 line-clamp-2">{product.subtext}</div>
+        <div className="flex items-baseline gap-2 text-semantic-text-primary">
+          <span className="text-lg font-semibold">${product.price.toFixed(2)}</span>
+          {hasDiscount ? (
+            <span className="text-sm text-semantic-text-primary/60 line-through">${product.compare_at_price?.toFixed(2)}</span>
+          ) : null}
+        </div>
+        <div className="flex flex-wrap items-center gap-2 text-xs text-semantic-text-primary/70">
+          {product.average_rating ? (
+            <span className="inline-flex items-center gap-1">
+              <Star className="h-4 w-4 fill-amber-400 text-amber-400" /> {product.average_rating.toFixed(1)}
+            </span>
+          ) : null}
+          {product.review_count ? <span>• {product.review_count} reviews</span> : null}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {product.badges.slice(0, 3).map((b) => (
+            <span key={b} className="rounded-full bg-brand-porcelain px-2 py-1 text-[11px] font-semibold text-semantic-text-primary/80">
+              {b}
+            </span>
+          ))}
+        </div>
       </div>
     </button>
   )
@@ -284,6 +236,8 @@ export default function ProductsPage() {
   const [snapshots, setSnapshots] = useState<Record<string, string>>(() =>
     Object.fromEntries(initialProducts.map((p) => [p.id, JSON.stringify(p)])),
   )
+  const iframeRef = useRef<HTMLIFrameElement | null>(null)
+  const [iframeHeight, setIframeHeight] = useState(844)
 
   const product = selectedId ? products.find((p) => p.id === selectedId) : null
 
@@ -296,6 +250,36 @@ export default function ProductsPage() {
     if (!product) return
     setProducts((prev) => prev.map((p) => (p.id === product.id ? updater(p) : p)))
   }
+
+  // Send draft to iframe preview for live mobile render
+  useEffect(() => {
+    if (!product || !iframeRef.current) return
+    iframeRef.current.contentWindow?.postMessage(
+      {
+        type: 'admin-draft-product',
+        handle: product.handle,
+        payload: {
+          productTitle: product.title,
+          productDesc: product.subtext,
+          price: product.price,
+          gallery: product.gallery,
+        },
+      },
+      '*',
+    )
+  }, [product])
+
+  // Listen for height messages from iframe preview
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'pdpHeight' && typeof event.data.height === 'number') {
+        // Clamp to iPhone-ish height while allowing slight growth if content overflows.
+        setIframeHeight(Math.min(Math.max(event.data.height, 844), 1400))
+      }
+    }
+    window.addEventListener('message', handler)
+    return () => window.removeEventListener('message', handler)
+  }, [])
 
   const handleSave = async () => {
     if (!product) return
@@ -342,7 +326,7 @@ export default function ProductsPage() {
 
       {/* Detail view */}
       {product ? (
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr)_360px]">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr)_360px]">
           <div className="space-y-6">
             {/* Breadcrumb + back */}
             <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3">
@@ -419,7 +403,6 @@ export default function ProductsPage() {
                 </div>
               </Field>
             </section>
-
             {/* Gallery */}
             <section className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Gallery</p>
@@ -456,484 +439,41 @@ export default function ProductsPage() {
               </div>
             </section>
 
-            {/* Quantity discounts + Sign to try */}
+            {/* Pricing / offers minimal */}
             <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Offers</p>
-              <h2 className="text-xl font-semibold text-semantic-text-primary">Quantity discounts</h2>
-              <div className="space-y-3">
-                {product.quantity_discounts.map((tier, idx) => (
-                  <div key={idx} className="grid gap-2 sm:grid-cols-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3 text-sm">
-                    <TextInput
-                      value={tier.min_qty.toString()}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          quantity_discounts: p.quantity_discounts.map((t, i) => (i === idx ? { ...t, min_qty: Number(v) || 1 } : t)),
-                        }))
-                      }
-                      placeholder="Min qty"
-                    />
-                    <select
-                      className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm"
-                      value={tier.type}
-                      onChange={(e) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          quantity_discounts: p.quantity_discounts.map((t, i) => (i === idx ? { ...t, type: e.target.value as QtyDiscount['type'] } : t)),
-                        }))
-                      }
-                    >
-                      <option value="percent">Percent</option>
-                      <option value="fixed">Fixed</option>
-                    </select>
-                    <TextInput
-                      value={tier.value.toString()}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          quantity_discounts: p.quantity_discounts.map((t, i) => (i === idx ? { ...t, value: Number(v) || 0 } : t)),
-                        }))
-                      }
-                      placeholder="Value"
-                    />
-                    <div className="sm:col-span-3 flex justify-end">
-                      <button
-                        className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                        onClick={() =>
-                          updateProduct((p) => ({
-                            ...p,
-                            quantity_discounts: p.quantity_discounts.filter((_, i) => i !== idx),
-                          }))
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" /> Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-                <button
-                  className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                  onClick={() =>
-                    updateProduct((p) => ({
-                      ...p,
-                      quantity_discounts: [...p.quantity_discounts, { min_qty: 2, type: 'percent', value: 5 }],
-                    }))
-                  }
-                >
-                  + Add tier
-                </button>
-              </div>
-
-              <div className="border-t border-semantic-legacy-brand-blush/60 pt-4 space-y-2">
-                <h3 className="text-sm font-semibold text-semantic-text-primary">Sign to try</h3>
-                <TextInput
-                  value={product.sign_to_try.title}
-                  onChange={(v) => updateProduct((p) => ({ ...p, sign_to_try: { ...p.sign_to_try, title: v } }))}
-                  placeholder="Title"
-                />
-                <TextArea
-                  value={product.sign_to_try.subtext}
-                  onChange={(v) => updateProduct((p) => ({ ...p, sign_to_try: { ...p.sign_to_try, subtext: v } }))}
-                  rows={2}
-                />
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Pricing</p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field label="Price">
+                  <TextInput
+                    value={product.price.toString()}
+                    onChange={(v) => updateProduct((p) => ({ ...p, price: Number(v) || 0 }))}
+                  />
+                </Field>
+                <Field label="Compare at (discounted from)">
+                  <TextInput
+                    value={product.compare_at_price?.toString() || ''}
+                    onChange={(v) => updateProduct((p) => ({ ...p, compare_at_price: v ? Number(v) : undefined }))}
+                  />
+                </Field>
               </div>
             </section>
 
-            {/* Why you'll love it */}
+            {/* Reviews metadata */}
             <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Benefits</p>
-              <Field label="Section title">
-                <TextInput
-                  value={product.why_love.title}
-                  onChange={(v) => updateProduct((p) => ({ ...p, why_love: { ...p.why_love, title: v } }))}
-                />
-              </Field>
-              <Field label="Section subtext">
-                <TextArea
-                  value={product.why_love.subtext}
-                  onChange={(v) => updateProduct((p) => ({ ...p, why_love: { ...p.why_love, subtext: v } }))}
-                />
-              </Field>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-semantic-text-primary">Bullets (cards)</h3>
-                  <button
-                    className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                    onClick={() =>
-                      updateProduct((p) => ({
-                        ...p,
-                        why_love: { ...p.why_love, bullets: [...p.why_love.bullets, { title: 'New point', subtext: '' }] },
-                      }))
-                    }
-                  >
-                    + Add bullet
-                  </button>
-                </div>
-                {product.why_love.bullets.map((bullet, idx) => (
-                  <div key={idx} className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3 space-y-2">
-                    <TextInput
-                      value={bullet.title}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          why_love: {
-                            ...p.why_love,
-                            bullets: p.why_love.bullets.map((b, i) => (i === idx ? { ...b, title: v } : b)),
-                          },
-                        }))
-                      }
-                    />
-                    <TextArea
-                      value={bullet.subtext}
-                      rows={2}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          why_love: {
-                            ...p.why_love,
-                            bullets: p.why_love.bullets.map((b, i) => (i === idx ? { ...b, subtext: v } : b)),
-                          },
-                        }))
-                      }
-                    />
-                    <div className="flex justify-end">
-                      <button
-                        className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                        onClick={() =>
-                          updateProduct((p) => ({
-                            ...p,
-                            why_love: { ...p.why_love, bullets: p.why_love.bullets.filter((_, i) => i !== idx) },
-                          }))
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" /> Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-semantic-text-primary">TikTok videos (Why you'll love it)</h3>
-                  <button
-                    className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                    onClick={() =>
-                      updateProduct((p) => ({
-                        ...p,
-                        why_love: { ...p.why_love, videos: [...p.why_love.videos, { embed_url: '', caption: '' }] },
-                      }))
-                    }
-                  >
-                    + Add video
-                  </button>
-                </div>
-                {product.why_love.videos.map((vid, idx) => (
-                  <div key={idx} className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3">
-                    <TextInput
-                      value={vid.embed_url}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          why_love: {
-                            ...p.why_love,
-                            videos: p.why_love.videos.map((x, i) => (i === idx ? { ...x, embed_url: v } : x)),
-                          },
-                        }))
-                      }
-                      placeholder="TikTok embed URL"
-                    />
-                    <TextInput
-                      value={vid.caption || ''}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          why_love: {
-                            ...p.why_love,
-                            videos: p.why_love.videos.map((x, i) => (i === idx ? { ...x, caption: v } : x)),
-                          },
-                        }))
-                      }
-                      placeholder="Caption"
-                    />
-                    <div className="flex justify-end">
-                      <button
-                        className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                        onClick={() =>
-                          updateProduct((p) => ({
-                            ...p,
-                            why_love: { ...p.why_love, videos: p.why_love.videos.filter((_, i) => i !== idx) },
-                          }))
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" /> Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Materials & care */}
-            <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Materials</p>
-              <Field label="Section title">
-                <TextInput
-                  value={product.materials.title}
-                  onChange={(v) => updateProduct((p) => ({ ...p, materials: { ...p.materials, title: v } }))}
-                />
-              </Field>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-semantic-text-primary">Bullet points</h3>
-                  <button
-                    className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                    onClick={() =>
-                      updateProduct((p) => ({
-                        ...p,
-                        materials: { ...p.materials, bullets: [...p.materials.bullets, { title: 'New', subtext: '' }] },
-                      }))
-                    }
-                  >
-                    + Add bullet
-                  </button>
-                </div>
-                {product.materials.bullets.map((bullet, idx) => (
-                  <div key={idx} className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3">
-                    <TextInput
-                      value={bullet.title}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          materials: {
-                            ...p.materials,
-                            bullets: p.materials.bullets.map((b, i) => (i === idx ? { ...b, title: v } : b)),
-                          },
-                        }))
-                      }
-                    />
-                    <TextArea
-                      rows={2}
-                      value={bullet.subtext}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          materials: {
-                            ...p.materials,
-                            bullets: p.materials.bullets.map((b, i) => (i === idx ? { ...b, subtext: v } : b)),
-                          },
-                        }))
-                      }
-                    />
-                    <div className="flex justify-end">
-                      <button
-                        className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                        onClick={() =>
-                          updateProduct((p) => ({
-                            ...p,
-                            materials: { ...p.materials, bullets: p.materials.bullets.filter((_, i) => i !== idx) },
-                          }))
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" /> Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <Field label="Care notes">
-                <TextArea
-                  value={product.materials.care_notes}
-                  onChange={(v) => updateProduct((p) => ({ ...p, materials: { ...p.materials, care_notes: v } }))}
-                />
-              </Field>
-            </section>
-
-            {/* Social proof */}
-            <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Social proof</p>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-semantic-text-primary">Creator testimonials</h3>
-                  <button
-                    className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                    onClick={() =>
-                      updateProduct((p) => ({
-                        ...p,
-                        testimonials: [...p.testimonials, { quote: '', creator: '', role: '' }],
-                      }))
-                    }
-                  >
-                    + Add testimonial
-                  </button>
-                </div>
-                {product.testimonials.map((t, idx) => (
-                  <div key={idx} className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3">
-                    <TextArea
-                      value={t.quote}
-                      rows={2}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          testimonials: p.testimonials.map((x, i) => (i === idx ? { ...x, quote: v } : x)),
-                        }))
-                      }
-                      placeholder="Quote"
-                    />
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      <TextInput
-                        value={t.creator}
-                        onChange={(v) =>
-                          updateProduct((p) => ({
-                            ...p,
-                            testimonials: p.testimonials.map((x, i) => (i === idx ? { ...x, creator: v } : x)),
-                          }))
-                        }
-                        placeholder="Creator name/handle"
-                      />
-                      <TextInput
-                        value={t.role || ''}
-                        onChange={(v) =>
-                          updateProduct((p) => ({
-                            ...p,
-                            testimonials: p.testimonials.map((x, i) => (i === idx ? { ...x, role: v } : x)),
-                          }))
-                        }
-                        placeholder="Role"
-                      />
-                    </div>
-                    <div className="flex justify-end">
-                      <button
-                        className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                        onClick={() =>
-                          updateProduct((p) => ({
-                            ...p,
-                            testimonials: p.testimonials.filter((_, i) => i !== idx),
-                          }))
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" /> Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-semantic-text-primary">Creators in action (TikTok)</h3>
-                  <button
-                    className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                    onClick={() =>
-                      updateProduct((p) => ({
-                        ...p,
-                        creators_in_action: [...p.creators_in_action, { embed_url: '', caption: '' }],
-                      }))
-                    }
-                  >
-                    + Add video
-                  </button>
-                </div>
-                {product.creators_in_action.map((vid, idx) => (
-                  <div key={idx} className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3">
-                    <TextInput
-                      value={vid.embed_url}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          creators_in_action: p.creators_in_action.map((x, i) => (i === idx ? { ...x, embed_url: v } : x)),
-                        }))
-                      }
-                      placeholder="TikTok embed URL"
-                    />
-                    <TextInput
-                      value={vid.caption || ''}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          creators_in_action: p.creators_in_action.map((x, i) => (i === idx ? { ...x, caption: v } : x)),
-                        }))
-                      }
-                      placeholder="Caption"
-                    />
-                    <div className="flex justify-end">
-                      <button
-                        className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                        onClick={() =>
-                          updateProduct((p) => ({
-                            ...p,
-                            creators_in_action: p.creators_in_action.filter((_, i) => i !== idx),
-                          }))
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" /> Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* FAQ */}
-            <section className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">FAQ</p>
-                  <h2 className="text-xl font-semibold text-semantic-text-primary">Questions & answers</h2>
-                </div>
-                <button
-                  className="text-xs font-semibold text-semantic-legacy-brand-cocoa"
-                  onClick={() => updateProduct((p) => ({ ...p, faq: [...p.faq, { question: '', answer: '' }] }))}
-                >
-                  + Add question
-                </button>
-              </div>
-
-              <div className="space-y-3">
-                {product.faq.map((item, idx) => (
-                  <div key={idx} className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-3">
-                    <TextInput
-                      value={item.question}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          faq: p.faq.map((f, i) => (i === idx ? { ...f, question: v } : f)),
-                        }))
-                      }
-                      placeholder="Question"
-                    />
-                    <TextArea
-                      value={item.answer}
-                      rows={2}
-                      onChange={(v) =>
-                        updateProduct((p) => ({
-                          ...p,
-                          faq: p.faq.map((f, i) => (i === idx ? { ...f, answer: v } : f)),
-                        }))
-                      }
-                      placeholder="Answer"
-                    />
-                    <div className="flex justify-end">
-                      <button
-                        className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
-                        onClick={() => updateProduct((p) => ({ ...p, faq: p.faq.filter((_, i) => i !== idx) }))}
-                      >
-                        <Trash2 className="h-4 w-4" /> Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Reviews</p>
+          </section>
           </div>
 
           {/* Live preview (desktop only) */}
           <div className="hidden xl:block">
-            <ProductPreview product={product} />
+            <iframe
+              ref={iframeRef}
+              title="Product mobile preview"
+              src={`/admin/preview/product/${product.handle}`}
+              className="w-[393px] max-w-full rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white"
+              style={{ height: iframeHeight }}
+              scrolling="yes"
+            />
           </div>
         </div>
       ) : null}

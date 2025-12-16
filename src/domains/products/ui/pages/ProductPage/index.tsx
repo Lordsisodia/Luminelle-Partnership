@@ -182,6 +182,18 @@ export const ProductPage = () => {
   const featureCopy = config.featureCallouts ?? null
   const featuredTikTokHeading = config.featuredTikTokHeading
 
+  useEffect(() => {
+    // Report height to admin iframe preview (if embedded)
+    const sendHeight = () => {
+      const h = document.body.scrollHeight
+      window.parent?.postMessage({ type: 'pdpHeight', height: h }, '*')
+    }
+    sendHeight()
+    const observer = new ResizeObserver(() => sendHeight())
+    observer.observe(document.body)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <MarketingLayout navItems={navItems} subtitle="Product">
       <Seo

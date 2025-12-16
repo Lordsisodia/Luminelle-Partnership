@@ -27,3 +27,9 @@ npm run build
 
 ## Environment
 Copy `.env.example` to `.env` and fill Shopify/Supabase/Clerk keys as needed. See `docs/ARCHITECTURE-HOWTO.md` for details.
+
+## Shopify webhooks (orders → Supabase)
+- Shopify signs Admin API webhooks with your app **API secret / client secret** (`SHOPIFY_API_SECRET`).
+- Some older deployments also use `SHOPIFY_WEBHOOK_SECRET`; keep it set to the **same value** as `SHOPIFY_API_SECRET` (or omit it if unused).
+- Webhook callback URLs can’t be on your shop’s own domains; use a separate receiver domain (e.g. your Cloudflare Pages `*.pages.dev` URL).
+- Quick sanity check: `node scripts/check-orders-webhook.mjs --url=https://<your-app-url>` should return `200 OK` for `SHOPIFY_API_SECRET`.
