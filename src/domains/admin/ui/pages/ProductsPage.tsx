@@ -323,7 +323,7 @@ export default function ProductsPage() {
         }
       }
 
-      const nextProducts: AdminProduct[] = filtered
+      let nextProducts: AdminProduct[] = filtered
         .map((row: any) => {
           const id = String(row.id)
           const handle = String(row.handle)
@@ -354,6 +354,37 @@ export default function ProductsPage() {
           }
         })
         .sort((a, b) => a.title.localeCompare(b.title))
+
+      // Fallback to in-repo product config when Supabase has no rows yet (common on fresh envs)
+      if (!nextProducts.length) {
+        nextProducts = Object.values(productConfigs)
+          .filter((cfg) => CONFIG_HANDLES.has(cfg.handle) && !ADMIN_HIDDEN_HANDLES.has(cfg.handle))
+          .map((cfg) => ({
+            id: cfg.handle,
+            handle: cfg.handle,
+            title: cfg.title ?? cfg.handle,
+            short_desc: cfg.hero?.description ?? '',
+            long_desc: '',
+            price: normalizeNumber((cfg as any).price?.value ?? null),
+            compare_at_price: normalizeNumber((cfg as any).price?.compare_at ?? null),
+            discount_percent_override: null,
+            average_rating: normalizeNumber((cfg as any).reviews?.average ?? null),
+            review_count: normalizeNumber((cfg as any).reviews?.count ?? null),
+            review_count_label: String((cfg as any).reviews?.label ?? ''),
+            badge: String((cfg as any).badge ?? ''),
+            video_slot: '',
+            care_label_override: '',
+            hide_details_accordion: false,
+            fallback_variant_id: '',
+            fallback_item_id: '',
+            specs_text: '{}',
+            faq_text: '[]',
+            status: 'draft',
+            updated_at: '',
+            media: [],
+          }))
+          .sort((a, b) => a.title.localeCompare(b.title))
+      }
 
       setProducts(nextProducts)
       setSelectedId((prev) => (prev && nextProducts.some((p) => p.id === prev) ? prev : nextProducts[0]?.id ?? null))
