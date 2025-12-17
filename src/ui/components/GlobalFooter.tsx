@@ -7,8 +7,8 @@ type GlobalFooterProps = {
 
 export function GlobalFooter({ supportEmail }: GlobalFooterProps) {
   const socials = [
-    { label: 'Instagram', href: 'https://instagram.com/lumellebeauty', icon: Instagram },
-    { label: 'TikTok', href: 'https://www.tiktok.com/@lumellebeauty', icon: Music2 },
+    { label: 'Instagram', href: 'https://www.instagram.com/lumelleuk/', icon: Instagram },
+    { label: 'TikTok', href: 'https://www.tiktok.com/@lumelleuk', icon: Music2 },
   ]
 
   return (

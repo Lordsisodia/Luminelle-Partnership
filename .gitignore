@@ -16,6 +16,7 @@ app/dist/
 .DS_Store
 .env
 .env.*
+!.env.example
 .vercel
 
 # component-library local installs

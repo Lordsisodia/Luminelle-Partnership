@@ -100,7 +100,7 @@ const PrivacyPage = () => {
   return (
     <>
       <Seo
-        title="Privacy Policy | LUMELLE™"
+        title="Privacy Policy"
         description="How Lumelle collects, uses, and protects your data, plus your privacy rights."
         url="https://lumelle.com/privacy"
         type="article"

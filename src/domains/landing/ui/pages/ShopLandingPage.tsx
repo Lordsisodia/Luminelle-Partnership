@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
 export const ShopLandingPage = () => {
   const image = cdnUrl(homeConfig.hero.image)
   const url = 'https://lumelle.com/'
-  const title = 'Luxury shower cap | Frizz-proof silk press & curls | Lumelle'
+  const title = 'Bathroom & Hair care'
   const description = 'Satin-lined, waterproof cap that blocks steam to keep silk presses, curls, and braids glossy. Free shipping £20+, 30-day returns.'
 
   const jsonLd = {

@@ -13,6 +13,8 @@ type CmsPage = {
   published_at: string | null
 }
 
+const FEATURED_SLUGS = ['home', 'landing', 'product-1', 'product-one', 'product-2', 'product-two']
+
 export default function PagesPage() {
   const { getToken } = useAuth()
   const { user } = useUser()
@@ -40,6 +42,14 @@ export default function PagesPage() {
       return raw
     }
   }, [])
+
+  const visiblePages = useMemo(() => pages.filter((p) => !p.slug.startsWith('admin')), [pages])
+
+  const featuredPages = useMemo(
+    () => visiblePages.filter((p) => FEATURED_SLUGS.includes(p.slug)),
+    [visiblePages]
+  )
+  const otherPages = useMemo(() => visiblePages.filter((p) => !FEATURED_SLUGS.includes(p.slug)), [visiblePages])
 
   const formatDateTime = useCallback((value: string | null | undefined) => {
     if (!value) return '—'
@@ -157,7 +167,7 @@ export default function PagesPage() {
         return
       }
 
-      const slug = pages[0]?.slug || 'home'
+      const slug = pages.find((p) => !p.slug.startsWith('admin'))?.slug || pages[0]?.slug || 'home'
       const url = `${supabaseUrl.replace(/\/$/, '')}/functions/v1/preview-content?type=page&slug=${encodeURIComponent(slug)}`
 
       const res = await fetch(url, { headers: { Authorization: `Bearer ${token}`, apikey: supabaseAnonKey } })
@@ -313,7 +323,7 @@ export default function PagesPage() {
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Pages</div>
             <div className="mt-2 text-sm text-semantic-text-primary/80">
-              {loading ? 'Loading…' : total === null ? `${pages.length} loaded` : `${total} total (showing ${pages.length})`}
+              {loading ? 'Loading…' : total === null ? `${visiblePages.length} loaded` : `${total} total (showing ${visiblePages.length})`}
             </div>
           </div>
         </div>
@@ -322,36 +332,75 @@ export default function PagesPage() {
           <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-semantic-text-primary/80">
             Loading pages…
           </div>
-        ) : pages.length === 0 ? (
+        ) : visiblePages.length === 0 ? (
           <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-semantic-text-primary/80">
             No pages found.
           </div>
         ) : (
-          <div className="mt-4 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60">
-            <table className="w-full text-sm">
-              <thead className="bg-brand-porcelain/70 text-left text-[12px] text-semantic-text-primary/70">
-                <tr>
-                  <th className="px-4 py-3">Title</th>
-                  <th className="px-4 py-3">Slug</th>
-                  <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3">Updated</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white">
-                {pages.map((p) => (
-                  <tr key={p.id} className="border-t border-semantic-legacy-brand-blush/40">
-                    <td className="px-4 py-3 font-semibold text-semantic-text-primary">{p.title}</td>
-                    <td className="px-4 py-3 font-mono text-[12px] text-semantic-text-primary/80">{p.slug}</td>
-                    <td className="px-4 py-3">
-                      <span className="inline-flex rounded-full border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-2 py-1 text-[12px] font-semibold text-semantic-text-primary">
-                        {p.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-semantic-text-primary/70">{formatDateTime(p.updated_at)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-4 grid gap-4">
+            {featuredPages.length ? (
+              <div className="overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60">
+                <div className="border-b border-semantic-legacy-brand-blush/40 bg-brand-porcelain/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
+                  Key pages
+                </div>
+                <table className="w-full text-sm">
+                  <thead className="bg-brand-porcelain/50 text-left text-[12px] text-semantic-text-primary/70">
+                    <tr>
+                      <th className="px-4 py-3">Title</th>
+                      <th className="px-4 py-3">Slug</th>
+                      <th className="px-4 py-3">Status</th>
+                      <th className="px-4 py-3">Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white">
+                    {featuredPages.map((p) => (
+                      <tr key={p.id} className="border-t border-semantic-legacy-brand-blush/40">
+                        <td className="px-4 py-3 font-semibold text-semantic-text-primary">{p.title}</td>
+                        <td className="px-4 py-3 font-mono text-[12px] text-semantic-text-primary/80">{p.slug}</td>
+                        <td className="px-4 py-3">
+                          <span className="inline-flex rounded-full border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-2 py-1 text-[12px] font-semibold text-semantic-text-primary">
+                            {p.status}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-semantic-text-primary/70">{formatDateTime(p.updated_at)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+
+            {otherPages.length ? (
+              <div className="overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60">
+                <div className="border-b border-semantic-legacy-brand-blush/40 bg-brand-porcelain/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
+                  Other pages
+                </div>
+                <table className="w-full text-sm">
+                  <thead className="bg-brand-porcelain/50 text-left text-[12px] text-semantic-text-primary/70">
+                    <tr>
+                      <th className="px-4 py-3">Title</th>
+                      <th className="px-4 py-3">Slug</th>
+                      <th className="px-4 py-3">Status</th>
+                      <th className="px-4 py-3">Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white">
+                    {otherPages.map((p) => (
+                      <tr key={p.id} className="border-t border-semantic-legacy-brand-blush/40">
+                        <td className="px-4 py-3 font-semibold text-semantic-text-primary">{p.title}</td>
+                        <td className="px-4 py-3 font-mono text-[12px] text-semantic-text-primary/80">{p.slug}</td>
+                        <td className="px-4 py-3">
+                          <span className="inline-flex rounded-full border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 px-2 py-1 text-[12px] font-semibold text-semantic-text-primary">
+                            {p.status}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-semantic-text-primary/70">{formatDateTime(p.updated_at)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
           </div>
         )}
       </section>

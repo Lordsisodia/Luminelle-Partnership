@@ -50,7 +50,7 @@ export const BlogPostPage = () => {
     return () => track.removeEventListener('scroll', handleScroll)
   }, [related.length])
 
-  const title = `${post.title} | Lumelle Journal`
+  const title = post.title
   const description =
     post.teaser || post.subtitle || 'Frizz-free hair care, creator routines, and product science from Lumelle.'
   const image = post.ogImage ?? post.cover

@@ -28,7 +28,7 @@ const BriefPage = () => {
   return (
     <>
       <Seo
-        title="Creator Content Brief | LUMELLE™"
+        title="Creator Content Brief"
         description="Everything you need to film with the Lumelle satin-lined waterproof shower cap: shots, guardrails, and product proof points."
         url="https://lumelle.com/brief"
         type="article"

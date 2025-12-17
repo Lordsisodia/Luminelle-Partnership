@@ -43,7 +43,7 @@ export const BlogIndexPage = () => {
     [visiblePosts]
   )
 
-  const title = 'Lumelle Journal | Blog'
+  const title = 'Journal'
   const description =
     'Guides, routines, and creator tips to keep silk presses, curls, and braids frizz-free with Lumelle.'
   const heroImage = cdnUrl(featured[0]?.cover || '/uploads/luminele/product-feature-01.webp')
