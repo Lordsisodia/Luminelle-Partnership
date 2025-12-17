@@ -43,15 +43,24 @@ export const ProductPage = () => {
     setProductDesc,
     heroImage,
   } = useProductContent(handleKey)
+  const [draftOverrides, setDraftOverrides] = useState<any | null>(null)
   const [justAdded, setJustAdded] = useState(false)
 
   const canonicalUrl = useMemo(() => `https://lumelle.com/product/${config.handle}`, [config.handle])
 
-  const ratingValue = config.ratingValueOverride ?? homeConfig.socialProof.rating
-  const ratingCountLabel =
-    config.ratingCountLabelOverride ??
-    homeConfig.socialProof.count?.toString() ??
-    '100+'
+  const ratingValue = (() => {
+    const raw = draftOverrides?.ratingValue
+    if (typeof raw === 'number' && Number.isFinite(raw)) return raw
+    if (typeof raw === 'string' && raw.trim() && Number.isFinite(Number(raw))) return Number(raw)
+    return config.ratingValueOverride ?? homeConfig.socialProof.rating
+  })()
+
+  const ratingCountLabel = (() => {
+    const raw = draftOverrides?.ratingCountLabel
+    if (typeof raw === 'string' && raw.trim()) return raw
+    if (raw != null && Number.isFinite(Number(raw))) return String(raw)
+    return config.ratingCountLabelOverride ?? homeConfig.socialProof.count?.toString() ?? '100+'
+  })()
 
   const navigate = useNavigate()
 
@@ -159,32 +168,46 @@ export const ProductPage = () => {
   }
 
   const essentials =
-    sections?.essentials && sections.essentials.length > 0
-      ? sections.essentials
-      : config.essentials
+    draftOverrides?.specs?.essentials && draftOverrides.specs.essentials.length > 0
+      ? draftOverrides.specs.essentials
+      : sections?.essentials && sections.essentials.length > 0
+        ? sections.essentials
+        : config.essentials
   const reasons =
-    sections?.reasons && sections.reasons.length > 0
-      ? sections.reasons
-      : config.reasons
+    draftOverrides?.specs?.reasons && draftOverrides.specs.reasons.length > 0
+      ? draftOverrides.specs.reasons
+      : sections?.reasons && sections.reasons.length > 0
+        ? sections.reasons
+        : config.reasons
   const faqs =
-    sections?.faq && sections.faq.length > 0
-      ? sections.faq
-      : config.qa
+    draftOverrides?.faq && draftOverrides.faq.length > 0
+      ? draftOverrides.faq
+      : sections?.faq && sections.faq.length > 0
+        ? sections.faq
+        : config.qa
   const howRaw =
-    sections?.how && sections.how.length > 0
-      ? sections.how
-      : config.how ?? []
+    draftOverrides?.specs?.how && draftOverrides.specs.how.length > 0
+      ? draftOverrides.specs.how
+      : sections?.how && sections.how.length > 0
+        ? sections.how
+        : config.how ?? []
   const how = howRaw.map((item: any, idx: number) =>
     typeof item === 'string'
       ? { title: `Reason ${idx + 1}`, body: item }
       : item
   )
   const care =
-    sections?.care && sections.care.length > 0
-      ? sections.care
-      : config.care ?? []
-  const featureCopy = config.featureCallouts ?? null
-  const featuredTikTokHeading = config.featuredTikTokHeading
+    draftOverrides?.specs?.care && draftOverrides.specs.care.length > 0
+      ? draftOverrides.specs.care
+      : sections?.care && sections.care.length > 0
+        ? sections.care
+        : config.care ?? []
+  const featureCopy = draftOverrides?.specs?.featureCallouts ?? config.featureCallouts ?? null
+  const featuredTikTokHeading = draftOverrides?.specs?.featuredTikTokHeading ?? config.featuredTikTokHeading
+
+  useEffect(() => {
+    setDraftOverrides(null)
+  }, [handleKey])
 
   useEffect(() => {
     // Allow the admin products editor to "live preview" draft changes in an iframe without saving.
@@ -194,6 +217,7 @@ export const ProductPage = () => {
       if (data.handle !== handleKey) return
 
       const draft = data.payload || {}
+      setDraftOverrides(draft)
       if (Array.isArray(draft.gallery)) setGallery(draft.gallery)
       if (draft.price != null) setPrice(Number(draft.price))
       if (typeof draft.productTitle === 'string') setProductTitle(draft.productTitle)
@@ -259,9 +283,22 @@ export const ProductPage = () => {
         activeImage,
         setActiveImage,
         price,
-        compareAtPrice: config.compareAtPrice,
-        discountPercentOverride: config.discountPercentOverride,
-        badge: config.badge,
+        compareAtPrice: (() => {
+          const v = draftOverrides?.compareAtPrice
+          if (v == null) return config.compareAtPrice
+          const n = Number(v)
+          return Number.isFinite(n) ? n : config.compareAtPrice
+        })(),
+        discountPercentOverride: (() => {
+          const v = draftOverrides?.discountPercentOverride
+          if (v == null) return config.discountPercentOverride
+          const n = Number(v)
+          return Number.isFinite(n) ? n : config.discountPercentOverride
+        })(),
+        badge:
+          typeof draftOverrides?.badge === 'string'
+            ? draftOverrides.badge
+            : config.badge,
         productTitle,
         productDesc,
         ratingValue,
@@ -275,8 +312,14 @@ export const ProductPage = () => {
         setQuantity,
         how,
         care,
-        careLabel: config.careLabelOverride,
-        hideDetailsAccordion: config.hideDetailsAccordion,
+        careLabel:
+          typeof draftOverrides?.careLabelOverride === 'string'
+            ? draftOverrides.careLabelOverride
+            : config.careLabelOverride,
+        hideDetailsAccordion:
+          typeof draftOverrides?.hideDetailsAccordion === 'boolean'
+            ? draftOverrides.hideDetailsAccordion
+            : config.hideDetailsAccordion,
         featureCopy,
         reasons,
         essentials,

@@ -1,7 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { createClient } from '@supabase/supabase-js'
+import { v2 as cloudinary } from 'cloudinary'
+
 
 const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } = process.env
+
+if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  })
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
@@ -18,7 +28,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { error } = await query
   if (error) return res.status(500).json({ error: error.message })
 
-  // Optional: Cloudinary destroy could be added here (requires API secret) to clean up assets.
+
+  // Optional: Cloudinary destroy
+  if (process.env.CLOUDINARY_API_SECRET) {
+    try {
+      await cloudinary.uploader.destroy(public_id)
+    } catch (err) {
+      console.warn('Cloudinary destroy failed', err)
+    }
+  }
 
   return res.status(200).json({ ok: true })
 }

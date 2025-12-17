@@ -22,10 +22,13 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
-  // TODO: plug real admin auth (Clerk/Supabase service session). For now just block if not localhost.
-  const referer = req.headers.referer || ''
-  if (!referer.includes('localhost')) {
-    return res.status(403).json({ error: 'Unauthorized' })
+  // Simple auth guard: require ADMIN_SHARED_SECRET header if set; else allow (dev).
+  const shared = process.env.ADMIN_SHARED_SECRET
+  if (shared) {
+    const provided = req.headers['x-admin-secret'] as string | undefined
+    if (!provided || provided !== shared) {
+      return res.status(403).json({ error: 'Unauthorized' })
+    }
   }
 
   const { folder = '', public_id } = typeof req.body === 'object' ? req.body : {}
