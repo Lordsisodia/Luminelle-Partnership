@@ -712,13 +712,6 @@ export default function ProductsPage() {
       actions={
         <div className="flex items-center gap-2">
           <Pill>{products.length} products</Pill>
-          {lastSavedAt && product ? (
-            <span className="flex items-center gap-1 text-xs text-semantic-text-primary/70">
-              <CheckCircle2 className="h-4 w-4 text-green-600" /> Saved {lastSavedAt.toLocaleTimeString()}
-            </span>
-          ) : null}
-          <Pill>{user?.primaryEmailAddress?.emailAddress || user?.id || '—'}</Pill>
-          <Pill>Roles: {roleDebug.length ? roleDebug.join(', ') : '—'}</Pill>
           <button
             disabled={saving || !dirty}
             onClick={handleSave}
