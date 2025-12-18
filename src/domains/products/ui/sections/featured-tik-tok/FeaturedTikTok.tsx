@@ -14,6 +14,7 @@ type Heading = {
 type Props = {
   heading?: Heading
   sectionId?: string
+  tiktoks?: typeof successStories
 }
 
 const defaultHeading: Heading = {
@@ -23,7 +24,7 @@ const defaultHeading: Heading = {
   alignment: 'center',
 }
 
-export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
+export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const [active, setActive] = useState(0)
   const [hydrated, setHydrated] = useState(false)
@@ -137,8 +138,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
             onMouseMove={handleMouseMove}
             className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-2 sm:px-2 lg:gap-4 lg:px-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing dragging:cursor-grabbing select-none"
           >
-            {successStories.map((s) => {
-              const idx = successStories.indexOf(s)
+            {(tiktoks ?? successStories).map((s, idx) => {
               const shouldLoad = hydrated && readyIndexes.has(idx)
               return (
                 <article key={s.handle} data-tiktok-card className="min-w-[min(72vw,300px)] snap-center lg:min-w-[min(340px,26vw)]">
@@ -204,7 +204,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
         </div>
 
         <div className="mt-4 flex items-center justify-center gap-2 text-sm text-semantic-text-primary/80">
-          {successStories.map((_, i) => (
+          {(tiktoks ?? successStories).map((_, i) => (
             <button
               key={i}
               aria-label={`Go to TikTok slide ${i + 1}`}
@@ -214,7 +214,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
           ))}
         </div>
         <span className="sr-only" aria-live="polite">
-          Showing TikTok slide {active + 1} of {successStories.length}
+          Showing TikTok slide {active + 1} of {(tiktoks ?? successStories).length}
         </span>
       </div>
     </section>

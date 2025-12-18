@@ -1,5 +1,36 @@
 import type { ProductConfig } from './product-types'
 
+// TikTok embeds supplied for the Satin Overnight Curler (see docs/marketing/tiktok-heatless-curler-videos.md)
+export const DEFAULT_CURLER_VIDEOS = [
+  {
+    name: 'Lumelle UK',
+    handle: '@lumelleuk',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7576640339788746006?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@lumelleuk/video/7576640339788746006',
+  },
+  {
+    name: 'Louaira',
+    handle: '@louaira',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7581520947211980054?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@louaira/video/7581520947211980054',
+  },
+  {
+    name: 'Hannah H. Styless',
+    handle: '@hannahh.styless',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7582990745552948502?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@hannahh.styless/video/7582990745552948502',
+  },
+  {
+    name: 'Lumelle UK Tutorial',
+    handle: '@lumelleuk',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7581498853610769667?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@lumelleuk/video/7581498853610769667',
+  },
+]
+
+const CURLER_VIDEO_SLOT = `video://${DEFAULT_CURLER_VIDEOS[0].embedUrl}`
+
+// Default fallback video (shower cap) used by other products; curler overrides below.
 export const DEFAULT_VIDEO_SLOT = 'video://https://www.tiktok.com/embed/v2/7567328998158585110'
 
 const CAP_GALLERY = [
@@ -83,7 +114,7 @@ const curlerGallery = [
   '/uploads/curler/6.webp',
   '/uploads/curler/7.webp',
   '/uploads/curler/8.webp',
-  DEFAULT_VIDEO_SLOT,
+  CURLER_VIDEO_SLOT,
 ]
 
 const essentialsCurler = [
@@ -195,14 +226,15 @@ const curlerConfig: ProductConfig = {
   careLabelOverride: "What's included",
   hideDetailsAccordion: true,
   gallery: curlerGallery,
-  videoSlot: DEFAULT_VIDEO_SLOT,
+  // Use curler-specific hero video (first client-provided TikTok)
+  videoSlot: CURLER_VIDEO_SLOT,
   essentials: essentialsCurler,
   reasons: reasonsCurler,
   qa: qaCurler,
   how: howCurler,
   care: careCurler,
   featureCallouts: {
-    mediaSrc: DEFAULT_VIDEO_SLOT,
+    mediaSrc: CURLER_VIDEO_SLOT,
     mediaAlt: 'Satin overnight curler demo',
     mediaLabel: 'Heatless overnight curls',
     mediaNote: 'Soft satin set that stays comfy all night',
@@ -219,6 +251,7 @@ const curlerConfig: ProductConfig = {
     description: "See How Long Creators' Curls Last and How Effortlessly Gorgeous They Look.",
     alignment: 'center',
   },
+  featuredTikToks: DEFAULT_CURLER_VIDEOS,
 }
 
 export const productConfigs: Record<string, ProductConfig> = {

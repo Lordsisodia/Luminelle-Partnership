@@ -204,6 +204,7 @@ export const ProductPage = () => {
         : config.care ?? []
   const featureCopy = draftOverrides?.specs?.featureCallouts ?? config.featureCallouts ?? null
   const featuredTikTokHeading = draftOverrides?.specs?.featuredTikTokHeading ?? config.featuredTikTokHeading
+  const featuredTikToks = draftOverrides?.specs?.featuredTikToks ?? config.featuredTikToks
 
   useEffect(() => {
     setDraftOverrides(null)
@@ -325,6 +326,7 @@ export const ProductPage = () => {
         essentials,
         faqs,
         featuredTikTokHeading,
+        featuredTikToks,
       })}
     </MarketingLayout>
   )

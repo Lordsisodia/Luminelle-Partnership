@@ -34,6 +34,12 @@ export type SectionProps = {
   essentials: any
   faqs: any
   featuredTikTokHeading: any
+  featuredTikToks?: {
+    name: string
+    handle: string
+    embedUrl: string
+    videoUrl?: string
+  }[]
   reviews?: ReviewType[]
   hideDetailsAccordion?: boolean
 }
@@ -110,7 +116,7 @@ export function renderSections(props: SectionProps): ReactNode {
         }}
       />
 
-      <FeaturedTikTok heading={props.featuredTikTokHeading} />
+      <FeaturedTikTok heading={props.featuredTikTokHeading} tiktoks={props.featuredTikToks} />
 
       <FaqSectionShop
         sectionId="faq"
