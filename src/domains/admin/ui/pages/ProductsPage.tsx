@@ -43,6 +43,12 @@ type AdminProduct = {
 const CONFIG_HANDLES = new Set(Object.values(productConfigs).map((cfg) => cfg.handle))
 const ADMIN_HIDDEN_HANDLES = new Set<string>(['satin-overnight-curler-set'])
 
+const getProductConfig = (handle: string) => {
+  const direct = (productConfigs as any)[handle]
+  if (direct) return direct
+  return Object.values(productConfigs).find((cfg) => cfg.handle === handle)
+}
+
 const normalizeNumber = (value: unknown): number | null => {
   if (value == null || value === '') return null
   const n = typeof value === 'number' ? value : Number(value)
@@ -135,43 +141,78 @@ function Pill({ children }: { children: ReactNode }) {
   )
 }
 
+const prettyTitle = (raw: string) =>
+  raw
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/\b\w/g, (m) => m.toUpperCase())
+
 function ProductCard({ product, onOpen }: { product: AdminProduct; onOpen: () => void }) {
-  const hero = product.media.find((m) => m.is_primary)?.path ?? product.media[0]?.path
-  const hasDiscount = product.compare_at_price != null && product.price != null && product.compare_at_price > product.price
+  const cfg = getProductConfig(product.handle)
+  const hero =
+    product.media.find((m) => m.is_primary)?.path ??
+    product.media[0]?.path ??
+    cfg?.gallery?.[0] ??
+    cfg?.featureCallouts?.mediaSrc ??
+    null
+
+  const price = product.price ?? cfg?.defaultPrice ?? 0
+  const compareAtPrice = product.compare_at_price ?? cfg?.compareAtPrice ?? null
+  const hasDiscount = compareAtPrice != null && compareAtPrice > price
+  const pctOff =
+    hasDiscount && compareAtPrice
+      ? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)
+      : product.discount_percent_override ?? cfg?.discountPercentOverride ?? null
+
+  const title = prettyTitle(product.title || cfg?.defaultTitle || cfg?.title || product.handle)
+  const subtitle = product.short_desc || cfg?.defaultSubtitle || cfg?.hero?.description || ''
+  const avgRating = product.average_rating ?? cfg?.ratingValueOverride ?? null
+  const ratingLabel =
+    product.review_count_label ||
+    (product.review_count != null ? String(product.review_count) : undefined) ||
+    cfg?.ratingCountLabelOverride ||
+    null
+
   return (
     <button
       className="flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow"
       onClick={onOpen}
     >
       {hero ? (
-        <div className="h-40 w-full overflow-hidden bg-brand-porcelain">
-          <img src={hero} alt={product.title} className="h-full w-full object-cover" loading="lazy" />
+        <div className="h-64 w-full overflow-hidden bg-brand-porcelain">
+          <img src={hero} alt={title} className="h-full w-full object-cover" loading="lazy" />
         </div>
       ) : null}
-      <div className="space-y-2 px-4 py-3">
-        <div className="flex items-center justify-between gap-2">
-          <div className="text-sm font-semibold text-semantic-text-primary">{product.title}</div>
-          <Pill>{product.handle}</Pill>
-        </div>
-        <div className="text-xs text-semantic-text-primary/70 line-clamp-2">{product.short_desc}</div>
-        <div className="flex items-baseline gap-2 text-semantic-text-primary">
-          <span className="text-lg font-semibold">£{(product.price ?? 0).toFixed(2)}</span>
-          {hasDiscount ? (
-            <span className="text-sm text-semantic-text-primary/60 line-through">£{product.compare_at_price?.toFixed(2)}</span>
-          ) : null}
-        </div>
-        <div className="flex flex-wrap items-center gap-2 text-xs text-semantic-text-primary/70">
-          {product.average_rating != null ? (
-            <span className="inline-flex items-center gap-1">
-              <Star className="h-4 w-4 fill-amber-400 text-amber-400" /> {product.average_rating.toFixed(1)}
-            </span>
-          ) : null}
-          {product.review_count != null ? <span>• {product.review_count} reviews</span> : null}
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {product.badge ? (
-            <span className="rounded-full bg-brand-porcelain px-2 py-1 text-[11px] font-semibold text-semantic-text-primary/80">
-              {product.badge}
+        <div className="space-y-2 px-4 py-3">
+          <div className="flex items-center justify-between gap-2">
+            <div className="text-base font-semibold text-semantic-text-primary line-clamp-1">{title}</div>
+            <Pill>{product.handle}</Pill>
+          </div>
+          <div className="text-xs text-semantic-text-primary/70 line-clamp-2">{subtitle || 'No description yet'}</div>
+          <div className="flex items-baseline gap-2 text-semantic-text-primary">
+            <span className="text-lg font-semibold">£{price.toFixed(2)}</span>
+            {hasDiscount && compareAtPrice != null ? (
+              <>
+                <span className="text-sm text-semantic-text-primary/60 line-through">£{compareAtPrice.toFixed(2)}</span>
+                {pctOff ? <span className="text-sm font-semibold text-rose-600">-{pctOff}%</span> : null}
+              </>
+            ) : null}
+          </div>
+          <div className="flex flex-wrap items-center gap-2 text-xs text-semantic-text-primary/70">
+            {avgRating != null ? (
+              <span className="inline-flex items-center gap-1">
+                <Star className="h-4 w-4 fill-amber-400 text-amber-400" /> {avgRating.toFixed(1)}
+              </span>
+            ) : null}
+            {ratingLabel ? <span>• {ratingLabel} reviews</span> : null}
+            {compareAtPrice && hasDiscount ? <span className="text-rose-600 font-semibold">Sale</span> : null}
+            <span className="text-semantic-text-primary/60">Updated</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {product.badge ? (
+              <span className="rounded-full bg-brand-porcelain px-2 py-1 text-[11px] font-semibold text-semantic-text-primary/80">
+                {product.badge}
             </span>
           ) : null}
         </div>
@@ -198,6 +239,7 @@ export default function ProductsPage() {
   const [iframeHeight, setIframeHeight] = useState(844)
 
   const product = selectedId ? products.find((p) => p.id === selectedId) : null
+  const hasSelection = !!product && !loading
 
   const dirty = useMemo(() => {
     if (!product) return false
@@ -327,7 +369,16 @@ export default function ProductsPage() {
         .map((row: any) => {
           const id = String(row.id)
           const handle = String(row.handle)
-          const media = (mediaByProduct.get(id) ?? []).slice().sort((a, b) => a.sort - b.sort)
+          const cfg = getProductConfig(handle)
+          const mediaFromDb = (mediaByProduct.get(id) ?? []).slice().sort((a, b) => a.sort - b.sort)
+          const media = mediaFromDb.length
+            ? mediaFromDb
+            : (cfg?.gallery ?? []).map((path, idx) => ({
+                path,
+                alt: `${cfg?.title ?? handle} image ${idx + 1}`,
+                sort: idx,
+                is_primary: idx === 0,
+              }))
           return {
             id,
             handle,
@@ -387,7 +438,7 @@ export default function ProductsPage() {
       }
 
       setProducts(nextProducts)
-      setSelectedId((prev) => (prev && nextProducts.some((p) => p.id === prev) ? prev : nextProducts[0]?.id ?? null))
+      setSelectedId((prev) => (prev && nextProducts.some((p) => p.id === prev) ? prev : null))
       setSnapshots(Object.fromEntries(nextProducts.map((p) => [p.id, JSON.stringify(p)])))
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load products.')
@@ -700,8 +751,7 @@ export default function ProductsPage() {
         </div>
       ) : null}
 
-      <div className="grid gap-6 xl:grid-cols-[360px_1fr_360px]">
-        {/* Products list */}
+      {!hasSelection ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between gap-2">
             <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Products</div>
@@ -713,15 +763,14 @@ export default function ProductsPage() {
               Reload
             </button>
           </div>
-          <div className="grid gap-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2">
             {products.map((p) => (
               <ProductCard key={p.id} product={p} onOpen={() => setSelectedId(p.id)} />
             ))}
           </div>
         </div>
-
-        {/* Editor */}
-        {product && !loading ? (
+      ) : (
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
           <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <button
@@ -967,15 +1016,9 @@ export default function ProductsPage() {
               </div>
             </section>
           </div>
-        ) : (
-          <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 text-sm text-semantic-text-primary/70">
-            Select a product to edit.
-          </div>
-        )}
 
-        {/* Live preview (desktop only) */}
-        <div className="hidden xl:block">
-          {product ? (
+          {/* Live preview (desktop only) */}
+          <div className="hidden xl:block">
             <iframe
               ref={iframeRef}
               title="Product mobile preview"
@@ -984,13 +1027,9 @@ export default function ProductsPage() {
               style={{ height: iframeHeight, display: 'block' }}
               scrolling="yes"
             />
-          ) : (
-            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 text-sm text-semantic-text-primary/70">
-              Preview appears when a product is selected.
-            </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </AdminPageLayout>
   )
 }
