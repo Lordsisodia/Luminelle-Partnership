@@ -709,23 +709,7 @@ export default function ProductsPage() {
     <AdminPageLayout
       title="Products"
       subtitle="Edits are saved to Supabase (cms_products + cms_product_media). Storefront still reads from in-repo config for now."
-      actions={
-        <div className="flex items-center gap-2">
-          <Pill>{products.length} products</Pill>
-          <button
-            disabled={saving || !dirty}
-            onClick={handleSave}
-            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold shadow-sm transition ${
-              saving || !dirty
-                ? 'cursor-not-allowed bg-semantic-text-primary/10 text-semantic-text-primary/50'
-                : 'bg-semantic-legacy-brand-cocoa text-white hover:opacity-90'
-            }`}
-          >
-            <Save className="h-4 w-4" />
-            {saving ? 'Saving…' : 'Save changes'}
-          </button>
-        </div>
-      }
+      actions={null}
     >
       {!isSupabaseConfigured ? (
         <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/60 p-4 text-sm text-semantic-text-primary/80">
@@ -747,7 +731,19 @@ export default function ProductsPage() {
       {!hasSelection ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between gap-2">
-            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Products</div>
+            <div className="flex items-center gap-2">
+              <Pill>{products.length} products</Pill>
+              <button
+                disabled={saving || !dirty || !product}
+                onClick={handleSave}
+                className={`inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary shadow-sm transition ${
+                  saving || !dirty || !product ? 'opacity-60 cursor-not-allowed' : 'hover:bg-brand-porcelain/60'
+                }`}
+              >
+                <Save className="h-4 w-4" />
+                {saving ? 'Saving…' : 'Save changes'}
+              </button>
+            </div>
             <button
               className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60 disabled:opacity-60"
               onClick={loadProducts}
