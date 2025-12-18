@@ -479,14 +479,9 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                   </div>
                   <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 p-3">
                     {items.length === 0 ? (
-                      <div className="space-y-3">
-                        <div className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-5 text-center shadow-soft">
-                          <p className="text-sm font-semibold text-semantic-text-primary">Your cart is empty.</p>
-                          <p className="mt-1 text-xs text-semantic-text-primary/70">Add a bestseller to unlock free shipping faster.</p>
-                        </div>
-                        <div className="space-y-2">
-                          {upsellProducts.map((p) => renderUpsellCard(p))}
-                        </div>
+                      <div className="rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-5 text-center shadow-soft">
+                        <p className="text-sm font-semibold text-semantic-text-primary">Your cart is empty.</p>
+                        <p className="mt-1 text-xs text-semantic-text-primary/70">Add a bestseller to unlock free shipping faster.</p>
                       </div>
                     ) : (
                       items.map((it) => {
