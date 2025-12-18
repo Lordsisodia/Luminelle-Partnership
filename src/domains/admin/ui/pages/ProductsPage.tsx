@@ -773,94 +773,166 @@ export default function ProductsPage() {
             </div>
 
             <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Hero</p>
-              <Field label="Title">
-                <TextInput value={product.title} onChange={(v) => updateProduct((p) => ({ ...p, title: v }))} />
-              </Field>
-              <Field label="Subtext / hero description">
-                <TextInput value={product.short_desc} onChange={(v) => updateProduct((p) => ({ ...p, short_desc: v }))} />
-              </Field>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Price">
-                  <TextInput
-                    value={product.price == null ? '' : String(product.price)}
-                    onChange={(v) => updateProduct((p) => ({ ...p, price: normalizeNumber(v) }))}
-                    placeholder="e.g. 14.99"
-                  />
-                </Field>
-                <Field label="Compare at">
-                  <TextInput
-                    value={product.compare_at_price == null ? '' : String(product.compare_at_price)}
-                    onChange={(v) => updateProduct((p) => ({ ...p, compare_at_price: normalizeNumber(v) }))}
-                    placeholder="e.g. 19.99"
-                  />
-                </Field>
+              <div className="h-9 -mx-5 -mt-5 mb-4 rounded-t-2xl bg-semantic-legacy-brand-blush flex items-center justify-center text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary">
+                Hero
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Discount % override">
-                  <TextInput
-                    value={product.discount_percent_override == null ? '' : String(product.discount_percent_override)}
-                    onChange={(v) => updateProduct((p) => ({ ...p, discount_percent_override: v ? Number(v) : null }))}
-                    placeholder="e.g. 20"
-                  />
-                </Field>
-                <Field label="Promo badge">
+
+              {/* Pill + Gallery */}
+              <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 space-y-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Hero pill & gallery</p>
+                <Field label="Hero pill / promo badge">
                   <TextInput
                     value={product.badge}
                     onChange={(v) => updateProduct((p) => ({ ...p, badge: v }))}
-                    placeholder="e.g. Buy 2, save 10%"
+                    placeholder="e.g. New heatless curler launched"
                   />
+                </Field>
+
+                <div className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/50 bg-brand-porcelain/50 p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Gallery images</p>
+                    <button
+                      type="button"
+                      className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
+                      onClick={handleUpload}
+                    >
+                      Upload to Cloudinary
+                    </button>
+                  </div>
+                  <div className="space-y-2">
+                    {product.media.map((item, idx) => (
+                      <div
+                        key={`${item.path}-${idx}`}
+                        className="flex items-center gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2"
+                      >
+                        {item.path ? <img src={item.path} alt="" className="h-14 w-14 rounded-lg object-cover" loading="lazy" /> : <div className="h-14 w-14 rounded-lg bg-brand-porcelain/60" />}
+                        <div className="flex flex-1 flex-col gap-2">
+                          <TextInput
+                            value={item.path}
+                            onChange={(v) =>
+                              updateProduct((p) => ({
+                                ...p,
+                                media: p.media.map((m, i) => (i === idx ? { ...m, path: v } : m)),
+                              }))
+                            }
+                            placeholder="Image URL (/uploads/... or https://...)"
+                          />
+                          <TextInput
+                            value={item.alt}
+                            onChange={(v) =>
+                              updateProduct((p) => ({
+                                ...p,
+                                media: p.media.map((m, i) => (i === idx ? { ...m, alt: v } : m)),
+                              }))
+                            }
+                            placeholder="Alt text"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <button
+                            type="button"
+                            className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white p-1 text-semantic-text-primary hover:bg-brand-porcelain/60 disabled:opacity-50"
+                            onClick={() => moveMedia(idx, Math.max(0, idx - 1))}
+                            disabled={idx === 0}
+                            aria-label="Move up"
+                          >
+                            <ArrowUp className="h-4 w-4" />
+                          </button>
+                          <button
+                            type="button"
+                            className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white p-1 text-semantic-text-primary hover:bg-brand-porcelain/60 disabled:opacity-50"
+                            onClick={() => moveMedia(idx, Math.min(product.media.length - 1, idx + 1))}
+                            disabled={idx === product.media.length - 1}
+                            aria-label="Move down"
+                          >
+                            <ArrowDown className="h-4 w-4" />
+                          </button>
+                        </div>
+                        <button
+                          className="inline-flex items-center gap-1 text-xs text-semantic-text-primary/70 hover:text-semantic-text-primary"
+                          onClick={() =>
+                            updateProduct((p) => ({
+                              ...p,
+                              media: p.media
+                                .filter((_, i) => i !== idx)
+                                .map((m, i) => ({ ...m, sort: i, is_primary: i === 0 })),
+                            }))
+                          }
+                        >
+                          <Trash2 className="h-4 w-4" /> Remove
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
+                      onClick={() =>
+                        updateProduct((p) => ({
+                          ...p,
+                          media: [
+                            ...p.media,
+                            {
+                              path: '',
+                              alt: '',
+                              sort: p.media.length,
+                              is_primary: p.media.length === 0,
+                            },
+                          ],
+                        }))
+                      }
+                    >
+                      + Add media URL
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Title & Subtext */}
+              <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 space-y-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Copy</p>
+                <Field label="Title">
+                  <TextInput value={product.title} onChange={(v) => updateProduct((p) => ({ ...p, title: v }))} />
+                </Field>
+                <Field label="Subtext / hero description">
+                  <TextInput value={product.short_desc} onChange={(v) => updateProduct((p) => ({ ...p, short_desc: v }))} />
                 </Field>
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Average rating">
-                  <TextInput
-                    value={product.average_rating == null ? '' : String(product.average_rating)}
-                    onChange={(v) => updateProduct((p) => ({ ...p, average_rating: normalizeNumber(v) }))}
-                    placeholder="e.g. 4.8"
-                  />
-                </Field>
-                <Field label="Review count">
-                  <TextInput
-                    value={product.review_count == null ? '' : String(product.review_count)}
-                    onChange={(v) => updateProduct((p) => ({ ...p, review_count: v ? Number(v) : null }))}
-                    placeholder="e.g. 100"
-                  />
-                </Field>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Review count label">
-                  <TextInput
-                    value={product.review_count_label}
-                    onChange={(v) => updateProduct((p) => ({ ...p, review_count_label: v }))}
-                    placeholder="e.g. 100+"
-                  />
-                </Field>
-                <Field label="Video slot">
-                  <TextInput
-                    value={product.video_slot}
-                    onChange={(v) => updateProduct((p) => ({ ...p, video_slot: v }))}
-                    placeholder="video://https://www.tiktok.com/embed/v2/..."
-                  />
-                </Field>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Care label override">
-                  <TextInput
-                    value={product.care_label_override}
-                    onChange={(v) => updateProduct((p) => ({ ...p, care_label_override: v }))}
-                    placeholder="e.g. What's included"
-                  />
-                </Field>
-                <Field label="Hide details accordion" description="cms_products.hide_details_accordion">
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
-                    onClick={() => updateProduct((p) => ({ ...p, hide_details_accordion: !p.hide_details_accordion }))}
-                  >
-                    {product.hide_details_accordion ? 'Yes (hidden)' : 'No (visible)'}
-                  </button>
-                </Field>
+
+              {/* Price & Reviews */}
+              <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 space-y-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Price & Reviews</p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Field label="Price">
+                    <TextInput
+                      value={product.price == null ? '' : String(product.price)}
+                      onChange={(v) => updateProduct((p) => ({ ...p, price: normalizeNumber(v) }))}
+                      placeholder="e.g. 14.99"
+                    />
+                  </Field>
+                  <Field label="Compare at">
+                    <TextInput
+                      value={product.compare_at_price == null ? '' : String(product.compare_at_price)}
+                      onChange={(v) => updateProduct((p) => ({ ...p, compare_at_price: normalizeNumber(v) }))}
+                      placeholder="e.g. 19.99"
+                    />
+                  </Field>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Field label="Average rating">
+                    <TextInput
+                      value={product.average_rating == null ? '' : String(product.average_rating)}
+                      onChange={(v) => updateProduct((p) => ({ ...p, average_rating: normalizeNumber(v) }))}
+                      placeholder="e.g. 4.8"
+                    />
+                  </Field>
+                  <Field label="Review count">
+                    <TextInput
+                      value={product.review_count == null ? '' : String(product.review_count)}
+                      onChange={(v) => updateProduct((p) => ({ ...p, review_count: v ? Number(v) : null }))}
+                      placeholder="e.g. 100"
+                    />
+                  </Field>
+                </div>
               </div>
             </section>
 

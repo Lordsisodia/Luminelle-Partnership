@@ -12,6 +12,8 @@ import {
   PanelsTopLeft,
   BarChart3,
   History,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react'
 
 type NavItem = {
@@ -32,7 +34,19 @@ const navItems: NavItem[] = [
   { group: 'Tools', label: 'Activity', to: '/admin/activity', icon: History },
 ]
 
-function NavItemLink({ to, label, icon: Icon, onNavigate }: { to: string; label: string; icon: LucideIcon; onNavigate?: () => void }) {
+function NavItemLink({
+  to,
+  label,
+  icon: Icon,
+  onNavigate,
+  collapsed,
+}: {
+  to: string
+  label: string
+  icon: LucideIcon
+  onNavigate?: () => void
+  collapsed?: boolean
+}) {
   return (
     <NavLink
       to={to}
@@ -40,17 +54,16 @@ function NavItemLink({ to, label, icon: Icon, onNavigate }: { to: string; label:
       onClick={onNavigate}
       className={({ isActive }) =>
         [
-          'flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold transition',
+          'flex items-center rounded-xl px-3 py-2 text-sm font-semibold transition overflow-hidden',
           isActive
             ? 'bg-white text-semantic-text-primary shadow-sm ring-1 ring-semantic-legacy-brand-blush/60'
             : 'text-semantic-text-primary/80 hover:bg-white/60 hover:text-semantic-text-primary',
+          collapsed ? 'justify-center' : 'justify-start gap-2',
         ].join(' ')
       }
     >
-      <span className="flex items-center gap-2">
-        <Icon className="h-4 w-4" aria-hidden="true" />
-        {label}
-      </span>
+      <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+      {collapsed ? null : <span className="ml-2 truncate">{label}</span>}
     </NavLink>
   )
 }
@@ -74,6 +87,7 @@ function BurgerIcon({ open }: { open: boolean }) {
 export default function AdminShell() {
   const { user, signedIn, signOut } = useAuth()
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
 
   useEffect(() => {
     setNoIndexNoFollow()
@@ -87,55 +101,112 @@ export default function AdminShell() {
 
   return (
     <div className="min-h-screen bg-brand-porcelain text-semantic-text-primary">
-      <div className="mx-auto flex min-h-screen w-full max-w-[1400px]">
+      <div className="flex min-h-screen w-full">
         {/* Desktop sidebar */}
-        <aside className="hidden w-72 shrink-0 border-r border-semantic-legacy-brand-blush/60 p-4 md:block">
-          <div className="flex items-center justify-between rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
-            <div>
-              <div className="text-sm font-semibold text-semantic-text-primary">Lumelle</div>
-              <div className="text-xs text-semantic-text-primary/70">Admin console</div>
-            </div>
-            <span className="rounded-full border border-semantic-legacy-brand-blush/60 px-2 py-1 text-[11px] text-semantic-text-primary/70">
-              {import.meta.env.MODE}
-            </span>
-          </div>
-
-          <nav className="mt-4 space-y-4">
-            {(['Core', 'Content', 'Tools'] as const).map((group) => (
-              <div key={group}>
-                <div className="px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-                  {group}
+        <aside
+          className={`sticky top-0 hidden h-screen shrink-0 border-r border-semantic-legacy-brand-blush/60 bg-brand-porcelain p-2 md:block transition-[width] duration-200 ${
+            collapsed ? 'w-16' : 'w-72'
+          }`}
+        >
+          <div className="flex h-full flex-col gap-3">
+            <div
+              className={`rounded-2xl ${
+                collapsed
+                  ? 'flex h-10 items-center justify-center px-1'
+                  : 'relative flex items-center justify-between border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3'
+              }`}
+            >
+              {!collapsed && (
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/70 bg-white text-base font-semibold text-semantic-legacy-brand-cocoa shadow-sm">
+                    L
+                  </span>
+                  <div className="flex flex-col">
+                    <div className="text-sm font-semibold text-semantic-text-primary">Lumelle</div>
+                    <div className="text-xs text-semantic-text-primary/70">Admin console</div>
+                  </div>
                 </div>
-                <div className="mt-2 space-y-1">
-                  {grouped[group].map((item) => (
-                    <NavItemLink key={item.to} to={item.to} label={item.label} icon={item.icon} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </nav>
-
-          <div className="mt-6 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">
-            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-              Signed in
-            </div>
-            <div className="mt-2 text-sm font-semibold">{user?.fullName || user?.email || 'Admin'}</div>
-            {user?.email ? <div className="mt-1 text-xs text-semantic-text-primary/70">{user.email}</div> : null}
-            <div className="mt-3 flex flex-wrap gap-2">
-              <a
-                href="/"
-                className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
+              )}
+              {!collapsed && (
+                <span className="ml-auto rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-[11px] font-semibold text-semantic-text-primary/80">
+                  {import.meta.env.MODE}
+                </span>
+              )}
+              <button
+                aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                onClick={() => setCollapsed((v) => !v)}
+                className={`${
+                  collapsed
+                    ? 'h-7 w-7 rounded-full border border-semantic-legacy-brand-blush/60 bg-white shadow-sm hover:bg-brand-porcelain'
+                    : 'absolute -right-2 top-1/2 h-7 w-7 -translate-y-1/2 rounded-full border border-semantic-legacy-brand-blush/60 bg-white shadow-sm hover:bg-brand-porcelain'
+                }`}
               >
-                View storefront
-              </a>
-              {signedIn ? (
-                <button
-                  onClick={signOut}
-                  className="inline-flex items-center rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
-                >
-                  Sign out
-                </button>
-              ) : null}
+                {collapsed ? <ChevronRight className="mx-auto h-4 w-4 text-semantic-text-primary" /> : <ChevronLeft className="mx-auto h-4 w-4 text-semantic-text-primary" />}
+              </button>
+            </div>
+
+            <nav className="flex-1 space-y-4 overflow-y-auto pr-1 min-h-0">
+              {(['Core', 'Content', 'Tools'] as const).map((group) => (
+                <div key={group}>
+                  {!collapsed && (
+                    <div className="px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+                      {group}
+                    </div>
+                  )}
+                  <div className={`mt-2 space-y-1 ${collapsed ? 'px-0' : ''}`}>
+                    {grouped[group].map((item) => (
+                      <NavItemLink key={item.to} to={item.to} label={item.label} icon={item.icon} collapsed={collapsed} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </nav>
+
+            <div
+              className={`mt-auto ${
+                collapsed ? 'flex items-center justify-center rounded-full p-2' : 'rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-sm'
+              }`}
+            >
+              <div className={`flex items-center ${collapsed ? '' : 'gap-3'}`}>
+                {user?.avatarUrl ? (
+                  <img
+                    src={user.avatarUrl}
+                    alt={user.fullName || user.email || 'Avatar'}
+                    className={`h-10 w-10 rounded-full object-cover shadow-sm ${collapsed ? '' : 'border border-semantic-legacy-brand-blush/80'}`}
+                  />
+                ) : (
+                  <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full ${collapsed ? '' : 'border border-semantic-legacy-brand-blush/80'} bg-white shadow-sm`}>
+                    <Avatar name={user?.fullName || user?.email || 'Admin'} size={36} />
+                  </span>
+                )}
+                {!collapsed && (
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+                      Signed in
+                    </div>
+                    <div className="text-sm font-semibold">{user?.fullName || user?.email || 'Admin'}</div>
+                    {user?.email ? <div className="text-xs text-semantic-text-primary/70">{user.email}</div> : null}
+                  </div>
+                )}
+              </div>
+              {!collapsed && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href="/"
+                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
+                  >
+                    View storefront
+                  </a>
+                  {signedIn ? (
+                    <button
+                      onClick={signOut}
+                      className="inline-flex items-center rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
+                    >
+                      Sign out
+                    </button>
+                  ) : null}
+                </div>
+              )}
             </div>
           </div>
         </aside>
