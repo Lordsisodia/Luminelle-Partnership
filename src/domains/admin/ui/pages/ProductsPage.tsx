@@ -779,8 +779,10 @@ export default function ProductsPage() {
 
               {/* Pill + Gallery */}
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 space-y-3">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Hero pill & gallery</p>
-                <Field label="Hero pill / promo badge">
+                <div className="inline-flex items-center rounded-full bg-semantic-legacy-brand-blush px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
+                  Hero visuals
+                </div>
+                <Field label="Hero badge">
                   <TextInput
                     value={product.badge}
                     onChange={(v) => updateProduct((p) => ({ ...p, badge: v }))}
@@ -790,7 +792,9 @@ export default function ProductsPage() {
 
                 <div className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/50 bg-brand-porcelain/50 p-3">
                   <div className="flex items-center justify-between gap-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Gallery images</p>
+                    <div className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/70 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary">
+                      Gallery
+                    </div>
                     <button
                       type="button"
                       className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
@@ -889,7 +893,9 @@ export default function ProductsPage() {
 
               {/* Title & Subtext */}
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 space-y-3">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Copy</p>
+                <div className="inline-flex items-center rounded-full bg-semantic-legacy-brand-blush px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
+                  Hero text
+                </div>
                 <Field label="Title">
                   <TextInput value={product.title} onChange={(v) => updateProduct((p) => ({ ...p, title: v }))} />
                 </Field>
@@ -900,7 +906,9 @@ export default function ProductsPage() {
 
               {/* Price & Reviews */}
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 space-y-3">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/70">Price & Reviews</p>
+                <div className="inline-flex items-center rounded-full bg-semantic-legacy-brand-blush px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
+                  Price & Reviews
+                </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <Field label="Price">
                     <TextInput
