@@ -774,21 +774,21 @@ export default function ProductsPage() {
 
             <section className="space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">Hero</p>
-              <Field label="Title" description="cms_products.title">
+              <Field label="Title">
                 <TextInput value={product.title} onChange={(v) => updateProduct((p) => ({ ...p, title: v }))} />
               </Field>
-              <Field label="Subtext / hero description" description="cms_products.short_desc">
+              <Field label="Subtext / hero description">
                 <TextInput value={product.short_desc} onChange={(v) => updateProduct((p) => ({ ...p, short_desc: v }))} />
               </Field>
               <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Price" description="cms_products.price">
+                <Field label="Price">
                   <TextInput
                     value={product.price == null ? '' : String(product.price)}
                     onChange={(v) => updateProduct((p) => ({ ...p, price: normalizeNumber(v) }))}
                     placeholder="e.g. 14.99"
                   />
                 </Field>
-                <Field label="Compare at" description="cms_products.compare_at_price">
+                <Field label="Compare at">
                   <TextInput
                     value={product.compare_at_price == null ? '' : String(product.compare_at_price)}
                     onChange={(v) => updateProduct((p) => ({ ...p, compare_at_price: normalizeNumber(v) }))}
@@ -797,14 +797,14 @@ export default function ProductsPage() {
                 </Field>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Discount % override" description="cms_products.discount_percent_override (optional)">
+                <Field label="Discount % override">
                   <TextInput
                     value={product.discount_percent_override == null ? '' : String(product.discount_percent_override)}
                     onChange={(v) => updateProduct((p) => ({ ...p, discount_percent_override: v ? Number(v) : null }))}
                     placeholder="e.g. 20"
                   />
                 </Field>
-                <Field label="Promo badge" description="cms_products.badge (optional)">
+                <Field label="Promo badge">
                   <TextInput
                     value={product.badge}
                     onChange={(v) => updateProduct((p) => ({ ...p, badge: v }))}
@@ -813,14 +813,14 @@ export default function ProductsPage() {
                 </Field>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Average rating" description="cms_products.average_rating (0–5)">
+                <Field label="Average rating">
                   <TextInput
                     value={product.average_rating == null ? '' : String(product.average_rating)}
                     onChange={(v) => updateProduct((p) => ({ ...p, average_rating: normalizeNumber(v) }))}
                     placeholder="e.g. 4.8"
                   />
                 </Field>
-                <Field label="Review count" description="cms_products.review_count">
+                <Field label="Review count">
                   <TextInput
                     value={product.review_count == null ? '' : String(product.review_count)}
                     onChange={(v) => updateProduct((p) => ({ ...p, review_count: v ? Number(v) : null }))}
@@ -829,14 +829,14 @@ export default function ProductsPage() {
                 </Field>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Review count label" description="cms_products.review_count_label (e.g. 100+)">
+                <Field label="Review count label">
                   <TextInput
                     value={product.review_count_label}
                     onChange={(v) => updateProduct((p) => ({ ...p, review_count_label: v }))}
                     placeholder="e.g. 100+"
                   />
                 </Field>
-                <Field label="Video slot" description="cms_products.video_slot (use video://https://...)">
+                <Field label="Video slot">
                   <TextInput
                     value={product.video_slot}
                     onChange={(v) => updateProduct((p) => ({ ...p, video_slot: v }))}
@@ -845,7 +845,7 @@ export default function ProductsPage() {
                 </Field>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <Field label="Care label override" description="cms_products.care_label_override (optional)">
+                <Field label="Care label override">
                   <TextInput
                     value={product.care_label_override}
                     onChange={(v) => updateProduct((p) => ({ ...p, care_label_override: v }))}
