@@ -81,6 +81,8 @@ const curlerGallery = [
   '/uploads/curler/4.webp',
   '/uploads/curler/5.webp',
   '/uploads/curler/6.webp',
+  '/uploads/curler/7.webp',
+  '/uploads/curler/8.webp',
   DEFAULT_VIDEO_SLOT,
 ]
 
