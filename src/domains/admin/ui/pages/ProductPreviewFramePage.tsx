@@ -7,8 +7,8 @@ export default function ProductPreviewFramePage() {
   // Constrain to mobile width even on desktop
   const wrapperStyle = useMemo(
     () => ({
-      maxWidth: 340,
-      minWidth: 340,
+      maxWidth: 440,
+      minWidth: 440,
       minHeight: 844,
       margin: '0 auto',
       overflowX: 'hidden' as const,

@@ -34,8 +34,10 @@ const ContentPage = lazy(() => import('@admin/ui/pages/ContentPage'))
 const PagesPage = lazy(() => import('@admin/ui/pages/PagesPage'))
 const ProductsPage = lazy(() => import('@admin/ui/pages/ProductsPage'))
 const BlogsPage = lazy(() => import('@admin/ui/pages/BlogsPage'))
+const BlogDetailPage = lazy(() => import('@admin/ui/pages/BlogDetailPage'))
 const MediaPage = lazy(() => import('@admin/ui/pages/MediaPage'))
-const GlobalsPage = lazy(() => import('@admin/ui/pages/GlobalsPage'))
+const ComponentsPage = lazy(() => import('@admin/ui/pages/ComponentsPage'))
+const ComponentDetailPage = lazy(() => import('@admin/ui/pages/ComponentDetailPage'))
 const ActivityPage = lazy(() => import('@admin/ui/pages/ActivityPage'))
 const ProductPreviewFramePage = lazy(() => import('@admin/ui/pages/ProductPreviewFramePage'))
 const AdminGuard = lazy(() => import('@admin/ui/components/AdminGuard'))
@@ -100,8 +102,11 @@ const App = () => {
             <Route path="pages" element={<PagesPage />} />
             <Route path="products" element={<ProductsPage />} />
             <Route path="blogs" element={<BlogsPage />} />
+            <Route path="blogs/:slug" element={<BlogDetailPage />} />
             <Route path="media" element={<MediaPage />} />
-            <Route path="globals" element={<GlobalsPage />} />
+            <Route path="globals" element={<Navigate to="/admin/components" replace />} />
+            <Route path="components" element={<ComponentsPage />} />
+            <Route path="components/:key" element={<ComponentDetailPage />} />
             <Route path="activity" element={<ActivityPage />} />
             <Route path="*" element={<Navigate to="/admin" replace />} />
           </Route>

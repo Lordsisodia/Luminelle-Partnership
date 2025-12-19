@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { setNoIndexNoFollow } from '@/lib/seo'
 import { useAuth } from '@auth/ui/providers/AuthContext'
+import { Avatar } from '@ui/components/Avatar'
 import type { LucideIcon } from 'lucide-react'
 import {
   LayoutDashboard,
@@ -27,7 +28,7 @@ const navItems: NavItem[] = [
   { group: 'Core', label: 'Dashboard', to: '/admin', icon: LayoutDashboard },
   { group: 'Content', label: 'Products', to: '/admin/products', icon: Boxes },
   { group: 'Content', label: 'Pages', to: '/admin/pages', icon: FileText },
-  { group: 'Content', label: 'Components', to: '/admin/globals', icon: PanelsTopLeft },
+  { group: 'Content', label: 'Components', to: '/admin/components', icon: PanelsTopLeft },
   { group: 'Content', label: 'Media', to: '/admin/media', icon: ImageIcon },
   { group: 'Content', label: 'Blogs', to: '/admin/blogs', icon: PenLine },
   { group: 'Tools', label: 'Analytics', to: '/admin/analytics', icon: BarChart3 },
@@ -40,12 +41,14 @@ function NavItemLink({
   icon: Icon,
   onNavigate,
   collapsed,
+  trailing,
 }: {
   to: string
   label: string
   icon: LucideIcon
   onNavigate?: () => void
   collapsed?: boolean
+  trailing?: React.ReactNode
 }) {
   return (
     <NavLink
@@ -54,16 +57,21 @@ function NavItemLink({
       onClick={onNavigate}
       className={({ isActive }) =>
         [
-          'flex items-center rounded-xl px-3 py-2 text-sm font-semibold transition overflow-hidden',
+          'group flex w-full items-center rounded-xl px-3 py-2 text-sm font-semibold transition overflow-hidden',
           isActive
-            ? 'bg-white text-semantic-text-primary shadow-sm ring-1 ring-semantic-legacy-brand-blush/60'
-            : 'text-semantic-text-primary/80 hover:bg-white/60 hover:text-semantic-text-primary',
-          collapsed ? 'justify-center' : 'justify-start gap-2',
+            ? 'bg-white text-semantic-text-primary shadow-sm ring-1 ring-semantic-legacy-brand-blush/60 shadow-[inset_3px_0_0_0_rgba(187,125,109,0.7)]'
+            : 'text-semantic-text-primary/80 hover:bg-white/70 hover:text-semantic-text-primary',
+          collapsed ? 'justify-center' : 'justify-start gap-2 pr-2',
         ].join(' ')
       }
     >
-      <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-      {collapsed ? null : <span className="ml-2 truncate">{label}</span>}
+      <Icon className="h-4 w-4 shrink-0 text-semantic-text-primary/70 group-[.active]:text-semantic-text-primary" aria-hidden="true" />
+      {collapsed ? null : (
+        <>
+          <span className="ml-2 truncate text-semantic-text-primary/90 group-[.active]:text-semantic-text-primary">{label}</span>
+          {trailing}
+        </>
+      )}
     </NavLink>
   )
 }
@@ -88,9 +96,65 @@ export default function AdminShell() {
   const { user, signedIn, signOut } = useAuth()
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
+  const location = useLocation()
+  const [productCount, setProductCount] = useState<string | null>(null)
+
+  const toTitleCase = (value: string) =>
+    value
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+
+  const breadcrumb = useMemo(() => {
+    const path = location.pathname.replace(/\/+$/, '')
+    if (path === '/admin') return [{ label: 'Dashboard', to: '/admin' }]
+    const parts = path.split('/').filter(Boolean) // e.g. ['admin','products','lumelle-shower-cap']
+    const items: { label: string; to?: string }[] = []
+    const sectionMap: Record<string, { label: string; to: string }> = {
+      products: { label: 'Products', to: '/admin/products' },
+      pages: { label: 'Pages', to: '/admin/pages' },
+      blogs: { label: 'Blogs', to: '/admin/blogs' },
+      media: { label: 'Media', to: '/admin/media' },
+      analytics: { label: 'Analytics', to: '/admin/analytics' },
+      activity: { label: 'Activity', to: '/admin/activity' },
+      content: { label: 'Product content', to: '/admin/content' },
+      components: { label: 'Components', to: '/admin/components' },
+      globals: { label: 'Components', to: '/admin/components' },
+    }
+    if (parts[0] === 'admin') {
+      items.push({ label: 'Dashboard', to: '/admin' })
+      const section = parts[1]
+      if (section) {
+        const mapped = sectionMap[section] ?? { label: toTitleCase(section), to: `/admin/${section}` }
+        items.push(mapped)
+      }
+      if (parts[2]) {
+        const pretty = toTitleCase(decodeURIComponent(parts.slice(2).join('-')))
+        items.push({ label: pretty })
+      } else if (section === 'products') {
+        // Fallback to last-viewed product label if stored
+        const cachedHandle = sessionStorage.getItem('admin:lastProductHandle')
+        const cachedTitle = sessionStorage.getItem('admin:lastProductTitle')
+        if (cachedHandle || cachedTitle) {
+          items.push({ label: toTitleCase(decodeURIComponent(cachedTitle || cachedHandle || '')) })
+        }
+      }
+    }
+    return items
+  }, [location.pathname])
 
   useEffect(() => {
     setNoIndexNoFollow()
+  }, [])
+
+  useEffect(() => {
+    const readCount = () => setProductCount(sessionStorage.getItem('admin:productCount'))
+    readCount()
+    const handler = (e: StorageEvent) => {
+      if (e.key === 'admin:productCount') readCount()
+    }
+    window.addEventListener('storage', handler)
+    return () => window.removeEventListener('storage', handler)
   }, [])
 
   const grouped = useMemo(() => {
@@ -105,7 +169,7 @@ export default function AdminShell() {
         {/* Desktop sidebar */}
         <aside
           className={`sticky top-0 hidden h-screen shrink-0 border-r border-semantic-legacy-brand-blush/60 bg-brand-porcelain p-2 md:block transition-[width] duration-200 ${
-            collapsed ? 'w-16' : 'w-72'
+            collapsed ? 'w-16' : 'w-80'
           }`}
         >
           <div className="flex h-full flex-col gap-3">
@@ -113,24 +177,21 @@ export default function AdminShell() {
               className={`rounded-2xl ${
                 collapsed
                   ? 'flex h-10 items-center justify-center px-1'
-                  : 'relative flex items-center justify-between border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3'
+                : 'relative flex items-center justify-between border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3'
               }`}
             >
               {!collapsed && (
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/70 bg-white text-base font-semibold text-semantic-legacy-brand-cocoa shadow-sm">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-[8px] bg-[#f3cfc5] text-[13px] font-semibold leading-none text-semantic-legacy-brand-cocoa font-serif">
                     L
                   </span>
                   <div className="flex flex-col">
-                    <div className="text-sm font-semibold text-semantic-text-primary">Lumelle</div>
+                    <div className="text-sm font-semibold uppercase tracking-[0.01em] text-semantic-text-primary font-serif">
+                      LUMELLE™
+                    </div>
                     <div className="text-xs text-semantic-text-primary/70">Admin console</div>
                   </div>
                 </div>
-              )}
-              {!collapsed && (
-                <span className="ml-auto rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-[11px] font-semibold text-semantic-text-primary/80">
-                  {import.meta.env.MODE}
-                </span>
               )}
               <button
                 aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
@@ -149,13 +210,26 @@ export default function AdminShell() {
               {(['Core', 'Content', 'Tools'] as const).map((group) => (
                 <div key={group}>
                   {!collapsed && (
-                    <div className="px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/50 bg-brand-porcelain px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/70 shadow-sm">
                       {group}
                     </div>
                   )}
                   <div className={`mt-2 space-y-1 ${collapsed ? 'px-0' : ''}`}>
                     {grouped[group].map((item) => (
-                      <NavItemLink key={item.to} to={item.to} label={item.label} icon={item.icon} collapsed={collapsed} />
+                      <NavItemLink
+                        key={item.to}
+                        to={item.to}
+                        label={item.label}
+                        icon={item.icon}
+                        collapsed={collapsed}
+                        trailing={
+                          !collapsed && item.to === '/admin/products' && productCount ? (
+                            <span className="ml-auto inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-[#f9e9e4] px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary/90 whitespace-nowrap">
+                              {productCount}
+                            </span>
+                          ) : null
+                        }
+                      />
                     ))}
                   </div>
                 </div>
@@ -190,17 +264,17 @@ export default function AdminShell() {
                 )}
               </div>
               {!collapsed && (
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="mt-3 grid grid-cols-2 gap-2">
                   <a
                     href="/"
-                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
+                    className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
                   >
                     View storefront
                   </a>
                   {signedIn ? (
                     <button
                       onClick={signOut}
-                      className="inline-flex items-center rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
+                      className="inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1.5 text-xs font-semibold text-white"
                     >
                       Sign out
                     </button>
@@ -215,19 +289,29 @@ export default function AdminShell() {
         <div className="min-w-0 flex-1">
           {/* Top bar with burger */}
           <header className="sticky top-0 z-30 flex items-center justify-between border-b border-semantic-legacy-brand-blush/60 bg-brand-porcelain/95 px-4 py-3 backdrop-blur">
-            <button
-              onClick={() => setDrawerOpen((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
-              aria-expanded={drawerOpen}
-              aria-controls="admin-drawer"
-            >
-              <BurgerIcon open={drawerOpen} />
-              <span className="hidden sm:inline">Navigation</span>
-            </button>
-            <div className="text-sm font-semibold">Admin</div>
-            <span className="rounded-full border border-semantic-legacy-brand-blush/60 px-2 py-1 text-[11px] text-semantic-text-primary/70">
-              {import.meta.env.MODE}
-            </span>
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-semantic-text-primary/80">
+              {breadcrumb.map((item, idx) => {
+                const isLast = idx === breadcrumb.length - 1
+                return (
+                  <span key={item.label} className="flex items-center gap-2">
+                    {idx > 0 && <span className="text-semantic-text-primary/50">/</span>}
+                    {isLast || !item.to ? (
+                      <span className="text-semantic-text-primary">{item.label}</span>
+                    ) : (
+                      <NavLink to={item.to} className="hover:text-semantic-text-primary text-semantic-text-primary/80">
+                        {item.label}
+                      </NavLink>
+                    )}
+                  </span>
+                )
+              })}
+            </nav>
+            <div className="flex items-center gap-3">
+              <div className="text-sm font-semibold">Admin</div>
+              <span className="rounded-full border border-semantic-legacy-brand-blush/60 px-2 py-1 text-[11px] text-semantic-text-primary/70">
+                {import.meta.env.MODE}
+              </span>
+            </div>
           </header>
 
           {/* Mobile/overlay drawer */}

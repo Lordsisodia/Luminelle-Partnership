@@ -12,7 +12,7 @@ const contentLinks: CardLink[] = [
   { title: 'Products', description: 'Manage product copy, SEO, and media (cms_products).', to: '/admin/products' },
   { title: 'Blogs', description: 'Draft and publish blog posts (cms_blogs + cms_blog_blocks).', to: '/admin/blogs' },
   { title: 'Media', description: 'Upload + organize assets across buckets.', to: '/admin/media' },
-  { title: 'Globals', description: 'Navigation, footer, promo bars, default SEO (cms_globals).', to: '/admin/globals' },
+  { title: 'Components', description: 'Navigation, footer, promo bar, spin wheel config (visual editor).', to: '/admin/components' },
 ]
 
 const toolLinks: CardLink[] = [
@@ -104,4 +104,3 @@ export default function DashboardPage() {
     </AdminPageLayout>
   )
 }
-

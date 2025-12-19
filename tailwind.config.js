@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import plugin from 'tailwindcss/plugin'
+import typography from '@tailwindcss/typography'
+import lineClamp from '@tailwindcss/line-clamp'
 
 const tokensPath = path.resolve('./src/theme/tokens.json')
 
@@ -138,6 +140,21 @@ export default {
       boxShadow: {
         soft: '0 20px 60px rgb(var(--brand-peach-rgb, 251 199 178) / 0.35)',
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.semantic.text.primary'),
+            a: { color: theme('colors.semantic.text.primary'), textDecoration: 'underline' },
+            strong: { color: theme('colors.semantic.text.primary') },
+            h1: { color: theme('colors.semantic.text.primary'), fontFamily: theme('fontFamily.heading'), fontWeight: '600' },
+            h2: { color: theme('colors.semantic.text.primary'), fontFamily: theme('fontFamily.heading'), fontWeight: '600' },
+            h3: { color: theme('colors.semantic.text.primary'), fontFamily: theme('fontFamily.heading'), fontWeight: '600' },
+            li: { marginTop: '0.35em', marginBottom: '0.35em' },
+            'ul > li::marker': { color: theme('colors.semantic.text.primary') },
+            blockquote: { borderLeftColor: theme('colors.brand.blush') },
+          },
+        },
+      }),
     },
   },
   plugins: [
@@ -199,5 +216,7 @@ export default {
         },
       })
     }),
+    lineClamp,
+    typography,
   ],
 }

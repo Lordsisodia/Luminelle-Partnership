@@ -58,7 +58,6 @@ const post: BlogPost = {
       relatedLinks: [
         { label: 'Best hooks for hair TikToks', href: '/blog/hair-hooks-that-convert' },
       ],
-      embedUrl: 'https://www.youtube.com/embed/pzPI7xqXQX4',
       productCard: {
         title: 'Creator launch kit',
         price: 'Free download',
@@ -131,7 +130,6 @@ const post: BlogPost = {
         image: '/uploads/luminele/product-feature-01.webp',
         caption: 'Steam-sealing band + satin lining; 30-day returns.',
       },
-      embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       relatedLinks: [{ label: 'Full steam-proof routine', href: '/blog/frizz-free-showers' }],
     },
     {
