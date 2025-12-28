@@ -53,7 +53,7 @@ export function GlobalFooter({ supportEmail }: GlobalFooterProps) {
       className="border-t border-semantic-legacy-brand-blush/30 bg-semantic-legacy-brand-blush/20 text-semantic-text-primary"
       data-sticky-buy-target
     >
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-3 md:px-6">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-3 md:px-6">
         <div className="space-y-3">
           <p className="font-heading text-xl font-semibold uppercase tracking-[0.28em]">Lumelle</p>
           <p className="max-w-sm text-sm text-semantic-text-primary/75">
