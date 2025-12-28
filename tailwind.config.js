@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import plugin from 'tailwindcss/plugin'
-import typography from '@tailwindcss/typography'
 import lineClamp from '@tailwindcss/line-clamp'
+import typography from '@tailwindcss/typography'
 
 const tokensPath = path.resolve('./src/theme/tokens.json')
 
@@ -130,11 +130,12 @@ export default {
           peach: rgbVar('--brand-peach-rgb', '251 199 178'),
           cocoa: rgbVar('--brand-cocoa-rgb', '85 54 42'),
           blush: rgbVar('--brand-blush-rgb', '253 212 220'),
+          porcelain: rgbVar('--brand-porcelain-rgb', '247 239 232'),
         },
         semantic: semanticColors,
       },
       fontFamily: {
-        heading: ['"The Seasons"', 'serif'],
+        heading: ['"Playfair Display"', 'serif'],
         body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
@@ -216,7 +217,7 @@ export default {
         },
       })
     }),
-    lineClamp,
     typography,
+    lineClamp,
   ],
 }
