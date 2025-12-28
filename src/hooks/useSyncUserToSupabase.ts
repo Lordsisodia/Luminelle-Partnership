@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useAuth as useClerkAuth, useUser } from '@clerk/clerk-react'
-import { createSupabaseClient, supabase } from '@/lib/supabase'
+import { createSupabaseClient, supabase } from '@platform/storage/supabase'
 
 const TABLE = 'customers'
 

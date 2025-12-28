@@ -1,1 +1,1 @@
-export * from '@landing/hooks/useLinkFallback'
+export * from '@client/marketing/hooks/useLinkFallback'
