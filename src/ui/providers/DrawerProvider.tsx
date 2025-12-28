@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type PropsWithChildren } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PropsWithChildren } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { UserRound } from 'lucide-react'
 import { useSignIn, useUser } from '@clerk/clerk-react'
-import { useCart } from '@cart/providers/CartContext'
-import { useAuth } from '@auth/ui/providers/AuthContext'
+import { useCart } from '@client/shop/cart/providers/CartContext'
+import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
+import { getVolumeDiscountTierForVariant } from '@client/shop/cart/logic/volumeDiscounts'
 import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
+import { FREE_SHIPPING_THRESHOLD_GBP, MAX_CART_ITEM_QTY } from '@/config/constants'
 import { DrawerContext } from './DrawerContext'
 
 type DrawerProviderProps = PropsWithChildren<Record<string, unknown>>
@@ -21,9 +23,56 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   }
 
   const [menuOpen, setMenuOpen] = useState(false)
+  const [drawerMounted, setDrawerMounted] = useState(false)
   const drawerRef = useRef<HTMLDivElement | null>(null)
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
+  const closeTimerRef = useRef<number | null>(null)
   const SHOW_LOYALTY = false
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current == null) return
+    window.clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = null
+  }
+
+  const openDrawer = () => {
+    clearCloseTimer()
+    setDrawerMounted(true)
+    // Next frame: transition from off-canvas → visible
+    window.requestAnimationFrame(() => setMenuOpen(true))
+  }
+
+  const closeDrawer = () => {
+    setMenuOpen(false)
+    clearCloseTimer()
+    closeTimerRef.current = window.setTimeout(() => {
+      setDrawerMounted(false)
+      closeTimerRef.current = null
+    }, 300)
+  }
+
+  const getDrawerFocusableElements = useCallback(() => {
+    const root = drawerRef.current
+    if (!root) return []
+
+    const nodes = Array.from(
+      root.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    )
+
+    return nodes.filter((el) => {
+      if (el.hasAttribute('disabled')) return false
+      if (el.getAttribute('aria-disabled') === 'true') return false
+      if (el.tabIndex < 0) return false
+
+      const style = window.getComputedStyle(el)
+      if (style.display === 'none' || style.visibility === 'hidden') return false
+      return el.getClientRects().length > 0
+    })
+  }, [])
+
+  useEffect(() => {
+    return () => clearCloseTimer()
+  }, [])
 
   const { items, qty, setQty, remove, add, checkoutUrl, setAttributes } = useCart()
   const { signedIn } = useAuth()
@@ -66,13 +115,8 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
     }
   }
 
-  const FREE_SHIP_THRESHOLD = 19.99
   const cartQty = qty
   const DRAWER_WIDTH = 320
-  const viewersNow = useMemo(() => {
-    const options = [87, 121, 205, 240, 310, 480]
-    return options[Math.floor(Math.random() * options.length)]
-  }, [])
 
   const [redirecting, setRedirecting] = useState(false)
   const beginCheckout = useCallback(async () => {
@@ -127,8 +171,6 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
 
   const renderUpsellCard = useCallback(
     (p: typeof upsellProducts[number]) => {
-      const rating = reviewMeta[p.title]?.rating ?? 4.8
-      const reviews = reviewMeta[p.title]?.reviews ?? 100
       return (
         <div
           key={p.id}
@@ -143,16 +185,10 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
           />
           <div className="flex-1 text-left pr-16">
             <div className="text-sm font-semibold text-semantic-text-primary leading-tight">{p.title}</div>
-            <div className="text-[11px] text-semantic-text-primary/70">
-              {rating.toFixed(1)} ★ · {reviews} reviews
-            </div>
-            <div className="mt-1 flex items-center gap-2">
-              <span className="text-xs font-semibold text-semantic-text-primary">£{p.price.toFixed(2)}</span>
-              <span className="text-[11px] text-semantic-text-primary/50 line-through">£{(p.price * 1.3).toFixed(2)}</span>
-            </div>
+            <div className="mt-1 text-xs font-semibold text-semantic-text-primary">£{p.price.toFixed(2)}</div>
           </div>
           <button
-            onClick={() => add({ id: p.variantId, title: p.title, price: p.price }, 1)}
+            onClick={() => add({ id: p.variantId, title: p.title, price: p.price, image: p.image }, 1)}
             className="absolute right-3 top-1/2 -translate-y-1/2 transform rounded-full border border-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-semantic-legacy-brand-cocoa hover:bg-semantic-legacy-brand-blush/30"
           >
             Add
@@ -160,14 +196,16 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
         </div>
       )
     },
-    [add, reviewMeta]
+    [add]
   )
 
   const getUnitPricing = useCallback(
     (item: { id: string; price: number; displayPrice?: number; compareAt?: number; displayCompareAt?: number }) => {
       const unitPrice = item.displayPrice ?? item.price
-      const unitCompareAt = item.displayCompareAt ?? item.compareAt ?? Math.round(unitPrice * 1.3 * 100) / 100
-      return { unitPrice, unitCompareAt }
+      const unitCompareAt = item.displayCompareAt ?? item.compareAt
+      const hasCompareAt =
+        typeof unitCompareAt === 'number' && Number.isFinite(unitCompareAt) && unitCompareAt > unitPrice
+      return { unitPrice, unitCompareAt, hasCompareAt }
     },
     []
   )
@@ -181,8 +219,9 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
 
   const displayCompareAtTotal = useMemo(() => {
     return items.reduce((sum, item) => {
-      const { unitCompareAt } = getUnitPricing(item)
-      return sum + unitCompareAt * item.qty
+      const { unitPrice, unitCompareAt, hasCompareAt } = getUnitPricing(item)
+      const compareAtForLine = hasCompareAt ? (unitCompareAt as number) : unitPrice
+      return sum + compareAtForLine * item.qty
     }, 0)
   }, [getUnitPricing, items])
 
@@ -190,17 +229,30 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
     return Math.max(0, displayCompareAtTotal - displaySubtotal)
   }, [displayCompareAtTotal, displaySubtotal])
 
-  const remainingForFreeShip = Math.max(0, FREE_SHIP_THRESHOLD - displaySubtotal)
-  const freeShipProgress = Math.min(100, Math.round((displaySubtotal / FREE_SHIP_THRESHOLD) * 100))
+  const remainingForFreeShip = Math.max(0, FREE_SHIPPING_THRESHOLD_GBP - displaySubtotal)
+  const freeShipProgress = Math.min(100, Math.round((displaySubtotal / FREE_SHIPPING_THRESHOLD_GBP) * 100))
   const [qtyOpen, setQtyOpen] = useState<string | null>(null)
 
-  const discountForQty = (qty: number) => {
-    if (qty >= 10) return 50
-    if (qty >= 8) return 30
-    if (qty >= 6) return 20
-    if (qty >= 4) return 15
-    if (qty >= 2) return 10
-    return 0
+  const handleDrawerTabKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+
+    const tabList = e.currentTarget
+    const activeEl = document.activeElement as HTMLElement | null
+    if (!activeEl || !tabList.contains(activeEl)) return
+
+    const tabs = Array.from(tabList.querySelectorAll<HTMLElement>('[role="tab"]'))
+    const currentIndex = tabs.findIndex((t) => t === activeEl)
+    if (currentIndex === -1) return
+
+    const direction = e.key === 'ArrowLeft' ? -1 : 1
+    const next = tabs[(currentIndex + direction + tabs.length) % tabs.length]
+    const nextTab = next.dataset.tab === 'cart' ? 'cart' : next.dataset.tab === 'menu' ? 'menu' : null
+    if (!nextTab) return
+
+    e.preventDefault()
+    setActiveTab(nextTab)
+    track('nav_tab_switch', { tab: nextTab, via: 'keyboard' })
+    next.focus()
   }
 
   useEffect(() => {
@@ -217,31 +269,42 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   }, [qtyOpen])
 
   useEffect(() => {
-    const original = document.documentElement.style.overflow
-    if (menuOpen) document.documentElement.style.overflow = 'hidden'
-    return () => {
-      document.documentElement.style.overflow = original
+    const root = document.documentElement
+    const originalOverflow = root.style.overflow
+    const originalPaddingRight = root.style.paddingRight
+
+    if (drawerMounted) {
+      // On platforms with persistent scrollbars, `overflow:hidden` removes the scrollbar and can
+      // shift the layout horizontally. Compensate by adding padding equal to the scrollbar width.
+      const scrollbarWidth = window.innerWidth - root.clientWidth
+      root.style.overflow = 'hidden'
+      if (scrollbarWidth > 0) {
+        const basePadding = originalPaddingRight?.trim() ? originalPaddingRight : '0px'
+        root.style.paddingRight = `calc(${basePadding} + ${scrollbarWidth}px)`
+      }
     }
-  }, [menuOpen])
+    return () => {
+      root.style.overflow = originalOverflow
+      root.style.paddingRight = originalPaddingRight
+    }
+  }, [drawerMounted])
 
   useEffect(() => {
     if (!menuOpen) return
 
     const previouslyFocused = document.activeElement as HTMLElement | null
-    const focusables = drawerRef.current?.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    )
-    if (focusables && focusables[0]) {
-      focusables[0].focus()
-    }
+    getDrawerFocusableElements()[0]?.focus()
 
     const onKey = (e: KeyboardEvent) => {
       if (!menuOpen) return
       if (e.key === 'Escape') {
-        setMenuOpen(false)
+        closeDrawer()
         return
       }
-      if (e.key === 'Tab' && focusables && focusables.length) {
+      if (e.key === 'Tab') {
+        const focusables = getDrawerFocusableElements()
+        if (!focusables.length) return
+
         const first = focusables[0]
         const last = focusables[focusables.length - 1]
         if (e.shiftKey && document.activeElement === first) {
@@ -252,21 +315,18 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
           first.focus()
         }
       }
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        setActiveTab((prev) => (prev === 'menu' ? 'cart' : 'menu'))
-      }
     }
     window.addEventListener('keydown', onKey)
     return () => {
       window.removeEventListener('keydown', onKey)
       previouslyFocused?.focus()
     }
-  }, [menuOpen])
+  }, [getDrawerFocusableElements, menuOpen])
 
   useEffect(() => {
     const onOpenCart = () => {
       setActiveTab('cart')
-      setMenuOpen(true)
+      openDrawer()
     }
     window.addEventListener('lumelle:open-cart', onOpenCart)
     return () => window.removeEventListener('lumelle:open-cart', onOpenCart)
@@ -276,10 +336,11 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
     () => ({
       openCart: () => {
         setActiveTab('cart')
-        setMenuOpen(true)
+        openDrawer()
       },
       openMenu: () => {
-        setMenuOpen(true)
+        setActiveTab('menu')
+        openDrawer()
       },
     }),
     []
@@ -289,24 +350,36 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
     <DrawerContext.Provider value={drawerApi}>
       {children}
 
-      {menuOpen ? (
+      {drawerMounted ? (
         <>
-          <div className="fixed inset-0 z-40 bg-black/20" onClick={() => { setMenuOpen(false); track('nav_close') }} />
+          <div
+            className={`fixed inset-0 z-40 bg-black/20 transition-opacity duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            onClick={() => { closeDrawer(); track('nav_close') }}
+          />
           <aside
             className="fixed inset-y-0 right-0 z-50 flex flex-col border-l border-semantic-legacy-brand-blush/60 bg-white shadow-2xl transition-transform duration-300"
             style={{ width: DRAWER_WIDTH, transform: menuOpen ? 'translateX(0)' : 'translateX(100%)' }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="drawer-title"
+            aria-hidden={menuOpen ? undefined : true}
             ref={drawerRef}
           >
+            <h2 id="drawer-title" className="sr-only">
+              Menu and cart
+            </h2>
             <div className="sticky top-0 z-10 border-b border-semantic-legacy-brand-blush/60 bg-white/95 px-4 py-3 backdrop-blur">
               <div className="flex items-center justify-between">
-                <div role="tablist" aria-label="Navigation sections">
+                <div role="tablist" aria-label="Navigation sections" onKeyDown={handleDrawerTabKeyDown}>
                   <div className="inline-grid grid-cols-2 rounded-full border border-semantic-legacy-brand-blush/60 p-0.5 text-sm font-semibold">
                     <button
                       role="tab"
+                      data-tab="menu"
                       aria-selected={activeTab === 'menu'}
+                      aria-controls="drawer-panel-menu"
+                      id="drawer-tab-menu"
+                      tabIndex={activeTab === 'menu' ? 0 : -1}
+                      type="button"
                       className={`rounded-full px-4 py-1.5 transition ${activeTab === 'menu' ? 'bg-semantic-legacy-brand-blush/50 text-semantic-text-primary' : 'text-semantic-text-primary/70 hover:bg-semantic-legacy-brand-blush/30'}`}
                       onClick={() => { setActiveTab('menu'); track('nav_tab_switch', { tab: 'menu' }) }}
                     >
@@ -314,7 +387,12 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                     </button>
                     <button
                       role="tab"
+                      data-tab="cart"
                       aria-selected={activeTab === 'cart'}
+                      aria-controls="drawer-panel-cart"
+                      id="drawer-tab-cart"
+                      tabIndex={activeTab === 'cart' ? 0 : -1}
+                      type="button"
                       className={`rounded-full px-4 py-1.5 transition ${activeTab === 'cart' ? 'bg-semantic-legacy-brand-blush/50 text-semantic-text-primary' : 'text-semantic-text-primary/70 hover:bg-semantic-legacy-brand-blush/30'}`}
                       onClick={() => { setActiveTab('cart'); track('nav_tab_switch', { tab: 'cart' }) }}
                     >
@@ -322,34 +400,34 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                     </button>
                   </div>
                 </div>
-                <button aria-label="Close" onClick={() => { setMenuOpen(false); track('nav_close') }} className="rounded-full border border-semantic-legacy-brand-blush/60 p-2">✕</button>
+                <button aria-label="Close" onClick={() => { closeDrawer(); track('nav_close') }} className="rounded-full border border-semantic-legacy-brand-blush/60 p-2">✕</button>
               </div>
             </div>
 
             <div className="flex-1 min-h-0 overflow-hidden">
             {activeTab === 'menu' ? (
-              <div className="flex h-full flex-col">
-              <div className="flex-1 min-h-0 overflow-y-auto pb-4">
+              <div id="drawer-panel-menu" role="tabpanel" aria-labelledby="drawer-tab-menu" className="flex h-full flex-col">
+              <div className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
                   <nav className="px-2 py-2">
                   <div className="rounded-xl">
                     <div className="px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">Products</div>
                     <RouterLink
                       to="/product/shower-cap"
                       className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/shower-cap' }) }}
+                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/product/shower-cap' }) }}
                     >
                       <div className="leading-tight">
                         <div>Lumelle Shower Cap</div>
                         <div className="text-xs font-medium text-semantic-text-primary/60 whitespace-nowrap">Satin-lined, steam-blocking</div>
                       </div>
-                      <span className="ml-2 rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-semantic-text-primary/70 whitespace-nowrap">
+                      <span className="ml-2 rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/70 whitespace-nowrap">
                         Best Seller
                       </span>
                     </RouterLink>
                     <RouterLink
                       to="/product/satin-overnight-curler"
                       className="mt-1 flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/product/satin-overnight-curler' }) }}
+                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/product/satin-overnight-curler' }) }}
                     >
                       <div className="leading-tight">
                         <div>Satin Overnight Heatless Curler Set</div>
@@ -362,7 +440,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                     <RouterLink
                       to="/creators"
                       className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/creators' }) }}
+                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/creators' }) }}
                     >
                       <div className="flex flex-col leading-tight">
                         <span>Creators</span>
@@ -373,7 +451,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                     <RouterLink
                       to="/brand"
                       className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/brand' }) }}
+                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/brand' }) }}
                     >
                       <div className="flex flex-col leading-tight">
                         <span>Brand story</span>
@@ -384,7 +462,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                     <RouterLink
                       to="/blog"
                       className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { setMenuOpen(false); track('nav_link_click', { to: '/blog' }) }}
+                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/blog' }) }}
                     >
                       <div className="flex flex-col leading-tight">
                         <span>Blog</span>
@@ -396,22 +474,31 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                 </nav>
 
               </div>
-                <div className="border-t border-semantic-legacy-brand-blush/60 bg-white/95 px-4 pb-[calc(1.2rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur">
-                  {signedIn ? (
-                    <div className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-soft">
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={user?.imageUrl ?? 'https://placekitten.com/80/80'}
-                          alt="Profile"
-                          className="h-10 w-10 rounded-full object-cover"
-                        />
-                        <div className="flex-1 leading-tight">
-                          <div className="text-sm font-semibold text-semantic-text-primary">
-                            Welcome back{user?.firstName ? `, ${user.firstName}` : ''}!
-                          </div>
+	                <div className="border-t border-semantic-legacy-brand-blush/60 bg-white/95 px-4 pb-[calc(1.2rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur">
+	                  {signedIn ? (
+	                    <div className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-soft">
+	                      <div className="flex items-center gap-3">
+	                        {user?.imageUrl ? (
+	                          <img
+	                            src={user.imageUrl}
+	                            alt={user.fullName ? `${user.fullName} profile photo` : 'Profile photo'}
+	                            className="h-10 w-10 rounded-full object-cover"
+	                          />
+	                        ) : (
+	                          <div
+	                            className="flex h-10 w-10 items-center justify-center rounded-full bg-semantic-legacy-brand-blush/40 text-sm font-semibold text-semantic-text-primary"
+	                            aria-hidden
+	                          >
+	                            {(user?.firstName ?? user?.fullName ?? 'U').slice(0, 1).toUpperCase()}
+	                          </div>
+	                        )}
+	                        <div className="flex-1 leading-tight">
+	                          <div className="text-sm font-semibold text-semantic-text-primary">
+	                            Welcome back{user?.firstName ? `, ${user.firstName}` : ''}!
+	                          </div>
                           <RouterLink
                             to="/account"
-                            onClick={() => setMenuOpen(false)}
+                            onClick={() => closeDrawer()}
                             className="text-[12px] font-medium text-semantic-text-primary/70 underline decoration-semantic-text-primary/40 underline-offset-4"
                           >
                             View account & orders
@@ -442,7 +529,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                         <span className="leading-tight">
                           Sign in
                           <span className="block text-[12px] font-medium text-semantic-text-primary/70">
-                            Track orders, save addresses, and manage subscriptions.
+                            Track orders, save addresses, and check out faster.
                           </span>
                         </span>
                       </div>
@@ -469,7 +556,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                 </div>
               </div>
             ) : (
-              <div className="flex-1 min-h-0 overflow-y-auto pb-4">
+              <div id="drawer-panel-cart" role="tabpanel" aria-labelledby="drawer-tab-cart" className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
                 <div className="px-4 pt-2">
                   <div className="mb-2 rounded-xl bg-semantic-legacy-brand-blush/30 px-3 py-2 text-xs text-semantic-text-primary/80">
                     {remainingForFreeShip > 0 ? `You are £${remainingForFreeShip.toFixed(2)} away from free shipping.` : 'You’ve unlocked free shipping!'}
@@ -487,7 +574,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                       items.map((it) => {
                         const displayTitle = it.title === 'Heatless Curler Set' ? 'Satin Overnight Curler Set' : it.title
                         return (
-                          <div key={it.id} className="relative mb-4 grid grid-cols-[92px_1fr] items-start gap-3 pr-1 last:mb-0">
+                          <div key={it.id} className="relative mb-4 grid grid-cols-[96px_1fr] items-start gap-3 last:mb-0">
                             <img src={it.image ?? '/uploads/luminele/product-feature-05.webp'} alt={displayTitle} className="h-24 w-24 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover" />
                             <div className="text-sm text-semantic-text-primary">
                               <div className="flex items-start gap-2">
@@ -561,20 +648,22 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                                   </button>
                                   {qtyOpen === it.id ? (
                                     <div className="absolute z-30 mt-1 w-full max-w-full rounded-lg border border-semantic-legacy-brand-blush/60 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] overflow-hidden left-0">
-                                      {[1,2,3,4,5,6,7,8,9,10].map((n) => (
+                                      {Array.from({ length: MAX_CART_ITEM_QTY }, (_, i) => i + 1).map((n) => (
                                         <button
                                           key={n}
                                           className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm ${n === it.qty ? 'bg-semantic-legacy-brand-blush/30 font-semibold text-semantic-text-primary' : 'text-semantic-text-primary/80 hover:bg-semantic-legacy-brand-blush/20'}`}
                                           onClick={() => { setQty(it.id, n); setQtyOpen(null) }}
                                         >
                                           <span>{n}</span>
-                                          {discountForQty(n) > 0 ? (
-                                            <span className="rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary">
-                                              Save {discountForQty(n)}%
-                                            </span>
-                                          ) : (
-                                            <span className="text-[11px] text-semantic-text-primary/60">—</span>
-                                          )}
+                                          {(() => {
+                                            const tier = getVolumeDiscountTierForVariant(it.id, n)
+                                            if (!tier) return null
+                                            return (
+                                              <span className="rounded-full bg-semantic-legacy-brand-blush/50 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary/70">
+                                                {tier.badge}
+                                              </span>
+                                            )
+                                          })()}
                                         </button>
                                       ))}
                                     </div>
@@ -582,11 +671,13 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                                 </div>
                                 <div className="text-right leading-tight">
                                   {(() => {
-                                    const { unitPrice, unitCompareAt } = getUnitPricing(it)
+                                    const { unitPrice, unitCompareAt, hasCompareAt } = getUnitPricing(it)
                                     return (
                                       <>
                                         <div className="text-sm font-semibold text-semantic-legacy-brand-cocoa">£{unitPrice.toFixed(2)}</div>
-                                        <div className="text-xs text-semantic-text-primary/50 line-through">£{unitCompareAt.toFixed(2)}</div>
+                                        {hasCompareAt ? (
+                                          <div className="text-xs text-semantic-text-primary/50 line-through">£{(unitCompareAt as number).toFixed(2)}</div>
+                                        ) : null}
                                       </>
                                     )
                                   })()}
@@ -617,25 +708,36 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
 
             {activeTab === 'cart' ? (
               <div className="sticky bottom-0 z-20 space-y-2 border-t border-semantic-legacy-brand-blush/60 bg-white px-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-6px_20px_rgba(0,0,0,0.06)]">
-                <div className="flex items-center gap-2 rounded-md bg-semantic-legacy-brand-blush/40 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/70">
+                <div className="flex items-center gap-2 rounded-md bg-semantic-legacy-brand-blush/40 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/70">
                   <span className="inline-flex h-2 w-2 flex-shrink-0 rounded-full bg-green-500" />
-                  <span className="truncate">{viewersNow} people are checking out now</span>
+                  <span className="truncate">
+                    {remainingForFreeShip > 0
+                      ? `£${remainingForFreeShip.toFixed(2)} to free shipping`
+                      : 'Free shipping unlocked'}
+                  </span>
                 </div>
-                <div className="flex items-center justify-between text-sm text-red-600/80">
-                  <span>Total savings</span>
-                  <span className="font-semibold text-red-700">£{savings.toFixed(2)}</span>
-                </div>
+                {savings > 0 ? (
+                  <div className="flex items-center justify-between text-sm text-red-600/80">
+                    <span>Total savings</span>
+                    <span className="font-semibold text-red-700">£{savings.toFixed(2)}</span>
+                  </div>
+                ) : null}
                 <div className="flex items-center justify-between text-sm text-semantic-text-primary/80">
                   <span>Subtotal</span>
                   <span className="font-semibold text-semantic-text-primary">£{displaySubtotal.toFixed(2)}</span>
                 </div>
                 <button
-                  className="mt-1 w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
+                  className="mt-1 w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft transition disabled:cursor-not-allowed disabled:opacity-70 enabled:hover:-translate-y-0.5 enabled:hover:shadow-md"
                   disabled={!checkoutUrl || redirecting || items.length === 0}
                   onClick={beginCheckout}
                 >
-                  {redirecting ? 'Redirecting…' : 'Checkout'}
+                  {redirecting ? 'Redirecting…' : checkoutUrl ? 'Checkout' : 'Checkout coming soon'}
                 </button>
+                {!checkoutUrl && items.length > 0 ? (
+                  <p className="text-center text-xs text-semantic-text-primary/60">
+                    Checkout is being configured on this storefront.
+                  </p>
+                ) : null}
               </div>
             ) : null}
           </aside>

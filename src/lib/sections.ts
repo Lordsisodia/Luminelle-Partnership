@@ -1,4 +1,4 @@
-import { runStorefront } from '@/lib/shopify/shopify'
+import { runStorefront } from '@platform/commerce/shopify'
 
 export type Sections = {
   heroSubtitle?: string
@@ -10,44 +10,53 @@ export type Sections = {
   gallery?: string[]
 }
 
-export async function fetchProductSections(handle: string): Promise<Sections | null> {
-  const useServer = (import.meta.env.VITE_USE_SERVER_CART as any) === '1'
-  if (useServer) {
-    const res = await fetch(`/api/storefront/product/sections?handle=${encodeURIComponent(handle)}`)
-    if (!res.ok) return null
-    const json = await res.json()
-    return normalizeFields(json.sections || [])
+const safeJsonParse = <T,>(raw: unknown, fallback: T): T => {
+  if (typeof raw !== 'string' || !raw.trim()) return fallback
+  try {
+    return JSON.parse(raw) as T
+  } catch {
+    return fallback
   }
-  const data = await runStorefront<any>(
-    `#graphql
-    query Sections($handle: String!) {
-      product(handle: $handle) {
-        metafield(namespace: "custom", key: "sections") {
-          reference { ... on Metaobject { fields { key value } } }
-        }
-      }
-    }
-  `,
-    { handle },
-  )
-  const fields = data?.product?.metafield?.reference?.fields || []
-  return normalizeFields(fields)
 }
 
-function normalizeFields(fields: { key: string; value: string }[]): Sections {
-  const m = new Map<string, string>(fields.map((f: any) => [f.key, f.value]))
-  const parse = <T>(k: string): T | undefined => {
-    const v = m.get(k)
-    if (!v) return undefined as any
-    try { return JSON.parse(v) as T } catch { return undefined as any }
+export const fetchSections = async () => {
+  const data = await runStorefront<any>(`
+      {
+        heroSubtitle: metaobject(handle: { handle: "hero", type: "hero_section" }) {
+          subtitle: field(key: "subtitle") { value }
+        }
+        essentials: metaobject(handle: { handle: "essentials", type: "essentials_section" }) {
+          title: field(key: "title") { value }
+          body: field(key: "body") { value }
+        }
+        reasons: metaobject(handle: { handle: "reasons", type: "reasons_section" }) {
+          title: field(key: "title") { value }
+          desc: field(key: "description") { value }
+        }
+        how: metaobject(handle: { handle: "how", type: "how_section" }) {
+          items: field(key: "items") { value }
+        }
+        care: metaobject(handle: { handle: "care", type: "care_section" }) {
+          items: field(key: "items") { value }
+        }
+        faq: metaobject(handle: { handle: "faq", type: "faq_section" }) {
+          items: field(key: "items") { value }
+        }
+        gallery: metaobject(handle: { handle: "gallery", type: "gallery_section" }) {
+          items: field(key: "items") { value }
+        }
+      }
+    `)
+
+  const sections: Sections = {
+    heroSubtitle: data?.heroSubtitle?.subtitle?.value ?? undefined,
+    essentials: data?.essentials?.title?.value ? safeJsonParse(data.essentials.body?.value, []) : [],
+    reasons: data?.reasons?.title?.value ? safeJsonParse(data.reasons.desc?.value, []) : [],
+    how: safeJsonParse(data?.how?.items?.value, []),
+    care: safeJsonParse(data?.care?.items?.value, []),
+    faq: safeJsonParse(data?.faq?.items?.value, []),
+    gallery: safeJsonParse(data?.gallery?.items?.value, []),
   }
-  return {
-    heroSubtitle: m.get('heroSubtitle') || m.get('hero_subtitle') || undefined,
-    essentials: parse('essentials'),
-    reasons: parse('reasons'),
-    how: parse('how'),
-    care: parse('care'),
-    faq: parse('faq'),
-    gallery: parse('gallery'),
-  }
+
+  return sections
 }

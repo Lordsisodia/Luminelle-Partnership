@@ -1,38 +1,32 @@
-# Domains Overview
+# Domains Overview (2025-12-20)
 
 Domain-first layout under `src/domains/`:
-- landing
-- blog
-- shop (products, cart, checkout, shared)
-- account
-- auth
-- admin
-- shopify (embedded admin)
+- `client/` – marketing, shop (`products/`, `cart/`, `checkout/`), `account/`, `rewards/`
+- `admin/` – `catalog/`, `pages/`, `media/`, `blog/`, `analytics/` (orders/settings scaffolded)
+- `creator/`
+- `blog/`
+- `platform/` – `auth/`, `commerce/` (Shopify), `storage/` (Supabase), plus `cms/`, `feature-flags/`, `observability/`, `design-tokens/`
+- `ui-kit/` – domain-agnostic primitives (small, optional)
 
-Each domain follows the UI/logic/data split:
+Each slice keeps the layered shape:
 - `ui/` (pages, sections, components, layouts)
 - `logic/` (behavior/services, no JSX)
-- `data/` (fetchers, content, mappers)
+- `data/` (fetchers, mappers, content)
 - `hooks/`, `providers/`, `state/` as needed
-- Types live next to their code.
+- Types colocated.
 
-Aliases: `@landing`, `@shop`, `@blog`, `@admin`, `@auth`, `@account`, `@shopify`, and `@/lib/*` for shared helpers.
+Aliases:
+- `@client`, `@admin`, `@creator`, `@blog`, `@platform`, `@ui-kit`, `@` (root)
+- Cross-domain access should go through `@platform/*` or the owning domain’s surface exports. No deep imports across domains.
 
-## How to add a feature (quick)
-1) Pick the domain.
-2) UI goes in `ui/{pages,sections,components,layouts}`.
-3) Behavior in `logic/`; data fetching in `data/`.
-4) Types beside their usage.
-5) Shared helpers only in `src/lib/`; avoid new shared folders.
-6) No server code in `src/`; backend lives in `api/_lib`.
+How to add a feature (quick):
+1) Pick the domain and, if applicable, the flow (e.g., `client/shop/products/pdp`).
+2) UI → `ui/{pages,sections,components,layouts}`; logic → `logic/`; data → `data/`; state/providers/hooks alongside.
+3) Keep vendor clients in platform; domains consume `@platform/*`.
+4) Avoid new “shared” folders—use platform or domain-owned code.
+5) No server code in `src/`; backend lives in `api/`.
 
-## Shop slices
-- `shop/products` – merchandising & PDP UI/logic/data.
-- `shop/cart` – cart UI, providers, logic.
-- `shop/checkout` – checkout/confirmation/tracking UI (+ logic folder reserved).
-- `shop/shared` – commerce helpers (Shopify client, Supabase).
-
-## Commands
-- `npm run typecheck` – TS check
-- `npm run dev` – dev server
-- `npm run build` – production build (if configured)
+Commands
+- `npm run typecheck`
+- `npm run lint`
+- `npm run dev`

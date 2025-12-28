@@ -1,7 +1,7 @@
 "use client"
 
 import { memo, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
-import { motion, useAnimation, useMotionValue, useTransform, useReducedMotion } from "framer-motion"
+import { useReducedMotion } from "framer-motion"
 import { StarRating } from "@ui/components/StarRating"
 
 export const useIsomorphicLayoutEffect =
@@ -49,10 +49,17 @@ export function useMediaQuery(
     const matchMedia = window.matchMedia(query)
     handleChange()
 
-    matchMedia.addEventListener("change", handleChange)
+    if (typeof matchMedia.addEventListener === "function") {
+      matchMedia.addEventListener("change", handleChange)
+      return () => {
+        matchMedia.removeEventListener("change", handleChange)
+      }
+    }
 
+    // Safari/legacy fallback
+    ;(matchMedia as any).addListener?.(handleChange)
     return () => {
-      matchMedia.removeEventListener("change", handleChange)
+      ;(matchMedia as any).removeListener?.(handleChange)
     }
   }, [query])
 
@@ -68,89 +75,156 @@ const reviewFallbacks: ReviewCard[] = [
   { author: "Tay", body: "Worth it for silk press protection alone.", stars: 5 },
 ]
 
-const Carousel = memo(
+const ReviewCardOrnaments = () => (
+  <>
+    <div className="pointer-events-none absolute inset-0 rounded-[15px] bg-[radial-gradient(700px_circle_at_20%_0%,rgba(231,197,106,0.22),transparent_55%)]" />
+    <div className="pointer-events-none absolute inset-0 rounded-[15px] ring-1 ring-inset ring-[#E7C56A]/30" />
+    <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-[#E7C56A]/40 to-transparent" />
+
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-[#C9A227]/45"
+      fill="none"
+    >
+      <path
+        d="M10.5 11.3c0 3.5-1.8 6.2-5.1 7.7l-.8-1.6c2.1-1.1 3.2-2.7 3.4-4.8H5.2V7.5h5.3v3.8Zm8.3 0c0 3.5-1.8 6.2-5.1 7.7l-.8-1.6c2.1-1.1 3.2-2.7 3.4-4.8h-2.8V7.5h5.3v3.8Z"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="pointer-events-none absolute right-3 top-3 h-6 w-6 text-[#E7C56A]/55"
+      fill="none"
+    >
+      <path
+        d="M12 3l1.25 5.1L18 9.4l-4.75 1.3L12 16l-1.25-5.3L6 9.4l4.75-1.3L12 3Z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </>
+)
+
+const ReviewCardContent = ({ review }: { review: ReviewCard }) => (
+  <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-white px-4 py-3 text-center">
+    <ReviewCardOrnaments />
+    <div className="relative flex justify-center">
+      <StarRating value={review.stars ?? 5} size={16} />
+    </div>
+    <p className="relative mt-2 text-[13px] leading-snug text-semantic-text-primary">“{review.body}”</p>
+    <p className="relative mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
+      {review.author}
+    </p>
+  </div>
+)
+
+const Reviews2DCarousel = memo(
   ({
-    controls,
     cards,
-    isCarouselActive,
+    activeIndex,
+    onActiveIndexChange,
+    prefersReducedMotion,
   }: {
-    controls: any
     cards: ReviewCard[]
-    isCarouselActive: boolean
+    activeIndex: number
+    onActiveIndexChange: (index: number) => void
+    prefersReducedMotion: boolean
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
-    const faceCount = cards.length
-    // Fixed widths sized for mobile/desktop; small enough to keep 2–3 cards visible on mobile
-    const faceWidth = isScreenSizeSm ? 190 : 260
-    const cylinderWidth = faceWidth * faceCount
-    const radius = cylinderWidth / (2 * Math.PI)
-    const rotation = useMotionValue(0)
-    const transform = useTransform(
-      rotation,
-      (value) => `rotate3d(0, 1, 0, ${value}deg)`
-    )
+    const itemWidth = isScreenSizeSm ? 208 : 280
+    const itemHeight = 156
+    const gapPx = 12
+    const listRef = useRef<HTMLDivElement | null>(null)
+    const isProgrammaticScrollRef = useRef(false)
+    const programmaticScrollTimeoutRef = useRef<number | null>(null)
+
+    const clampIndex = (index: number) =>
+      Math.min(Math.max(index, 0), Math.max(0, cards.length - 1))
+
+    const scrollToIndex = (index: number) => {
+      const el = listRef.current
+      if (!el) return
+      const target = clampIndex(index)
+      isProgrammaticScrollRef.current = true
+      if (programmaticScrollTimeoutRef.current) {
+        window.clearTimeout(programmaticScrollTimeoutRef.current)
+      }
+      el.scrollTo({
+        left: target * (itemWidth + gapPx),
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      })
+      programmaticScrollTimeoutRef.current = window.setTimeout(() => {
+        isProgrammaticScrollRef.current = false
+      }, prefersReducedMotion ? 0 : 450)
+    }
+
+	    useEffect(() => {
+	      scrollToIndex(activeIndex)
+	    }, [activeIndex, itemWidth, cards.length])
+
+    useEffect(() => {
+      const el = listRef.current
+      if (!el) return
+      let raf = 0
+
+      const onScroll = () => {
+        if (isProgrammaticScrollRef.current) return
+        cancelAnimationFrame(raf)
+        raf = requestAnimationFrame(() => {
+          const nextIndex = clampIndex(Math.round(el.scrollLeft / (itemWidth + gapPx)))
+          onActiveIndexChange(nextIndex)
+        })
+      }
+
+      el.addEventListener("scroll", onScroll, { passive: true })
+      return () => {
+        el.removeEventListener("scroll", onScroll)
+        cancelAnimationFrame(raf)
+      }
+    }, [gapPx, itemWidth, onActiveIndexChange])
+
+    useEffect(() => {
+      return () => {
+        if (programmaticScrollTimeoutRef.current) {
+          window.clearTimeout(programmaticScrollTimeoutRef.current)
+        }
+      }
+    }, [])
 
     return (
-      <div
-        className="flex h-full items-center justify-center bg-transparent"
-        style={{
-          perspective: "1000px",
-          transformStyle: "preserve-3d",
-          willChange: "transform",
-        }}
-      >
-        <motion.div
-          drag={isCarouselActive ? "x" : false}
-          className="relative flex h-full origin-center cursor-grab justify-center active:cursor-grabbing"
+      <div className="w-full">
+        <div
+          ref={listRef}
+          className="flex w-full gap-3 overflow-x-auto px-4 pb-1 pt-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{
-            transform,
-            rotateY: rotation,
-            width: cylinderWidth,
-            transformStyle: "preserve-3d",
-            willChange: isCarouselActive ? "transform" : "auto",
+            scrollSnapType: "x mandatory",
+            scrollPaddingLeft: "16px",
+            scrollPaddingRight: "16px",
+            touchAction: "pan-y",
           }}
-          onDrag={(_, info) =>
-            isCarouselActive &&
-            rotation.set(rotation.get() + info.offset.x * 0.05)
-          }
-          onDragEnd={(_, info) =>
-            isCarouselActive &&
-            controls.start({
-              rotateY: rotation.get() + info.velocity.x * 0.05,
-              transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 30,
-                mass: 0.1,
-              },
-            })
-          }
-          animate={controls}
+          aria-label="Customer reviews"
         >
           {cards.map((card, i) => (
-            <motion.div
-              key={`key-${card.author}-${i}`}
-              className="absolute flex origin-center items-center justify-center rounded-xl bg-white p-3 shadow-md border border-semantic-accent-cta/50"
-              style={{
-                width: `${faceWidth}px`,
-                maxWidth: isScreenSizeSm ? 240 : 320,
-                height: "160px",
-                transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`,
-                backfaceVisibility: "hidden",
-              }}
+            <div
+              key={`review-${card.author}-${i}`}
+              className="shrink-0 snap-start"
+              style={{ width: `${itemWidth}px` }}
             >
-              <div className="pointer-events-none flex h-full w-full flex-col justify-between rounded-lg bg-white text-center py-2.5 px-2">
-                <div className="flex justify-center">
-                  <StarRating value={card.stars ?? 5} size={16} />
+              <div className="rounded-2xl bg-gradient-to-br from-[#E7C56A]/55 via-white to-brand-blush/40 p-[1px] shadow-[0_18px_45px_rgba(18,16,15,0.12)]">
+                <div style={{ height: `${itemHeight}px` }}>
+                  <ReviewCardContent review={card} />
                 </div>
-                <p className="mt-2 text-[13px] leading-snug text-semantic-text-primary">“{card.body}”</p>
-                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
-                  {card.author}
-                </p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     )
   }
@@ -158,33 +232,79 @@ const Carousel = memo(
 
 function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
   const prefersReducedMotion = useReducedMotion()
-  const [isVisible, setIsVisible] = useState(false)
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const allCards = useMemo(() => (reviews?.length ? reviews : reviewFallbacks), [reviews])
+  const cards = useMemo(() => allCards.slice(0, 12), [allCards])
+  const clampIndex = (index: number) =>
+    Math.min(Math.max(index, 0), Math.max(0, cards.length - 1))
+  const prev = () => setActiveIndex((i) => clampIndex(i - 1))
+  const next = () => setActiveIndex((i) => clampIndex(i + 1))
 
-  useEffect(() => {
-    if (!wrapperRef.current || prefersReducedMotion) return
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { rootMargin: "0px 0px -20% 0px", threshold: 0.15 }
-    )
-    observer.observe(wrapperRef.current)
-    return () => observer.disconnect()
-  }, [prefersReducedMotion])
-
-  const isCarouselActive = !prefersReducedMotion && isVisible
-  const controls = useAnimation()
-  const cards = useMemo(() => (reviews?.length ? reviews : reviewFallbacks), [reviews])
+  const activeLabel = useMemo(() => {
+    const current = cards[clampIndex(activeIndex)]
+    if (!current) return `Review 1 of ${cards.length}`
+    return `Review ${clampIndex(activeIndex) + 1} of ${cards.length}: ${current.author}`
+  }, [activeIndex, cards])
 
   return (
-    <motion.div layout className="relative" ref={wrapperRef}>
-      <div className="relative min-h-[340px] w-full overflow-visible rounded-3xl bg-white pt-8 pb-6 md:min-h-[400px]">
-        <Carousel
-          controls={controls}
-          cards={cards}
-          isCarouselActive={isCarouselActive}
+    <div className="relative">
+      <div
+        className="relative w-full overflow-visible rounded-3xl border border-semantic-border-subtle bg-[linear-gradient(180deg,#FFFFFF_0%,#FDF8F6_100%)] pt-8 pb-6 shadow-[0_26px_70px_rgba(251,199,178,0.12)] md:pt-10"
+        role="region"
+        aria-label="Customer reviews carousel"
+        aria-roledescription="carousel"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault()
+            prev()
+          }
+          if (e.key === "ArrowRight") {
+            e.preventDefault()
+            next()
+          }
+        }}
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(800px_circle_at_50%_0%,rgba(231,197,106,0.12),transparent_60%)]"
         />
+        <div className="mx-auto flex w-full max-w-[520px] items-center justify-between px-4 md:px-6">
+          <button
+            type="button"
+            onClick={prev}
+            className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-xs font-semibold text-semantic-text-primary shadow-sm hover:bg-brand-porcelain/60 focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/25"
+            aria-label="Previous review"
+          >
+            ← Prev
+          </button>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+            Reviews
+          </p>
+          <button
+            type="button"
+            onClick={next}
+            className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-xs font-semibold text-semantic-text-primary shadow-sm hover:bg-brand-porcelain/60 focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/25"
+            aria-label="Next review"
+          >
+            Next →
+          </button>
+        </div>
+
+        <p className="sr-only" aria-live="polite">
+          {activeLabel}
+        </p>
+
+        <div className="relative">
+          <Reviews2DCarousel
+            cards={cards}
+            activeIndex={activeIndex}
+            onActiveIndexChange={setActiveIndex}
+            prefersReducedMotion={Boolean(prefersReducedMotion)}
+          />
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

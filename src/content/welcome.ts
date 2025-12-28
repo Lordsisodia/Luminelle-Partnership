@@ -1,4 +1,4 @@
-import { CONTENT_BRIEF_URL, SUPPORT_EMAIL, WHATSAPP_INVITE_URL } from '@/config/constants'
+import { CONTENT_BRIEF_URL, SUPPORT_EMAIL, WHATSAPP_INVITE_URL, WHATSAPP_SUPPORT_URL } from '@/config/constants'
 
 export const welcomeHero = {
   headline: 'You’re in, Creator!',
@@ -17,14 +17,20 @@ export const welcomeSteps = [
   {
     title: 'Join the WhatsApp crew',
     description: 'Tap the button above, introduce yourself, and pin the creator content brief.',
+    action: 'Open WhatsApp',
+    href: WHATSAPP_INVITE_URL,
   },
   {
     title: 'Download the content brief',
     description: 'Grab shot lists, hooks, and examples to map your first two videos.',
+    action: 'Download brief',
+    href: CONTENT_BRIEF_URL,
   },
   {
     title: 'Log your launch date',
     description: 'Tell us when your content goes live so we can celebrate and track results.',
+    action: 'Message launch date',
+    href: WHATSAPP_SUPPORT_URL,
   },
 ]
 
@@ -39,7 +45,7 @@ export const resourceCards = [
     title: 'Leaderboard Snapshot',
     description: 'See the top performers and their winning angles.',
     action: 'View leaderboard',
-    href: '#leaderboard',
+    href: '/creators#leaderboard',
   },
   {
     title: 'Creator Concierge',

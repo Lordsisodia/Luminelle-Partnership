@@ -2,7 +2,7 @@
 
 Last updated: 2025-11-13
 Owner: Shaan / Lumelle project
-Source: feedback/client-call.md
+Source: feedback/2025-11-13-client-call.md
 
 ## 1) Project Overview
 - Objective: Launch a high‑converting, mobile‑first, single‑product storefront for Lumelle with a strong landing page, social proof, and streamlined checkout.
@@ -185,4 +185,4 @@ Accessibility and performance
 
 Appendix A — References
 - Competitor inspirations discussed: Kit/“Catch” style product page; Carpe‑style funnel; gamified pop‑ups.
-- Transcript source: feedback/client-call.md (2025‑11‑13).
+- Transcript source: feedback/2025-11-13-client-call.md (2025‑11‑13).

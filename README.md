@@ -18,6 +18,7 @@ npm run build
 - `functions/api/**` – **Cloudflare Pages Functions** API implementation (`/api/*` on Cloudflare Pages).
 - `api/**` – legacy **Vercel** serverless snapshot (kept for reference; not used on Cloudflare).
 - `docs/` – project knowledge base; see `docs/ARCHITECTURE-HOWTO.md` and `docs/domains-README.md`.
+- Automated PR reviews (optional): see `docs/ai-code-review.md`.
 
 ## Conventions
 - If it renders, it lives in `ui/`.  

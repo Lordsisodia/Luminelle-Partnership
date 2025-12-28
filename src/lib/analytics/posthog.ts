@@ -1,5 +1,6 @@
 import type posthogType from 'posthog-js'
 import { getOrCreateAnonId, getOrCreateSessionId } from '@/experiments/identity'
+import { hasTrackingConsent } from '@/lib/cookieConsent'
 
 type PostHogClient = typeof posthogType
 type EventProperties = Record<string, unknown>
@@ -50,6 +51,7 @@ function getPosthogHost(): string | undefined {
 
 export async function initPosthogOnce(): Promise<void> {
   if (!isBrowser()) return
+  if (!hasTrackingConsent()) return
   if (posthog) return
 
   const shouldInit = posthogConfigured() && (analyticsEnabled() || experimentsEnabled())
@@ -119,6 +121,7 @@ export function getPosthogDistinctId(): string | null {
 export function captureEvent(name: string, properties?: EventProperties) {
   if (!isBrowser()) return
   if (!analyticsEnabled()) return
+  if (!hasTrackingConsent()) return
 
   const payload = {
     ...getExperimentProperties(),
@@ -211,6 +214,7 @@ export function captureExperimentExposure(experimentKey: string, variant: string
 
 export function buildCheckoutAttributionAttributes(): Record<string, string> {
   const attrs: Record<string, string> = {}
+  if (!hasTrackingConsent()) return attrs
   const anonId = getOrCreateAnonId()
   const sessionId = getOrCreateSessionId()
   attrs.lumelle_anon_id = anonId
@@ -226,4 +230,3 @@ export function buildCheckoutAttributionAttributes(): Record<string, string> {
 
   return attrs
 }
-

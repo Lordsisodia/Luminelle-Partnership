@@ -6,7 +6,7 @@ Annotated issues below reference the supplied mobile screenshot (`screencapture-
 
 - **Washed-out background:** The hero photo is desaturated and clashes with the peach/blush palette, especially once the translucent overlay is applied. Brand guidance insists on light, airy hues drawn from #FBC7B2 / #FDD4DC with high-quality product or creator imagery. Replace the background with one of the planned lifestyle shots and keep enough negative space for copy. `(docs/02-BRANDING-DESIGN-SPECS.md:10-32)`
 - **CTA hierarchy drift:** Primary and secondary buttons are nearly identical in weight and sit too far from the headline, so the call-to-action loses urgency. Increase size, differentiate fills (solid peach vs outlined cream), and pull the stack closer to the copy block.
-- **Slider controls lack affordance:** Tiny pagination dots plus a “NEXT” text link do not clearly signal the 3-card carousel. Add arrow buttons or chunkier pills so users understand there’s more than one slide, especially given the request for a hero background slideshow. `(feedback/client-feedback.md:5-35)`
+- **Slider controls lack affordance:** Tiny pagination dots plus a “NEXT” text link do not clearly signal the 3-card carousel. Add arrow buttons or chunkier pills so users understand there’s more than one slide, especially given the request for a hero background slideshow. `(feedback/2025-10-31-client-feedback.md:5-35)`
 - **Trust badges cramped:** The shipping/returns icons under the hero sit flush against the edge and read like body text. Increase spacing and add iconography or subtle dividers so they feel like reassurance chips instead of footnotes.
 - **Header lacks action:** Mobile nav shows a hamburger but no “Join WhatsApp” or “Shop now” button, missing the immediate CTA the content structure calls for. Consider a sticky CTA or badge icon next to the wordmark per hero requirements. `(docs/04-CONTENT-STRUCTURE.md:5-18)`
 - **Eyebrow pill tracking:** “BEST SELLER” spans nearly the full width because of extreme letter-spacing, making the headline feel detached. Reduce tracking to match brand typography guidance and align the pill to the same left edge as the headline for cleaner hierarchy. `(docs/02-BRANDING-DESIGN-SPECS.md:33-52)`
@@ -57,7 +57,7 @@ Annotated issues below reference the supplied mobile screenshot (`screencapture-
 ## 9. PDP Teaser & FAQ (frame 7)
 
 - **CTA blending:** “View details” uses a muted peach that disappears against the card. Give it the same treatment as the primary CTA or outline it in cocoa.
-- **Accordion affordance:** FAQ rows use very light borders and no icons, so they appear static. Add chevrons and stronger separators per client expectation for clearer readability. `(feedback/client-feedback.md:29-36)`
+- **Accordion affordance:** FAQ rows use very light borders and no icons, so they appear static. Add chevrons and stronger separators per client expectation for clearer readability. `(feedback/2025-10-31-client-feedback.md:29-36)`
 - **Content mismatch:** FAQ questions focus on basic product logistics rather than creator/affiliate concerns (commission, ad spend, brand story) noted by the client. Update entries to match the requested topics.
 
 ## 10. Footer & Email Capture (frame 8)
@@ -68,11 +68,11 @@ Annotated issues below reference the supplied mobile screenshot (`screencapture-
 
 ## 11. Alignment with Affiliate-Page Feedback
 
-- **Hero carousel assets still placeholders:** Client explicitly asked for 4–5 approved creator shots in the blurred hero background; the current ecommerce hero reuses generic imagery and lacks the blurred slideshow effect. `(feedback/client-feedback.md:5-35)`
+- **Hero carousel assets still placeholders:** Client explicitly asked for 4–5 approved creator shots in the blurred hero background; the current ecommerce hero reuses generic imagery and lacks the blurred slideshow effect. `(feedback/2025-10-31-client-feedback.md:5-35)`
 - **Metrics/perks imagery missing:** The hero metric cards should rotate through perks like spa days and £1,000 cash boosts; present implementation shows static text-only cards without supporting visuals.
-- **Onboarding steps copy still literal:** “Protect / Rinse / Repeat” echoes product usage rather than the aspirational “Trial / Learn / Launch” narrative requested for affiliates. Update copy to highlight bonuses and scripts to stay on-brief. `(feedback/client-feedback.md:25-33)`
-- **Testimonials without avatars:** Client wanted profile photos and consistent stat typography in creator testimonials; the current quote block is anonymous and minimal. `(feedback/client-feedback.md:29-31)`
-- **FAQ wording:** Still references generic product concerns instead of the tailored questions about commission, brand story, and content briefs. `(feedback/client-feedback.md:34-36)`
+- **Onboarding steps copy still literal:** “Protect / Rinse / Repeat” echoes product usage rather than the aspirational “Trial / Learn / Launch” narrative requested for affiliates. Update copy to highlight bonuses and scripts to stay on-brief. `(feedback/2025-10-31-client-feedback.md:25-33)`
+- **Testimonials without avatars:** Client wanted profile photos and consistent stat typography in creator testimonials; the current quote block is anonymous and minimal. `(feedback/2025-10-31-client-feedback.md:29-31)`
+- **FAQ wording:** Still references generic product concerns instead of the tailored questions about commission, brand story, and content briefs. `(feedback/2025-10-31-client-feedback.md:34-36)`
 
 ## 12. Global Layout & Spacing
 
@@ -95,7 +95,7 @@ Annotated issues below reference the supplied mobile screenshot (`screencapture-
 ## 15. Microinteractions & States
 
 - **No feedback on tap:** Buttons and carousels don’t show hover/active states in the design, which will make the final build feel flat. Document hover/tap states (scale, shadow, color) for key CTAs as part of the UI polish pass.
-- **Auto-play absence:** Client called for a “slow/blurred image carousel” in the hero; the current slider appears manual-only. Implement auto-play with accessible pause controls so the motion supports storytelling. `(feedback/client-feedback.md:5-25)`
+- **Auto-play absence:** Client called for a “slow/blurred image carousel” in the hero; the current slider appears manual-only. Implement auto-play with accessible pause controls so the motion supports storytelling. `(feedback/2025-10-31-client-feedback.md:5-25)`
 - **Icon animations:** Perk/feature icons are static; subtle micro-animations (pulse, glow) would add modernity without overwhelming the luxury tone.
 
 ## 16. Accessibility Considerations
@@ -114,7 +114,7 @@ Annotated issues below reference the supplied mobile screenshot (`screencapture-
 
 - **Product-first storyline:** The entire scroll feels like a DTC PDP rather than an affiliate recruitment funnel. Missing sections such as “Creator Success Stories,” “WhatsApp CTA,” and “Incentives & Rewards” from the content map makes the experience misaligned with stakeholder expectations. `(docs/04-CONTENT-STRUCTURE.md:21-120)`
 - **Missing brand story slider:** The plan calls for a 3-slide brand vision/product/affiliate success carousel near the top; the current layout jumps straight into product benefits. Reintroduce the slider to communicate mission and community. `(docs/04-CONTENT-STRUCTURE.md:21-44)`
-- **No leaderboard or rewards tiers:** Client feedback specified perks, tiers, and weekly prizes; none of that appears in this landing page, so affiliates can’t see the incentive structure. `(feedback/client-feedback.md:32-34)`
+- **No leaderboard or rewards tiers:** Client feedback specified perks, tiers, and weekly prizes; none of that appears in this landing page, so affiliates can’t see the incentive structure. `(feedback/2025-10-31-client-feedback.md:32-34)`
 
 ## 19. Media Formatting & Technical Notes
 

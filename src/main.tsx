@@ -5,42 +5,111 @@ import { HelmetProvider } from 'react-helmet-async'
 import { ClerkProvider } from '@clerk/clerk-react'
 import './index.css'
 import App from './App.tsx'
-import { CartProvider } from './domains/cart/providers/CartContext'
+import { CartProvider } from './domains/client/shop/cart/providers/CartContext'
 import { DrawerProvider } from './ui/providers/DrawerProvider'
-import { AuthProvider } from './domains/auth/ui/providers/AuthContext'
+import { AuthProvider } from './domains/platform/auth/providers/AuthContext'
 import { initPosthogOnce } from '@/lib/analytics/posthog'
+import { dispatchServiceWorkerUpdateAvailable } from '@/lib/serviceWorkerUpdates'
 import ScrollToTop from './ui/components/ScrollToTop'
+import AppErrorBoundary from './ui/components/AppErrorBoundary'
+import CookieConsentBanner from './ui/components/CookieConsentBanner'
+import ServiceWorkerUpdateToast from './ui/components/ServiceWorkerUpdateToast'
+import { SUPPORT_EMAIL } from '@/config/constants'
+
+// Guard against missing react-refresh runtime in certain build modes (prevents $RefreshReg$ errors).
+if (typeof window !== 'undefined') {
+  // @ts-expect-error - react-refresh injects this global in dev; provide fallback in other build modes.
+  window.$RefreshReg$ = window.$RefreshReg$ || (() => {})
+  // @ts-expect-error - react-refresh injects this global in dev; provide fallback in other build modes.
+  window.$RefreshSig$ = window.$RefreshSig$ || (() => (type: any) => type)
+}
 
 // Start PostHog init early (feature flags may be needed during first render).
 // Actual event capture remains gated by `VITE_ANALYTICS_ENABLED`.
 void initPosthogOnce()
 
-const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? 'pk_test_placeholder'
+const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const isClerkConfigured = Boolean(clerkPublishableKey) && clerkPublishableKey !== 'pk_test_placeholder'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ClerkProvider
-      publishableKey={clerkPublishableKey}
-      signInUrl="/sign-in"
-      signUpUrl="/sign-up"
-      afterSignInUrl="/account"
-      afterSignUpUrl="/account"
-    >
+const rootEl = document.getElementById('root')
+if (!rootEl) throw new Error('Missing #root element')
+
+if (!isClerkConfigured) {
+  createRoot(rootEl).render(
+    <StrictMode>
       <HelmetProvider>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <ScrollToTop />
-          <CartProvider>
-            <AuthProvider>
-              <DrawerProvider>
-                <App />
-              </DrawerProvider>
-            </AuthProvider>
-          </CartProvider>
-        </BrowserRouter>
+        <main className="min-h-screen bg-white text-semantic-text-primary">
+          <div className="mx-auto max-w-3xl px-4 py-16 md:px-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
+              Configuration required
+            </p>
+            <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-semantic-text-primary md:text-4xl">
+              Sign-in is temporarily unavailable
+            </h1>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-semantic-text-primary/70">
+              Authentication is not configured for this environment, so account/admin pages can’t load safely.
+            </p>
+
+            {import.meta.env.DEV ? (
+              <div className="mt-8 rounded-3xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-6">
+                <p className="text-sm font-semibold text-semantic-text-primary">
+                  Fix (local dev):
+                </p>
+                <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-semantic-text-primary/70">
+                  <li>
+                    Add <code className="font-mono text-xs">VITE_CLERK_PUBLISHABLE_KEY</code> to your{' '}
+                    <code className="font-mono text-xs">.env.local</code>.
+                  </li>
+                  <li>Restart the dev server.</li>
+                </ol>
+                <p className="mt-4 text-xs text-semantic-text-primary/60">
+                  If you don’t have a Clerk key, ask an admin or use the project’s shared dev env file.
+                </p>
+              </div>
+            ) : (
+              <p className="mt-8 text-sm text-semantic-text-primary/70">
+                Please try again later, or contact{' '}
+                <a className="underline underline-offset-4" href={`mailto:${SUPPORT_EMAIL}`}>
+                  {SUPPORT_EMAIL}
+                </a>
+                .
+              </p>
+            )}
+          </div>
+        </main>
       </HelmetProvider>
-    </ClerkProvider>
-  </StrictMode>
-)
+    </StrictMode>
+  )
+} else {
+  createRoot(rootEl).render(
+    <StrictMode>
+      <ClerkProvider
+        publishableKey={clerkPublishableKey}
+        signInUrl="/sign-in"
+        signUpUrl="/sign-up"
+        afterSignInUrl="/account"
+        afterSignUpUrl="/account"
+      >
+        <HelmetProvider>
+          <AppErrorBoundary>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+              <ScrollToTop />
+              <CookieConsentBanner />
+              <ServiceWorkerUpdateToast />
+              <CartProvider>
+                <AuthProvider>
+                  <DrawerProvider>
+                    <App />
+                  </DrawerProvider>
+                </AuthProvider>
+              </CartProvider>
+            </BrowserRouter>
+          </AppErrorBoundary>
+        </HelmetProvider>
+      </ClerkProvider>
+    </StrictMode>
+  )
+}
 
 // Basic service worker registration for PWA install/offline.
 // Only enable in production to avoid stale caches during local development.
@@ -48,6 +117,23 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')
+      .then((registration) => {
+        const notify = () => dispatchServiceWorkerUpdateAvailable()
+
+        // If an update was already downloaded while the page was open, surface it.
+        if (registration.waiting && navigator.serviceWorker.controller) notify()
+
+        registration.addEventListener('updatefound', () => {
+          const installing = registration.installing
+          if (!installing) return
+
+          installing.addEventListener('statechange', () => {
+            if (installing.state !== 'installed') return
+            // If there's an existing controller, this is an update (not first install).
+            if (navigator.serviceWorker.controller) notify()
+          })
+        })
+      })
       .catch((err) => console.error('SW registration failed', err))
   })
 }
