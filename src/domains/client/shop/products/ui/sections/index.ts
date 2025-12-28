@@ -1,0 +1,6 @@
+export * from './details-accordion/DetailsAccordion'
+export * from './feature-callouts/FeatureCallouts'
+export * from './featured-tik-tok/FeaturedTikTok'
+export * from './faq-section-shop/FaqSectionShop'
+export * from './hero-proof-strip/HeroProofStrip'
+export * from './reviews-auto-carousel/ReviewsAutoCarousel'
