@@ -1,5 +1,0 @@
-export * from './ui/pages/ShopLandingPage'
-export * from './ui/pages/TermsPage'
-export * from './ui/pages/PrivacyPage'
-export * from './ui/pages/BriefPage'
-export * from './ui/pages/WelcomePage'

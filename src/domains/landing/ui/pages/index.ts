@@ -1,5 +1,0 @@
-export { default as BriefPage } from './BriefPage'
-export { default as PrivacyPage } from './PrivacyPage'
-export { default as ShopLandingPage } from './ShopLandingPage'
-export { default as TermsPage } from './TermsPage'
-export { default as WelcomePage } from './WelcomePage'
