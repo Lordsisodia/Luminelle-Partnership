@@ -207,7 +207,8 @@ const Reviews2DCarousel = memo(
             scrollSnapType: "x mandatory",
             scrollPaddingLeft: "16px",
             scrollPaddingRight: "16px",
-            touchAction: "pan-y",
+            // Allow horizontal swipe scrolling on mobile.
+            touchAction: "pan-x",
           }}
           aria-label="Customer reviews"
         >
