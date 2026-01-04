@@ -13,7 +13,12 @@ type Heading = {
 type Props = {
   heading?: Heading
   sectionId?: string
-  tiktoks?: typeof successStories
+  tiktoks?: {
+    name: string
+    handle: string
+    embedUrl: string
+    videoUrl?: string
+  }[]
 }
 
 const defaultHeading: Heading = {
