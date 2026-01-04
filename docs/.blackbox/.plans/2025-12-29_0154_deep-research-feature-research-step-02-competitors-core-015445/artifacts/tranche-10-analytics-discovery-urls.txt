@@ -1,0 +1,3 @@
+# Tranche 10 — Optional handle discovery / category evidence
+https://apps.shopify.com/categories/store-management shopify-cat-store-management
+https://apps.shopify.com/categories/store-management-operations-analytics?surface_detail=store-management&surface_type=category&surface_version=redesign shopify-cat-store-management-ops-analytics

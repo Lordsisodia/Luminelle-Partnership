@@ -1,0 +1,10 @@
+https://www.hotjar.com Hotjar
+https://www.fullstory.com FullStory
+https://logrocket.com LogRocket
+https://amplitude.com Amplitude
+https://mixpanel.com Mixpanel
+https://retool.com Retool
+https://www.appsmith.com Appsmith
+https://tooljet.com ToolJet
+https://budibase.com Budibase
+https://plausible.io Plausible

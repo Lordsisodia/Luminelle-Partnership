@@ -1,0 +1,123 @@
+# source: .blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-01-feature-hunt-oss-harvest-015445/artifacts/summary.md
+# captured: 2025-12-30T23:54:29Z
+
+---
+status: draft
+last_reviewed: 2025-12-28
+owner: agent
+---
+
+# Summary (Step 01 — Feature Hunt + OSS Harvest)
+
+- ✅ Tranche #1 completed: expanded Returns / Exchanges / RMA automation into a detailed feature universe with stealable workflows + thin slices in `artifacts/features-catalog.md`.
+- ✅ Evidence pack added for returns primitives and vendor workflow patterns (Shopify help center, AfterShip, Narvar, Happy Returns, ReturnGO, Reuters) in `artifacts/sources.md` (S1–S9).
+- ✅ OSS pointers added (8) for returns/RMA-adjacent patterns (Medusa, Saleor, Vendure, Sylius, Spree, VTEX return-app, OCA/rma, WooCommerce RMA plugin) in `artifacts/oss-catalog.md`.
+- ✅ Search reproducibility updated with queries and top hits in `artifacts/search-log.md`.
+- 🔥 Fastest thin slices (1–3 days): return initiation portal + policy gating; exchange-to-any SKU (credit-only delta); manual review queue + approve/deny + templated comms.
+- 🧱 High-leverage follow-ons (1–2 weeks): scan/event-driven refunds; routing + consolidation; inventory reservation + ship-first/receive-first controls.
+- ❓ Open decisions: exchange price-delta handling (split tender vs credit-only); refund trigger milestone policy (scan vs received); store credit instrument choice (gift card vs ledger balance).
+
+- ✅ Tranche #2 started: Shipping / delivery exception management feature cluster added with workflows + thin slices (tracking ingestion, exception queues, holds, comms) in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: shipping exceptions are an **event ingestion + normalization + task queue** problem (canonical status enums + “last scan age” rules) more than a “UI-only” problem. (S14, S16, S19)
+- 🔥 Fastest thin slices (1–3 days): webhook endpoint + “shipment timeline”; exception queue + manual resolution notes; fulfillment hold/unhold with reasons. (S16, S18, S12)
+- 🧱 High-leverage follow-ons (1–2 weeks): proactive notification rules by event + SLA; address verification + correction loop; carrier claims tracker with attachments. (S15, S17, S16)
+- ⚖️ OSS posture: shipping exception “platforms” are mostly SaaS; OSS is strongest as primitives (carrier integration layers + address parsing/geocoding) and should be treated as accelerators, not full solutions. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #3 started: Inventory / fulfillment exception management feature cluster added (multi-location inventory, routing, split/merge, transfers, oversell/backorder) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: inventory/fulfillment exceptions collapse into **(a) location-aware inventory ledger**, **(b) routing/assignment engine**, and **(c) exception queues** (backorder, transfer aging, partial fulfillments). (S22, S21, S28)
+- 🔥 Fastest thin slices (1–3 days): partial fulfillment (split) + customer comms; inventory transfers with receive UI; bulk inventory edit with row-level errors. (S28, S23, S25)
+- 🧱 High-leverage follow-ons (1–2 weeks): fulfillable-inventory gating by ship-to zones; inventory reservations (committed vs available) + auto-release; low-stock tasking per location. (S29, S22)
+- ⚖️ OSS posture: mature inventory/WMS patterns mostly live in OSS ERP/WMS suites (ERPNext/Odoo/OpenBoxes) as reference for flows and edge cases; treat as pattern extraction until Step-04. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #4 started: Support desk ops feature cluster added (views/queues, macros, canned responses, rules, auto-assign, SLAs, audit trail) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: support desks are **queue primitives (views) + automation primitives (rules/macros) + time primitives (SLAs)**. (S36, S31, S35)
+- 🔥 Fastest thin slices (1–3 days): canned responses + variables; macro actions (tag/assign/status + draft reply); SLA breach view + overdue badges. (S33, S30, S35)
+- 🧱 High-leverage follow-ons (1–2 weeks): ecommerce side panel (order/return/shipment context) + 1-click ops actions; collision avoidance/presence; spam/OOO hygiene via rules. (S30, S34)
+- ⚖️ OSS posture: full helpdesks exist in OSS (Chatwoot/Zammad/osTicket), but license/posture varies; treat as reference until Step-04 verifies licenses and integration fit. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #5 started: Analytics & QA feature cluster added (metrics dictionary, agent performance, queue health, CSAT, QA rubrics/scorecards, coaching) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: analytics/QA is a **measurement layer** over the same event system used by rules/macros/SLAs (ticket events + automation executions + timers). (S37, S35)
+- 🔥 Fastest thin slices (1–3 days): CSAT capture (2-choice) + DSAT escalation; agent performance dashboard (first reply time + tickets solved); simple QA rubric + evaluation form. (S39, S40, S41)
+- 🧱 High-leverage follow-ons (1–2 weeks): calibration sessions (grader variance), coaching plans linked to QA findings, combined “speed + quality” scorecard to prevent gaming. (S41)
+- ⚖️ OSS posture: analytics is easiest to accelerate via OSS BI/telemetry stacks (Superset/Metabase/Grafana/OTel) while keeping domain metrics in-app; licenses vary and need Step-04 verification. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #6 started: Customer self-serve / deflection feature cluster added (order lookup, status/tracking pages, customer accounts, help center + search, deflection analytics) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: self-serve is a **content + search + contextual status surfaces** problem, plus instrumentation to measure “contact anyway” behavior. (S45, S46, S42)
+- 🔥 Fastest thin slices (1–3 days): order lookup page + tracking link; help center 10 articles + basic search; contact form with structured reasons and prefilled order context. (S44, S49, S31)
+- 🧱 High-leverage follow-ons (1–2 weeks): contextual status modules (delayed/exception guidance), recommended articles on contact page, deflection analytics linking search→contact sessions. (S45, S43, S48)
+- ⚖️ OSS posture: help centers and search can be accelerated with OSS (Docusaurus + Meilisearch/DocSearch) but search licenses vary; defer license verification to Step-04. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #7 started: Workflow builder / automation feature cluster added (triggers, actions, condition builder, visual editor, run history, approvals, retries) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: automation is a **unifying layer** across returns/shipping/inventory/support, with a shared trigger/action/condition model and audit history. (S51, S50)
+- 🔥 Fastest thin slices (1–3 days): linear flow editor + 10 triggers/actions; test runner with sample payload; run history list with errors. (S50, S53)
+- 🧱 High-leverage follow-ons (1–2 weeks): approval step for risky actions; rate limiting + dedupe; connector packaging (“pieces/nodes”) for rapid integrations. (S52, S54, S55)
+- ⚖️ OSS posture: OSS exists at multiple layers (builder UI, connector model, durable runtime) but licenses vary (notably n8n historically source-available); defer license verification to Step-04. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #8 started: Security & compliance feature cluster added (RBAC, MFA, SSO/SCIM, sessions, audit logs, approvals, webhook security) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: security features are **control plane primitives** that every other tranche depends on (permissions + auditability + safe automation). (S56, S65)
+- 🔥 Fastest thin slices (1–3 days): fixed roles + permission checks on risky actions; audit log (20 events + filters + CSV export); webhook signature verification + rotation UI. (S56, S65, S64)
+- 🧱 High-leverage follow-ons (1–2 weeks): enforce MFA and session revocation; SSO (SAML) + SCIM provisioning with group→role mapping; two-person approvals for refunds and role changes. (S57, S58, S59)
+- ⚖️ OSS posture: identity + authz layers have strong OSS options (Keycloak/OpenFGA/OPA/Casbin), but integration and license posture must be validated in Step-04. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #9 started: Inventory forecasting + replenishment feature cluster added (POs, vendors, reorder rules, suggested quantities, inbound visibility, transfers vs buy, forecasting layer) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: replenishment is **rules-first** (min/max, reorder levels, lead times) and forecasting is an optional layer that should start as advisory. (S68, S69, S70)
+- 🔥 Fastest thin slices (1–3 days): PO create + partial receiving; reorder point table + daily suggestions; days-of-cover risk dashboard. (S66, S68, S67)
+- 🧱 High-leverage follow-ons (1–2 weeks): transfer-vs-buy suggestions; ABC classification with policy defaults; forecasting POC report for top SKUs (no auto-order). (S67, S70)
+- ⚖️ OSS posture: ERP/WMS suites provide mature replenishment flows (ERPNext/Odoo); forecasting libs (Prophet/Darts) can accelerate models, but licensing/ops fit need Step-04 verification. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #10 started: Pricing & billing admin feature cluster added (plans/catalog, subscriptions, proration previews, invoices, taxes/tax IDs, dunning, billing portal) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: billing admin is **catalog + subscription lifecycle + invoice lifecycle**, with proration as the “edge-case engine” and taxes as a compliance layer. (S71, S72, S73)
+- 🔥 Fastest thin slices (1–3 days): invoice list/detail + PDF; hosted billing portal link; tax ID capture and show on invoice. (S72, S71, S74)
+- 🧱 High-leverage follow-ons (1–2 weeks): proration previews and change confirmations; dunning settings with grace-period access states; approvals for refunds/credits. (S73, S71, S63)
+- ⚖️ OSS posture: full billing engines exist (Kill Bill) and can inform data models; many teams integrate Stripe/Paddle/Chargebee for faster compliance and operations. (S71, S75, S76)
+
+- ✅ Tranche #11 started: Fraud & risk feature cluster added (order risk panels, review queues, risk rules, disputes/chargebacks inbox, evidence packets, return-fraud gating) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: fraud/risk is **signals → score/rules → queue → action**, plus a separate disputes lifecycle with deadlines and evidence packaging. (S77, S78)
+- 🔥 Fastest thin slices (1–3 days): order risk panel + manual review queue + “hold order”; dispute inbox with due dates; evidence packet export (PDF/ZIP). (S80, S78, S79)
+- 🧱 High-leverage follow-ons (1–2 weeks): verification flows, velocity controls, and return-fraud gating integrated into returns portal; audit trail for all overrides and evidence submissions. (S77, S9, S65)
+- ⚖️ OSS posture: OSS helps mostly with primitives (geo/risk signals, explainability, monitoring) while payment/dispute lifecycles are typically provider-integrated. (S77, S78)
+
+- ✅ Tranche #12 started: Analytics for finance feature cluster added (MRR/ARR, churn, NRR bridges, cohorts, LTV, loss impact) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: finance analytics needs a **metrics dictionary + transparent drilldowns**, otherwise numbers won’t be trusted by operators. (S82, S84)
+- 🔥 Fastest thin slices (1–3 days): MRR dashboard + plan breakdown; churn dashboard; refunds/chargebacks impact chart. (S82, S83, S78)
+- 🧱 High-leverage follow-ons (1–2 weeks): cohort retention tables, NRR/GRR bridges, and invoice-vs-MRR reconciliation views. (S84, S82)
+- ⚖️ OSS posture: BI stacks (Superset/Metabase) and semantic layers (Cube) accelerate dashboards, but licenses vary and need Step-04 verification. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #13 started: Data import/export + integrations admin feature cluster added (connector catalog, webhook management, bulk exports, sync run history, retries) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: integrations need **three control planes** — credentials/scopes, delivery/run observability, and safe retry/replay controls. (S87, S91, S93)
+- 🔥 Fastest thin slices (1–3 days): webhook endpoint manager + delivery log + replay; CSV import/export center with dry-run validation; connector run history with retry button. (S87, S90, S91)
+- 🧱 High-leverage follow-ons (1–2 weeks): schema mapping/transforms, per-connector schedules, and event subscription manager (topic selection + sample payload viewer). (S92, S88, S89)
+- ⚖️ OSS posture: ELT/connectors (Airbyte/Meltano/Singer) and webhook delivery (Svix) provide strong patterns, but licenses and integration shape need Step-04 validation. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #14 started: Mobile ops feature cluster added (scan-to-receive, offline-first scanning, push alerts, mobile task inbox) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: mobile ops success depends on **offline-first queues + conflict resolution**, plus fast scan UX and device compatibility constraints. (S98, S95, S94)
+- 🔥 Fastest thin slices (1–3 days): scan-to-receive transfer (online); push alerts for 2 events; basic offline queue for scans with “sync now”. (S95, S97, S98)
+- 🧱 High-leverage follow-ons (1–2 weeks): offline photo/evidence capture and upload retries; pick/pack scan confirmation; device/scanner test screen. (S98, S94)
+- ⚖️ OSS posture: mobile scaffolding and storage primitives exist (Expo/AsyncStorage/ZXing), but barcode scanning often relies on platform SDKs (e.g., ML Kit). (S99, S100)
+
+- ✅ Tranche #15 started: Approvals & tasks feature cluster added (task object, views, templates/playbooks, approvals inbox, reminders/escalations) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: approvals/tasks are the **execution layer** that ties automation, security, and mobile together (queue + state machine + due dates). (S102, S35)
+- 🔥 Fastest thin slices (1–3 days): task CRUD + “My tasks” view; approval request object + approval inbox; email approve/deny deep links with auth gate. (S101, S36, S105)
+- 🧱 High-leverage follow-ons (1–2 weeks): task templates/playbooks + checklist steps; escalations and reminders; kanban board view for ops teams. (S102, S104)
+- ⚖️ OSS posture: OSS boards and issue trackers provide strong UI patterns (Focalboard/OpenProject), but licenses vary; Step-04 should verify before reuse. (GitHub pointers in `artifacts/sources.md`)
+
+- ✅ Tranche #16 started: Localization feature cluster added (multi-currency, translations, time zones) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: localization is a **data model + formatting runtime** problem (CLDR/ICU), not just “translate strings”; correct money math + rounding is a core risk surface. (S108, S109, S112)
+- 🔥 Fastest thin slices (1–3 days): tenant locale defaults applied across UI; FX rate snapshot displayed on order; missing translation keys report + export. (S109, S106, S111)
+- 🧱 High-leverage follow-ons (1–2 weeks): per-market price lists and conversion policies (rate lock windows) + audit log; locale-aware input parsing for admin pricing. (S106, S107, S108)
+- ⚖️ OSS posture: strong OSS primitives exist for i18n runtime/message formatting and money math (FormatJS, i18next, Dinero.js), but licensing and fit should be verified in Step-04. (S110, S111, S112)
+
+- ✅ Tranche #17 started: Observability feature cluster added (logs, tracing, alerts, SLOs) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: observability is an **ops control plane** (schemas + routing + policy) as much as a “dashboard”; without semantic conventions, search/correlation collapses. (S114, S113)
+- 🔥 Fastest thin slices (1–3 days): log search with saved queries; trace lookup by trace_id/request_id; alert routing + silences; basic incident object with timeline notes. (S117, S119, S116, S122)
+- 🧱 High-leverage follow-ons (1–2 weeks): SLOs + burn-rate alerts + error budgets; PII redaction and sampling policies; release markers on charts and error inbox for fast regressions. (S121, S113, S120)
+- ⚖️ OSS posture: strong OSS exists across the stack (OTel Collector, Prometheus/Alertmanager, Loki/Tempo/Jaeger), but licensing varies and should be validated in Step-04 before adoption. (S113, S115, S117, S119)
+
+- ✅ Tranche #18 started: Admin IA feature cluster added (navigation, search, saved views, shortcuts) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: admin IA is “**reduce repeated work**” via saved views + deep links; global search and command palettes shift the UI from “browse” to “lookup”. (S123, S124, S126)
+- 🔥 Fastest thin slices (1–3 days): saved views (filters + sort) on one list; ⌘K command palette for navigation; shortcuts overlay; shareable deep links to queue states. (S123, S125, S129)
+- 🧱 High-leverage follow-ons (1–2 weeks): advanced search syntax + builder UI; table personalization (columns/density) per view; bulk actions with selection persistence; permission-aware navigation for reduced confusion. (S127, S128, S123)
+- ⚖️ OSS posture: strong OSS primitives exist for command palettes, keyboard shortcuts, fuzzy search, and table state (cmdk/kbar/Fuse/FlexSearch/TanStack Table), but licenses should be verified in Step-04. (S129)
+
+- ✅ Tranche #19 started: Data governance feature cluster added (retention, exports, privacy requests) with workflows + thin slices in `artifacts/features-catalog.md`.
+- 🧠 Durable pattern: governance is **policy + execution + proof** — policy registry (retention/DSAR rules), jobs/workflows to execute, and audit logs proving outcomes. (S130, S135, S137)

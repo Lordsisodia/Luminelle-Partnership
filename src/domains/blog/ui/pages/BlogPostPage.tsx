@@ -5,29 +5,60 @@ import type { NavItem } from '@/layouts/MarketingLayout'
 import { blogPosts } from '@/content/blog'
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { cdnUrl } from '@/utils/cdn'
-import { BlogSocial } from '../components/BlogSocial'
+import BlogSocial from '../components/BlogSocial'
 import { Seo } from '@/components/Seo'
+import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
+import { SUPPORT_EMAIL } from '@/config/constants'
 import { useCallback, useState, useEffect, useRef } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Post' },
   { id: 'faq', label: 'FAQ' },
 ]
 
+const BLOG_SLUG_ALIASES: Record<string, string> = {
+  'frizz-free-showers': 'frizz-free-showers-seo',
+  'hair-hooks-that-convert': 'creator-tiktok-scripts',
+  'satin-vs-waterproof': 'why-satin-matters',
+  'travel-hair-kit': 'travel-ready-hair-kit',
+}
+
 export const BlogPostPage = () => {
   const { slug } = useParams()
-  const post = blogPosts.find((p) => p.slug === slug)
+  const canonicalSlug = slug ? BLOG_SLUG_ALIASES[slug] ?? slug : undefined
+  const post = blogPosts.find((p) => p.slug === canonicalSlug)
   const [currentRelatedIndex, setCurrentRelatedIndex] = useState(0)
   const relatedTrackRef = useRef<HTMLDivElement | null>(null)
   const [copied, setCopied] = useState(false)
 
-  if (!post) return <Navigate to="/blog" replace />
+  if (!canonicalSlug || !post) return <Navigate to="/blog" replace />
   if (post.status === 'draft' && !import.meta.env.DEV) return <Navigate to="/blog" replace />
+  if (slug !== canonicalSlug) return <Navigate to={`/blog/${canonicalSlug}`} replace />
+
+  const authorHref = post.authorLink?.trim() ? post.authorLink : null
 
   const related = blogPosts
     .filter((p) => p.slug !== post.slug && (import.meta.env.DEV ? true : p.status !== 'draft'))
     .sort((a, b) => (a.tag === post.tag ? -1 : b.tag === post.tag ? 1 : 0))
     .slice(0, 3)
+
+  const scrollRelatedToIndex = useCallback(
+    (idx: number) => {
+      const track = relatedTrackRef.current
+      if (!track) return
+
+      const clamped = Math.max(0, Math.min(related.length - 1, idx))
+      const el = track.querySelector(`[data-related-slide="${clamped}"]`) as HTMLElement | null
+      if (!el) return
+
+      const trackRect = track.getBoundingClientRect()
+      const elRect = el.getBoundingClientRect()
+      const left = elRect.left - trackRect.left + track.scrollLeft
+      track.scrollTo({ left, behavior: 'smooth' })
+    },
+    [related.length],
+  )
 
   const slugify = (value: string) =>
     value
@@ -40,14 +71,39 @@ export const BlogPostPage = () => {
     const track = relatedTrackRef.current
     if (!track) return
 
+    let raf = 0
+
     const handleScroll = () => {
-      const slideWidth = track.scrollWidth / related.length || 1
-      const nextIndex = Math.round(track.scrollLeft / slideWidth)
-      setCurrentRelatedIndex(nextIndex)
+      if (raf) cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const slides = Array.from(track.querySelectorAll('[data-related-slide]')) as HTMLElement[]
+        if (!slides.length) return
+
+        const trackRect = track.getBoundingClientRect()
+        const trackCenterX = trackRect.left + trackRect.width / 2
+
+        let bestIdx = 0
+        let bestDist = Number.POSITIVE_INFINITY
+        for (let i = 0; i < slides.length; i += 1) {
+          const rect = slides[i].getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const dist = Math.abs(centerX - trackCenterX)
+          if (dist < bestDist) {
+            bestDist = dist
+            bestIdx = i
+          }
+        }
+
+        setCurrentRelatedIndex(bestIdx)
+      })
     }
 
     track.addEventListener('scroll', handleScroll, { passive: true })
-    return () => track.removeEventListener('scroll', handleScroll)
+    handleScroll()
+    return () => {
+      track.removeEventListener('scroll', handleScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
   }, [related.length])
 
   const title = post.title
@@ -55,9 +111,9 @@ export const BlogPostPage = () => {
     post.teaser || post.subtitle || 'Frizz-free hair care, creator routines, and product science from Lumelle.'
   const image = post.ogImage ?? post.cover
   const absImage = cdnUrl(image)
-  const url = `https://lumelle.com/blog/${post.slug}`
+  const url = toPublicUrl(`/blog/${post.slug}`)
   const handleCopy = useCallback(() => {
-    navigator.clipboard?.writeText(url).then(() => {
+    void navigator.clipboard?.writeText?.(url)?.then(() => {
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1200)
     })
@@ -104,13 +160,11 @@ export const BlogPostPage = () => {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://lumelle.com/blog' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: toPublicUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: toPublicUrl('/blog') },
       { '@type': 'ListItem', position: 3, name: post.title, item: url },
     ],
   }
-
-  if (!post) return <Navigate to="/blog" replace />
 
   const reviewed = post.reviewed || post.date
 
@@ -142,21 +196,39 @@ export const BlogPostPage = () => {
             <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-semantic-text-primary/80">
               <div className="flex items-center gap-2">
                 {post.authorAvatar ? (
-                  <a href={post.authorLink || '#'} className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-semantic-legacy-brand-blush/60 shadow-soft hover:-translate-y-0.5 transition">
-                    <img src={post.authorAvatar} alt={post.author} className="h-full w-full object-cover" loading="lazy" />
-                  </a>
+                  authorHref ? (
+                    <a
+                      href={authorHref}
+                      className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-semantic-legacy-brand-blush/60 shadow-soft hover:-translate-y-0.5 transition"
+                    >
+                      <img src={cdnUrl(post.authorAvatar)} alt={post.author} className="h-full w-full object-cover" loading="lazy" />
+                    </a>
+                  ) : (
+                    <span className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-semantic-legacy-brand-blush/60 shadow-soft">
+                      <img src={cdnUrl(post.authorAvatar)} alt={post.author} className="h-full w-full object-cover" loading="lazy" />
+                    </span>
+                  )
                 ) : (
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-semantic-legacy-brand-blush/50 text-sm font-semibold text-semantic-text-primary">
                     {post.author.charAt(0)}
                   </span>
                 )}
-                <a
-                  href={post.authorLink || '#'}
-                  className="font-semibold text-semantic-text-primary hover:text-semantic-text-primary/80"
-                  title={post.authorRoleLong || post.authorRole}
-                >
-                  {post.author}
-                </a>
+                {authorHref ? (
+                  <a
+                    href={authorHref}
+                    className="font-semibold text-semantic-text-primary hover:text-semantic-text-primary/80"
+                    title={post.authorRoleLong || post.authorRole}
+                  >
+                    {post.author}
+                  </a>
+                ) : (
+                  <span
+                    className="font-semibold text-semantic-text-primary"
+                    title={post.authorRoleLong || post.authorRole}
+                  >
+                    {post.author}
+                  </span>
+                )}
                 {post.authorRole ? <span className="text-semantic-text-primary/70">· {post.authorRole}</span> : null}
               </div>
               {post.authorRoleLong ? <span className="text-semantic-text-primary/60">{post.authorRoleLong}</span> : null}
@@ -185,7 +257,7 @@ export const BlogPostPage = () => {
             </div>
             <div className="mt-6 overflow-hidden rounded-[2rem] border border-semantic-legacy-brand-blush/60">
               <img
-                src={post.cover}
+                src={cdnUrl(post.cover)}
                 alt={post.title}
                 className="w-full object-cover"
                 width={1200}
@@ -220,7 +292,7 @@ export const BlogPostPage = () => {
                 {post.productCard ? (
                   <div className="flex items-center gap-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-3 shadow-soft">
                     <img
-                      src={post.productCard.image}
+                      src={cdnUrl(post.productCard.image)}
                       alt={post.productCard.title}
                       className="h-14 w-14 rounded-xl object-cover"
                       loading="lazy"
@@ -239,24 +311,36 @@ export const BlogPostPage = () => {
                       ) : null}
                       <div className="flex items-center gap-2 text-sm font-semibold text-semantic-text-primary">
                         {post.productCard.price ? <span>{post.productCard.price}</span> : null}
-                        <a
-                          href={post.productCard.href}
-                          className="inline-flex items-center gap-1 rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
-                        >
-                          Shop now
-                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                        </a>
+                        {post.productCard.href.startsWith('/') ? (
+                          <RouterLink
+                            to={post.productCard.href}
+                            className="inline-flex items-center gap-1 rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                          >
+                            Shop now
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                          </RouterLink>
+                        ) : (
+                          <a
+                            href={post.productCard.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
+                          >
+                            Shop now
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <a
-                    href="/product/lumelle-shower-cap"
+                  <RouterLink
+                    to="/product/lumelle-shower-cap"
                     className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
                   >
                     Shop the satin-lined waterproof cap
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                  </a>
+                  </RouterLink>
                 )}
               </div>
             </div>
@@ -407,17 +491,27 @@ export const BlogPostPage = () => {
         <section className="bg-white">
           <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
             <div className="flex items-center gap-4 rounded-3xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/15 p-4">
-              <a
-                href={post.authorLink || '#'}
-                className="h-12 w-12 rounded-full bg-semantic-legacy-brand-blush/40 text-center text-lg font-semibold text-semantic-text-primary flex items-center justify-center hover:-translate-y-0.5 transition"
-              >
-                {post.author.charAt(0)}
-              </a>
+              {authorHref ? (
+                <a
+                  href={authorHref}
+                  className="h-12 w-12 rounded-full bg-semantic-legacy-brand-blush/40 text-center text-lg font-semibold text-semantic-text-primary flex items-center justify-center hover:-translate-y-0.5 transition"
+                >
+                  {post.author.charAt(0)}
+                </a>
+              ) : (
+                <div className="h-12 w-12 rounded-full bg-semantic-legacy-brand-blush/40 text-center text-lg font-semibold text-semantic-text-primary flex items-center justify-center">
+                  {post.author.charAt(0)}
+                </div>
+              )}
               <div className="space-y-1 text-sm text-semantic-text-primary/80">
                 <div className="font-semibold text-semantic-text-primary">
-                  <a href={post.authorLink || '#'} className="hover:text-semantic-text-primary">
-                    {post.author}
-                  </a>
+                  {authorHref ? (
+                    <a href={authorHref} className="hover:text-semantic-text-primary">
+                      {post.author}
+                    </a>
+                  ) : (
+                    <span>{post.author}</span>
+                  )}
                   {post.authorRole ? ` · ${post.authorRole}` : ''}
                 </div>
                 {post.authorRoleLong ? (
@@ -426,59 +520,99 @@ export const BlogPostPage = () => {
                 <div>
                   Published {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · Last reviewed {new Date(reviewed).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </div>
-                <div>Have feedback? Email hello@lumelle.com</div>
+                <div>
+                  Have feedback? Email{' '}
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="underline underline-offset-4 hover:text-semantic-text-primary">
+                    {SUPPORT_EMAIL}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {related.length ? (
-          <section className="bg-white">
-            <div className="mx-auto max-w-6xl px-4 pb-12 md:px-6">
-              <SectionHeading
-                eyebrow="Related reads"
-                title="You might also like"
-                description="More quick wins to keep hair frizz-free."
-                alignment="left"
-              />
-              <div
-                ref={relatedTrackRef}
-                className="no-scrollbar mt-6 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              >
-                <div className="flex gap-4 pr-6 md:pr-10">
-                  {related.map((item) => (
-                    <RouterLink
-                      key={item.slug}
-                      to={`/blog/${item.slug}`}
-                      className="group relative flex min-w-[17rem] max-w-[17rem] flex-1 shrink-0 flex-col overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
+	        {related.length ? (
+	          <section className="bg-white">
+	            <div className="mx-auto max-w-6xl px-4 pb-12 md:px-6">
+	              <SectionHeading
+	                eyebrow="Related reads"
+	                title="You might also like"
+	                description="More quick wins to keep hair frizz-free."
+	                alignment="left"
+	              />
+                <div className="mt-6 flex items-center justify-between gap-3">
+                  <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+                    {currentRelatedIndex + 1} / {related.length}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      aria-label="Previous related post"
+                      onClick={() => scrollRelatedToIndex(currentRelatedIndex - 1)}
+                      disabled={currentRelatedIndex <= 0}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-sm hover:bg-brand-porcelain/60 disabled:opacity-40"
                     >
-                      <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
-                        <img src={item.cover} alt={item.title} className="h-full w-full object-cover" loading="lazy" />
-                      </div>
-                      <div className="space-y-2 p-4">
-                        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-                          <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{item.tag}</span>
-                          <span>{item.readTime}</span>
-                        </div>
-                        <h3 className="font-heading text-lg text-semantic-text-primary">{item.title}</h3>
-                        <p className="text-sm text-semantic-text-primary/75 line-clamp-2">{item.teaser}</p>
-                      </div>
-                    </RouterLink>
-                  ))}
+                      <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Next related post"
+                      onClick={() => scrollRelatedToIndex(currentRelatedIndex + 1)}
+                      disabled={currentRelatedIndex >= related.length - 1}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-sm hover:bg-brand-porcelain/60 disabled:opacity-40"
+                    >
+                      <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-4 flex justify-center gap-2">
-                {related.map((item, idx) => (
-                  <span
-                    key={item.slug}
-                    className={`h-2 w-2 rounded-full transition-all duration-200 ${currentRelatedIndex === idx ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-blush/60'}`}
-                    aria-hidden
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
+
+	              <div
+	                ref={relatedTrackRef}
+                  role="region"
+                  aria-label="Related reads"
+	                className="no-scrollbar mt-4 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+	              >
+	                <div className="flex gap-4 pr-6 md:pr-10">
+	                  {related.map((item, idx) => (
+	                    <RouterLink
+	                      key={item.slug}
+	                      to={`/blog/${item.slug}`}
+                        data-related-slide={idx}
+	                      className="group relative flex min-w-[17rem] max-w-[17rem] flex-1 shrink-0 flex-col overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/50 bg-white shadow-sm transition hover:-translate-y-1"
+	                    >
+	                      <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
+                        <img src={cdnUrl(item.cover)} alt={item.title} className="h-full w-full object-cover" loading="lazy" />
+	                      </div>
+	                      <div className="space-y-2 p-4">
+	                        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
+	                          <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{item.tag}</span>
+	                          <span>{item.readTime}</span>
+	                        </div>
+	                        <h3 className="font-heading text-lg text-semantic-text-primary">{item.title}</h3>
+	                        <p className="text-sm text-semantic-text-primary/75 line-clamp-2">{item.teaser}</p>
+	                      </div>
+	                    </RouterLink>
+	                  ))}
+	                </div>
+	              </div>
+
+	              <div className="mt-4 flex justify-center gap-2">
+	                {related.map((item, idx) => (
+	                  <button
+	                    key={item.slug}
+                      type="button"
+                      aria-label={`Go to related post ${idx + 1}`}
+                      aria-current={currentRelatedIndex === idx ? 'true' : undefined}
+                      onClick={() => scrollRelatedToIndex(idx)}
+	                    className={`h-2.5 w-2.5 rounded-full transition-all duration-200 ${
+                        currentRelatedIndex === idx ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-blush/60 hover:bg-semantic-legacy-brand-blush'
+                      }`}
+	                  />
+	                ))}
+	              </div>
+	            </div>
+	          </section>
+	        ) : null}
 
       </MarketingLayout>
     </>

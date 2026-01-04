@@ -1,6 +1,6 @@
 import type { BlogPost } from '../types'
 import { stripFrontmatter } from '../utils'
-import raw from '../../../../docs/blogs/is-satin-good-for-your-hair.md?raw'
+import raw from '../../../../docs/04-growth/content/blogs/is-satin-good-for-your-hair.md?raw'
 
 const post: BlogPost = {
   slug: 'is-satin-good-for-your-hair',

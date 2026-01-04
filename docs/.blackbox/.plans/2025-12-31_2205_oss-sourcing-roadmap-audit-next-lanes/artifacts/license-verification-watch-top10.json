@@ -1,0 +1,102 @@
+[
+  {
+    "full_name": "langgenius/dify",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/langgenius/dify/blob/main/LICENSE",
+    "api_url": "https://api.github.com/repos/langgenius/dify/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "could not confidently classify from text"
+  },
+  {
+    "full_name": "strapi/strapi",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "MIT",
+    "html_url": "https://github.com/strapi/strapi/blob/develop/LICENSE",
+    "api_url": "https://api.github.com/repos/strapi/strapi/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "MIT-style detected from license text"
+  },
+  {
+    "full_name": "FlowiseAI/Flowise",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "Apache-2.0",
+    "html_url": "https://github.com/FlowiseAI/Flowise/blob/main/LICENSE.md",
+    "api_url": "https://api.github.com/repos/FlowiseAI/Flowise/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "Apache 2.0 detected from license text"
+  },
+  {
+    "full_name": "directus/directus",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "BUSL-1.1",
+    "html_url": "https://github.com/directus/directus/blob/main/license",
+    "api_url": "https://api.github.com/repos/directus/directus/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "Business Source License detected (not open source); dual-license language detected (treat as copyleft unless commercial terms)"
+  },
+  {
+    "full_name": "PostHog/posthog",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "MIT",
+    "html_url": "https://github.com/PostHog/posthog/blob/master/LICENSE",
+    "api_url": "https://api.github.com/repos/PostHog/posthog/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "MIT-style detected from license text"
+  },
+  {
+    "full_name": "Budibase/budibase",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "GPL-3.0",
+    "html_url": "https://github.com/Budibase/budibase/blob/master/LICENSE",
+    "api_url": "https://api.github.com/repos/Budibase/budibase/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "GPLv3 mentioned in license text"
+  },
+  {
+    "full_name": "chatwoot/chatwoot",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "MIT",
+    "html_url": "https://github.com/chatwoot/chatwoot/blob/develop/LICENSE",
+    "api_url": "https://api.github.com/repos/chatwoot/chatwoot/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "MIT-style detected from license text"
+  },
+  {
+    "full_name": "handsontable/handsontable",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/handsontable/handsontable/blob/develop/LICENSE.txt",
+    "api_url": "https://api.github.com/repos/handsontable/handsontable/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "could not confidently classify from text"
+  },
+  {
+    "full_name": "Comcast/react-data-grid",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "MIT",
+    "html_url": "https://github.com/Comcast/react-data-grid/blob/main/LICENSE",
+    "api_url": "https://api.github.com/repos/Comcast/react-data-grid/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "MIT-style detected from license text"
+  },
+  {
+    "full_name": "store-craft/storecraft",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/store-craft/storecraft/blob/main/LICENSE.md",
+    "api_url": "https://api.github.com/repos/store-craft/storecraft/license",
+    "fetched_at": "2025-12-31 15:14 UTC",
+    "notes": "could not confidently classify from text"
+  }
+]

@@ -1,6 +1,6 @@
 import type { BlogPost } from '../types'
 import { stripFrontmatter } from '../utils'
-import raw from '../../../../docs/blogs/how-to-make-heatless-curls-last-longer.md?raw'
+import raw from '../../../../docs/04-growth/content/blogs/how-to-make-heatless-curls-last-longer.md?raw'
 
 const post: BlogPost = {
   slug: 'how-to-make-heatless-curls-last-longer',

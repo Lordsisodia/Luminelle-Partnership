@@ -1,0 +1,23 @@
+{
+  "posthog/posthog": "MIT",
+  "PostHog/posthog": "MIT",
+  "novuhq/novu": "MIT",
+  "n8n-io/n8n": "SUL-1.0",
+  "directus/directus": "BUSL-1.1",
+  "Budibase/budibase": "GPL-3.0",
+  "strapi/strapi": "MIT",
+  "activepieces/activepieces": "MIT",
+  "growthbook/growthbook": "MIT",
+  "meilisearch/meilisearch": "BUSL-1.1",
+  "airbytehq/airbyte": "ELv2",
+  "metabase/metabase": "AGPL-3.0",
+  "chatwoot/chatwoot": "MIT",
+  "windmill-labs/windmill": "AGPL-3.0 AND Apache-2.0 AND PROPRIETARY",
+  "mautic/mautic": "GPL-3.0",
+  "vendure-ecommerce/vendure": "GPL-3.0",
+  "karrioapi/karrio": "LGPL-3.0",
+  "binwiederhier/ntfy": "Apache-2.0",
+  "gotify/server": "MIT",
+  "caronc/apprise": "BSD-2-Clause",
+  "opensearch-project/OpenSearch": "Apache-2.0"
+}

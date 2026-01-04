@@ -1,0 +1,4 @@
+../src/domains/client/shop/cart/providers/CartContext.tsx:93:const isLegacyShopifyGid = (id: string) => id.startsWith('gid://shopify/')
+../src/domains/platform/commerce/adapters/shopify/internal-api/keyRegistry.ts:12:  'variant.lumelle-shower-cap.default': 'gid://shopify/ProductVariant/56829020504438',
+../src/domains/platform/commerce/adapters/shopify/internal-api/keyRegistry.ts:13:  'variant.satin-overnight-curler.default': 'gid://shopify/ProductVariant/56852779696502',
+../src/domains/platform/commerce/adapters/shopify/internal-api/keyRegistry.ts:23:const isLegacyShopifyGid = (value: string) => value.startsWith('gid://shopify/')

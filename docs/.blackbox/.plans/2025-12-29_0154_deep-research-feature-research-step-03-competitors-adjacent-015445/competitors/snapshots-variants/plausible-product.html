@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full plausible">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plausible is a lightweight and open-source web analytics tool. Your website data is 100% yours and the privacy of your visitors is respected.">
+
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/ee/apple-touch-icon-8ecdb958bc3d0c54930755663cc34525.png?vsn=d">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/ee/favicon-32x32-4453f8bca3f1ea04a9084aa5cb81f474.png?vsn=d">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/ee/favicon-16x16-dc007123f637eca918f9aae6c45bf5e9.png?vsn=d">
+
+    <title>
+      Plausible · Simple, privacy-friendly alternative to Google Analytics
+    </title>
+    <link rel="stylesheet" href="/css/app-45a130583dc2a9798d98d34464686742.css?vsn=d">
+    <script blocking="rendering">
+  (function(){
+    var themePref = 'system';
+    function reapplyTheme() {
+      var darkMediaPref = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var htmlRef = document.querySelector('html');
+      var hcaptchaRefs = Array.from(document.getElementsByClassName('h-captcha'));
+
+      var isDark = themePref === 'dark' || (themePref === 'system' && darkMediaPref);
+
+      if (isDark) {
+          htmlRef.classList.add('dark')
+          hcaptchaRefs.forEach(function(ref) { ref.dataset.theme = "dark"; });
+      } else {
+          htmlRef.classList.remove('dark');
+          hcaptchaRefs.forEach(function(ref) { ref.dataset.theme = "light"; });
+      }
+    }
+
+    reapplyTheme();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', reapplyTheme);
+  })()
+</script>
+    
+  <script id="dogfood-script" data-script-params="{&quot;custom_properties&quot;:{&quot;logged_in&quot;:false},&quot;domain_to_replace&quot;:null,&quot;location_override&quot;:null,&quot;capture_on_localhost&quot;:false,&quot;script_url&quot;:&quot;https://plausible.io/js/pa-6_srOGVV9SLMWJ1ZpUAbG.js&quot;}">
+    var scriptParams = JSON.parse(document.currentScript.dataset.scriptParams)
+
+    window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)},window.plausible.init=function(i){window.plausible.o=i||{}};var script=document.createElement("script");script.type="text/javascript",script.async=!0,script.src=scriptParams.script_url;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(script,r);
+
+    plausible.init({
+      captureOnLocalhost: scriptParams.capture_on_localhost,
+      customProperties: {
+        ...scriptParams.custom_properties,
+        browser_language: navigator.language || navigator.userLanguage
+      },
+      transformRequest: function (payload) {
+        if (scriptParams.location_override) {
+          payload.u = scriptParams.location_override
+        } else if (scriptParams.domain_to_replace) {
+          payload.u = payload.u.replace(scriptParams.domain_to_replace, ':dashboard')
+        }
+        return payload
+      }
+    })
+  </script>
+
+  </head>
+  <body class="flex flex-col bg-gray-50 dark:bg-gray-950 h-full" style="">
+
+      <nav class="relative z-20 py-8">
+  <div class="container print:max-w-full">
+    <nav class="relative flex items-center justify-between sm:h-10 md:justify-center">
+      <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
+        <a href="/">
+          <img src="/images/ee/logo_dark-4ce532ac105c4615d6a2e51307c8fc28.svg?vsn=d" class="w-32 hidden dark:inline" alt="Plausible logo" loading="lazy">
+          <img src="/images/ee/logo_light-38aed73a70daced020b53243966ed15e.svg?vsn=d" class="w-32 inline dark:hidden" alt="Plausible logo" loading="lazy">
+        </a>
+      </div>
+      <div class="absolute inset-y-0 right-0 flex items-center justify-end">
+
+            <ul class="flex" x-show="!document.cookie.includes('logged_in=true')">
+              <li>
+                <div class="inline-flex">
+                  <a href="/login" class="font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-hidden focus:text-gray-900 transition duration-150 ease-in-out">
+                    Login
+                  </a>
+                </div>
+                <div class="inline-flex ml-6 rounded-sm shadow-sm">
+                  <a href="/register" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent leading-6 rounded-md hover:bg-indigo-500 focus:outline-hidden focus:ring transition duration-150 ease-in-out">
+                    Sign up
+                  </a>
+                </div>
+              </li>
+            </ul>
+
+      </div>
+    </nav>
+  </div>
+</nav>
+
+        
+  
+
+
+
+
+
+    <main class="flex-1">
+      <!DOCTYPE html>
+<html lang="en" class="h-full plausible">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/ee/apple-touch-icon-8ecdb958bc3d0c54930755663cc34525.png?vsn=d">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/ee/favicon-32x32-4453f8bca3f1ea04a9084aa5cb81f474.png?vsn=d">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/ee/favicon-16x16-dc007123f637eca918f9aae6c45bf5e9.png?vsn=d">
+    <title>Plausible · Web analytics</title>
+    <link rel="stylesheet" href="/css/app-45a130583dc2a9798d98d34464686742.css?vsn=d">
+  </head>
+  <body class="flex flex-col h-full bg-gray-100 dark:bg-gray-900">
+    <div class="w-full my-8 text-center">
+      <a href="/">
+        <img src="/images/ee/logo_dark-4ce532ac105c4615d6a2e51307c8fc28.svg?vsn=d" class="w-44 hidden dark:inline" alt="Plausible logo" loading="lazy">
+        <img src="/images/ee/logo_light-38aed73a70daced020b53243966ed15e.svg?vsn=d" class="w-44 inline dark:hidden" alt="Plausible logo" loading="lazy">
+      </a>
+    </div>
+
+    <div class="container flex flex-col items-center text-center mt-24">
+  <h1 class="text-5xl font-black dark:text-gray-100">404</h1>
+  <div class="mt-4 text-xl dark:text-gray-100">Oops! There's nothing here</div>
+
+  <div class="text-xl dark:text-gray-100">
+    Trying to access your dashboard? You may need to log in again to see it
+  </div>
+  <div class="mt-4 flex">
+    <a href="/login?return_to=%2Fproduct" class="mt-6 whitespace-nowrap truncate inline-flex items-center justify-center gap-x-2 font-medium rounded-md px-3.5 py-2.5 text-sm transition-all duration-150 cursor-pointer disabled:cursor-not-allowed bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:outline-indigo-600 disabled:bg-indigo-400/60 disabled:dark:bg-indigo-600/30 disabled:dark:text-white/35 mr-4">
+  
+      Log in
+    
+</a>
+    <a href="/" class="mt-6 whitespace-nowrap truncate inline-flex items-center justify-center gap-x-2 font-medium rounded-md px-3.5 py-2.5 text-sm transition-all duration-150 cursor-pointer disabled:cursor-not-allowed border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:text-gray-900 hover:shadow-sm dark:hover:bg-gray-600 dark:hover:text-white disabled:text-gray-700/40 disabled:hover:shadow-none dark:disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:border-gray-800 ">
+  
+      Go to homepage
+    
+</a>
+  </div>
+</div>
+
+    <script type="text/javascript" src="/js/app-a342158928e9418a59d12c953b7c686d.js?vsn=d">
+    </script>
+  </body>
+</html>
+    </main>
+
+
+      <div class="mt-24 bg-gray-800 dark:bg-gray-900">
+  <div class="container px-4 py-12 sm:px-6 lg:py-16 lg:px-8">
+    <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+      <div class="my-8 xl:my-0">
+        <h4 class="font-semibold tracking-wider text-gray-300 leading-5">
+          <img src="/images/ee/logo_dark-4ce532ac105c4615d6a2e51307c8fc28.svg?vsn=d" class="inline-block w-32 mr-1" alt="Plausible logo" loading="lazy">
+        </h4>
+        <p class="mt-4 text-base text-gray-400 leading-6">
+
+            Made and hosted in the EU <span class="text-lg">🇪🇺</span> <br>
+            Solely funded by our subscribers.
+
+
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-8 xl:col-span-2">
+        <div class="md:grid md:grid-cols-2 md:gap-8 print:hidden">
+          <div>
+            <h4 class="text-sm font-semibold tracking-wider text-gray-400 uppercase leading-5">
+              Getting started
+            </h4>
+            <ul class="mt-4">
+              <li>
+                <a rel="noreferrer" href="https://plausible.io/docs/integration-guides" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Integration guides
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/wordpress-analytics-plugin" class="text-base text-gray-300 leading-6 hover:text-white">
+                  WordPress plugin
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/docs/troubleshoot-integration" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Troubleshooting
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/docs/script-extensions" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Script extensions
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/docs/google-analytics-import" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Import stats
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/docs/google-search-console-integration" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Search Console
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/docs/users-roles" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Invite team members
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/docs/excluding" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Exclude traffic
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-32 md:mt-0">
+            <h4 class="text-sm font-semibold tracking-wider text-gray-400 uppercase leading-5">
+              Help guides
+            </h4>
+            <ul class="mt-4">
+              <li>
+                <a rel="noferrer" href="https://plausible.io/docs/compare-stats" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Compare stats
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/docs/filters-segments" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Segment audience
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/docs/manual-link-tagging" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Track campaigns
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/docs/goal-conversions" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Event conversions
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/docs/funnel-analysis" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Funnel analysis
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/docs/ecommerce-revenue-tracking" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Revenue attribution
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/docs/custom-props/introduction" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Custom properties
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noferrer" href="https://plausible.io/docs/proxy/introduction" class="text-base text-gray-300 leading-6 hover:text-white">
+                  Bypass adblockers
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="md:grid md:grid-cols-2 md:gap-8 print:hidden">
+          <div>
+            <h4 class="text-sm leading-5 font-semibold tracking-wider text-gray-400 uppercase">
+              Community
+            </h4>
+            <ul class="mt-4">
+              <li>
+                <a rel="noreferrer" href="https://plausible.io/changelog" class="text-base leading-6 text-gray-300 hover:text-white">
+                  What's new
+                </a>
+              </li>
+              <li class="mt-4">
+                <a ref="noreferrer" target="_blank" href="https://plausible.io/status" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Status
+                </a>
+              </li>
+              <li class="mt-4">
+                <a ref="noreferrer" href="https://plausible.io/blog" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Blog
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/docs" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Documentation
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" target="_blank" href="https://github.com/plausible/analytics" class="text-base leading-6 text-gray-300 hover:text-white">
+                  GitHub
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" target="_blank" href="https://twitter.com/plausiblehq" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Twitter
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" target="_blank" rel="me" href="https://fosstodon.org/@plausible" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Mastodon
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/company/plausible-analytics/" class="text-base leading-6 text-gray-300 hover:text-white">
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-12 md:mt-0">
+            <h4 class="text-sm leading-5 font-semibold tracking-wider text-gray-400 uppercase">
+              Company
+            </h4>
+            <ul class="mt-4">
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/about" class="text-base leading-6 text-gray-300 hover:text-white">
+                  About
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/contact" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Contact
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/privacy" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Privacy
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/data-policy" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Data policy
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/terms" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Terms
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/dpa" class="text-base leading-6 text-gray-300 hover:text-white">
+                  DPA
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/security" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Security
+                </a>
+              </li>
+              <li class="mt-4">
+                <a rel="noreferrer" href="https://plausible.io/imprint" class="text-base leading-6 text-gray-300 hover:text-white">
+                  Imprint
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script type="text/javascript" src="/js/app-a342158928e9418a59d12c953b7c686d.js?vsn=d">
+    </script>
+
+  </body>
+</html>

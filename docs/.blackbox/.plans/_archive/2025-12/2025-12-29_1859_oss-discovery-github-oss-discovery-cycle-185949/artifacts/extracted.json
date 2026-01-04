@@ -1,0 +1,494 @@
+{
+  "candidates": [
+    {
+      "description": "Quill is a modern WYSIWYG editor built for compatibility and extensibility",
+      "forks": 3609,
+      "full_name": "slab/quill",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=46665, updated=2025-12-29T04:43:59Z); license=15/15 (BSD-3-Clause); time_to_value=10/10",
+      "score": 77,
+      "stars": 46665,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "editor",
+        "quill",
+        "rich-text-editor",
+        "wysiwyg"
+      ],
+      "updated_at": "2025-12-29T04:43:59Z",
+      "url": "https://github.com/slab/quill"
+    },
+    {
+      "description": "The world's most flexible commerce platform.",
+      "forks": 3925,
+      "full_name": "medusajs/medusa",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=31524, updated=2025-12-29T10:12:13Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 31524,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "commerce",
+        "e-commerce",
+        "ecommerce",
+        "framework",
+        "javascript",
+        "medusa",
+        "nodejs",
+        "react",
+        "typescript"
+      ],
+      "updated_at": "2025-12-29T10:12:13Z",
+      "url": "https://github.com/medusajs/medusa"
+    },
+    {
+      "description": "A rich text editor for everyday writing",
+      "forks": 1143,
+      "full_name": "basecamp/trix",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=19877, updated=2025-12-28T22:17:39Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 19877,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "custom-elements",
+        "editor",
+        "javascript",
+        "rich-text-editor",
+        "text-editor",
+        "wysiwyg",
+        "wysiwyg-editor"
+      ],
+      "updated_at": "2025-12-28T22:17:39Z",
+      "url": "https://github.com/basecamp/trix"
+    },
+    {
+      "description": "Etherpad: A modern really-real-time collaborative document editor.",
+      "forks": 2994,
+      "full_name": "ether/etherpad-lite",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=18015, updated=2025-12-29T08:48:28Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 18015,
+      "tags": [
+        "cms",
+        "search"
+      ],
+      "topics": [
+        "collaboration",
+        "collaborative",
+        "collaborative-editing",
+        "collaborative-framework",
+        "collaborative-research",
+        "collaborative-writing",
+        "document",
+        "documents",
+        "docx",
+        "etherpad",
+        "libreoffice",
+        "microsoft",
+        "pdf",
+        "pdf-generation",
+        "rich-text-editor",
+        "video-conference",
+        "video-conferencing",
+        "web-editor",
+        "word"
+      ],
+      "updated_at": "2025-12-29T08:48:28Z",
+      "url": "https://github.com/ether/etherpad-lite"
+    },
+    {
+      "description": "Next.js Commerce",
+      "forks": 5274,
+      "full_name": "vercel/commerce",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=13786, updated=2025-12-29T05:08:59Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 13786,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "ecommerce",
+        "nextjs",
+        "react",
+        "shopify"
+      ],
+      "updated_at": "2025-12-29T05:08:59Z",
+      "url": "https://github.com/vercel/commerce"
+    },
+    {
+      "description": "\ud83d\udcdd the simplest and smallest WYSIWYG text editor for web, with no dependencies",
+      "forks": 550,
+      "full_name": "jaredreich/pell",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=12068, updated=2025-12-29T04:37:46Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 12068,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "contenteditable",
+        "editor",
+        "javascript",
+        "rich-text-editor",
+        "text-editing",
+        "text-editor",
+        "wysiwyg",
+        "wysiwyg-editor"
+      ],
+      "updated_at": "2025-12-29T04:37:46Z",
+      "url": "https://github.com/jaredreich/pell"
+    },
+    {
+      "description": "Alokai is a Frontend as a Service solution that simplifies composable commerce. It connects all the technologies needed to build and deploy fast & scalable ecommerce frontends. It guides merchants to deliver exceptional customer experiences quickly and easily.",
+      "forks": 2095,
+      "full_name": "vuestorefront/vue-storefront",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=10898, updated=2025-12-29T03:21:16Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 10898,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "commercetools",
+        "e-commerce",
+        "ecommerce",
+        "ecommerce-platform",
+        "headless",
+        "headless-commerce",
+        "integrations-team",
+        "magento",
+        "magento2",
+        "mobile",
+        "nuxt",
+        "open-source",
+        "pwa",
+        "shopify",
+        "shopware",
+        "storefront",
+        "typescript",
+        "vue",
+        "vue-storefront",
+        "vue3"
+      ],
+      "updated_at": "2025-12-29T03:21:16Z",
+      "url": "https://github.com/vuestorefront/vue-storefront"
+    },
+    {
+      "description": "\ud83c\udf7c Plugin driven WYSIWYG  markdown editor framework.",
+      "forks": 483,
+      "full_name": "Milkdown/milkdown",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=10872, updated=2025-12-29T03:55:28Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 10872,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "editor",
+        "gfm",
+        "javascript",
+        "markdown",
+        "markdown-editor",
+        "milkdown",
+        "prosemirror",
+        "remarkjs",
+        "rich-text-editor",
+        "typescript",
+        "wysiwyg",
+        "wysiwyg-editor"
+      ],
+      "updated_at": "2025-12-29T03:55:28Z",
+      "url": "https://github.com/Milkdown/milkdown"
+    },
+    {
+      "description": "A Quill component for React.",
+      "forks": 953,
+      "full_name": "zenoamaro/react-quill",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=7021, updated=2025-12-29T08:38:39Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 7021,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "editor",
+        "quill",
+        "react",
+        "rich-text-editor",
+        "wysiwyg-editor"
+      ],
+      "updated_at": "2025-12-29T08:38:39Z",
+      "url": "https://github.com/zenoamaro/react-quill"
+    },
+    {
+      "description": "\ud83e\udde9 Content editing tech stack for the web - BlockSuite is a toolkit for building editors and collaborative applications.",
+      "forks": 520,
+      "full_name": "toeverything/blocksuite",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=5448, updated=2025-12-28T21:57:53Z); license=15/15 (MPL-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 5448,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "block",
+        "block-editor",
+        "collaboration",
+        "components",
+        "components-library",
+        "crdt",
+        "editor",
+        "local-first",
+        "notion-editor",
+        "rich-text-editor",
+        "state-management",
+        "webcomponents",
+        "wysiwyg",
+        "wysiwyg-editor",
+        "yjs"
+      ],
+      "updated_at": "2025-12-28T21:57:53Z",
+      "url": "https://github.com/toeverything/blocksuite"
+    },
+    {
+      "description": "Medium.com WYSIWYG editor clone. Uses contenteditable API to implement a rich text solution.",
+      "forks": 1848,
+      "full_name": "yabwe/medium-editor",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=16116, updated=2025-12-29T07:27:54Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 16116,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "contenteditable",
+        "editor",
+        "javascript",
+        "medium-editor",
+        "rich-text-editor",
+        "wysiwyg"
+      ],
+      "updated_at": "2025-12-29T07:27:54Z",
+      "url": "https://github.com/yabwe/medium-editor"
+    },
+    {
+      "description": "The world's #1 JavaScript library for rich text editing. Available for React, Vue and Angular",
+      "forks": 2320,
+      "full_name": "tinymce/tinymce",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=16031, updated=2025-12-29T11:43:42Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 16031,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "contenteditable",
+        "editor",
+        "javascript",
+        "rich-text-editor",
+        "tinymce",
+        "wysiwyg",
+        "wysiwyg-editor",
+        "wysiwyg-html-editor"
+      ],
+      "updated_at": "2025-12-29T11:43:42Z",
+      "url": "https://github.com/tinymce/tinymce"
+    },
+    {
+      "description": "A React Rich Text Editor that's block-based (Notion style) and extensible. Built on top of Prosemirror and Tiptap.",
+      "forks": 662,
+      "full_name": "TypeCellOS/BlockNote",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=8901, updated=2025-12-29T09:07:06Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 8901,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "block-based",
+        "editor",
+        "javascript",
+        "notion",
+        "notion-editor",
+        "prosemirror",
+        "react",
+        "rich-text-editor",
+        "tiptap",
+        "typescript",
+        "wysiwyg",
+        "yjs"
+      ],
+      "updated_at": "2025-12-29T09:07:06Z",
+      "url": "https://github.com/TypeCellOS/BlockNote"
+    },
+    {
+      "description": "Saleor Core: the high performance, composable, headless commerce API.",
+      "forks": 5884,
+      "full_name": "saleor/saleor",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=22435, updated=2025-12-29T08:33:34Z); license=15/15 (BSD-3-Clause); time_to_value=8/10",
+      "score": 69,
+      "stars": 22435,
+      "tags": [
+        "commerce",
+        "returns",
+        "cms"
+      ],
+      "topics": [
+        "cart",
+        "checkout",
+        "commerce",
+        "composable",
+        "e-commerce",
+        "ecommerce",
+        "graphql",
+        "headless",
+        "headless-commerce",
+        "multichannel",
+        "oms",
+        "order-management",
+        "payments",
+        "pim",
+        "python",
+        "shop",
+        "shopping-cart",
+        "store"
+      ],
+      "updated_at": "2025-12-29T08:33:34Z",
+      "url": "https://github.com/saleor/saleor"
+    },
+    {
+      "description": "Project has been discontinued ////// Mailchimp Open Commerce is an API-first, headless commerce platform built using Node.js, React, GraphQL. Deployed via Docker and Kubernetes.",
+      "forks": 2201,
+      "full_name": "reactioncommerce/reaction",
+      "language": "JavaScript",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=12444, updated=2025-12-29T03:19:04Z); license=7/15 (GPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 12444,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "cart",
+        "commerce",
+        "docker",
+        "e-commerce",
+        "ecommerce",
+        "ecommerce-platform",
+        "graphql",
+        "hacktoberfest",
+        "headless",
+        "javascript",
+        "marketplace",
+        "mongodb",
+        "reaction-action",
+        "reactioncommerce",
+        "shop",
+        "storefront"
+      ],
+      "updated_at": "2025-12-29T03:19:04Z",
+      "url": "https://github.com/reactioncommerce/reaction"
+    },
+    {
+      "description": "\ud83d\udecd\ufe0f Typescript E-commerce Platform",
+      "forks": 2051,
+      "full_name": "evershopcommerce/evershop",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=8910, updated=2025-12-29T01:16:52Z); license=7/15 (GPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 8910,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "ecommerce",
+        "ecommerce-framework",
+        "ecommerce-platform",
+        "react",
+        "typescript"
+      ],
+      "updated_at": "2025-12-29T01:16:52Z",
+      "url": "https://github.com/evershopcommerce/evershop"
+    },
+    {
+      "description": "Prior to making any Submission(s), you must sign an Adobe Contributor License Agreement, available here at: https://opensource.adobe.com/cla.html. All Submissions you make to Adobe Inc. and its affiliates, assigns and subsidiaries (collectively \u201cAdobe\u201d) are subject to the terms of the Adobe Contributor License Agreement.",
+      "forks": 9411,
+      "full_name": "magento/magento2",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "OSL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=12019, updated=2025-12-29T11:57:06Z); license=10/15 (OSL-3.0); time_to_value=8/10",
+      "score": 60,
+      "stars": 12019,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "ecommerce",
+        "ecommerce-platform",
+        "hacktoberfest",
+        "magento",
+        "magento2",
+        "php"
+      ],
+      "updated_at": "2025-12-29T11:57:06Z",
+      "url": "https://github.com/magento/magento2"
+    }
+  ],
+  "count": 17,
+  "generated_at_utc": "2025-12-29T12:01:34Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-29_1859_oss-discovery-github-oss-discovery-cycle-185949/oss/entries"
+  }
+}

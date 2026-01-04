@@ -1,0 +1,26 @@
+{
+  "count": 0,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": null,
+  "excluded_results_count": 1,
+  "generated_at_utc": "2025-12-30T16:17:08Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 100,
+  "queries_used": [
+    "returns portal ecommerce open source stars:>=100 fork:false archived:false",
+    "rma management open source stars:>=100 fork:false archived:false",
+    "reverse logistics open source stars:>=100 fork:false archived:false",
+    "exchange workflow ecommerce open source stars:>=100 fork:false archived:false",
+    "store credit wallet open source stars:>=100 fork:false archived:false"
+  ],
+  "repos": [],
+  "title": "OSS Discovery \u2014 Catalog gap boost (catalog only)"
+}

@@ -1,0 +1,12 @@
+# Tranche 03 — Gorgias Shopify App Store retry variants
+#
+# Goal: capture a working Shopify App Store listing snapshot for Gorgias.
+# If these still return “Oh no! That page doesn’t exist.” treat as blocked/unstable evidence.
+
+https://apps.shopify.com/gorgias gorgias-shopify-app-store
+https://apps.shopify.com/gorgias/ gorgias-shopify-app-store-slash
+https://apps.shopify.com/gorgias?locale=en gorgias-shopify-app-store-locale
+https://apps.shopify.com/gorgias/?locale=en gorgias-shopify-app-store-slash-locale
+https://apps.shopify.com/gorgias?locale=en&surface_detail=gorgias&surface_type=app_details gorgias-shopify-app-store-surface
+https://apps.shopify.com/gorgias?locale=en&surface_detail=gorgias&surface_type=app_details&surface_version=redesign gorgias-shopify-app-store-surface-redesign
+

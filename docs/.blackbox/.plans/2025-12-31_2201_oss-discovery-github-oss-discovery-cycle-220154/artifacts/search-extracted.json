@@ -1,0 +1,92 @@
+{
+  "count": 5,
+  "exclude_keywords": [
+    "wordpress",
+    "woocommerce",
+    "magento",
+    "prestashop",
+    "opencart",
+    "shopware",
+    "drupal"
+  ],
+  "exclude_regex": "\\b(portfolio|resume|curriculum|cv|homework|assignment|course|semester|leetcode|tutorial|cheatsheet|whitepaper|paper|book|erc20|ethereum|blockchain|ico|crowdsale|landofcoder|codecanyon|envato|ticksy)\\b",
+  "excluded_results_count": 0,
+  "generated_at_utc": "2025-12-31T15:02:20Z",
+  "include_archived": true,
+  "include_forks": false,
+  "min_stars": 25,
+  "queries_used": [
+    "topic:rma topic:ecommerce stars:>=25 fork:false",
+    "topic:reverse-logistics topic:ecommerce stars:>=25 fork:false",
+    "topic:returns topic:ecommerce stars:>=25 fork:false",
+    "\"return label\" \"ecommerce\" stars:>=25 fork:false",
+    "\"return portal\" \"shopify\" stars:>=25 fork:false",
+    "topic:shipping topic:ecommerce stars:>=25 fork:false",
+    "topic:fulfillment topic:ecommerce stars:>=25 fork:false",
+    "topic:warehouse-management topic:ecommerce stars:>=25 fork:false",
+    "\"carrier rates\" ecommerce stars:>=25 fork:false",
+    "\"tracking\" \"shopify\" app stars:>=25 fork:false",
+    "\"shipping label\" api ecommerce stars:>=25 fork:false",
+    "\"shipment tracking\" api ecommerce stars:>=25 fork:false",
+    "\"3pl\" integration ecommerce stars:>=25 fork:false",
+    "\"wms\" integration ecommerce stars:>=25 fork:false"
+  ],
+  "repos": [
+    {
+      "description": "Quantum Stash is an open-source, modern, full-stack SaaS web application, designed for efficient inventory management. Tailored mainly for e-commerce, it is versatile enough to meet the needs of any business requiring maticulous stock control.",
+      "full_name": "pjborowiecki/QUANTUM-STASH-inventory-Management-SaaS-NextJs-TypeScript-NextAuth-v5-Postgres-Drizzle-Tailwind",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 43,
+      "updated_at": "2025-12-19T15:55:47Z",
+      "url": "https://github.com/pjborowiecki/QUANTUM-STASH-inventory-Management-SaaS-NextJs-TypeScript-NextAuth-v5-Postgres-Drizzle-Tailwind"
+    },
+    {
+      "description": "preparing new version",
+      "full_name": "doublechaintech/scm-biz-suite",
+      "integration_score": 7,
+      "language": "N/A",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 2746,
+      "updated_at": "2025-12-23T01:14:59Z",
+      "url": "https://github.com/doublechaintech/scm-biz-suite"
+    },
+    {
+      "description": "Build your own ecommerce store with Filament & Splade",
+      "full_name": "tomatophp/filament-ecommerce",
+      "integration_score": 6,
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 96,
+      "updated_at": "2025-12-29T09:17:58Z",
+      "url": "https://github.com/tomatophp/filament-ecommerce"
+    },
+    {
+      "description": "The Fast-Track to Flawless Shopify Apps  \u2728",
+      "full_name": "helloastral/Shopify-App-Starter",
+      "integration_score": 6,
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 46,
+      "updated_at": "2025-11-06T05:43:46Z",
+      "url": "https://github.com/helloastral/Shopify-App-Starter"
+    },
+    {
+      "description": "\ud83d\udce6 A series of plugins for Vendure to add features to shipping using boxes, and shipping based on product dimensions.",
+      "full_name": "jonyw4/vendure-advanced-shipping",
+      "integration_score": 5,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 27,
+      "updated_at": "2024-12-10T16:46:04Z",
+      "url": "https://github.com/jonyw4/vendure-advanced-shipping"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

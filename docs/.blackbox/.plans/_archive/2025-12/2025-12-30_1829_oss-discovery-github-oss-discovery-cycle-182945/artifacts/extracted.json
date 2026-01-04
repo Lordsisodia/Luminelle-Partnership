@@ -1,0 +1,69 @@
+{
+  "candidates": [
+    {
+      "description": "Create Filters on table column items(like Excel)",
+      "forks": 21,
+      "full_name": "cheekujha/react-table-filter",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=64, updated=2025-12-23T05:57:54Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 64,
+      "tags": [],
+      "topics": [
+        "filters",
+        "react",
+        "react-component",
+        "react-filter",
+        "reactjs",
+        "tablefilter"
+      ],
+      "updated_at": "2025-12-23T05:57:54Z",
+      "url": "https://github.com/cheekujha/react-table-filter"
+    },
+    {
+      "description": "React Hook for syncing TanStack Table state with URL search params.",
+      "forks": 4,
+      "full_name": "taro-28/tanstack-table-search-params",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=84, updated=2025-11-18T17:59:54Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 62,
+      "stars": 84,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "queryparams",
+        "querystring",
+        "react",
+        "search-params",
+        "tanstack-table"
+      ],
+      "updated_at": "2025-11-18T17:59:54Z",
+      "url": "https://github.com/taro-28/tanstack-table-search-params"
+    },
+    {
+      "description": "In this React 16 + tutorial, we'll look into how to implement advanced Datatables in a React application having features like Filter, Pagination, Sorting, Row Column Resizing, Row Expand Collapse and many more. Read more https://www.freakyjolly.com/react-table-tutorial/",
+      "forks": 12,
+      "full_name": "ipsjolly/react--table-tutorial-app",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=8/20 (stars=12, updated=2025-04-16T12:39:55Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 52,
+      "stars": 12,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-04-16T12:39:55Z",
+      "url": "https://github.com/ipsjolly/react--table-tutorial-app"
+    }
+  ],
+  "count": 3,
+  "generated_at_utc": "2025-12-30T11:30:46Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1829_oss-discovery-github-oss-discovery-cycle-182945/oss/entries"
+  }
+}

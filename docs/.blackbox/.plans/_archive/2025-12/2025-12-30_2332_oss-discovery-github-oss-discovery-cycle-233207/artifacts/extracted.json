@@ -1,0 +1,334 @@
+{
+  "candidates": [
+    {
+      "description": "\ud83c\udfce A set of primitives to build simple, flexible, WAI-ARIA compliant React autocomplete, combobox or select dropdown components.",
+      "forks": 944,
+      "full_name": "downshift-js/downshift",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=12291, updated=2025-12-29T20:51:17Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 12291,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "accessible",
+        "autocomplete",
+        "autoselect",
+        "autosuggest",
+        "combobox",
+        "dropdown",
+        "multiselect",
+        "react",
+        "select",
+        "wai-aria"
+      ],
+      "updated_at": "2025-12-29T20:51:17Z",
+      "url": "https://github.com/downshift-js/downshift"
+    },
+    {
+      "description": "Tiny and powerful JavaScript full-text search engine for browser and Node",
+      "forks": 156,
+      "full_name": "lucaong/minisearch",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=5705, updated=2025-12-30T06:03:43Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 5705,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "autocomplete",
+        "autosuggestion",
+        "edge-computing",
+        "fulltext-search",
+        "fuzzy-search",
+        "javascript",
+        "search",
+        "search-engine",
+        "text-search",
+        "typo-tolerance"
+      ],
+      "updated_at": "2025-12-30T06:03:43Z",
+      "url": "https://github.com/lucaong/minisearch"
+    },
+    {
+      "description": "\ud83d\udd2e Fast and full-featured autocomplete library",
+      "forks": 338,
+      "full_name": "algolia/autocomplete",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=5235, updated=2025-12-29T15:45:09Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 5235,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "accessible",
+        "alfred",
+        "algolia",
+        "autocomplete",
+        "combobox",
+        "dropdown",
+        "modal",
+        "query",
+        "search",
+        "select",
+        "spotlight",
+        "suggestion",
+        "typeahead"
+      ],
+      "updated_at": "2025-12-29T15:45:09Z",
+      "url": "https://github.com/algolia/autocomplete"
+    },
+    {
+      "description": "React + Vue Search UI for Elasticsearch & Opensearch. Compatible with Algolia's Instantsearch and Autocomplete components.",
+      "forks": 446,
+      "full_name": "searchkit/searchkit",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=4854, updated=2025-12-30T07:08:39Z); license=15/15 (Apache-2.0); time_to_value=9/10",
+      "score": 76,
+      "stars": 4854,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "algolia",
+        "angular",
+        "autocomplete",
+        "components",
+        "elasticsearch",
+        "instantsearch",
+        "javascript",
+        "nodejs",
+        "react",
+        "search",
+        "typescript",
+        "ui",
+        "ui-components",
+        "vue",
+        "web"
+      ],
+      "updated_at": "2025-12-30T07:08:39Z",
+      "url": "https://github.com/searchkit/searchkit"
+    },
+    {
+      "description": "\u26a1\ufe0f Libraries for building performant and instant search and recommend experiences with Algolia. Compatible with JavaScript, TypeScript, React and Vue.",
+      "forks": 556,
+      "full_name": "algolia/instantsearch",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=3983, updated=2025-12-30T12:38:32Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 3983,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "algolia",
+        "instantsearch",
+        "react",
+        "recommend",
+        "search",
+        "vanilla",
+        "vue",
+        "widgets"
+      ],
+      "updated_at": "2025-12-30T12:38:32Z",
+      "url": "https://github.com/algolia/instantsearch"
+    },
+    {
+      "description": "JavaScript/TypeScript client for Meilisearch",
+      "forks": 101,
+      "full_name": "meilisearch/meilisearch-js",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=847, updated=2025-12-30T08:04:21Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 847,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "javascript",
+        "meilisearch",
+        "nodejs",
+        "sdk",
+        "typescript"
+      ],
+      "updated_at": "2025-12-30T08:04:21Z",
+      "url": "https://github.com/meilisearch/meilisearch-js"
+    },
+    {
+      "description": "\u26a1 Next.js enterprise-grade storefront for high-performance e-commerce with Shopify backend and Algolia middle layer with excellent browsing journey",
+      "forks": 128,
+      "full_name": "Blazity/enterprise-commerce",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=654, updated=2025-12-29T05:43:29Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 654,
+      "tags": [
+        "commerce",
+        "storefront",
+        "search"
+      ],
+      "topics": [
+        "ai",
+        "algolia",
+        "ecommerce",
+        "meilisearch",
+        "next",
+        "next-js",
+        "nextjs",
+        "nextjs14",
+        "react",
+        "seo",
+        "shopify",
+        "starter-kit",
+        "storefront",
+        "typescript",
+        "vercel",
+        "web-performance"
+      ],
+      "updated_at": "2025-12-29T05:43:29Z",
+      "url": "https://github.com/Blazity/enterprise-commerce"
+    },
+    {
+      "description": "JavaScript / TypeScript client for Typesense",
+      "forks": 89,
+      "full_name": "typesense/typesense-js",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=528, updated=2025-12-23T05:46:31Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 528,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "javascript",
+        "search",
+        "typescript",
+        "typesense",
+        "typesense-js"
+      ],
+      "updated_at": "2025-12-23T05:46:31Z",
+      "url": "https://github.com/typesense/typesense-js"
+    },
+    {
+      "description": "A JS adapter library to build rich search interfaces with Typesense and InstantSearch.js",
+      "forks": 80,
+      "full_name": "typesense/typesense-instantsearch-adapter",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=505, updated=2025-12-29T06:58:39Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 505,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "algolia",
+        "algolia-instantsearch",
+        "angular",
+        "angular-instantsearch",
+        "instantsearch",
+        "instantsearch-js",
+        "react",
+        "react-instantsearch",
+        "search",
+        "search-interface",
+        "search-ui",
+        "typesense",
+        "typesense-instantsearch-adapter",
+        "vue",
+        "vue-instantsearch"
+      ],
+      "updated_at": "2025-12-29T06:58:39Z",
+      "url": "https://github.com/typesense/typesense-instantsearch-adapter"
+    },
+    {
+      "description": "Extremely fast faceted search engine in JavaScript - lightweight, flexible, and simple to use",
+      "forks": 43,
+      "full_name": "itemsapi/itemsjs",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=393, updated=2025-11-30T01:29:34Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 393,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "aggregations",
+        "faceted-search",
+        "facets",
+        "filters",
+        "fulltext-search",
+        "javascript",
+        "lightweight",
+        "reindex",
+        "search-engine",
+        "solr"
+      ],
+      "updated_at": "2025-11-30T01:29:34Z",
+      "url": "https://github.com/itemsapi/itemsjs"
+    },
+    {
+      "description": "The open-source storefront for any ecommerce. Built with a headless approach, using a modern JS stack. Works with Litekart, Medusa. WIP for Shopify.",
+      "forks": 331,
+      "full_name": "itswadesh/svelte-commerce",
+      "language": "Svelte",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Svelte); maintenance=20/20 (stars=1758, updated=2025-12-27T16:12:26Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 1758,
+      "tags": [
+        "commerce",
+        "storefront",
+        "search"
+      ],
+      "topics": [
+        "cart",
+        "ecommerce",
+        "faceted-search",
+        "filters",
+        "hacktoberfest",
+        "headless",
+        "jamstack",
+        "javascript",
+        "pwa",
+        "rest-api",
+        "shopping-cart",
+        "svelte",
+        "tailwind",
+        "tailwindcss",
+        "typescript",
+        "vercel"
+      ],
+      "updated_at": "2025-12-27T16:12:26Z",
+      "url": "https://github.com/itswadesh/svelte-commerce"
+    }
+  ],
+  "count": 11,
+  "generated_at_utc": "2025-12-30T16:33:10Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_2332_oss-discovery-github-oss-discovery-cycle-233207/oss/entries"
+  }
+}

@@ -1,0 +1,6 @@
+../README.md:18:- `functions/api/**` – **Cloudflare Pages Functions** API implementation (`/api/*` on Cloudflare Pages).
+../legacy/vercel-api/README.md:3:This folder contains a **snapshot copy** of the repo’s original Vercel-style serverless API (`/api/**`).
+../docs/05-planning/research/deep-research-context-pack.md:85:- `functions/api/**` – **Cloudflare Pages Functions** API implementation (`/api/*` on Cloudflare Pages).
+../docs/05-planning/research/deep-research-context-pack.md:182:- Backend/serverless: Cloudflare Pages Functions in `functions/api/**`.
+../docs/06-quality/incidents/004-api-handler-style-inconsistency-request-vs-vercelreq.md:4:**Resolved for Cloudflare Pages/Workers**: the production API surface is now implemented as **Cloudflare Pages Functions** under `functions/api/**` (Fetch-style `Request` → `Response` only). The legacy `api/**` folder is kept as a **Vercel snapshot** and remains mixed-style by design.
+../docs/06-quality/incidents/004-api-handler-style-inconsistency-request-vs-vercelreq.md:52:- **Cloudflare Pages**: use `functions/api/**` (Pages Functions). This repo now follows this approach, so the “mixed handler” risk is avoided in production.

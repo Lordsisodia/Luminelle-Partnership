@@ -1,4 +1,3 @@
-/* @ts-nocheck */
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { HighlightsCarousel } from './HighlightsCarousel'
 

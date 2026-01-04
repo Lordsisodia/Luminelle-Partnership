@@ -33,7 +33,7 @@ export const FloatingBuyCta = ({ label = 'Buy Now', href }: Props) => {
   const show = isVisible && !isCtaInView
 
   return (
-    <div className={`pointer-events-none fixed inset-x-0 bottom-6 z-50 px-4 transition-opacity duration-300 md:hidden ${show ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`pointer-events-none fixed inset-x-0 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-50 px-4 transition-opacity duration-300 md:hidden ${show ? 'opacity-100' : 'opacity-0'}`}>
       <a href={href} className="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-brand-peach px-6 py-4 text-lg font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5">
         {label}
       </a>

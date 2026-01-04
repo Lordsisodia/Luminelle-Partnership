@@ -39,12 +39,12 @@ const post: BlogPost = {
       heading: 'Frizz-free routines you can run on autopilot',
       paragraphs: [
         [
-          '- **Pre-shower seal (2 minutes):** mist a light leave-in, smooth with a satin scarf, then cap. Zero steam creep. [Full seal guide](/blog/frizz-free-showers).',
+          '- **Pre-shower seal (2 minutes):** mist a light leave-in, smooth with a satin scarf, then cap. Zero steam creep. [Full seal guide](/blog/frizz-free-showers-seo).',
           '- **Press-safe nights:** micro-mist the hairline with distilled water + 1–2% glycerin, let it dry 60 seconds, then sleep in a satin-lined bonnet. Testers cut morning touch-ups by 40%.',
           '- **Curl-preserving steams:** right tension, correct cap size, and crown venting keep curls springy instead of puffy.',
         ].join('\\n'),
       ],
-      relatedLinks: [{ label: 'Frizz-free showers routine', href: '/blog/frizz-free-showers' }],
+      relatedLinks: [{ label: 'Frizz-free showers routine', href: '/blog/frizz-free-showers-seo' }],
       image: '/uploads/luminele/product-feature-02.webp',
       imageAlt: 'Cap placement and tension diagram for steam protection',
     },
@@ -56,9 +56,8 @@ const post: BlogPost = {
         'You’ll see beats, pacing, and CTA swaps by audience (press, curls, locs, braids).',
       ],
       relatedLinks: [
-        { label: 'Best hooks for hair TikToks', href: '/blog/hair-hooks-that-convert' },
+        { label: 'Best hooks for hair TikToks', href: '/blog/creator-tiktok-scripts' },
       ],
-      embedUrl: 'https://www.youtube.com/embed/pzPI7xqXQX4',
       productCard: {
         title: 'Creator launch kit',
         price: 'Free download',
@@ -72,13 +71,13 @@ const post: BlogPost = {
       heading: 'Product science, minus the jargon',
       paragraphs: [
         'Why satin + waterproof matters: fiber type, wicking vs sealing, band pressure, dome shape and condensation.',
-        'Humidity-chamber results (100% RH, 20 minutes) across styles: silk press, knotless braids, locs, twist-outs. See the full breakdown in the [material science deep-dive](/blog/satin-vs-waterproof).',
+        'Humidity-chamber results (100% RH, 20 minutes) across styles: silk press, knotless braids, locs, twist-outs. See the full breakdown in the [material science deep-dive](/blog/why-satin-matters).',
       ],
       image: '/uploads/luminele/product-feature-03.webp',
       imageAlt: 'Humidity test set-up showing cap and instrumentation',
       relatedLinks: [
-        { label: 'Full material science breakdown', href: '/blog/satin-vs-waterproof' },
-        { label: 'Silk press shower-cap guide', href: '/blog/frizz-free-showers' },
+        { label: 'Full material science breakdown', href: '/blog/why-satin-matters' },
+        { label: 'Silk press shower-cap guide', href: '/blog/frizz-free-showers-seo' },
       ],
     },
     {
@@ -91,11 +90,11 @@ const post: BlogPost = {
         title: 'Travel-ready cap (compact case)',
         price: '£15.99',
         badge: 'New',
-        href: '/product/lumelle-shower-cap?variant=travel',
+        href: '/product/lumelle-shower-cap',
         image: '/uploads/luminele/product-feature-02.webp',
         caption: 'Same seal, slimmer profile—great for gym bags.',
       },
-      relatedLinks: [{ label: 'Travel hair kit checklist', href: '/blog/travel-hair-kit' }],
+      relatedLinks: [{ label: 'Travel hair kit checklist', href: '/blog/travel-ready-hair-kit' }],
     },
     {
       heading: 'Behind the scenes: how we test',
@@ -131,8 +130,7 @@ const post: BlogPost = {
         image: '/uploads/luminele/product-feature-01.webp',
         caption: 'Steam-sealing band + satin lining; 30-day returns.',
       },
-      embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      relatedLinks: [{ label: 'Full steam-proof routine', href: '/blog/frizz-free-showers' }],
+      relatedLinks: [{ label: 'Full steam-proof routine', href: '/blog/frizz-free-showers-seo' }],
     },
     {
       heading: 'Steal this script (30 seconds)',

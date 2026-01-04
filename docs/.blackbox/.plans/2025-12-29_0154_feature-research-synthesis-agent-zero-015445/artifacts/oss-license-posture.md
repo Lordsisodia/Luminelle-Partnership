@@ -1,0 +1,214 @@
+---
+status: active
+updated_at_utc: 2025-12-29T13:59:55Z
+---
+
+# OSS License Posture (Safe vs Flagged)
+
+- Purpose: make build/integrate decisions quickly without accidentally adopting copyleft, fair-code, or mixed-license repos.
+- Rule of thumb:
+  - `safe` = permissive SPDX (MIT/Apache/BSD/ISC/MPL-2.0) **and** no obvious enterprise/proprietary carve-outs in the repo license text/name.
+  - `flag` = GPL/AGPL/LGPL, BUSL, SUL, ELv2, PROPRIETARY, or mixed licensing / enterprise carve-outs.
+
+- Total OSS entries scanned: `48`
+- Safe: `25`
+- Flagged: `23`
+- Unknown/NOASSERTION: `0` (should be 0; if not, verify next)
+
+## ✅ Safe (preferred posture)
+
+- `apache/superset` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/apache/superset
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/apache-superset.md`
+- `appsmithorg/appsmith` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/appsmithorg/appsmith
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/appsmithorg-appsmith.md`
+- `appwrite/appwrite` — `BSD-3-Clause`
+  - Why: permissive (BSD-3-Clause)
+  - URL: https://github.com/appwrite/appwrite
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/appwrite-appwrite.md`
+- `binwiederhier/ntfy` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/binwiederhier/ntfy
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/binwiederhier-ntfy.md`
+- `caronc/apprise` — `BSD-2-Clause`
+  - Why: permissive (BSD-2-Clause)
+  - URL: https://github.com/caronc/apprise
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/caronc-apprise.md`
+- `casbin/casbin` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/casbin/casbin
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/casbin-casbin.md`
+- `Flagsmith/flagsmith` — `BSD-3-Clause`
+  - Why: permissive (BSD-3-Clause)
+  - URL: https://github.com/Flagsmith/flagsmith
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/flagsmith-flagsmith.md`
+- `getredash/redash` — `BSD-2-Clause`
+  - Why: permissive (BSD-2-Clause)
+  - URL: https://github.com/getredash/redash
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/getredash-redash.md`
+- `gotify/server` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/gotify/server
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/gotify-server.md`
+- `keycloak/keycloak` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/keycloak/keycloak
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/keycloak-keycloak.md`
+- `killbill/killbill` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/killbill/killbill
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/killbill-killbill.md`
+- `marmelab/react-admin` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/marmelab/react-admin
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/marmelab-react-admin.md`
+- `medusajs/medusa` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/medusajs/medusa
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/medusajs-medusa.md`
+- `novuhq/novu` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/novuhq/novu
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/novuhq-novu.md`
+- `open-policy-agent/opa` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/open-policy-agent/opa
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/open-policy-agent-opa.md`
+- `ory/hydra` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/ory/hydra
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/ory-hydra.md`
+- `ory/kratos` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/ory/kratos
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/ory-kratos.md`
+- `payloadcms/payload` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/payloadcms/payload
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/payloadcms-payload.md`
+- `pocketbase/pocketbase` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/pocketbase/pocketbase
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/pocketbase-pocketbase.md`
+- `refinedev/refine` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/refinedev/refine
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/refinedev-refine.md`
+- `saleor/saleor` — `BSD-3-Clause`
+  - Why: permissive (BSD-3-Clause)
+  - URL: https://github.com/saleor/saleor
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/saleor-saleor.md`
+- `supabase/supabase` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/supabase/supabase
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/supabase-supabase.md`
+- `temporalio/temporal` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/temporalio/temporal
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/temporalio-temporal.md`
+- `umami-software/umami` — `MIT`
+  - Why: permissive (MIT)
+  - URL: https://github.com/umami-software/umami
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/umami-software-umami.md`
+- `Unleash/unleash` — `Apache-2.0`
+  - Why: permissive (Apache-2.0)
+  - URL: https://github.com/Unleash/unleash
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/unleash-unleash.md`
+
+## ⚠️ Flagged (needs policy decision / service boundary / avoid)
+
+- `activepieces/activepieces` — `MIT`
+  - Why: repo has enterprise/proprietary carve-outs (treat as mixed)
+  - URL: https://github.com/activepieces/activepieces
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/activepieces-activepieces.md`
+- `airbytehq/airbyte` — `ELv2`
+  - Why: license-restricted/mixed (ELv2)
+  - URL: https://github.com/airbytehq/airbyte
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/airbytehq-airbyte.md`
+- `Budibase/budibase` — `GPL-3.0`
+  - Why: copyleft (GPL-3.0)
+  - URL: https://github.com/Budibase/budibase
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/budibase-budibase.md`
+- `chatwoot/chatwoot` — `MIT`
+  - Why: repo has enterprise/proprietary carve-outs (treat as mixed)
+  - URL: https://github.com/chatwoot/chatwoot
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/chatwoot-chatwoot.md`
+- `directus/directus` — `BUSL-1.1`
+  - Why: license-restricted/mixed (BUSL-1.1)
+  - URL: https://github.com/directus/directus
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/directus-directus.md`
+- `grafana/grafana` — `AGPL-3.0`
+  - Why: copyleft (AGPL-3.0)
+  - URL: https://github.com/grafana/grafana
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/grafana-grafana.md`
+- `growthbook/growthbook` — `MIT`
+  - Why: repo has enterprise/proprietary carve-outs (treat as mixed)
+  - URL: https://github.com/growthbook/growthbook
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/growthbook-growthbook.md`
+- `karrioapi/karrio` — `LGPL-3.0`
+  - Why: copyleft (LGPL-3.0)
+  - URL: https://github.com/karrioapi/karrio
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/karrioapi-karrio.md`
+- `knadh/listmonk` — `AGPL-3.0`
+  - Why: copyleft (AGPL-3.0)
+  - URL: https://github.com/knadh/listmonk
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/knadh-listmonk.md`
+- `matomo-org/matomo` — `GPL-3.0`
+  - Why: copyleft (GPL-3.0)
+  - URL: https://github.com/matomo-org/matomo
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/matomo-org-matomo.md`
+- `mautic/mautic` — `GPL-3.0`
+  - Why: copyleft (GPL-3.0)
+  - URL: https://github.com/mautic/mautic
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/mautic-mautic.md`
+- `meilisearch/meilisearch` — `MIT AND BUSL-1.1`
+  - Why: license-restricted/mixed (MIT AND BUSL-1.1)
+  - URL: https://github.com/meilisearch/meilisearch
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/meilisearch-meilisearch.md`
+- `metabase/metabase` — `AGPL-3.0`
+  - Why: copyleft (AGPL-3.0)
+  - URL: https://github.com/metabase/metabase
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/metabase-metabase.md`
+- `n8n-io/n8n` — `SUL-1.0`
+  - Why: license-restricted/mixed (SUL-1.0)
+  - URL: https://github.com/n8n-io/n8n
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/n8n-io-n8n.md`
+- `plausible/analytics` — `AGPL-3.0`
+  - Why: copyleft (AGPL-3.0)
+  - URL: https://github.com/plausible/analytics
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/plausible-analytics.md`
+- `PostHog/posthog` — `MIT`
+  - Why: repo has enterprise/proprietary carve-outs (treat as mixed)
+  - URL: https://github.com/PostHog/posthog
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/posthog-posthog.md`
+- `strapi/strapi` — `MIT`
+  - Why: repo has enterprise/proprietary carve-outs (treat as mixed)
+  - URL: https://github.com/strapi/strapi
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/strapi-strapi.md`
+- `ToolJet/ToolJet` — `AGPL-3.0`
+  - Why: copyleft (AGPL-3.0)
+  - URL: https://github.com/ToolJet/ToolJet
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/tooljet-tooljet.md`
+- `typesense/typesense` — `GPL-3.0`
+  - Why: copyleft (GPL-3.0)
+  - URL: https://github.com/typesense/typesense
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/typesense-typesense.md`
+- `vendure-ecommerce/vendure` — `GPL-3.0`
+  - Why: copyleft (GPL-3.0)
+  - URL: https://github.com/vendure-ecommerce/vendure
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/vendure-ecommerce-vendure.md`
+- `windmill-labs/windmill` — `AGPL-3.0 AND Apache-2.0 AND PROPRIETARY`
+  - Why: copyleft (AGPL-3.0 AND Apache-2.0 AND PROPRIETARY), license-restricted/mixed (AGPL-3.0 AND Apache-2.0 AND PROPRIETARY)
+  - URL: https://github.com/windmill-labs/windmill
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/windmill-labs-windmill.md`
+- `zammad/zammad` — `AGPL-3.0`
+  - Why: copyleft (AGPL-3.0)
+  - URL: https://github.com/zammad/zammad
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/zammad-zammad.md`
+- `zitadel/zitadel` — `AGPL-3.0`
+  - Why: copyleft (AGPL-3.0)
+  - URL: https://github.com/zitadel/zitadel
+  - Entry: `.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-04-oss-harvesting-cool-code-015445/oss/entries/zitadel-zitadel.md`

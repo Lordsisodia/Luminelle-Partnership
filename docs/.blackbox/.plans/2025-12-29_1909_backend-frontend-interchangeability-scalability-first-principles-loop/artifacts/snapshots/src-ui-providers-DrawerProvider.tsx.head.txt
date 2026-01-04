@@ -1,0 +1,183 @@
+# source: src/ui/providers/DrawerProvider.tsx
+# captured: 2025-12-29T12:54:31Z
+
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PropsWithChildren } from 'react'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { UserRound } from 'lucide-react'
+import { useSignIn, useUser } from '@clerk/clerk-react'
+import { useCart } from '@client/shop/cart/providers/CartContext'
+import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
+import { getVolumeDiscountTierForVariant } from '@client/shop/cart/logic/volumeDiscounts'
+import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
+import { FREE_SHIPPING_THRESHOLD_GBP, MAX_CART_ITEM_QTY } from '@/config/constants'
+import { DrawerContext } from './DrawerContext'
+
+type DrawerProviderProps = PropsWithChildren<Record<string, unknown>>
+
+export const DrawerProvider = ({ children }: DrawerProviderProps) => {
+  const reviewMeta: Record<string, { rating: number; reviews: number }> = {
+    'Lumelle Shower Cap': { rating: 4.8, reviews: 187 },
+    'Satin Overnight Curler Set': { rating: 4.6, reviews: 92 },
+    'Luxe Essentials Bundle': { rating: 4.9, reviews: 64 },
+  }
+  const track = (event?: string, props?: Record<string, unknown>) => {
+    void event
+    void props
+  }
+
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [drawerMounted, setDrawerMounted] = useState(false)
+  const drawerRef = useRef<HTMLDivElement | null>(null)
+  const menuPanelRef = useRef<HTMLDivElement | null>(null)
+  const cartPanelRef = useRef<HTMLDivElement | null>(null)
+  const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
+  const closeTimerRef = useRef<number | null>(null)
+  const SHOW_LOYALTY = false
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current == null) return
+    window.clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = null
+  }
+
+  const openDrawer = () => {
+    clearCloseTimer()
+    setDrawerMounted(true)
+    // Next frame: transition from off-canvas → visible
+    window.requestAnimationFrame(() => setMenuOpen(true))
+  }
+
+  const closeDrawer = () => {
+    setMenuOpen(false)
+    clearCloseTimer()
+    closeTimerRef.current = window.setTimeout(() => {
+      setDrawerMounted(false)
+      closeTimerRef.current = null
+    }, 300)
+  }
+
+  const getDrawerFocusableElements = useCallback(() => {
+    const root = drawerRef.current
+    if (!root) return []
+
+    const nodes = Array.from(
+      root.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    )
+
+    return nodes.filter((el) => {
+      if (el.hasAttribute('disabled')) return false
+      if (el.getAttribute('aria-disabled') === 'true') return false
+      if (el.tabIndex < 0) return false
+
+      const style = window.getComputedStyle(el)
+      if (style.display === 'none' || style.visibility === 'hidden') return false
+      return el.getClientRects().length > 0
+    })
+  }, [])
+
+  useEffect(() => {
+    return () => clearCloseTimer()
+  }, [])
+
+  const { items, qty, setQty, remove, add, checkoutUrl, setAttributes } = useCart()
+  const { signedIn } = useAuth()
+  const location = useLocation()
+  const { isLoaded: signInLoaded, signIn } = useSignIn()
+  const { user } = useUser()
+  const [signInSubmitting, setSignInSubmitting] = useState(false)
+  const [signInError, setSignInError] = useState<string | null>(null)
+
+  const redirectTo = useMemo(() => {
+    const target = `${location.pathname}${location.search}${location.hash}` || '/'
+    return target
+  }, [location.hash, location.pathname, location.search])
+
+  const extractClerkErrorMessage = (error: unknown) => {
+    if (error && typeof error === 'object' && 'errors' in error) {
+      const clerkErrors = (error as { errors?: Array<{ message: string }> }).errors
+      if (clerkErrors && clerkErrors[0]?.message) return clerkErrors[0].message
+    }
+    if (error instanceof Error) return error.message
+    return 'Something went wrong — please try again.'
+  }
+
+  const handleGoogleSignIn = async () => {
+    if (!signInLoaded || !signIn) return
+    if (signInSubmitting) return
+    setSignInSubmitting(true)
+    setSignInError(null)
+    try {
+      await signIn.authenticateWithRedirect({
+        strategy: 'oauth_google',
+        redirectUrl: '/sso-callback',
+        redirectUrlComplete: redirectTo,
+      })
+    } catch (err) {
+      const message = extractClerkErrorMessage(err)
+      console.error('Google sign-in failed', err)
+      setSignInError(message)
+      setSignInSubmitting(false)
+    }
+  }
+
+  const cartQty = qty
+  const DRAWER_WIDTH = 320
+
+  const [redirecting, setRedirecting] = useState(false)
+  const beginCheckout = useCallback(async () => {
+    if (!checkoutUrl || redirecting) return
+    setRedirecting(true)
+    captureEvent('begin_checkout', { source: 'drawer', href: checkoutUrl })
+    try {
+      await initPosthogOnce()
+      const attrs = buildCheckoutAttributionAttributes()
+      await Promise.race([
+        setAttributes?.(attrs),
+        new Promise((resolve) => setTimeout(resolve, 800)),
+      ])
+    } finally {
+      window.location.href = checkoutUrl
+    }
+  }, [checkoutUrl, redirecting, setAttributes])
+  const loyaltyPoints = SHOW_LOYALTY
+    ? useMemo(() => {
+        const raw = user?.publicMetadata?.loyaltyPoints
+        return typeof raw === 'number' ? raw : 0
+      }, [user?.publicMetadata?.loyaltyPoints])
+    : 0
+  const nextTier = 500
+  const loyaltyProgress = SHOW_LOYALTY ? Math.min(100, Math.round((loyaltyPoints / nextTier) * 100)) : 0
+
+  const upsellProducts = useMemo(
+    () => [
+      {
+        variantId: 'gid://shopify/ProductVariant/56829020504438',
+        id: 'shower-cap',
+        title: 'Lumelle Shower Cap',
+        price: 14.99,
+        image: '/uploads/luminele/product-feature-05.webp',
+        href: '/product/lumelle-shower-cap',
+      },
+      {
+        variantId: 'gid://shopify/ProductVariant/56852779696502',
+        id: 'heatless-curler',
+        title: 'Satin Overnight Curler Set',
+        price: 16.99,
+        image: '/uploads/curler/3.webp',
+        href: '/product/satin-overnight-curler',
+      },
+    ],
+    []
+  )
+  const cartIds = useMemo(() => new Set(items.map((i) => i.id)), [items])
+  const filteredUpsells = useMemo(() => {
+    return upsellProducts.filter((p) => !cartIds.has(p.variantId))
+  }, [upsellProducts, cartIds])
+
+  const renderUpsellCard = useCallback(
+    (p: typeof upsellProducts[number]) => {
+      return (
+        <div
+          key={p.id}
+          className="relative flex items-center gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white p-3 shadow-soft"
+        >

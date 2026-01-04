@@ -1,3 +1,9 @@
+import { env } from '@/utils/env'
+import { commerce } from '@platform/commerce'
+import { PortError } from '@platform/ports'
+
+const FALLBACK_IMAGE = '/uploads/luminele/product-main.webp'
+
 export type Product = {
   id: string
   title: string
@@ -7,13 +13,49 @@ export type Product = {
   variantId: string
 }
 
-export const fetchProduct = async (id: string): Promise<Product> => ({
-  id,
-  title: 'Stub product',
-  description: 'Placeholder description',
-  price: { amount: 0, currencyCode: 'GBP' },
-  images: ['/uploads/luminele/product-main.webp'],
-  variantId: id,
-})
+const isDev = () => import.meta.env.DEV
+const shouldUseRealCommerceInDev = () => env('USE_REAL_COMMERCE') === 'true'
 
-export const fetchProductByHandle = async (handle: string) => fetchProduct(handle)
+export const fetchProduct = async (id: string): Promise<Product> => {
+  // Legacy placeholder; replaced when Shopify is configured and callers use `fetchProductByHandle`.
+  return {
+    id,
+    title: 'Stub product',
+    description: 'Placeholder description',
+    price: { amount: 0, currencyCode: 'GBP' },
+    images: [FALLBACK_IMAGE],
+    variantId: id,
+  }
+}
+
+export const fetchProductByHandle = async (handle: string): Promise<Product> => {
+  // Keep legacy behavior: in dev we don't want mock commerce results to overwrite hard-coded defaults
+  // unless we explicitly opt into the real adapter.
+  if (isDev() && !shouldUseRealCommerceInDev()) return fetchProduct(handle)
+
+  try {
+    const dto = await commerce.catalog.getProductByHandle(handle)
+
+    const defaultVariant =
+      (dto.defaultVariantKey && dto.variants.find((v) => v.variantKey === dto.defaultVariantKey)) || dto.variants[0]
+    if (!defaultVariant) return fetchProduct(handle)
+
+    const mergedImages = dto.images.length ? dto.images : [FALLBACK_IMAGE]
+
+    return {
+      id: dto.productKey,
+      title: dto.title,
+      description: dto.description ?? '',
+      price: {
+        amount: defaultVariant.unitPrice.amount,
+        currencyCode: defaultVariant.unitPrice.currencyCode,
+      },
+      images: mergedImages,
+      variantId: defaultVariant.variantKey,
+    }
+  } catch (error) {
+    // Prefer "no override" behavior for optional product enrichment rather than breaking the page.
+    if (error instanceof PortError) return fetchProduct(handle)
+    return fetchProduct(handle)
+  }
+}

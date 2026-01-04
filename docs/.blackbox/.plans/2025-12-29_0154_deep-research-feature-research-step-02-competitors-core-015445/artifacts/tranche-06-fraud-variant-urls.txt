@@ -1,0 +1,24 @@
+https://apps.shopify.com/search?q=signifyd signifyd-shopify-search
+https://apps.shopify.com/search?q=riskified riskified-shopify-search
+https://apps.shopify.com/search?q=nofraud nofraud-shopify-search
+https://apps.shopify.com/search?q=chargeflow chargeflow-shopify-search
+https://apps.shopify.com/search?q=clearsale clearsale-shopify-search
+
+https://apps.shopify.com/signifyd signifyd-shopify-app-store
+https://apps.shopify.com/riskified riskified-shopify-app-store
+https://apps.shopify.com/nofraud-chargeback-prevention-and-protection nofraud-shopify-app-store
+https://apps.shopify.com/chargeflow chargeflow-shopify-app-store
+https://apps.shopify.com/clearsale clearsale-shopify-app-store
+
+https://www.signifyd.com/pricing signifyd-pricing
+https://www.signifyd.com/platform/ signifyd-platform
+https://www.riskified.com/pricing/ riskified-pricing
+https://www.riskified.com/platform/ riskified-platform
+https://nofraud.com/pricing/ nofraud-pricing
+https://nofraud.com/platform/ nofraud-platform
+https://chargeflow.io/pricing chargeflow-pricing
+https://chargeflow.io/product chargeflow-product
+https://www.clear.sale/ clearsale-home-variant
+https://www2.clear.sale/fraud-protection/how-it-works clearsale-how-it-works
+
+https://apps.shopify.com/categories/store-management-security-fraud/all shopify-category-security-fraud

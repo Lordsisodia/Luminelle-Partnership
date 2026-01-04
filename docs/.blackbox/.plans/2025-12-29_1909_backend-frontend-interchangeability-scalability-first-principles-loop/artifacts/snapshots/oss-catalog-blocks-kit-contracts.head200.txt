@@ -1,0 +1,200 @@
+# Blocks Kit Contracts (v1)
+
+Updated: `2025-12-31`
+
+Purpose: define **stable, implementable contracts** for the Blocks Kit we want to build (or mine patterns for) so we can:
+- stop endless OSS discovery loops,
+- implement blocks consistently across products (blog, marketing pages, storefront),
+- keep UI primitives composable and accessible.
+
+This is *not* framework-specific code. It is an interface + behavior spec.
+
+Related:
+- Blocks inventory (what/why): `docs/.blackbox/oss-catalog/blocks-inventory.md`
+- Mining method: `docs/.blackbox/oss-catalog/component-mining-playbook.md`
+- File pointers (where to look in OSS): `docs/.blackbox/oss-catalog/component-source-map.md`
+
+---
+
+## Global conventions (applies to all blocks)
+
+### IDs + links
+- Every block that can be deep-linked should accept `id?: string`.
+- If an `id` is provided, it must become the DOM id of the block root.
+
+### Telemetry hook points
+- Every interactive block should support:
+  - `onEvent?: (event) => void` where `event.type` is stable (e.g. `faq.open`, `pricing.toggle`, `newsletter.submit`).
+
+### States (minimum)
+- Interactive blocks must define UI behavior for:
+  - `loading` (optional but recommended)
+  - `error` (if there is async work)
+  - `empty` (when inputs have 0 items)
+
+### Accessibility (non-negotiable)
+- Keyboard nav must work.
+- Focus indicators must be visible.
+- “Selected/active” states must not rely on color alone.
+
+---
+
+## A) Blog / article blocks
+
+### 1) `RichContent` (Markdown/MDX renderer)
+Purpose: render blog/article content with a controlled component map.
+
+Props (conceptual):
+- `content: string` (mdx or markdown)
+- `format: "mdx" | "markdown"`
+- `components?: Record<string, ReactComponent>`
+- `frontmatter?: Record<string, unknown>`
+
+Behavior requirements:
+- Deterministic rendering (same input → same output).
+- Sanitization: no script injection; safe HTML handling.
+- Link behavior: external links can be styled consistently.
+
+Where to mine:
+- MDX/TOC/code pointers live in `docs/.blackbox/oss-catalog/component-source-map.md`.
+
+### 2) `TableOfContents`
+Purpose: render a TOC for an article with active-heading highlighting.
+
+Props:
+- `items: TocItem[]` where `TocItem = { id: string; title: string; depth: number; children?: TocItem[] }`
+- `activeId?: string`
+- `onNavigate?: (id: string) => void`
+
+Behavior:
+- Desktop: sticky sidebar pattern.
+- Mobile: collapsible panel/drawer pattern.
+- Active heading updates on scroll (IntersectionObserver recommended).
+
+Where to mine:
+- `timlrx/tailwind-nextjs-starter-blog`, `shadcn-ui/taxonomy` (TOC extraction + UI).
+- Astro TOC patterns in source map.
+
+### 3) `CodeBlock`
+Purpose: highlighted code blocks with copy button and optional filename/title.
+
+Props:
+- `code: string`
+- `language?: string`
+- `title?: string`
+- `highlightLines?: number[]` (optional)
+
+Behavior:
+- Copy button copies raw code (not HTML).
+- Long lines scroll horizontally without breaking layout.
+- Optional line highlighting should not break copy behavior.
+
+Where to mine:
+- `rehype-pretty/rehype-pretty-code`, `shikijs/shiki`, `code-hike/codehike` (see source map).
+
+### 4) `Callout`
+Purpose: admonition/callout box used inside articles and landing pages.
+
+Props:
+- `kind: "info" | "warning" | "danger" | "success"`
+- `title?: string`
+- `children: ReactNode`
+
+Behavior:
+- Icon + semantics + spacing consistent across themes.
+- Must be readable in light/dark mode.
+
+Where to mine:
+- Flowbite/DaisyUI/HyperUI/MerakiUI blocks; see source map.
+
+---
+
+## B) Marketing / content-heavy page sections
+
+### 5) `FaqSection`
+Purpose: FAQ accordion with optional deep-link and “single-open” mode.
+
+Props:
+- `items: { id: string; question: string; answer: ReactNode }[]`
+- `mode?: "single" | "multiple"` (default `single`)
+- `defaultOpenId?: string`
+
+Behavior:
+- Keyboard accessible accordion/disclosure.
+- Optional deep link support: `/page#faq-returns-window` opens + scrolls.
+- “Open” state is communicated via aria attributes.
+
+Where to mine:
+- HyperUI FAQ HTML blocks.
+- MerakiUI FAQ Collapse.
+- Flowbite accordion behavior (JS component).
+- DaisyUI collapse/accordion conventions.
+
+### 6) `PricingSection`
+Purpose: pricing tiers with monthly/yearly toggle and optional comparison table.
+
+Props:
+- `tiers: { id: string; name: string; priceMonthly: string; priceYearly?: string; features: string[]; ctaLabel?: string; badge?: string }[]`
+- `billingMode?: "monthly" | "yearly"` (controlled) or `defaultBillingMode?`
+- `onBillingModeChange?: (mode: "monthly" | "yearly") => void`
+
+Behavior:
+- Toggle changes prices without layout shift.
+- “Most popular”/highlight tier must have non-color-only indicator.
+
+Where to mine:
+- Tailblocks pricing blocks.
+- HyperUI pricing blocks.
+- MerakiUI pricing variants.
+
+### 7) `TestimonialsSection`
+Purpose: testimonial cards in grid/stack; optional slider.
+
+Props:
+- `items: { id: string; name: string; title?: string; quote: string; avatarUrl?: string; rating?: number }[]`
+- `layout?: "grid" | "stack" | "slider"` (default `grid`)
+
+Behavior:
+- Avatars should not cause layout shift (reserve space).
+- Rating display is read-only; accessible label (e.g. “4 out of 5 stars”).
+
+Where to mine:
+- Tailblocks testimonial blocks.
+- MerakiUI testimonials (card/centered/slider).
+- Flowbite rating pattern (docs).
+
+### 8) `NewsletterSignup`
+Purpose: email capture form with loading/success/error states and an anti-spam hook.
+
+Props:
+- `onSubmit: (email: string) => Promise<void>`
+- `validateEmail?: (email: string) => string | null` (error message)
+- `honeypotFieldName?: string` (optional)
+
+Behavior:
+- Loading state disables submit.
+- Success state is visible (alert/callout).
+- Error state shows a helpful message (not just “failed”).
+
+Where to mine:
+- HyperUI newsletter signup blocks.
+- MerakiUI newsletter form blocks.
+- Flowbite input + alert patterns.
+
+---
+
+## C) Storefront UI primitives (pattern mining → implementation contracts)
+
+### 9) `ProductCard` + `ProductGrid`
+Purpose: PLP product cards + responsive grid layout.
+
+Props:
+- `product: { id: string; title: string; handle?: string; images: { url: string; alt?: string }[]; price: string; compareAtPrice?: string; badges?: string[]; available?: boolean; rating?: number }`
+- `href: string`
+
+Behavior:
+- Handles missing images and long titles gracefully.
+- Sold out / sale / badge states don’t break layout.
+- Entire card is a clean link target (avoid nested click traps).
+
+Where to mine:

@@ -1,0 +1,129 @@
+../docs/05-planning/future-features/A-B testing components/hybrid-analytics-heatmaps-stack.md:11:- Frontend: Vite + React (`src/`), deployed on **Cloudflare**.
+../docs/05-planning/future-features/A-B testing components/hybrid-analytics-heatmaps-stack.md:80:- **Cloudflare D1**: free SQLite-at-edge; per-DB size limits mean it’s best for **rollups/config**, not raw event firehose.
+../docs/05-planning/future-features/A-B testing components/hybrid-analytics-heatmaps-stack.md:91:Turso is a distributed SQLite (libSQL) database and has first-class guidance for Cloudflare Workers integration.
+../docs/05-planning/future-features/A-B testing components/hybrid-analytics-heatmaps-stack.md:95:- **Cloudflare-friendly**: Cloudflare docs explicitly call out that Workers should import `@libsql/client/web` and use `TURSO_URL` + `TURSO_AUTH_TOKEN` style bindings/secrets.
+../docs/05-planning/future-features/A-B testing components/hybrid-analytics-heatmaps-stack.md:116:- Cloudflare Workers → Turso integration: https://developers.cloudflare.com/workers/databases/native-integrations/turso/
+../docs/05-planning/future-features/A-B testing components/hybrid-analytics-heatmaps-stack.md:117:- Cloudflare Workers tutorial: https://developers.cloudflare.com/workers/tutorials/connect-to-turso-using-workers/
+../docs/05-planning/future-features/A-B testing components/hybrid-analytics-heatmaps-stack.md:289:- Cloudflare D1 pricing/limits: https://developers.cloudflare.com/d1/platform/pricing/
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:1:# PostHog + Cloudflare Pages (Functions) — Setup & Verification
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:3:This doc is the “single source of truth” for how PostHog works in this repo and how to set it up on Cloudflare Pages + Pages Functions.
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:6:- Frontend is deployed on **Cloudflare Pages**
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:7:- Server endpoints are **Cloudflare Pages Functions** (the `functions/**` folder)
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:46:3) Our Cloudflare webhook handler extracts them and sends a server-side `purchase` event to PostHog.
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:49:- Cloudflare webhook (prod path): `functions/api/shopify/webhooks/orders-create.ts`
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:53:## 1) Prereq sanity check (Cloudflare Functions must actually run)
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:55:Cloudflare Pages can serve SPA fallbacks (HTML) even for `/api/*` if Functions aren’t enabled for those routes.
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:91:## 3) Cloudflare env vars (where + what)
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:93:Cloudflare Dashboard → Pages → your project → Settings → **Variables and Secrets**
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:98:- Non-`VITE_` vars are **runtime** (Pages Functions secrets)
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:114:- Keep secrets as “Secret” in Cloudflare (not Plaintext): Shopify secrets, DB URLs, Clerk secrets, etc.
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:186:- Cloudflare Pages env vars exist and are on the correct environment (Preview vs Production)
+../docs/05-planning/future-features/A-B testing components/posthog-cloudflare-setup.md:193:- Cloudflare Functions secrets exist:
+../vite.config.ts:44:    allowedHosts: ['choir-holly-assist-cases.trycloudflare.com', 'localhost', '127.0.0.1'],
+../docs/05-planning/future-features/A-B testing components/state-of-play.md:15:  - Cloudflare Pages Functions: `functions/api/shopify/webhooks/orders-create.ts` sends server-side `purchase` to PostHog if `POSTHOG_API_KEY` is set
+../docs/05-planning/future-features/A-B testing components/state-of-play.md:16:  - (Legacy / Node/Vercel) `api/shopify/webhooks/orders-create.ts` does the same for non-Workers deployments
+../docs/05-planning/future-features/A-B testing components/implementation-plan.md:46:   - Prefer Shopify/Cloudflare analytics for generic traffic stats if needed.
+../docs/05-planning/future-features/A-B testing components/implementation-plan.md:65:14) In the Shopify order webhook handler (Cloudflare Worker), extract the attributes.
+../docs/05-planning/future-features/A-B testing components/readme.md:19:  - Cloudflare Pages Functions: `functions/api/shopify/webhooks/orders-create.ts` sends server-side `purchase` to PostHog when `POSTHOG_API_KEY` is set.
+../docs/05-planning/future-features/A-B testing components/readme.md:20:  - (Legacy / Node/Vercel) `api/shopify/webhooks/orders-create.ts` does the same for non-Workers deployments.
+../docs/05-planning/future-features/A-B testing components/readme.md:59:## Setup (Cloudflare + PostHog)
+../docs/05-planning/future-features/A-B testing components/readme.md:61:- `posthog-cloudflare-setup.md`
+../docs/05-planning/future-features/A-B testing components/staging-runbook.md:8:Quick reference (Cloudflare + PostHog setup details):
+../docs/05-planning/future-features/A-B testing components/staging-runbook.md:9:- `posthog-cloudflare-setup.md`
+../docs/05-planning/future-features/A-B testing components/staging-runbook.md:11:0) Preflight: confirm Cloudflare Pages Functions are invoked for `/api/*`
+../docs/05-planning/future-features/A-B testing components/staging-runbook.md:22:   - Cloudflare UI: Pages → Project → Settings → Variables and Secrets
+../docs/05-planning/future-features/A-B testing components/integration-plan.md:25:- Hosted on Cloudflare (Pages + Workers)
+../docs/05-planning/future-features/A-B testing components/integration-plan.md:43:### Browser (Cloudflare Pages)
+../docs/05-planning/future-features/A-B testing components/integration-plan.md:53:### Server (Cloudflare Workers)
+../.env.example:5:# Everything else is server-only and should be set as platform secrets (Vercel env, Cloudflare Worker secrets, etc.).
+../.env.example:8:# Frontend (Vite / Cloudflare Pages)
+../.env.example:21:# Cart mode (recommended for Cloudflare Pages: keep normal shoppers off your API)
+../.env.example:63:# Server/API (Vercel or Workers) — secrets
+../docs/05-planning/future-features/Magic Cart Recovery System/research-checklist.md:17:10. ◔ Assess Supabase as auxiliary store (cart_shares table or KV) vs alternatives (Vercel KV/R2); collect pricing/latency notes. — Supabase Realtime benchmark p95 28 ms (WebSocket). Cloudflare R2 pricing: $0.015/GB-month; Class A $4.50/M; Class B $0.36/M; zero egress. TODO: add Vercel KV latency and Supabase PG RPC p95. citeturn0search6turn0search0
+../legacy/vercel-api/README.md:6:- We’re migrating hosting to **Cloudflare Pages + Workers + R2**.
+../legacy/vercel-api/README.md:7:- Cloudflare Workers is not drop-in compatible with the current `api/**` code (it includes Node/Vercel-specific patterns like `@vercel/node` request types and `pg` TCP pooling).
+../legacy/vercel-api/README.md:14:- This code is **not** meant to be deployed on Cloudflare as-is.
+../shopify.app.toml:5:application_url = "https://again-rom-meaning-shed.trycloudflare.com"
+../shopify.app.toml:19:  "https://again-rom-meaning-shed.trycloudflare.com/api/shopify/auth/callback"
+../shopify.app.toml:23:url = "https://again-rom-meaning-shed.trycloudflare.com/api/shopify"
+../docs/05-planning/future-features/Magic Cart Recovery System/framework-options.md:10:- **Cloudflare R2 + Supabase (infra pieces)** – Cheap, open infra for storing shared-cart payloads server-side (R2 object, Supabase row/trigger) to keep tokens PII-free.
+../docs/05-planning/future-features/ab-testing-components.md:9:- Hosted on Cloudflare (Pages + Workers)
+../docs/05-planning/research/ui-infra-port-implementation-strategy.md:37:- `CatalogPort`, `ContentPort`, `CartPort`, `CheckoutPort` call internal endpoints (Pages Functions / server).
+../docs/05-planning/research/ui-infra-port-implementation-strategy.md:125:- Those port implementations should, by default, call internal HTTP endpoints (Pages Functions) such as:
+../docs/01-product/admin/admin-gap-analysis.md:52:| `/admin/content` | `@admin/pages/ui/pages/ContentPage` | 🧪 | Cloudflare function `/api/admin/sections/*` | Legacy Shopify metafield/metaobject editor using a shared secret. |
+../docs/01-product/gamification/implementation.md:67:- (Cloudflare parity) `functions/api/shopify/webhooks/*`
+../docs/05-planning/research/market-intelligence/ecommerce-benchmarking/audits/womens-fashion-shortlist-15/BATCH-03.md:29:- **DÔEN** (Cloudflare “Just a moment…”)
+../docs/05-planning/research/market-intelligence/ecommerce-benchmarking/audits/womens-fashion-shortlist-15/BATCH-03.md:30:- **SSENSE** (Cloudflare “Just a moment…”)
+../docs/05-planning/research/market-intelligence/ecommerce-benchmarking/audits/womens-fashion-shortlist-15/BATCH-03.md:31:- **thredUP** (Cloudflare “Just a moment…”)
+../README.md:18:- `functions/api/**` – **Cloudflare Pages Functions** API implementation (`/api/*` on Cloudflare Pages).
+../README.md:19:- `api/**` – legacy **Vercel** serverless snapshot (kept for reference; not used on Cloudflare).
+../README.md:35:- Webhook callback URLs can’t be on your shop’s own domains; use a separate receiver domain (e.g. your Cloudflare Pages `*.pages.dev` URL).
+../docs/05-planning/research/supabase-multitenancy-decoupled-backend.md:1:# Supabase Multitenancy + Decoupled Backend (Cloudflare) — Plan
+../docs/05-planning/research/supabase-multitenancy-decoupled-backend.md:5:- Hosting/edge is Cloudflare.
+../docs/05-planning/research/supabase-multitenancy-decoupled-backend.md:12:- `docs/.blackbox/.plans/2025-12-29_1901_supabase-multitenancy-decoupled-backend-cloudflare/`
+../docs/05-planning/research/supabase-multitenancy-decoupled-backend.md:20:- Cloudflare Workers/Pages Functions implement `/api/*`.
+../docs/05-planning/research/supabase-multitenancy-decoupled-backend.md:28:See: `docs/.blackbox/.plans/2025-12-29_1901_supabase-multitenancy-decoupled-backend-cloudflare/backend-boundary.md`
+../docs/05-planning/research/supabase-multitenancy-decoupled-backend.md:43:See: `docs/.blackbox/.plans/2025-12-29_1901_supabase-multitenancy-decoupled-backend-cloudflare/supabase-multitenancy-plan.md`
+../docs/05-planning/research/supabase-multitenancy-decoupled-backend.md:56:See: `docs/.blackbox/.plans/2025-12-29_1901_supabase-multitenancy-decoupled-backend-cloudflare/migration-stages.md`
+../docs/05-planning/research/deep-research-context-pack.md:85:- `functions/api/**` – **Cloudflare Pages Functions** API implementation (`/api/*` on Cloudflare Pages).
+../docs/05-planning/research/deep-research-context-pack.md:86:- `api/**` – legacy **Vercel** serverless snapshot (kept for reference; not used on Cloudflare).
+../docs/05-planning/research/deep-research-context-pack.md:102:- Webhook callback URLs can’t be on your shop’s own domains; use a separate receiver domain (e.g. your Cloudflare Pages `*.pages.dev` URL).
+../docs/05-planning/research/deep-research-context-pack.md:182:- Backend/serverless: Cloudflare Pages Functions in `functions/api/**`.
+../docs/07-templates/library/templated/starter-decisions.md:82:- Keep code portability in mind so a future move (e.g., Cloudflare) is not a rewrite.
+../docs/02-engineering/technical/shopify-integration.md:17:Note: Images for marketing pages are served from `public/**` by default. If you later move static assets to an external host (e.g., Cloudflare R2), enable it with:
+../docs/02-engineering/technical/shopify-integration.md:86:### (Optional) Keep checkout on the same domain (Cloudflare Pages Functions)
+../docs/02-engineering/technical/shopify-integration.md:89:This repo includes a Cloudflare Pages Functions proxy for:
+../docs/02-engineering/technical/shopify-integration.md:102:- This approach still consumes Cloudflare Functions requests for each checkout page/XHR that hits those paths.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:1:# Cloudflare Pages + Workers + R2 + Supabase (Deployment Setup)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:5:- **Frontend**: Cloudflare Pages (static Vite build)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:6:- **API**: Cloudflare Workers (or Pages Functions) for `/api/*`
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:7:- **Images/Assets**: Cloudflare R2 (served via a public hostname or a Worker)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:10:The goal is to keep **public shopping pages** extremely cheap to serve (mostly static + Shopify) and use Workers only for:
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:16:> Important: Workers is not “full Node.js”. Don’t deploy the current `/api/**` folder to Workers as-is (many files assume `@vercel/node` and `pg` TCP pooling). The right approach is to **port only the endpoints you need**, and have them talk to Supabase via **HTTP** (not `pg`).
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:28:This is ideal for Cloudflare’s free-tier request limits because normal shoppers don’t consume Worker requests.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:53:- A **Cloudflare account** with your domain added (recommended so you can use Pages, Workers, and R2 on the same zone).
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:60:- Cloudflare Wrangler CLI (recommended)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:64:## 2) Cloudflare Pages (frontend)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:67:1. Cloudflare Dashboard → **Pages** → “Create a project”.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:83:Cloudflare Pages will include this in the final build.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:85:### 2.3.1 Don’t accidentally disable Pages Functions (`_routes.json`)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:86:This repo also uses Cloudflare Pages Functions under `functions/**`.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:88:Cloudflare Pages can optionally use `public/_routes.json` to **limit which paths invoke Functions**.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:100:Set these in Cloudflare Pages → Settings → Environment variables.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:118:2. Follow Cloudflare’s DNS instructions.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:122:## 3) Cloudflare R2 (images + static assets)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:124:> Optional: If you want to avoid R2 (card requirement) and keep things simple, you can just keep “marketing images” in this repo under `public/uploads/**` and `public/images/**`. Cloudflare Pages will serve them directly and cheaply.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:139:Cloudflare Dashboard → R2 → Create bucket, e.g.:
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:154:To enable CDN mode in Cloudflare Pages, set:
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:162:## 4) Cloudflare Workers (API)
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:166:**Option A: Pages Functions**
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:214:- `INTERNAL_SHARED_SECRET`: this is **your own** randomly generated secret (not provided by Shopify/Cloudflare).
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:228:  - Copy the generated **Client ID** and **Client secret** into Cloudflare Pages runtime secrets.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:232:> Update: This repo now includes a Cloudflare Pages Functions implementation under `functions/api/**` which replaces the legacy Vercel-style `api/**` folder for Cloudflare deployments.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:246:Update: `orders/create` is already implemented for Cloudflare in `functions/api/shopify/webhooks/orders-create.ts` and (optionally) sends a server-side `purchase` event to PostHog when `POSTHOG_API_KEY` is set.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:258:Workers considerations:
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:277:Because Workers won’t be running `pg` migrations automatically, create tables in Supabase once.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:298:- If Workers write using the **service role**, they bypass RLS.
+../docs/02-engineering/hosting/cloudflare-pages-workers-r2-supabase.md:306:Update webhook callback URLs to point at your Cloudflare API domain:
+../docs/02-engineering/hosting/README.md:3:- `cloudflare-pages-workers-r2-supabase.md` — Step-by-step plan for hosting this repo on Cloudflare Pages + Workers + R2, while keeping Supabase as the database.
+../docs/02-engineering/shopify/shopify-developer-platform.md:63:- Eventing: Shopify emits webhooks; you implement secure receivers, retries/backoff, idempotency keys, and background workers.
+../docs/06-quality/incidents/README.md:16:- [x] `004-api-handler-style-inconsistency-request-vs-vercelreq.md` — **Resolved for Cloudflare**: API is now standardized under `functions/api/**` (Pages Functions). `api/**` remains a Vercel snapshot.
+../docs/06-quality/incidents/004-api-handler-style-inconsistency-request-vs-vercelreq.md:4:**Resolved for Cloudflare Pages/Workers**: the production API surface is now implemented as **Cloudflare Pages Functions** under `functions/api/**` (Fetch-style `Request` → `Response` only). The legacy `api/**` folder is kept as a **Vercel snapshot** and remains mixed-style by design.
+../docs/06-quality/incidents/004-api-handler-style-inconsistency-request-vs-vercelreq.md:52:- **Cloudflare Pages**: use `functions/api/**` (Pages Functions). This repo now follows this approach, so the “mixed handler” risk is avoided in production.
+../scripts/register-webhooks.mjs:155:  if (String(BASE_URL).includes('trycloudflare.com')) {
+../scripts/register-webhooks.mjs:156:    console.warn('Warning: base URL is a trycloudflare tunnel; webhooks will break when the tunnel changes.')
+../docs/06-quality/incidents/progress.md:3:## Cloudflare Pages / Workers
+../docs/06-quality/incidents/progress.md:4:- Cloudflare Functions version of all API routes is in `functions/api/**` and replaces the legacy Vercel-style `api/**` for Cloudflare deployments.
+../docs/06-quality/incidents/progress.md:7:### Runtime secrets still missing in Cloudflare
+../docs/06-quality/incidents/progress.md:36:1) Set missing Cloudflare runtime secrets (at least `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `INTERNAL_SHARED_SECRET`).
+../docs/06-quality/incidents/progress.md:39:4) Run smoke tests on Cloudflare after secrets are in place.
+../docs/06-quality/incidents/007-spa-deep-links-on-vercel.md:31:- If Netlify/Cloudflare Pages is the target:
+../server/migrations/2025-12-14_shopify_tables_and_metrics.sql:1:-- Shopify sync tables + analytics RPCs (for Cloudflare Pages Functions / Workers)
+../server/migrations/2025-12-14_shopify_tables_and_metrics.sql:69:-- Analytics RPCs (called from Cloudflare Functions via Supabase `rpc()`)
+../server/migrations/2025-12-14_customers_table.sql:2:-- This matches the schema expected by `api/_lib/customers.ts` and Cloudflare Functions `functions/_lib/customers.ts`.
+../server/migrations/2025-12-14_shopify_rls_lockdown.sql:3:-- These tables are written/read by server-only code (Cloudflare Pages Functions / Workers) using the
+../docs/08-meta/repo/meta/dev-notes.md:4:- Cloudflare Pages preview should point to `dev` only; production deploys from `main`.
+../docs/08-meta/repo/docs-ledger.md:47:- `2025-12-29 — planning — supabase-multitenancy-decoupled-backend — docs/05-planning/research/supabase-multitenancy-decoupled-backend.md — artifacts: docs/.blackbox/.plans/2025-12-29_1901_supabase-multitenancy-decoupled-backend-cloudflare/`
+../src/domains/client/shop/cart/ui/pages/CheckoutHandoffPage.tsx:110:                      and likely <span className="font-mono text-[12px]">/checkouts/*</span>) to Shopify at the edge (Cloudflare/Workers).
+../src/domains/platform/content/runtime.ts:58:  // In dev, default to mock unless explicitly enabled (local dev often won't run Pages Functions).
+../src/domains/platform/commerce/runtime.ts:136:  // In dev, default to mock unless explicitly enabled (local dev often won't run Pages Functions).

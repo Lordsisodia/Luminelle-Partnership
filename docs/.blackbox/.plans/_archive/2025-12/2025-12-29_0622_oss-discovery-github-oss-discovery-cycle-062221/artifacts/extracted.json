@@ -1,0 +1,159 @@
+{
+  "candidates": [
+    {
+      "description": "Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool.",
+      "forks": 1191,
+      "full_name": "illacloud/illa-builder",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=12306, updated=2025-12-28T14:26:24Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 12306,
+      "tags": [
+        "admin",
+        "support",
+        "cms",
+        "workflows"
+      ],
+      "topics": [
+        "aiagent",
+        "app-builder",
+        "crud-application",
+        "developer-tool",
+        "developer-tools",
+        "gui",
+        "hacktoberfest",
+        "internal-development",
+        "internal-tool",
+        "internal-tools",
+        "low-code",
+        "low-code-development-platform",
+        "lowcode",
+        "react",
+        "self-hosted",
+        "typescript"
+      ],
+      "updated_at": "2025-12-28T14:26:24Z",
+      "url": "https://github.com/illacloud/illa-builder"
+    },
+    {
+      "description": "RESTool is an open source UI tool for managing RESTful APIs. It could save you time developing your own internal tools. A live example:",
+      "forks": 121,
+      "full_name": "dsternlicht/RESTool",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=487, updated=2025-11-29T16:19:18Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 487,
+      "tags": [],
+      "topics": [
+        "developer-tools",
+        "javascript",
+        "reactjs",
+        "rest-api",
+        "restful",
+        "tools"
+      ],
+      "updated_at": "2025-11-29T16:19:18Z",
+      "url": "https://github.com/dsternlicht/RESTool"
+    },
+    {
+      "description": "ToolJet is the open-source foundation of ToolJet AI - the AI-native platform for building internal tools, dashboard, business applications, workflows and AI agents \ud83d\ude80",
+      "forks": 4914,
+      "full_name": "ToolJet/ToolJet",
+      "language": "JavaScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=37084, updated=2025-12-28T20:10:58Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 37084,
+      "tags": [
+        "admin",
+        "workflows"
+      ],
+      "topics": [
+        "ai-app-builder",
+        "docker",
+        "hacktoberfest",
+        "internal-applications",
+        "internal-project",
+        "internal-tool",
+        "internal-tools",
+        "javascript",
+        "kubernetes",
+        "low-code",
+        "low-code-development-platform",
+        "low-code-framework",
+        "no-code",
+        "nodejs",
+        "reactjs",
+        "self-hosted",
+        "typescript",
+        "web-development-tools",
+        "workflow-automation"
+      ],
+      "updated_at": "2025-12-28T20:10:58Z",
+      "url": "https://github.com/ToolJet/ToolJet"
+    },
+    {
+      "description": "LLM Transparency Tool (LLM-TT), an open-source interactive toolkit for analyzing internal workings of Transformer-based language models. *Check out demo at* https://huggingface.co/spaces/facebook/llm-transparency-tool-demo",
+      "forks": 101,
+      "full_name": "facebookresearch/llm-transparency-tool",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=1213, updated=2025-12-28T21:19:55Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 63,
+      "stars": 1213,
+      "tags": [
+        "search"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T21:19:55Z",
+      "url": "https://github.com/facebookresearch/llm-transparency-tool"
+    },
+    {
+      "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+      "forks": 27352,
+      "full_name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "language": "N/A",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (N/A); maintenance=20/20 (stars=102947, updated=2025-12-28T23:22:07Z); license=7/15 (GPL-3.0); time_to_value=8/10",
+      "score": 57,
+      "stars": 102947,
+      "tags": [],
+      "topics": [
+        "ai",
+        "bolt",
+        "cluely",
+        "copilot",
+        "cursor",
+        "cursorai",
+        "devin",
+        "github-copilot",
+        "lovable",
+        "open-source",
+        "perplexity",
+        "replit",
+        "system-prompts",
+        "trae",
+        "trae-ai",
+        "trae-ide",
+        "v0",
+        "vscode",
+        "windsurf",
+        "windsurf-ai"
+      ],
+      "updated_at": "2025-12-28T23:22:07Z",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+    }
+  ],
+  "count": 5,
+  "generated_at_utc": "2025-12-28T23:22:28Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-29_0622_oss-discovery-github-oss-discovery-cycle-062221/oss/entries"
+  }
+}

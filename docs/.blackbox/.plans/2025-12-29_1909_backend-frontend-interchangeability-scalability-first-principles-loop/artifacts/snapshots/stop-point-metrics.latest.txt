@@ -1,0 +1,12 @@
+captured_at=2025-12-31T17:51:04Z
+checkout_proxy_missing_snapshots=0
+vendor_leaks_disallowed_lines=0
+adapter_imports_ui_client_violations=0
+backend_surface_api_only_endpoints=13
+backend_surface_api_only_endpoints_used_by_src=0
+backend_surface_api_only_endpoints_used_by_scripts=1
+vendor_sdk_imports_nonplatform_total=10
+vendor_sdk_imports_nonplatform_clerk=7
+vendor_sdk_imports_nonplatform_stripe=3
+contract_gaps_missing_auth=0
+contract_gaps_missing_cache=0

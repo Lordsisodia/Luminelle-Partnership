@@ -1,0 +1,126 @@
+{
+  "candidates": [
+    {
+      "description": "Beautiful code blocks for Markdown or MDX.",
+      "forks": 73,
+      "full_name": "rehype-pretty/rehype-pretty-code",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1265, updated=2025-12-29T07:02:05Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1265,
+      "tags": [],
+      "topics": [
+        "markdown",
+        "mdx",
+        "shiki",
+        "syntax-highlighting",
+        "vscode"
+      ],
+      "updated_at": "2025-12-29T07:02:05Z",
+      "url": "https://github.com/rehype-pretty/rehype-pretty-code"
+    },
+    {
+      "description": "React code blocks and code snippet components",
+      "forks": 78,
+      "full_name": "rajinwonderland/react-code-blocks",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=636, updated=2025-11-27T14:16:37Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 636,
+      "tags": [],
+      "topics": [
+        "highlightjs",
+        "hljs",
+        "js",
+        "jsx",
+        "mdx",
+        "prismjs",
+        "react",
+        "react-code-blocks",
+        "react-codemirror",
+        "react-codemirror2",
+        "react-components",
+        "remark",
+        "syntax-highlighting",
+        "syntax-theme"
+      ],
+      "updated_at": "2025-11-27T14:16:37Z",
+      "url": "https://github.com/rajinwonderland/react-code-blocks"
+    },
+    {
+      "description": "React package to render FAQ section",
+      "forks": 10,
+      "full_name": "binodswain/react-faq-component",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=16/20 (stars=59, updated=2025-05-12T11:41:51Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 70,
+      "stars": 59,
+      "tags": [],
+      "topics": [
+        "faq-accordion",
+        "faqs",
+        "react-faq",
+        "reactjs",
+        "reactjs-component"
+      ],
+      "updated_at": "2025-05-12T11:41:51Z",
+      "url": "https://github.com/binodswain/react-faq-component"
+    },
+    {
+      "description": "Light weight react component for creating a table of contents from the given markdown text\u26a1\u26a1",
+      "forks": 6,
+      "full_name": "K-Sato1995/react-toc",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=14/20 (stars=42, updated=2025-03-26T00:05:27Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 68,
+      "stars": 42,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "markdown",
+        "react",
+        "tableofcontents",
+        "toc",
+        "typescript"
+      ],
+      "updated_at": "2025-03-26T00:05:27Z",
+      "url": "https://github.com/K-Sato1995/react-toc"
+    },
+    {
+      "description": "\ud83e\udde9 Set of unstyled UI components to build powerful code blocks in React.",
+      "forks": 1,
+      "full_name": "blenderskool/react-code-block",
+      "language": "MDX",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (MDX); maintenance=20/20 (stars=77, updated=2025-12-13T19:52:35Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 77,
+      "tags": [],
+      "topics": [
+        "code-blocks",
+        "mdx",
+        "react",
+        "snippets",
+        "syntax-highlighting",
+        "unstyled-components"
+      ],
+      "updated_at": "2025-12-13T19:52:35Z",
+      "url": "https://github.com/blenderskool/react-code-block"
+    }
+  ],
+  "count": 5,
+  "generated_at_utc": "2025-12-30T10:20:08Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1719_oss-discovery-github-oss-discovery-cycle-171928/oss/entries"
+  }
+}

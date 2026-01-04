@@ -1,0 +1,12 @@
+[
+  {
+    "full_name": "Budibase/budibase",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "GPL-3.0",
+    "html_url": "https://github.com/Budibase/budibase/blob/master/LICENSE",
+    "api_url": "https://api.github.com/repos/Budibase/budibase/license",
+    "fetched_at": "2025-12-28 22:41 UTC",
+    "notes": "GPLv3 mentioned in license text"
+  }
+]

@@ -1,0 +1,460 @@
+{
+  "candidates": [
+    {
+      "description": "Payload is the open-source, fullstack Next.js framework, giving you instant backend superpowers. Get a full TypeScript backend and admin panel instantly. Use Payload as a headless CMS or for building powerful applications.",
+      "forks": 0,
+      "full_name": "payloadcms/payload",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=39578, updated=2025-12-28T22:46:50Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 39578,
+      "tags": [
+        "admin",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T22:46:50Z",
+      "url": "https://github.com/payloadcms/payload"
+    },
+    {
+      "description": "Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool.",
+      "forks": 0,
+      "full_name": "illacloud/illa-builder",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=12306, updated=2025-12-28T14:26:24Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 12306,
+      "tags": [
+        "admin",
+        "support",
+        "cms",
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T14:26:24Z",
+      "url": "https://github.com/illacloud/illa-builder"
+    },
+    {
+      "description": "Open source headless commerce that\u2019s fast, flexible, and built to scale,launch stunning storefronts that convert and grow your business without limits.",
+      "forks": 0,
+      "full_name": "bagisto/nextjs-commerce",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=3472, updated=2025-12-28T12:39:16Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 3472,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T12:39:16Z",
+      "url": "https://github.com/bagisto/nextjs-commerce"
+    },
+    {
+      "description": "\u2728 Open-Source Full-stack E-Commerce Storefront with CMS Admin Panel. Built with Typescript, Next.js 14 App Dir, Tailwind CSS ( @shadcn-ui ) and Prisma. Admin Panel: https://pardis.vercel.app",
+      "forks": 0,
+      "full_name": "slowfound/next-prisma-tailwind-ecommerce",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=350, updated=2025-12-25T16:22:25Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 350,
+      "tags": [
+        "commerce",
+        "admin",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-25T16:22:25Z",
+      "url": "https://github.com/slowfound/next-prisma-tailwind-ecommerce"
+    },
+    {
+      "description": "Open-source SDKs / toolkit for seamless integration and development of Shopify Hydrogen themes and headless commerce solutions.",
+      "forks": 0,
+      "full_name": "Weaverse/weaverse",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=77, updated=2025-12-24T04:33:32Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 77,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-24T04:33:32Z",
+      "url": "https://github.com/Weaverse/weaverse"
+    },
+    {
+      "description": "Open-source internal tool framework. \ud83d\udcaa  Empower your team and collaborators to view and manage the data you already own in a nice easy-to-use protected tool. Basetool helps you have a better handle on your data in a collaborative way so you can focus on moving your business forward.",
+      "forks": 0,
+      "full_name": "basetool-io/basetool",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=282, updated=2025-11-19T15:32:52Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 72,
+      "stars": 282,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-11-19T15:32:52Z",
+      "url": "https://github.com/basetool-io/basetool"
+    },
+    {
+      "description": "The open-source Retool alternative. Low-code platform for building internal tools fast!",
+      "forks": 0,
+      "full_name": "Toola-bakery/Toola",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=240, updated=2025-11-19T15:32:49Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 72,
+      "stars": 240,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-11-19T15:32:49Z",
+      "url": "https://github.com/Toola-bakery/Toola"
+    },
+    {
+      "description": "ToolJet is the open-source foundation of ToolJet AI - the AI-native platform for building internal tools, dashboard, business applications, workflows and AI agents \ud83d\ude80",
+      "forks": 0,
+      "full_name": "ToolJet/ToolJet",
+      "language": "JavaScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=37084, updated=2025-12-28T20:10:58Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 37084,
+      "tags": [
+        "admin",
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T20:10:58Z",
+      "url": "https://github.com/ToolJet/ToolJet"
+    },
+    {
+      "description": "React Storefront - PWA for eCommerce. 100% offline, platform agnostic, headless, Magento 2 supported. Always Open Source, Apache-2.0 license. Join us as contributor (contributors@reactstorefront.io).",
+      "forks": 0,
+      "full_name": "storefront-foundation/react-storefront",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=833, updated=2025-12-24T14:21:02Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 69,
+      "stars": 833,
+      "tags": [
+        "commerce",
+        "support",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-24T14:21:02Z",
+      "url": "https://github.com/storefront-foundation/react-storefront"
+    },
+    {
+      "description": "Django-ecommerce is a fully open-source E-commerce platform built using Django Web Framework, designed with Bootstrap4...",
+      "forks": 0,
+      "full_name": "shyam999/Django-ecommerce",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=314, updated=2025-12-28T01:46:27Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 66,
+      "stars": 314,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T01:46:27Z",
+      "url": "https://github.com/shyam999/Django-ecommerce"
+    },
+    {
+      "description": "Free and open source laravel eCommerce platform",
+      "forks": 0,
+      "full_name": "bagisto/bagisto",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=24774, updated=2025-12-28T20:32:31Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 24774,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T20:32:31Z",
+      "url": "https://github.com/bagisto/bagisto"
+    },
+    {
+      "description": "This open-source mobile ecommerce app seamlessly transforms your Bagisto store into a powerful mobile platform, providing real-time synchronization of products and categories.",
+      "forks": 0,
+      "full_name": "bagisto/opensource-ecommerce-mobile-app",
+      "language": "Dart",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Dart); maintenance=20/20 (stars=13411, updated=2025-12-28T20:32:33Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 13411,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T20:32:33Z",
+      "url": "https://github.com/bagisto/opensource-ecommerce-mobile-app"
+    },
+    {
+      "description": "Headless open-source eCommerce platform on top of PHP/Symfony/API Platform",
+      "forks": 0,
+      "full_name": "Sylius/Sylius",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=8381, updated=2025-12-27T13:34:40Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 8381,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T13:34:40Z",
+      "url": "https://github.com/Sylius/Sylius"
+    },
+    {
+      "description": "An open-source package that brings the power of modern headless e-commerce functionality to Laravel.",
+      "forks": 0,
+      "full_name": "lunarphp/lunar",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=3363, updated=2025-12-28T22:50:13Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 3363,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T22:50:13Z",
+      "url": "https://github.com/lunarphp/lunar"
+    },
+    {
+      "description": "The open-source storefront for any ecommerce. Built with a headless approach, using a modern JS stack. Works with Litekart, Medusa. WIP for Shopify.",
+      "forks": 0,
+      "full_name": "itswadesh/svelte-commerce",
+      "language": "Svelte",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Svelte); maintenance=20/20 (stars=1758, updated=2025-12-27T16:12:26Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 1758,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T16:12:26Z",
+      "url": "https://github.com/itswadesh/svelte-commerce"
+    },
+    {
+      "description": "An open-source, dynamic e-commerce solution powered by Nuxt 4 and GraphQL, headless storefront replacement for Woocommerce. Featuring a user interface in the style of Pinterest and fully customizable (Vue, Nuxt4).",
+      "forks": 0,
+      "full_name": "zackha/nuxtcommerce",
+      "language": "Vue",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Vue); maintenance=20/20 (stars=210, updated=2025-12-27T03:03:25Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 210,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T03:03:25Z",
+      "url": "https://github.com/zackha/nuxtcommerce"
+    },
+    {
+      "description": "An open source eCommerce platform giving you full control and customizability. Modular and API-first. Multi-vendor, multi-tenant, multi-store, multi-currency, multi-language. Built using Ruby on Rails. Developed by @vendo-dev",
+      "forks": 0,
+      "full_name": "spree/spree",
+      "language": "Ruby",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=20/20 (stars=15115, updated=2025-12-28T21:33:08Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 60,
+      "stars": 15115,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T21:33:08Z",
+      "url": "https://github.com/spree/spree"
+    },
+    {
+      "description": "ASP.NET Core eCommerce software. nopCommerce is a free and open-source shopping cart.",
+      "forks": 0,
+      "full_name": "nopSolutions/nopCommerce",
+      "language": "C#",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (C#); maintenance=20/20 (stars=9920, updated=2025-12-28T21:17:17Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 60,
+      "stars": 9920,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T21:17:17Z",
+      "url": "https://github.com/nopSolutions/nopCommerce"
+    },
+    {
+      "description": "PrestaShop is the universal open-source software platform to build your e-commerce solution.",
+      "forks": 0,
+      "full_name": "PrestaShop/PrestaShop",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=8912, updated=2025-12-28T13:30:10Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 60,
+      "stars": 8912,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T13:30:10Z",
+      "url": "https://github.com/PrestaShop/PrestaShop"
+    },
+    {
+      "description": "\ud83d\udd25\ud83d\udd25\ud83d\udd25 Free open source and easy-to-use laravel eCommerce platform, Base on the Laravel . It supports multiple languages and currencies, integrates ChatGPT OpenAI. The platform features customizable visual design and a rich plugins on marketplace.",
+      "forks": 0,
+      "full_name": "beikeshop/beikeshop",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=1821, updated=2025-12-28T13:19:52Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 59,
+      "stars": 1821,
+      "tags": [
+        "commerce",
+        "support"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T13:19:52Z",
+      "url": "https://github.com/beikeshop/beikeshop"
+    },
+    {
+      "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+      "forks": 0,
+      "full_name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "language": "N/A",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (N/A); maintenance=20/20 (stars=102948, updated=2025-12-28T23:25:36Z); license=7/15 (GPL-3.0); time_to_value=8/10",
+      "score": 57,
+      "stars": 102948,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-28T23:25:36Z",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+    },
+    {
+      "description": "The Trusted Membership Platform That Grows with You: Restrict access to content and charge recurring subscriptions using Stripe, PayPal, and more. Fully open source. 100% GPL.",
+      "forks": 0,
+      "full_name": "strangerstudios/paid-memberships-pro",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=515, updated=2025-12-15T19:05:22Z); license=10/15 (NOASSERTION); time_to_value=5/10",
+      "score": 57,
+      "stars": 515,
+      "tags": [
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-15T19:05:22Z",
+      "url": "https://github.com/strangerstudios/paid-memberships-pro"
+    },
+    {
+      "description": "A modular, scalable and ultra-fast open-source all-in-one eCommerce platform built on ASP.NET Core 7",
+      "forks": 0,
+      "full_name": "smartstore/Smartstore",
+      "language": "C#",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (C#); maintenance=20/20 (stars=1429, updated=2025-12-26T04:36:52Z); license=7/15 (AGPL-3.0); time_to_value=7/10",
+      "score": 56,
+      "stars": 1429,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-26T04:36:52Z",
+      "url": "https://github.com/smartstore/Smartstore"
+    },
+    {
+      "description": "This is an open source tool to dump the wifi profiles and cleartext passwords of the connected access points on the Windows machine. This tool will help you in a Wifi penetration testing. Furthermore, it is useful while performing red team or an internal infrastructure engagements.",
+      "forks": 0,
+      "full_name": "Viralmaniar/Wifi-Dumper",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=290, updated=2025-12-20T08:56:09Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 56,
+      "stars": 290,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-20T08:56:09Z",
+      "url": "https://github.com/Viralmaniar/Wifi-Dumper"
+    },
+    {
+      "description": "A customizable, open-source ecommerce platform built on WordPress. Build any commerce solution you can imagine.",
+      "forks": 0,
+      "full_name": "woocommerce/woocommerce",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=10107, updated=2025-12-27T18:46:59Z); license=5/15 (UNKNOWN); time_to_value=8/10",
+      "score": 55,
+      "stars": 10107,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T18:46:59Z",
+      "url": "https://github.com/woocommerce/woocommerce"
+    },
+    {
+      "description": "\ud83d\udd2d Tololo is an open-source package that brings the power of modern headless e-commerce functionality to Elixir's Phoenix Framework.",
+      "forks": 0,
+      "full_name": "ElixirCL/tololo",
+      "language": "Elixir",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Elixir); maintenance=20/20 (stars=70, updated=2025-12-25T14:37:14Z); license=7/15 (AGPL-3.0); time_to_value=5/10",
+      "score": 54,
+      "stars": 70,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-25T14:37:14Z",
+      "url": "https://github.com/ElixirCL/tololo"
+    }
+  ],
+  "count": 26,
+  "generated_at_utc": "2025-12-28T23:34:39Z",
+  "source": {
+    "search_json": ".blackbox/.plans/2025-12-29_0634_oss-discovery-github-oss-discovery-cycle-063425/artifacts/search-extracted.json"
+  }
+}

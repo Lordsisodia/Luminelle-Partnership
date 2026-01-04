@@ -1,0 +1,224 @@
+{
+  "type": "returns-domain-mining",
+  "version": 1,
+  "data": {
+    "focus": [
+      "returns",
+      "refunds",
+      "store_credit"
+    ],
+    "constraints": [
+      "no_cloning",
+      "file_pointers_only",
+      "prefer_safe_license"
+    ],
+    "repos": [
+      {
+        "full_name": "saleor/saleor",
+        "url": "https://github.com/saleor/saleor",
+        "license_bucket": "safe",
+        "license_spdx": "BSD-3-Clause",
+        "ref": {
+          "branch": "main",
+          "commit_sha": "9de3f4d8202ac9856e29c723efaaddce8de27c10"
+        },
+        "primitives": [
+          {
+            "name": "return_products",
+            "pointers": [
+              {
+                "path": "saleor/graphql/order/mutations/fulfillment_return_products.py",
+                "why": "Return products; optional refund and optional replacement exchange"
+              },
+              {
+                "path": "saleor/order/actions.py",
+                "why": "Core orchestration helpers"
+              }
+            ]
+          },
+          {
+            "name": "refunds",
+            "pointers": [
+              {
+                "path": "saleor/graphql/order/mutations/fulfillment_refund_products.py",
+                "why": "Line-level refunds"
+              },
+              {
+                "path": "saleor/graphql/order/mutations/order_refund.py",
+                "why": "Amount-level refund (ops escape hatch)"
+              }
+            ]
+          },
+          {
+            "name": "refund_owed_vs_processed",
+            "pointers": [
+              {
+                "path": "saleor/graphql/order/mutations/order_grant_refund_create.py",
+                "why": "Create auditable 'refund owed' record"
+              },
+              {
+                "path": "saleor/graphql/order/mutations/order_grant_refund_update.py",
+                "why": "Update/refine owed record"
+              },
+              {
+                "path": "saleor/graphql/payment/mutations/transaction/transaction_request_refund_for_granted_refund.py",
+                "why": "Execute refund against a transaction rail"
+              }
+            ]
+          },
+          {
+            "name": "gift_cards_as_store_credit",
+            "pointers": [
+              {
+                "path": "saleor/giftcard/const.py",
+                "why": "Gift card gateway ID"
+              },
+              {
+                "path": "saleor/giftcard/models.py",
+                "why": "Gift card model (balance/expiry)"
+              },
+              {
+                "path": "saleor/giftcard/events.py",
+                "why": "Gift card events/history hooks"
+              },
+              {
+                "path": "saleor/giftcard/gateway.py",
+                "why": "Gift card refund behavior (balance adjustments)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "full_name": "solidusio/solidus",
+        "url": "https://github.com/solidusio/solidus",
+        "license_bucket": "safe",
+        "license_spdx": "BSD-3-Clause",
+        "ref": {
+          "branch": "main",
+          "commit_sha": "f8779d647eb4bb1dc5bc82b9f87ee88774b6f8c1"
+        },
+        "verification_notes": [
+          "GitHub /license reports NOASSERTION, but LICENSE.md contains BSD-3-Clause style license text."
+        ],
+        "primitives": [
+          {
+            "name": "store_credit_ledger",
+            "pointers": [
+              {
+                "path": "core/app/models/spree/store_credit.rb",
+                "why": "Store credit balance object"
+              },
+              {
+                "path": "core/app/models/spree/store_credit_event.rb",
+                "why": "Ledger/event history"
+              },
+              {
+                "path": "core/app/models/spree/store_credit_type.rb",
+                "why": "Typing/categories"
+              },
+              {
+                "path": "core/app/models/spree/payment_method/store_credit.rb",
+                "why": "Store credit as payment method"
+              }
+            ]
+          },
+          {
+            "name": "returns_state_machine",
+            "pointers": [
+              {
+                "path": "core/app/models/spree/return_authorization.rb",
+                "why": "RMA/authorization"
+              },
+              {
+                "path": "core/app/models/spree/core/state_machines/return_authorization.rb",
+                "why": "State transitions"
+              },
+              {
+                "path": "core/app/models/spree/customer_return.rb",
+                "why": "Receiving boundary"
+              },
+              {
+                "path": "core/app/models/spree/return_item.rb",
+                "why": "Return line item primitive"
+              },
+              {
+                "path": "core/app/models/spree/return_item/eligibility_validator",
+                "why": "Eligibility/policy-like validators (time windows, RMA required, etc.)"
+              }
+            ]
+          },
+          {
+            "name": "reimbursements",
+            "pointers": [
+              {
+                "path": "core/app/models/spree/reimbursement.rb",
+                "why": "Reimbursement object tying returns to refund method"
+              },
+              {
+                "path": "core/app/models/spree/reimbursement_type/store_credit.rb",
+                "why": "Refund via store credit"
+              },
+              {
+                "path": "core/app/models/spree/reimbursement_type/original_payment.rb",
+                "why": "Refund via original payment"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "full_name": "spree/spree",
+        "url": "https://github.com/spree/spree",
+        "license_bucket": "flagged",
+        "license_spdx": "AGPL-3.0",
+        "ref": {
+          "branch": "main"
+        },
+        "verification_notes": [
+          "license.md states AGPL-3.0 applies to contributions from v4.10 onward (dual-license). Treat as reference-only."
+        ],
+        "primitives": [
+          {
+            "name": "store_credit_ledger_reference_only",
+            "pointers": [
+              {
+                "path": "core/app/models/spree/store_credit.rb",
+                "why": "Store credit balance object (reference-only)"
+              },
+              {
+                "path": "core/app/models/spree/store_credit_event.rb",
+                "why": "Ledger/event history (reference-only)"
+              }
+            ]
+          },
+          {
+            "name": "returns_reimbursements_reference_only",
+            "pointers": [
+              {
+                "path": "core/app/models/spree/return_authorization.rb",
+                "why": "Return authorization (reference-only)"
+              },
+              {
+                "path": "core/app/models/spree/return_item.rb",
+                "why": "Return item primitive (reference-only)"
+              },
+              {
+                "path": "core/app/models/spree/customer_return.rb",
+                "why": "Customer return primitive (reference-only)"
+              },
+              {
+                "path": "core/app/models/spree/reimbursement.rb",
+                "why": "Reimbursement primitive (reference-only)"
+              },
+              {
+                "path": "core/app/models/spree/reimbursement_type.rb",
+                "why": "Reimbursement types (reference-only)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

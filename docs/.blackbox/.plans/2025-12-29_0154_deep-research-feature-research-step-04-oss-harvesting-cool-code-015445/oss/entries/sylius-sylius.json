@@ -1,0 +1,10 @@
+{
+  "source": "manual",
+  "repo_full_name": "Sylius/Sylius",
+  "repo_url": "https://github.com/Sylius/Sylius",
+  "license": "MIT",
+  "primary_language": "PHP",
+  "tags": ["commerce", "ecommerce", "framework", "symfony", "admin"],
+  "fetched_at": "2025-12-30"
+}
+

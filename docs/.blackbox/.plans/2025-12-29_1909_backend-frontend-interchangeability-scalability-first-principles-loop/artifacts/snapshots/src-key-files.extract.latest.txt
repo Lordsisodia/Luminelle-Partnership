@@ -1,0 +1,640 @@
+===== src/main.tsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { RouterProvider } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
+import { ClerkProvider } from '@clerk/clerk-react'
+import './index.css'
+import router from './router'
+import { initPosthogOnce } from '@/lib/analytics/posthog'
+import { dispatchServiceWorkerUpdateAvailable } from '@/lib/serviceWorkerUpdates'
+import AppErrorBoundary from './ui/components/AppErrorBoundary'
+import { SUPPORT_EMAIL } from '@/config/constants'
+import { PaymentsProvider } from '@client/account/providers/PaymentsProvider'
+
+// Guard against missing react-refresh runtime in certain build modes (prevents $RefreshReg$ errors).
+if (typeof window !== 'undefined') {
+  // @ts-expect-error - react-refresh injects this global in dev; provide fallback in other build modes.
+  window.$RefreshReg$ = window.$RefreshReg$ || (() => {})
+  // @ts-expect-error - react-refresh injects this global in dev; provide fallback in other build modes.
+  window.$RefreshSig$ = window.$RefreshSig$ || (() => (type: any) => type)
+}
+
+// Start PostHog init early (feature flags may be needed during first render).
+// Actual event capture remains gated by `VITE_ANALYTICS_ENABLED`.
+void initPosthogOnce()
+
+const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const isClerkConfigured = Boolean(clerkPublishableKey) && clerkPublishableKey !== 'pk_test_placeholder'
+
+const rootEl = document.getElementById('root')
+if (!rootEl) throw new Error('Missing #root element')
+
+if (!isClerkConfigured) {
+  createRoot(rootEl).render(
+    <StrictMode>
+      <HelmetProvider>
+        <main className="min-h-screen bg-white text-semantic-text-primary">
+          <div className="mx-auto max-w-3xl px-4 py-16 md:px-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
+              Configuration required
+            </p>
+            <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-semantic-text-primary md:text-4xl">
+              Sign-in is temporarily unavailable
+            </h1>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-semantic-text-primary/70">
+              Authentication is not configured for this environment, so account/admin pages can’t load safely.
+            </p>
+
+            {import.meta.env.DEV ? (
+              <div className="mt-8 rounded-3xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/10 p-6">
+                <p className="text-sm font-semibold text-semantic-text-primary">
+                  Fix (local dev):
+                </p>
+                <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-semantic-text-primary/70">
+                  <li>
+                    Add <code className="font-mono text-xs">VITE_CLERK_PUBLISHABLE_KEY</code> to your{' '}
+                    <code className="font-mono text-xs">.env.local</code>.
+                  </li>
+                  <li>Restart the dev server.</li>
+                </ol>
+                <p className="mt-4 text-xs text-semantic-text-primary/60">
+                  If you don’t have a Clerk key, ask an admin or use the project’s shared dev env file.
+                </p>
+              </div>
+            ) : (
+              <p className="mt-8 text-sm text-semantic-text-primary/70">
+                Please try again later, or contact{' '}
+                <a className="underline underline-offset-4" href={`mailto:${SUPPORT_EMAIL}`}>
+                  {SUPPORT_EMAIL}
+                </a>
+                .
+              </p>
+            )}
+          </div>
+        </main>
+      </HelmetProvider>
+    </StrictMode>
+  )
+} else {
+  createRoot(rootEl).render(
+    <StrictMode>
+      <ClerkProvider
+        publishableKey={clerkPublishableKey}
+        signInUrl="/sign-in"
+        signUpUrl="/sign-up"
+        afterSignInUrl="/account"
+        afterSignUpUrl="/account"
+      >
+        <HelmetProvider>
+          <AppErrorBoundary>
+            <PaymentsProvider>
+              <RouterProvider router={router} future={{ v7_startTransition: true }} />
+            </PaymentsProvider>
+          </AppErrorBoundary>
+        </HelmetProvider>
+      </ClerkProvider>
+    </StrictMode>
+  )
+}
+
+// Basic service worker registration for PWA install/offline.
+// Only enable in production to avoid stale caches during local development.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((registration) => {
+        const notify = () => dispatchServiceWorkerUpdateAvailable()
+
+        // If an update was already downloaded while the page was open, surface it.
+        if (registration.waiting && navigator.serviceWorker.controller) notify()
+
+        registration.addEventListener('updatefound', () => {
+          const installing = registration.installing
+          if (!installing) return
+
+          installing.addEventListener('statechange', () => {
+            if (installing.state !== 'installed') return
+            // If there's an existing controller, this is an update (not first install).
+            if (navigator.serviceWorker.controller) notify()
+          })
+        })
+      })
+      .catch((err) => console.error('SW registration failed', err))
+  })
+}
+
+===== src/router.tsx
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+import App from './App'
+import { CartProvider } from './domains/client/shop/cart/providers/CartContext'
+import { AuthProvider } from './domains/platform/auth/providers/AuthContext'
+import ScrollToTop from './ui/components/ScrollToTop'
+import CookieConsentBanner from './ui/components/CookieConsentBanner'
+import ServiceWorkerUpdateToast from './ui/components/ServiceWorkerUpdateToast'
+import { DrawerProvider } from './ui/providers/DrawerProvider'
+
+const RootApp = () => {
+  return (
+    <CartProvider>
+      <AuthProvider>
+        <DrawerProvider>
+          <ScrollToTop />
+          <CookieConsentBanner />
+          <ServiceWorkerUpdateToast />
+          <App />
+        </DrawerProvider>
+      </AuthProvider>
+    </CartProvider>
+  )
+}
+
+export const router = createBrowserRouter(
+  createRoutesFromElements(<Route path="*" element={<RootApp />} />),
+  {
+    future: {
+      v7_relativeSplatPath: true,
+    },
+  }
+)
+
+export default router
+
+===== src/App.tsx
+import { Suspense, lazy } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import { SUPPORT_EMAIL } from '@/config/constants'
+import { GlobalFooter } from '@ui/components/GlobalFooter'
+
+const LandingPage = lazy(() => import('@creator/ui/pages/CreatorsPage'))
+const WelcomePage = lazy(() => import('@client/marketing/ui/pages/WelcomePage'))
+const TermsPage = lazy(() => import('@client/marketing/ui/pages/TermsPage'))
+const PrivacyPage = lazy(() => import('@client/marketing/ui/pages/PrivacyPage'))
+const BriefPage = lazy(() => import('@client/marketing/ui/pages/BriefPage'))
+const ShopLandingPage = lazy(() => import('@client/marketing/ui/pages/ShopLandingPage'))
+const ProductPage = lazy(() => import('@client/shop/products/ui/pages/ProductPage/index'))
+const BlogIndexPage = lazy(() => import('@blog/ui/pages/BlogIndexPage'))
+const BlogPostPage = lazy(() => import('@blog/ui/pages/BlogPostPage'))
+const CartPage = lazy(() => import('@client/shop/cart/ui/pages/CartPage'))
+const CheckoutPage = lazy(() => import('@client/shop/checkout/ui/pages/CheckoutPage'))
+const OrderConfirmationPage = lazy(() => import('@client/shop/checkout/ui/pages/OrderConfirmationPage'))
+const OrderTrackingPage = lazy(() => import('@client/shop/checkout/ui/pages/OrderTrackingPage'))
+const ReturnsPage = lazy(() => import('@client/shop/checkout/ui/pages/ReturnsPage'))
+const OrderDetailPage = lazy(() => import('@client/account/ui/pages/OrderDetailPage'))
+const AddressesPage = lazy(() => import('@client/account/ui/pages/AddressesPage'))
+const PaymentMethodsPage = lazy(() => import('@client/account/ui/pages/PaymentMethodsPage'))
+const SearchResultsPage = lazy(() => import('@client/shop/products/ui/pages/SearchResultsPage'))
+const AccountPage = lazy(() => import('@client/account/ui/pages/AccountPage'))
+const OrdersPage = lazy(() => import('@client/account/ui/pages/OrdersPage'))
+const BrandStoryPage = lazy(() => import('@client/marketing/brand/ui/pages/BrandStoryPage'))
+const CheckoutHandoffPage = lazy(() => import('@client/shop/cart/ui/pages/CheckoutHandoffPage'))
+const RewardsPage = lazy(() => import('@client/rewards/ui/pages/RewardsPage'))
+const SignInPage = lazy(() => import('@platform/auth/ui/pages/SignInPage'))
+const SignUpPage = lazy(() => import('@platform/auth/ui/pages/SignUpPage'))
+const SSOCallbackPage = lazy(() => import('@platform/auth/ui/pages/SSOCallbackPage'))
+const AdminShell = lazy(() => import('@admin/shared/ui/layouts/AdminShell'))
+const DashboardPage = lazy(() => import('@admin/analytics/ui/pages/DashboardPage'))
+const AnalyticsPage = lazy(() => import('@admin/analytics/ui/pages/AnalyticsPage'))
+const ActivityPage = lazy(() => import('@admin/analytics/ui/pages/ActivityPage'))
+
+const PagesPage = lazy(() => import('@admin/pages/ui/pages/PagesPage'))
+
+const ProductsPage = lazy(() => import('@admin/catalog/ui/pages/ProductsPage'))
+const ProductPreviewFramePage = lazy(() => import('@admin/catalog/ui/pages/ProductPreviewFramePage'))
+const ComponentsPage = lazy(() => import('@admin/catalog/ui/pages/ComponentsPage'))
+const ComponentDetailPage = lazy(() => import('@admin/catalog/ui/pages/ComponentDetailPage'))
+
+const BlogsPage = lazy(() => import('@admin/blog/ui/pages/BlogsPage'))
+const BlogDetailPage = lazy(() => import('@admin/blog/ui/pages/BlogDetailPage'))
+
+const MediaPage = lazy(() => import('@admin/media/ui/pages/MediaPage'))
+const AdminOrdersPage = lazy(() => import('@admin/orders/ui/pages/OrdersPage'))
+const AdminSettingsPage = lazy(() => import('@admin/settings/ui/pages/SettingsPage'))
+const AdminGuard = lazy(() => import('@admin/shared/ui/components/AdminGuard'))
+const ClerkShell = lazy(() => import('@/shells/ClerkShell'))
+const NotFoundPage = lazy(() => import('@ui/pages/NotFoundPage'))
+
+// Rewards temporarily disabled per client request; toggle to re-enable.
+const ENABLE_REWARDS = false
+
+const AppLoadingFallback = () => {
+  return (
+    <div className="flex min-h-screen flex-col bg-white text-semantic-text-primary">
+      <header className="border-b border-semantic-legacy-brand-blush/40 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
+          <div className="flex items-center gap-3">
+            <div
+              className="h-10 w-10 rounded-full border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/20"
+              aria-hidden
+            />
+            <div className="font-heading text-lg font-semibold uppercase tracking-[0.22em]">Lumelle</div>
+          </div>
+          <div
+            className="h-10 w-28 rounded-full border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/20"
+            aria-hidden
+          />
+        </div>
+      </header>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 md:px-6">
+        <div className="space-y-4 motion-safe:animate-pulse motion-reduce:animate-none">
+          <div className="h-10 w-3/5 rounded-2xl bg-semantic-legacy-brand-blush/25" aria-hidden />
+          <div className="h-4 w-2/5 rounded-xl bg-semantic-legacy-brand-blush/25" aria-hidden />
+          <div className="h-4 w-4/5 rounded-xl bg-semantic-legacy-brand-blush/25" aria-hidden />
+          <div className="mt-8 h-60 w-full rounded-3xl border border-semantic-legacy-brand-blush/50 bg-semantic-legacy-brand-blush/10" aria-hidden />
+        </div>
+        <p className="mt-8 text-center text-sm text-semantic-text-primary/60">Loading…</p>
+      </main>
+      <GlobalFooter supportEmail={SUPPORT_EMAIL} />
+    </div>
+  )
+}
+
+const App = () => {
+  return (
+    <Suspense fallback={<AppLoadingFallback />}>
+      <Helmet>
+        {/* Default to indexable pages; override per-route where needed. */}
+        <meta name="robots" content="index,follow" />
+      </Helmet>
+      <Routes>
+        {/* Store landing is root */}
+        <Route path="/" element={<ShopLandingPage />} />
+        {/* Creator welcome lives at /welcome */}
+        <Route path="/welcome" element={<WelcomePage />} />
+        {/* Legacy/alt landing stub */}
+        <Route path="/landing" element={<ShopLandingPage />} />
+        {/* Creators page */}
+        <Route path="/creators" element={<LandingPage />} />
+        <Route path="/brand" element={<BrandStoryPage />} />
+        <Route path="/product/:handle" element={<ProductPage />} />
+        {/* Checkout handoff URLs can look like /cart/c/<id>?key=... */}
+        <Route path="/cart/c/*" element={<CheckoutHandoffPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/order/:orderId/confirm" element={<OrderConfirmationPage />} />
+        <Route path="/order/track" element={<OrderTrackingPage />} />
+        <Route path="/search" element={<SearchResultsPage />} />
+        <Route path="/returns" element={<ReturnsPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/brief" element={<BriefPage />} />
+
+        {/* Routes that require Clerk (auth + account + admin + blog commenting) */}
+        <Route element={<ClerkShell />}>
+          <Route path="/blog" element={<BlogIndexPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+
+          {ENABLE_REWARDS ? (
+            <Route path="/rewards" element={<RewardsPage />} />
+          ) : (
+            <Route path="/rewards" element={<Navigate to="/" replace />} />
+          )}
+          <Route path="/checkout" element={<CheckoutPage />} />
+
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/sso-callback" element={<SSOCallbackPage />} />
+
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="/account/orders" element={<OrdersPage />} />
+          <Route path="/account/orders/:orderId" element={<OrderDetailPage />} />
+          <Route path="/account/addresses" element={<AddressesPage />} />
+          <Route path="/account/payments" element={<PaymentMethodsPage />} />
+
+          {/* Admin mobile preview (uses real PDP component) */}
+          <Route path="/admin/preview/product/:handle" element={<ProductPreviewFramePage />} />
+
+          {/* Admin */}
+          <Route path="/admin" element={<AdminGuard><AdminShell /></AdminGuard>}>
+            <Route index element={<DashboardPage />} />
+            <Route path="analytics" element={<AnalyticsPage />} />
+            <Route path="orders" element={<AdminOrdersPage />} />
+            <Route path="orders/:orderId" element={<AdminOrdersPage />} />
+            <Route path="content/*" element={<Navigate to="/admin/products" replace />} />
+            <Route path="pages" element={<PagesPage />} />
+            <Route path="pages/:slug" element={<PagesPage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="products/:handle" element={<ProductsPage />} />
+            <Route path="blogs" element={<BlogsPage />} />
+            <Route path="blogs/:slug" element={<BlogDetailPage />} />
+            <Route path="media" element={<MediaPage />} />
+            <Route path="media/upload/:bucketId" element={<MediaPage />} />
+            <Route path="media/:assetId" element={<MediaPage />} />
+            <Route path="globals" element={<Navigate to="/admin/components" replace />} />
+            <Route path="components" element={<ComponentsPage />} />
+            <Route path="components/:key" element={<ComponentDetailPage />} />
+            <Route path="activity" element={<ActivityPage />} />
+            <Route path="settings" element={<AdminSettingsPage />} />
+            <Route path="*" element={<Navigate to="/admin" replace />} />
+          </Route>
+        </Route>
+
+        {/* Fallback for unknown routes (prevents white screen) */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Suspense>
+  )
+}
+
+export default App
+
+===== src/domains/platform/http/internal-api/client.ts
+import { PortError } from '@platform/ports'
+
+type JsonRequestInit = Omit<RequestInit, 'body'> & { body?: unknown }
+
+const classifyError = (status: number, message: string) => {
+  const msg = message.toLowerCase()
+  if (status === 400) return { code: 'INVALID_INPUT' as const }
+  if (status === 404) return { code: 'NOT_FOUND' as const }
+  if (status === 429) return { code: 'RATE_LIMITED' as const }
+  if (status >= 500) {
+    if (msg.includes('missing') || msg.includes('not configured') || msg.includes('not set')) {
+      return { code: 'NOT_CONFIGURED' as const }
+    }
+    return { code: 'UNAVAILABLE' as const }
+  }
+  return { code: 'UNKNOWN' as const }
+}
+
+export const requestJson = async <T>(path: string, init?: JsonRequestInit): Promise<T> => {
+  const res = await fetch(path, {
+    ...init,
+    headers: { 'content-type': 'application/json', ...(init?.headers ?? {}) },
+    body: init?.body === undefined ? undefined : JSON.stringify(init.body),
+  })
+
+  if (!res.ok) {
+    const raw = await res.text().catch(() => '')
+    const message = raw || `HTTP ${res.status} (${res.statusText})`
+    const { code } = classifyError(res.status, message)
+    throw new PortError(code, message, { details: { path, status: res.status } })
+  }
+
+  return (await res.json()) as T
+}
+
+
+===== src/domains/platform/commerce/runtime.ts
+import { env } from '@/utils/env'
+import { PortError } from '@platform/ports'
+import type { CatalogPort, CartPort, CheckoutPort } from './ports'
+import { createShopifyCommerceAdapter } from './adapters/shopify/internal-api'
+
+type CommerceRuntime = {
+  catalog: CatalogPort
+  cart: CartPort
+  checkout: CheckoutPort
+}
+
+const isDev = () => import.meta.env.DEV
+
+const isShopifyConfigured = () => {
+  const domain = env('SHOPIFY_STORE_DOMAIN')
+  return Boolean(domain)
+}
+
+const shouldUseRealCommerceInDev = () => env('USE_REAL_COMMERCE') === 'true'
+
+const createMockCommerce = (): CommerceRuntime => {
+  const catalog: CatalogPort = {
+    async getProductByHandle(handle) {
+      return {
+        productKey: `mock.${handle}`,
+        handle,
+        title: `Mock product (${handle})`,
+        description: 'Mock catalog adapter (dev only).',
+        images: ['/uploads/luminele/product-main.webp'],
+        defaultVariantKey: `mock.${handle}.default`,
+        variants: [
+          {
+            variantKey: `mock.${handle}.default`,
+            title: 'Default',
+            available: true,
+            unitPrice: { amount: 0, currencyCode: 'GBP' },
+          },
+        ],
+      }
+    },
+  }
+
+  const cart: CartPort = {
+    async getCart() {
+      return {
+        cartKey: 'mock-cart',
+        lines: [],
+        subtotal: { amount: 0, currencyCode: 'GBP' },
+        currencyCode: 'GBP',
+        discountCodes: [],
+      }
+    },
+    async addLine() {
+      return await this.getCart()
+    },
+    async updateLine() {
+      return await this.getCart()
+    },
+    async removeLine() {
+      return await this.getCart()
+    },
+  }
+
+  const checkout: CheckoutPort = {
+    getCapabilities() {
+      return {
+        mode: 'none',
+        providerLabel: 'Checkout unavailable (mock)',
+        supportsDiscounts: false,
+        supportsBuyerIdentity: false,
+        handoff: { routes: ['/cart/c/*', '/checkouts/*'] },
+      }
+    },
+    async beginCheckout() {
+      return { mode: 'none', reason: 'Mock commerce adapter (dev only).' }
+    },
+  }
+
+  return { catalog, cart, checkout }
+}
+
+const createDisabledCommerce = (code: 'NOT_CONFIGURED' | 'UNAVAILABLE', message: string): CommerceRuntime => {
+  const fail = () => {
+    throw new PortError(code, message)
+  }
+
+  const catalog: CatalogPort = {
+    async getProductByHandle() {
+      return fail()
+    },
+  }
+
+  const cart: CartPort = {
+    async getCart() {
+      return fail()
+    },
+    async addLine() {
+      return fail()
+    },
+    async updateLine() {
+      return fail()
+    },
+    async removeLine() {
+      return fail()
+    },
+  }
+
+  const checkout: CheckoutPort = {
+    getCapabilities() {
+      return {
+        mode: 'none',
+        supportsDiscounts: false,
+        supportsBuyerIdentity: false,
+        handoff: { routes: ['/cart/c/*', '/checkouts/*'] },
+      }
+    },
+    async beginCheckout() {
+      return { mode: 'none', reason: message }
+    },
+  }
+
+  return { catalog, cart, checkout }
+}
+
+export const createCommerce = (): CommerceRuntime => {
+  const configured = isShopifyConfigured()
+
+  if (!configured) {
+    if (isDev()) return createMockCommerce()
+    return createDisabledCommerce(
+      'NOT_CONFIGURED',
+      'Commerce provider is not configured (missing SHOPIFY_STORE_DOMAIN).'
+    )
+  }
+
+  // In dev, default to mock unless explicitly enabled (local dev often won't run Pages Functions).
+  if (isDev() && !shouldUseRealCommerceInDev()) return createMockCommerce()
+
+  const adapter = createShopifyCommerceAdapter()
+  return {
+    catalog: adapter.catalog,
+    cart: adapter.cart,
+    checkout: adapter.checkout,
+  }
+}
+
+export const commerce = createCommerce()
+
+===== src/domains/platform/commerce/ports/checkout.ts
+export type CheckoutHandoffCapabilities = {
+  routes: string[]
+}
+
+export type CheckoutCapabilities = {
+  mode: 'redirect' | 'embedded' | 'none'
+  providerLabel?: string
+
+  supportsDiscounts: boolean
+  supportsBuyerIdentity: boolean
+
+  handoff?: CheckoutHandoffCapabilities
+}
+
+export type CheckoutStart =
+  | { mode: 'redirect'; url: string }
+  | { mode: 'embedded'; sessionToken: string }
+  | { mode: 'none'; reason: string }
+
+export interface CheckoutPort {
+  getCapabilities(): CheckoutCapabilities
+  beginCheckout(): Promise<CheckoutStart>
+}
+
+
+===== src/domains/platform/commerce/adapters/shopify/internal-api/checkout.ts
+import type { CheckoutPort } from '@platform/commerce/ports'
+import { requestJson } from '@platform/http/internal-api/client'
+import { decodeCartKey } from './keys'
+import { __internalShopifyCartKeyStorage } from './cart'
+
+type ShopifyCart = {
+  id: string
+  checkoutUrl: string
+}
+
+const toFirstPartyHandoffUrl = (checkoutUrl: string) => {
+  try {
+    const u = new URL(checkoutUrl)
+    return `${window.location.origin}${u.pathname}${u.search}${u.hash}`
+  } catch {
+    return checkoutUrl
+  }
+}
+
+export const createShopifyCheckoutPort = (): CheckoutPort => {
+  return {
+    getCapabilities() {
+      return {
+        mode: 'redirect',
+        providerLabel: 'Secure checkout',
+        supportsDiscounts: true,
+        supportsBuyerIdentity: true,
+        handoff: { routes: ['/cart/c/*', '/checkouts/*'] },
+      }
+    },
+
+    async beginCheckout() {
+      const stored = __internalShopifyCartKeyStorage.getStoredCartKey()
+      if (!stored) return { mode: 'none', reason: 'No cart exists' }
+
+      const rawCartId = decodeCartKey(stored)
+      const data = await requestJson<{ cart: ShopifyCart }>(`/api/storefront/cart/fetch?id=${encodeURIComponent(rawCartId)}`)
+      const checkoutUrl = data.cart.checkoutUrl
+
+      // Default policy: prefer first-party proxy/handoff URLs when possible.
+      const url = typeof window !== 'undefined' ? toFirstPartyHandoffUrl(checkoutUrl) : checkoutUrl
+      return { mode: 'redirect', url }
+    },
+  }
+}
+
+===== src/domains/platform/storage/supabase.ts
+import { createClient } from '@supabase/supabase-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+const clientCache = new Map<string, SupabaseClient>()
+
+const buildClient = (authToken?: string): SupabaseClient =>
+  createClient(supabaseUrl!, supabaseAnonKey!, {
+    // Separate storage keys to avoid GoTrue instance collisions in the browser.
+    auth: {
+      persistSession: false,
+      storageKey: authToken ? 'sb-lumelle-auth-token' : 'sb-lumelle-auth-anon',
+    },
+    global: authToken
+      ? {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      : undefined,
+  })
+
+export const createSupabaseClient = (authToken?: string) => {
+  if (!supabaseUrl || !supabaseAnonKey) return null
+  const cacheKey = authToken ? `token:${authToken}` : 'anon'
+  const existing = clientCache.get(cacheKey)
+  if (existing) return existing
+  const next = buildClient(authToken)
+  clientCache.set(cacheKey, next)
+  return next
+}
+
+// Singleton base client to reuse across the app.
+export const supabase = createSupabaseClient()
+
+export const isSupabaseConfigured = Boolean(supabase)
+

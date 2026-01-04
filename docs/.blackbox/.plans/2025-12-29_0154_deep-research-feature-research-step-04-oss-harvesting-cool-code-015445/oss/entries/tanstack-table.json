@@ -1,0 +1,10 @@
+{
+  "source": "npm",
+  "package": "@tanstack/react-table",
+  "repo_full_name": "TanStack/table",
+  "repo_url": "https://github.com/TanStack/table",
+  "homepage": "https://tanstack.com/table",
+  "license": "MIT",
+  "latest_version": "8.21.3",
+  "fetched_at": "2025-12-30"
+}

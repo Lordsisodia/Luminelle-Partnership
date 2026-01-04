@@ -1,0 +1,61 @@
+    45	  - Mitigation: implement “manual override” + approval workflow; log every override.
+    46	- Risk: Policy drift across environments.
+    47	  - Mitigation: version policies; include policy version in every decision log.
+    48	
+    49	Top 10 shortlist why: Policy-as-code decision point for approvals; keeps business rules versioned/testable and decoupled from app deploys.
+    50	  - Open Policy Agent (OPA) is an open source, general-purpose policy engine.
+    51	- **retracedhq/retraced** — status=poc, priority=58, owner=Shaan, score=74, stars=426, license=safe, lang=TypeScript, tags=— (https://github.com/retracedhq/retraced) Seeded:seeded rank=21/25 ; score=74 ; stars=426
+    52	POC scoped (auto): Prototype an audit log stream + embeddable UI for our ops actions (refund, exchange, workflow run). Run locally with 1 event producer and verify search/filter.
+    53	
+    54	POC deepening notes (Retraced)
+    55	
+    56	1 day POC plan (steps)
+    57	- Deploy Retraced locally (docker/k8s): bring up API + UI.
+    58	- Define an “event schema” for Lumelle ops actions:
+    59	  - actor (user/service), action (refund_approved, exchange_created, workflow_run), object (order_id/customer_id), metadata, timestamp.
+    60	- Implement a tiny event emitter in a test harness (or script) that sends 10–20 sample events.
+    61	- Verify key UX requirements:
+    62	  - filter/search by `order_id` and `customer_id`
+    63	  - view per-actor activity
+    64	  - view per-action history
+    65	- Confirm retention/storage knobs and export strategy.
+    66	
+    67	Integration touchpoints (APIs / webhooks / DB)
+    68	- API integration:
+    69	  - Our services call Retraced ingestion endpoint when ops actions occur.
+    70	- Webhook linkage:
+    71	  - Shopify webhooks (order/refund/fulfillment) are not the audit source; they are inputs to workflows. Audit should capture *our decisions*.
+    72	- Data storage:
+    73	  - Retraced stores event log; we should also keep a minimal local pointer (event id + order_id) if we need cross-system traceability.
+    74	- UI embedding:
+    75	  - Embed audit UI into admin surfaces (Returns Ops, Support timeline) or deep-link by order/customer.
+    76	
+    77	Risks + mitigations
+    78	- Risk: Product fit mismatch (Retraced is audit logs, not a full customer timeline).
+    79	  - Mitigation: use Retraced for immutable audit; build timeline aggregation separately.
+    80	- Risk: Operational overhead (K8s, storage, backups).
+    81	  - Mitigation: timebox POC to deployment complexity; decide if we want managed alternative later.
+    82	- Risk: Data volume & PII handling.
+    83	  - Mitigation: keep payload minimal, avoid raw PII, store identifiers only; ensure retention policy.
+    84	- Risk: Licensing/maintenance.
+    85	  - Mitigation: verify license + cadence; keep an exit plan (exportable events).
+    86	
+    87	Top 10 shortlist why: Fast way to stand up immutable audit logs + embeddable UI for every ops action (refunds, overrides, workflow runs).
+    88	  - 🔥 A fully open source audit logs service and embeddable UI easily deployed to your own Kubernetes cluster. Brought to you by replicated.com …
+    89	- **illacloud/illa-builder** — status=poc, priority=56, owner=Shaan, score=77, stars=12307, license=safe, lang=TypeScript, tags=admin, cms (https://github.com/illacloud/illa-builder) Admin builder; assess embed + RBAC
+    90	POC scoped (auto): Prototype an internal “Returns Ops” admin tool: list returns, bulk actions, and a detail view fed by mocked API. Focus on speed of building + embedding + RBAC hooks.
+    91	
+    92	POC deepening notes (ILLA Builder)
+    93	
+    94	1 day POC plan (steps)
+    95	- Bring up ILLA locally and get a hello-world internal app running.
+    96	- Create a mocked Returns Ops API (static JSON) with 3 endpoints:
+    97	  - GET `/returns?status=&q=` (list)
+    98	  - POST `/returns/bulk` (approve/deny/store-credit)
+    99	  - GET `/returns/{id}` (detail)
+   100	- Build the “Returns Ops” internal UI:
+   101	  - list view with filters (status, date range), search (order_id/customer_id), and pagination.
+   102	  - bulk-select + bulk action buttons (approve, deny, request more info).
+   103	  - detail view showing timeline and action buttons.
+   104	- Validate RBAC:
+   105	  - define roles: `ops_agent`, `ops_manager`, `admin`

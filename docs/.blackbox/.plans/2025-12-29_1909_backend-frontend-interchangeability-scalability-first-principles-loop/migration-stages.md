@@ -1,0 +1,131 @@
+# Migration Stages (frontend swappable + multi-tenant ready)
+
+Goal of this plan:
+- Backend boundary stays stable while we swap UI and providers across client projects.
+
+Scope guardrail:
+- This file is planning-only; it does not require `src/` changes to exist.
+
+Evidence anchors (repo reality this plan is grounded in):
+- Cloudflare Pages Functions exist as the production API surface under `functions/api/**` (repo references): `docs/.blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots/cloudflare-api-surface.rg.txt`
+- A ports/adapters/runtimes split exists under `src/domains/platform/**`: `docs/.blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots/src-domains-platform-files.find.txt`
+- Cloudflare + functions handler inventory exists: `docs/.blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots/functions-api-handlers.rg.txt`
+- The repo also contains a legacy `api/**` route tree alongside `functions/**`; this must be consolidated or frozen to avoid contract drift:
+  - drift summary: `docs/.blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots/api-vs-functions.summary.txt`
+
+---
+
+## Stage 0 — Freeze the boundary contract (docs + gates)
+
+Objective:
+- “Frontend is swappable” is a measurable claim, not a vibe.
+
+Actions:
+- Maintain contract v1 (ports-aligned): `backend-boundary-contract-v1.md`
+- Keep v0 for history only (superseded): `backend-boundary-contract-v0.md`
+- Maintain invariants + acceptance checks: `artifacts/invariants-and-acceptance.md`
+- Add CLI gates (commands + expected outputs): `acceptance-gates.md`
+
+Acceptance checks:
+- Evidence snapshots exist for the core boundary scans:
+  - adapter import scans: `artifacts/snapshots/boundary-adapter-imports.rg.txt`, `artifacts/snapshots/boundary-adapter-imports.ui-client.rg.txt`
+  - vendor leak scan output exists: `artifacts/snapshots/check-vendor-leaks.txt`
+
+---
+
+## Stage 1 — Make provider boundaries enforceable (IDs + capabilities)
+
+Objective:
+- UI/product domains never contain provider identifiers or provider-specific assumptions.
+
+Actions:
+- Drive all vendor IDs behind adapters (e.g. Shopify GIDs in commerce adapters only).
+- Make checkout/payment UI capabilities-driven (no “Shopify-only” branching in shared UI).
+
+Acceptance checks:
+- Vendor leak scan is “clean” (or at least monotonically shrinking) and becomes a hard gate later:
+  - scan output: `artifacts/snapshots/check-vendor-leaks.txt`
+  - coupling evidence snapshot: `artifacts/snapshots/coupling-shopify-gid-matches.txt`
+
+---
+
+## Stage 2 — Standardize `/api/*` as the stable backend boundary (Cloudflare)
+
+Objective:
+- Any frontend (current UI, future UI, client-specific UIs) only depends on your `/api/*` contract.
+
+Actions:
+- Ensure every user-facing flow is reachable via `/api/*` endpoints aligned to ports.
+- Ensure stable error semantics for all endpoints (mapped to `PortError` codes).
+- Freeze and then remove legacy backend surfaces that can drift the contract:
+  - treat `functions/api/**` as canonical for this plan
+  - treat `api/**` as legacy until proven unused, then delete/archive
+
+Acceptance checks:
+- API surface is implemented in `functions/api/**` (inventory evidence): `artifacts/snapshots/functions-api-dir.ls.txt`
+- API handlers exist (route inventory): `artifacts/snapshots/functions-api-handlers.rg.txt`
+- Drift is quantified and shrinking over time (eventual target: `api_only=0`):
+  - `artifacts/snapshots/api-vs-functions.summary.txt`
+
+---
+
+## Stage 3 — Introduce tenancy tables (no behavior change yet)
+
+Objective:
+- Store per-tenant configuration (domain + integrations) without changing single-tenant behavior.
+
+Actions:
+- Add tables in Supabase (planning-level here; implementation later):
+  - `tenants`
+  - `tenant_domains`
+  - `tenant_integrations` (Shopify today; Stripe later)
+
+Acceptance checks:
+- Tenancy resolution rules exist (deterministic + cache-safe): `tenancy-context-rules.md`
+
+---
+
+## Stage 4 — Tenant-aware resolution for integrations (still single tenant)
+
+Objective:
+- Replace “global env” for provider config with “tenant config lookup” while keeping behavior identical for the first tenant.
+
+Actions:
+- Cloudflare edge resolves tenant by host.
+- Backend boundary uses tenant integration config to construct provider adapters.
+
+Acceptance checks:
+- The provider selection pattern remains centralized in platform runtimes:
+  - runtime inventory: `artifacts/snapshots/platform-runtime-files.txt`
+
+---
+
+## Stage 5 — Onboard tenant #2 (prove multi-tenant)
+
+Objective:
+- Two tenants can run concurrently without cross-tenant leaks.
+
+Actions:
+- Follow the runbook: `tenant-2-onboarding-runbook.md`
+
+Acceptance checks:
+- Tenancy “deny on mismatch” gates are explicitly defined and testable from CLI:
+  - gate definitions: `acceptance-gates.md`
+
+---
+
+## Stage 6 — Client-project modularity packaging (the “swap parts” payoff)
+
+Objective:
+- You can ship client projects by swapping:
+  - UI layer (branding + pages + components)
+  - provider adapters (Shopify now; Stripe or other commerce later)
+  - tenant config (domain + integrations)
+  without rewriting the domain logic.
+
+Actions:
+- Adopt the modularity blueprint: `client-project-modularity-blueprint.md`
+
+Acceptance checks:
+- Boundaries are enforceable by scans (ports/adapters separation) and by API contract tests:
+  - `acceptance-gates.md`

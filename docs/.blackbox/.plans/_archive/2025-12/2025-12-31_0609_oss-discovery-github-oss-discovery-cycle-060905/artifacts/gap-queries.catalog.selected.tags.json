@@ -1,0 +1,13 @@
+{
+  "excluded_tags": [],
+  "generated_at_utc": "2025-12-30T23:09:55Z",
+  "max_tags": 3,
+  "out": ".blackbox/.plans/2025-12-31_0609_oss-discovery-github-oss-discovery-cycle-060905/artifacts/gap-queries.catalog.selected.md",
+  "selected_tags": [
+    "returns"
+  ],
+  "source": ".blackbox/.plans/2025-12-31_0609_oss-discovery-github-oss-discovery-cycle-060905/artifacts/gap-queries.catalog.md",
+  "start_index": 0,
+  "total_sections_after_exclude": 1,
+  "wrap": true
+}

@@ -18,6 +18,7 @@ app/dist/
 .env.*
 !.env.example
 .vercel
+.tmp/
 
 # component-library local installs
 components-library/node_modules/
@@ -27,3 +28,8 @@ components-library/package-lock.json
 # Nested repositories
 lumelle/
 components-library/
+
+# Agent / scratch artifacts
+**/.blackbox/.local/
+**/.blackbox/.cache/
+**/.blackbox/*.log

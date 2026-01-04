@@ -1,0 +1,11 @@
+../functions/api/exports/orders.ts:3:import { requireInternalAuth } from '../../_lib/internalAuth'
+../functions/api/exports/orders.ts:30:  const auth = requireInternalAuth(request, env)
+../functions/api/exports/orders.ts:31:  if (!auth.ok) return text('Unauthorized', { status: auth.status })
+../functions/api/admin/orders/list.ts:122:  if (status === 'pending') query = query.in('financial_status', ['pending', 'authorized'])
+../functions/api/admin/sections/update.ts:2:import { requireInternalAuth } from '../../../_lib/internalAuth'
+../functions/api/admin/sections/update.ts:9:  const auth = requireInternalAuth(request, env)
+../functions/api/exports/customers.ts:3:import { requireInternalAuth } from '../../_lib/internalAuth'
+../functions/api/exports/customers.ts:18:  const auth = requireInternalAuth(request, env)
+../functions/api/exports/customers.ts:19:  if (!auth.ok) return text('Unauthorized', { status: auth.status })
+../functions/api/admin/sections/get.ts:2:import { requireInternalAuth } from '../../../_lib/internalAuth'
+../functions/api/admin/sections/get.ts:9:  const auth = requireInternalAuth(request, env)

@@ -1,0 +1,391 @@
+{
+  "candidates": [
+    {
+      "description": "Papercups chat widget",
+      "forks": 105,
+      "full_name": "papercups-io/chat-widget",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=268, updated=2025-12-26T03:44:39Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 268,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "chat",
+        "chat-widget",
+        "react"
+      ],
+      "updated_at": "2025-12-26T03:44:39Z",
+      "url": "https://github.com/papercups-io/chat-widget"
+    },
+    {
+      "description": "AnythingLLM Embed widget submodule for the main AnythingLLM application",
+      "forks": 83,
+      "full_name": "Mintplex-Labs/anythingllm-embed",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=142, updated=2025-12-25T14:19:09Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 142,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "ai-assistant",
+        "ai-chatbot",
+        "anythingllm",
+        "chat-widget",
+        "customer-support-ai",
+        "customer-support-assistant",
+        "gpt",
+        "javascript",
+        "llm",
+        "llm-chatbot",
+        "ollama",
+        "rag",
+        "rag-chatbot"
+      ],
+      "updated_at": "2025-12-25T14:19:09Z",
+      "url": "https://github.com/Mintplex-Labs/anythingllm-embed"
+    },
+    {
+      "description": "Firefox/Chrome Extension to provide bullet chatting (Danmaku) on YouTube Live, like niconico or bilibili.",
+      "forks": 3,
+      "full_name": "ys-j/YoutubeLiveChatFlusher",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=110, updated=2025-12-28T01:08:13Z); license=15/15 (MPL-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 110,
+      "tags": [],
+      "topics": [
+        "chrome-extension",
+        "danmaku",
+        "firefox-addon",
+        "firefox-extension",
+        "livechat",
+        "livestream",
+        "webextension",
+        "youtube"
+      ],
+      "updated_at": "2025-12-28T01:08:13Z",
+      "url": "https://github.com/ys-j/YoutubeLiveChatFlusher"
+    },
+    {
+      "description": "A ionic v5 and Angular 8 desktop and mobile chat",
+      "forks": 96,
+      "full_name": "chat21/chat21-ionic",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=84, updated=2025-07-09T02:26:05Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 84,
+      "tags": [],
+      "topics": [
+        "chat",
+        "customer-service",
+        "firebase",
+        "instant-messaging",
+        "ionic3",
+        "livechat",
+        "mqtt",
+        "rabbitmq",
+        "realtime"
+      ],
+      "updated_at": "2025-07-09T02:26:05Z",
+      "url": "https://github.com/chat21/chat21-ionic"
+    },
+    {
+      "description": "Official Channel Web SDK Loader",
+      "forks": 3,
+      "full_name": "channel-io/channel-web-sdk-loader",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=78, updated=2025-10-22T08:19:25Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 72,
+      "stars": 78,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "branding",
+        "channel",
+        "channel-io",
+        "channel-talk",
+        "channel-web-sdk",
+        "chat",
+        "chat-application",
+        "chatbot",
+        "crm",
+        "crm-platform",
+        "customer-relationship-management",
+        "customer-service",
+        "japanese-language",
+        "korean-language",
+        "live-chat",
+        "live-chat-sdk",
+        "marketing-tools",
+        "messenger",
+        "sales",
+        "user-management"
+      ],
+      "updated_at": "2025-10-22T08:19:25Z",
+      "url": "https://github.com/channel-io/channel-web-sdk-loader"
+    },
+    {
+      "description": "A privacy-first, self-hosted, fully open source personal knowledge management software, written in typescript and golang.",
+      "forks": 2494,
+      "full_name": "siyuan-note/siyuan",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=40191, updated=2025-12-31T06:34:33Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 40191,
+      "tags": [
+        "content"
+      ],
+      "topics": [
+        "anki",
+        "chatgpt",
+        "deepseek",
+        "electron",
+        "evernote",
+        "knowledge-base",
+        "local-first",
+        "markdown",
+        "note-taking",
+        "notes-app",
+        "notion",
+        "obsidian",
+        "ocr",
+        "ollama",
+        "openai",
+        "pdf",
+        "s3",
+        "self-hosted",
+        "webdav"
+      ],
+      "updated_at": "2025-12-31T06:34:33Z",
+      "url": "https://github.com/siyuan-note/siyuan"
+    },
+    {
+      "description": "Build your personal knowledge base with Trilium Notes",
+      "forks": 2241,
+      "full_name": "TriliumNext/Trilium",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=33788, updated=2025-12-31T06:01:27Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 33788,
+      "tags": [],
+      "topics": [
+        "electron",
+        "electron-app",
+        "knowledge-base",
+        "knowledge-graph",
+        "knowledge-management",
+        "knowledge-management-graph",
+        "local-first",
+        "note-managment",
+        "note-taker",
+        "note-taking",
+        "notebook",
+        "notes",
+        "notes-app",
+        "personal-knowledge-base",
+        "personal-wiki",
+        "scriptable",
+        "self-hosted",
+        "self-hosting",
+        "wiki"
+      ],
+      "updated_at": "2025-12-31T06:01:27Z",
+      "url": "https://github.com/TriliumNext/Trilium"
+    },
+    {
+      "description": "A Django application to manage tickets for an internal helpdesk. Formerly known as Jutda Helpdesk.",
+      "forks": 674,
+      "full_name": "django-helpdesk/django-helpdesk",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=1652, updated=2025-12-23T09:22:57Z); license=15/15 (BSD-3-Clause); time_to_value=7/10",
+      "score": 68,
+      "stars": 1652,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "bugs",
+        "cases",
+        "django",
+        "hacktoberfest",
+        "hacktoberfest2020",
+        "helpdesk",
+        "incidents",
+        "issues",
+        "python",
+        "servicedesk",
+        "support",
+        "tickets",
+        "tracker"
+      ],
+      "updated_at": "2025-12-23T09:22:57Z",
+      "url": "https://github.com/django-helpdesk/django-helpdesk"
+    },
+    {
+      "description": "BYCEPS is a self-hosted web platform to run LAN parties. Multiple brands, multiple sites, advanced ticketing, seating, native discussion board and shop, intranet mode, etc.",
+      "forks": 28,
+      "full_name": "byceps/byceps",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=104, updated=2025-12-25T23:02:13Z); license=15/15 (BSD-3-Clause); time_to_value=5/10",
+      "score": 66,
+      "stars": 104,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "byceps",
+        "forums",
+        "lan-party",
+        "lanparty",
+        "multi-brand",
+        "seating",
+        "shop",
+        "ticketing",
+        "user-management-system"
+      ],
+      "updated_at": "2025-12-25T23:02:13Z",
+      "url": "https://github.com/byceps/byceps"
+    },
+    {
+      "description": "A highly customizable, animated roadmap timeline component built with shadcn/ui, React, Framer Motion, and Recharts.",
+      "forks": 20,
+      "full_name": "aliezzahn/event-timeline-roadmap",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=70, updated=2025-12-27T08:51:29Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 70,
+      "tags": [
+        "analytics"
+      ],
+      "topics": [
+        "awesome",
+        "awesome-shadcn",
+        "events",
+        "framer-motion",
+        "gantt",
+        "kanban",
+        "nextjs",
+        "react",
+        "recharts",
+        "recharts-js",
+        "roadmap",
+        "shadcn-ui",
+        "tailwind",
+        "timeline",
+        "typescript"
+      ],
+      "updated_at": "2025-12-27T08:51:29Z",
+      "url": "https://github.com/aliezzahn/event-timeline-roadmap"
+    },
+    {
+      "description": "AddChat Laravel is a Laravel chat package. Live chat widget for Laravel that also includes multi-user chat, group permissions, customer support chat & more.",
+      "forks": 31,
+      "full_name": "classiebit/addchat-laravel",
+      "language": "CSS",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (CSS); maintenance=18/20 (stars=138, updated=2025-10-30T16:08:37Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 60,
+      "stars": 138,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "addchat-laravel",
+        "addchat-lite",
+        "chat",
+        "chat-widget",
+        "chatapp",
+        "chatbot",
+        "css-flexbox",
+        "customer-support",
+        "helpdesk",
+        "laravel",
+        "laravel-chat-package",
+        "laravel-chat-widget",
+        "laravel-website",
+        "live-chat",
+        "relatime"
+      ],
+      "updated_at": "2025-10-30T16:08:37Z",
+      "url": "https://github.com/classiebit/addchat-laravel"
+    },
+    {
+      "description": "[UPDATED] A Server-less Beautiful Gooey / Material Design Slack Chat Web Integrating Widget.",
+      "forks": 52,
+      "full_name": "rotatordisk92/react-slack-chat",
+      "language": "SCSS",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (SCSS); maintenance=20/20 (stars=156, updated=2025-12-19T16:01:48Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 52,
+      "stars": 156,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "bot",
+        "chat-widget",
+        "custom-hook",
+        "material",
+        "react-chat",
+        "react-slack-chat",
+        "slack"
+      ],
+      "updated_at": "2025-12-19T16:01:48Z",
+      "url": "https://github.com/rotatordisk92/react-slack-chat"
+    },
+    {
+      "description": "\u76f4\u64ad\u793c\u7269\u52a8\u753b \u9001\u8d5e\u9001\u793c\u7269\u52a8\u753b \u4eff\u6620\u5ba2\u793c\u7269\u52a8\u753b\u4fa7\u680f\u5f39\u51fa\u9001\u82b1\u4eba\u548c\u793c\u7269\u4ee5\u53cax1 x2 x3\u6548\u679c\uff0c\u652f\u6301\u961f\u5217 \u6392\u5e8f",
+      "forks": 16,
+      "full_name": "lozn00/giftanim",
+      "language": "Java",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=18/20 (stars=137, updated=2025-11-13T13:57:18Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 50,
+      "stars": 137,
+      "tags": [],
+      "topics": [
+        "gift",
+        "gift-cards",
+        "live",
+        "livechat",
+        "livegift",
+        "livelayout"
+      ],
+      "updated_at": "2025-11-13T13:57:18Z",
+      "url": "https://github.com/lozn00/giftanim"
+    }
+  ],
+  "count": 13,
+  "generated_at_utc": "2025-12-31T06:58:37Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-31_1341_oss-discovery-github-oss-discovery-cycle-134147/oss/entries"
+  }
+}

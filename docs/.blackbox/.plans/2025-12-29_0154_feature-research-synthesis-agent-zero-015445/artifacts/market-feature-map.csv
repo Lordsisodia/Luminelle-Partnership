@@ -1,0 +1,118 @@
+rank,feature_label,mentions,example_1,example_2,example_3,normalized_key
+1,Pricing + product packaging captured,2,Gorgias (core) — Pricing + product packaging captured,ShipStation (core) — Pricing/product packaging captured (variants),,pricing product packaging captured
+2,Pricing/plans page exists (packaging signal),2,Yotpo (core) — Pricing/plans page exists (packaging signal),Segment (adjacent) (adjacent) — Pricing plans page exists (packaging signal),,pricing plans page exists
+3,Platform primitives breadth,2,Firebase (adjacent) (adjacent) — Platform primitives breadth,Supabase (adjacent) (adjacent) — Platform primitives breadth,,platform primitives breadth
+4,"“All-in-one” admin surface (products, orders, customers, settings)",1,"Shopify (core) — “All-in-one” admin surface (products, orders, customers, settings)",,,all one admin surface
+5,POS features (from captured variant page),1,Shopify (core) — POS features (from captured variant page),,,pos features
+6,Strong onboarding + plan/pricing structure,1,Shopify (core) — Strong onboarding + plan/pricing structure,,,strong onboarding plan pricing structure
+7,Platform-led approach with pricing/plan packaging,1,BigCommerce (core) — Platform-led approach with pricing/plan packaging,,,platform led approach pricing plan packaging
+8,Focus on merchant operations tooling (admin-first surface),1,BigCommerce (core) — Focus on merchant operations tooling (admin-first surface),,,focus merchant operations tooling
+9,Ecosystem-first approach (extensions marketplace pattern),1,WooCommerce (core) — Ecosystem-first approach (extensions marketplace pattern),,,ecosystem first approach
+10,Merchant-friendly packaging around store management,1,WooCommerce (core) — Merchant-friendly packaging around store management,,,merchant friendly packaging around store management
+11,Developer positioning (“flexible commerce platform”),1,Medusa (core) — Developer positioning (“flexible commerce platform”),,,developer positioning
+12,"OSS adoption patterns (docs, examples, modularity)",1,"Medusa (core) — OSS adoption patterns (docs, examples, modularity)",,,oss adoption patterns
+13,API-first positioning (GraphQL-first),1,Saleor (core) — API-first positioning (GraphQL-first),,,api first positioning
+14,Composable/headless messaging,1,Saleor (core) — Composable/headless messaging,,,composable headless messaging
+15,Centralized “operations on a single platform” positioning,1,AfterShip (core) — Centralized “operations on a single platform” positioning,,,centralized operations single platform positioning
+16,Developer docs + APIs (captured docs variant),1,AfterShip (core) — Developer docs + APIs (captured docs variant),,,developer docs apis
+17,"Post-purchase focus (reduce costs, streamline CX)",1,"AfterShip (core) — Post-purchase focus (reduce costs, streamline CX)",,,post purchase focus
+18,Returns portal workflow (customer-facing + admin workflow),1,Loop Returns (core) — Returns portal workflow (customer-facing + admin workflow),,,returns portal workflow
+19,Pricing/feature packaging (captured variants),1,Loop Returns (core) — Pricing/feature packaging (captured variants),,,pricing feature packaging
+20,Subscription management focus (from homepage/feature variants),1,Recharge (core) — Subscription management focus (from homepage/feature variants),,,subscription management focus
+21,Strong pricing + packaging,1,Recharge (core) — Strong pricing + packaging,,,strong pricing packaging
+22,Ecommerce-focused helpdesk messaging,1,Gorgias (core) — Ecommerce-focused helpdesk messaging,,,ecommerce focused helpdesk messaging
+23,"Shipping ops workflow focus (labels, carriers, fulfillment)",1,"ShipStation (core) — Shipping ops workflow focus (labels, carriers, fulfillment)",,,shipping ops workflow focus
+24,Composable/headless positioning (enterprise),1,commercetools (core) — Composable/headless positioning (enterprise),,,composable headless positioning
+25,Clear “pricing plans” page (packaging signal),1,commercetools (core) — Clear “pricing plans” page (packaging signal),,,clear pricing plans page
+26,Developer docs surface exists (integration + API-first signal),1,commercetools (core) — Developer docs surface exists (integration + API-first signal),,,developer docs surface exists
+27,“Connected commerce” / platform backbone positioning (stack modernization),1,VTEX (core) — “Connected commerce” / platform backbone positioning (stack modernization),,,connected commerce platform backbone positioning
+28,AI + automation-forward positioning,1,Salesforce Commerce Cloud (core) — AI + automation-forward positioning,,,ai automation forward positioning
+29,Emphasis on flexibility (platform breadth vs single workflow),1,Salesforce Commerce Cloud (core) — Emphasis on flexibility (platform breadth vs single workflow),,,emphasis flexibility
+30,“Scale + 2-day shipping” fulfillment positioning,1,ShipBob (core) — “Scale + 2-day shipping” fulfillment positioning,,,scale 2 day shipping fulfillment positioning
+31,Inventory + shipments management surfaces,1,ShipBob (core) — Inventory + shipments management surfaces,,,inventory shipments management surfaces
+32,Pricing page exists (quote/custom pricing flow),1,ShipBob (core) — Pricing page exists (quote/custom pricing flow),,,pricing page exists
+33,AI Agents positioning,1,Zendesk (core) — AI Agents positioning,,,ai agents positioning
+34,Omnichannel support framing (chat/email/voice),1,Zendesk (core) — Omnichannel support framing (chat/email/voice),,,omnichannel support framing
+35,Pricing plans start point is visible (packaging signal),1,Zendesk (core) — Pricing plans start point is visible (packaging signal),,,pricing plans start point is visible
+36,“AI Agent + Copilot” bundling inside pricing plans,1,Intercom (core) — “AI Agent + Copilot” bundling inside pricing plans,,,ai agent copilot bundling inside pricing plans
+37,Strong positioning around handling complex queries,1,Intercom (core) — Strong positioning around handling complex queries,,,strong positioning around handling complex queries
+38,Loyalty + reviews positioning,1,Yotpo (core) — Loyalty + reviews positioning,,,loyalty reviews positioning
+39,Returns software + reverse logistics framing,1,Happy Returns (core) — Returns software + reverse logistics framing,,,returns software reverse logistics framing
+40,Dedicated docs surface exists (integration signal),1,Happy Returns (core) — Dedicated docs surface exists (integration signal),,,dedicated docs surface exists
+41,Photo reviews/UGC positioning (conversion + trust),1,Loox (core) — Photo reviews/UGC positioning (conversion + trust),,,photo reviews ugc positioning
+42,Likely moderation and incentives workflows (common in category),1,Loox (core) — Likely moderation and incentives workflows (common in category),,,likely moderation incentives workflows
+43,Audience segmentation + campaign builder positioning,1,Mailchimp (core) — Audience segmentation + campaign builder positioning,,,audience segmentation campaign builder positioning
+44,Pricing/packaging surfaced via variants,1,Mailchimp (core) — Pricing/packaging surfaced via variants,,,pricing packaging surfaced variants
+45,Classic commerce platform positioning,1,PrestaShop (core) — Classic commerce platform positioning,,,classic commerce platform positioning
+46,WMS/warehouse operations framing,1,ShipHero (core) — WMS/warehouse operations framing,,,wms warehouse operations framing
+47,OSS commerce platform framing,1,Spree Commerce (core) — OSS commerce platform framing,,,oss commerce platform framing
+48,Omnichannel baseline (POS + online),1,Square Online (core) — Omnichannel baseline (POS + online),,,omnichannel baseline
+49,OSS commerce positioning,1,Sylius (core) — OSS commerce positioning,,,oss commerce positioning
+50,Embeddable commerce framing (plugin/embed patterns),1,Ecwid (core) — Embeddable commerce framing (plugin/embed patterns),,,embeddable commerce framing
+51,OSS commerce framing,1,OpenCart (core) — OSS commerce framing,,,oss commerce framing
+52,Commerce + ecosystem positioning,1,Shopware (core) — Commerce + ecosystem positioning,,,commerce ecosystem positioning
+53,Retail/omnichannel framing (inventory + store operations),1,Lightspeed eCom (core) — Retail/omnichannel framing (inventory + store operations),,,retail omnichannel framing
+54,Personalization + merchandising positioning,1,Nosto (core) — Personalization + merchandising positioning,,,personalization merchandising positioning
+55,Search/discovery positioning (CRO-aligned),1,Klevu (core) — Search/discovery positioning (CRO-aligned),,,search discovery positioning
+56,Enterprise subscriptions framing,1,Ordergroove (core) — Enterprise subscriptions framing,,,enterprise subscriptions framing
+57,Support suite positioning,1,Re:amaze (core) — Support suite positioning,,,support suite positioning
+58,Shared inbox + support workflow focus,1,Help Scout (core) — Shared inbox + support workflow focus,,,shared inbox support workflow focus
+59,“customer timeline” / unified profile patterns (common in CX suites),1,Kustomer (core) — “customer timeline” / unified profile patterns (common in CX suites),,,customer timeline unified profile patterns
+60,Lifecycle/journeys automation positioning,1,Attentive (core) — Lifecycle/journeys automation positioning,,,lifecycle journeys automation positioning
+61,Returns portal positioning inside a larger post-purchase suite,1,AfterShip Returns (core) — Returns portal positioning inside a larger post-purchase suite,,,returns portal positioning inside larger post purchase suite
+62,Fulfillment/warehouse ops positioning,1,ShipMonk (core) — Fulfillment/warehouse ops positioning,,,fulfillment warehouse ops positioning
+63,Analytics + “build/test/measure/ship” positioning,1,PostHog (adjacent) (adjacent) — Analytics + “build/test/measure/ship” positioning,,,analytics build test measure ship positioning
+64,The idea of keeping experimentation + flags + analytics close together (one control plane),1,PostHog (adjacent) (adjacent) — The idea of keeping experimentation + flags + analytics close together (one control plane),,,idea keeping experimentation flags analytics close together
+65,“Runtime control plane for features” framing,1,LaunchDarkly (adjacent) (adjacent) — “Runtime control plane for features” framing,,,runtime control plane features framing
+66,Pricing/packaging around feature management (captured variants),1,LaunchDarkly (adjacent) (adjacent) — Pricing/packaging around feature management (captured variants),,,pricing packaging around feature management
+67,"OSS flag server patterns (environments, strategies)",1,"Unleash (adjacent) (adjacent) — OSS flag server patterns (environments, strategies)",,,oss flag server patterns
+68,Flags + remote config control-plane patterns,1,Flagsmith (adjacent) (adjacent) — Flags + remote config control-plane patterns,,,flags remote config control plane patterns
+69,Experimentation/feature management product surface (captured variants),1,GrowthBook (adjacent) (adjacent) — Experimentation/feature management product surface (captured variants),,,experimentation feature management product surface
+70,Content modeling + admin editing patterns,1,Strapi (adjacent) (adjacent) — Content modeling + admin editing patterns,,,content modeling admin editing patterns
+71,Data browsing/admin UI patterns,1,Directus (adjacent) (adjacent) — Data browsing/admin UI patterns,,,data browsing admin ui patterns
+72,Dev-first CMS positioning,1,Payload CMS (adjacent) (adjacent) — Dev-first CMS positioning,,,dev first cms positioning
+73,"Workflow automation UX mental model (nodes, triggers, actions)",1,"n8n (adjacent) (adjacent) — Workflow automation UX mental model (nodes, triggers, actions)",,,workflow automation ux mental model
+74,Self-serve dashboards + filtering patterns,1,Metabase (adjacent) (adjacent) — Self-serve dashboards + filtering patterns,,,self serve dashboards filtering patterns
+75,Privacy-first positioning (explicitly contrasted with Google Analytics),1,Matomo (adjacent) (adjacent) — Privacy-first positioning (explicitly contrasted with Google Analytics),,,privacy first positioning
+76,Features list page exists (strong breadth signal),1,Matomo (adjacent) (adjacent) — Features list page exists (strong breadth signal),,,features list page exists
+77,Pricing compare page exists (cloud vs on-prem packaging signal),1,Matomo (adjacent) (adjacent) — Pricing compare page exists (cloud vs on-prem packaging signal),,,pricing compare page exists
+78,“Shows everything users do” positioning (capture breadth),1,Heap (adjacent) (adjacent) — “Shows everything users do” positioning (capture breadth),,,shows everything users do positioning
+79,Emphasis on faster insights / discovery,1,Heap (adjacent) (adjacent) — Emphasis on faster insights / discovery,,,emphasis faster insights discovery
+80,Collect / clean / activate framing (pipeline + activation),1,Segment (adjacent) (adjacent) — Collect / clean / activate framing (pipeline + activation),,,collect clean activate framing
+81,Product page exists (surface for “destinations” style configuration),1,Segment (adjacent) (adjacent) — Product page exists (surface for “destinations” style configuration),,,product page exists
+82,Pipeline orientation (sources → transformations → destinations),1,RudderStack (adjacent) (adjacent) — Pipeline orientation (sources → transformations → destinations),,,pipeline orientation
+83,OSS-ish positioning (self-host posture),1,RudderStack (adjacent) (adjacent) — OSS-ish positioning (self-host posture),,,oss ish positioning
+84,Clear “data viz + exploration” positioning,1,Apache Superset (adjacent) (adjacent) — Clear “data viz + exploration” positioning,,,clear data viz exploration positioning
+85,Docs surface exists (even if not via a neat /docs page),1,Apache Superset (adjacent) (adjacent) — Docs surface exists (even if not via a neat /docs page),,,docs surface exists
+86,Combined content + testing + personalization narrative,1,Optimizely (adjacent) (adjacent) — Combined content + testing + personalization narrative,,,combined content testing personalization narrative
+87,Pricing exists (customized pricing),1,Optimizely (adjacent) (adjacent) — Pricing exists (customized pricing),,,pricing exists
+88,Explicit experimentation + CRO positioning,1,VWO (adjacent) (adjacent) — Explicit experimentation + CRO positioning,,,explicit experimentation cro positioning
+89,Features suite page exists (testing + understand customers + personalize + measure),1,VWO (adjacent) (adjacent) — Features suite page exists (testing + understand customers + personalize + measure),,,features suite page exists
+90,Pricing supports add-on modularity (start with one product),1,VWO (adjacent) (adjacent) — Pricing supports add-on modularity (start with one product),,,pricing supports add modularity
+91,Feature management + experimentation surface (product page captured),1,Split.io (adjacent) (adjacent) — Feature management + experimentation surface (product page captured),,,feature management experimentation surface
+92,Pricing exists under Harness (packaging signal),1,Split.io (adjacent) (adjacent) — Pricing exists under Harness (packaging signal),,,pricing exists under harness
+93,Strong “reasonable price / unlimited seats” packaging signal,1,ConfigCat (adjacent) (adjacent) — Strong “reasonable price / unlimited seats” packaging signal,,,strong reasonable price unlimited seats packaging signal
+94,Pricing page clearly describes “all features included; limits differ”,1,ConfigCat (adjacent) (adjacent) — Pricing page clearly describes “all features included; limits differ”,,,pricing page clearly describes all features included limits differ
+95,Large connector ecosystem (value = breadth),1,Airbyte (adjacent) (adjacent) — Large connector ecosystem (value = breadth),,,large connector ecosystem
+96,Sync status / failures are core UX surfaces (common in ELT tools),1,Airbyte (adjacent) (adjacent) — Sync status / failures are core UX surfaces (common in ELT tools),,,sync status failures are core ux surfaces
+97,“backend primitives” suite framing,1,Appwrite (adjacent) (adjacent) — “backend primitives” suite framing,,,backend primitives suite framing
+98,Strong onboarding + console-driven setup,1,Firebase (adjacent) (adjacent) — Strong onboarding + console-driven setup,,,strong onboarding console driven setup
+99,Workflow automation positioning (dev-friendly),1,Pipedream (adjacent) (adjacent) — Workflow automation positioning (dev-friendly),,,workflow automation positioning
+100,Lightweight “backend in a file/binary” posture,1,PocketBase (adjacent) (adjacent) — Lightweight “backend in a file/binary” posture,,,lightweight backend file binary posture
+101,Good fit for sidecar/prototype modules,1,PocketBase (adjacent) (adjacent) — Good fit for sidecar/prototype modules,,,good fit sidecar prototype modules
+102,OSS ELT framework positioning,1,Meltano (adjacent) (adjacent) — OSS ELT framework positioning,,,oss elt framework positioning
+103,Strong dashboard UX + developer onboarding,1,Supabase (adjacent) (adjacent) — Strong dashboard UX + developer onboarding,,,strong dashboard ux developer onboarding
+104,Connector breadth and “easy automation” posture,1,Zapier (adjacent) (adjacent) — Connector breadth and “easy automation” posture,,,connector breadth easy automation posture
+105,Strong publishing lifecycle UX patterns,1,Webflow (adjacent) (adjacent) — Strong publishing lifecycle UX patterns,,,strong publishing lifecycle ux patterns
+106,Enterprise content ops framing (models + workflows),1,Contentful (adjacent) (adjacent) — Enterprise content ops framing (models + workflows),,,enterprise content ops framing
+107,Content modeling + workflows emphasis,1,Sanity (adjacent) (adjacent) — Content modeling + workflows emphasis,,,content modeling workflows emphasis
+108,Editorial workflow emphasis,1,Prismic (adjacent) (adjacent) — Editorial workflow emphasis,,,editorial workflow emphasis
+109,Visual editing + structured content positioning,1,Storyblok (adjacent) (adjacent) — Visual editing + structured content positioning,,,visual editing structured content positioning
+110,Visual editing + page building positioning,1,Builder.io (adjacent) (adjacent) — Visual editing + page building positioning,,,visual editing page building positioning
+111,Durable workflow engine positioning,1,Temporal (adjacent) (adjacent) — Durable workflow engine positioning,,,durable workflow engine positioning
+112,OSS + self-host analytics framing,1,Umami (adjacent) (adjacent) — OSS + self-host analytics framing,,,oss self host analytics framing
+113,Run/test/validate mental model,1,dbt (adjacent) (adjacent) — Run/test/validate mental model,,,run test validate mental model
+114,Experimentation workflow positioning,1,Convert.com (adjacent) (adjacent) — Experimentation workflow positioning,,,experimentation workflow positioning
+115,Visual automation builder patterns,1,Make (Integromat) (adjacent) (adjacent) — Visual automation builder patterns,,,visual automation builder patterns
+116,Feature management platform positioning,1,Split.io (adjacent) (adjacent) — Feature management platform positioning,,,feature management platform positioning
+117,Pricing under Harness + product surfaces captured,1,Split.io (adjacent) (adjacent) — Pricing under Harness + product surfaces captured,,,pricing under harness product surfaces captured

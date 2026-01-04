@@ -1,0 +1,79 @@
+../src/content/legal.ts:25:Payouts are issued weekly via Stripe using the bank information you provide in onboarding.`,
+../functions/api/payments/intent/create.ts:3:import { coerceStripeSource } from '../../../_lib/payments/stripe'
+../functions/api/payments/intent/create.ts:28:  if (!env.STRIPE_SECRET_KEY) {
+../functions/api/payments/intent/create.ts:30:    return json({ error: 'Stripe is not configured (missing STRIPE_SECRET_KEY).' }, { status: 500 })
+../functions/api/payments/intent/create.ts:58:  // Stable non-PII tag for Stripe Dashboard filtering.
+../functions/api/payments/intent/create.ts:59:  params.set('metadata[source]', coerceStripeSource(body?.source))
+../functions/api/payments/intent/create.ts:69:  // If a run id is provided by the client, keep it visible in Stripe Dashboard for correlation.
+../functions/api/payments/intent/create.ts:76:  const res = await fetch('https://api.stripe.com/v1/payment_intents', {
+../functions/api/payments/intent/create.ts:79:      authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+../functions/api/payments/intent/create.ts:88:    return json({ error: raw || `Stripe ${res.status}` }, { status: 502 })
+../functions/api/payments/intent/create.ts:91:  const stripeJson = raw ? (JSON.parse(raw) as any) : null
+../functions/api/payments/intent/create.ts:92:  const clientSecret = stripeJson?.client_secret
+../functions/api/payments/intent/create.ts:94:    return json({ error: 'Stripe response missing client_secret.' }, { status: 502 })
+../functions/_lib/types.ts:57:  // Stripe (server-side; future)
+../functions/_lib/types.ts:58:  STRIPE_SECRET_KEY?: string
+../functions/_lib/payments/stripe.ts:1:export const STRIPE_ALLOWED_SOURCES = new Set([
+../functions/_lib/payments/stripe.ts:7:export const coerceStripeSource = (raw: unknown): string => {
+../functions/_lib/payments/stripe.ts:9:  return STRIPE_ALLOWED_SOURCES.has(source) ? source : 'lumelle.account.payments.dev'
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:10:import { StripeDevEmbeddedPaymentPanel } from '@client/account/ui/components/StripeDevEmbeddedPaymentPanel'
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:18:  const stripePublishableKey = env('STRIPE_PUBLISHABLE_KEY')
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:19:  const stripeDashboardBase = (() => {
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:20:    const key = (stripePublishableKey ?? '').trim()
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:21:    if (!key) return 'https://dashboard.stripe.com'
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:22:    return key.startsWith('pk_test_') ? 'https://dashboard.stripe.com/test' : 'https://dashboard.stripe.com'
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:24:  const stripeModeLabel = stripeDashboardBase.includes('/test') ? 'test' : 'live'
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:25:  const stripeKeyPrefix = (() => {
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:26:    const key = (stripePublishableKey ?? '').trim()
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:53:      const raw = localStorage.getItem('lumelle_dev_last_stripe_debug_ts')
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:63:      const raw = localStorage.getItem('lumelle_dev_last_stripe_run_id')
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:77:      const stripeStatus = params.get('redirect_status')
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:78:      if (stripeStatus === 'succeeded') return { kind: 'success' as const, message: 'Payment succeeded.' }
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:79:      if (stripeStatus === 'failed') return { kind: 'error' as const, message: 'Payment failed.' }
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:80:      if (stripeStatus === 'canceled') return { kind: 'warning' as const, message: 'Payment was cancelled.' }
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:88:  const stripeDebug = (() => {
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:108:  const effectivePaymentIntent = stripeDebug?.paymentIntent ?? lastIntent
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:110:    const s = (stripeDebug?.redirectStatus ?? lastRedirectStatus ?? '').trim().toLowerCase()
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:132:      localStorage.setItem('lumelle_dev_last_stripe_debug_ts', String(ts))
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:135:      localStorage.setItem('lumelle_dev_last_stripe_run_id', runId)
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:165:  const openStripeDashboardSearch = (query: string) => {
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:167:      const url = `${stripeDashboardBase}/search?query=${encodeURIComponent(query)}`
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:208:                {stripeDebug ? (
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:212:                        Stripe {stripeModeLabel}
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:215:                        {stripeKeyPrefix}
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:220:                      <span className="font-mono text-[11px]">{stripeDashboardBase}</span>
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:266:                            onClick={() => openStripeDashboardSearch(effectivePaymentIntent!)}
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:269:                            Open in Stripe
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:276:                      <span className="font-mono text-[11px]">{stripeDebug.redirectStatus ?? '(none)'}</span>
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:278:                    {lastRedirectStatus && !stripeDebug.redirectStatus ? (
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:286:                      <span className="font-mono text-[11px]">{stripeDebug.clientSecretSuffix ?? '(none)'}</span>
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:301:                            localStorage.removeItem('lumelle_dev_last_stripe_debug_ts')
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:302:                            localStorage.removeItem('lumelle_dev_last_stripe_run_id')
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:351:                  disabled={!canTest || !stripePublishableKey}
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:359:                {!stripePublishableKey ? (
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:362:                    Missing <span className="font-mono text-[12px]">VITE_STRIPE_PUBLISHABLE_KEY</span>.
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:369:            {import.meta.env.DEV && clientSecret && stripePublishableKey ? (
+../src/domains/client/account/ui/pages/PaymentMethodsPage.tsx:370:              <StripeDevEmbeddedPaymentPanel publishableKey={stripePublishableKey} clientSecret={clientSecret} />
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:2:import { loadStripe } from '@stripe/stripe-js'
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:3:import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:4:import type { StripeElementsOptions } from '@stripe/stripe-js'
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:7:  const stripe = useStripe()
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:13:    if (!stripe || !elements || submitting) return
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:17:      const result = await stripe.confirmPayment({
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:43:        disabled={!stripe || !elements || submitting}
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:51:        Dev-only: this uses Stripe Elements. Do not expose this flow in production until you have the full UX and confirmation handling.
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:57:export const StripeDevEmbeddedPaymentPanel = ({
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:64:  const stripePromise = useMemo(() => loadStripe(publishableKey), [publishableKey])
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:66:  const options: StripeElementsOptions = useMemo(
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:69:      appearance: { theme: 'stripe' },
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:78:        Stripe client secret created. Complete the form below to confirm the payment.
+../src/domains/client/account/ui/components/StripeDevEmbeddedPaymentPanel.tsx:80:      <Elements stripe={stripePromise} options={options}>
+../src/domains/platform/payments/adapters/stripe/index.ts:5:export type StripePaymentsAdapter = {
+../src/domains/platform/payments/adapters/stripe/index.ts:9:export const createStripePaymentsAdapter = (): StripePaymentsAdapter => {
+../src/domains/platform/payments/adapters/stripe/index.ts:14:        providerLabel: 'Payments (Stripe)',
+../src/domains/platform/payments/adapters/stripe/index.ts:31:        throw new PortError('UNAVAILABLE', 'Stripe payments request failed.', { cause: err })
+../src/domains/platform/payments/runtime.ts:4:import { createStripePaymentsAdapter } from './adapters/stripe'
+../src/domains/platform/payments/runtime.ts:12:type PaymentsProvider = 'none' | 'stripe'
+../src/domains/platform/payments/runtime.ts:16:  if (v === 'stripe') return 'stripe'
+../src/domains/platform/payments/runtime.ts:56:  if (provider === 'stripe') {
+../src/domains/platform/payments/runtime.ts:57:    const adapter = createStripePaymentsAdapter()

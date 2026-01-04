@@ -1,0 +1,48 @@
+{
+  "candidates": [
+    {
+      "description": "Alokai is a Frontend as a Service solution that simplifies composable commerce. It connects all the technologies needed to build and deploy fast & scalable ecommerce frontends. It guides merchants to deliver exceptional customer experiences quickly and easily.",
+      "forks": 2095,
+      "full_name": "vuestorefront/vue-storefront",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=10899, updated=2025-12-30T01:44:58Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 10899,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "commercetools",
+        "e-commerce",
+        "ecommerce",
+        "ecommerce-platform",
+        "headless",
+        "headless-commerce",
+        "integrations-team",
+        "magento",
+        "magento2",
+        "mobile",
+        "nuxt",
+        "open-source",
+        "pwa",
+        "shopify",
+        "shopware",
+        "storefront",
+        "typescript",
+        "vue",
+        "vue-storefront",
+        "vue3"
+      ],
+      "updated_at": "2025-12-30T01:44:58Z",
+      "url": "https://github.com/vuestorefront/vue-storefront"
+    }
+  ],
+  "count": 1,
+  "generated_at_utc": "2025-12-30T15:02:29Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_2202_oss-discovery-github-oss-discovery-cycle-220210/oss/entries"
+  }
+}

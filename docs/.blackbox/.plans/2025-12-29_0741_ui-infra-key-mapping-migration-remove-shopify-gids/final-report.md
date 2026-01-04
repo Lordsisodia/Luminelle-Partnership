@@ -1,0 +1,90 @@
+# Final Report — Key Mapping Migration (remove Shopify GIDs above adapters)
+
+## ✅ 1) Summary (what happened)
+
+- Captured baseline leak scan and confirmed the remaining coupling is small and specific (UI/provider + client config/logic).
+- Chose the minimal, lowest-risk “internal key” approach that matches current platform reality: use the existing opaque `VariantKey` encoding (`variant.<base64url(gid)>`) instead of raw Shopify GIDs.
+- Produced an execution-ready plan with measurable acceptance checks (vendor leak scan can be enforced).
+
+## 🧭 2) Current state (baseline)
+
+Baseline scan output:
+- `artifacts/baseline-vendor-leaks.txt`
+
+Current scan output (after improving the checker’s allowlist behavior):
+- `artifacts/vendor-leaks-current.txt`
+
+Disallowed vendor IDs currently exist in:
+- `src/ui/providers/DrawerProvider.tsx` (2 lines)
+- `src/domains/client/shop/products/data/product-config.ts` (2 lines)
+- `src/domains/client/shop/cart/logic/volumeDiscounts.ts` (1 line)
+
+Allowed transitional match (does not block `--fail`):
+- `src/domains/client/shop/cart/providers/CartContext.tsx` (legacy cleanup helper only)
+
+## 🧩 3) Decision: what is an “internal VariantKey” in this repo?
+
+The platform’s Shopify adapter currently defines `VariantKey` as:
+- `variant.<base64url(raw_shopify_variant_gid)>`
+
+Source of truth:
+- `src/domains/platform/commerce/adapters/shopify/internal-api/keys.ts`
+
+This is not a “semantic SKU key”, but it satisfies the immediate goal:
+- UI/config contains no vendor IDs
+- adapters own decoding back to vendor IDs
+
+### Precomputed replacements (for the current leaks)
+
+Shopify GIDs:
+- `gid://shopify/ProductVariant/56829020504438` (Lumelle Shower Cap)
+- `gid://shopify/ProductVariant/56852779696502` (Satin Overnight Curler Set)
+
+Encoded `VariantKey` values:
+- `variant.Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC81NjgyOTAyMDUwNDQzOA`
+- `variant.Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC81Njg1Mjc3OTY5NjUwMg`
+
+## 🧱 4) Proposed file-by-file edit plan (when code changes are allowed)
+
+Goal: ensure all “add to cart” flows pass `VariantKey` (not raw Shopify GIDs).
+
+1) `src/ui/providers/DrawerProvider.tsx`
+   - Change upsell objects from `variantId` (raw GID) → `variantKey` (encoded key).
+   - Ensure:
+     - `filteredUpsells` compares keys to keys (`cartIds` contains keys)
+     - `add(...)` passes `id: variantKey` to cart provider
+
+2) `src/domains/client/shop/products/data/product-config.ts`
+   - Replace `fallbackVariantId` values with the encoded `VariantKey` values.
+   - Option A (lowest churn): keep field name but treat it as a key (document it).
+   - Option B (cleaner): rename `fallbackVariantId` → `fallbackVariantKey` and update consumers.
+
+3) `src/domains/client/shop/cart/logic/volumeDiscounts.ts`
+   - Replace `SHOWER_CAP_VARIANT_ID` with `SHOWER_CAP_VARIANT_KEY` (encoded key).
+   - Update function naming and signature to accept `variantKey: string` (not `variantId`).
+
+4) `src/domains/client/shop/cart/providers/CartContext.tsx`
+   - Keep the legacy cleanup helper temporarily (allowed).
+   - Add a sunset note (date/condition) once all disallowed leaks are removed.
+
+## 🧪 5) Verification
+
+Must pass:
+- `./.blackbox/scripts/check-vendor-leaks.sh` reports `disallowed_lines=0`
+- `./.blackbox/scripts/check-vendor-leaks.sh --fail` exits 0
+- `./.blackbox/scripts/validate-all.sh --auto-sync --check-vendor-leaks`
+
+Manual spot checks:
+- Upsell “Add” from the drawer successfully adds an item (no PortError decode failures).
+- Volume discount behavior still triggers for shower cap tiering (now key-based).
+
+## ❓ 6) Open questions
+
+1) Do we ever need *semantic* variant keys (e.g. `variant.shower-cap.default`) for cross-provider mapping?
+   - If yes: introduce a platform mapping registry later; do not block Phase 1.
+2) What’s the sunset plan for the CartContext legacy helper?
+   - Suggestion: remove it once `--fail-vendor-leaks` is enabled and stable for 1–2 weeks.
+
+## 🏁 7) Rankings (out of 100)
+
+1) Remove disallowed Shopify GIDs above adapters — 92/100 — biggest unlock — Next: implement file-by-file plan above.

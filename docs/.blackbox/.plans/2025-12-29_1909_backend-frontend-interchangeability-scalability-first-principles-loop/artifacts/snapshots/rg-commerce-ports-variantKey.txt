@@ -1,0 +1,4 @@
+../src/domains/platform/commerce/ports/catalog.ts:4:  variantKey: VariantKey
+../src/domains/platform/commerce/ports/cart.ts:4:  lines: Array<{ variantKey: VariantKey; qty: number }>
+../src/domains/platform/commerce/ports/cart.ts:12:  variantKey: VariantKey
+../src/domains/platform/commerce/ports/cart.ts:40:  addLine(input: { variantKey: VariantKey; qty: number }): Promise<CartDTO>

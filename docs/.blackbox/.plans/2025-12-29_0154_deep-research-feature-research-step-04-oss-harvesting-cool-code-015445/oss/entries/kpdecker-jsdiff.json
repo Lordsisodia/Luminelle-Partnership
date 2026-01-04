@@ -1,0 +1,10 @@
+{
+  "source": "manual",
+  "repo_full_name": "kpdecker/jsdiff",
+  "repo_url": "https://github.com/kpdecker/jsdiff",
+  "license": "BSD-3-Clause",
+  "primary_language": "JavaScript",
+  "tags": ["diff", "patch", "upgrade-review"],
+  "fetched_at": "2025-12-30"
+}
+

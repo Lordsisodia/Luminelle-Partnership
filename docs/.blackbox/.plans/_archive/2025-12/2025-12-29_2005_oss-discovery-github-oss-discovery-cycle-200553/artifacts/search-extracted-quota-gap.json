@@ -1,0 +1,170 @@
+{
+  "count": 13,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": null,
+  "excluded_results_count": 2,
+  "generated_at_utc": "2025-12-29T13:07:28Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 100,
+  "queries_used": [
+    "rbac open source stars:>=100 fork:false archived:false",
+    "policy engine open source authorization stars:>=100 fork:false archived:false",
+    "abac open source stars:>=100 fork:false archived:false",
+    "audit log open source stars:>=100 fork:false archived:false",
+    "approval workflow open source stars:>=100 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "Open Policy Agent (OPA) is an open source, general-purpose policy engine.",
+      "full_name": "open-policy-agent/opa",
+      "integration_score": 10,
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 11023,
+      "updated_at": "2025-12-29T07:30:56Z",
+      "url": "https://github.com/open-policy-agent/opa"
+    },
+    {
+      "description": "Open Source, Google Zanzibar-inspired database for scalably storing and querying fine-grained authorization data",
+      "full_name": "authzed/spicedb",
+      "integration_score": 9,
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 6308,
+      "updated_at": "2025-12-29T08:29:07Z",
+      "url": "https://github.com/authzed/spicedb"
+    },
+    {
+      "description": "Open source headless CMS API written using NestJS, that has pre built modules like User Management, Role Management, Permission Management, Email Module, Account Settings, OTP, Throttling, RBAC support, Localization, and many more.",
+      "full_name": "gobeam/truthy",
+      "integration_score": 9,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 587,
+      "updated_at": "2025-12-21T04:50:01Z",
+      "url": "https://github.com/gobeam/truthy"
+    },
+    {
+      "description": "\ud83d\udd25 A fully open source audit logs service and embeddable UI easily deployed to your own Kubernetes cluster. Brought to you by replicated.com and boxyhq.com  \ud83d\ude80",
+      "full_name": "retracedhq/retraced",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 426,
+      "updated_at": "2025-12-26T13:02:23Z",
+      "url": "https://github.com/retracedhq/retraced"
+    },
+    {
+      "description": "Open-source MCP gateway and control plane for teams to govern which tools agents can use, what they can do, and how it\u2019s audited\u2014across agentic IDEs like Cursor, or other agents and AI tools.",
+      "full_name": "aipotheosis-labs/gate22",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 150,
+      "updated_at": "2025-12-18T05:59:34Z",
+      "url": "https://github.com/aipotheosis-labs/gate22"
+    },
+    {
+      "description": "An open-source authorization as a service inspired by Google Zanzibar, designed to build and manage fine-grained and scalable authorization systems for any application. \u2014 Permify is now part of FusionAuth \ud83c\udf89",
+      "full_name": "Permify/permify",
+      "integration_score": 7,
+      "language": "Go",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "stars": 5748,
+      "updated_at": "2025-12-29T07:12:45Z",
+      "url": "https://github.com/Permify/permify"
+    },
+    {
+      "description": "Open source platform for X.509 certificate based service authentication and fine grained access control in dynamic infrastructures. Athenz supports provisioning and configuration (centralized authorization) use cases as well as serving/runtime (decentralized authorization) use cases.",
+      "full_name": "AthenZ/athenz",
+      "integration_score": 7,
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 978,
+      "updated_at": "2025-12-27T14:44:44Z",
+      "url": "https://github.com/AthenZ/athenz"
+    },
+    {
+      "description": "Frontier is an all-in-one user management platform that provides identity, access and billing management to help organizations secure their systems and data. (Open source alternative to Clerk, WorkOS)",
+      "full_name": "raystack/frontier",
+      "integration_score": 7,
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 314,
+      "updated_at": "2025-12-29T03:52:36Z",
+      "url": "https://github.com/raystack/frontier"
+    },
+    {
+      "description": "Open source RBAC library. Associate users with roles and permissions.",
+      "full_name": "Permify/go-role",
+      "integration_score": 7,
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 215,
+      "updated_at": "2025-12-03T02:13:28Z",
+      "url": "https://github.com/Permify/go-role"
+    },
+    {
+      "description": "Use Casbin in FastAPI, Casbin is a powerful and efficient open-source access control library.",
+      "full_name": "pycasbin/fastapi-authz",
+      "integration_score": 7,
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 188,
+      "updated_at": "2025-12-20T10:58:00Z",
+      "url": "https://github.com/pycasbin/fastapi-authz"
+    },
+    {
+      "description": "Human resource management open source .net core",
+      "full_name": "optimajet/HRM",
+      "integration_score": 7,
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 147,
+      "updated_at": "2025-12-18T04:46:01Z",
+      "url": "https://github.com/optimajet/HRM"
+    },
+    {
+      "description": "Use Casbin in Flask, Casbin is a powerful and efficient open-source access control library.",
+      "full_name": "pycasbin/flask-authz",
+      "integration_score": 7,
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 113,
+      "updated_at": "2025-12-24T09:25:52Z",
+      "url": "https://github.com/pycasbin/flask-authz"
+    },
+    {
+      "description": "IsoBridge is an open-source ISO 8583 parser, builder, and forwarding engine for modern .NET teams. It provides deterministic parsing, auditable logging, and REST/SOAP forwarding to help fintech engineers integrate with legacy switches and POS devices without complexity.",
+      "full_name": "gabyslaw/IsoBridge",
+      "integration_score": 6,
+      "language": "C#",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 145,
+      "updated_at": "2025-12-25T03:26:01Z",
+      "url": "https://github.com/gabyslaw/IsoBridge"
+    }
+  ],
+  "title": "OSS Discovery \u2014 Coverage quota boost (tranche only)"
+}

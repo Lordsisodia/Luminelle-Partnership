@@ -1,0 +1,565 @@
+{
+  "candidates": [
+    {
+      "description": "The ultimate starter for headless Shopify stores",
+      "forks": 247,
+      "full_name": "BuilderIO/nextjs-shopify",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=479, updated=2025-12-28T13:58:49Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 479,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "drag-and-drop",
+        "headless",
+        "nextjs",
+        "nextjs-starter",
+        "react"
+      ],
+      "updated_at": "2025-12-28T13:58:49Z",
+      "url": "https://github.com/BuilderIO/nextjs-shopify"
+    },
+    {
+      "description": "A collection of awesome plugins for medusa :rocket:",
+      "forks": 47,
+      "full_name": "adrien2p/medusa-plugins",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=184, updated=2025-12-29T16:02:33Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 184,
+      "tags": [
+        "admin",
+        "analytics"
+      ],
+      "topics": [
+        "analytics",
+        "authentication",
+        "dashboard",
+        "facebook-authentication",
+        "google-authentication",
+        "grafana",
+        "javascipt",
+        "javascript",
+        "linkedin-authentication",
+        "medusa-plugin",
+        "medusa-plugins",
+        "medusajs",
+        "nodejs",
+        "oauth2",
+        "payments",
+        "prometheus",
+        "sentry-integration",
+        "twitter-authentication",
+        "typescript"
+      ],
+      "updated_at": "2025-12-29T16:02:33Z",
+      "url": "https://github.com/adrien2p/medusa-plugins"
+    },
+    {
+      "description": "Astro Powered Shopify Storefront Boilerplate with TailwindCSS and Nanostores.",
+      "forks": 64,
+      "full_name": "zeon-studio/storeplate",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=184, updated=2025-12-31T12:19:58Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 184,
+      "tags": [
+        "commerce",
+        "storefront"
+      ],
+      "topics": [
+        "astrojs",
+        "nanostores",
+        "react",
+        "shopify",
+        "tailwindcss"
+      ],
+      "updated_at": "2025-12-31T12:19:58Z",
+      "url": "https://github.com/zeon-studio/storeplate"
+    },
+    {
+      "description": "A Turborepo monorepo integrating a Medusa2 backend with a Remix frontend, featuring a Coffee Roast themed dynamic storefront. Includes Stripe payment integration, scalability with unlimited products and categories, and a developer-friendly setup using TypeScript and Biome. Ideal for rapidly building scalable e-commerce stores.",
+      "forks": 42,
+      "full_name": "lambda-curry/medusa2-starter",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=145, updated=2025-12-20T02:08:26Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 145,
+      "tags": [
+        "commerce",
+        "storefront"
+      ],
+      "topics": [
+        "ecommerce",
+        "medusajs"
+      ],
+      "updated_at": "2025-12-20T02:08:26Z",
+      "url": "https://github.com/lambda-curry/medusa2-starter"
+    },
+    {
+      "description": "A Sanity toolkit for Hydrogen",
+      "forks": 17,
+      "full_name": "sanity-io/hydrogen-sanity",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=90, updated=2025-12-12T22:42:48Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 90,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "hydrogen",
+        "react-router",
+        "remix",
+        "sanity",
+        "shopify"
+      ],
+      "updated_at": "2025-12-12T22:42:48Z",
+      "url": "https://github.com/sanity-io/hydrogen-sanity"
+    },
+    {
+      "description": "A fully-featured Shopify Hydrogen starter theme packed with versatile components designed to seamlessly integrate with Pack and Shopify Hydrogen",
+      "forks": 27,
+      "full_name": "packdigital/pack-hydrogen-theme-blueprint",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=88, updated=2025-12-27T23:14:32Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 88,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "ecommerce",
+        "hydrogen",
+        "remix",
+        "shopify",
+        "tailwindcss"
+      ],
+      "updated_at": "2025-12-27T23:14:32Z",
+      "url": "https://github.com/packdigital/pack-hydrogen-theme-blueprint"
+    },
+    {
+      "description": "\ud83d\udcf1 Combine your Medusa.js e-commerce backend and/or web storefront with a Expo mobile app that matches Medusa  @nextjs  starter functionality, look and feel.",
+      "forks": 11,
+      "full_name": "bidah/mobile-medusa",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=115, updated=2025-11-19T22:59:57Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 115,
+      "tags": [
+        "commerce",
+        "storefront"
+      ],
+      "topics": [],
+      "updated_at": "2025-11-19T22:59:57Z",
+      "url": "https://github.com/bidah/mobile-medusa"
+    },
+    {
+      "description": "This is a Next.Js + Typescript + Tailwindcss + headless Shopify free starter template.",
+      "forks": 27,
+      "full_name": "stefanogali/panini-cake",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=17/20 (stars=33, updated=2025-12-24T14:16:10Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 71,
+      "stars": 33,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "customizable",
+        "ecommerce-store",
+        "free-template",
+        "headless-shopify",
+        "nextjs",
+        "nextjs-template",
+        "responsive",
+        "shopify",
+        "tailwindcss",
+        "typescript"
+      ],
+      "updated_at": "2025-12-24T14:16:10Z",
+      "url": "https://github.com/stefanogali/panini-cake"
+    },
+    {
+      "description": "\ud83c\udf88 Hydrogen. Voted (by me) the world's lightest static-site generator built with TypeScript \u2764 It uses \ud83d\udd25 lit-html inspired templating for super duper performant template generation.",
+      "forks": 9,
+      "full_name": "hydrogenjs/hydrogen",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=16/20 (stars=169, updated=2025-02-12T05:08:29Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 70,
+      "stars": 169,
+      "tags": [],
+      "topics": [
+        "api",
+        "data",
+        "es6",
+        "es7",
+        "es8",
+        "hydrogen",
+        "javascript",
+        "lit-html",
+        "nodejs",
+        "static-site",
+        "static-site-generator",
+        "string-literals",
+        "template-engine",
+        "typescript"
+      ],
+      "updated_at": "2025-02-12T05:08:29Z",
+      "url": "https://github.com/hydrogenjs/hydrogen"
+    },
+    {
+      "description": "Deprecated! See the announcement below. JavaScript/TypeScript SDK for building e-commerce experiences and checkouts with Saleor API.",
+      "forks": 81,
+      "full_name": "saleor/saleor-sdk",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=16/20 (stars=127, updated=2025-01-15T10:41:08Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 70,
+      "stars": 127,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "deprecated",
+        "deprecated-repo",
+        "e-commerce",
+        "ecommerce",
+        "graphql",
+        "hacktoberfest",
+        "javascript",
+        "saleor",
+        "sdk",
+        "typescript"
+      ],
+      "updated_at": "2025-01-15T10:41:08Z",
+      "url": "https://github.com/saleor/saleor-sdk"
+    },
+    {
+      "description": "Your boilerplate for new Saleor Apps. Batteries included.",
+      "forks": 118,
+      "full_name": "saleor/saleor-app-template",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=80, updated=2025-12-21T12:26:32Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 69,
+      "stars": 80,
+      "tags": [],
+      "topics": [
+        "graphql",
+        "nextjs",
+        "saleor",
+        "saleor-app",
+        "saleor-app-nextjs",
+        "saleor-boilerplate",
+        "typescript"
+      ],
+      "updated_at": "2025-12-21T12:26:32Z",
+      "url": "https://github.com/saleor/saleor-app-template"
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "full_name": "wilmerdev0127/nextjs-shopify-starter",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=12/20 (stars=28, updated=2025-06-30T20:29:35Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 66,
+      "stars": 28,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-06-30T20:29:35Z",
+      "url": "https://github.com/wilmerdev0127/nextjs-shopify-starter"
+    },
+    {
+      "description": "Monorepo including medusajs 2.0 backend and storefront",
+      "forks": 237,
+      "full_name": "rpuls/medusajs-2.0-for-railway-boilerplate",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=181, updated=2025-12-27T16:09:42Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 181,
+      "tags": [
+        "commerce",
+        "storefront"
+      ],
+      "topics": [
+        "ecommerce",
+        "medusajs",
+        "medusajs-v2",
+        "railway",
+        "railway-app"
+      ],
+      "updated_at": "2025-12-27T16:09:42Z",
+      "url": "https://github.com/rpuls/medusajs-2.0-for-railway-boilerplate"
+    },
+    {
+      "description": "Open Source Storefront for Multi-vendor Marketplace. Customizable and designed for B2C. Check demo for Fashion industry \ud83d\udc47",
+      "forks": 98,
+      "full_name": "mercurjs/b2c-marketplace-storefront",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=138, updated=2025-12-28T17:37:05Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 138,
+      "tags": [
+        "commerce",
+        "storefront"
+      ],
+      "topics": [
+        "cart",
+        "marketplace",
+        "medusajs",
+        "multi-vendor",
+        "multi-vendor-theme",
+        "multivendor-ecommerce",
+        "nextjs",
+        "shopping-cart",
+        "store",
+        "storefront",
+        "ui"
+      ],
+      "updated_at": "2025-12-28T17:37:05Z",
+      "url": "https://github.com/mercurjs/b2c-marketplace-storefront"
+    },
+    {
+      "description": "A curated list of awesome resources related to MedusaJS \ud83d\ude0e",
+      "forks": 42,
+      "full_name": "adrien2p/awesome-medusajs",
+      "language": "N/A",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (N/A); maintenance=20/20 (stars=582, updated=2025-12-31T04:16:31Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 582,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "authentication",
+        "awesome",
+        "awesome-list",
+        "e-commerce",
+        "ecommerce",
+        "ecommerce-api",
+        "gatsby",
+        "headless",
+        "headless-cms",
+        "medusa",
+        "medusa-js",
+        "medusa-plugin",
+        "medusa-plugins",
+        "medusajs",
+        "nextjs",
+        "nodejs",
+        "oauth2",
+        "plugins",
+        "react",
+        "starter"
+      ],
+      "updated_at": "2025-12-31T04:16:31Z",
+      "url": "https://github.com/adrien2p/awesome-medusajs"
+    },
+    {
+      "description": "A port of Hydrogen's default template to Shopify OS 2.0",
+      "forks": 45,
+      "full_name": "montalvomiguelo/hydrogen-theme",
+      "language": "Liquid",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Liquid); maintenance=20/20 (stars=163, updated=2025-12-22T14:16:11Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 163,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "hydrogen",
+        "islands",
+        "liquid",
+        "shopify",
+        "shopify-theme",
+        "tailwindcss",
+        "vite"
+      ],
+      "updated_at": "2025-12-22T14:16:11Z",
+      "url": "https://github.com/montalvomiguelo/hydrogen-theme"
+    },
+    {
+      "description": "Starter project to help you create your Medusa-powered ecommerce application",
+      "forks": 15,
+      "full_name": "pevey/sveltekit-medusa-starter",
+      "language": "Svelte",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Svelte); maintenance=20/20 (stars=146, updated=2025-12-26T22:16:24Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 146,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-26T22:16:24Z",
+      "url": "https://github.com/pevey/sveltekit-medusa-starter"
+    },
+    {
+      "description": "Enapter Blueprint Marketplace \u2013 integrate any device into your Energy Management System. \ud83d\udd0b \ud83d\udd0c \ud83d\udc69\ud83c\udffd\u200d\ud83d\udcbb \ud83d\udc68\u200d\ud83d\udcbb",
+      "forks": 14,
+      "full_name": "Enapter/marketplace",
+      "language": "Lua",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Lua); maintenance=20/20 (stars=57, updated=2025-12-17T15:33:16Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 57,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [
+        "battery",
+        "boiler",
+        "building-automation",
+        "electric-vehicle-charging-station",
+        "ems",
+        "energy",
+        "energy-management",
+        "energy-storage",
+        "hem",
+        "hems",
+        "hvac",
+        "hydrogen",
+        "iot",
+        "photovoltaics",
+        "pv",
+        "smart-energy",
+        "smart-meter",
+        "solar",
+        "solar-energy"
+      ],
+      "updated_at": "2025-12-17T15:33:16Z",
+      "url": "https://github.com/Enapter/marketplace"
+    },
+    {
+      "description": "Python Saleor App/Extension boilerplate. Batteries included.",
+      "forks": 24,
+      "full_name": "mirumee/saleor-app-framework-python",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=16/20 (stars=55, updated=2025-06-18T12:57:55Z); license=15/15 (BSD-3-Clause); time_to_value=5/10",
+      "score": 62,
+      "stars": 55,
+      "tags": [],
+      "topics": [
+        "python",
+        "saleor",
+        "saleor-app",
+        "starter-kit"
+      ],
+      "updated_at": "2025-06-18T12:57:55Z",
+      "url": "https://github.com/mirumee/saleor-app-framework-python"
+    },
+    {
+      "description": "A pipeflow calculation tool that complements pandapower in the simulation of multi energy grids",
+      "forks": 75,
+      "full_name": "e2nIEE/pandapipes",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=201, updated=2025-12-12T14:37:10Z); license=10/15 (NOASSERTION); time_to_value=5/10",
+      "score": 61,
+      "stars": 201,
+      "tags": [],
+      "topics": [
+        "distribution-networks",
+        "district-heating",
+        "gas-network-simulation",
+        "hydrogen",
+        "multi-energy-systems",
+        "pipe-network",
+        "water-network-distribution"
+      ],
+      "updated_at": "2025-12-12T14:37:10Z",
+      "url": "https://github.com/e2nIEE/pandapipes"
+    },
+    {
+      "description": "This repository hosts helm charts needed to deploy a production ready saleor backend service consisting of a celery task runner, redis DB, postgres DB and the saleor core server exposing the graphQL API",
+      "forks": 15,
+      "full_name": "trieb-work/helm-charts",
+      "language": "Smarty",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Smarty); maintenance=17/20 (stars=45, updated=2025-10-15T11:10:08Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 59,
+      "stars": 45,
+      "tags": [],
+      "topics": [
+        "helm",
+        "helm-chart",
+        "saleor"
+      ],
+      "updated_at": "2025-10-15T11:10:08Z",
+      "url": "https://github.com/trieb-work/helm-charts"
+    },
+    {
+      "description": "",
+      "forks": 18,
+      "full_name": "saleor/auth-sdk",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=14/20 (stars=26, updated=2025-10-01T23:53:56Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 58,
+      "stars": 26,
+      "tags": [
+        "auth"
+      ],
+      "topics": [
+        "apollo",
+        "graphql",
+        "hacktoberfest",
+        "nextjs",
+        "saleor",
+        "typescript",
+        "urql"
+      ],
+      "updated_at": "2025-10-01T23:53:56Z",
+      "url": "https://github.com/saleor/auth-sdk"
+    }
+  ],
+  "count": 22,
+  "generated_at_utc": "2025-12-31T12:52:19Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-31_1950_oss-discovery-github-oss-discovery-cycle-195059/oss/entries"
+  }
+}

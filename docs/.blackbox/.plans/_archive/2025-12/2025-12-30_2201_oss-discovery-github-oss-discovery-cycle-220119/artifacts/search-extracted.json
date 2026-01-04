@@ -1,0 +1,33 @@
+{
+  "count": 0,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": null,
+  "excluded_results_count": 0,
+  "generated_at_utc": "2025-12-30T15:01:41Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 50,
+  "queries_used": [
+    "topic:returns topic:ecommerce stars:>=50 fork:false archived:false",
+    "topic:reverse-logistics topic:ecommerce stars:>=50 fork:false archived:false",
+    "topic:return-portal topic:ecommerce stars:>=50 fork:false archived:false",
+    "topic:rma topic:ecommerce stars:>=50 fork:false archived:false",
+    "\"return portal\" \"shopify app\" stars:>=50 fork:false archived:false",
+    "\"returns\" \"shopify app\" \"store credit\" stars:>=50 fork:false archived:false",
+    "\"exchange\" \"shopify app\" \"store credit\" stars:>=50 fork:false archived:false",
+    "\"store credit\" refund exchange stars:>=50 fork:false archived:false",
+    "\"store credit\" \"returns\" ecommerce stars:>=50 fork:false archived:false",
+    "\"rma\" \"return reason\" taxonomy stars:>=50 fork:false archived:false",
+    "\"return request\" \"rma number\" stars:>=50 fork:false archived:false",
+    "\"return received\" inspection restock stars:>=50 fork:false archived:false"
+  ],
+  "repos": [],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

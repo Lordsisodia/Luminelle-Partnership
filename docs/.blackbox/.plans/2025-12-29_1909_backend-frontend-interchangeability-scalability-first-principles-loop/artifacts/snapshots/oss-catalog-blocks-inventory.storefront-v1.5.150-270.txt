@@ -1,0 +1,121 @@
+  - Loading state + success confirmation
+  - Spam mitigation hook point (honeypot / rate limit) (nice-to-have)
+- Primary sources (deepen):
+  - `markmead/hyperui`
+  - `themesberg/flowbite`
+  - `saadeghi/daisyui`
+
+---
+
+### C) Storefront UI primitives (PDP/PLP/cart) — v1.5 add-on
+
+These blocks are useful for:
+- product listing (PLP) pages
+- product detail (PDP) pages
+- cart drawer / cart page primitives
+
+Practical note:
+- These are **pattern mining targets** first. We’ll standardize contracts + a11y + state handling, and only then decide whether to copy snippets (safe licenses only) or implement ourselves.
+
+#### 11) Product card + product grid (PLP)
+- Contract:
+  - Input: `product` { id, title, handle, images[], price, compareAtPrice?, badges?, availability?, rating? }
+  - Output: a card + a grid layout that supports skeleton/loading states
+- Acceptance criteria:
+  - Responsive grid (1-col mobile, 2–4 cols desktop), consistent aspect ratio handling
+  - Handles missing images, long titles, and price-with-discount without layout breakage
+  - Accessible link target and focus states; no “click trap” inside the card
+- Primary sources (storefront reference set):
+  - `Shopify/hydrogen-v1` (poc)
+  - `Blazity/enterprise-commerce` (deepen)
+  - `vuestorefront/storefront-ui` (poc)
+
+#### 12) Variant selector (size/color/options) (PDP)
+- Contract:
+  - Input: options + availability model:
+    - `options[]` { name, values[] }
+    - `selectedOptions` + `disabledCombinations`
+  - Output: option pickers with disabled/unavailable states
+- Acceptance criteria:
+  - Disabled states are obvious and not color-only
+  - Keyboard navigation works (tab + arrow patterns where relevant)
+  - Selecting an option updates the selected variant deterministically
+- Primary sources (storefront reference set):
+  - `Shopify/hydrogen-v1` (poc)
+  - `Blazity/enterprise-commerce` (deepen)
+
+#### 13) Price display (“Money”) + discounts
+- Contract:
+  - Input: `amount`, `currency`, `compareAt?`, `discountLabel?`
+  - Output: formatted price UI (and compare-at strikethrough when present)
+- Acceptance criteria:
+  - Currency formatting is correct and stable
+  - Compare-at display is accessible (not only via strikethrough color)
+- Primary sources:
+  - `vuestorefront/storefront-ui` (poc)
+  - `Shopify/hydrogen-v1` (poc)
+
+#### 14) Cart lines editor (qty/update/remove) + empty/loading states
+- Contract:
+  - Input: `cart` { lines[], totals, currency } + actions { updateQty, removeLine }
+  - Output: cart UI (drawer or page) with optimistic updates where possible
+- Acceptance criteria:
+  - Quantity updates are debounced or otherwise don’t spam network calls
+  - Empty cart state is clean and provides recovery CTA
+  - Loading/error states are explicit; keyboard accessible
+- Primary sources (storefront reference set):
+  - `Shopify/hydrogen-v1` (poc)
+  - `vuestorefront/storefront-ui` (poc)
+  - `lambda-curry/medusa2-starter` (deepen)
+
+#### 15) Collection filters / facets (URL-synced)
+- Contract:
+  - Input: facet definitions + selected state (query params)
+  - Output: sidebar filters + “selected chips” bar + “clear all”
+- Acceptance criteria:
+  - URL is the source of truth for selected filters (shareable links)
+  - “Clear all” resets without leaving stale UI state
+  - Mobile UX: filters open in a drawer/sheet
+- Primary sources:
+  - `Blazity/enterprise-commerce` (deepen)
+  - Supporting model-side reference: `itemsapi/itemsjs` (deepen)
+
+Related:
+- Storefront pattern mining index: `.blackbox/oss-catalog/storefront-reference-set.md`
+
+---
+
+## Primary OSS sources to mine first (deepen set)
+
+From `.blackbox/oss-catalog/curation.json`:
+- `saadeghi/daisyui`
+- `themesberg/flowbite`
+- `markmead/hyperui`
+- `mertJF/tailblocks`
+- `merakiuilabs/merakiui`
+- `ephraimduncan/blocks`
+- `lmsqueezy/wedges`
+- Blog pipeline: `remarkjs/remark-rehype`, `rehypejs/rehype-react`, `rehypejs/rehype-slug`, `rehypejs/rehype-autolink-headings`
+- Storefront references (patterns):
+  - `Shopify/hydrogen-v1`
+  - `Blazity/enterprise-commerce`
+  - `BuilderIO/nextjs-shopify`
+  - `lambda-curry/medusa2-starter`
+  - `pevey/sveltekit-medusa-starter`
+  - `zeon-studio/storeplate`
+  - `vuestorefront/storefront-ui`
+
+- Blog/content reference apps (patterns):
+  - `shadcn-ui/taxonomy`
+  - `timlrx/tailwind-nextjs-starter-blog`
+
+## Reference set (watch)
+
+Use these to cross-check patterns, but don’t mine first:
+- `StaticMania/keep-react`
+- `hunvreus/basecoat`
+- `creativetimofficial/material-tailwind`
+- `kokonut-labs/kokonutui`
+- `tommyjepsen/twblocks`
+- `TailGrids/tailwind-ui-components`
+- License-verify first:

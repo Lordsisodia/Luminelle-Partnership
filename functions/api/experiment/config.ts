@@ -1,6 +1,6 @@
 import type { PagesFunction } from '../../_lib/types'
 import { getSupabase } from '../../_lib/supabase'
-import { json, methodNotAllowed } from '../../_lib/response'
+import { jsonTenantPublic, methodNotAllowed, notModifiedTenantPublic } from '../../_lib/response'
 
 export const onRequest: PagesFunction = async ({ request, env }) => {
   if (request.method !== 'GET') return methodNotAllowed(['GET'])
@@ -22,10 +22,9 @@ export const onRequest: PagesFunction = async ({ request, env }) => {
   const etag = `W/\"experiments:${items.length}:${maxUpdated}\"`
   const ifNoneMatch = request.headers.get('if-none-match')
   if (ifNoneMatch && ifNoneMatch === etag) {
-    return new Response('', { status: 304, headers: { ETag: etag } })
+    return notModifiedTenantPublic({ ttlSeconds: 60, etag })
   }
 
   const config = items.map(({ updated_at: _updatedAt, ...rest }) => rest)
-  return json(config, { headers: { ETag: etag } })
+  return jsonTenantPublic(config, { ttlSeconds: 60, etag })
 }
-

@@ -1,0 +1,46 @@
+{
+  "candidates": [
+    {
+      "description": "React Hooks to implement Undo and Redo functionality",
+      "forks": 25,
+      "full_name": "homerchen19/use-undo",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=412, updated=2025-12-28T19:08:45Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 412,
+      "tags": [],
+      "topics": [
+        "hooks",
+        "react",
+        "react-hooks"
+      ],
+      "updated_at": "2025-12-28T19:08:45Z",
+      "url": "https://github.com/homerchen19/use-undo"
+    },
+    {
+      "description": "\u21aa React hook for undo/redo functionality (with batteries included)",
+      "forks": 8,
+      "full_name": "xplato/useUndoable",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=182, updated=2025-10-23T09:20:58Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 182,
+      "tags": [],
+      "topics": [
+        "react",
+        "undo-redo"
+      ],
+      "updated_at": "2025-10-23T09:20:58Z",
+      "url": "https://github.com/xplato/useUndoable"
+    }
+  ],
+  "count": 2,
+  "generated_at_utc": "2025-12-30T15:41:20Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_2240_oss-discovery-github-oss-discovery-cycle-224029/oss/entries"
+  }
+}

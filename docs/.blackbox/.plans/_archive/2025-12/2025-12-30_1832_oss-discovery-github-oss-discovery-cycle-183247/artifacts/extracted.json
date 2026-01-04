@@ -1,0 +1,165 @@
+{
+  "candidates": [
+    {
+      "description": "React Hooks to implement Undo and Redo functionality",
+      "forks": 25,
+      "full_name": "homerchen19/use-undo",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=412, updated=2025-12-28T19:08:45Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 412,
+      "tags": [],
+      "topics": [
+        "hooks",
+        "react",
+        "react-hooks"
+      ],
+      "updated_at": "2025-12-28T19:08:45Z",
+      "url": "https://github.com/homerchen19/use-undo"
+    },
+    {
+      "description": "\u21aa React hook for undo/redo functionality (with batteries included)",
+      "forks": 8,
+      "full_name": "xplato/useUndoable",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=182, updated=2025-10-23T09:20:58Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 182,
+      "tags": [],
+      "topics": [
+        "react",
+        "undo-redo"
+      ],
+      "updated_at": "2025-10-23T09:20:58Z",
+      "url": "https://github.com/xplato/useUndoable"
+    },
+    {
+      "description": "A React hook for state time travel with undo, redo, reset and archive functionalities.",
+      "forks": 1,
+      "full_name": "mutativejs/use-travel",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=88, updated=2025-11-29T03:04:43Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 88,
+      "tags": [],
+      "topics": [
+        "immutable",
+        "mutative",
+        "react",
+        "react-hooks",
+        "redo",
+        "state-history",
+        "time-travel",
+        "undo",
+        "use-undo"
+      ],
+      "updated_at": "2025-11-29T03:04:43Z",
+      "url": "https://github.com/mutativejs/use-travel"
+    },
+    {
+      "description": "React hook that lets you use undomundo's branching undo/redo functionality independently of how you structure your application state.",
+      "forks": 2,
+      "full_name": "philipmendels/use-flexible-undo",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=12/20 (stars=18, updated=2025-09-09T03:16:19Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 66,
+      "stars": 18,
+      "tags": [],
+      "topics": [
+        "hook",
+        "hooks",
+        "react",
+        "typescript",
+        "undo",
+        "undo-redo"
+      ],
+      "updated_at": "2025-09-09T03:16:19Z",
+      "url": "https://github.com/philipmendels/use-flexible-undo"
+    },
+    {
+      "description": "Zustand-inspired state management for Blazor (WebAssembly/Server/MAUI). Query system, cross-tab sync, SignalR collaboration, undo/redo, optimistic updates, Redux DevTools. .NET 8/9/10.",
+      "forks": 3,
+      "full_name": "mashrulhaque/EasyAppDev.Blazor.Store",
+      "language": "C#",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (C#); maintenance=19/20 (stars=48, updated=2025-12-29T12:00:57Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 61,
+      "stars": 48,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "blazor",
+        "blazor-component",
+        "blazor-components",
+        "blazor-server",
+        "blazor-webassembly",
+        "csharp",
+        "dependency-injection",
+        "devtools",
+        "dotnet",
+        "dotnet8",
+        "dotnet9",
+        "immutable-state",
+        "maui",
+        "reactive",
+        "redux",
+        "redux-devtools",
+        "signalr",
+        "state-management",
+        "tanstack-query",
+        "zustand"
+      ],
+      "updated_at": "2025-12-29T12:00:57Z",
+      "url": "https://github.com/mashrulhaque/EasyAppDev.Blazor.Store"
+    },
+    {
+      "description": "A React hook to keep track of state changes for undo/redo functionality.",
+      "forks": 2,
+      "full_name": "haydn/use-state-snapshots",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=6/20 (stars=11, updated=2024-05-14T16:51:33Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 60,
+      "stars": 11,
+      "tags": [],
+      "topics": [
+        "hooks",
+        "react",
+        "react-hooks"
+      ],
+      "updated_at": "2024-05-14T16:51:33Z",
+      "url": "https://github.com/haydn/use-state-snapshots"
+    },
+    {
+      "description": "\ud83d\udd04 Simple solution to handle undo\\redo turned into React Hooks",
+      "forks": 1,
+      "full_name": "sandiiarov/use-simple-undo",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=10/20 (stars=30, updated=2024-10-25T15:55:33Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 54,
+      "stars": 30,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2024-10-25T15:55:33Z",
+      "url": "https://github.com/sandiiarov/use-simple-undo"
+    }
+  ],
+  "count": 7,
+  "generated_at_utc": "2025-12-30T11:33:51Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1832_oss-discovery-github-oss-discovery-cycle-183247/oss/entries"
+  }
+}

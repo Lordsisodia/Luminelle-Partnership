@@ -1,0 +1,327 @@
+{
+  "candidates": [
+    {
+      "description": "Hydrogen lets you build faster headless storefronts in less time, on Shopify.",
+      "forks": 377,
+      "full_name": "Shopify/hydrogen",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1836, updated=2025-12-29T20:57:42Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1836,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "hydrogen",
+        "react",
+        "remix",
+        "shopify"
+      ],
+      "updated_at": "2025-12-29T20:57:42Z",
+      "url": "https://github.com/Shopify/hydrogen"
+    },
+    {
+      "description": "Fluid is a Hydrogen theme that lets you easily build Shopify headless storefronts by organizing your content with Sanity.",
+      "forks": 46,
+      "full_name": "frontvibe/fluid",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=276, updated=2025-12-18T10:12:27Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 276,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "ecommerce",
+        "headless",
+        "hydrogen",
+        "radix-ui",
+        "react",
+        "react-router",
+        "remix",
+        "remix-stack",
+        "sanity",
+        "shadcnui",
+        "shopify",
+        "tailwindcss",
+        "theme"
+      ],
+      "updated_at": "2025-12-18T10:12:27Z",
+      "url": "https://github.com/frontvibe/fluid"
+    },
+    {
+      "description": "\u4e2a\u4eba\u7ad9\u70b9\u751f\u6210\u5668\uff0c\u53ef\u4ee5\u5728\u6d4f\u89c8\u5668\u5b8c\u6210\u5168\u90e8\u64cd\u4f5c\uff01\u4ece\u642d\u5efa\u5230\u90e8\u7f72\u90fd\u53ef\u4ee5\u5728\u6d4f\u89c8\u5668\u4e2d\u5b8c\u6210\uff0c\u4e0d\u9700\u8981\u672c\u5730\u73af\u5883\u3002\u9644\u8be6\u7ec6\u6587\u6863\u3002",
+      "forks": 69,
+      "full_name": "inannan423/Daymd",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=224, updated=2025-12-22T09:29:57Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 224,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "blog",
+        "contentlayer",
+        "daisyui",
+        "documentation",
+        "jsx",
+        "nextjs",
+        "react",
+        "reactjs",
+        "tailwindcss",
+        "typescript"
+      ],
+      "updated_at": "2025-12-22T09:29:57Z",
+      "url": "https://github.com/inannan423/Daymd"
+    },
+    {
+      "description": "Fast React-Luma Magento 2 Optimizer. Works with ReactJS, Vue UI Components, or any other modern JS Framework with Magento 2 instead of default magento JS and CSS without migrating to a new theme. Checkout, admin, customer account, and any other part of your APP can work using legacy Ko Magento 2 JS implementation",
+      "forks": 37,
+      "full_name": "Genaker/reactmagento2",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=158, updated=2025-12-24T11:14:13Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 158,
+      "tags": [
+        "commerce",
+        "admin"
+      ],
+      "topics": [
+        "magento",
+        "magento2",
+        "react",
+        "reactjs",
+        "vuejs"
+      ],
+      "updated_at": "2025-12-24T11:14:13Z",
+      "url": "https://github.com/Genaker/reactmagento2"
+    },
+    {
+      "description": "My (previous) personal website \u263b  \u2013  Built using Next.js, TypeScript, Tailwind CSS and MDX",
+      "forks": 42,
+      "full_name": "jahirfiquitiva/jahir.dev",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=362, updated=2025-11-23T07:33:54Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 362,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "blog",
+        "contentlayer",
+        "hacktoberfest",
+        "hacktoberfest-accepted",
+        "hacktoberfest2022",
+        "javascript",
+        "mdx",
+        "nextjs",
+        "notion",
+        "notion-api",
+        "planetscale",
+        "portfolio",
+        "react",
+        "reactjs",
+        "tailwind",
+        "tailwindcss",
+        "typescript",
+        "velite",
+        "vercel"
+      ],
+      "updated_at": "2025-11-23T07:33:54Z",
+      "url": "https://github.com/jahirfiquitiva/jahir.dev"
+    },
+    {
+      "description": "\ud83d\udc68\u200d\ud83d\udcbb Dev blog built with Next.js 13, TypeScript, and Contentlayer, using latest Next.js features",
+      "forks": 9,
+      "full_name": "kfirfitousi/blog",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=105, updated=2025-11-15T15:20:23Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 105,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "blog",
+        "contentlayer",
+        "dev-blog",
+        "giscus",
+        "markdown",
+        "mdx",
+        "metadata",
+        "next-js",
+        "nextjs",
+        "nextjs13",
+        "react",
+        "react-18",
+        "server-components",
+        "starter",
+        "storybook",
+        "tailwindcss",
+        "template",
+        "typescript",
+        "vercel",
+        "vercel-og"
+      ],
+      "updated_at": "2025-11-15T15:20:23Z",
+      "url": "https://github.com/kfirfitousi/blog"
+    },
+    {
+      "description": "\u26a1\ufe0f My personal website built with Next.js, Chakra UI, ContentLayer + MDX, and Vercel.",
+      "forks": 37,
+      "full_name": "segunadebayo/adebayosegun.com",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=168, updated=2025-12-26T14:06:21Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 168,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "blog",
+        "chakra-ui",
+        "contentlayer",
+        "mdx",
+        "nextjs",
+        "portfolio",
+        "react",
+        "vercel"
+      ],
+      "updated_at": "2025-12-26T14:06:21Z",
+      "url": "https://github.com/segunadebayo/adebayosegun.com"
+    },
+    {
+      "description": "A design system with a collection of reusable components, guided by clear standards, that can be assembled together to build any number of applications.",
+      "forks": 25,
+      "full_name": "imodeveloperlab/dskit",
+      "language": "Swift",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Swift); maintenance=20/20 (stars=164, updated=2025-12-28T03:57:40Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 164,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "design",
+        "design-system",
+        "ecommerce",
+        "feed",
+        "ios",
+        "rss",
+        "shopify",
+        "swift",
+        "system",
+        "template"
+      ],
+      "updated_at": "2025-12-28T03:57:40Z",
+      "url": "https://github.com/imodeveloperlab/dskit"
+    },
+    {
+      "description": "Free TailwindCSS HTML UI Components - built to create landing pages and websites. Easyfrontend UI components are free and open-source. show your support and love, don't forget to give us a star \ud83c\udf1f",
+      "forks": 32,
+      "full_name": "EasyFrontendHQ/html-tailwindcss-components",
+      "language": "HTML",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (HTML); maintenance=18/20 (stars=618, updated=2025-11-26T02:47:54Z); license=10/15 (NOASSERTION); time_to_value=5/10",
+      "score": 55,
+      "stars": 618,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "components",
+        "components-library",
+        "developer-tools",
+        "features",
+        "free",
+        "free-ui",
+        "frontend",
+        "frontend-web",
+        "hacktoberfest",
+        "hacktoberfest-accepted",
+        "hacktoberfest2025",
+        "hacktoberfest2025repo",
+        "html",
+        "sections",
+        "tailwind",
+        "tailwind-css",
+        "tailwindcss"
+      ],
+      "updated_at": "2025-11-26T02:47:54Z",
+      "url": "https://github.com/EasyFrontendHQ/html-tailwindcss-components"
+    },
+    {
+      "description": "Collection of CSS components built specifically for my Instagram page",
+      "forks": 35,
+      "full_name": "frontend-joe/css-reels",
+      "language": "CSS",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (CSS); maintenance=20/20 (stars=286, updated=2025-12-12T01:23:45Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 52,
+      "stars": 286,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-12T01:23:45Z",
+      "url": "https://github.com/frontend-joe/css-reels"
+    },
+    {
+      "description": "\u2b50Build SEO optimized personal blog website with Next.js, Tailwind CSS and Contentlayer. If you want to learn to create this you can follow the tutorial link given in the Read me file.",
+      "forks": 97,
+      "full_name": "codebucks27/Nextjs-contentlayer-blog",
+      "language": "MDX",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (MDX); maintenance=20/20 (stars=188, updated=2025-12-01T12:48:05Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 52,
+      "stars": 188,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "blog",
+        "contentlayer",
+        "contentlayer-nextjs",
+        "markdown",
+        "nextjs",
+        "nextjs-13",
+        "nextjs-blog",
+        "nextjs-starter",
+        "nextjs-starter-blog",
+        "nextjs-template",
+        "nextjs13",
+        "tailwindcss",
+        "webdevelopment",
+        "website-template"
+      ],
+      "updated_at": "2025-12-01T12:48:05Z",
+      "url": "https://github.com/codebucks27/Nextjs-contentlayer-blog"
+    }
+  ],
+  "count": 11,
+  "generated_at_utc": "2025-12-30T14:01:46Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_2100_oss-discovery-github-oss-discovery-cycle-210057/oss/entries"
+  }
+}

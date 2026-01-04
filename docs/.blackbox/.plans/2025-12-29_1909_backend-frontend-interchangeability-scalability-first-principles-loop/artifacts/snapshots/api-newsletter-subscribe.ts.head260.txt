@@ -1,0 +1,57 @@
+# source: api/newsletter/subscribe.ts
+# captured: 2025-12-30T15:45:31Z
+
+import { getPgPool } from "../_lib/db.js";
+
+type NewsletterSignupPayload = {
+  email?: unknown;
+  source?: unknown;
+};
+
+const isValidEmail = (email: string) => {
+  if (!email) return false;
+  if (email.length > 254) return false;
+  // Intentionally simple validation: avoids rejecting legitimate addresses while blocking obvious junk.
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
+async function ensureNewsletterTable() {
+  const pool = getPgPool();
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS public.newsletter_signups (
+      id bigserial PRIMARY KEY,
+      email text NOT NULL UNIQUE,
+      source text,
+      created_at timestamptz NOT NULL DEFAULT now()
+    );
+  `);
+}
+
+export default async function handler(req: Request) {
+  if (req.method !== "POST") {
+    return new Response("Method not allowed", { status: 405 });
+  }
+
+  const payload = (await req.json().catch(() => null)) as NewsletterSignupPayload | null;
+  const rawEmail = typeof payload?.email === "string" ? payload.email : "";
+  const email = rawEmail.trim().toLowerCase();
+  const sourceRaw = typeof payload?.source === "string" ? payload.source : "";
+  const source = sourceRaw.trim().slice(0, 200) || null;
+
+  if (!email) return new Response("Missing email", { status: 400 });
+  if (!isValidEmail(email)) return new Response("Invalid email", { status: 400 });
+
+  await ensureNewsletterTable();
+
+  const pool = getPgPool();
+  const result = await pool.query(
+    "INSERT INTO public.newsletter_signups (email, source) VALUES ($1, $2) ON CONFLICT (email) DO NOTHING RETURNING email",
+    [email, source],
+  );
+
+  return new Response(
+    JSON.stringify({ ok: true, created: result.rowCount > 0 }),
+    { headers: { "content-type": "application/json" } },
+  );
+}
+

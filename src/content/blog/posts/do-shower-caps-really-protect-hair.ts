@@ -1,6 +1,6 @@
 import type { BlogPost } from '../types'
 import { stripFrontmatter } from '../utils'
-import raw from '../../../../docs/blogs/do-shower-caps-really-protect-hair.md?raw'
+import raw from '../../../../docs/04-growth/content/blogs/do-shower-caps-really-protect-hair.md?raw'
 
 const post: BlogPost = {
   slug: 'do-shower-caps-really-protect-hair',

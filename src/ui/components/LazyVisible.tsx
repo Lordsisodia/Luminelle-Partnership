@@ -18,19 +18,30 @@ export const LazyVisible = ({ children, rootMargin = '200px', once = true, place
     if (!el) return
     if (visible && once) return
 
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisible(true)
-            if (once) obs.disconnect()
-          }
-        })
-      },
-      { rootMargin }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
+    if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true)
+      return
+    }
+
+    let obs: IntersectionObserver | null = null
+    try {
+      obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisible(true)
+              if (once) obs?.disconnect()
+            }
+          })
+        },
+        { rootMargin }
+      )
+      obs.observe(el)
+    } catch {
+      setVisible(true)
+    }
+
+    return () => obs?.disconnect()
   }, [rootMargin, once, visible])
 
   return <div ref={ref} className={className}>{visible ? children : placeholder}</div>

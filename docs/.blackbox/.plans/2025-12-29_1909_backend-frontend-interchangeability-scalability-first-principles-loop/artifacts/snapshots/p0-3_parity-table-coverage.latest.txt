@@ -1,0 +1,11 @@
+p0.3 parity table endpoint coverage check
+- api_only_endpoints_txt_count: 13
+- p0_3_table_count: 13
+
+missing_in_p0_3_table:
+- (none)
+
+extra_in_p0_3_table_not_in_api_only_list:
+- (none)
+
+captured_at_utc=2025-12-31T17:47:07Z

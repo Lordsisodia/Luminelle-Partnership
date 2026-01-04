@@ -1,0 +1,189 @@
+{
+  "candidates": [
+    {
+      "description": "React Hook for managing state in URL query parameters with easy serialization.",
+      "forks": 100,
+      "full_name": "pbeshai/use-query-params",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "ISC",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=2221, updated=2025-12-18T07:45:48Z); license=15/15 (ISC); time_to_value=9/10",
+      "score": 76,
+      "stars": 2221,
+      "tags": [],
+      "topics": [
+        "hooks",
+        "query",
+        "query-parameters",
+        "queryparams",
+        "querystring",
+        "react",
+        "react-hooks",
+        "reactjs",
+        "url"
+      ],
+      "updated_at": "2025-12-18T07:45:48Z",
+      "url": "https://github.com/pbeshai/use-query-params"
+    },
+    {
+      "description": "A React Hook to use URL query string as a state management",
+      "forks": 5,
+      "full_name": "rudyhuynh/use-url-search-params",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=66, updated=2025-11-26T16:57:57Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 66,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "react",
+        "react-hooks",
+        "url-query",
+        "urlsearchparams"
+      ],
+      "updated_at": "2025-11-26T16:57:57Z",
+      "url": "https://github.com/rudyhuynh/use-url-search-params"
+    },
+    {
+      "description": "\ud83c\udd99 A React hook that serializes state into the URL query string",
+      "forks": 5,
+      "full_name": "trevorblades/use-query-string",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=57, updated=2025-08-26T08:47:28Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 57,
+      "tags": [],
+      "topics": [
+        "hooks",
+        "query-string",
+        "querystring",
+        "react",
+        "react-hooks",
+        "serialization",
+        "state-management"
+      ],
+      "updated_at": "2025-08-26T08:47:28Z",
+      "url": "https://github.com/trevorblades/use-query-string"
+    },
+    {
+      "description": "React Hook for syncing TanStack Table state with URL search params.",
+      "forks": 4,
+      "full_name": "taro-28/tanstack-table-search-params",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=84, updated=2025-11-18T17:59:54Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 62,
+      "stars": 84,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "queryparams",
+        "querystring",
+        "react",
+        "search-params",
+        "tanstack-table"
+      ],
+      "updated_at": "2025-11-18T17:59:54Z",
+      "url": "https://github.com/taro-28/tanstack-table-search-params"
+    },
+    {
+      "description": "Next.js e-commerce website with Redux Toolkit for state management, dynamic charts, product filtering, pagination, and integrated Stripe payments. Built with SSR/SSG, TailwindCSS, and optimized for fast performance and SEO.",
+      "forks": 2,
+      "full_name": "NiharMondal/nextjs-ecommerce",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=15/20 (stars=22, updated=2025-12-18T03:05:21Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 59,
+      "stars": 22,
+      "tags": [
+        "commerce",
+        "returns"
+      ],
+      "topics": [
+        "chartjs",
+        "ecommerce",
+        "frontend",
+        "fullstack",
+        "mongodb",
+        "nextjs",
+        "pagination",
+        "prisma",
+        "product-filtering",
+        "react",
+        "redux-toolkit",
+        "responsive-design",
+        "rtk-query",
+        "seo",
+        "ssg",
+        "ssr",
+        "stripe",
+        "tailwindcss",
+        "typescript",
+        "web-developement"
+      ],
+      "updated_at": "2025-12-18T03:05:21Z",
+      "url": "https://github.com/NiharMondal/nextjs-ecommerce"
+    },
+    {
+      "description": "Created a dynamic, responsive Real Estate web app with React.js, Tailwind CSS, and Headless UI, featuring advanced state management filters for streamlined property discovery",
+      "forks": 7,
+      "full_name": "AnirudhaPatil-1/91acres-Real-Estate-Website",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=13/20 (stars=15, updated=2025-12-19T05:32:02Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 57,
+      "stars": 15,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "css3",
+        "headlessui",
+        "html5",
+        "javascript",
+        "react",
+        "tailwindcss"
+      ],
+      "updated_at": "2025-12-19T05:32:02Z",
+      "url": "https://github.com/AnirudhaPatil-1/91acres-Real-Estate-Website"
+    },
+    {
+      "description": "React hook to keep state using URL search params. Based on useSearchParams from react-router-dom@6",
+      "forks": 1,
+      "full_name": "jschwindt/react-use-search-params-state",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=7/20 (stars=13, updated=2024-12-05T18:29:42Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 56,
+      "stars": 13,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "react",
+        "react-hook",
+        "react-router",
+        "react-router-dom-v6",
+        "react-state",
+        "reactjs"
+      ],
+      "updated_at": "2024-12-05T18:29:42Z",
+      "url": "https://github.com/jschwindt/react-use-search-params-state"
+    }
+  ],
+  "count": 7,
+  "generated_at_utc": "2025-12-30T11:27:37Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1826_oss-discovery-github-oss-discovery-cycle-182633/oss/entries"
+  }
+}

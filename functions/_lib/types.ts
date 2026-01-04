@@ -7,11 +7,22 @@ export type Env = {
   POSTHOG_API_KEY?: string
   POSTHOG_HOST?: string
 
+  // Cloudinary signing auth (optional; legacy Vercel endpoint used x-admin-secret)
+  ADMIN_SHARED_SECRET?: string
+
+  // Cloudinary (server-side; do not expose API_SECRET to browser)
+  CLOUDINARY_CLOUD_NAME?: string
+  CLOUDINARY_API_KEY?: string
+  CLOUDINARY_API_SECRET?: string
+  CLOUDINARY_URL?: string
+
   // Internal auth (server-side)
   INTERNAL_SHARED_SECRET?: string
 
   // Shopify (app + webhooks)
   SHOPIFY_STORE_DOMAIN?: string
+  // Optional: public store domain (usually a Vite client env var); sometimes used as a fallback in functions.
+  VITE_SHOPIFY_STORE_DOMAIN?: string
   // Optional: explicitly choose the upstream host for checkout proxying (e.g. myshopify.com).
   // If omitted, falls back to SHOPIFY_STORE_DOMAIN / VITE_SHOPIFY_STORE_DOMAIN.
   SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN?: string
@@ -39,6 +50,12 @@ export type Env = {
   CART_RECOVERY_CRON_ENABLED?: string
   CART_RECOVERY_DISCOUNT_ENABLED?: string
   CART_RECOVERY_SECRET?: string
+
+  // Loyalty (optional; used by Shopify webhooks)
+  LOYALTY_POINTS_PER_GBP?: string
+
+  // Stripe (server-side; future)
+  STRIPE_SECRET_KEY?: string
 }
 
 export type PagesContext<EnvBindings = Env> = {

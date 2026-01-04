@@ -1,0 +1,21 @@
+run:
+  id: "2025-12-28_1947_deep-research-oss-competitors-step-02-competitors-core"
+  created_at: "2025-12-28T19:47:44+0700"
+  agent_id: "deep-research"
+
+inputs:
+  prompts:
+    - ".blackbox/.prompts/oss-competitors-step-02-competitors-core.md"
+  context_pack:
+    - ".blackbox/agents/deep-research/prompts/context-pack.md"
+
+model:
+  name: "<fill>"
+  temperature: "<fill>"
+
+outputs:
+  raw: "artifacts/raw.md"
+  sources: "artifacts/sources.md"
+  extracted: "artifacts/extracted.json"
+  summary: "artifacts/summary.md"
+  competitor_matrix: "artifacts/competitor-matrix.md"

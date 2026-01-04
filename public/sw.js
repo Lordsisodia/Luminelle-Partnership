@@ -18,8 +18,14 @@ const IS_LOCALHOST =
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   )
+})
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting()
+  }
 })
 
 self.addEventListener('activate', (event) => {
@@ -34,17 +40,18 @@ self.addEventListener('fetch', (event) => {
   const { request } = event
   if (request.method !== 'GET') return
   const url = new URL(request.url)
+  const isDocument = request.mode === 'navigate' || request.destination === 'document'
 
   // Avoid stale caches during local development (breaks HMR and UI iteration).
   if (IS_LOCALHOST) {
-    event.respondWith(fetch(request).catch(() => caches.match(OFFLINE_URL)))
+    event.respondWith(
+      fetch(request).catch(() => (isDocument ? caches.match(OFFLINE_URL) : Response.error()))
+    )
     return
   }
 
   // Only handle same-origin requests. Let the browser manage cross-origin caching.
   if (url.origin !== self.location.origin) return
-
-  const isDocument = request.mode === 'navigate' || request.destination === 'document'
 
   event.respondWith(
     (async () => {
@@ -70,7 +77,9 @@ self.addEventListener('fetch', (event) => {
         cache.put(request, resp.clone())
         return resp
       } catch {
-        return await cache.match(OFFLINE_URL)
+        // Never return an HTML document for failed asset requests (it breaks images/JS/CSS).
+        // If the asset isn't cached, fail the request and let the app handle it.
+        return Response.error()
       }
     })()
   )

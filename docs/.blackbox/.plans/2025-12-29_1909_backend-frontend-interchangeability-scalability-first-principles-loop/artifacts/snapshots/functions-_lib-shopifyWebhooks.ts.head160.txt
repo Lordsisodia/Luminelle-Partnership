@@ -1,0 +1,36 @@
+# source: functions/_lib/shopifyWebhooks.ts
+# captured: 2025-12-30T10:42:49Z
+
+import type { Env } from './types'
+import { hmacSha256Base64, safeEqual } from './crypto'
+
+export async function verifyShopifyWebhook(
+  request: Request,
+  env: Env,
+): Promise<{ valid: boolean; body: any | null; rawBody: string | null; hmacHeader: string | null }> {
+  const hmacHeader = request.headers.get('x-shopify-hmac-sha256') || request.headers.get('X-Shopify-Hmac-Sha256')
+  if (!hmacHeader) return { valid: false, body: null, rawBody: null, hmacHeader: null }
+
+  // Shopify signs webhook payloads with the app secret (`SHOPIFY_API_SECRET`).
+  // Some deployments historically used a separate env var name (`SHOPIFY_WEBHOOK_SECRET`) which
+  // may or may not match. To avoid an env mismatch silently breaking all webhooks, we accept either.
+  const apiSecret = env.SHOPIFY_API_SECRET || ''
+  const webhookSecret = env.SHOPIFY_WEBHOOK_SECRET || ''
+  if (!apiSecret && !webhookSecret) return { valid: false, body: null, rawBody: null, hmacHeader }
+
+  const rawBody = await request.text()
+  const expectedApi = apiSecret ? await hmacSha256Base64(apiSecret, rawBody) : null
+  const expectedWebhook =
+    webhookSecret && webhookSecret !== apiSecret ? await hmacSha256Base64(webhookSecret, rawBody) : null
+  const valid = Boolean(
+    (expectedApi && safeEqual(expectedApi, hmacHeader)) || (expectedWebhook && safeEqual(expectedWebhook, hmacHeader)),
+  )
+
+  if (!valid) return { valid: false, body: null, rawBody, hmacHeader }
+  try {
+    const body = JSON.parse(rawBody)
+    return { valid: true, body, rawBody, hmacHeader }
+  } catch {
+    return { valid: true, body: null, rawBody, hmacHeader }
+  }
+}

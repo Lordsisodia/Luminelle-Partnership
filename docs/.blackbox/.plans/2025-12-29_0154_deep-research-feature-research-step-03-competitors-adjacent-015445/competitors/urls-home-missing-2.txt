@@ -1,0 +1,3 @@
+https://strapi.io strapi
+https://www.hotjar.com hotjar
+https://retool.com retool

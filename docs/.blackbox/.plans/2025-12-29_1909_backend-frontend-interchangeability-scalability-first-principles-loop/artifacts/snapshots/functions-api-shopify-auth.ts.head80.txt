@@ -1,0 +1,41 @@
+# source: functions/api/shopify/auth.ts
+# captured: 2025-12-30T10:21:37Z
+
+import type { PagesFunction } from '../../_lib/types'
+import { randomHex } from '../../_lib/crypto'
+import { appendSetCookie } from '../../_lib/cookies'
+import { isValidShopDomain } from '../../_lib/shopifyOAuth'
+import { methodNotAllowed, text } from '../../_lib/response'
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'GET') return methodNotAllowed(['GET'])
+
+  const url = new URL(request.url)
+  const shop = url.searchParams.get('shop')
+  const host = url.searchParams.get('host') || ''
+  if (!isValidShopDomain(shop)) return text('Invalid shop', { status: 400 })
+
+  const apiKey = env.SHOPIFY_API_KEY || ''
+  const scopes = env.SCOPES || env.SHOPIFY_SCOPES || 'read_products,write_products'
+  const appUrl = env.SHOPIFY_APP_URL || url.origin
+  const callback = new URL('/api/shopify/auth/callback', appUrl).toString()
+
+  const state = randomHex(16)
+
+  const authUrl = new URL(`https://${shop}/admin/oauth/authorize`)
+  authUrl.searchParams.set('client_id', apiKey)
+  authUrl.searchParams.set('scope', scopes)
+  authUrl.searchParams.set('redirect_uri', callback)
+  authUrl.searchParams.set('state', state)
+  if (host) authUrl.searchParams.set('host', host)
+
+  const headers = new Headers({ Location: authUrl.toString() })
+  const cookieBase = 'Path=/; HttpOnly; Secure; SameSite=None; Max-Age=600'
+  appendSetCookie(headers, [
+    `shopify_state=${state}; ${cookieBase}`,
+    `shopify_shop=${shop}; ${cookieBase}`,
+  ])
+
+  return new Response('', { status: 302, headers })
+}
+

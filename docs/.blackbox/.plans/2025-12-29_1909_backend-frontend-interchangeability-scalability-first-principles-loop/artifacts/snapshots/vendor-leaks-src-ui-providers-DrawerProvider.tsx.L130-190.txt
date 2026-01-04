@@ -1,0 +1,61 @@
+   130	      const attrs = buildCheckoutAttributionAttributes()
+   131	      await Promise.race([
+   132	        setAttributes?.(attrs),
+   133	        new Promise((resolve) => setTimeout(resolve, 800)),
+   134	      ])
+   135	    } finally {
+   136	      window.location.href = checkoutUrl
+   137	    }
+   138	  }, [checkoutUrl, redirecting, setAttributes])
+   139	  const loyaltyPoints = SHOW_LOYALTY
+   140	    ? useMemo(() => {
+   141	        const raw = user?.publicMetadata?.loyaltyPoints
+   142	        return typeof raw === 'number' ? raw : 0
+   143	      }, [user?.publicMetadata?.loyaltyPoints])
+   144	    : 0
+   145	  const nextTier = 500
+   146	  const loyaltyProgress = SHOW_LOYALTY ? Math.min(100, Math.round((loyaltyPoints / nextTier) * 100)) : 0
+   147	
+   148	  const upsellProducts = useMemo(
+   149	    () => [
+   150	      {
+   151	        variantId: 'gid://shopify/ProductVariant/56829020504438',
+   152	        id: 'shower-cap',
+   153	        title: 'Lumelle Shower Cap',
+   154	        price: 14.99,
+   155	        image: '/uploads/luminele/product-feature-05.webp',
+   156	        href: '/product/lumelle-shower-cap',
+   157	      },
+   158	      {
+   159	        variantId: 'gid://shopify/ProductVariant/56852779696502',
+   160	        id: 'heatless-curler',
+   161	        title: 'Satin Overnight Curler Set',
+   162	        price: 16.99,
+   163	        image: '/uploads/curler/3.webp',
+   164	        href: '/product/satin-overnight-curler',
+   165	      },
+   166	    ],
+   167	    []
+   168	  )
+   169	  const cartIds = useMemo(() => new Set(items.map((i) => i.id)), [items])
+   170	  const filteredUpsells = useMemo(() => {
+   171	    return upsellProducts.filter((p) => !cartIds.has(p.variantId))
+   172	  }, [upsellProducts, cartIds])
+   173	
+   174	  const renderUpsellCard = useCallback(
+   175	    (p: typeof upsellProducts[number]) => {
+   176	      return (
+   177	        <div
+   178	          key={p.id}
+   179	          className="relative flex items-center gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white p-3 shadow-soft"
+   180	        >
+   181	          <img
+   182	            src={p.image}
+   183	            alt={p.title}
+   184	            className="h-14 w-14 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover"
+   185	            loading="lazy"
+   186	            decoding="async"
+   187	          />
+   188	          <div className="flex-1 text-left pr-16">
+   189	            <div className="text-sm font-semibold text-semantic-text-primary leading-tight">{p.title}</div>
+   190	            <div className="mt-1 text-xs font-semibold text-semantic-text-primary">£{p.price.toFixed(2)}</div>

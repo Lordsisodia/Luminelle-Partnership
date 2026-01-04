@@ -1,0 +1,372 @@
+{
+  "candidates": [
+    {
+      "description": "AfterShip Shipping (Postmen) API Client Library for JS (USPS, FedEx, UPS, DHL and more)",
+      "forks": 5,
+      "full_name": "postmen/postmen-sdk-js",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=7/20 (stars=14, updated=2023-03-09T07:45:08Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 61,
+      "stars": 14,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "aftership",
+        "api",
+        "postmen",
+        "sdk",
+        "shipping",
+        "shipping-api"
+      ],
+      "updated_at": "2023-03-09T07:45:08Z",
+      "url": "https://github.com/postmen/postmen-sdk-js"
+    },
+    {
+      "description": "Shipping API PHP library (USPS, FedEx, UPS and more)",
+      "forks": 91,
+      "full_name": "goshippo/shippo-php-client",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=18/20 (stars=168, updated=2025-09-13T20:18:38Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 60,
+      "stars": 168,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "carriers",
+        "dhl",
+        "fedex",
+        "php",
+        "shipping",
+        "shipping-api",
+        "shipping-label",
+        "ups",
+        "usps"
+      ],
+      "updated_at": "2025-09-13T20:18:38Z",
+      "url": "https://github.com/goshippo/shippo-php-client"
+    },
+    {
+      "description": "Shipping API Java library (USPS, FedEx, UPS and more)",
+      "forks": 38,
+      "full_name": "goshippo/shippo-java-client",
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=18/20 (stars=60, updated=2025-08-22T13:34:39Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 60,
+      "stars": 60,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "carriers",
+        "dhl",
+        "fedex",
+        "java",
+        "shipments",
+        "shipping-api",
+        "shipping-label",
+        "ups",
+        "usps"
+      ],
+      "updated_at": "2025-08-22T13:34:39Z",
+      "url": "https://github.com/goshippo/shippo-java-client"
+    },
+    {
+      "description": "PHP Client for SendCloud API",
+      "forks": 46,
+      "full_name": "picqer/sendcloud-php-client",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=17/20 (stars=44, updated=2025-09-08T21:40:13Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 59,
+      "stars": 44,
+      "tags": [],
+      "topics": [
+        "parcel",
+        "php",
+        "php-client",
+        "sendcloud",
+        "sendcloud-api"
+      ],
+      "updated_at": "2025-09-08T21:40:13Z",
+      "url": "https://github.com/picqer/sendcloud-php-client"
+    },
+    {
+      "description": "Provides a PHP client to interact with the SendCloud API in an object-oriented way.",
+      "forks": 17,
+      "full_name": "Webador/sendcloud",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=14/20 (stars=16, updated=2025-11-29T20:46:05Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 56,
+      "stars": 16,
+      "tags": [],
+      "topics": [
+        "api",
+        "client",
+        "jouwweb",
+        "parcel",
+        "php",
+        "sendcloud",
+        "sendcloud-api",
+        "webhook"
+      ],
+      "updated_at": "2025-11-29T20:46:05Z",
+      "url": "https://github.com/Webador/sendcloud"
+    },
+    {
+      "description": "AfterShip Shipping (Postmen) API Client Library for Python (USPS, FedEx, UPS, DHL and more)",
+      "forks": 11,
+      "full_name": "postmen/postmen-sdk-python",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=6/20 (stars=11, updated=2022-12-16T14:56:41Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 52,
+      "stars": 11,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "aftership",
+        "api",
+        "postmen",
+        "sdk",
+        "shipping",
+        "shipping-api"
+      ],
+      "updated_at": "2022-12-16T14:56:41Z",
+      "url": "https://github.com/postmen/postmen-sdk-python"
+    },
+    {
+      "description": "AfterShip Shipping (Postmen) API Client Library for Java (USPS, FedEx, UPS, DHL and more)",
+      "forks": 6,
+      "full_name": "postmen/postmen-sdk-java",
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=10/20 (stars=9, updated=2025-09-09T09:47:17Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 52,
+      "stars": 9,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "aftership",
+        "api",
+        "postmen",
+        "sdk",
+        "shipping",
+        "shipping-api"
+      ],
+      "updated_at": "2025-09-09T09:47:17Z",
+      "url": "https://github.com/postmen/postmen-sdk-java"
+    },
+    {
+      "description": "Shipping API Ruby library (USPS, FedEx, UPS and more)",
+      "forks": 73,
+      "full_name": "goshippo/shippo-ruby-client",
+      "language": "Ruby",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=18/20 (stars=75, updated=2025-08-14T23:35:28Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 50,
+      "stars": 75,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "carriers",
+        "dhl",
+        "fedex",
+        "ruby",
+        "shipments",
+        "shipping-api",
+        "shipping-label",
+        "ups",
+        "usps"
+      ],
+      "updated_at": "2025-08-14T23:35:28Z",
+      "url": "https://github.com/goshippo/shippo-ruby-client"
+    },
+    {
+      "description": "A PHP client library for accessing Shippo APIs",
+      "forks": 0,
+      "full_name": "shippodeveloper/shippo-sdk-php-client",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=8/20 (stars=19, updated=2019-04-09T06:45:23Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 50,
+      "stars": 19,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2019-04-09T06:45:23Z",
+      "url": "https://github.com/shippodeveloper/shippo-sdk-php-client"
+    },
+    {
+      "description": "A Shopify App to integrate with easypost fulfillment service",
+      "forks": 7,
+      "full_name": "sanjucta/shopify-easypost",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=6/20 (stars=10, updated=2023-07-11T12:16:41Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 50,
+      "stars": 10,
+      "tags": [
+        "commerce",
+        "shipping"
+      ],
+      "topics": [],
+      "updated_at": "2023-07-11T12:16:41Z",
+      "url": "https://github.com/sanjucta/shopify-easypost"
+    },
+    {
+      "description": "client for DHL Business Customer Shipping API version 2",
+      "forks": 8,
+      "full_name": "webit-de/dhl-bcs",
+      "language": "Ruby",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=6/20 (stars=12, updated=2024-05-13T12:15:52Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 48,
+      "stars": 12,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "dhl",
+        "dhl-api",
+        "gem",
+        "ruby",
+        "soap"
+      ],
+      "updated_at": "2024-05-13T12:15:52Z",
+      "url": "https://github.com/webit-de/dhl-bcs"
+    },
+    {
+      "description": "ruby client for sohu sendcloud api",
+      "forks": 6,
+      "full_name": "kevyu/sendcloud",
+      "language": "Ruby",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=6/20 (stars=10, updated=2023-03-10T09:23:10Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 48,
+      "stars": 10,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2023-03-10T09:23:10Z",
+      "url": "https://github.com/kevyu/sendcloud"
+    },
+    {
+      "description": "Ruby Client for the SendCloud API",
+      "forks": 9,
+      "full_name": "peterberkenbosch/sendcloud",
+      "language": "Ruby",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=5/20 (stars=7, updated=2023-09-26T03:22:26Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 47,
+      "stars": 7,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "hacktoberfest",
+        "hacktoberfest2021",
+        "ruby",
+        "sendcloud",
+        "shipping"
+      ],
+      "updated_at": "2023-09-26T03:22:26Z",
+      "url": "https://github.com/peterberkenbosch/sendcloud"
+    },
+    {
+      "description": "AfterShip Shipping (Postmen) API Client Library for PHP (USPS, FedEx, UPS, DHL and more)",
+      "forks": 11,
+      "full_name": "postmen/postmen-sdk-php",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=10/20 (stars=11, updated=2025-07-04T10:35:11Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 42,
+      "stars": 11,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "aftership",
+        "api",
+        "postmen",
+        "sdk",
+        "shipping",
+        "shipping-api"
+      ],
+      "updated_at": "2025-07-04T10:35:11Z",
+      "url": "https://github.com/postmen/postmen-sdk-php"
+    },
+    {
+      "description": "AfterShip Shipping (Postmen) API Client Library for Ruby (USPS, FedEx, UPS, DHL and more)",
+      "forks": 3,
+      "full_name": "postmen/postmen-sdk-ruby",
+      "language": "Ruby",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=5/20 (stars=7, updated=2022-12-16T14:56:00Z); license=10/15 (NOASSERTION); time_to_value=5/10",
+      "score": 42,
+      "stars": 7,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "aftership",
+        "api",
+        "api-client",
+        "postmen",
+        "ruby",
+        "sdk",
+        "shipping",
+        "shipping-api"
+      ],
+      "updated_at": "2022-12-16T14:56:00Z",
+      "url": "https://github.com/postmen/postmen-sdk-ruby"
+    },
+    {
+      "description": "Royal Mail Pro Shipping v3 REST API PHP Client",
+      "forks": 10,
+      "full_name": "zVPS/royal-mail-shipping-rest-api-client",
+      "language": "PHP",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=5/20 (stars=8, updated=2023-05-04T10:27:09Z); license=7/15 (GPL-3.0); time_to_value=5/10",
+      "score": 39,
+      "stars": 8,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [
+        "php",
+        "royal-mail",
+        "shipping-api"
+      ],
+      "updated_at": "2023-05-04T10:27:09Z",
+      "url": "https://github.com/zVPS/royal-mail-shipping-rest-api-client"
+    }
+  ],
+  "count": 16,
+  "generated_at_utc": "2025-12-30T10:42:08Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1741_oss-discovery-github-oss-discovery-cycle-174112/oss/entries"
+  }
+}

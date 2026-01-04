@@ -1,0 +1,20 @@
+run:
+  id: "<plan-folder-name>"
+  created_at: "<YYYY-MM-DDTHH:MM:SS±ZZZZ>"
+  agent_id: "<agent-id>"
+
+inputs:
+  prompts:
+    - "<path-to-prompt>"
+  context_pack:
+    - "docs/.blackbox/.prompts/deepresearch/context-pack.md"
+
+model:
+  name: "<model-name>"
+  temperature: "<number>"
+
+outputs:
+  raw: "artifacts/raw.md"
+  sources: "artifacts/sources.md"
+  extracted: "artifacts/extracted.json"
+  summary: "artifacts/summary.md"

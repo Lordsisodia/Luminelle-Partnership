@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react'
 import { cdnUrl } from '@/utils/cdn'
 import { BlogLayout } from '@blog/ui/layouts'
 import { Seo } from '@/components/Seo'
+import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Blog' },
@@ -47,7 +48,7 @@ export const BlogIndexPage = () => {
   const description =
     'Guides, routines, and creator tips to keep silk presses, curls, and braids frizz-free with Lumelle.'
   const heroImage = cdnUrl(featured[0]?.cover || '/uploads/luminele/product-feature-01.webp')
-  const url = 'https://lumelle.com/blog'
+  const url = toPublicUrl('/blog')
 
   // Simple Blog schema
   const ld = {
@@ -61,7 +62,7 @@ export const BlogIndexPage = () => {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lumelle.com/' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: toPublicUrl('/') },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: url },
     ],
   }
@@ -120,7 +121,7 @@ export const BlogIndexPage = () => {
                 >
                   <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
                     <img
-                      src={post.cover}
+                      src={cdnUrl(post.cover)}
                       alt={post.title}
                       className="h-full w-full object-cover"
                       width={800}
@@ -194,7 +195,7 @@ export const BlogIndexPage = () => {
                 >
                   <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
                     <img
-                      src={post.cover}
+                      src={cdnUrl(post.cover)}
                       alt={post.title}
                       className="h-full w-full object-cover"
                       width={600}

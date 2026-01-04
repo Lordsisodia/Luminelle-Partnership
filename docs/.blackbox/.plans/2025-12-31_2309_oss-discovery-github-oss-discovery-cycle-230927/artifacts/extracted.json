@@ -1,0 +1,39 @@
+{
+  "candidates": [
+    {
+      "description": "A library to implement the transactional outbox pattern for PostgreSQL, a message broker or event stream, and TypeScript.",
+      "forks": 2,
+      "full_name": "Zehelein/pg-transactional-outbox",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=17/20 (stars=35, updated=2025-12-28T16:28:17Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 71,
+      "stars": 35,
+      "tags": [
+        "support"
+      ],
+      "topics": [
+        "inbox",
+        "inbox-pattern",
+        "logical-replication",
+        "microservices",
+        "nodejs",
+        "outbox",
+        "outbox-pattern",
+        "postgres",
+        "postgresql",
+        "transactional-inbox",
+        "transactional-outbox",
+        "typescript"
+      ],
+      "updated_at": "2025-12-28T16:28:17Z",
+      "url": "https://github.com/Zehelein/pg-transactional-outbox"
+    }
+  ],
+  "count": 1,
+  "generated_at_utc": "2025-12-31T16:09:54Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-31_2309_oss-discovery-github-oss-discovery-cycle-230927/oss/entries"
+  }
+}

@@ -51,7 +51,8 @@ export type HomeConfig = {
     rating: number
     reviews: number
     pills: string[]
-    price: string
+    priceNow: number
+    priceWas?: number
     bullets: string[]
     image: string
     href: string
@@ -70,10 +71,11 @@ const pdpTeaserCap: HomeConfig['pdpTeaser'] = {
   subtitle: 'Creator-loved protection for every style',
   description:
     'Dual-layer satin with a waterproof core keeps silk presses, curls, and braids flawless through every steamy shower.',
-  rating: 4.9,
-  reviews: 1240,
+  rating: 4.8,
+  reviews: 100,
   pills: ['No-frizz seal', 'Luxury feel', 'Reusable + eco'],
-  price: '£14.99 (was £19.99)',
+  priceNow: 14.99,
+  priceWas: 19.99,
   bullets: [
     'Reusable waterproof',
     'Satin lined',
@@ -93,7 +95,8 @@ const pdpTeaserCurler: HomeConfig['pdpTeaser'] = {
   rating: 4.8,
   reviews: 50,
   pills: ['Heatless curls', 'Overnight set', 'Satin smooth'],
-  price: '£16.99 (was £21.99)',
+  priceNow: 16.99,
+  priceWas: 21.99,
   bullets: [
     'Satin heatless curling rod',
     'Luxury satin bonnet',

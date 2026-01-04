@@ -52,7 +52,8 @@ export type HomeConfig = {
     rating: number
     reviews: number
     pills: string[]
-    price: string
+    priceNow: number
+    priceWas?: number
     bullets: string[]
     image: string
     href: string

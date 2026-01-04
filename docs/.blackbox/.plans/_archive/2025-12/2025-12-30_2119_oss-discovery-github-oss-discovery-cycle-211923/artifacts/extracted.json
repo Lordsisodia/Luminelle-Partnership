@@ -1,0 +1,39 @@
+{
+  "candidates": [
+    {
+      "description": "React code blocks and code snippet components",
+      "forks": 78,
+      "full_name": "rajinwonderland/react-code-blocks",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=636, updated=2025-11-27T14:16:37Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 636,
+      "tags": [],
+      "topics": [
+        "highlightjs",
+        "hljs",
+        "js",
+        "jsx",
+        "mdx",
+        "prismjs",
+        "react",
+        "react-code-blocks",
+        "react-codemirror",
+        "react-codemirror2",
+        "react-components",
+        "remark",
+        "syntax-highlighting",
+        "syntax-theme"
+      ],
+      "updated_at": "2025-11-27T14:16:37Z",
+      "url": "https://github.com/rajinwonderland/react-code-blocks"
+    }
+  ],
+  "count": 1,
+  "generated_at_utc": "2025-12-30T14:19:46Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_2119_oss-discovery-github-oss-discovery-cycle-211923/oss/entries"
+  }
+}

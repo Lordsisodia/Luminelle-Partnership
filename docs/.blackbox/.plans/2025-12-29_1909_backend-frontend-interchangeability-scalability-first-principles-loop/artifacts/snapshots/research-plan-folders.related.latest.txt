@@ -1,0 +1,9 @@
+captured_at=2025-12-31T12:09:55Z
+
+2025-12-28_2014_deep-research-architecture-ui-infra-plug-in-ports-adapters
+2025-12-29_0741_ui-infra-key-mapping-migration-remove-shopify-gids
+2025-12-29_1844_architecture-map-improvements-src
+2025-12-29_1901_supabase-multitenancy-decoupled-backend-cloudflare
+2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop
+2025-12-31_0551_component-mining-mini-poc-blog-sections-kit
+2025-12-31_0647_component-mining-mini-poc-storefront-primitives-kit

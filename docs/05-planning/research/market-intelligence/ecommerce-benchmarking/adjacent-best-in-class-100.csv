@@ -1,0 +1,102 @@
+store,url,niche,why_it_matters,features_to_steal
+Glossier,https://www.glossier.com,Beauty DTC,Community + content-led conversion,UGC loops; routine building; reviews/photos; fast checkout
+Sephora,https://www.sephora.com,Beauty marketplace,Discovery + trust at scale,Filtering; ratings/reviews; sampling framing; loyalty UX
+Ulta,https://www.ulta.com,Beauty marketplace,Promos + loyalty mechanics at scale,Offer architecture; loyalty; personalized recs; omnichannel cues
+Rare Beauty,https://www.rarebeauty.com,Beauty DTC,Mission-driven brand + social proof,Creator merchandising; PDP media; bundles
+OUAI,https://www.ouai.com,Beauty DTC,High AOV DTC with routine framing,Bundles; subscriptions; PDP copy; reviews
+Drunk Elephant,https://www.drunk-elephant.com,Beauty DTC,Product education reduces uncertainty,Ingredient education; routines; PDP clarity; trust cues
+Fenty Beauty,https://fentybeauty.com,Beauty DTC,Drop + newness merchandising,Launch cadence; shade range navigation; UGC; bundles
+Tatcha,https://www.tatcha.com,Beauty DTC,Premium skincare conversion,Routine finder; PDP education; bundles; gifting
+Paula's Choice,https://www.paulaschoice.com,Beauty DTC,Education + skin concerns navigation,Problem-first navigation; routines; quizzes; subscriptions
+The Ordinary,https://theordinary.com,Beauty DTC,Simple value proposition + transparency,Ingredient clarity; collections; PDP education
+The Inkey List,https://www.theinkeylist.com,Beauty DTC,Concern-led shopping flow,Skin concerns navigation; routines; bundles
+Supergoop,https://supergoop.com,Beauty DTC,Education for category adoption,Finder/quiz; PDP education; bundles; reviews
+Summer Fridays,https://summerfridays.com,Beauty DTC,Brand aesthetics + social proof,UGC/creator cues; clean PDP; bundles
+Kiehl's,https://www.kiehls.com,Beauty DTC,Loyalty + sampling,Rewards; bundles; subscriptions; gifting
+Aesop,https://www.aesop.com,Beauty DTC,Premium brand UX,Minimalist design; store locator; storytelling; gifting
+Lush,https://www.lush.com,Beauty retail,Product discovery + gifting,Category storytelling; gifting; store locator
+ColourPop,https://colourpop.com,Beauty DTC,Drop-driven merchandising,Newness; bundles; promos; UGC
+e.l.f. Cosmetics,https://www.elfcosmetics.com,Beauty DTC,Mass market promos + loyalty,Promos; bundles; loyalty; creator cues
+MAC Cosmetics,https://www.maccosmetics.com,Beauty DTC,Shade selection + artistry,Shade navigation; PDP media; tutorials; bundles
+Charlotte Tilbury,https://www.charlottetilbury.com,Beauty DTC,High-conversion merchandising,Bundles; routine sets; PDP education; social proof
+Dermstore,https://www.dermstore.com,Beauty marketplace,Marketplace-style trust for skincare,Filtering; reviews; subscriptions; rewards
+Cult Beauty,https://www.cultbeauty.com,Beauty retail,Editorial + discovery,Curation; filtering; gift sets; reviews
+Lookfantastic,https://www.lookfantastic.com,Beauty retail,Promo-heavy beauty retail,Offer architecture; bundles; loyalty; upsells
+Ritual,https://www.ritual.com,Supplements subscription,Subscription onboarding done right,Subscription UX; trust/ingredients; cancellation transparency
+AG1,https://athleticgreens.com,Supplements DTC,Offer architecture + bundles,Offer design; subscription anchoring; trust framing
+Huel,https://huel.com,Nutrition DTC,Education-driven conversion,Comparisons; subscription options; onboarding
+Seed,https://seed.com,Supplements DTC,Science-first trust building,Education; subscription; guarantees; reviews
+Thorne,https://www.thorne.com,Supplements DTC,Premium supplements trust,Ingredient education; subscriptions; bundles
+Vitamin Shoppe,https://www.vitaminshoppe.com,Supplements retail,Large catalog discovery,Filtering; promos; loyalty; subscriptions
+HelloFresh,https://www.hellofresh.com,Subscription food,Onboarding + personalization at scale,Plan builder; preference capture; retention hooks
+Blue Apron,https://www.blueapron.com,Subscription food,Meal kit onboarding + plan selection,Plan builder; menu merchandising; subscriptions
+ButcherBox,https://www.butcherbox.com,Subscription food,High-trust subscription conversion,Bundle builder; subscription anchoring; trust cues
+Thrive Market,https://thrivemarket.com,Membership marketplace,Membership economics & retention loops,Membership framing; deal UX; reorder flows
+Misfits Market,https://www.misfitsmarket.com,Subscription grocery,Value + sustainability framing,Onboarding; personalization; bundles; retention hooks
+Imperfect Foods,https://www.imperfectfoods.com,Subscription grocery,Subscription grocery with preference capture,Onboarding; delivery scheduling; retention hooks
+Liquid Death,https://liquiddeath.com,Beverage DTC,Brand voice drives conversion,Storytelling; bundles; subscriptions; UGC
+Athletic Brewing,https://athleticbrewing.com,Beverage DTC,Category education + subscriptions,Subscriptions; variety packs; reviews; story
+OLIPOP,https://drinkolipop.com,Beverage DTC,Benefits-led beverage conversion,Bundles; subscriptions; reviews; education
+Hint Water,https://www.drinkhint.com,Beverage DTC,Simple offer + subscriptions,Subscriptions; bundles; promos
+Blue Bottle Coffee,https://bluebottlecoffee.com,Coffee DTC,Premium product storytelling,Subscriptions; bundles; gift sets; education
+La Colombe,https://www.lacolombe.com,Coffee DTC,Upsell bundles + subscriptions,Subscriptions; bundles; reviews; PDP education
+Stumptown Coffee Roasters,https://www.stumptowncoffee.com,Coffee DTC,Brand storytelling + subscription,Subscriptions; roast education; gift sets
+Nespresso,https://www.nespresso.com,Coffee retail,Device + consumables ecosystem,Accessory bundling; subscriptions; loyalty
+Trade Coffee,https://www.drinktrade.com,Coffee subscription,Taste quiz personalization,Quiz; subscriptions; recommendations; gifting
+Cometeer,https://cometeer.com,Coffee subscription,High-AOV subscription onboarding,Subscriptions; onboarding; education; trials
+Chewy,https://www.chewy.com,Pet e-commerce,Retention + autoship done well,Autoship UX; reorder flows; support cues
+BarkBox,https://www.barkbox.com,Subscription pet,Fun onboarding + gifting,Subscription UX; gifting flows; retention bundles
+Petco,https://www.petco.com,Pet retail,Omnichannel retail + subscriptions,Pickup cues; membership; subscriptions; services
+PetSmart,https://www.petsmart.com,Pet retail,Services + retail integration,Appointments; loyalty; pickup cues
+The Farmer's Dog,https://www.thefarmersdog.com,Subscription pet food,Personalization for trust,Quiz onboarding; subscriptions; trust cues
+Nom Nom,https://www.nomnomnow.com,Subscription pet food,Subscription meal personalization,Quiz onboarding; subscriptions; delivery scheduling
+Brooklinen,https://www.brooklinen.com,Home DTC,Bundle-first merchandising,Bundles; comparisons; reviews; fast checkout
+Parachute,https://www.parachutehome.com,Home DTC,Premium positioning with education,Material education; room navigation; PDP specs
+Article,https://www.article.com,Furniture DTC,Large-ticket confidence building,Delivery/returns clarity; reviews; PDP specs; financing
+IKEA,https://www.ikea.com,Home retail,Discovery at massive scale,Room merchandising; inventory/store integration
+Wayfair,https://www.wayfair.com,Home retail,Catalog discovery at scale,Filtering; reviews; delivery estimates; financing
+Casper,https://casper.com,Home DTC,Mattress conversion + de-risking,Trial framing; comparisons; reviews; financing
+Saatva,https://www.saatva.com,Home DTC,Premium mattress trust,Delivery/trial clarity; concierge; reviews; financing
+Joybird,https://joybird.com,Furniture DTC,Customization + swatches,Configurator; swatch ordering; delivery clarity
+Ruggable,https://ruggable.com,Home DTC,Product education + bundles,How-it-works; size guidance; bundles
+Boll & Branch,https://www.bollandbranch.com,Home DTC,Premium basics conversion,Trust cues; reviews; bundles; gifting
+Crate & Barrel,https://www.crateandbarrel.com,Home retail,Room merchandising + registry,Room inspiration; registry; omnichannel cues
+West Elm,https://www.westelm.com,Home retail,Design-led merchandising,Room inspiration; filtering; registry; delivery estimates
+Pottery Barn,https://www.potterybarn.com,Home retail,Registry + room sets,Registry; room sets; delivery estimates
+Williams Sonoma,https://www.williams-sonoma.com,Home retail,Cooking ecosystem merchandising,Bundles; subscriptions; registry; content
+Apple,https://www.apple.com,Electronics DTC,Best-in-class product education,Comparison tools; configurators; trade-in flows
+Samsung,https://www.samsung.com,Electronics DTC,Device configurators + trade-in,Configurator; financing; trade-in; bundles
+Google Store,https://store.google.com,Electronics DTC,Simple bundles + financing,Bundles; financing; trade-in; fast checkout
+Best Buy,https://www.bestbuy.com,Electronics retail,Retail trust + pickup,Pickup cues; warranties; reviews; financing
+Sonos,https://www.sonos.com,Electronics DTC,Premium audio education,Product comparison; bundles; setup guidance
+Bose,https://www.bose.com,Electronics DTC,Trust + comparisons,Comparisons; bundles; financing; reviews
+Dyson,https://www.dyson.com,Appliances DTC,High-AOV specs + trust,PDP specs; comparisons; financing; warranty
+Peloton,https://www.onepeloton.com,Fitness DTC,Hardware + subscription bundling,Financing; subscription anchoring; onboarding
+Garmin,https://www.garmin.com,Electronics DTC,Configurator + comparisons,Product finder; comparisons; bundles; warranty
+B&H Photo Video,https://www.bhphotovideo.com,Electronics retail,Catalog discovery for pros,Filtering; specs; reviews; comparisons
+REI,https://www.rei.com,Outdoor retail,Trust + education-driven shopping,Expert content; filters; reviews; pickup cues
+Patagonia,https://www.patagonia.com,Outdoor DTC,Values-led trust + repair economy,Storytelling; repair/resale messaging; education
+Backcountry,https://www.backcountry.com,Outdoor retail,Discovery for outdoors,Filtering; expert content; reviews; chat/support
+The North Face,https://www.thenorthface.com,Outdoor DTC,Omnichannel + drops,Drops; membership; product education
+Arc'teryx,https://arcteryx.com,Outdoor DTC,Premium outdoor education,Product education; sizing; store locator
+Salomon,https://www.salomon.com,Outdoor DTC,Performance product guidance,Product finder; sizing; reviews; bundles
+Decathlon,https://www.decathlon.com,Outdoor retail,Value + category breadth,Filtering; comparisons; pickup cues; reviews
+Dick's Sporting Goods,https://www.dickssportinggoods.com,Outdoor retail,Retail trust + services,Pickup cues; rewards; financing; reviews
+Warby Parker,https://www.warbyparker.com,Eyewear DTC,Try-before-buy confidence systems,Home try-on; store locator; fit guidance
+Zenni Optical,https://www.zennioptical.com,Eyewear DTC,Low-friction eyewear purchase,Virtual try-on; configurator; fast checkout
+Ray-Ban,https://www.ray-ban.com,Eyewear DTC,Product personalization,Personalization; bundles; store locator
+Away,https://www.awaytravel.com,Travel DTC,Premium physical product conversion,PDP specs; warranty framing; bundling accessories
+Rimowa,https://www.rimowa.com,Travel DTC,Luxury product storytelling,Premium PDP; warranties; store locator
+Samsonite,https://www.samsonite.com,Travel retail,Catalog + filtering,Filtering; bundles; warranties; promos
+TUMI,https://www.tumi.com,Travel DTC,Luxury personalization,Personalization; bundles; store locator
+Amazon,https://www.amazon.com,Marketplace,Speed and reduced friction,Checkout speed; recommendations; reviews density
+Etsy,https://www.etsy.com,Marketplace,Personalization + discovery loops,Search relevance; trust mechanisms; personalization
+eBay,https://www.ebay.com,Marketplace,Marketplace trust + deals,Bidding UX; seller trust; filtering
+Target,https://www.target.com,Marketplace,Omnichannel retail UX,Pickup cues; bundles; loyalty; reviews
+Walmart,https://www.walmart.com,Marketplace,Speed + marketplace,Pickup cues; subscriptions; recommendations; reviews
+Poshmark,https://poshmark.com,Resale marketplace,Resale discovery + community,Social selling; search; trust cues; offers
+The RealReal,https://www.therealreal.com,Resale marketplace,Luxury authentication trust,Authentication cues; condition grading; returns clarity
+Depop,https://www.depop.com,Resale marketplace,Social marketplace conversion,Social feed; offers; messaging; trust cues
+StockX,https://stockx.com,Resale marketplace,Market price transparency,Price charts; authenticity; bids/asks
+Rent the Runway,https://www.renttherunway.com,Rental marketplace,Rental subscription model,Membership tiers; inventory UX; fit guidance
+

@@ -1,0 +1,61 @@
+{
+  "count": 2,
+  "exclude_keywords": [
+    "awesome"
+  ],
+  "exclude_regex": "\\b(portfolio|resume|curriculum|cv|homework|assignment|course|semester|leetcode|tutorial|cheatsheet|whitepaper|paper|book|erc20|ethereum|blockchain|ico|crowdsale|landofcoder|codecanyon|envato|ticksy)\\b",
+  "excluded_results_count": 7,
+  "generated_at_utc": "2025-12-30T23:29:06Z",
+  "include_archived": true,
+  "include_forks": false,
+  "min_stars": 5,
+  "queries_used": [
+    "topic:return-portal stars:>=5 fork:false",
+    "topic:returns-portal stars:>=5 fork:false",
+    "topic:reverse-logistics stars:>=5 fork:false",
+    "topic:return-label stars:>=5 fork:false",
+    "\"return label\" shopify stars:>=5 fork:false",
+    "\"exchange\" shopify \"store credit\" stars:>=5 fork:false",
+    "\"store credit\" shopify returns stars:>=5 fork:false",
+    "\"return portal\" shopify stars:>=5 fork:false",
+    "\"returns portal\" shopify stars:>=5 fork:false",
+    "\"return merchandise authorization\" ecommerce stars:>=5 fork:false",
+    "\"rma\" ecommerce returns stars:>=5 fork:false",
+    "\"return portal\" ecommerce stars:>=5 fork:false",
+    "\"returns management\" ecommerce stars:>=5 fork:false",
+    "\"reverse logistics\" ecommerce stars:>=5 fork:false",
+    "\"store credit\" returns ecommerce stars:>=5 fork:false",
+    "\"return label\" ecommerce stars:>=5 fork:false",
+    "\"spree\" rma stars:>=5 fork:false",
+    "\"solidus\" store credit stars:>=5 fork:false",
+    "\"saleor\" returns stars:>=5 fork:false",
+    "\"magento2\" rma stars:>=5 fork:false",
+    "\"magento 2\" rma stars:>=5 fork:false",
+    "\"woocommerce\" returns plugin stars:>=5 fork:false"
+  ],
+  "repos": [
+    {
+      "description": "Automate creating/renewing Xray accounts on a **3x-ui** panel straight from **WooCommerce**. The plugin calls a secure **Cloudflare Worker**; the Worker logs into 3x-ui, adds/upserts the client, and returns subscription details to show in **My Account**.",
+      "full_name": "ehsanking/xui-sales-associate",
+      "integration_score": 5,
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "stars": 13,
+      "updated_at": "2025-12-25T13:38:57Z",
+      "url": "https://github.com/ehsanking/xui-sales-associate"
+    },
+    {
+      "description": "Self-service RMA for Magento.",
+      "full_name": "auroraextensions/simplereturns",
+      "integration_score": 4,
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 22,
+      "updated_at": "2025-05-28T03:07:50Z",
+      "url": "https://github.com/auroraextensions/simplereturns"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

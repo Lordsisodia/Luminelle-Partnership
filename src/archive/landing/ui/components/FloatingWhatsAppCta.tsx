@@ -45,13 +45,15 @@ export const FloatingWhatsAppCta = ({
 
   return (
     <div
-      className={`pointer-events-none fixed inset-x-0 bottom-6 z-50 px-4 transition-opacity duration-300 md:hidden ${
+      aria-hidden={!shouldShow}
+      className={`pointer-events-none fixed inset-x-0 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-50 px-4 transition-opacity duration-300 md:hidden ${
         shouldShow ? 'opacity-100' : 'opacity-0'
       }`}
     >
       <button
         onClick={onClick}
         type="button"
+        tabIndex={shouldShow ? 0 : -1}
         className="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-brand-peach px-6 py-4 text-lg font-semibold text-brand-cocoa shadow-soft transition hover:-translate-y-0.5"
       >
         {label}

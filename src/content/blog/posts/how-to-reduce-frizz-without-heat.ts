@@ -1,6 +1,6 @@
 import type { BlogPost } from '../types'
 import { stripFrontmatter } from '../utils'
-import raw from '../../../../docs/blogs/how-to-reduce-frizz-without-heat.md?raw'
+import raw from '../../../../docs/04-growth/content/blogs/how-to-reduce-frizz-without-heat.md?raw'
 
 const post: BlogPost = {
   slug: 'how-to-reduce-frizz-without-heat',

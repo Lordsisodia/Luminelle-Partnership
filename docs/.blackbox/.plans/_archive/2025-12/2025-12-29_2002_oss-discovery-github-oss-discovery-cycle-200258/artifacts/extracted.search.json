@@ -1,0 +1,1975 @@
+{
+  "candidates": [
+    {
+      "description": "Payload is the open-source, fullstack Next.js framework, giving you instant backend superpowers. Get a full TypeScript backend and admin panel instantly. Use Payload as a headless CMS or for building powerful applications.",
+      "forks": 0,
+      "full_name": "payloadcms/payload",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=39582, updated=2025-12-29T12:42:12Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 39582,
+      "tags": [
+        "admin",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:42:12Z",
+      "url": "https://github.com/payloadcms/payload"
+    },
+    {
+      "description": "Platform to build admin panels, internal tools, and dashboards. Integrates with 25+ databases and any API.",
+      "forks": 0,
+      "full_name": "appsmithorg/appsmith",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=38764, updated=2025-12-29T09:53:18Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 38764,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T09:53:18Z",
+      "url": "https://github.com/appsmithorg/appsmith"
+    },
+    {
+      "description": "A React Framework for building  internal tools, admin panels, dashboards & B2B apps with unmatched flexibility.",
+      "forks": 0,
+      "full_name": "refinedev/refine",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=33724, updated=2025-12-29T11:34:58Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 33724,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T11:34:58Z",
+      "url": "https://github.com/refinedev/refine"
+    },
+    {
+      "description": "A frontend Framework for single-page applications on top of REST/GraphQL APIs, using TypeScript, React and Material Design",
+      "forks": 0,
+      "full_name": "marmelab/react-admin",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=26434, updated=2025-12-29T08:57:47Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 26434,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T08:57:47Z",
+      "url": "https://github.com/marmelab/react-admin"
+    },
+    {
+      "description": "Open-source platform to build and deploy AI agent workflows.",
+      "forks": 0,
+      "full_name": "simstudioai/sim",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=24640, updated=2025-12-29T12:10:04Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 24640,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:10:04Z",
+      "url": "https://github.com/simstudioai/sim"
+    },
+    {
+      "description": "A fully open-source headless CMS that supports Markdown and Visual Editing",
+      "forks": 0,
+      "full_name": "tinacms/tinacms",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=13020, updated=2025-12-29T05:40:59Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 13020,
+      "tags": [
+        "support",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T05:40:59Z",
+      "url": "https://github.com/tinacms/tinacms"
+    },
+    {
+      "description": "Open-source feature management platform",
+      "forks": 0,
+      "full_name": "Unleash/unleash",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=13009, updated=2025-12-29T05:35:14Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 13009,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T05:35:14Z",
+      "url": "https://github.com/Unleash/unleash"
+    },
+    {
+      "description": "Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool.",
+      "forks": 0,
+      "full_name": "illacloud/illa-builder",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=12307, updated=2025-12-29T05:41:00Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 12307,
+      "tags": [
+        "admin",
+        "support",
+        "cms",
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T05:41:00Z",
+      "url": "https://github.com/illacloud/illa-builder"
+    },
+    {
+      "description": "Open-Source Chrome extension for AI-powered web automation. Run multi-agent workflows using your own LLM API key. Alternative to OpenAI Operator.",
+      "forks": 0,
+      "full_name": "nanobrowser/nanobrowser",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=11742, updated=2025-12-29T10:19:08Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 11742,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T10:19:08Z",
+      "url": "https://github.com/nanobrowser/nanobrowser"
+    },
+    {
+      "description": "Resolve production issues, fast. An open source observability platform unifying session replays, logs, metrics, traces and errors powered by ClickHouse and OpenTelemetry.",
+      "forks": 0,
+      "full_name": "hyperdxio/hyperdx",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=9197, updated=2025-12-29T09:10:10Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 9197,
+      "tags": [
+        "analytics",
+        "observability"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T09:10:10Z",
+      "url": "https://github.com/hyperdxio/hyperdx"
+    },
+    {
+      "description": "Open source headless commerce that\u2019s fast, flexible, and built to scale,launch stunning storefronts that convert and grow your business without limits.",
+      "forks": 0,
+      "full_name": "bagisto/nextjs-commerce",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=3472, updated=2025-12-28T12:39:16Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 3472,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T12:39:16Z",
+      "url": "https://github.com/bagisto/nextjs-commerce"
+    },
+    {
+      "description": "The config web stack for business apps - build internal tools, client portals, web apps, admin panels, dashboards, web sites, and CRUD apps with YAML or JSON.",
+      "forks": 0,
+      "full_name": "lowdefy/lowdefy",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=2921, updated=2025-12-26T13:54:23Z); license=15/15 (Apache-2.0); time_to_value=9/10",
+      "score": 76,
+      "stars": 2921,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-26T13:54:23Z",
+      "url": "https://github.com/lowdefy/lowdefy"
+    },
+    {
+      "description": "Laminar - open-source all-in-one platform for engineering AI products. Create data flywheel for your AI app. Traces, Evals, Datasets, Labels. YC S24.",
+      "forks": 0,
+      "full_name": "lmnr-ai/lmnr",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=2487, updated=2025-12-28T17:47:09Z); license=15/15 (Apache-2.0); time_to_value=9/10",
+      "score": 76,
+      "stars": 2487,
+      "tags": [
+        "shipping"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T17:47:09Z",
+      "url": "https://github.com/lmnr-ai/lmnr"
+    },
+    {
+      "description": "Netlify/Decap CMS successor. Fast, lightweight, Git-based headless CMS. Modern UX, first-class i18n support, mobile support + 100s of improvements. Framework-agnostic, open source & free.",
+      "forks": 0,
+      "full_name": "sveltia/sveltia-cms",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=1996, updated=2025-12-29T04:41:51Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1996,
+      "tags": [
+        "support",
+        "cms",
+        "auth"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T04:41:51Z",
+      "url": "https://github.com/sveltia/sveltia-cms"
+    },
+    {
+      "description": "[Not actively maintained] Toolpad: Full stack components and low-code builder for dashboards and internal apps.",
+      "forks": 0,
+      "full_name": "mui/toolpad",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1705, updated=2025-12-28T07:24:22Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1705,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T07:24:22Z",
+      "url": "https://github.com/mui/toolpad"
+    },
+    {
+      "description": "Trench \u2014 Open-Source Analytics Infrastructure. A single production-ready Docker image built on ClickHouse, Kafka, and Node.js for tracking events. Easily build product analytics dashboards, LLM RAGs, observability platforms, or any other analytics product.",
+      "forks": 0,
+      "full_name": "FrigadeHQ/trench",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1613, updated=2025-12-23T16:44:28Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1613,
+      "tags": [
+        "admin",
+        "shipping",
+        "analytics",
+        "observability"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-23T16:44:28Z",
+      "url": "https://github.com/FrigadeHQ/trench"
+    },
+    {
+      "description": "An open source headless CMS / real-time database. Powerful table editor, full-text search, and SDKs for JS / React / Svelte.",
+      "forks": 0,
+      "full_name": "atomicdata-dev/atomic-server",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1458, updated=2025-12-29T10:46:46Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1458,
+      "tags": [
+        "cms",
+        "search"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T10:46:46Z",
+      "url": "https://github.com/atomicdata-dev/atomic-server"
+    },
+    {
+      "description": "BPMN 2.0 execution engine. Open source javascript workflow engine.",
+      "forks": 0,
+      "full_name": "paed01/bpmn-engine",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=958, updated=2025-12-28T02:16:19Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 958,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T02:16:19Z",
+      "url": "https://github.com/paed01/bpmn-engine"
+    },
+    {
+      "description": "Open source workflow automation platform built for developers - full observability and code exportability!",
+      "forks": 0,
+      "full_name": "bubblelabai/BubbleLab",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=944, updated=2025-12-29T07:55:38Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 944,
+      "tags": [
+        "workflows",
+        "observability"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T07:55:38Z",
+      "url": "https://github.com/bubblelabai/BubbleLab"
+    },
+    {
+      "description": ".NET Open Source Workflow Engine,  AI Empowerment",
+      "forks": 0,
+      "full_name": "besley/Slickflow",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=847, updated=2025-12-24T02:00:15Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 847,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-24T02:00:15Z",
+      "url": "https://github.com/besley/Slickflow"
+    },
+    {
+      "description": "\ud83d\ude0e Open-source, pretty, simple and fast \u26a1 Meilisearch admin dashboard UI for managing your meilisearch instances \ud83d\udd79",
+      "forks": 0,
+      "full_name": "eyeix/meilisearch-ui",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=684, updated=2025-12-26T01:31:41Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 684,
+      "tags": [
+        "admin",
+        "search"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-26T01:31:41Z",
+      "url": "https://github.com/eyeix/meilisearch-ui"
+    },
+    {
+      "description": "\ud83d\udd25 A fully open source audit logs service and embeddable UI easily deployed to your own Kubernetes cluster. Brought to you by replicated.com and boxyhq.com  \ud83d\ude80",
+      "forks": 0,
+      "full_name": "retracedhq/retraced",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=426, updated=2025-12-26T13:02:23Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 426,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-26T13:02:23Z",
+      "url": "https://github.com/retracedhq/retraced"
+    },
+    {
+      "description": "A free, open source, Vite, Typescript admin theme created using Ant Design 5",
+      "forks": 0,
+      "full_name": "design-sparx/antd-multipurpose-dashboard",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=250, updated=2025-12-17T02:25:19Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 250,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-17T02:25:19Z",
+      "url": "https://github.com/design-sparx/antd-multipurpose-dashboard"
+    },
+    {
+      "description": "The Guardian is an innovative open-source platform that streamlines the creation, management, and verification of digital environmental assets. It leverages a customizable Policy Workflow Engine and Web3 technology to ensure transparent and fraud-proof operations, making it a key tool for transforming sustainability practices and carbon markets.",
+      "forks": 0,
+      "full_name": "hashgraph/guardian",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=130, updated=2025-12-22T20:05:13Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 130,
+      "tags": [
+        "workflows",
+        "policy"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-22T20:05:13Z",
+      "url": "https://github.com/hashgraph/guardian"
+    },
+    {
+      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "forks": 0,
+      "full_name": "n8n-io/n8n",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=165352, updated=2025-12-29T13:01:45Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 165352,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T13:01:45Z",
+      "url": "https://github.com/n8n-io/n8n"
+    },
+    {
+      "description": "\ud83d\ude80 Strapi is the leading open-source headless CMS. It\u2019s 100% JavaScript/TypeScript, fully customizable, and developer-first.",
+      "forks": 0,
+      "full_name": "strapi/strapi",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=70824, updated=2025-12-29T12:34:18Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 70824,
+      "tags": [
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:34:18Z",
+      "url": "https://github.com/strapi/strapi"
+    },
+    {
+      "description": "Build AI Agents, Visually",
+      "forks": 0,
+      "full_name": "FlowiseAI/Flowise",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=47645, updated=2025-12-29T12:38:58Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 47645,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T12:38:58Z",
+      "url": "https://github.com/FlowiseAI/Flowise"
+    },
+    {
+      "description": "Create business apps and automate workflows in minutes. Supports PostgreSQL, MySQL, MariaDB, MSSQL, MongoDB, Rest API, Docker, K8s, and more \ud83d\ude80 No code / Low code platform..",
+      "forks": 0,
+      "full_name": "Budibase/budibase",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=27482, updated=2025-12-29T12:38:38Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 27482,
+      "tags": [
+        "support",
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:38:38Z",
+      "url": "https://github.com/Budibase/budibase"
+    },
+    {
+      "description": "NocoBase is the most extensible AI-powered no-code/low-code platform for building business applications and enterprise solutions.",
+      "forks": 0,
+      "full_name": "nocobase/nocobase",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=20937, updated=2025-12-29T12:44:48Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 20937,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T12:44:48Z",
+      "url": "https://github.com/nocobase/nocobase"
+    },
+    {
+      "description": "The open source Zapier alternative. Build workflow automation without spending time and money.",
+      "forks": 0,
+      "full_name": "automatisch/automatisch",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=13430, updated=2025-12-29T11:06:53Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 13430,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T11:06:53Z",
+      "url": "https://github.com/automatisch/automatisch"
+    },
+    {
+      "description": "Session replay, cobrowsing and product analytics you can self-host. Ideal for reproducing issues and iterating on your product.",
+      "forks": 0,
+      "full_name": "openreplay/openreplay",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=11536, updated=2025-12-29T11:15:41Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 11536,
+      "tags": [
+        "analytics"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T11:15:41Z",
+      "url": "https://github.com/openreplay/openreplay"
+    },
+    {
+      "description": "AngularJS Bootstrap Admin Panel Framework",
+      "forks": 0,
+      "full_name": "akveo/blur-admin",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=11327, updated=2025-12-11T06:19:24Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 11327,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-11T06:19:24Z",
+      "url": "https://github.com/akveo/blur-admin"
+    },
+    {
+      "description": "highlight.io: The open source, full-stack monitoring platform. Error monitoring, session replay, logging, distributed tracing, and more.",
+      "forks": 0,
+      "full_name": "highlight/highlight",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=9060, updated=2025-12-29T08:15:45Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 9060,
+      "tags": [
+        "observability"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T08:15:45Z",
+      "url": "https://github.com/highlight/highlight"
+    },
+    {
+      "description": "Open-source serverless enterprise CMS. Includes a headless CMS, page builder, form builder, and file manager. Easy to customize and expand. Deploys to AWS.",
+      "forks": 0,
+      "full_name": "webiny/webiny-js",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=7909, updated=2025-12-29T11:52:14Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 7909,
+      "tags": [
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T11:52:14Z",
+      "url": "https://github.com/webiny/webiny-js"
+    },
+    {
+      "description": "Open Source Feature Flagging and A/B Testing Platform",
+      "forks": 0,
+      "full_name": "growthbook/growthbook",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=7203, updated=2025-12-29T12:25:29Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 7203,
+      "tags": [
+        "flags",
+        "experimentation"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:25:29Z",
+      "url": "https://github.com/growthbook/growthbook"
+    },
+    {
+      "description": "Low-code backend platform. Manage database on spreadsheet-like UI and build cloud functions workflows in JS/TS, all in your browser.",
+      "forks": 0,
+      "full_name": "rowyio/rowy",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=6778, updated=2025-12-27T11:07:09Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 6778,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T11:07:09Z",
+      "url": "https://github.com/rowyio/rowy"
+    },
+    {
+      "description": "Countly is a product analytics platform that helps teams track, analyze and act-on their user actions and behaviour on mobile, web and desktop applications.",
+      "forks": 0,
+      "full_name": "Countly/countly-server",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=5808, updated=2025-12-26T16:37:24Z); license=10/15 (NOASSERTION); time_to_value=10/10",
+      "score": 72,
+      "stars": 5808,
+      "tags": [
+        "analytics"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-26T16:37:24Z",
+      "url": "https://github.com/Countly/countly-server"
+    },
+    {
+      "description": "Open-source internal tool framework. \ud83d\udcaa  Empower your team and collaborators to view and manage the data you already own in a nice easy-to-use protected tool. Basetool helps you have a better handle on your data in a collaborative way so you can focus on moving your business forward.",
+      "forks": 0,
+      "full_name": "basetool-io/basetool",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=282, updated=2025-11-19T15:32:52Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 72,
+      "stars": 282,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-11-19T15:32:52Z",
+      "url": "https://github.com/basetool-io/basetool"
+    },
+    {
+      "description": "Socketkit is a free open-source alternative to ChartMogul, SensorTower, Google Analytics and Mixpanel.",
+      "forks": 0,
+      "full_name": "anonrig/socketkit",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=18/20 (stars=252, updated=2025-09-30T19:54:50Z); license=15/15 (MPL-2.0); time_to_value=7/10",
+      "score": 72,
+      "stars": 252,
+      "tags": [
+        "analytics"
+      ],
+      "topics": [],
+      "updated_at": "2025-09-30T19:54:50Z",
+      "url": "https://github.com/anonrig/socketkit"
+    },
+    {
+      "description": "The open-source Retool alternative. Low-code platform for building internal tools fast!",
+      "forks": 0,
+      "full_name": "Toola-bakery/Toola",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=240, updated=2025-11-19T15:32:49Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 72,
+      "stars": 240,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-11-19T15:32:49Z",
+      "url": "https://github.com/Toola-bakery/Toola"
+    },
+    {
+      "description": "Free and open-source admin dashboard app made with React & Material-UI",
+      "forks": 0,
+      "full_name": "m6v3l9/react-material-admin",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=147, updated=2025-11-22T20:04:10Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 147,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-11-22T20:04:10Z",
+      "url": "https://github.com/m6v3l9/react-material-admin"
+    },
+    {
+      "description": "An open source AI wearable device that captures what you say and hear in the real world and then transcribes and stores it on your own server. You can then chat with Adeus using the app, and it will have all the right context about what you want to talk about - a truly personalized, personal AI.",
+      "forks": 0,
+      "full_name": "adamcohenhillel/ADeus",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=3328, updated=2025-12-28T21:37:16Z); license=10/15 (NOASSERTION); time_to_value=9/10",
+      "score": 71,
+      "stars": 3328,
+      "tags": [
+        "commerce",
+        "support"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T21:37:16Z",
+      "url": "https://github.com/adamcohenhillel/ADeus"
+    },
+    {
+      "description": "Open-source developer content platform",
+      "forks": 0,
+      "full_name": "vriteio/vrite",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1956, updated=2025-12-29T07:40:32Z); license=10/15 (NOASSERTION); time_to_value=9/10",
+      "score": 71,
+      "stars": 1956,
+      "tags": [
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T07:40:32Z",
+      "url": "https://github.com/vriteio/vrite"
+    },
+    {
+      "description": "\ud83d\udd25 \ud83d\udd25 \ud83d\udd25 Open Source Airtable Alternative",
+      "forks": 0,
+      "full_name": "nocodb/nocodb",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=59350, updated=2025-12-29T12:46:05Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 59350,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T12:46:05Z",
+      "url": "https://github.com/nocodb/nocodb"
+    },
+    {
+      "description": "ToolJet is the open-source foundation of ToolJet AI - the AI-native platform for building internal tools, dashboard, business applications, workflows and AI agents \ud83d\ude80",
+      "forks": 0,
+      "full_name": "ToolJet/ToolJet",
+      "language": "JavaScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=37088, updated=2025-12-29T10:01:15Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 37088,
+      "tags": [
+        "admin",
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T10:01:15Z",
+      "url": "https://github.com/ToolJet/ToolJet"
+    },
+    {
+      "description": "We write your reusable computer vision tools. \ud83d\udc9c",
+      "forks": 0,
+      "full_name": "roboflow/supervision",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=36236, updated=2025-12-29T11:35:35Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 69,
+      "stars": 36236,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T11:35:35Z",
+      "url": "https://github.com/roboflow/supervision"
+    },
+    {
+      "description": "\ud83d\ude80\ud83c\udf89\ud83d\udcda APITable, an API-oriented low-code platform for building collaborative apps and better than all other Airtable open-source alternatives.",
+      "forks": 0,
+      "full_name": "apitable/apitable",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=15174, updated=2025-12-29T10:40:59Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 15174,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T10:40:59Z",
+      "url": "https://github.com/apitable/apitable"
+    },
+    {
+      "description": "Open source website builder and Webflow alternative. Webstudio is an advanced visual builder that connects to any headless CMS, supports all CSS properties, and can be hosted anywhere, including with us.",
+      "forks": 0,
+      "full_name": "webstudio-is/webstudio",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=8073, updated=2025-12-29T08:46:55Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 8073,
+      "tags": [
+        "support",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T08:46:55Z",
+      "url": "https://github.com/webstudio-is/webstudio"
+    },
+    {
+      "description": "OpenStock is an open-source alternative to expensive market platforms. Track real-time prices, set personalized alerts, and explore detailed company insights \u2014 built openly, for everyone, forever free.",
+      "forks": 0,
+      "full_name": "Open-Dev-Society/OpenStock",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=6599, updated=2025-12-29T11:09:40Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 6599,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T11:09:40Z",
+      "url": "https://github.com/Open-Dev-Society/OpenStock"
+    },
+    {
+      "description": "\ud83d\udd25 \ud83d\udd25 \ud83d\udd25 The Open Source Retool Alternative",
+      "forks": 0,
+      "full_name": "openblocks-dev/openblocks",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=6177, updated=2025-12-28T14:49:26Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 6177,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-28T14:49:26Z",
+      "url": "https://github.com/openblocks-dev/openblocks"
+    },
+    {
+      "description": "Flagsmith is an open source feature flagging and remote config service. Self-host or use our hosted version at https://app.flagsmith.com.",
+      "forks": 0,
+      "full_name": "Flagsmith/flagsmith",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=6143, updated=2025-12-28T19:14:03Z); license=15/15 (BSD-3-Clause); time_to_value=8/10",
+      "score": 69,
+      "stars": 6143,
+      "tags": [
+        "flags"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T19:14:03Z",
+      "url": "https://github.com/Flagsmith/flagsmith"
+    },
+    {
+      "description": "Openpanel is an open-source web and product analytics platform that combines the power of Mixpanel with the ease of Plausible and one of the best Google Analytics replacements.",
+      "forks": 0,
+      "full_name": "Openpanel-dev/openpanel",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=5054, updated=2025-12-29T07:59:13Z); license=7/15 (AGPL-3.0); time_to_value=10/10",
+      "score": 69,
+      "stars": 5054,
+      "tags": [
+        "analytics"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T07:59:13Z",
+      "url": "https://github.com/Openpanel-dev/openpanel"
+    },
+    {
+      "description": "React Storefront - PWA for eCommerce. 100% offline, platform agnostic, headless, Magento 2 supported. Always Open Source, Apache-2.0 license. Join us as contributor (contributors@reactstorefront.io).",
+      "forks": 0,
+      "full_name": "storefront-foundation/react-storefront",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=833, updated=2025-12-24T14:21:02Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 69,
+      "stars": 833,
+      "tags": [
+        "commerce",
+        "support",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-24T14:21:02Z",
+      "url": "https://github.com/storefront-foundation/react-storefront"
+    },
+    {
+      "description": "An open-source tool for processing stream data using a spreadsheet-like interface.",
+      "forks": 0,
+      "full_name": "eclipse-streamsheets/streamsheets",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "EPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=481, updated=2025-12-01T06:42:49Z); license=10/15 (EPL-2.0); time_to_value=7/10",
+      "score": 69,
+      "stars": 481,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-01T06:42:49Z",
+      "url": "https://github.com/eclipse-streamsheets/streamsheets"
+    },
+    {
+      "description": "Build, personalize and control your own LLMs. From data pre-processing to fine-tuning, xTuring provides an easy way to personalize open-source LLMs. Join our discord community: https://discord.gg/TgHXuSJEk6",
+      "forks": 0,
+      "full_name": "stochasticai/xTuring",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=2664, updated=2025-12-29T08:45:53Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 68,
+      "stars": 2664,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T08:45:53Z",
+      "url": "https://github.com/stochasticai/xTuring"
+    },
+    {
+      "description": "Flagr is a feature flagging, A/B testing and dynamic configuration microservice",
+      "forks": 0,
+      "full_name": "openflagr/flagr",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=2563, updated=2025-12-27T09:06:37Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 68,
+      "stars": 2563,
+      "tags": [
+        "flags",
+        "experimentation"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T09:06:37Z",
+      "url": "https://github.com/openflagr/flagr"
+    },
+    {
+      "description": "GO Feature Flag is a simple, complete and lightweight self-hosted feature flag solution 100% Open Source. \ud83c\udf9b\ufe0f",
+      "forks": 0,
+      "full_name": "thomaspoignant/go-feature-flag",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=1893, updated=2025-12-29T12:51:34Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 68,
+      "stars": 1893,
+      "tags": [
+        "flags"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:51:34Z",
+      "url": "https://github.com/thomaspoignant/go-feature-flag"
+    },
+    {
+      "description": "Generate powerful admin apps without writing a single line of code - Run `npx dashpress` to see some magic!",
+      "forks": 0,
+      "full_name": "dashpresshq/dashpress",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1881, updated=2025-12-23T00:48:18Z); license=7/15 (AGPL-3.0); time_to_value=9/10",
+      "score": 68,
+      "stars": 1881,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-23T00:48:18Z",
+      "url": "https://github.com/dashpresshq/dashpress"
+    },
+    {
+      "description": "The Next-gen Open Source learning platform for everyone \u2728",
+      "forks": 0,
+      "full_name": "learnhouse/learnhouse",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1226, updated=2025-12-27T16:33:36Z); license=7/15 (AGPL-3.0); time_to_value=9/10",
+      "score": 68,
+      "stars": 1226,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-27T16:33:36Z",
+      "url": "https://github.com/learnhouse/learnhouse"
+    },
+    {
+      "description": "A full-featured, open-source content management framework built with Node.js that empowers organizations by combining in-context editing and headless architecture in a full-stack JS environment.",
+      "forks": 0,
+      "full_name": "apostrophecms/apostrophe",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=4507, updated=2025-12-29T12:43:14Z); license=5/15 (UNKNOWN); time_to_value=9/10",
+      "score": 66,
+      "stars": 4507,
+      "tags": [
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:43:14Z",
+      "url": "https://github.com/apostrophecms/apostrophe"
+    },
+    {
+      "description": "Abstruse is a free and open-source CI/CD platform that tests your models and code.",
+      "forks": 0,
+      "full_name": "bleenco/abstruse",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=956, updated=2025-12-24T03:56:54Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 66,
+      "stars": 956,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-24T03:56:54Z",
+      "url": "https://github.com/bleenco/abstruse"
+    },
+    {
+      "description": "Django-ecommerce is a fully open-source E-commerce platform built using Django Web Framework, designed with Bootstrap4...",
+      "forks": 0,
+      "full_name": "shyam999/Django-ecommerce",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=314, updated=2025-12-28T01:46:27Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 66,
+      "stars": 314,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T01:46:27Z",
+      "url": "https://github.com/shyam999/Django-ecommerce"
+    },
+    {
+      "description": "Ryax is the low-code serverless and open-source solution to build faster your AI workflows and applications",
+      "forks": 0,
+      "full_name": "RyaxTech/ryax-engine",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=181, updated=2025-12-22T12:14:01Z); license=15/15 (MPL-2.0); time_to_value=5/10",
+      "score": 66,
+      "stars": 181,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-22T12:14:01Z",
+      "url": "https://github.com/RyaxTech/ryax-engine"
+    },
+    {
+      "description": "Open-source framework that gives you AI Agents that help you navigate decision-making, get personalized goals and execute them",
+      "forks": 0,
+      "full_name": "topoteretes/PromethAI-Backend",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=180, updated=2025-12-27T22:26:23Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 66,
+      "stars": 180,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-27T22:26:23Z",
+      "url": "https://github.com/topoteretes/PromethAI-Backend"
+    },
+    {
+      "description": ":tada: A magical vue admin                                                                https://panjiachen.github.io/vue-element-admin",
+      "forks": 0,
+      "full_name": "PanJiaChen/vue-element-admin",
+      "language": "Vue",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Vue); maintenance=20/20 (stars=90232, updated=2025-12-29T11:09:10Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 90232,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T11:09:10Z",
+      "url": "https://github.com/PanJiaChen/vue-element-admin"
+    },
+    {
+      "description": "\ud83d\udd25AI low-code platform empowers enterprises to quickly develop low-code solutions and build AI applications.  \u52a9\u529b\u4f01\u4e1a\u5feb\u901f\u5b9e\u73b0\u4f4e\u4ee3\u7801\u5f00\u53d1\u548c\u6784\u5efaAI\u5e94\u7528\uff01 AI\u5e94\u7528\u5e73\u53f0\u6db5\u76d6\uff1aAI\u5e94\u7528\u3001AI\u6a21\u578b\u3001AI\u804a\u5929\u52a9\u624b\u3001\u77e5\u8bc6\u5e93\u3001AI\u6d41\u7a0b\u7f16\u6392\u3001MCP\u548c\u63d2\u4ef6\uff0c\u804a\u5929\u5f0f\u4e1a\u52a1\u64cd\u4f5c\u7b49\u3002 \u5f3a\u5927\u4ee3\u7801\u751f\u6210\u5668\uff1a\u5b9e\u73b0\u524d\u540e\u7aef\u4e00\u952e\u751f\u6210\uff0c\u65e0\u9700\u624b\u5199\u4ee3\u7801! \u663e\u8457\u63d0\u5347\u6548\u7387\u8282\u7701\u6210\u672c\uff0c\u53c8\u4e0d\u5931\u7075\u6d3b~",
+      "forks": 0,
+      "full_name": "jeecgboot/JeecgBoot",
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=20/20 (stars=44865, updated=2025-12-29T12:09:24Z); license=15/15 (Apache-2.0); time_to_value=8/10",
+      "score": 65,
+      "stars": 44865,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T12:09:24Z",
+      "url": "https://github.com/jeecgboot/JeecgBoot"
+    },
+    {
+      "description": "Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap",
+      "forks": 0,
+      "full_name": "tabler/tabler",
+      "language": "HTML",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (HTML); maintenance=20/20 (stars=40570, updated=2025-12-29T11:25:59Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 40570,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T11:25:59Z",
+      "url": "https://github.com/tabler/tabler"
+    },
+    {
+      "description": "Event Driven Orchestration & Scheduling Platform for Mission Critical Applications",
+      "forks": 0,
+      "full_name": "kestra-io/kestra",
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=20/20 (stars=26154, updated=2025-12-29T13:01:48Z); license=15/15 (Apache-2.0); time_to_value=8/10",
+      "score": 65,
+      "stars": 26154,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T13:01:48Z",
+      "url": "https://github.com/kestra-io/kestra"
+    },
+    {
+      "description": "Free and open source laravel eCommerce platform",
+      "forks": 0,
+      "full_name": "bagisto/bagisto",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=24775, updated=2025-12-29T09:42:10Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 24775,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T09:42:10Z",
+      "url": "https://github.com/bagisto/bagisto"
+    },
+    {
+      "description": "\ud83c\udf89 vue admin,vue3 admin,vue3.0 admin,vue\u540e\u53f0\u7ba1\u7406,vue-admin,vue3.0-admin,admin,vue-admin,vue-element-admin,ant-design,vab admin pro,vab admin plus,vue admin plus,vue admin pro",
+      "forks": 0,
+      "full_name": "zxwk1998/vue-admin-better",
+      "language": "Vue",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Vue); maintenance=20/20 (stars=18545, updated=2025-12-29T12:50:42Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 18545,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:50:42Z",
+      "url": "https://github.com/zxwk1998/vue-admin-better"
+    },
+    {
+      "description": "This open-source mobile ecommerce app seamlessly transforms your Bagisto store into a powerful mobile platform, providing real-time synchronization of products and categories.",
+      "forks": 0,
+      "full_name": "bagisto/opensource-ecommerce-mobile-app",
+      "language": "Dart",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Dart); maintenance=20/20 (stars=13411, updated=2025-12-28T20:32:33Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 13411,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T20:32:33Z",
+      "url": "https://github.com/bagisto/opensource-ecommerce-mobile-app"
+    },
+    {
+      "description": "Activiti is a light-weight workflow and Business Process Management (BPM) Platform targeted at business people, developers and system admins. Its core is a super-fast and rock-solid BPMN 2 process engine for Java. It's open-source and distributed under the Apache license. Activiti runs in any Java application, on a server, on a cluster or in the cloud. It integrates perfectly with Spring, it is extremely lightweight and based on simple concepts.",
+      "forks": 0,
+      "full_name": "Activiti/Activiti",
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=20/20 (stars=10494, updated=2025-12-28T02:23:13Z); license=15/15 (Apache-2.0); time_to_value=8/10",
+      "score": 65,
+      "stars": 10494,
+      "tags": [
+        "admin",
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T02:23:13Z",
+      "url": "https://github.com/Activiti/Activiti"
+    },
+    {
+      "description": "Headless open-source eCommerce platform on top of PHP/Symfony/API Platform",
+      "forks": 0,
+      "full_name": "Sylius/Sylius",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=8382, updated=2025-12-29T02:58:19Z); license=15/15 (MIT); time_to_value=8/10",
+      "score": 65,
+      "stars": 8382,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T02:58:19Z",
+      "url": "https://github.com/Sylius/Sylius"
+    },
+    {
+      "description": "Production-ready platform for agentic workflow development.",
+      "forks": 0,
+      "full_name": "langgenius/dify",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=124006, updated=2025-12-29T13:02:22Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 64,
+      "stars": 124006,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T13:02:22Z",
+      "url": "https://github.com/langgenius/dify"
+    },
+    {
+      "description": "\ud83e\udd94 PostHog is an all-in-one developer platform for building successful products. We offer product analytics, web analytics, session replay, error tracking, feature flags, experimentation, surveys, data warehouse, a CDP, and an AI product assistant to help debug your code, ship features faster, and keep all your usage and customer data in one stack.",
+      "forks": 0,
+      "full_name": "PostHog/posthog",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=30577, updated=2025-12-29T12:22:04Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 64,
+      "stars": 30577,
+      "tags": [
+        "shipping",
+        "analytics",
+        "flags",
+        "experimentation"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:22:04Z",
+      "url": "https://github.com/PostHog/posthog"
+    },
+    {
+      "description": "\u2728 Yao is an all-in-one application engine that enables developers to create web apps, REST APIs, business applications, and more, with AI as a development partner.",
+      "forks": 0,
+      "full_name": "YaoApp/yao",
+      "language": "Go",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=7474, updated=2025-12-29T10:59:10Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 64,
+      "stars": 7474,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T10:59:10Z",
+      "url": "https://github.com/YaoApp/yao"
+    },
+    {
+      "description": "\ud83d\udc2c Beautiful, performant feature flags for Ruby.",
+      "forks": 0,
+      "full_name": "flippercloud/flipper",
+      "language": "Ruby",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=20/20 (stars=3897, updated=2025-12-23T16:08:36Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 3897,
+      "tags": [
+        "returns",
+        "flags"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-23T16:08:36Z",
+      "url": "https://github.com/flippercloud/flipper"
+    },
+    {
+      "description": "An open-source package that brings the power of modern headless e-commerce functionality to Laravel.",
+      "forks": 0,
+      "full_name": "lunarphp/lunar",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=3365, updated=2025-12-29T09:27:46Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 3365,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T09:27:46Z",
+      "url": "https://github.com/lunarphp/lunar"
+    },
+    {
+      "description": "Feature flippers.",
+      "forks": 0,
+      "full_name": "fetlife/rollout",
+      "language": "Ruby",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=20/20 (stars=2900, updated=2025-12-20T09:40:36Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 2900,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-20T09:40:36Z",
+      "url": "https://github.com/fetlife/rollout"
+    },
+    {
+      "description": "Free Open Source Enterprise Grade RPA",
+      "forks": 0,
+      "full_name": "open-rpa/openrpa",
+      "language": "C#",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (C#); maintenance=20/20 (stars=2815, updated=2025-12-29T02:23:14Z); license=15/15 (MPL-2.0); time_to_value=7/10",
+      "score": 64,
+      "stars": 2815,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T02:23:14Z",
+      "url": "https://github.com/open-rpa/openrpa"
+    },
+    {
+      "description": "A tool for refactoring code related to feature flag APIs",
+      "forks": 0,
+      "full_name": "uber/piranha",
+      "language": "Rust",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Rust); maintenance=20/20 (stars=2416, updated=2025-12-21T01:04:57Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 64,
+      "stars": 2416,
+      "tags": [
+        "flags"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-21T01:04:57Z",
+      "url": "https://github.com/uber/piranha"
+    },
+    {
+      "description": "An open source user-empowering data visualization Vue 3 components library for eloquent data storytelling",
+      "forks": 0,
+      "full_name": "graphieros/vue-data-ui",
+      "language": "Vue",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Vue); maintenance=20/20 (stars=2124, updated=2025-12-29T11:17:58Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 2124,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T11:17:58Z",
+      "url": "https://github.com/graphieros/vue-data-ui"
+    },
+    {
+      "description": "The open-source storefront for any ecommerce. Built with a headless approach, using a modern JS stack. Works with Litekart, Medusa. WIP for Shopify.",
+      "forks": 0,
+      "full_name": "itswadesh/svelte-commerce",
+      "language": "Svelte",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Svelte); maintenance=20/20 (stars=1758, updated=2025-12-27T16:12:26Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 1758,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T16:12:26Z",
+      "url": "https://github.com/itswadesh/svelte-commerce"
+    },
+    {
+      "description": "Terrateam is open-source GitOps infrastructure orchestration. It integrates with GitHub to automate Terraform, OpenTofu, CDKTF, Terragrunt, and Pulumi workflows through pull requests.",
+      "forks": 0,
+      "full_name": "terrateamio/terrateam",
+      "language": "OCaml",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (OCaml); maintenance=20/20 (stars=1144, updated=2025-12-24T22:28:49Z); license=15/15 (MPL-2.0); time_to_value=7/10",
+      "score": 64,
+      "stars": 1144,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-24T22:28:49Z",
+      "url": "https://github.com/terrateamio/terrateam"
+    },
+    {
+      "description": "Joget is an open source no-code/low-code application platform that combines the best of rapid application development, business process automation and workflow management. This Joget open source repository is licensed under GPLv3. For commercial licensing, please visit www.joget.org.",
+      "forks": 0,
+      "full_name": "jogetworkflow/jw-community",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=594, updated=2025-12-25T19:36:23Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 594,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-25T19:36:23Z",
+      "url": "https://github.com/jogetworkflow/jw-community"
+    },
+    {
+      "description": "A tiny open source workflow engine written in Go (golang)",
+      "forks": 0,
+      "full_name": "js-ojus/flow",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=18/20 (stars=376, updated=2025-07-28T14:34:39Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 64,
+      "stars": 376,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-07-28T14:34:39Z",
+      "url": "https://github.com/js-ojus/flow"
+    },
+    {
+      "description": "Open Source Workflow Engine for Cloud Native Infrastructure",
+      "forks": 0,
+      "full_name": "lyraproj/lyra",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=18/20 (stars=212, updated=2025-10-06T09:26:13Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 64,
+      "stars": 212,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-10-06T09:26:13Z",
+      "url": "https://github.com/lyraproj/lyra"
+    },
+    {
+      "description": "SwitchFeat is an open source and self-hosted feature flags and A/B testing framework written in Nodejs, Typescript and React.",
+      "forks": 0,
+      "full_name": "switchfeat-com/switchfeat",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=200, updated=2025-11-27T10:23:32Z); license=7/15 (AGPL-3.0); time_to_value=7/10",
+      "score": 64,
+      "stars": 200,
+      "tags": [
+        "flags",
+        "experimentation"
+      ],
+      "topics": [],
+      "updated_at": "2025-11-27T10:23:32Z",
+      "url": "https://github.com/switchfeat-com/switchfeat"
+    },
+    {
+      "description": "Open-Source Feature Flags, Remote Config & A/B Tests for Developers \u26f3\ud83e\uddea",
+      "forks": 0,
+      "full_name": "tryabby/abby",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=163, updated=2025-11-24T12:16:35Z); license=7/15 (AGPL-3.0); time_to_value=7/10",
+      "score": 64,
+      "stars": 163,
+      "tags": [
+        "flags",
+        "experimentation"
+      ],
+      "topics": [],
+      "updated_at": "2025-11-24T12:16:35Z",
+      "url": "https://github.com/tryabby/abby"
+    },
+    {
+      "description": "Human resource management open source .net core",
+      "forks": 0,
+      "full_name": "optimajet/HRM",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=147, updated=2025-12-18T04:46:01Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 147,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-18T04:46:01Z",
+      "url": "https://github.com/optimajet/HRM"
+    },
+    {
+      "description": "An open source, cloud-native streaming data integration and analytics product optimized for agile digital businesses",
+      "forks": 0,
+      "full_name": "wso2/product-sp",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=18/20 (stars=121, updated=2025-09-23T13:11:21Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 64,
+      "stars": 121,
+      "tags": [
+        "analytics"
+      ],
+      "topics": [],
+      "updated_at": "2025-09-23T13:11:21Z",
+      "url": "https://github.com/wso2/product-sp"
+    },
+    {
+      "description": "Enterprise-ready, Git native feature management solution",
+      "forks": 0,
+      "full_name": "flipt-io/flipt",
+      "language": "Go",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=4668, updated=2025-12-29T02:37:21Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 63,
+      "stars": 4668,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T02:37:21Z",
+      "url": "https://github.com/flipt-io/flipt"
+    },
+    {
+      "description": "Alchemy is the Open Source Rails CMS framework for the component based web that can be used as classic server side rendered or headless CMS.",
+      "forks": 0,
+      "full_name": "AlchemyCMS/alchemy_cms",
+      "language": "Ruby",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=20/20 (stars=882, updated=2025-12-29T10:06:18Z); license=15/15 (BSD-3-Clause); time_to_value=5/10",
+      "score": 62,
+      "stars": 882,
+      "tags": [
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T10:06:18Z",
+      "url": "https://github.com/AlchemyCMS/alchemy_cms"
+    },
+    {
+      "description": "azooKey-Desktop is an open-source Japanese input method for macOS, written in Swift and powered by the Zenzai neural kana-kanji converter. It provides live conversion, optional LLM-based \u201cMagic Conversions\u201d, and Tuner-backed personalization for a smooth, desktop typing experience.",
+      "forks": 0,
+      "full_name": "azooKey/azooKey-Desktop",
+      "language": "Swift",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Swift); maintenance=20/20 (stars=675, updated=2025-12-29T10:25:08Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 675,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T10:25:08Z",
+      "url": "https://github.com/azooKey/azooKey-Desktop"
+    },
+    {
+      "description": "\ud83d\udc55 Open-source course on architecting, building and deploying a real-time personalized recommender for H&M fashion articles.",
+      "forks": 0,
+      "full_name": "decodingai-magazine/personalized-recommender-course",
+      "language": "Jupyter Notebook",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Jupyter Notebook); maintenance=20/20 (stars=590, updated=2025-12-22T19:41:45Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 590,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-22T19:41:45Z",
+      "url": "https://github.com/decodingai-magazine/personalized-recommender-course"
+    },
+    {
+      "description": "Open source checks for SAP Code Inspector / ABAP Test Cockpit",
+      "forks": 0,
+      "full_name": "larshp/abapOpenChecks",
+      "language": "ABAP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (ABAP); maintenance=20/20 (stars=307, updated=2025-12-11T03:02:01Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 307,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-11T03:02:01Z",
+      "url": "https://github.com/larshp/abapOpenChecks"
+    },
+    {
+      "description": "An open-source, dynamic e-commerce solution powered by Nuxt 4 and GraphQL, headless storefront replacement for Woocommerce. Featuring a user interface in the style of Pinterest and fully customizable (Vue, Nuxt4).",
+      "forks": 0,
+      "full_name": "zackha/nuxtcommerce",
+      "language": "Vue",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Vue); maintenance=20/20 (stars=210, updated=2025-12-27T03:03:25Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 210,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-27T03:03:25Z",
+      "url": "https://github.com/zackha/nuxtcommerce"
+    },
+    {
+      "description": "IsoBridge is an open-source ISO 8583 parser, builder, and forwarding engine for modern .NET teams. It provides deterministic parsing, auditable logging, and REST/SOAP forwarding to help fintech engineers integrate with legacy switches and POS devices without complexity.",
+      "forks": 0,
+      "full_name": "gabyslaw/IsoBridge",
+      "language": "C#",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (C#); maintenance=20/20 (stars=145, updated=2025-12-25T03:26:01Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 145,
+      "tags": [
+        "observability"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-25T03:26:01Z",
+      "url": "https://github.com/gabyslaw/IsoBridge"
+    },
+    {
+      "description": "The Open Source Product Control Tower",
+      "forks": 0,
+      "full_name": "progressively-crew/progressively",
+      "language": "TypeScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=16/20 (stars=113, updated=2025-06-12T12:20:31Z); license=7/15 (AGPL-3.0); time_to_value=7/10",
+      "score": 62,
+      "stars": 113,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-06-12T12:20:31Z",
+      "url": "https://github.com/progressively-crew/progressively"
+    },
+    {
+      "description": "Laravel Headless eCommerce APIs allow you to experience seamless and easily scalable storefront performance. An open-source and GraphQL based Rest API Laravel platform delivering ultra-fast, dynamic, and personalized shopping experiences.",
+      "forks": 0,
+      "full_name": "bagisto/headless-ecommerce",
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=107, updated=2025-12-26T10:44:09Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 62,
+      "stars": 107,
+      "tags": [
+        "commerce",
+        "returns",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-26T10:44:09Z",
+      "url": "https://github.com/bagisto/headless-ecommerce"
+    },
+    {
+      "description": "Open-source developer platform to power your entire infra and turn scripts into webhooks, workflows and UIs. Fastest workflow engine (13x vs Airflow). Open-source alternative to Retool and Temporal.",
+      "forks": 0,
+      "full_name": "windmill-labs/windmill",
+      "language": "HTML",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (HTML); maintenance=20/20 (stars=15410, updated=2025-12-29T13:01:24Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 60,
+      "stars": 15410,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T13:01:24Z",
+      "url": "https://github.com/windmill-labs/windmill"
+    },
+    {
+      "description": "An open source eCommerce platform giving you full control and customizability. Modular and API-first. Multi-vendor, multi-tenant, multi-store, multi-currency, multi-language. Built using Ruby on Rails. Developed by @vendo-dev",
+      "forks": 0,
+      "full_name": "spree/spree",
+      "language": "Ruby",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=20/20 (stars=15115, updated=2025-12-29T12:39:12Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 60,
+      "stars": 15115,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:39:12Z",
+      "url": "https://github.com/spree/spree"
+    },
+    {
+      "description": "ASP.NET Core eCommerce software. nopCommerce is a free and open-source shopping cart.",
+      "forks": 0,
+      "full_name": "nopSolutions/nopCommerce",
+      "language": "C#",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (C#); maintenance=20/20 (stars=9921, updated=2025-12-29T11:03:49Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 60,
+      "stars": 9921,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T11:03:49Z",
+      "url": "https://github.com/nopSolutions/nopCommerce"
+    },
+    {
+      "description": "PrestaShop is the universal open-source software platform to build your e-commerce solution.",
+      "forks": 0,
+      "full_name": "PrestaShop/PrestaShop",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=8913, updated=2025-12-29T09:14:07Z); license=10/15 (NOASSERTION); time_to_value=8/10",
+      "score": 60,
+      "stars": 8913,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T09:14:07Z",
+      "url": "https://github.com/PrestaShop/PrestaShop"
+    },
+    {
+      "description": "Super Magic. The first open-source all-in-one AI productivity platform (Generalist AI Agent + Workflow Engine + IM + Online collaborative office system)",
+      "forks": 0,
+      "full_name": "dtyq/magic",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=4420, updated=2025-12-29T09:26:02Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 59,
+      "stars": 4420,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T09:26:02Z",
+      "url": "https://github.com/dtyq/magic"
+    },
+    {
+      "description": "\ud83d\udd25\ud83d\udd25\ud83d\udd25 Free open source and easy-to-use laravel eCommerce platform, Base on the Laravel . It supports multiple languages and currencies, integrates ChatGPT OpenAI. The platform features customizable visual design and a rich plugins on marketplace.",
+      "forks": 0,
+      "full_name": "beikeshop/beikeshop",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=1821, updated=2025-12-29T03:53:00Z); license=10/15 (NOASSERTION); time_to_value=7/10",
+      "score": 59,
+      "stars": 1821,
+      "tags": [
+        "commerce",
+        "support"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T03:53:00Z",
+      "url": "https://github.com/beikeshop/beikeshop"
+    },
+    {
+      "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+      "forks": 0,
+      "full_name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "language": "N/A",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (N/A); maintenance=20/20 (stars=103163, updated=2025-12-29T13:00:24Z); license=7/15 (GPL-3.0); time_to_value=8/10",
+      "score": 57,
+      "stars": 103163,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-29T13:00:24Z",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+    },
+    {
+      "description": "Open-source, AI-native, low-code platform for API orchestration, workflow automation, and AI agent integration across internal systems and SaaS products.",
+      "forks": 0,
+      "full_name": "bytechefhq/bytechef",
+      "language": "Java",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=20/20 (stars=691, updated=2025-12-29T08:54:33Z); license=10/15 (NOASSERTION); time_to_value=5/10",
+      "score": 57,
+      "stars": 691,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T08:54:33Z",
+      "url": "https://github.com/bytechefhq/bytechef"
+    },
+    {
+      "description": "The Trusted Membership Platform That Grows with You: Restrict access to content and charge recurring subscriptions using Stripe, PayPal, and more. Fully open source. 100% GPL.",
+      "forks": 0,
+      "full_name": "strangerstudios/paid-memberships-pro",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=515, updated=2025-12-15T19:05:22Z); license=10/15 (NOASSERTION); time_to_value=5/10",
+      "score": 57,
+      "stars": 515,
+      "tags": [
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-15T19:05:22Z",
+      "url": "https://github.com/strangerstudios/paid-memberships-pro"
+    },
+    {
+      "description": "A modular, scalable and ultra-fast open-source all-in-one eCommerce platform built on ASP.NET Core 7",
+      "forks": 0,
+      "full_name": "smartstore/Smartstore",
+      "language": "C#",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (C#); maintenance=20/20 (stars=1430, updated=2025-12-29T08:54:59Z); license=7/15 (AGPL-3.0); time_to_value=7/10",
+      "score": 56,
+      "stars": 1430,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T08:54:59Z",
+      "url": "https://github.com/smartstore/Smartstore"
+    },
+    {
+      "description": "This is an open source tool to dump the wifi profiles and cleartext passwords of the connected access points on the Windows machine. This tool will help you in a Wifi penetration testing. Furthermore, it is useful while performing red team or an internal infrastructure engagements.",
+      "forks": 0,
+      "full_name": "Viralmaniar/Wifi-Dumper",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=290, updated=2025-12-20T08:56:09Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 56,
+      "stars": 290,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-20T08:56:09Z",
+      "url": "https://github.com/Viralmaniar/Wifi-Dumper"
+    },
+    {
+      "description": "A customizable, open-source ecommerce platform built on WordPress. Build any commerce solution you can imagine.",
+      "forks": 0,
+      "full_name": "woocommerce/woocommerce",
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=20/20 (stars=10108, updated=2025-12-29T12:44:11Z); license=5/15 (UNKNOWN); time_to_value=8/10",
+      "score": 55,
+      "stars": 10108,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-29T12:44:11Z",
+      "url": "https://github.com/woocommerce/woocommerce"
+    },
+    {
+      "description": "Infinitic is an open source orchestration framework for application teams to build durable and flexible backend processes.",
+      "forks": 0,
+      "full_name": "infiniticio/infinitic",
+      "language": "Kotlin",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Kotlin); maintenance=18/20 (stars=357, updated=2025-10-22T11:58:40Z); license=10/15 (NOASSERTION); time_to_value=5/10",
+      "score": 55,
+      "stars": 357,
+      "tags": [
+        "workflows"
+      ],
+      "topics": [],
+      "updated_at": "2025-10-22T11:58:40Z",
+      "url": "https://github.com/infiniticio/infinitic"
+    },
+    {
+      "description": "An open-source keyboard layout visualizer for Windows. Learn and practice alternative layouts, personalize appearance, and improve your typing.",
+      "forks": 0,
+      "full_name": "conventoangelo/OverKeys",
+      "language": "Dart",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Dart); maintenance=20/20 (stars=157, updated=2025-12-23T05:33:52Z); license=7/15 (GPL-3.0); time_to_value=5/10",
+      "score": 54,
+      "stars": 157,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-23T05:33:52Z",
+      "url": "https://github.com/conventoangelo/OverKeys"
+    },
+    {
+      "description": "Open-source APIs, SDKs, and models for building virtual try-on and fashion AI applications. Generate models, edit garments, create photoshoots, and build personalized fashion experiences.",
+      "forks": 0,
+      "full_name": "tryonlabs/opentryon",
+      "language": "Jupyter Notebook",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Jupyter Notebook); maintenance=20/20 (stars=432, updated=2025-12-27T07:05:18Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 52,
+      "stars": 432,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-27T07:05:18Z",
+      "url": "https://github.com/tryonlabs/opentryon"
+    },
+    {
+      "description": "Free, privacy-friendly, simple, open-source and self-hostable product analytics.",
+      "forks": 0,
+      "full_name": "shafy/fugu",
+      "language": "Ruby",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Ruby); maintenance=18/20 (stars=215, updated=2025-11-12T23:16:41Z); license=7/15 (AGPL-3.0); time_to_value=5/10",
+      "score": 52,
+      "stars": 215,
+      "tags": [
+        "analytics"
+      ],
+      "topics": [],
+      "updated_at": "2025-11-12T23:16:41Z",
+      "url": "https://github.com/shafy/fugu"
+    },
+    {
+      "description": "ABRouter Laravel AB test is a simple package for the base library to run ab-tests and feature flags via ABRouter with Laravel. Prepare and run your ab-test in 10 minutes. Easy to manage and run. Can be also used as a feature flag or feature toggle. Free cloud version available for free. Completely open-source.",
+      "forks": 0,
+      "full_name": "abrouter/laravel-abtest",
+      "language": "PHP",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (PHP); maintenance=18/20 (stars=109, updated=2025-11-02T12:06:13Z); license=7/15 (GPL-3.0); time_to_value=5/10",
+      "score": 52,
+      "stars": 109,
+      "tags": [
+        "flags",
+        "experimentation"
+      ],
+      "topics": [],
+      "updated_at": "2025-11-02T12:06:13Z",
+      "url": "https://github.com/abrouter/laravel-abtest"
+    }
+  ],
+  "count": 117,
+  "generated_at_utc": "2025-12-29T13:04:21Z",
+  "source": {
+    "search_json": ".blackbox/.plans/2025-12-29_2002_oss-discovery-github-oss-discovery-cycle-200258/artifacts/search-extracted.json"
+  }
+}

@@ -1,133 +1,103 @@
-import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
 import { Link as RouterLink } from 'react-router-dom'
 import { UserRound, Menu } from 'lucide-react'
-import { useAuth } from '@auth/ui/providers/AuthContext'
+import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
 import { useDrawer } from '@ui/providers/DrawerContext'
 
 type Promo = { label: string; href?: string }
 
 type GlobalHeaderProps = {
   promoMessages: Promo[]
-  activePromo: number
-  subtitle?: string | null
-  primaryLabel?: string
-  onPrimaryAction?: () => void
-  onOpenMenu?: () => void
 }
 
-export function GlobalHeader({
-  promoMessages,
-  activePromo,
-  subtitle,
-  primaryLabel = 'Join WhatsApp',
-  onPrimaryAction,
-  onOpenMenu,
-}: GlobalHeaderProps) {
-  const { signedIn } = useAuth()
-  const { openMenu } = useDrawer()
-  const handleOpenMenu = onOpenMenu ?? openMenu
+const PromoBar = ({ promos }: { promos: Promo[] }) => {
+  if (!promos.length) return null
+  return (
+    <div className="bg-semantic-legacy-brand-cocoa text-white text-xs font-semibold px-4 py-2 flex flex-wrap items-center justify-center gap-4">
+      {promos.map((p, idx) => (
+        p.href ? (
+          <RouterLink key={idx} to={p.href} className="underline underline-offset-4">
+            {p.label}
+          </RouterLink>
+        ) : (
+          <span key={idx}>{p.label}</span>
+        )
+      ))}
+    </div>
+  )
+}
+
+export const GlobalHeader = ({ promoMessages }: GlobalHeaderProps) => {
+  const { signedIn, user, signOut } = useAuth()
+  const drawer = useDrawer()
 
   return (
-    <>
-      {/* Promo strip */}
-      <div className="overflow-hidden bg-semantic-legacy-brand-blush text-semantic-text-primary">
-        <div className="px-4 md:px-6">
-          <div className="relative flex h-10 items-center justify-center text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary sm:text-[13px]">
-            {promoMessages.map((msg, idx) => (
-              <span
-                key={msg.label}
-                className={`absolute whitespace-nowrap transition-opacity duration-400 ${idx === activePromo ? 'opacity-100' : 'opacity-0'}`}
-                aria-hidden={idx !== activePromo}
-              >
-                {msg.href ? (
-                  <RouterLink to={msg.href} className="underline decoration-semantic-text-primary/50 underline-offset-4 hover:text-semantic-text-primary/80">
-                    {msg.label}
-                  </RouterLink>
-                ) : (
-                  msg.label
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Top nav */}
-      <div className="px-4 md:px-6">
-        <div className="relative flex items-center justify-between gap-4 py-2 md:py-3">
+    <header className="sticky top-0 z-30 shadow-sm">
+      <PromoBar promos={promoMessages} />
+      <div className="flex items-center justify-between bg-white px-4 py-3 border-b border-semantic-legacy-brand-blush/50">
+        <div className="flex items-center gap-3">
           <button
-            aria-label="Open menu"
-            onClick={handleOpenMenu}
-            className="inline-flex h-10 w-10 items-center justify-center text-semantic-text-primary hover:text-semantic-text-primary/80"
+            aria-label="Open navigation"
+            className="rounded-full border border-semantic-legacy-brand-blush/60 p-2 text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30"
+            onClick={() => drawer.openMenu()}
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-5 w-5" />
           </button>
-
-          <div className="flex items-center gap-2">
-            {onPrimaryAction ? (
-              <button
-                onClick={onPrimaryAction}
-                type="button"
-                className="hidden items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-5 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90 md:inline-flex"
-              >
-                {primaryLabel}
-              </button>
-            ) : null}
-
-            <SignedOut>
-              <button
-                type="button"
-                onClick={handleOpenMenu}
-                className="hidden rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary transition hover:bg-semantic-legacy-brand-blush/40 md:inline-flex"
-              >
-                Sign in
-              </button>
-            </SignedOut>
-            <SignedIn>
-              <div className="hidden md:block">
-                <UserButton afterSignOutUrl="/" appearance={{ elements: { avatarBox: 'h-10 w-10' } }} />
-              </div>
-            </SignedIn>
-
-            {signedIn ? (
-              <RouterLink
-                to="/account"
-                className="inline-flex h-10 w-10 items-center justify-center text-semantic-text-primary hover:text-semantic-text-primary/80"
-                aria-label="Account"
-              >
-                <UserRound className="h-6 w-6" />
-              </RouterLink>
-            ) : (
-              <button
-                type="button"
-                onClick={handleOpenMenu}
-                className="inline-flex h-10 w-10 items-center justify-center text-semantic-text-primary hover:text-semantic-text-primary/80"
-                aria-label="Open account menu"
-              >
-                <UserRound className="h-6 w-6" />
-              </button>
-            )}
-          </div>
-
-          <RouterLink
-            to="/"
-            className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-1 text-center"
-          >
-            <span className="font-heading text-2xl font-semibold uppercase tracking-[0.24em] text-semantic-text-primary md:text-xl">
-              Lumelle
-            </span>
-            {subtitle ? (
-              <>
-                <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-semantic-text-primary/60 md:hidden">
-                  {subtitle}
-                </span>
-                <span className="hidden text-sm font-medium text-semantic-text-primary/70 md:inline">{subtitle}</span>
-              </>
-            ) : null}
+          <RouterLink to="/" className="text-lg font-semibold text-semantic-text-primary">
+            Lumelle
           </RouterLink>
         </div>
+
+        <div className="flex items-center gap-3">
+          <RouterLink
+            to="/product/shower-cap"
+            className="hidden sm:inline-flex rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30"
+          >
+            Shop
+          </RouterLink>
+          <button
+            onClick={() => drawer.openCart()}
+            className="rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30"
+          >
+            Cart
+          </button>
+          {signedIn ? (
+            <div className="flex items-center gap-2">
+              <RouterLink
+                to="/account"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30 border border-semantic-legacy-brand-blush/60"
+                aria-label="Open account"
+              >
+                {user?.avatarUrl ? (
+                  <img
+                    src={user.avatarUrl}
+                    alt=""
+                    className="h-8 w-8 rounded-full border border-semantic-legacy-brand-blush/60 object-cover"
+                  />
+                ) : (
+                  <UserRound className="h-4 w-4" />
+                )}
+                <span className="hidden sm:inline">{user?.fullName ?? 'Account'}</span>
+              </RouterLink>
+              <button
+                type="button"
+                onClick={() => void signOut()}
+                className="hidden sm:inline-flex rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30"
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <RouterLink
+              to="/sign-in"
+              className="inline-flex items-center gap-2 rounded-full bg-semantic-accent-cta px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:-translate-y-0.5 transition"
+            >
+              <UserRound className="h-4 w-4" />
+              Sign in
+            </RouterLink>
+          )}
+        </div>
       </div>
-    </>
+    </header>
   )
 }
 

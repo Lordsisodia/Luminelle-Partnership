@@ -1,0 +1,68 @@
+{
+  "count": 2,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": "\\b(portfolio|resume|curriculum|cv|landing\\s*page|template|boilerplate)\\b",
+  "excluded_results_count": 2,
+  "generated_at_utc": "2025-12-30T15:41:17Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 100,
+  "queries_used": [
+    "tanstack table indeterminate checkbox stars:>=100 fork:false archived:false",
+    "shift click selection react table stars:>=100 fork:false archived:false",
+    "selected rows toolbar react stars:>=100 fork:false archived:false",
+    "apply to selected modal react stars:>=100 fork:false archived:false",
+    "multi select actions toolbar react stars:>=100 fork:false archived:false",
+    "tanstack table row selection example stars:>=100 fork:false archived:false",
+    "tanstack table select all across pages stars:>=100 fork:false archived:false",
+    "\"tanstack table\" url search params stars:>=100 fork:false archived:false",
+    "persist table state localstorage react stars:>=100 fork:false archived:false",
+    "saved views filter state react stars:>=100 fork:false archived:false",
+    "admin filters url query params react stars:>=100 fork:false archived:false",
+    "search params state admin table react stars:>=100 fork:false archived:false",
+    "\"tanstack table\" saved views stars:>=100 fork:false archived:false",
+    "\"tanstack table\" column filters hook stars:>=100 fork:false archived:false",
+    "optimistic updates undo redo stars:>=100 fork:false archived:false",
+    "react undo redo hook stars:>=100 fork:false archived:false",
+    "command pattern undo redo javascript stars:>=100 fork:false archived:false",
+    "mutation queue hook react stars:>=100 fork:false archived:false",
+    "queue mutations react hook stars:>=100 fork:false archived:false",
+    "react query optimistic update rollback stars:>=100 fork:false archived:false",
+    "tanstack query optimistic update helper stars:>=100 fork:false archived:false",
+    "react grid clipboard copy paste stars:>=100 fork:false archived:false",
+    "clipboard paste table react stars:>=100 fork:false archived:false",
+    "spreadsheet component react editable stars:>=100 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "React Hooks to implement Undo and Redo functionality",
+      "full_name": "homerchen19/use-undo",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 412,
+      "updated_at": "2025-12-28T19:08:45Z",
+      "url": "https://github.com/homerchen19/use-undo"
+    },
+    {
+      "description": "\u21aa React hook for undo/redo functionality (with batteries included)",
+      "full_name": "xplato/useUndoable",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 182,
+      "updated_at": "2025-10-23T09:20:58Z",
+      "url": "https://github.com/xplato/useUndoable"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

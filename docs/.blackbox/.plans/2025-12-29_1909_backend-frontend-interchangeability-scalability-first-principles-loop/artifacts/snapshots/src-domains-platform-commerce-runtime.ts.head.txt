@@ -1,0 +1,150 @@
+# source: src/domains/platform/commerce/runtime.ts
+# captured: 2025-12-29T12:53:01Z
+
+import { env } from '@/utils/env'
+import { PortError } from '@platform/ports'
+import type { CatalogPort, CartPort, CheckoutPort } from './ports'
+import { createShopifyCommerceAdapter } from './adapters/shopify/internal-api'
+
+type CommerceRuntime = {
+  catalog: CatalogPort
+  cart: CartPort
+  checkout: CheckoutPort
+}
+
+const isDev = () => import.meta.env.DEV
+
+const isShopifyConfigured = () => {
+  const domain = env('SHOPIFY_STORE_DOMAIN')
+  return Boolean(domain)
+}
+
+const shouldUseRealCommerceInDev = () => env('USE_REAL_COMMERCE') === 'true'
+
+const createMockCommerce = (): CommerceRuntime => {
+  const catalog: CatalogPort = {
+    async getProductByHandle(handle) {
+      return {
+        productKey: `mock.${handle}`,
+        handle,
+        title: `Mock product (${handle})`,
+        description: 'Mock catalog adapter (dev only).',
+        images: ['/uploads/luminele/product-main.webp'],
+        defaultVariantKey: `mock.${handle}.default`,
+        variants: [
+          {
+            variantKey: `mock.${handle}.default`,
+            title: 'Default',
+            available: true,
+            unitPrice: { amount: 0, currencyCode: 'GBP' },
+          },
+        ],
+      }
+    },
+  }
+
+  const cart: CartPort = {
+    async getCart() {
+      return {
+        cartKey: 'mock-cart',
+        lines: [],
+        subtotal: { amount: 0, currencyCode: 'GBP' },
+        currencyCode: 'GBP',
+        discountCodes: [],
+      }
+    },
+    async addLine() {
+      return await this.getCart()
+    },
+    async updateLine() {
+      return await this.getCart()
+    },
+    async removeLine() {
+      return await this.getCart()
+    },
+  }
+
+  const checkout: CheckoutPort = {
+    getCapabilities() {
+      return {
+        mode: 'none',
+        providerLabel: 'Checkout unavailable (mock)',
+        supportsDiscounts: false,
+        supportsBuyerIdentity: false,
+        handoff: { routes: ['/cart/c/*', '/checkouts/*'] },
+      }
+    },
+    async beginCheckout() {
+      return { mode: 'none', reason: 'Mock commerce adapter (dev only).' }
+    },
+  }
+
+  return { catalog, cart, checkout }
+}
+
+const createDisabledCommerce = (code: 'NOT_CONFIGURED' | 'UNAVAILABLE', message: string): CommerceRuntime => {
+  const fail = () => {
+    throw new PortError(code, message)
+  }
+
+  const catalog: CatalogPort = {
+    async getProductByHandle() {
+      return fail()
+    },
+  }
+
+  const cart: CartPort = {
+    async getCart() {
+      return fail()
+    },
+    async addLine() {
+      return fail()
+    },
+    async updateLine() {
+      return fail()
+    },
+    async removeLine() {
+      return fail()
+    },
+  }
+
+  const checkout: CheckoutPort = {
+    getCapabilities() {
+      return {
+        mode: 'none',
+        supportsDiscounts: false,
+        supportsBuyerIdentity: false,
+        handoff: { routes: ['/cart/c/*', '/checkouts/*'] },
+      }
+    },
+    async beginCheckout() {
+      return { mode: 'none', reason: message }
+    },
+  }
+
+  return { catalog, cart, checkout }
+}
+
+export const createCommerce = (): CommerceRuntime => {
+  const configured = isShopifyConfigured()
+
+  if (!configured) {
+    if (isDev()) return createMockCommerce()
+    return createDisabledCommerce(
+      'NOT_CONFIGURED',
+      'Commerce provider is not configured (missing SHOPIFY_STORE_DOMAIN).'
+    )
+  }
+
+  // In dev, default to mock unless explicitly enabled (local dev often won't run Pages Functions).
+  if (isDev() && !shouldUseRealCommerceInDev()) return createMockCommerce()
+
+  const adapter = createShopifyCommerceAdapter()
+  return {
+    catalog: adapter.catalog,
+    cart: adapter.cart,
+    checkout: adapter.checkout,
+  }
+}
+
+export const commerce = createCommerce()

@@ -1,0 +1,43 @@
+name: AI PR Review (OpenAI)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  ai_review:
+    name: Post automated AI review
+    runs-on: ubuntu-latest
+    # Secrets are not available to forked PRs; skip to avoid confusing failures.
+    if: ${{ github.event.pull_request.draft == false && github.event.pull_request.head.repo.fork == false }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate AI review comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Optional tuning knobs
+          OPENAI_REVIEW_MODEL: ${{ vars.OPENAI_REVIEW_MODEL }}
+          OPENAI_REVIEW_MAX_DIFF_CHARS: ${{ vars.OPENAI_REVIEW_MAX_DIFF_CHARS }}
+          OPENAI_REVIEW_MAX_OUTPUT_TOKENS: ${{ vars.OPENAI_REVIEW_MAX_OUTPUT_TOKENS }}
+          OPENAI_REVIEW_TEMPERATURE: ${{ vars.OPENAI_REVIEW_TEMPERATURE }}
+        run: node scripts/ai-review/review-pr.mjs
+

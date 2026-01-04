@@ -1,4 +1,3 @@
-/* @ts-nocheck */
 import { StarRating } from '@ui/components/StarRating'
 
 export const RatingSnippet = ({ rating, count, quote }: { rating: number; count: number; quote: string }) => (
@@ -18,4 +17,3 @@ export const RatingSnippet = ({ rating, count, quote }: { rating: number; count:
 )
 
 export default RatingSnippet
-

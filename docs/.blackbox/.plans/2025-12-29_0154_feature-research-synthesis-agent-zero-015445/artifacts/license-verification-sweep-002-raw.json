@@ -1,0 +1,44 @@
+[
+  {
+    "full_name": "metabase/metabase",
+    "branch": "master",
+    "raw_url": "https://raw.githubusercontent.com/metabase/metabase/master/LICENSE.txt",
+    "spdx_guess": "AGPL-3.0",
+    "notes": "AGPL detected from license text"
+  },
+  {
+    "full_name": "chatwoot/chatwoot",
+    "branch": "develop",
+    "raw_url": "https://raw.githubusercontent.com/chatwoot/chatwoot/develop/LICENSE",
+    "spdx_guess": "MIT",
+    "notes": "MIT-style detected from license text"
+  },
+  {
+    "full_name": "airbytehq/airbyte",
+    "branch": "master",
+    "raw_url": "https://raw.githubusercontent.com/airbytehq/airbyte/master/LICENSE",
+    "spdx_guess": "ELv2",
+    "notes": "Elastic License 2.0 detected (not open source)"
+  },
+  {
+    "full_name": "windmill-labs/windmill",
+    "branch": "main",
+    "raw_url": "https://raw.githubusercontent.com/windmill-labs/windmill/main/LICENSE",
+    "spdx_guess": "GPL-3.0",
+    "notes": "GPLv3 mentioned in license text"
+  },
+  {
+    "full_name": "mautic/mautic",
+    "branch": "7.x",
+    "raw_url": "https://raw.githubusercontent.com/mautic/mautic/7.x/LICENSE.txt",
+    "spdx_guess": "AGPL-3.0",
+    "notes": "AGPL detected from license text"
+  },
+  {
+    "full_name": "meilisearch/meilisearch",
+    "branch": "main",
+    "raw_url": "https://raw.githubusercontent.com/meilisearch/meilisearch/main/LICENSE",
+    "spdx_guess": "BUSL-1.1",
+    "notes": "Business Source License detected (not open source)"
+  }
+]

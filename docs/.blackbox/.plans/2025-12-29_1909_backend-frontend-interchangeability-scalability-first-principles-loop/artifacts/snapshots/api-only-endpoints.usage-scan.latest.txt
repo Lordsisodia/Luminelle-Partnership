@@ -1,0 +1,128 @@
+timestamp: 2025-12-30_223437
+root: ..
+
+=== rg: admin/media ===
+../docs/01-product/admin/admin-gap-analysis.md:29:- `src/domains/admin/media` — media library (prototype)
+../docs/01-product/admin/admin-gap-analysis.md:56:| `/admin/media` | `@admin/media/ui/pages/MediaPage` | 🧪 | mock constants | UI is “designed”, not wired to storage. |
+../docs/01-product/admin/admin-gap-analysis.md:190:### 4.4 Media (`/admin/media`) — **prototype**
+../docs/01-product/admin/admin-gap-analysis.md:351:- `src/domains/admin/media/ui/pages/MediaPage.tsx`
+../docs/05-planning/future-features/admin content self-service/admin-frontend-plan.md:27:    - `/admin/media`
+../docs/05-planning/future-features/admin content self-service/admin-shell-outline.tsx:39:              <Route path="/admin/media" element={<Media />} />
+../docs/05-planning/plans/domains-refactor-plan.md:43:- Add README in `domains/admin/media/ui/sections`.
+../scripts/run-upload.cjs:45:      const upsert = await fetch(`${API_BASE}/api/admin/media/upsert`, {
+../scripts/upload-to-cloudinary.ts:34:      await fetch(`${API_BASE}/api/admin/media/upsert`, {
+../docs/06-quality/reviews/app-ui-review-2025-12-26.md:447:- **Where:** `src/domains/admin/media/ui/pages/MediaPage.tsx`
+../docs/06-quality/reviews/app-ui-review-2025-12-26.md:1300:    - Admin media list: `src/domains/admin/media/ui/pages/MediaPage.tsx` (`line-clamp-1`)
+../src/domains/admin/media/README.md:4:- Media library and asset management surfaces at /admin/media.
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1274:  // Route `/admin/media/:assetId` -> open asset sheet
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1285:      navigate(qs ? `/admin/media?${qs}` : '/admin/media', { replace: true })
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1292:  // Route `/admin/media/upload/:bucketId` -> open upload drawer
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1303:      navigate(qs ? `/admin/media?${qs}` : '/admin/media', { replace: true })
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1344:      qs ? `/admin/media/upload/${encodeURIComponent(nextBucketId)}?${qs}` : `/admin/media/upload/${encodeURIComponent(nextBucketId)}`,
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1349:    navigate(qs ? `/admin/media?${qs}` : '/admin/media')
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1673:                            navigate(qs ? `/admin/media/${encodeURIComponent(item.id)}?${qs}` : `/admin/media/${encodeURIComponent(item.id)}`)
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1690:                            navigate(qs ? `/admin/media/${encodeURIComponent(item.id)}?${qs}` : `/admin/media/${encodeURIComponent(item.id)}`)
+../src/domains/admin/media/ui/pages/MediaPage.tsx:1713:          navigate(qs ? `/admin/media?${qs}` : '/admin/media')
+../src/domains/admin/analytics/ui/pages/DashboardPage.tsx:14:  { title: 'Media', description: 'Upload + organize assets across buckets.', to: '/admin/media' },
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-162.md:33:  - `src/domains/admin/media/ui/pages/MediaPage.tsx` (demo/seed media list)
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-162.md:109:- `src/domains/admin/media/ui/pages/MediaPage.tsx`
+../src/domains/admin/shared/data/componentMeta.ts:239:          { label: 'Media', href: '/admin/media', icon: 'image' },
+../src/domains/admin/shared/data/adminNav.ts:35:  { id: 'media', label: 'Media', icon: ImageIcon, primaryTo: '/admin/media' },
+../src/domains/admin/shared/data/adminNav.ts:47:  if (path.startsWith('/admin/media')) return 'media'
+../src/App.tsx:48:const MediaPage = lazy(() => import('@admin/media/ui/pages/MediaPage'))
+../src/domains/admin/shared/ui/layouts/AdminShell.tsx:41:      media: { label: 'Media', to: '/admin/media' },
+../src/domains/admin/shared/ui/components/AdminSideNav.tsx:264:                <PrimaryPanelLink to="/admin/media" label="All Media" onNavigate={onNavigate} />
+../src/domains/admin/shared/ui/components/AdminSideNav.tsx:266:                  <ListRowLink to="/admin/media?bucket=blog-media" label="Blog media" onNavigate={onNavigate} />
+../src/domains/admin/shared/ui/components/AdminSideNav.tsx:267:                  <ListRowLink to="/admin/media?bucket=product-shower-cap" label="Shower cap media" onNavigate={onNavigate} />
+../src/domains/admin/shared/ui/components/AdminSideNav.tsx:268:                  <ListRowLink to="/admin/media?bucket=product-heatless-curler" label="Heatless curler media" onNavigate={onNavigate} />
+../src/domains/admin/shared/ui/components/AdminSideNav.tsx:269:                  <ListRowLink to="/admin/media?bucket=landing-media" label="Landing media" onNavigate={onNavigate} />
+../src/domains/admin/shared/ui/components/AdminSideNav.tsx:270:                  <ListRowLink to="/admin/media?bucket=draft-media" label="Draft media" onNavigate={onNavigate} />
+../docs/06-quality/feedback/admin/media.md:4:- `/admin/media`
+../docs/06-quality/feedback/admin/media.md:8:- `src/domains/admin/media/ui/pages/MediaPage.tsx`
+../docs/06-quality/feedback/admin/README.md:16:- Media (`/admin/media`) → [media.md](./media.md)
+
+=== rg: cloudinary/sign ===
+../src/domains/admin/catalog/ui/pages/ProductsPage.tsx:1226:            const res = await fetch('/api/cloudinary/sign', {
+
+=== rg: customer-auth/pkce ===
+
+=== rg: internal/recovery-cron ===
+../docs/06-quality/incidents/005-cart-recovery-endpoints-are-stubs.md:8:- `api/internal/recovery-cron.ts` returns `501 not implemented` when enabled.
+../docs/06-quality/incidents/005-cart-recovery-endpoints-are-stubs.md:15:- `api/internal/recovery-cron.ts` returns `501` when enabled.
+../docs/05-planning/future-features/Magic Cart Recovery System/tech-spec.md:23:- `api/internal/recovery-cron.ts`: Vercel cron handler (noop if flag off).
+../docs/05-planning/future-features/Magic Cart Recovery System/tech-spec.md:92:## Cron job (Vercel /api/internal/recovery-cron)
+../docs/05-planning/future-features/Magic Cart Recovery System/status.md:11:  - `api/internal/recovery-cron.ts` (no-op unless cron flag on; returns 501).
+
+=== rg: newsletter/subscribe ===
+../src/ui/components/NewsletterModal.tsx:51:      const res = await fetch('/api/newsletter/subscribe', {
+../src/ui/components/GlobalFooter.tsx:25:      const res = await fetch('/api/newsletter/subscribe', {
+../src/domains/client/marketing/ui/sections/shop/email-capture-band/EmailCaptureBand.tsx:34:      const res = await fetch('/api/newsletter/subscribe', {
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-090.md:67:- Add a POST endpoint `/api/newsletter/subscribe` that:
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-090.md:86:- `api/newsletter/subscribe.ts`: new POST endpoint that stores signups in `public.newsletter_signups` via `DATABASE_URL`.
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-090.md:87:- `src/ui/components/GlobalFooter.tsx`: replaced the mailto CTA with an email form that posts to `/api/newsletter/subscribe` and shows inline status messages.
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-090.md:96:4. Simulate API failure (e.g., block `/api/newsletter/subscribe`) → shows error message.
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-090.md:109:- `api/newsletter/subscribe.ts`
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:31:- Related newsletter infrastructure (already used elsewhere): `api/newsletter/subscribe.ts`, `src/ui/components/GlobalFooter.tsx`
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:47:4) You’d see the code, but no real signup persisted (no request to `/api/newsletter/subscribe`).
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:57:- Requires the `/api/newsletter/subscribe` endpoint to be reachable in the deployed environment (it already exists and is used by the footer signup).
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:66:- The repo already has `api/newsletter/subscribe.ts` and the footer uses it, so we reuse the same pattern and get real persistence with minimal new surface area.
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:74:- Add a `loading` state and submit handler that POSTs `{ email, source }` to `/api/newsletter/subscribe`.
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:82:- Submitting the form triggers a POST to `/api/newsletter/subscribe`.
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:97:  - now POSTs to `/api/newsletter/subscribe`
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-023.md:123:- `api/newsletter/subscribe.ts`
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-040.md:63:- Newsletter submission needs a backend endpoint. (A `/api/newsletter/subscribe` handler already exists in this repo.)
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-040.md:83:  - Make the email input editable, validate email, and submit to `/api/newsletter/subscribe`.
+../docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-040.md:108:  - Added editable email input + submit handler to `/api/newsletter/subscribe`
+
+=== rg: shopify/billing/create ===
+../docs/05-planning/plans/shopify-headless-implementation-plan.md:66:- `billing.activateTestPlan(shop)` — appSubscriptionCreate (Dev) (Done: `/api/shopify/billing/create`).
+
+=== rg: shopify/settings ===
+../docs/05-planning/plans/shopify-headless-implementation-plan.md:65:- `settings.get/save(shop)` — `ShopSettings` (Done: `/api/shopify/settings`).
+../docs/05-planning/plans/shopify-headless-implementation-plan.md:71:- Settings: `/api/shopify/settings` (GET/POST).
+
+=== rg: shopify/sync ===
+
+=== rg: shopify/backfill ===
+../docs/02-engineering/technical/shopify-architecture.md:23:- Backfills: `/api/shopify/backfill/{customers|orders}?shop=...` with `Authorization: Bearer INTERNAL_SHARED_SECRET`.
+../docs/07-templates/library/templated/customer-sync.md:31:- Backfill: `api/shopify/backfill/customers.ts`
+
+=== rg: shopify/webhooks/checkouts ===
+
+=== rg: shopify/webhooks/products ===
+../scripts/test-webhook.mjs:73:console.log(`Sending webhook to ${appUrl}/api/shopify/webhooks/products_create...`);
+../scripts/test-webhook.mjs:77:        const res = await fetch(`${appUrl}/api/shopify/webhooks/products_create`, {
+
+=== rg: storefront/cart/restore ===
+../docs/06-quality/incidents/005-cart-recovery-endpoints-are-stubs.md:7:- `api/storefront/cart/restore.ts` verifies a token but does **not** actually reconstruct a cart; it returns placeholder JSON.
+../docs/06-quality/incidents/005-cart-recovery-endpoints-are-stubs.md:16:- `api/storefront/cart/restore.ts` contains TODOs for loading snapshot and replaying cart lines, then returns a placeholder `checkoutUrl`.
+../docs/05-planning/future-features/magic-cart-recovery-system.md:46:- Client handler: on `restore` param, POST token to `/api/storefront/cart/restore` → validates signature/expiry, fetches Shopify cart, or loads stored payload, then hydrates Zustand store and navigates to cart page.
+../docs/05-planning/future-features/magic-cart-recovery-system.md:67:4) **Share endpoints (1d):** Build `/api/storefront/cart/share` and `/api/storefront/cart/restore`; HMAC signing; optional Supabase `cart_shares` table for non-Shopify carts.
+../docs/05-planning/future-features/Magic Cart Recovery System/status.md:10:  - `api/storefront/cart/restore.ts` (404 unless enabled; stubbed restore response).
+../docs/05-planning/future-features/Magic Cart Recovery System/tech-spec.md:22:- `api/storefront/cart/restore.ts`: flagged endpoint (404 if disabled).
+../docs/05-planning/future-features/Magic Cart Recovery System/tech-spec.md:88:- `POST /api/storefront/cart/restore`
+../docs/05-planning/future-features/Magic Cart Recovery System/implementation-plan.md:28:13. Add API: `POST /api/storefront/cart/restore` → validates token, loads payload/cart, replays lines, returns checkoutUrl.
+
+=== rg: storefront/cart/share ===
+../docs/05-planning/future-features/magic-cart-recovery-system.md:43:- New endpoint `POST /api/storefront/cart/share` (server) returns `{ restoreUrl }`.
+../docs/05-planning/future-features/magic-cart-recovery-system.md:67:4) **Share endpoints (1d):** Build `/api/storefront/cart/share` and `/api/storefront/cart/restore`; HMAC signing; optional Supabase `cart_shares` table for non-Shopify carts.
+../docs/05-planning/future-features/Magic Cart Recovery System/implementation-plan.md:27:12. Add API: `POST /api/storefront/cart/share` → stores payload, returns signed restore URL.
+../docs/05-planning/future-features/Magic Cart Recovery System/tech-spec.md:21:- `api/storefront/cart/share.ts`: flagged endpoint (404 if disabled).
+../docs/05-planning/future-features/Magic Cart Recovery System/tech-spec.md:85:- `POST /api/storefront/cart/share`
+../docs/05-planning/future-features/Magic Cart Recovery System/status.md:9:  - `api/storefront/cart/share.ts` (404 unless `CART_RECOVERY_ENABLED` + secret).
+../docs/06-quality/incidents/005-cart-recovery-endpoints-are-stubs.md:6:- `api/storefront/cart/share.ts` issues a token and returns a URL, but defaults `restoreBaseUrl` to `https://example.com/cart` when not provided.
+../docs/06-quality/incidents/005-cart-recovery-endpoints-are-stubs.md:17:- `api/storefront/cart/share.ts` hardcodes `https://example.com/cart` as a fallback base URL.
+
+=== rg: orders/list ===
+../src/domains/admin/orders/data/adminOrdersApi.ts:32:  const url = sp.toString() ? `/api/admin/orders/list?${sp.toString()}` : '/api/admin/orders/list'
+../docs/02-engineering/technical/shopify-architecture.md:30:  - Admin console: `/api/admin/orders/list`, `/api/admin/orders/get?id=...` (reads from the Supabase `ShopOrders` mirror; browser cannot read `ShopOrders` directly because RLS is enabled).
+../docs/02-engineering/technical/shopify-architecture.md:31:  - Legacy/customer helpers: `/api/orders/list`, `/api/orders/get?id=...`, `/api/orders/by-email`, `/api/orders/by-name`.
+
+=== rg: api/og ===
+../docs/05-planning/strategy/gemini/extended_roi_features.md:40:*   Create a template: `api/og?title=Product+Name&price=$50`.
+../docs/05-planning/strategy/gemini/seo_strategy.md:36:*   **Action**: Create an API route `api/og.tsx`.
+../docs/05-planning/strategy/gemini/seo_strategy.md:42:3.  **Implement Vercel OG** (`api/og`) to fix the social sharing issue. This gives you 90% of the benefit of SSR with 1% of the effort.
+../docs/06-quality/incidents/004-api-handler-style-inconsistency-request-vs-vercelreq.md:28:- `api/og.ts`
+
+=== rg: '/og' ===
+

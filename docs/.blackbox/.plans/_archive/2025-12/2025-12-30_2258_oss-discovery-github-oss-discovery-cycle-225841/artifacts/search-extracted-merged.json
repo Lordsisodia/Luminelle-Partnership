@@ -1,0 +1,62 @@
+{
+  "count": 2,
+  "exclude_keywords": [
+    "awesome"
+  ],
+  "exclude_regex": "\\b(portfolio|resume|curriculum|cv|personal\\s*(site|website)?|my\\s*site)\\b",
+  "excluded_results_count": 0,
+  "generated_at_utc": "2025-12-30T15:59:19Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 50,
+  "queries_used": [
+    "\"cart drawer\" nextjs stars:>=50 fork:false archived:false",
+    "\"cart drawer\" react stars:>=50 fork:false archived:false",
+    "\"minicart\" react ecommerce stars:>=50 fork:false archived:false",
+    "\"cart sidebar\" react ecommerce stars:>=50 fork:false archived:false",
+    "\"add to cart\" \"Shopify Storefront API\" next stars:>=50 fork:false archived:false",
+    "\"variant selector\" react ecommerce stars:>=50 fork:false archived:false",
+    "\"product variants\" selector nextjs stars:>=50 fork:false archived:false",
+    "\"size selector\" \"color selector\" react ecommerce stars:>=50 fork:false archived:false",
+    "\"variant picker\" storefront stars:>=50 fork:false archived:false",
+    "\"selectedOptions\" Shopify Storefront API stars:>=50 fork:false archived:false",
+    "\"collection filters\" nextjs ecommerce stars:>=50 fork:false archived:false",
+    "\"facet filters\" react ecommerce stars:>=50 fork:false archived:false",
+    "\"product listing\" filters nextjs stars:>=50 fork:false archived:false",
+    "\"price range\" filter component react stars:>=50 fork:false archived:false",
+    "\"filter sidebar\" ecommerce react stars:>=50 fork:false archived:false",
+    "\"algolia\" storefront nextjs stars:>=50 fork:false archived:false",
+    "\"search autocomplete\" ecommerce react stars:>=50 fork:false archived:false",
+    "\"search suggestions\" storefront stars:>=50 fork:false archived:false",
+    "\"instantsearch\" ecommerce storefront stars:>=50 fork:false archived:false",
+    "hydrogen \"cart\" \"drawer\" stars:>=50 fork:false archived:false",
+    "medusa \"cart\" storefront nextjs stars:>=50 fork:false archived:false",
+    "saleor storefront \"cart\" stars:>=50 fork:false archived:false",
+    "shopify storefront api \"cart lines\" stars:>=50 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "Saleor Storefront built using React, Next.js with App Router, TypeScript, GraphQL, and Tailwind CSS.",
+      "full_name": "saleor/storefront",
+      "integration_score": 9,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "stars": 1331,
+      "updated_at": "2025-12-26T00:29:03Z",
+      "url": "https://github.com/saleor/storefront"
+    },
+    {
+      "description": "\u26a1 Next.js enterprise-grade storefront for high-performance e-commerce with Shopify backend and Algolia middle layer with excellent browsing journey",
+      "full_name": "Blazity/enterprise-commerce",
+      "integration_score": 9,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 654,
+      "updated_at": "2025-12-29T05:43:29Z",
+      "url": "https://github.com/Blazity/enterprise-commerce"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

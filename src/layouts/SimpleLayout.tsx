@@ -1,3 +1,3 @@
-import SimpleLayout from '../domains/landing/ui/layouts/SimpleLayout'
+import SimpleLayout from '../domains/client/marketing/ui/layouts/SimpleLayout'
 export { SimpleLayout }
 export default SimpleLayout
