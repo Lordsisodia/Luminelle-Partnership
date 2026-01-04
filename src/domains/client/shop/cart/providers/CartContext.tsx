@@ -275,7 +275,17 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
       // Ensure we keep our volume-discount logic consistent with the loaded cart.
       const nextItems = mapCartToItems(cart)
-      syncVolumeDiscountFromItems(nextItems)
+      const { managed, code } = syncVolumeDiscountFromItems(nextItems)
+
+      // Keep the provider cart in sync with our tiered discount policy so checkout reflects it.
+      if (managed && commerce.cart.applyDiscount) {
+        try {
+          cart = await commerce.cart.applyDiscount(code ?? '')
+        } catch (err) {
+          console.warn('Failed to apply volume discount during cart rehydrate:', err)
+        }
+      }
+
       await setFromCart(cart)
     })
   }, [enqueue, setFromCart, syncVolumeDiscountFromItems])
