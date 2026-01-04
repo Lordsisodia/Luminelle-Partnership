@@ -30,5 +30,6 @@ lumelle/
 components-library/
 
 # Agent / scratch artifacts
-docs/.blackbox/
-docs/feedback/.blackbox/
+**/.blackbox/.local/
+**/.blackbox/.cache/
+**/.blackbox/*.log

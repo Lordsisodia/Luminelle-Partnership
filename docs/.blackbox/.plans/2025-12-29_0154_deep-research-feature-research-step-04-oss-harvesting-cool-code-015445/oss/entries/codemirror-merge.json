@@ -1,0 +1,10 @@
+{
+  "source": "manual",
+  "repo_full_name": "codemirror/merge",
+  "repo_url": "https://github.com/codemirror/merge",
+  "license": "MIT",
+  "primary_language": "JavaScript",
+  "tags": ["diff", "merge", "editor", "upgrade-review"],
+  "fetched_at": "2025-12-30"
+}
+

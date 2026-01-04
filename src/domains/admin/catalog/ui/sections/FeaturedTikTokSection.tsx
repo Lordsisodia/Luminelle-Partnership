@@ -11,11 +11,13 @@ export default function FeaturedTikTokSection({
   heading,
   onChange,
   highlight = false,
+  onPreviewClick,
 }: {
   id?: string
   heading: FeaturedTikTokHeading
   onChange: (field: 'eyebrow' | 'title' | 'description', value: string) => void
   highlight?: boolean
+  onPreviewClick?: () => void
 }) {
   const activeSectionClass =
     'ring-2 ring-semantic-legacy-brand-cocoa/15 ring-offset-2 ring-offset-brand-porcelain shadow-sm'
@@ -35,8 +37,13 @@ export default function FeaturedTikTokSection({
           Featured TikTok
         </span>
         <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-          {missingTitle ? <span className="text-semantic-legacy-brand-cocoa">Missing title</span> : null}
-          {missingDesc ? <span className="text-semantic-legacy-brand-cocoa">Missing description</span> : null}
+          <button
+            type="button"
+            onClick={onPreviewClick}
+            className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+          >
+            View in preview
+          </button>
         </div>
       </div>
 
@@ -67,4 +74,3 @@ export default function FeaturedTikTokSection({
     </section>
   )
 }
-

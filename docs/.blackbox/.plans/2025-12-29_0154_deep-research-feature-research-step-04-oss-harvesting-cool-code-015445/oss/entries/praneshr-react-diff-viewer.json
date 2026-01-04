@@ -1,0 +1,10 @@
+{
+  "source": "manual",
+  "repo_full_name": "praneshr/react-diff-viewer",
+  "repo_url": "https://github.com/praneshr/react-diff-viewer",
+  "license": "MIT",
+  "primary_language": "TypeScript",
+  "tags": ["diff", "react", "ui", "upgrade-review"],
+  "fetched_at": "2025-12-30"
+}
+

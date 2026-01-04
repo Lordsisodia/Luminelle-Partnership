@@ -1,0 +1,22 @@
+https://stripe.com/payments stripe-payments
+https://stripe.com/checkout stripe-checkout
+https://stripe.com/docs stripe-docs
+https://stripe.com/pricing stripe-pricing
+
+https://www.adyen.com/pricing adyen-pricing
+https://www.adyen.com/checkout adyen-checkout
+https://docs.adyen.com/ adyen-docs
+
+https://www.paypal.com/us/business paypal-business
+https://www.paypal.com/us/business/accept-payments paypal-accept-payments
+https://developer.paypal.com/docs/ paypal-developer-docs
+
+https://www.braintreepayments.com/features braintree-features
+https://www.braintreepayments.com/pricing braintree-pricing
+https://developer.paypal.com/braintree/docs braintree-docs
+
+https://www.bolt.com/checkout bolt-checkout
+https://www.bolt.com/checkoutos bolt-checkoutos
+https://www.bolt.com/conversions bolt-conversions
+https://www.bolt.com/pricing bolt-pricing
+https://help.bolt.com/ bolt-help

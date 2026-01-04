@@ -1,0 +1,228 @@
+# Candidate URLs (from snapshot)
+
+- snapshot: `.blackbox/.plans/2025-12-29_0523_deep-research-ecommerce-benchmark-womens-fashion/artifacts/snapshots/homepages/alo-yoga.html`
+- base: `https://www.aloyoga.com/`
+
+## collection (79)
+
+- https://www.aloyoga.com/en-vn/collections/bestsellers
+- https://www.aloyoga.com/en-vn/collections/new-arrivals
+- https://www.aloyoga.com/en-vn/collections/travel-in-alo
+- https://www.aloyoga.com/en-vn/collections/as-seen-on-the-jenners
+- https://www.aloyoga.com/en-vn/collections/lounge-shop
+- https://www.aloyoga.com/en-vn/pages/new-to-alo
+- https://www.aloyoga.com/en-vn/collections/womens-sale-all
+- https://www.aloyoga.com/collections/best-sets-1
+- https://www.aloyoga.com/en-vn/collections/tops
+- https://www.aloyoga.com/en-vn/collections/womens-sweatshirts-hoodies
+- https://www.aloyoga.com/en-vn/collections/womens-leggings
+- https://www.aloyoga.com/en-vn/collections/womens-jackets
+- https://www.aloyoga.com/en-vn/collections/pants
+- https://www.aloyoga.com/en-vn/collections/bras
+- https://www.aloyoga.com/en-vn/collections/womens-shorts
+- https://www.aloyoga.com/en-vn/collections/skirts
+- https://www.aloyoga.com/en-vn/collections/sweatpants
+- https://www.aloyoga.com/en-vn/collections/sweaters
+- https://www.aloyoga.com/en-vn/collections/dresses
+- https://www.aloyoga.com/en-vn/collections/onesies
+- https://www.aloyoga.com/en-vn/collections/underwear
+- https://www.aloyoga.com/en-vn/collections/yoga
+- https://www.aloyoga.com/en-vn/collections/train
+- https://www.aloyoga.com/en-vn/collections/pilates
+- https://www.aloyoga.com/en-vn/collections/run
+- https://www.aloyoga.com/en-vn/collections/tennis-inspired
+- https://www.aloyoga.com/en-vn/collections/steel-grey
+- https://www.aloyoga.com/collections/toasted-almond
+- https://www.aloyoga.com/collections/eclipse-blue
+- https://www.aloyoga.com/en-vn/collections/raisinette
+- https://www.aloyoga.com/en-vn/collections/oatmeal-heather
+- https://www.aloyoga.com/collections/ballet-pink
+- https://www.aloyoga.com/collections/gravel
+- https://www.aloyoga.com/en-vn/collections/white
+- https://www.aloyoga.com/en-vn/collections/black
+- https://www.aloyoga.com/en-vn/collections/womens-navy
+- https://www.aloyoga.com/en-vn/collections/espresso-1
+- https://www.aloyoga.com/en-vn/collections/grey
+- https://www.aloyoga.com/en-vn/collections/hats
+- https://www.aloyoga.com/en-vn/collections/bags-1
+- https://www.aloyoga.com/en-vn/collections/yoga-gear
+- https://www.aloyoga.com/en-vn/collections/socks
+- https://www.aloyoga.com/en-vn/collections/hair-accessories
+- https://www.aloyoga.com/en-vn/collections/shoes
+- https://www.aloyoga.com/en-vn/collections/sunglasses
+- https://www.aloyoga.com/en-vn/collections/jewelry
+- https://www.aloyoga.com/en-vn/collections/beauty-shop-all
+- https://www.aloyoga.com/en-vn/collections/haircare
+- https://www.aloyoga.com/en-vn/collections/face
+- https://www.aloyoga.com/en-vn/collections/body
+- https://www.aloyoga.com/en-vn/collections/homecare
+- https://www.aloyoga.com/en-vn/collections/gels
+- https://www.aloyoga.com/en-vn/collections/mens-bestsellers
+- https://www.aloyoga.com/en-vn/collections/mens-new-arrivals
+- https://www.aloyoga.com/pages/new-to-alo
+- https://www.aloyoga.com/en-vn/collections/performance-heros
+- https://www.aloyoga.com/en-vn/collections/mens-lounge-shop
+- https://www.aloyoga.com/collections/mens-sale
+- https://www.aloyoga.com/en-vn/collections/mens-sweatshirts-hoodies
+- https://www.aloyoga.com/en-vn/collections/tees-tanks
+- https://www.aloyoga.com/en-vn/collections/mens-shorts
+- https://www.aloyoga.com/en-vn/collections/mens-pants
+- https://www.aloyoga.com/en-vn/collections/mens-sweatpants
+- https://www.aloyoga.com/en-vn/collections/mens-jackets
+- https://www.aloyoga.com/en-vn/collections/mens-underwear
+- https://www.aloyoga.com/en-vn/collections/mens-train
+- https://www.aloyoga.com/en-vn/collections/mens-run
+- https://www.aloyoga.com/en-vn/collections/mens-yoga
+- https://www.aloyoga.com/collections/mens-tennis
+- https://www.aloyoga.com/en-vn/collections/gift-cards
+- https://www.aloyoga.com/en-vn/collections/sneakers
+- https://www.aloyoga.com/en-vn/collections/slides
+- https://www.aloyoga.com/en-vn/collections/womens-shop-all
+- https://www.aloyoga.com/en-vn/collections/gift-guide
+- https://www.aloyoga.com/en-vn/collections/atelier
+- https://www.aloyoga.com/en-vn/collections/bag-collection
+- https://www.aloyoga.com/en-vn/collections/almost-gone-1
+- https://www.aloyoga.com/en-vn/collections/accessories-shop-all
+- https://www.aloyoga.com/en-vn/collections/best-sets-1
+
+## sizing (1)
+
+- https://www.aloyoga.com/en-vn/pages/size-chart
+
+## returns (2)
+
+- https://www.aloyoga.com/pages/returns-support
+- https://www.aloyoga.com/en-vn/pages/returns-support
+
+## cart_checkout (1)
+
+- https://www.aloyoga.com/cart
+
+## support (2)
+
+- https://www.aloyoga.com/pages/help-center
+- https://www.aloyoga.com/en-vn/pages/help-center
+
+## other (120)
+
+- https://www.aloyoga.com/en-vn
+- https://www.aloyoga.com
+- https://www.aloyoga.com/
+- https://www.aloyoga.com/de-ch
+- https://www.aloyoga.com/fr-ch
+- https://www.aloyoga.com/it-ch
+- https://www.aloyoga.com/en-ch
+- https://www.aloyoga.com/de-li
+- https://www.aloyoga.com/en-li
+- https://www.aloyoga.com/en-ad
+- https://www.aloyoga.com/en-ag
+- https://www.aloyoga.com/en-ai
+- https://www.aloyoga.com/en-al
+- https://www.aloyoga.com/es-ar
+- https://www.aloyoga.com/en-ar
+- https://www.aloyoga.com/en-aw
+- https://www.aloyoga.com/en-ba
+- https://www.aloyoga.com/en-bb
+- https://www.aloyoga.com/en-bd
+- https://www.aloyoga.com/en-bg
+- https://www.aloyoga.com/en-bh
+- https://www.aloyoga.com/fr-bj
+- https://www.aloyoga.com/en-bj
+- https://www.aloyoga.com/en-bl
+- https://www.aloyoga.com/en-bm
+- https://www.aloyoga.com/en-bn
+- https://www.aloyoga.com/es-bo
+- https://www.aloyoga.com/en-bo
+- https://www.aloyoga.com/en-bs
+- https://www.aloyoga.com/en-bt
+- https://www.aloyoga.com/en-bw
+- https://www.aloyoga.com/en-bz
+- https://www.aloyoga.com/en-ca
+- https://www.aloyoga.com/fr-ca
+- https://www.aloyoga.com/es-cl
+- https://www.aloyoga.com/en-cl
+- https://www.aloyoga.com/zh-hans-cn
+- https://www.aloyoga.com/zh-hant-cn
+- https://www.aloyoga.com/en-cn
+- https://www.aloyoga.com/es-co
+- https://www.aloyoga.com/en-co
+- https://www.aloyoga.com/es-cr
+- https://www.aloyoga.com/en-cr
+- https://www.aloyoga.com/en-cw
+- https://www.aloyoga.com/en-cz
+- https://www.aloyoga.com/en-dk
+- https://www.aloyoga.com/en-dm
+- https://www.aloyoga.com/es-do
+- https://www.aloyoga.com/en-do
+- https://www.aloyoga.com/es-ec
+- https://www.aloyoga.com/en-ec
+- https://www.aloyoga.com/en-eg
+- https://www.aloyoga.com/en-et
+- https://www.aloyoga.com/en-fj
+- https://www.aloyoga.com/en-gb
+- https://www.aloyoga.com/en-gd
+- https://www.aloyoga.com/en-gf
+- https://www.aloyoga.com/en-gg
+- https://www.aloyoga.com/en-gi
+- https://www.aloyoga.com/fr-gn
+- https://www.aloyoga.com/en-gn
+- https://www.aloyoga.com/en-gp
+- https://www.aloyoga.com/es-gq
+- https://www.aloyoga.com/en-gq
+- https://www.aloyoga.com/fr-gq
+- https://www.aloyoga.com/es-gt
+- https://www.aloyoga.com/en-gt
+- https://www.aloyoga.com/en-gy
+- https://www.aloyoga.com/zh-hant-hk
+- https://www.aloyoga.com/zh-hans-hk
+- https://www.aloyoga.com/en-hk
+- https://www.aloyoga.com/es-hn
+- https://www.aloyoga.com/en-hn
+- https://www.aloyoga.com/fr-ht
+- https://www.aloyoga.com/en-ht
+- https://www.aloyoga.com/en-hu
+- https://www.aloyoga.com/en-in
+- https://www.aloyoga.com/en-is
+- https://www.aloyoga.com/en-je
+- https://www.aloyoga.com/en-jm
+- https://www.aloyoga.com/en-jo
+- https://www.aloyoga.com/en-ke
+- https://www.aloyoga.com/en-kh
+- https://www.aloyoga.com/en-kn
+- https://www.aloyoga.com/en-ky
+- https://www.aloyoga.com/en-la
+- https://www.aloyoga.com/en-lc
+- https://www.aloyoga.com/en-lk
+- https://www.aloyoga.com/en-ls
+- https://www.aloyoga.com/en-ma
+- https://www.aloyoga.com/fr-mc
+- https://www.aloyoga.com/en-mc
+- https://www.aloyoga.com/en-me
+- https://www.aloyoga.com/fr-mg
+- https://www.aloyoga.com/en-mg
+- https://www.aloyoga.com/en-mn
+- https://www.aloyoga.com/en-mq
+- https://www.aloyoga.com/en-ms
+- https://www.aloyoga.com/en-mu
+- https://www.aloyoga.com/en-mv
+- https://www.aloyoga.com/en-mw
+- https://www.aloyoga.com/en-my
+- https://www.aloyoga.com/en-mz
+- https://www.aloyoga.com/en-na
+- https://www.aloyoga.com/en-nc
+- https://www.aloyoga.com/es-ni
+- https://www.aloyoga.com/en-ni
+- https://www.aloyoga.com/en-no
+- https://www.aloyoga.com/en-nz
+- https://www.aloyoga.com/en-om
+- https://www.aloyoga.com/es-pa
+- https://www.aloyoga.com/en-pa
+- https://www.aloyoga.com/es-pe
+- https://www.aloyoga.com/en-pe
+- https://www.aloyoga.com/en-pf
+- https://www.aloyoga.com/en-pg
+- https://www.aloyoga.com/en-ph
+- https://www.aloyoga.com/en-pk
+- https://www.aloyoga.com/en-pl
+- https://www.aloyoga.com/es-py
+

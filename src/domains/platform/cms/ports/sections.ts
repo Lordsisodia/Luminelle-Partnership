@@ -1,0 +1,17 @@
+export type SectionsDTO = {
+  schemaVersion?: string
+  updatedAt?: string
+
+  heroSubtitle?: string
+  essentials?: { title: string; body: string }[]
+  reasons?: { title: string; desc: string }[]
+  how?: string[]
+  care?: { icon?: string; title: string; body: string }[]
+  faq?: { q: string; a: string }[]
+  gallery?: string[]
+}
+
+export interface ContentPort {
+  getLandingSections(): Promise<SectionsDTO>
+}
+

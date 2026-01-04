@@ -1,0 +1,20 @@
+# AUTO-GENERATED: feature-research config
+run:
+  kind: feature-research
+  created_at_utc: "2025-12-28T15:49:49Z"
+  role: "step-04"
+  plan_path: ".blackbox/.plans/2025-12-28_2249_deep-research-feature-research-step-04-oss-harvesting-cool-code-224949"
+  prompt_pack: "docs/.blackbox/.prompts/oss-competitors-step-04-oss-harvesting.md"
+
+decisions:
+  # Fill these in early to prevent drift in a 10–20 hour run.
+  target_user_first: "merchant admins"
+  license_policy: "prefer permissive; flag GPL/AGPL"
+
+scoring:
+  # These become “defaults” for scorecards and ranking decisions.
+  prioritize_easy_integration: true
+  prefer_low_cost_setup: true
+
+guardrails:
+  scope: "research only (no implementation)"

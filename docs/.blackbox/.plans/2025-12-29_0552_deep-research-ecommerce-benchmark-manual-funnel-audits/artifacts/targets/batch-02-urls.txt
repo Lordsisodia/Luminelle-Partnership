@@ -1,0 +1,52 @@
+# Batch targets generated from homepage link candidates
+# Format: <url> <label>
+
+# ThirdLove
+https://www.thirdlove.com ThirdLove__home
+https://www.thirdlove.com/collections/all-bras-underwear ThirdLove__plp
+https://www.thirdlove.com/products/24-7-classic-t-shirt-bra-taupe ThirdLove__pdp
+https://www.thirdlove.com/cart ThirdLove__cart_or_checkout
+https://www.thirdlove.com/pages/fitting-room ThirdLove__size_fit
+https://www.thirdlove.com/pages/returns-center ThirdLove__returns
+https://www.thirdlove.com/pages/customer-support ThirdLove__help_support
+
+# UniversalStandard
+https://www.universalstandard.com UniversalStandard__home
+https://www.universalstandard.com/collections/new UniversalStandard__plp
+https://www.universalstandard.com/products/lou-high-rise-barrel-leg-jeans-princeton-blue UniversalStandard__pdp
+https://www.universalstandard.com/pages/fit-liberty-faq UniversalStandard__size_fit
+https://www.universalstandard.com/pages/help-center?hcUrl=%2Fen-US%2Fwhat-is-your-return-and-exchange-policy-for-a-domestic-order-389722 UniversalStandard__returns
+https://www.universalstandard.com/pages/help-center UniversalStandard__help_support
+
+# Summersalt
+https://www.summersalt.com Summersalt__home
+https://www.summersalt.com/collections/all-products Summersalt__plp
+https://www.summersalt.com/products/the-silky-luxe-palazzo-pants-with-ties-in-sea-urchin Summersalt__pdp
+https://www.summersalt.com/pages/fit-guide Summersalt__size_fit
+https://www.summersalt.com/pages/shipping-and-delivery Summersalt__shipping
+https://www.summersalt.com/pages/choose-returns Summersalt__returns
+https://www.summersalt.com/pages/choose-faq Summersalt__help_support
+
+# AloYoga
+https://www.aloyoga.com AloYoga__home
+https://www.aloyoga.com/collections/best-sets-1 AloYoga__plp
+https://www.aloyoga.com/cart AloYoga__cart_or_checkout
+https://www.aloyoga.com/en-vn/pages/size-chart AloYoga__size_fit
+https://www.aloyoga.com/pages/returns-support AloYoga__returns
+https://www.aloyoga.com/pages/help-center AloYoga__help_support
+
+# RentTheRunway
+https://www.renttherunway.com RentTheRunway__home
+https://www.renttherunway.com/shop/new_arrivals_app/products RentTheRunway__plp
+https://www.renttherunway.com/content/find-your-fit?action_type=footer_link RentTheRunway__size_fit
+https://www.renttherunway.com/returns?action_type=footer_link RentTheRunway__returns
+https://www.renttherunway.com/help/contact?_=1719328953125 RentTheRunway__help_support
+
+# Mytheresa
+https://www.mytheresa.com Mytheresa__home
+https://www.mytheresa.com/us/en/women Mytheresa__women_home
+https://www.mytheresa.com/us/en/women/clothing Mytheresa__plp_clothing
+https://www.mytheresa.com/us/en/women/dolce-gabbana-fitted-midi-dress-black-p00849315 Mytheresa__pdp_example
+https://www.mytheresa.com/us/en/customer-care/returns-exchanges Mytheresa__returns
+https://www.mytheresa.com/us/en/customer-care/contact Mytheresa__help_support
+https://www.mytheresa.com/us/en/customer-care/order Mytheresa__ordering_info

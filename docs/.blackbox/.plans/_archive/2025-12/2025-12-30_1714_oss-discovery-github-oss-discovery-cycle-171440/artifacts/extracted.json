@@ -1,0 +1,191 @@
+{
+  "candidates": [
+    {
+      "description": "Anomstack - Painless open source anomaly detection for your metrics \ud83d\udcc8\ud83d\udcc9\ud83d\ude80",
+      "forks": 12,
+      "full_name": "andrewm4894/anomstack",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=107, updated=2025-12-24T20:19:56Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 66,
+      "stars": 107,
+      "tags": [],
+      "topics": [
+        "anomaly-detection",
+        "metrics"
+      ],
+      "updated_at": "2025-12-24T20:19:56Z",
+      "url": "https://github.com/andrewm4894/anomstack"
+    },
+    {
+      "description": "An open-source framework for real-time anomaly detection using Python, ElasticSearch and Kibana",
+      "forks": 168,
+      "full_name": "MentatInnovations/datastream.io",
+      "language": "Python",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=18/20 (stars=914, updated=2025-11-02T07:48:23Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 64,
+      "stars": 914,
+      "tags": [
+        "admin",
+        "search"
+      ],
+      "topics": [
+        "alerts",
+        "anomaly",
+        "anomaly-detection",
+        "anomalydetection",
+        "anomalydiscovery",
+        "bokeh-dashboard",
+        "dashboard",
+        "data-science",
+        "data-stream",
+        "datascience",
+        "dataset",
+        "dsio",
+        "elasticsearch",
+        "iot",
+        "jupyter",
+        "kibana",
+        "machinelearning",
+        "python",
+        "sklearn",
+        "timeseries"
+      ],
+      "updated_at": "2025-11-02T07:48:23Z",
+      "url": "https://github.com/MentatInnovations/datastream.io"
+    },
+    {
+      "description": "An open-source unsupervised time-series anomaly detection package by Getcontact Data Team",
+      "forks": 5,
+      "full_name": "Teknasyon-Teknoloji/pyfbad",
+      "language": "Jupyter Notebook",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Jupyter Notebook); maintenance=19/20 (stars=44, updated=2025-12-27T14:07:35Z); license=15/15 (MIT); time_to_value=5/10",
+      "score": 61,
+      "stars": 44,
+      "tags": [],
+      "topics": [
+        "anomaly-detection",
+        "outlier-detection",
+        "time-series",
+        "unsupervised-learning"
+      ],
+      "updated_at": "2025-12-27T14:07:35Z",
+      "url": "https://github.com/Teknasyon-Teknoloji/pyfbad"
+    },
+    {
+      "description": "Out-of-distribution detection, robustness, and generalization resources. The repository contains a curated list of papers, tutorials, books, videos, articles and open-source libraries etc",
+      "forks": 77,
+      "full_name": "huytransformer/Awesome-Out-Of-Distribution-Detection",
+      "language": "N/A",
+      "license_bucket": "verify",
+      "license_spdx": "CC0-1.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (N/A); maintenance=20/20 (stars=966, updated=2025-12-29T15:09:29Z); license=10/15 (CC0-1.0); time_to_value=5/10",
+      "score": 57,
+      "stars": 966,
+      "tags": [],
+      "topics": [
+        "anomaly",
+        "anomaly-detection",
+        "awesome",
+        "awesome-lists",
+        "distribution-shifts",
+        "novelty-detection",
+        "ood-detection",
+        "ood-generalization",
+        "ood-robustness",
+        "open-set",
+        "open-set-recognition",
+        "open-world",
+        "open-world-learning",
+        "out-of-distribution",
+        "out-of-distribution-detection",
+        "out-of-distribution-generalization",
+        "out-of-distribution-robustness",
+        "outlier-detection",
+        "robustness"
+      ],
+      "updated_at": "2025-12-29T15:09:29Z",
+      "url": "https://github.com/huytransformer/Awesome-Out-Of-Distribution-Detection"
+    },
+    {
+      "description": "Adaptive Memory Networks with Self-supervised Learning for Unsupervised Anomaly Detection (AMSL) -open source",
+      "forks": 5,
+      "full_name": "zhangyuxin621/AMSL",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=18/20 (stars=56, updated=2025-11-05T08:54:49Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 54,
+      "stars": 56,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-11-05T08:54:49Z",
+      "url": "https://github.com/zhangyuxin621/AMSL"
+    },
+    {
+      "description": "Threat Detection & Anomaly Detection rules for popular open-source components",
+      "forks": 10,
+      "full_name": "Loginsoft-LLC/threat-detection-rules",
+      "language": "N/A",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (N/A); maintenance=18/20 (stars=53, updated=2025-08-06T11:46:08Z); license=7/15 (GPL-3.0); time_to_value=5/10",
+      "score": 52,
+      "stars": 53,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "anomaly-detection",
+        "elasticsearch",
+        "siem",
+        "sigma",
+        "splunk",
+        "threat-detection",
+        "threat-hunting"
+      ],
+      "updated_at": "2025-08-06T11:46:08Z",
+      "url": "https://github.com/Loginsoft-LLC/threat-detection-rules"
+    },
+    {
+      "description": "Source codes of our paper in TCSVT 2025:  PLOVAD: Prompting Vision-Language Models for Open Vocabulary Video Anomaly Detection",
+      "forks": 3,
+      "full_name": "ctX-u/PLOVAD",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=16/20 (stars=27, updated=2025-12-25T11:34:36Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 52,
+      "stars": 27,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2025-12-25T11:34:36Z",
+      "url": "https://github.com/ctX-u/PLOVAD"
+    },
+    {
+      "description": "Open Source Anomaly Detection in Python",
+      "forks": 13,
+      "full_name": "nlittlepoole/thermometr",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=12/20 (stars=40, updated=2020-10-14T17:48:00Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 48,
+      "stars": 40,
+      "tags": [],
+      "topics": [],
+      "updated_at": "2020-10-14T17:48:00Z",
+      "url": "https://github.com/nlittlepoole/thermometr"
+    }
+  ],
+  "count": 8,
+  "generated_at_utc": "2025-12-30T10:15:24Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1714_oss-discovery-github-oss-discovery-cycle-171440/oss/entries"
+  }
+}

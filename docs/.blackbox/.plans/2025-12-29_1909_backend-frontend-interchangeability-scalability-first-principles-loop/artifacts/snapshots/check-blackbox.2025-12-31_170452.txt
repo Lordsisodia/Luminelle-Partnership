@@ -1,0 +1,18 @@
+Blackbox check: /Users/shaansisodia/DEV/client-projects/lumelle/docs/.blackbox
+OK
+- roots: 9
+- 01-product: child_dirs=3
+- 02-engineering: child_dirs=9
+- 03-ai: child_dirs=2
+- 04-growth: child_dirs=3
+- 05-planning: child_dirs=4
+- 06-quality: child_dirs=5
+- 07-templates: child_dirs=2
+- 08-meta: child_dirs=2
+- context: child_dirs=3
+OK: Core files present
+OK: Docs routing + ledger present (08-meta/repo)
+OK: Pointer files reference canonical docs
+OK: .prompts exists (markdown prompt packs)
+OK: .skills is flat (README.md + *.md)
+OK: Scripts are executable

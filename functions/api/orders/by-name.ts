@@ -1,10 +1,14 @@
 import type { PagesFunction } from '../../_lib/types'
+import { requireInternalAuth } from '../../_lib/internalAuth'
 import { getSupabase } from '../../_lib/supabase'
 import { json, methodNotAllowed, text } from '../../_lib/response'
 import { mapShopOrderRowToOrder } from '../../_lib/orders'
 
 export const onRequest: PagesFunction = async ({ request, env }) => {
   if (request.method !== 'GET') return methodNotAllowed(['GET'])
+
+  const auth = requireInternalAuth(request, env)
+  if (!auth.ok) return json({ error: auth.message }, { status: auth.status })
 
   const url = new URL(request.url)
   const raw = (url.searchParams.get('name') || '').trim()
@@ -17,4 +21,3 @@ export const onRequest: PagesFunction = async ({ request, env }) => {
   if (!data || data.length === 0) return text('Not found', { status: 404 })
   return json(mapShopOrderRowToOrder(data[0]))
 }
-

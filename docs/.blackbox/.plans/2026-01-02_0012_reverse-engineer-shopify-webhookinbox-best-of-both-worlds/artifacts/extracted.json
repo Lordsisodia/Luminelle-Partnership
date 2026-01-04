@@ -1,0 +1,118 @@
+{
+  "type": "webhookinbox_reverse_engineering",
+  "version": 1,
+  "data": {
+    "canonical_ingress": {
+      "shopify_app_toml": {
+        "redirect_urls": [
+          "/api/shopify/auth/callback"
+        ],
+        "app_proxy_url": "/api/shopify"
+      },
+      "notes": [
+        "Treat `api/shopify/webhooks/*` as canonical for Shopify delivery.",
+        "`functions/api/shopify/webhooks/*` exists as an alternate runtime; keep in parity or deprecate intentionally."
+      ]
+    },
+    "webhooks_registered_on_install": [
+      {
+        "topic": "CUSTOMERS_CREATE",
+        "callback_path": "/api/shopify/webhooks/customers-create",
+        "node_handler": "api/shopify/webhooks/customers-create.ts",
+        "functions_handler": "functions/api/shopify/webhooks/customers-create.ts",
+        "side_effects": [
+          "Upsert ShopCustomers mirror"
+        ]
+      },
+      {
+        "topic": "CUSTOMERS_UPDATE",
+        "callback_path": "/api/shopify/webhooks/customers-update",
+        "node_handler": "api/shopify/webhooks/customers-update.ts",
+        "functions_handler": "functions/api/shopify/webhooks/customers-update.ts",
+        "side_effects": [
+          "Upsert ShopCustomers mirror"
+        ]
+      },
+      {
+        "topic": "CUSTOMERS_DELETE",
+        "callback_path": "/api/shopify/webhooks/customers-delete",
+        "node_handler": "api/shopify/webhooks/customers-delete.ts",
+        "functions_handler": "functions/api/shopify/webhooks/customers-delete.ts",
+        "side_effects": [
+          "Delete or mark customer (implementation-specific)"
+        ]
+      },
+      {
+        "topic": "APP_UNINSTALLED",
+        "callback_path": "/api/shopify/webhooks/app-uninstalled",
+        "node_handler": "api/shopify/webhooks/app-uninstalled.ts",
+        "functions_handler": "functions/api/shopify/webhooks/app-uninstalled.ts",
+        "side_effects": [
+          "App uninstall cleanup (currently a stub)"
+        ]
+      },
+      {
+        "topic": "ORDERS_CREATE",
+        "callback_path": "/api/shopify/webhooks/orders-create",
+        "node_handler": "api/shopify/webhooks/orders-create.ts",
+        "functions_handler": "functions/api/shopify/webhooks/orders-create.ts",
+        "side_effects": [
+          "Upsert ShopOrders mirror",
+          "PostHog purchase event",
+          "Optional order confirmation email"
+        ]
+      },
+      {
+        "topic": "ORDERS_UPDATED",
+        "callback_path": "/api/shopify/webhooks/orders-updated",
+        "node_handler": "api/shopify/webhooks/orders-updated.ts",
+        "functions_handler": "functions/api/shopify/webhooks/orders-updated.ts",
+        "side_effects": [
+          "Upsert ShopOrders mirror",
+          "Refund email (Node implementation)",
+          "Loyalty points reversal (idempotent key)"
+        ]
+      },
+      {
+        "topic": "FULFILLMENTS_CREATE",
+        "callback_path": "/api/shopify/webhooks/fulfillments-create",
+        "node_handler": "api/shopify/webhooks/fulfillments-create.ts",
+        "functions_handler": "functions/api/shopify/webhooks/fulfillments-create.ts",
+        "side_effects": [
+          "Update fulfillment status + tracking info",
+          "Optional shipment email",
+          "Loyalty points award (idempotent key)"
+        ]
+      }
+    ],
+    "idempotency_store": {
+      "table": "public.ShopWebhookDeliveries",
+      "current_schema": [
+        "id text primary key",
+        "received_at timestamptz default now()"
+      ],
+      "used_for": [
+        "dedupe Shopify deliveries",
+        "dedupe internal side effects via composite keys (e.g. loyalty:award:...)"
+      ]
+    },
+    "drift_signals": [
+      "Node handlers typically dedupe by x-shopify-delivery-id only; functions sometimes fall back to x-shopify-webhook-id.",
+      "Functions folder lacks some webhook handlers present in api/ (checkouts, products).",
+      "Inbox schema is minimal; no status/attempts/error/payload hash recorded."
+    ],
+    "recommended_standardization": {
+      "id_key": "X-Shopify-Webhook-Id",
+      "uniqueness": "(shop, webhook_id)",
+      "schema_additions": [
+        "shop",
+        "topic",
+        "payload_hash",
+        "status",
+        "attempts",
+        "last_error",
+        "processed_at"
+      ]
+    }
+  }
+}

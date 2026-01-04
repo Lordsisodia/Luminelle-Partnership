@@ -1,7 +1,7 @@
 import { productConfigs } from './product-config'
 import type { ProductConfig } from './product-types'
-import { fetchProductByHandle as legacyFetch } from '@/lib/product'
-import { fetchSections as legacySections } from '@/lib/sections'
+import { fetchProductByHandle } from '@/lib/product'
+import { fetchSections } from '@/lib/sections'
 
 export type LoadedProduct = Partial<{
   title: string
@@ -23,7 +23,7 @@ export async function loadProduct(handle: string): Promise<LoadedProduct | null>
   try {
     const config = getConfig(handle)
     const resolvedHandle = config.handle || handle
-    const p = await legacyFetch(resolvedHandle)
+    const p = await fetchProductByHandle(resolvedHandle)
     if (isStub(p)) return null
     return {
       title: p.title,
@@ -44,7 +44,7 @@ export async function loadSections(handle: string) {
   // to avoid cross-product copy/media leaking onto other products (e.g., the curler).
   if (config.handle !== productConfigs['shower-cap'].handle) return null
   try {
-    return await legacySections()
+    return await fetchSections()
   } catch {
     return null
   }

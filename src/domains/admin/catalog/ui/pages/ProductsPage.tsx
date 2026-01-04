@@ -1,9 +1,12 @@
 import { useAuth } from '@clerk/clerk-react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useContext } from 'react'
 import { useBeforeUnload, useBlocker, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { setAdminNavList } from '@admin/shared/application/adminNavLists'
 import { AdminPageLayout } from '@admin/shared/ui/layouts'
-import { Copy, Save } from 'lucide-react'
+import { TopBarActionsContext } from '@admin/shared/ui/layouts/AdminShell'
+import { Save, Smartphone, Tablet, Laptop } from 'lucide-react'
 import { createSupabaseClient, isSupabaseConfigured } from '@/lib/supabase'
+import { getClerkSupabaseToken } from '@platform/auth/clerkSupabaseToken'
 import { productConfigs } from '@client/shop/products/data/product-config'
 import { canonicalizeProductHandle } from '@client/shop/products/data/product-handle-aliases'
 import ProductsLayout from '@admin/catalog/ui/layouts/ProductsLayout'
@@ -21,7 +24,47 @@ import IPhonePreviewCard from '@admin/shared/ui/preview/IPhonePreviewCard'
 import useBidirectionalPreviewScrollSync from '@admin/shared/hooks/useBidirectionalPreviewScrollSync'
 const CONFIG_HANDLES = new Set(Object.values(productConfigs).map((cfg) => cfg.handle))
 const PREVIEW_DEVICE_PERSIST_KEY = 'admin:previewDevice'
-const PREVIEW_SYNC_PERSIST_KEY = 'admin:previewSync'
+
+const buildConfigFallbackProducts = (): AdminProduct[] => {
+  return Object.values(productConfigs)
+    .filter((cfg) => CONFIG_HANDLES.has(cfg.handle))
+    .map((cfg) => ({
+      id: cfg.handle,
+      handle: cfg.handle,
+      alias_handles: [],
+      title: (cfg as any).title ?? (cfg as any).defaultTitle ?? cfg.handle,
+      short_desc: (cfg as any).hero?.description ?? (cfg as any).defaultSubtitle ?? '',
+      long_desc: '',
+      price: normalizeNumber((cfg as any).price?.value ?? (cfg as any).defaultPrice ?? null),
+      compare_at_price: normalizeNumber((cfg as any).price?.compare_at ?? (cfg as any).compareAtPrice ?? null),
+      discount_percent_override: null,
+      average_rating: normalizeNumber((cfg as any).reviews?.average ?? (cfg as any).ratingValueOverride ?? null),
+      review_count: normalizeNumber((cfg as any).reviews?.count ?? null),
+      review_count_label: String((cfg as any).reviews?.label ?? (cfg as any).ratingCountLabelOverride ?? ''),
+      badge: String((cfg as any).badge ?? ''),
+      video_slot: String((cfg as any).videoSlot ?? '').replace(/^video:\/\//i, ''),
+      care_label_override: '',
+      hide_details_accordion: Boolean((cfg as any).hideDetailsAccordion ?? false),
+      fallback_variant_id: String((cfg as any).fallbackVariantKey ?? ''),
+      fallback_item_id: String((cfg as any).fallbackItemId ?? ''),
+      specs_text: safeJsonStringify((cfg as any).specs ?? [], '[]'),
+      faq_text: safeJsonStringify((cfg as any).qa ?? [], '[]'),
+      status: 'draft',
+      updated_at: '',
+      media: (cfg as any).gallery
+        ? (cfg as any).gallery
+            .filter((src: string) => !String(src ?? '').startsWith('video://'))
+            .map((src: string, idx: number) => ({
+              id: `${cfg.handle}-${idx}`,
+              path: src,
+              alt: (cfg as any).defaultTitle ?? cfg.handle,
+              sort: idx,
+              is_primary: idx === 0,
+            }))
+        : [],
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title))
+}
 
 // Some products use a route key that differs from their canonical handle (e.g. `shower-cap` -> `lumelle-shower-cap`).
 // Keep admin URLs stable by preferring the product config key when available.
@@ -93,12 +136,6 @@ const JUMP_TO_SECTION_IDS = [
 type JumpToSectionId = (typeof JUMP_TO_SECTION_IDS)[number]
 type ProductsEditorSectionId = (typeof PRODUCTS_EDITOR_SCROLL_SECTION_IDS)[number]
 
-function parseJumpToSectionId(value: string | null | undefined): JumpToSectionId | null {
-  const v = (value ?? '').trim()
-  if (!v) return null
-  return (JUMP_TO_SECTION_IDS as readonly string[]).includes(v) ? (v as JumpToSectionId) : null
-}
-
 function parseMediaIdx(value: string | null | undefined): number | null {
   const v = (value ?? '').trim()
   if (!v) return null
@@ -119,66 +156,8 @@ function parsePreviewSync(value: string | null | undefined): boolean {
   const v = (value ?? '').trim().toLowerCase()
   if (v === '0' || v === 'false' || v === 'off' || v === 'no') return false
   if (v === '1' || v === 'true' || v === 'on' || v === 'yes') return true
-  return true
-}
-
-const formatEditorSectionLabel = (id: string): string => {
-  switch (id) {
-    case 'admin-editor-hero':
-      return 'Hero'
-    case 'admin-editor-hero-badge':
-      return 'Hero · Badge'
-    case 'admin-editor-hero-gallery':
-      return 'Hero · Gallery'
-    case 'admin-editor-hero-text':
-      return 'Hero · Text'
-    case 'admin-editor-hero-price-reviews':
-      return 'Hero · Price & Reviews'
-    case 'admin-editor-sign':
-      return 'Sign'
-    case 'admin-editor-care':
-      return 'Care'
-    case 'admin-editor-proof':
-      return 'Proof'
-    case 'admin-editor-details':
-      return 'Details'
-    case 'admin-editor-details-heading':
-      return 'Details · Heading'
-    case 'admin-editor-details-tiktok':
-      return 'Details · TikTok'
-    case 'admin-editor-details-pills':
-      return 'Details · Pills'
-    case 'admin-editor-benefits':
-      return 'Benefits'
-    case 'admin-editor-essentials':
-      return 'Essentials'
-    case 'admin-editor-featured-tiktok':
-      return 'Featured TikTok'
-    case 'admin-editor-faq':
-      return 'FAQ'
-    default:
-      break
-  }
-
-  const signMatch = id.match(/^admin-editor-sign-bullet-(\d+)$/)
-  if (signMatch) return `Sign · Bullet ${signMatch[1]}`
-
-  const careMatch = id.match(/^admin-editor-care-bullet-(\d+)$/)
-  if (careMatch) return `Care · Bullet ${careMatch[1]}`
-
-  const proofMatch = id.match(/^admin-editor-proof-item-(\d+)$/)
-  if (proofMatch) return `Proof · Item ${proofMatch[1]}`
-
-  const benefitMatch = id.match(/^admin-editor-benefits-bullet-(\d+)$/)
-  if (benefitMatch) return `Benefits · Bullet ${benefitMatch[1]}`
-
-  const essentialsMatch = id.match(/^admin-editor-essentials-item-(\d+)$/)
-  if (essentialsMatch) return `Essentials · Point ${essentialsMatch[1]}`
-
-  const faqMatch = id.match(/^admin-editor-faq-item-(\d+)$/)
-  if (faqMatch) return `FAQ · Q&A ${faqMatch[1]}`
-
-  return 'Section'
+  // Default to false so the editor and preview scroll independently unless explicitly linked via ?sync=1.
+  return false
 }
 
 const formatAge = (deltaMs: number) => {
@@ -194,8 +173,9 @@ const formatAge = (deltaMs: number) => {
 }
 
 export default function ProductsPage() {
-  const { getToken } = useAuth()
+  const { getToken, isSignedIn } = useAuth()
   const navigate = useNavigate()
+  const topBarCtx = useContext(TopBarActionsContext)
   const { handle: routeHandle } = useParams<{ handle?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
   const [loading, setLoading] = useState(true)
@@ -208,9 +188,6 @@ export default function ProductsPage() {
   const [nowMs, setNowMs] = useState<number>(() => Date.now())
   const [activeEditorSectionId, setActiveEditorSectionId] = useState<JumpToSectionId>('admin-editor-hero')
   const [activePreviewEditorId, setActivePreviewEditorId] = useState<ProductsEditorSectionId>('admin-editor-hero')
-  const activePreviewLabel = useMemo(() => formatEditorSectionLabel(activePreviewEditorId), [activePreviewEditorId])
-  const [copiedEditorLink, setCopiedEditorLink] = useState(false)
-  const editorLinkCopyResetRef = useRef<number | null>(null)
   const iframeRef = useRef<HTMLIFrameElement | null>(null)
   const [editingMediaIdx, setEditingMediaIdx] = useState<number | null>(null)
   const [productSearch, setProductSearch] = useState<string>(() => (searchParams.get('q') ?? '').trim())
@@ -232,16 +209,29 @@ export default function ProductsPage() {
       return 'phone'
     }
   }, [searchParams])
-  const previewSyncEnabled = useMemo(() => {
-    const raw = searchParams.get('sync')
-    if (raw != null) return parsePreviewSync(raw)
-    try {
-      const stored = window.localStorage.getItem(PREVIEW_SYNC_PERSIST_KEY)
-      return parsePreviewSync(stored)
-    } catch {
-      return true
-    }
-  }, [searchParams])
+  const previewSyncEnabled = useMemo(() => parsePreviewSync(searchParams.get('sync')), [searchParams])
+
+  // Strip legacy `section` deep-link param to prevent scroll resets.
+  useEffect(() => {
+    if (!hasSelection) return
+    if (!searchParams.has('section')) return
+    const next = new URLSearchParams(searchParams)
+    next.delete('section')
+    if (next.toString() === searchParams.toString()) return
+    setSearchParams(next, { replace: true })
+  }, [hasSelection, searchParams, setSearchParams])
+
+  const scrollPreviewToSection = useCallback(
+    (editorId: ProductsEditorSectionId, behavior: ScrollBehavior = 'smooth') => {
+      const previewId = PRODUCTS_EDITOR_TO_PREVIEW_SECTION[editorId]
+      if (!previewId) return
+      iframeRef.current?.contentWindow?.postMessage(
+        { type: 'scrollToSection', target: previewId, behavior },
+        window.location.origin,
+      )
+    },
+    [],
+  )
 
   // Keep URL in sync with persisted preview device (without forcing `device=phone`).
   useEffect(() => {
@@ -252,15 +242,6 @@ export default function ProductsPage() {
     setSearchParams(next, { replace: true })
   }, [previewDevice, searchParams, setSearchParams])
 
-  // Keep URL in sync with persisted preview sync (without forcing `sync=1`).
-  useEffect(() => {
-    if (searchParams.has('sync')) return
-    if (previewSyncEnabled) return
-    const next = new URLSearchParams(searchParams)
-    next.set('sync', '0')
-    setSearchParams(next, { replace: true })
-  }, [previewSyncEnabled, searchParams, setSearchParams])
-
   const handlePreviewDeviceChange = useCallback(
     (nextDevice: PreviewDevice) => {
       const next = new URLSearchParams(searchParams)
@@ -269,20 +250,6 @@ export default function ProductsPage() {
       setSearchParams(next, { replace: true })
       try {
         window.localStorage.setItem(PREVIEW_DEVICE_PERSIST_KEY, nextDevice)
-      } catch {
-        // ignore
-      }
-    },
-    [searchParams, setSearchParams],
-  )
-  const handlePreviewSyncChange = useCallback(
-    (enabled: boolean) => {
-      const next = new URLSearchParams(searchParams)
-      if (enabled) next.delete('sync')
-      else next.set('sync', '0')
-      setSearchParams(next, { replace: true })
-      try {
-        window.localStorage.setItem(PREVIEW_SYNC_PERSIST_KEY, enabled ? '1' : '0')
       } catch {
         // ignore
       }
@@ -307,12 +274,6 @@ export default function ProductsPage() {
       if (e.metaKey || e.ctrlKey || e.altKey) return
       if (isEditableTarget(e.target)) return
 
-      if (e.shiftKey && e.key.toLowerCase() === 's') {
-        e.preventDefault()
-        handlePreviewSyncChange(!previewSyncEnabled)
-        return
-      }
-
       if (e.key === '1') {
         e.preventDefault()
         handlePreviewDeviceChange('phone')
@@ -327,22 +288,23 @@ export default function ProductsPage() {
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [handlePreviewDeviceChange, handlePreviewSyncChange, hasSelection, previewSyncEnabled])
+  }, [handlePreviewDeviceChange, hasSelection])
 
   useBidirectionalPreviewScrollSync({
     enabled: hasSelection && previewSyncEnabled,
+    direction: 'editor-to-preview',
     iframeRef,
     previewToEditor: PRODUCTS_PREVIEW_TO_EDITOR_SECTION,
     editorToPreview: PRODUCTS_EDITOR_TO_PREVIEW_SECTION,
     editorSectionIds: PRODUCTS_EDITOR_SCROLL_SECTION_IDS,
-    editorScrollThrottleMs: 90,
-    previewScrollThrottleMs: 90,
-    suppressMs: 240,
+    editorScrollThrottleMs: 140,
+    previewScrollThrottleMs: 420,
+    suppressMs: 800,
     activationY: 200,
-    editorScrollBehavior: 'smooth',
-    previewScrollBehavior: 'smooth',
+    editorScrollBehavior: 'auto',
+    previewScrollBehavior: 'auto',
     editorScrollBlock: 'nearest',
-    editorScrollMode: 'pin',
+    editorScrollMode: 'nearest',
     editorScrollOffsetPx: 120,
   })
   useEffect(() => {
@@ -390,73 +352,6 @@ export default function ProductsPage() {
     if (editingMediaIdx !== desired) setEditingMediaIdx(desired)
   }, [editingMediaIdx, hasSelection, product?.media?.length, routeHandle, searchParams, setSearchParams])
 
-  // URL -> state for editor section (deep links + back/forward).
-  // We use query params (not hash) to avoid browser auto-scrolling/jank.
-  useEffect(() => {
-    if (!hasSelection) return
-    const desired = parseJumpToSectionId(searchParams.get('section'))
-    if (!desired) return
-    if (desired === activeEditorSectionId) return
-
-    setActiveEditorSectionId(desired)
-
-    // Retry a few times to support deep links before the section DOM mounts.
-    let cancelled = false
-    let attempts = 0
-    const tryScroll = () => {
-      if (cancelled) return
-      const el = document.getElementById(desired)
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        return
-      }
-      attempts += 1
-      if (attempts < 12) window.setTimeout(tryScroll, 60)
-    }
-    tryScroll()
-
-    return () => {
-      cancelled = true
-    }
-  }, [activeEditorSectionId, hasSelection, routeHandle, searchParams])
-
-  // state -> URL for editor section (shareable URLs, no history spam).
-  const desiredSearch = useMemo(() => {
-    const next = new URLSearchParams(searchParams)
-
-    const requestedSection = parseJumpToSectionId(searchParams.get('section'))
-
-    // List route: strip editor-only params.
-    if (!routeHandle) {
-      if (next.has('section')) next.delete('section')
-      if (next.has('media')) next.delete('media')
-      return next
-    }
-
-    // Detail route, but product not loaded yet: preserve deep links.
-    if (!hasSelection) return next
-
-    // If URL requests a non-hero section but state is still at the default (hero), don't fight it.
-    // This avoids deleting `?section=...` during the initial "load -> select" transition.
-    if (activeEditorSectionId === 'admin-editor-hero' && requestedSection && requestedSection !== 'admin-editor-hero') {
-      return next
-    }
-
-    if (activeEditorSectionId === 'admin-editor-hero') {
-      if (next.has('section')) next.delete('section')
-      return next
-    }
-
-    const current = next.get('section')
-    if (current !== activeEditorSectionId) next.set('section', activeEditorSectionId)
-    return next
-  }, [activeEditorSectionId, hasSelection, routeHandle, searchParams])
-
-  useEffect(() => {
-    if (searchParams.toString() === desiredSearch.toString()) return
-    setSearchParams(desiredSearch, { replace: true })
-  }, [desiredSearch, searchParams, setSearchParams])
-
   const handleToggleEditingMediaIdx = useCallback(
     (idx: number) => {
       if (!hasSelection) return
@@ -490,14 +385,19 @@ export default function ProductsPage() {
     sessionStorage.setItem('admin:productCount', String(products.length || ''))
     window.dispatchEvent(new Event('admin:productCountUpdated'))
   }, [products.length])
+
+  useEffect(() => {
+    setAdminNavList(
+      'products',
+      products.map((p) => ({
+        label: String(p.title ?? p.handle),
+        to: `/admin/products/${p.handle}`,
+      })),
+    )
+  }, [products])
   useEffect(() => {
     const id = window.setInterval(() => setNowMs(Date.now()), 15_000)
     return () => window.clearInterval(id)
-  }, [])
-  useEffect(() => {
-    return () => {
-      if (editorLinkCopyResetRef.current) window.clearTimeout(editorLinkCopyResetRef.current)
-    }
   }, [])
 
   // Listen for the preview iframe scrollspy so we can softly highlight the corresponding editor card.
@@ -630,36 +530,6 @@ export default function ProductsPage() {
       if (raf) window.cancelAnimationFrame(raf)
     }
   }, [hasSelection])
-  const scrollToEditorSection = useCallback((id: string) => {
-    const el = document.getElementById(id)
-    if (!el) return
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [])
-  const jumpFromPreviewToEditor = useCallback(() => {
-    scrollToEditorSection(activePreviewEditorId)
-  }, [activePreviewEditorId, scrollToEditorSection])
-  const copyEditorLink = useCallback(() => {
-    try {
-      const url = new URL(window.location.href)
-      if (activeEditorSectionId === 'admin-editor-hero') url.searchParams.delete('section')
-      else url.searchParams.set('section', activeEditorSectionId)
-
-      const write = async () => {
-        try {
-          await navigator.clipboard.writeText(url.toString())
-          setCopiedEditorLink(true)
-          if (editorLinkCopyResetRef.current) window.clearTimeout(editorLinkCopyResetRef.current)
-          editorLinkCopyResetRef.current = window.setTimeout(() => setCopiedEditorLink(false), 1200)
-        } catch {
-          window.prompt('Copy editor URL:', url.toString())
-        }
-      }
-
-      void write()
-    } catch {
-      window.prompt('Copy editor URL:', window.location.href)
-    }
-  }, [activeEditorSectionId])
   const updateProduct = useCallback(
     (updater: (p: AdminProduct) => AdminProduct) => {
       if (!product) return
@@ -968,24 +838,64 @@ export default function ProductsPage() {
     },
     [product, updateProduct],
   )
+  const buildConfigFallbackProducts = (): AdminProduct[] => {
+    return Object.values(productConfigs)
+      .filter((cfg) => CONFIG_HANDLES.has(cfg.handle))
+      .map((cfg) => ({
+            id: cfg.handle,
+            handle: cfg.handle,
+            alias_handles: [],
+            title: (cfg as any).title ?? (cfg as any).defaultTitle ?? cfg.handle,
+            short_desc: (cfg as any).hero?.description ?? (cfg as any).defaultSubtitle ?? '',
+            long_desc: '',
+            price: normalizeNumber((cfg as any).price?.value ?? (cfg as any).defaultPrice ?? null),
+            compare_at_price: normalizeNumber((cfg as any).price?.compare_at ?? (cfg as any).compareAtPrice ?? null),
+            discount_percent_override: null,
+            average_rating: normalizeNumber((cfg as any).reviews?.average ?? (cfg as any).ratingValueOverride ?? null),
+            review_count: normalizeNumber((cfg as any).reviews?.count ?? null),
+            review_count_label: String((cfg as any).reviews?.label ?? (cfg as any).ratingCountLabelOverride ?? ''),
+            badge: String((cfg as any).badge ?? ''),
+            video_slot: String((cfg as any).videoSlot ?? '').replace(/^video:\/\//i, ''),
+            care_label_override: '',
+            hide_details_accordion: Boolean((cfg as any).hideDetailsAccordion ?? false),
+            fallback_variant_id: String((cfg as any).fallbackVariantKey ?? ''),
+            fallback_item_id: String((cfg as any).fallbackItemId ?? ''),
+            specs_text: safeJsonStringify((cfg as any).specs ?? [], '[]'),
+            faq_text: safeJsonStringify((cfg as any).qa ?? [], '[]'),
+            status: 'draft',
+            updated_at: '',
+            media: (cfg as any).gallery
+              ? (cfg as any).gallery
+                  .filter((src: string) => !String(src ?? '').startsWith('video://'))
+                  .map((src: string, idx: number) => ({
+                    id: `${cfg.handle}-${idx}`,
+                    path: src,
+                    alt: (cfg as any).defaultTitle ?? cfg.handle,
+                    sort: idx,
+                    is_primary: idx === 0,
+                  }))
+              : [],
+      }))
+      .sort((a, b) => a.title.localeCompare(b.title))
+  }
+
   const loadProducts = useCallback(async () => {
+    // Show instant fallback so UI isn't empty while we fetch.
+    const fallback = buildConfigFallbackProducts()
+    setProducts(fallback)
+    setSnapshots(Object.fromEntries(fallback.map((p) => [p.id, JSON.stringify(p)])))
     setLoading(true)
     setError(null)
     try {
-      const token = await getToken({ template: 'supabase' }).catch(() => null)
-      if (!token) {
-        setError('Missing Clerk JWT template `supabase` token. Check Clerk → JWT Templates.')
-        setProducts([])
-        setSelectedId(null)
-        setSnapshots({})
-        return
-      }
-      const client = createSupabaseClient(token)
+
+      // Use anon client for faster, unauthenticated reads (RLS allows select).
+      const client = createSupabaseClient()
       if (!client) {
         setError('Supabase is not configured in this environment (missing VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY).')
-        setProducts([])
+        const fallbackProducts = buildConfigFallbackProducts()
+        setProducts(fallbackProducts)
         setSelectedId(null)
-        setSnapshots({})
+        setSnapshots(Object.fromEntries(fallbackProducts.map((p) => [p.id, JSON.stringify(p)])))
         return
       }
       const { data: productRows, error: productsErr } = await client
@@ -1023,6 +933,7 @@ export default function ProductsPage() {
         setSnapshots({})
         return
       }
+      console.info('admin:products fetched rows', productRows?.length ?? 0)
       const byCanonical = new Map<string, { row: any; aliasHandles: Set<string> }>()
       for (const row of productRows ?? []) {
         const rawHandle = String((row as any).handle ?? '').trim()
@@ -1064,6 +975,7 @@ export default function ProductsPage() {
       }))
 
       const productIds = filtered.map((entry) => entry.row.id as string)
+      console.info('admin:products canonical count', filtered.length, 'ids', productIds)
       const mediaByProduct = new Map<string, AdminMediaItem[]>()
       if (productIds.length) {
         const { data: mediaRows, error: mediaErr } = await client
@@ -1139,44 +1051,7 @@ export default function ProductsPage() {
         .sort((a, b) => a.title.localeCompare(b.title))
       // Fallback to in-repo product config when Supabase has no rows yet (common on fresh envs)
       if (!nextProducts.length) {
-        nextProducts = Object.values(productConfigs)
-          .filter((cfg) => CONFIG_HANDLES.has(cfg.handle))
-          .map((cfg) => ({
-            id: cfg.handle,
-            handle: cfg.handle,
-            alias_handles: [],
-            title: (cfg as any).title ?? (cfg as any).defaultTitle ?? cfg.handle,
-            short_desc: (cfg as any).hero?.description ?? (cfg as any).defaultSubtitle ?? '',
-            long_desc: '',
-            price: normalizeNumber((cfg as any).price?.value ?? (cfg as any).defaultPrice ?? null),
-            compare_at_price: normalizeNumber((cfg as any).price?.compare_at ?? (cfg as any).compareAtPrice ?? null),
-            discount_percent_override: null,
-            average_rating: normalizeNumber((cfg as any).reviews?.average ?? (cfg as any).ratingValueOverride ?? null),
-            review_count: normalizeNumber((cfg as any).reviews?.count ?? null),
-            review_count_label: String((cfg as any).reviews?.label ?? (cfg as any).ratingCountLabelOverride ?? ''),
-            badge: String((cfg as any).badge ?? ''),
-            video_slot: String((cfg as any).videoSlot ?? '').replace(/^video:\/\//i, ''),
-            care_label_override: '',
-            hide_details_accordion: Boolean((cfg as any).hideDetailsAccordion ?? false),
-            fallback_variant_id: String((cfg as any).fallbackVariantId ?? ''),
-            fallback_item_id: String((cfg as any).fallbackItemId ?? ''),
-            specs_text: safeJsonStringify((cfg as any).specs ?? [], '[]'),
-            faq_text: safeJsonStringify((cfg as any).qa ?? [], '[]'),
-            status: 'draft',
-            updated_at: '',
-            media: (cfg as any).gallery
-              ? (cfg as any).gallery
-                  .filter((src: string) => !String(src ?? '').startsWith('video://'))
-                  .map((src: string, idx: number) => ({
-                  id: `${cfg.handle}-${idx}`,
-                  path: src,
-                  alt: (cfg as any).defaultTitle ?? cfg.handle,
-                  sort: idx,
-                  is_primary: idx === 0,
-                }))
-              : [],
-          }))
-          .sort((a, b) => a.title.localeCompare(b.title))
+        nextProducts = buildConfigFallbackProducts()
       }
       setProducts(nextProducts)
       setSelectedId((prev) => (prev && nextProducts.some((p) => p.id === prev) ? prev : null))
@@ -1189,7 +1064,7 @@ export default function ProductsPage() {
     } finally {
       setLoading(false)
     }
-  }, [getToken])
+  }, [])
   useEffect(() => {
     void loadProducts()
   }, [loadProducts])
@@ -1377,9 +1252,9 @@ export default function ProductsPage() {
         )
         return
       }
-      const token = await getToken({ template: 'supabase' }).catch(() => null)
+      const { token, template } = await getClerkSupabaseToken(getToken)
       if (!token) {
-        setError('Missing Clerk JWT template `supabase` token.')
+        setError(!isSignedIn ? 'Sign in to save changes to Supabase.' : `Missing Clerk JWT template \`${template}\` token.`)
         return
       }
       const client = createSupabaseClient(token)
@@ -1482,9 +1357,10 @@ export default function ProductsPage() {
     } finally {
       setSaving(false)
     }
-  }, [getToken, product])
+  }, [getToken, isSignedIn, product])
   const saveStatusLabel = useMemo(() => {
-    if (isConfigFallbackProduct) return 'Read-only (config fallback)'
+    // Hide config-fallback status label: it's noisy and was rendering as a broken floating overlay in the UI.
+    if (isConfigFallbackProduct) return ''
     if (saving) return 'Saving…'
     if (!product) return ''
     if (dirty) return 'Unsaved changes'
@@ -1549,6 +1425,80 @@ export default function ProductsPage() {
   const missingDetailsPills = featurePills.filter((pill) => !pill.trim()).length
   const missingBenefitTitles = benefitBullets.filter((b) => !b.title.trim()).length
   const missingBenefitBodies = benefitBullets.filter((b) => !b.body.trim()).length
+  const headerActions =
+    hasSelection && product ? (
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="inline-flex items-center gap-1 rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-2 py-1 shadow-sm">
+          <button
+            type="button"
+            onClick={() => handlePreviewDeviceChange('phone')}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition ${
+              previewDevice === 'phone'
+                ? 'bg-semantic-legacy-brand-blush text-semantic-text-primary shadow-sm'
+                : 'bg-brand-porcelain/70 text-semantic-text-primary hover:bg-brand-porcelain'
+            }`}
+            title="Phone preview"
+            aria-label="Preview phone"
+          >
+            <Smartphone className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => handlePreviewDeviceChange('tablet')}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition ${
+              previewDevice === 'tablet'
+                ? 'bg-semantic-legacy-brand-blush text-semantic-text-primary shadow-sm'
+                : 'bg-brand-porcelain/70 text-semantic-text-primary hover:bg-brand-porcelain'
+            }`}
+            title="Tablet preview"
+            aria-label="Preview tablet"
+          >
+            <Tablet className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => handlePreviewDeviceChange('desktop')}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition ${
+              previewDevice === 'desktop'
+                ? 'bg-semantic-legacy-brand-blush text-semantic-text-primary shadow-sm'
+                : 'bg-brand-porcelain/70 text-semantic-text-primary hover:bg-brand-porcelain'
+            }`}
+            title="Desktop preview"
+            aria-label="Preview desktop"
+          >
+            <Laptop className="h-4 w-4" />
+          </button>
+        </div>
+        {saveStatusLabel ? (
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm">
+            <span
+              className={`h-2 w-2 rounded-full ${
+                saveStatusLabel.startsWith('Saved') ? 'bg-emerald-500' : saveStatusLabel.startsWith('Saving') ? 'bg-amber-500' : 'bg-rose-500'
+              }`}
+            />
+            <span>{saveStatusLabel}</span>
+          </div>
+        ) : null}
+        <button
+          disabled={isConfigFallbackProduct || saving || !dirty || !product}
+          onClick={handleSave}
+          className={`inline-flex h-9 items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 text-xs font-semibold text-semantic-text-primary shadow-sm transition ${
+            isConfigFallbackProduct || saving || !dirty || !product ? 'opacity-60 cursor-not-allowed' : 'hover:bg-brand-porcelain/60'
+          }`}
+        >
+          <Save className="h-4 w-4" />
+          {isConfigFallbackProduct ? 'Read-only' : saving ? 'Saving…' : 'Save changes'}
+        </button>
+      </div>
+    ) : null
+
+  const topActionsNode = useMemo(() => headerActions, [headerActions])
+
+  useEffect(() => {
+    topBarCtx?.setTopActions(topActionsNode ?? null)
+    return () => topBarCtx?.setTopActions(null)
+  }, [topActionsNode, topBarCtx])
+
   return (
     <AdminPageLayout title={null} subtitle={null} actions={null}>
       {!isSupabaseConfigured ? (
@@ -1619,108 +1569,39 @@ export default function ProductsPage() {
 	          </div>
 	        </div>
       ) : (
-	        <ProductsLayout
-		          previewSlot={
-		            <IPhonePreviewCard
-		              iframeRef={iframeRef}
-		              src={`/admin/preview/product/${encodeURIComponent(
-		                PRODUCT_HANDLE_TO_ROUTE_KEY[product.handle] ?? product.handle,
-		              )}`}
-		              device={previewDevice}
-		              onDeviceChange={handlePreviewDeviceChange}
-		              activeSectionLabel={activePreviewLabel}
-		              syncEnabled={previewSyncEnabled}
-		              onSyncEnabledChange={handlePreviewSyncChange}
-		              onJumpToEditorSection={jumpFromPreviewToEditor}
-		              onCopyEditorLink={copyEditorLink}
-		              hidden={!hasSelection}
-		              onIframeLoad={handlePreviewIframeLoad}
-		            />
-		          }
-		        >
-          <div className="sticky top-24 z-20">
-            <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/90 px-3 py-2 shadow-sm backdrop-blur">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <div className="truncate text-sm font-semibold text-semantic-text-primary">{product.title}</div>
-                    <Pill>{product.status === 'live' ? 'Live' : 'Draft'}</Pill>
-                  </div>
-                  <div className="mt-1 text-xs font-semibold text-semantic-text-primary/70">
-                    {saveStatusLabel}
-                    {copiedEditorLink ? ' · Link copied' : ''}
-                  </div>
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <select
-                    aria-label="Jump to section"
-                    value={activeEditorSectionId}
-                    onChange={(e) => {
-                      const id = e.target.value
-                      scrollToEditorSection(id)
-                    }}
-                    className="inline-flex h-8 rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 text-xs font-semibold text-semantic-text-primary shadow-sm hover:bg-brand-porcelain/60 focus:outline-none"
-                  >
-                    <optgroup label="Hero">
-                      <option value="admin-editor-hero">Hero</option>
-                      <option value="admin-editor-hero-badge">Hero badge</option>
-                      <option value="admin-editor-hero-gallery">Gallery</option>
-                      <option value="admin-editor-hero-text">Hero text</option>
-                      <option value="admin-editor-hero-price-reviews">Price & reviews</option>
-                    </optgroup>
-	                    <optgroup label="Sections">
-	                      <option value="admin-editor-sign">Sign</option>
-	                      <option value="admin-editor-care">Care</option>
-	                      <option value="admin-editor-proof">Proof</option>
-	                      <option value="admin-editor-details">Details</option>
-	                      <option value="admin-editor-benefits">Benefits</option>
-	                      <option value="admin-editor-essentials">Essentials</option>
-	                      <option value="admin-editor-featured-tiktok">Featured TikTok</option>
-	                      <option value="admin-editor-faq">FAQ</option>
-	                    </optgroup>
-                  </select>
-
-                  <button
-                    disabled={isConfigFallbackProduct || saving || !dirty || !product}
-                    onClick={handleSave}
-                    className={`inline-flex h-8 items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 text-xs font-semibold text-semantic-text-primary shadow-sm transition ${
-                      isConfigFallbackProduct || saving || !dirty || !product ? 'opacity-60 cursor-not-allowed' : 'hover:bg-brand-porcelain/60'
-                    }`}
-                  >
-                    <Save className="h-4 w-4" />
-                    {isConfigFallbackProduct ? 'Read-only' : saving ? 'Saving…' : 'Save changes'}
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="Copy editor link"
-                    title="Copy editor link"
-                    onClick={copyEditorLink}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full text-semantic-text-primary/60 hover:bg-brand-porcelain/60 hover:text-semantic-text-primary focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/25 focus:ring-offset-2 focus:ring-offset-brand-porcelain"
-                  >
-                    <Copy className="h-4 w-4" aria-hidden="true" />
-                  </button>
-                </div>
+        <ProductsLayout
+          previewSlot={
+            <IPhonePreviewCard
+              iframeRef={iframeRef}
+              src={`/admin/preview/product/${encodeURIComponent(
+                PRODUCT_HANDLE_TO_ROUTE_KEY[product.handle] ?? product.handle,
+              )}`}
+              enableDeviceToggle={false}
+              device={previewDevice}
+              onDeviceChange={handlePreviewDeviceChange}
+              hidden={!hasSelection}
+              onIframeLoad={handlePreviewIframeLoad}
+            />
+          }
+        >
+		          <section
+            id="admin-editor-hero"
+            className={`scroll-mt-24 space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 transition-shadow ${
+              isHeroSectionActive || String(activePreviewEditorId ?? '').startsWith('admin-editor-hero') ? activeSectionClass : ''
+            }`}
+          >
+            <div className="h-9 -mx-5 -mt-5 mb-4 rounded-t-2xl bg-semantic-legacy-brand-blush px-4 flex items-center justify-between">
+              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary">Hero</span>
+              <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
+                <button
+                  type="button"
+                  onClick={() => scrollPreviewToSection('admin-editor-hero')}
+                  className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+                >
+                  View in preview
+                </button>
               </div>
             </div>
-          </div>
-
-		          <section
-	            id="admin-editor-hero"
-	            className={`scroll-mt-24 space-y-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5 transition-shadow ${
-	              isHeroSectionActive || String(activePreviewEditorId ?? '').startsWith('admin-editor-hero') ? activeSectionClass : ''
-	            }`}
-	          >
-              <div className="h-9 -mx-5 -mt-5 mb-4 rounded-t-2xl bg-semantic-legacy-brand-blush px-4 flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary">Hero</span>
-                <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-                  <span className="text-semantic-text-primary/60">{mediaCount} images</span>
-                  {missingAltCount ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingAltCount} missing alt</span>
-                  ) : null}
-                  {missingHeroSubtext ? <span className="text-semantic-legacy-brand-cocoa">Missing subtext</span> : null}
-                  {missingHeroPrice ? <span className="text-semantic-legacy-brand-cocoa">Missing price</span> : null}
-                </div>
-              </div>
               {/* Pill + Gallery */}
 	              <div
                   className={`rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 space-y-3 transition-shadow ${
@@ -1761,8 +1642,10 @@ export default function ProductsPage() {
                       activePreviewEditorId === 'admin-editor-hero-gallery' ? activeSectionClass : ''
                     }`}
                   >
-	                  <div className="flex items-center justify-between gap-2">
-	                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/80">Gallery</p>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center rounded-full bg-semantic-legacy-brand-blush px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary">
+                      Gallery
+                    </span>
                     <button
                       type="button"
                       className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
@@ -1812,7 +1695,9 @@ export default function ProductsPage() {
                   </div>
                   {editingMediaIdx != null && product.media[editingMediaIdx] ? (
                     <div className="space-y-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2">
-                      <p className="text-xs font-semibold text-semantic-text-primary/80">Image details</p>
+                      <span className="inline-flex items-center rounded-full bg-semantic-legacy-brand-blush px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-semantic-text-primary">
+                        Image details
+                      </span>
                       <TextInput
                         value={product.media[editingMediaIdx].path}
                         onChange={(v) =>
@@ -1953,13 +1838,13 @@ export default function ProductsPage() {
                   Your sign to try this
                 </span>
                 <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-                  <span className="text-semantic-text-primary/60">3 bullets</span>
-                  {missingSignTitles ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingSignTitles} missing titles</span>
-                  ) : null}
-                  {missingSignBodies ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingSignBodies} missing subtext</span>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => scrollPreviewToSection('admin-editor-sign')}
+                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+                  >
+                    View in preview
+                  </button>
                 </div>
               </div>
 	              <div className="space-y-3">
@@ -2003,13 +1888,13 @@ export default function ProductsPage() {
                   Care & materials
                 </span>
                 <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-                  <span className="text-semantic-text-primary/60">3 bullets</span>
-                  {missingCareTitles ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingCareTitles} missing titles</span>
-                  ) : null}
-                  {missingCareBodies ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingCareBodies} missing subtext</span>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => scrollPreviewToSection('admin-editor-care')}
+                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+                  >
+                    View in preview
+                  </button>
                 </div>
               </div>
               <div className="space-y-3">
@@ -2053,13 +1938,13 @@ export default function ProductsPage() {
                   Proof strip
                 </span>
                 <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-                  <span className="text-semantic-text-primary/60">3 items</span>
-                  {missingProofLabels ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingProofLabels} missing labels</span>
-                  ) : null}
-                  {missingProofBodies ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingProofBodies} missing copy</span>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => scrollPreviewToSection('admin-editor-proof')}
+                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+                  >
+                    View in preview
+                  </button>
                 </div>
               </div>
               <div className="space-y-3">
@@ -2106,20 +1991,13 @@ export default function ProductsPage() {
                   Why you’ll love it
                 </span>
                 <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-                  {missingDetailsHeadingTitle ? (
-                    <span className="text-semantic-legacy-brand-cocoa">Missing heading title</span>
-                  ) : null}
-                  {missingDetailsHeadingDesc ? (
-                    <span className="text-semantic-legacy-brand-cocoa">Missing heading subtext</span>
-                  ) : null}
-                  {missingDetailsTikTokUrl ? (
-                    <span className="text-semantic-text-primary/60">No TikTok URL</span>
-                  ) : (
-                    <span className="text-semantic-text-primary/60">TikTok set</span>
-                  )}
-                  {missingDetailsPills ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingDetailsPills} empty pill</span>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => scrollPreviewToSection('admin-editor-details')}
+                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+                  >
+                    View in preview
+                  </button>
                 </div>
               </div>
 	              <div className="space-y-3">
@@ -2197,13 +2075,13 @@ export default function ProductsPage() {
                   Benefits
                 </span>
                 <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-                  <span className="text-semantic-text-primary/60">{BENEFIT_COUNT} bullets</span>
-                  {missingBenefitTitles ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingBenefitTitles} missing titles</span>
-                  ) : null}
-                  {missingBenefitBodies ? (
-                    <span className="text-semantic-legacy-brand-cocoa">{missingBenefitBodies} missing subtext</span>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => scrollPreviewToSection('admin-editor-benefits')}
+                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+                  >
+                    View in preview
+                  </button>
                 </div>
               </div>
               <div className="space-y-3">
@@ -2242,12 +2120,14 @@ export default function ProductsPage() {
 	              onChange={updateEssential}
 	              highlight={isEssentialsActive || String(activePreviewEditorId ?? '').startsWith('admin-editor-essentials')}
 	              activeAnchorId={activePreviewEditorId}
+	              onPreviewClick={() => scrollPreviewToSection('admin-editor-essentials')}
 	            />
 	            <FeaturedTikTokSection
 	              id="admin-editor-featured-tiktok"
 	              heading={featuredTikTokHeading}
 	              onChange={updateFeaturedTikTokHeading}
 	              highlight={isFeaturedTikTokActive || activePreviewEditorId === 'admin-editor-featured-tiktok'}
+	              onPreviewClick={() => scrollPreviewToSection('admin-editor-featured-tiktok')}
 	            />
 	            <FaqSection
 	              id="admin-editor-faq"
@@ -2255,6 +2135,7 @@ export default function ProductsPage() {
 	              onChange={updateFaq}
 	              highlight={isFaqActive || String(activePreviewEditorId ?? '').startsWith('admin-editor-faq')}
 	              activeAnchorId={activePreviewEditorId}
+	              onPreviewClick={() => scrollPreviewToSection('admin-editor-faq')}
 	            />
         </ProductsLayout>
       )}

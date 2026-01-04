@@ -5,6 +5,7 @@ import AdminPageLayout from '@admin/shared/ui/layouts/AdminPageLayout'
 import { ArrowUpRight, Filter, Plus, RefreshCw } from 'lucide-react'
 import clsx from 'clsx'
 import { blogPosts } from '@/content/blog'
+import { setAdminNavList } from '@admin/shared/application/adminNavLists'
 
 const Badge = ({ tone = 'neutral', children }: { tone?: 'neutral' | 'success' | 'warning' | 'danger'; children: ReactNode }) => {
   const toneClass =
@@ -138,6 +139,16 @@ export default function BlogsPage() {
     [],
   )
 
+  useEffect(() => {
+    setAdminNavList(
+      'blogPosts',
+      blogPosts.map((p) => ({
+        label: p.title,
+        to: `/admin/blogs/${p.slug}`,
+      })),
+    )
+  }, [])
+
   const tagOptions = useMemo(
     () => ['all', ...Array.from(new Set(rows.flatMap((r) => r.tags.filter(Boolean))))],
     [rows],
@@ -235,8 +246,19 @@ export default function BlogsPage() {
 
   return (
     <AdminPageLayout
-      title="Blogs"
-      subtitle="Blog posts and metrics live in Supabase (cms_blogs + cms_blog_media)."
+      subtitle={
+        <span className="block max-w-2xl text-sm leading-relaxed">
+          Blog posts and metrics live in Supabase (
+          <span className="inline-flex items-center whitespace-nowrap rounded-md border border-semantic-legacy-brand-blush/60 bg-brand-porcelain px-1.5 py-0.5 font-mono text-[12px] text-semantic-text-primary/80">
+            cms_blogs
+          </span>{' '}
+          +{' '}
+          <span className="inline-flex items-center whitespace-nowrap rounded-md border border-semantic-legacy-brand-blush/60 bg-brand-porcelain px-1.5 py-0.5 font-mono text-[12px] text-semantic-text-primary/80">
+            cms_blog_media
+          </span>
+          ).
+        </span>
+      }
       actions={<Toolbar />}
     >
       <Card className="overflow-hidden">

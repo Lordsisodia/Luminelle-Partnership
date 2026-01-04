@@ -1,18 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import { shopifyEnabled } from '@platform/commerce/shopify/shopify'
 import { MAX_CART_ITEM_QTY } from '@/config/constants'
 import { getVolumeDiscountCodes, getVolumeDiscountTierForVariant, type VolumeDiscountTier } from '@client/shop/cart/logic/volumeDiscounts'
-import {
-  cartAttributesUpdate,
-  cartBuyerIdentityUpdate,
-  cartCreate,
-  cartDiscountCodesUpdate,
-  cartFetch,
-  cartLinesAdd,
-  cartLinesRemove,
-  cartLinesUpdate,
-  type ShopifyCart,
-} from '@platform/commerce/shopify/shopifyCart'
+import { commerce } from '@platform/commerce'
+import type { CartDTO, CartLineDTO, CheckoutCapabilities, CheckoutStart } from '@platform/commerce/ports'
 
 export type CartItem = {
   id: string
@@ -38,6 +28,8 @@ type CartState = {
   subtotal: number
   qty: number
   checkoutUrl?: string
+  checkoutCapabilities?: CheckoutCapabilities
+  checkoutStart?: CheckoutStart
   setEmail?: (email: string) => Promise<void>
   setAttributes?: (attrs: Record<string, string>) => Promise<void>
   applyDiscount?: (code: string) => void
@@ -46,7 +38,6 @@ type CartState = {
 const STORAGE_KEY = 'lumelle_cart'
 const DISCOUNT_KEY = 'lumelle_cart_discount_code'
 const PENDING_DISCOUNT_KEY = 'lumelle_pending_discount_code'
-const SHOPIFY_CART_ID_KEY = 'lumelle_shopify_cart_id'
 const CartCtx = createContext<CartState | null>(null)
 
 const persist = (items: CartItem[]) => {
@@ -69,18 +60,6 @@ const persistDiscount = (code: string | null) => {
   }
 }
 
-const persistShopifyCartId = (cartId: string | null) => {
-  try {
-    if (!cartId) {
-      localStorage.removeItem(SHOPIFY_CART_ID_KEY)
-      return
-    }
-    localStorage.setItem(SHOPIFY_CART_ID_KEY, cartId)
-  } catch {
-    /* ignore */
-  }
-}
-
 const toNumber = (value: unknown): number => {
   const n = typeof value === 'number' ? value : typeof value === 'string' ? Number(value) : NaN
   return Number.isFinite(n) ? n : 0
@@ -91,19 +70,38 @@ const clampLineQty = (qty: number): number => {
   return Math.max(1, Math.min(MAX_CART_ITEM_QTY, Math.floor(n)))
 }
 
-const mapShopifyCartToItems = (cart: ShopifyCart): CartItem[] => {
-  return (cart.lines ?? []).map((line) => ({
-    id: line.merchandise.id,
-    lineId: line.id,
-    title: line.merchandise.product.title,
-    price: toNumber(line.merchandise.price.amount),
-    compareAt: line.merchandise.compareAtPrice ? toNumber(line.merchandise.compareAtPrice.amount) : undefined,
-    qty: clampLineQty(line.quantity),
-    image: line.merchandise.product.featuredImage?.url ?? undefined,
-  }))
+const mapCartLineToItem = (line: CartLineDTO): CartItem => {
+  const unitPrice = toNumber(line.unitPrice.amount)
+  const compareAt = line.compareAt ? toNumber(line.compareAt.amount) : undefined
+  const title = line.productTitle ?? line.title ?? 'Item'
+
+  return {
+    id: line.variantKey,
+    lineId: line.lineKey,
+    title,
+    price: unitPrice,
+    compareAt,
+    qty: clampLineQty(line.qty),
+    image: line.image,
+  }
+}
+
+const mapCartToItems = (cart: CartDTO): CartItem[] => {
+  return (cart.lines ?? []).map(mapCartLineToItem)
+}
+
+const isLegacyShopifyGid = (id: string) => id.startsWith('gid://shopify/')
+
+const clearLegacyShopifyCartId = () => {
+  try {
+    localStorage.removeItem('lumelle_shopify_cart_id')
+  } catch {
+    // ignore
+  }
 }
 
 const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const checkoutCapabilities = useMemo(() => commerce.checkout.getCapabilities(), [])
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -148,20 +146,12 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     }
   })
 
-  const [shopifyCartId, setShopifyCartId] = useState<string | null>(() => {
-    try {
-      const raw = localStorage.getItem(SHOPIFY_CART_ID_KEY)
-      return raw ? String(raw) : null
-    } catch {
-      return null
-    }
-  })
   const [checkoutUrl, setCheckoutUrl] = useState<string | undefined>(undefined)
+  const [checkoutStart, setCheckoutStart] = useState<CheckoutStart | undefined>(undefined)
 
   const itemsRef = useRef<CartItem[]>(items)
   const discountCodeRef = useRef<string | null>(discountCode)
-  const shopifyCartIdRef = useRef<string | null>(shopifyCartId)
-  const shopifyQueueRef = useRef<Promise<void>>(Promise.resolve())
+  const queueRef = useRef<Promise<void>>(Promise.resolve())
   const volumeDiscountCodes = useMemo(() => getVolumeDiscountCodes(), [])
 
   useEffect(() => {
@@ -173,10 +163,6 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   }, [discountCode])
 
   useEffect(() => {
-    shopifyCartIdRef.current = shopifyCartId
-  }, [shopifyCartId])
-
-  useEffect(() => {
     persist(items)
   }, [items])
 
@@ -184,24 +170,43 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     persistDiscount(discountCode)
   }, [discountCode])
 
-  useEffect(() => {
-    persistShopifyCartId(shopifyCartId)
-  }, [shopifyCartId])
-
-  const enqueueShopify = useCallback((op: () => Promise<void>) => {
-    shopifyQueueRef.current = shopifyQueueRef.current
+  const enqueue = useCallback((op: () => Promise<void>) => {
+    queueRef.current = queueRef.current
       .then(op)
       .catch((err) => {
-        console.error('Shopify cart sync failed:', err)
+        console.error('Cart sync failed:', err)
       })
-    return shopifyQueueRef.current
+    return queueRef.current
   }, [])
 
-  const setFromShopifyCart = useCallback((cart: ShopifyCart) => {
-    setShopifyCartId(cart.id)
-    setCheckoutUrl(cart.checkoutUrl)
-    setItems(mapShopifyCartToItems(cart))
+  const syncCheckoutUrl = useCallback(async () => {
+    try {
+      const start = await commerce.checkout.beginCheckout()
+      setCheckoutStart(start)
+      if (start.mode === 'redirect') {
+        setCheckoutUrl(start.url)
+        return
+      }
+      setCheckoutUrl(undefined)
+    } catch (err) {
+      console.warn('Failed to compute checkout URL:', err)
+      setCheckoutStart({ mode: 'none', reason: 'Checkout unavailable' })
+      setCheckoutUrl(undefined)
+    }
   }, [])
+
+  const setFromCart = useCallback(
+    async (cart: CartDTO) => {
+      setItems(mapCartToItems(cart))
+
+      if ((cart.lines ?? []).length > 0) {
+        await syncCheckoutUrl()
+      } else {
+        setCheckoutUrl(undefined)
+      }
+    },
+    [syncCheckoutUrl]
+  )
 
   const getDesiredVolumeDiscountTier = useCallback((nextItems: CartItem[]): VolumeDiscountTier | null => {
     let best: VolumeDiscountTier | null = null
@@ -232,77 +237,48 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     [getDesiredVolumeDiscountTier, volumeDiscountCodes]
   )
 
-  const applyDiscountToCartIfNeeded = useCallback(
-    async (cart: ShopifyCart): Promise<ShopifyCart> => {
-      const code = discountCodeRef.current
-      if (!code) return cart
-      try {
-        return await cartDiscountCodesUpdate(cart.id, [code])
-      } catch (err) {
-        console.warn('Failed to apply discount code to Shopify cart:', err)
-        return cart
-      }
-    },
-    []
-  )
+  const applyDiscountToBackendIfSupported = useCallback(async (code: string | null) => {
+    if (!commerce.cart.applyDiscount) return
+    try {
+      const cart = await commerce.cart.applyDiscount(code ?? '')
+      await setFromCart(cart)
+    } catch (err) {
+      console.warn('Failed to apply discount code to cart:', err)
+    }
+  }, [setFromCart])
 
-  const syncDiscountCodesForCart = useCallback(
-    async (cart: ShopifyCart, managed: boolean, code: string | null): Promise<ShopifyCart> => {
-      if (managed) {
+  // Rehydrate cart from provider (and optionally create it from local draft).
+  useEffect(() => {
+    clearLegacyShopifyCartId()
+
+    void enqueue(async () => {
+      // Filter out legacy Shopify GIDs (pre-ports) to avoid feeding undecodable IDs into ports.
+      const seedItems = itemsRef.current
+      const compatibleSeed = seedItems.filter((i) => !isLegacyShopifyGid(i.id))
+      if (compatibleSeed.length !== seedItems.length) {
+        itemsRef.current = compatibleSeed
+        setItems(compatibleSeed)
+      }
+
+      let cart = await commerce.cart.getCart()
+
+      if ((cart.lines ?? []).length === 0 && compatibleSeed.length > 0 && commerce.cart.syncFromDraft) {
         try {
-          return await cartDiscountCodesUpdate(cart.id, code ? [code] : [])
+          cart = await commerce.cart.syncFromDraft({
+            lines: compatibleSeed.map((i) => ({ variantKey: i.id, qty: clampLineQty(i.qty) })),
+            discountCode: discountCodeRef.current ?? undefined,
+          })
         } catch (err) {
-          console.warn('Failed to sync volume discount code to Shopify cart:', err)
-          return cart
+          console.warn('Failed to seed cart from local draft:', err)
         }
       }
 
-      return await applyDiscountToCartIfNeeded(cart)
-    },
-    [applyDiscountToCartIfNeeded]
-  )
-
-  const enforceShopifyLineQtyCap = useCallback(async (cart: ShopifyCart): Promise<ShopifyCart> => {
-    let next = cart
-    for (const line of next.lines ?? []) {
-      if (line.quantity <= MAX_CART_ITEM_QTY) continue
-      next = await cartLinesUpdate(next.id, line.id, MAX_CART_ITEM_QTY)
-    }
-    return next
-  }, [])
-
-  // Rehydrate Shopify checkoutUrl if a cart id exists, or create a cart from persisted items.
-  useEffect(() => {
-    if (!shopifyEnabled) return
-
-    const existingCartId = shopifyCartIdRef.current
-    const seedItems = itemsRef.current
-
-    if (existingCartId) {
-      enqueueShopify(async () => {
-        let cart = await cartFetch(existingCartId)
-        cart = await enforceShopifyLineQtyCap(cart)
-        const { managed, code } = syncVolumeDiscountFromItems(mapShopifyCartToItems(cart))
-        cart = await syncDiscountCodesForCart(cart, managed, code)
-        setFromShopifyCart(cart)
-      })
-      return
-    }
-
-    if (!seedItems.length) return
-
-    enqueueShopify(async () => {
-      const first = seedItems[0]
-      let cart = await cartCreate(first.id, clampLineQty(first.qty))
-      for (const item of seedItems.slice(1)) {
-        cart = await cartLinesAdd(cart.id, item.id, clampLineQty(item.qty))
-      }
-      cart = await enforceShopifyLineQtyCap(cart)
-      const { managed, code } = syncVolumeDiscountFromItems(mapShopifyCartToItems(cart))
-      cart = await syncDiscountCodesForCart(cart, managed, code)
-      setFromShopifyCart(cart)
+      // Ensure we keep our volume-discount logic consistent with the loaded cart.
+      const nextItems = mapCartToItems(cart)
+      syncVolumeDiscountFromItems(nextItems)
+      await setFromCart(cart)
     })
-  }, [enqueueShopify, enforceShopifyLineQtyCap, setFromShopifyCart, syncDiscountCodesForCart, syncVolumeDiscountFromItems])
+  }, [enqueue, setFromCart, syncVolumeDiscountFromItems])
 
   const add: CartState['add'] = async (item, qty = 1) => {
     const safeQty = clampLineQty(qty)
@@ -319,32 +295,18 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     setItems(nextItems)
     const { managed, code } = syncVolumeDiscountFromItems(nextItems)
 
-    if (!shopifyEnabled) return
-    await enqueueShopify(async () => {
-      const cartId = shopifyCartIdRef.current
-      let cart: ShopifyCart
-      if (!cartId) {
-        cart = await cartCreate(item.id, nextQty)
-        cart = await syncDiscountCodesForCart(cart, managed, code)
-        setFromShopifyCart(cart)
-        return
-      }
+    await enqueue(async () => {
+      const localLineKey = itemsRef.current.find((i) => i.id === item.id)?.lineId
+      let cart: CartDTO
 
-      const localLineId = itemsRef.current.find((i) => i.id === item.id)?.lineId
-      let lineId = localLineId
-      if (!lineId) {
-        const fetched = await cartFetch(cartId)
-        lineId = fetched.lines.find((l) => l.merchandise.id === item.id)?.id
-      }
-
-      if (lineId) {
-        cart = await cartLinesUpdate(cartId, lineId, nextQty)
+      if (localLineKey) {
+        cart = await commerce.cart.updateLine({ lineKey: localLineKey, qty: nextQty })
       } else {
-        cart = await cartLinesAdd(cartId, item.id, safeQty)
+        cart = await commerce.cart.addLine({ variantKey: item.id, qty: existing ? safeQty : nextQty })
       }
 
-      cart = await syncDiscountCodesForCart(cart, managed, code)
-      setFromShopifyCart(cart)
+      await setFromCart(cart)
+      if (managed) await applyDiscountToBackendIfSupported(code)
     })
   }
 
@@ -357,26 +319,22 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     setItems(nextItems)
     const { managed, code } = syncVolumeDiscountFromItems(nextItems)
 
-    if (!shopifyEnabled) return
-    await enqueueShopify(async () => {
-      const cartId = shopifyCartIdRef.current
-      if (!cartId) return
-
-      const localLineId = itemsRef.current.find((i) => i.id === id)?.lineId
-      let lineId = localLineId
-      if (!lineId) {
-        const cart = await cartFetch(cartId)
-        lineId = cart.lines.find((l) => l.merchandise.id === id)?.id
+    await enqueue(async () => {
+      const localLineKey = itemsRef.current.find((i) => i.id === id)?.lineId
+      if (localLineKey) {
+        const cart = await commerce.cart.updateLine({ lineKey: localLineKey, qty: clampedQty })
+        await setFromCart(cart)
+        if (managed) await applyDiscountToBackendIfSupported(code)
+        return
       }
 
-      let cart: ShopifyCart
-      if (lineId) {
-        cart = await cartLinesUpdate(cartId, lineId, clampedQty)
-      } else {
-        cart = await cartLinesAdd(cartId, id, clampedQty)
-      }
-      cart = await syncDiscountCodesForCart(cart, managed, code)
-      setFromShopifyCart(cart)
+      // If we don't have a line key (legacy/local), try to resolve it by fetching the cart.
+      const cart = await commerce.cart.getCart()
+      const line = (cart.lines ?? []).find((l) => l.variantKey === id)
+      if (!line) return
+      const next = await commerce.cart.updateLine({ lineKey: line.lineKey, qty: clampedQty })
+      await setFromCart(next)
+      if (managed) await applyDiscountToBackendIfSupported(code)
     })
   }
 
@@ -387,29 +345,40 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     setItems(nextItems)
     const { managed, code } = syncVolumeDiscountFromItems(nextItems)
 
-    if (!shopifyEnabled) return
-    await enqueueShopify(async () => {
-      const cartId = shopifyCartIdRef.current
-      if (!cartId) return
-
-      const localLineId = itemsRef.current.find((i) => i.id === id)?.lineId
-      let lineId = localLineId
-      if (!lineId) {
-        const cart = await cartFetch(cartId)
-        lineId = cart.lines.find((l) => l.merchandise.id === id)?.id
+    await enqueue(async () => {
+      const localLineKey = itemsRef.current.find((i) => i.id === id)?.lineId
+      if (localLineKey) {
+        const cart = await commerce.cart.removeLine({ lineKey: localLineKey })
+        await setFromCart(cart)
+        if (managed) await applyDiscountToBackendIfSupported(code)
+        return
       }
-      if (!lineId) return
 
-      let cart = await cartLinesRemove(cartId, [lineId])
-      cart = await syncDiscountCodesForCart(cart, managed, code)
-      setFromShopifyCart(cart)
+      const cart = await commerce.cart.getCart()
+      const line = (cart.lines ?? []).find((l) => l.variantKey === id)
+      if (!line) return
+      const next = await commerce.cart.removeLine({ lineKey: line.lineKey })
+      await setFromCart(next)
+      if (managed) await applyDiscountToBackendIfSupported(code)
     })
   }
 
   const clear: CartState['clear'] = async () => {
     setItems([])
     setCheckoutUrl(undefined)
-    setShopifyCartId(null)
+    setDiscountCode(null)
+    itemsRef.current = []
+
+    await enqueue(async () => {
+      try {
+        const cart = await commerce.cart.getCart()
+        for (const line of cart.lines ?? []) {
+          await commerce.cart.removeLine({ lineKey: line.lineKey })
+        }
+      } catch (err) {
+        console.warn('Failed to clear cart:', err)
+      }
+    })
   }
 
   const subtotal = useMemo(
@@ -422,47 +391,39 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     const trimmed = (code ?? '').trim()
     if (!trimmed) {
       setDiscountCode(null)
-      if (shopifyEnabled) {
-        void enqueueShopify(async () => {
-          const cartId = shopifyCartIdRef.current
-          if (!cartId) return
-          const cart = await cartDiscountCodesUpdate(cartId, [])
-          setFromShopifyCart(cart)
-        })
-      }
+      void enqueue(async () => {
+        await applyDiscountToBackendIfSupported(null)
+      })
       return
     }
     setDiscountCode(trimmed.toUpperCase())
 
-    if (!shopifyEnabled) return
-    void enqueueShopify(async () => {
-      const cartId = shopifyCartIdRef.current
-      if (!cartId) return
-      const cart = await cartDiscountCodesUpdate(cartId, [trimmed.toUpperCase()])
-      setFromShopifyCart(cart)
+    void enqueue(async () => {
+      await applyDiscountToBackendIfSupported(trimmed.toUpperCase())
     })
   }
 
   const setEmail: CartState['setEmail'] = async (email) => {
-    if (!shopifyEnabled) return
-    await enqueueShopify(async () => {
-      const cartId = shopifyCartIdRef.current
-      if (!cartId) return
-      const cart = await cartBuyerIdentityUpdate(cartId, email)
-      setFromShopifyCart(cart)
+    if (!commerce.cart.setBuyerIdentity) return
+    await enqueue(async () => {
+      try {
+        const cart = await commerce.cart.setBuyerIdentity!({ email })
+        await setFromCart(cart)
+      } catch (err) {
+        console.warn('Failed to set buyer email:', err)
+      }
     })
   }
 
   const setAttributes: CartState['setAttributes'] = async (attrs) => {
-    if (!shopifyEnabled) return
-    await enqueueShopify(async () => {
-      const cartId = shopifyCartIdRef.current
-      if (!cartId) return
-      const cart = await cartAttributesUpdate(
-        cartId,
-        Object.entries(attrs).map(([key, value]) => ({ key, value })),
-      )
-      setFromShopifyCart(cart)
+    if (!commerce.cart.setAttributes) return
+    await enqueue(async () => {
+      try {
+        const cart = await commerce.cart.setAttributes!(attrs)
+        await setFromCart(cart)
+      } catch (err) {
+        console.warn('Failed to set cart attributes:', err)
+      }
     })
   }
 
@@ -476,6 +437,8 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     subtotal,
     qty,
     checkoutUrl,
+    checkoutCapabilities,
+    checkoutStart,
     setEmail,
     setAttributes,
     applyDiscount,

@@ -1,0 +1,57 @@
+# source: functions/api/experiment/track.ts
+# captured: 2025-12-30T14:45:17Z
+
+import type { PagesFunction } from '../../_lib/types'
+import { getSupabase } from '../../_lib/supabase'
+import { json, methodNotAllowed, text } from '../../_lib/response'
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'POST') return methodNotAllowed(['POST'])
+
+  const body = await request.json().catch(() => null)
+  if (!Array.isArray(body)) return text('Expected array', { status: 400 })
+
+  const exposures: any[] = []
+  const events: any[] = []
+
+  for (const item of body) {
+    if (!item || typeof item !== 'object') continue
+    if (item.type === 'exposure') {
+      exposures.push({
+        experiment_key: item.experiment_key,
+        variant: item.variant,
+        user_id: item.user_id ?? null,
+        anon_id: item.anon_id,
+        session_id: item.session_id,
+        page_path: item.page_path ?? null,
+        user_agent: item.user_agent ?? null,
+      })
+    } else if (item.type === 'event') {
+      events.push({
+        name: item.name,
+        experiment_key: item.experiment_key ?? null,
+        variant: item.variant ?? null,
+        user_id: item.user_id ?? null,
+        anon_id: item.anon_id,
+        session_id: item.session_id,
+        cart_value: item.cart_value ?? null,
+        metadata: item.metadata ?? null,
+      })
+    }
+  }
+
+  const supabase = getSupabase(env)
+
+  if (exposures.length) {
+    const { error } = await supabase.from('experiment_exposures').insert(exposures)
+    if (error) throw error
+  }
+
+  if (events.length) {
+    const { error } = await supabase.from('events').insert(events)
+    if (error) throw error
+  }
+
+  return json({ ok: true }, { status: 200 })
+}
+

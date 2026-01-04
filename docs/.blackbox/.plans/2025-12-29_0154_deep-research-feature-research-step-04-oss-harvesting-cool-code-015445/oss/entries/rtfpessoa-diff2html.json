@@ -1,0 +1,10 @@
+{
+  "source": "manual",
+  "repo_full_name": "rtfpessoa/diff2html",
+  "repo_url": "https://github.com/rtfpessoa/diff2html",
+  "license": "MIT",
+  "primary_language": "TypeScript",
+  "tags": ["diff", "html", "ui", "upgrade-review"],
+  "fetched_at": "2025-12-30"
+}
+

@@ -1,0 +1,116 @@
+{
+  "count": 8,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": null,
+  "excluded_results_count": 4,
+  "generated_at_utc": "2025-12-30T16:17:22Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 100,
+  "queries_used": [
+    "shipping label api open source stars:>=100 fork:false archived:false",
+    "carrier rates api open source stars:>=100 fork:false archived:false",
+    "package tracking api open source stars:>=100 fork:false archived:false",
+    "fulfillment management open source stars:>=100 fork:false archived:false",
+    "warehouse pick pack open source stars:>=100 fork:false archived:false",
+    "helpdesk open source ticketing stars:>=100 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "UVdesk Open Source Community Helpdesk is a comprehensive ticketing support system designed for everyone, offering robust features to streamline customer support and collaboration.",
+      "full_name": "uvdesk/community-skeleton",
+      "integration_score": 8,
+      "language": "CSS",
+      "license_bucket": "verify",
+      "license_spdx": "OSL-3.0",
+      "stars": 17024,
+      "updated_at": "2025-12-29T14:39:00Z",
+      "url": "https://github.com/uvdesk/community-skeleton"
+    },
+    {
+      "description": "Helpy is a modern, open source helpdesk customer support application. Features include knowledgebase, community discussions and support tickets integrated with email.",
+      "full_name": "helpyio/helpy",
+      "integration_score": 8,
+      "language": "Ruby",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 2522,
+      "updated_at": "2025-12-29T17:10:52Z",
+      "url": "https://github.com/helpyio/helpy"
+    },
+    {
+      "description": ":coffee: :seedling: Trudesk is an open-source help desk/ticketing solution.",
+      "full_name": "polonel/trudesk",
+      "integration_score": 8,
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "stars": 1465,
+      "updated_at": "2025-12-30T04:46:12Z",
+      "url": "https://github.com/polonel/trudesk"
+    },
+    {
+      "description": "OpenSupports is a simple and beautiful open source ticket system",
+      "full_name": "opensupports/opensupports",
+      "integration_score": 7,
+      "language": "JavaScript",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "stars": 1018,
+      "updated_at": "2025-12-25T10:00:52Z",
+      "url": "https://github.com/opensupports/opensupports"
+    },
+    {
+      "description": "Zammad is a web based open source helpdesk/customer support system.",
+      "full_name": "zammad/zammad",
+      "integration_score": 6,
+      "language": "Ruby",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "stars": 5295,
+      "updated_at": "2025-12-30T13:05:18Z",
+      "url": "https://github.com/zammad/zammad"
+    },
+    {
+      "description": "Modern, Streamlined, Free and Open Source Customer Service Software",
+      "full_name": "frappe/helpdesk",
+      "integration_score": 6,
+      "language": "Vue",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "stars": 2841,
+      "updated_at": "2025-12-30T07:25:04Z",
+      "url": "https://github.com/frappe/helpdesk"
+    },
+    {
+      "description": "Faveo Open source ticketing system build on Laravel framework",
+      "full_name": "faveosuite/faveo-helpdesk",
+      "integration_score": 6,
+      "language": "PHP",
+      "license_bucket": "verify",
+      "license_spdx": "OSL-3.0",
+      "stars": 1211,
+      "updated_at": "2025-12-24T05:19:42Z",
+      "url": "https://github.com/faveosuite/faveo-helpdesk"
+    },
+    {
+      "description": "Znuny is a free, open-source, and versatile web-based ticketing system for Customer Service, Help Desk, IT Service Management, and more. It is built for transparency and long-term sustainability and is highly tailorable to your organization's needs.",
+      "full_name": "znuny/Znuny",
+      "integration_score": 5,
+      "language": "Perl",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "stars": 531,
+      "updated_at": "2025-12-24T03:43:04Z",
+      "url": "https://github.com/znuny/Znuny"
+    }
+  ],
+  "title": "OSS Discovery \u2014 Coverage quota boost (tranche only)"
+}

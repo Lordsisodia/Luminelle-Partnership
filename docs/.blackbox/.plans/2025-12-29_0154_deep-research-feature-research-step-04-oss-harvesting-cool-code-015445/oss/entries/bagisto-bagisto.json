@@ -1,0 +1,10 @@
+{
+  "source": "manual",
+  "repo_full_name": "bagisto/bagisto",
+  "repo_url": "https://github.com/bagisto/bagisto",
+  "license": "MIT",
+  "primary_language": "PHP",
+  "tags": ["commerce", "ecommerce", "platform", "laravel", "admin"],
+  "fetched_at": "2025-12-30"
+}
+

@@ -5,6 +5,12 @@ type UseBidirectionalPreviewScrollSyncArgs = {
   enabled: boolean
   iframeRef: RefObject<HTMLIFrameElement | null>
 
+  // Direction control:
+  // - 'both': keep preview and editor in sync (default)
+  // - 'editor-to-preview': scrolling the editor drives the preview (safer; avoids editor scroll tug-of-war)
+  // - 'preview-to-editor': scrolling the preview drives the editor
+  direction?: 'both' | 'editor-to-preview' | 'preview-to-editor'
+
   // Map PDP section IDs (inside iframe) -> editor section IDs (admin page).
   previewToEditor: Record<string, string>
 
@@ -46,6 +52,7 @@ type UseBidirectionalPreviewScrollSyncArgs = {
 // - When editor scroll triggers preview scroll, we temporarily suppress preview->editor messages.
 export function useBidirectionalPreviewScrollSync({
   enabled,
+  direction = 'both',
   iframeRef,
   previewToEditor,
   editorToPreview,
@@ -69,9 +76,12 @@ export function useBidirectionalPreviewScrollSync({
   const lastPreviewToEditorAtRef = useRef(0)
   const lastEditorToPreviewAtRef = useRef(0)
 
+  const enablePreviewToEditor = enabled && (direction === 'both' || direction === 'preview-to-editor')
+  const enableEditorToPreview = enabled && (direction === 'both' || direction === 'editor-to-preview')
+
   // Preview (iframe) -> Editor (admin page)
   useEffect(() => {
-    if (!enabled) return
+    if (!enablePreviewToEditor) return
 
     const pendingEditorIdRef = { current: null as string | null }
     let pendingTimer: number | null = null
@@ -183,7 +193,7 @@ export function useBidirectionalPreviewScrollSync({
       clearPendingTimer()
     }
   }, [
-    enabled,
+    enablePreviewToEditor,
     previewToEditor,
     editorScrollThrottleMs,
     suppressMs,
@@ -191,11 +201,12 @@ export function useBidirectionalPreviewScrollSync({
     editorScrollBlock,
     editorScrollOffsetPx,
     editorScrollMode,
+    direction,
   ])
 
   // Editor (admin page) -> Preview (iframe)
   useEffect(() => {
-    if (!enabled) return
+    if (!enableEditorToPreview) return
 
     const targetOrigin = window.location.origin
     const editorIds = Array.from(new Set((editorSectionIds && editorSectionIds.length ? editorSectionIds : Object.keys(editorToPreview)) ?? []))
@@ -305,7 +316,17 @@ export function useBidirectionalPreviewScrollSync({
       cancelAnimationFrame(raf)
       clearPendingTimer()
     }
-  }, [enabled, iframeRef, editorToPreview, editorSectionIds, previewScrollThrottleMs, suppressMs, activationY, previewScrollBehavior])
+  }, [
+    enableEditorToPreview,
+    iframeRef,
+    editorToPreview,
+    editorSectionIds,
+    previewScrollThrottleMs,
+    suppressMs,
+    activationY,
+    previewScrollBehavior,
+    direction,
+  ])
 }
 
 export default useBidirectionalPreviewScrollSync

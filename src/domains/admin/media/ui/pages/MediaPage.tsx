@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, type ReactNode, useEffect } from 'react'
+import { useMemo, useState, useCallback, type ReactNode, useEffect, useRef } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import {
   AlertTriangle,
@@ -17,6 +17,7 @@ import {
   X,
 } from 'lucide-react'
 import { AdminPageLayout } from '@admin/shared/ui/layouts'
+import { HighlightCard } from '@admin/shared/ui/components'
 
 type MediaStatus = 'ready' | 'draft' | 'needs-alt'
 
@@ -55,6 +56,9 @@ type MediaItem = {
   breakpoint: Breakpoint
 }
 
+type StatusFilter = 'all' | MediaStatus
+type TypeFilter = 'all' | MediaItem['type']
+
 function parseBoolParam(raw: string | null): boolean {
   if (!raw) return false
   return raw === '1' || raw.toLowerCase() === 'true'
@@ -62,6 +66,39 @@ function parseBoolParam(raw: string | null): boolean {
 
 function parseDensity(raw: string | null): 'cozy' | 'compact' {
   return raw === 'compact' ? 'compact' : 'cozy'
+}
+
+function parseStatusFilter(searchParams: URLSearchParams): StatusFilter {
+  const next = (searchParams.get('status') ?? '').trim()
+  if (next === 'ready' || next === 'draft' || next === 'needs-alt') return next
+
+  // Back-compat: old boolean params (were ANDed, so both true produced empty results).
+  const needsAlt = parseBoolParam(searchParams.get('needsAlt'))
+  const draft = parseBoolParam(searchParams.get('draft'))
+  if (needsAlt && !draft) return 'needs-alt'
+  if (draft && !needsAlt) return 'draft'
+  return 'all'
+}
+
+function parseGlobalBreakpointFilter(searchParams: URLSearchParams): BreakpointFilter {
+  const next = (searchParams.get('bpGlobal') ?? '').trim()
+  if (next === 'desktop' || next === 'mobile' || next === 'all') return next
+
+  // Back-compat: old boolean params (were ANDed, so both true produced empty results).
+  const desktop = parseBoolParam(searchParams.get('desktop'))
+  const mobile = parseBoolParam(searchParams.get('mobile'))
+  if (desktop && !mobile) return 'desktop'
+  if (mobile && !desktop) return 'mobile'
+  return 'all'
+}
+
+function parseTypeFilter(searchParams: URLSearchParams): TypeFilter {
+  const next = (searchParams.get('type') ?? '').trim()
+  if (next === 'image' || next === 'svg' || next === 'all') return next
+
+  // Back-compat
+  const svg = parseBoolParam(searchParams.get('svg'))
+  return svg ? 'svg' : 'all'
 }
 
 const BUCKETS: Bucket[] = [
@@ -1131,13 +1168,13 @@ export default function MediaPage() {
   const navigate = useNavigate()
   const { assetId, bucketId } = useParams<{ assetId?: string; bucketId?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
+  const bucketFocusRaw = (searchParams.get('bucket') ?? '').trim()
+  const bucketFocus = bucketFocusRaw && BUCKET_ID_SET.has(bucketFocusRaw) ? bucketFocusRaw : ''
   const [search, setSearch] = useState(() => searchParams.get('q') ?? '')
-  const [needsAltOnly, setNeedsAltOnly] = useState(() => parseBoolParam(searchParams.get('needsAlt')))
-  const [desktopOnly, setDesktopOnly] = useState(() => parseBoolParam(searchParams.get('desktop')))
-  const [mobileOnly, setMobileOnly] = useState(() => parseBoolParam(searchParams.get('mobile')))
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>(() => parseStatusFilter(searchParams))
+  const [globalBreakpoint, setGlobalBreakpoint] = useState<BreakpointFilter>(() => parseGlobalBreakpointFilter(searchParams))
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>(() => parseTypeFilter(searchParams))
   const [unusedOnly, setUnusedOnly] = useState(() => parseBoolParam(searchParams.get('unused')))
-  const [draftOnly, setDraftOnly] = useState(() => parseBoolParam(searchParams.get('draft')))
-  const [svgOnly, setSvgOnly] = useState(() => parseBoolParam(searchParams.get('svg')))
   const [oversizeOnly, setOversizeOnly] = useState(() => parseBoolParam(searchParams.get('oversize')))
   const [density, setDensity] = useState<'cozy' | 'compact'>(() => parseDensity(searchParams.get('density')))
   const [bucketViews, setBucketViews] = useState<Record<string, 'grid' | 'list'>>(() => parseBucketViewsParam(searchParams.get('views')))
@@ -1145,16 +1182,38 @@ export default function MediaPage() {
   const [bucketBreakpoints, setBucketBreakpoints] = useState<Record<string, BreakpointFilter>>(() => parseBucketBreakpointsParam(searchParams.get('bp')))
   const [uploadBucketId, setUploadBucketId] = useState<string | null>(null)
   const [selectedAsset, setSelectedAsset] = useState<MediaItem | null>(null)
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  const filtersWrapRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!filtersOpen) return
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setFiltersOpen(false)
+    }
+
+    const onMouseDown = (e: MouseEvent) => {
+      const root = filtersWrapRef.current
+      if (!root) return
+      if (!(e.target instanceof Node)) return
+      if (!root.contains(e.target)) setFiltersOpen(false)
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    document.addEventListener('mousedown', onMouseDown)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('mousedown', onMouseDown)
+    }
+  }, [filtersOpen])
 
   // URL -> state (shareable filters)
   useEffect(() => {
     setSearch(searchParams.get('q') ?? '')
-    setNeedsAltOnly(parseBoolParam(searchParams.get('needsAlt')))
-    setDesktopOnly(parseBoolParam(searchParams.get('desktop')))
-    setMobileOnly(parseBoolParam(searchParams.get('mobile')))
+    setStatusFilter(parseStatusFilter(searchParams))
+    setGlobalBreakpoint(parseGlobalBreakpointFilter(searchParams))
+    setTypeFilter(parseTypeFilter(searchParams))
     setUnusedOnly(parseBoolParam(searchParams.get('unused')))
-    setDraftOnly(parseBoolParam(searchParams.get('draft')))
-    setSvgOnly(parseBoolParam(searchParams.get('svg')))
     setOversizeOnly(parseBoolParam(searchParams.get('oversize')))
     setDensity(parseDensity(searchParams.get('density')))
     setBucketViews((prev) => {
@@ -1175,14 +1234,13 @@ export default function MediaPage() {
   const desiredSearch = useMemo(() => {
     const next = new URLSearchParams()
     if (search.trim()) next.set('q', search.trim())
-    if (needsAltOnly) next.set('needsAlt', '1')
-    if (desktopOnly) next.set('desktop', '1')
-    if (mobileOnly) next.set('mobile', '1')
+    if (statusFilter !== 'all') next.set('status', statusFilter)
+    if (globalBreakpoint !== 'all') next.set('bpGlobal', globalBreakpoint)
+    if (typeFilter !== 'all') next.set('type', typeFilter)
     if (unusedOnly) next.set('unused', '1')
-    if (draftOnly) next.set('draft', '1')
-    if (svgOnly) next.set('svg', '1')
     if (oversizeOnly) next.set('oversize', '1')
     if (density !== 'cozy') next.set('density', density)
+    if (bucketFocus) next.set('bucket', bucketFocus)
     const viewsParam = serializeBucketViewsParam(bucketViews)
     if (viewsParam) next.set('views', viewsParam)
     const bpParam = serializeBucketBreakpointsParam(bucketBreakpoints)
@@ -1194,16 +1252,20 @@ export default function MediaPage() {
     bucketBreakpoints,
     bucketSorts,
     bucketViews,
+    bucketFocus,
     density,
-    desktopOnly,
-    draftOnly,
-    mobileOnly,
-    needsAltOnly,
+    globalBreakpoint,
     oversizeOnly,
     search,
-    svgOnly,
+    statusFilter,
+    typeFilter,
     unusedOnly,
   ])
+
+  const visibleBuckets = useMemo(() => {
+    if (!bucketFocus) return BUCKETS
+    return BUCKETS.filter((b) => b.id === bucketFocus)
+  }, [bucketFocus])
 
   useEffect(() => {
     if (searchParams.toString() === desiredSearch.toString()) return
@@ -1251,18 +1313,16 @@ export default function MediaPage() {
       const matchesSearch = search
         ? `${item.name} ${item.altText ?? ''} ${item.tags.join(' ')}`.toLowerCase().includes(search.toLowerCase())
         : true
-      const altGate = needsAltOnly ? item.status === 'needs-alt' : true
-      const desktopGate = desktopOnly ? item.breakpoint === 'desktop' : true
-      const mobileGate = mobileOnly ? item.breakpoint === 'mobile' : true
+      const statusGate = statusFilter === 'all' ? true : item.status === statusFilter
+      const breakpointGate = globalBreakpoint === 'all' ? true : item.breakpoint === globalBreakpoint
+      const typeGate = typeFilter === 'all' ? true : item.type === typeFilter
       const unusedGate = unusedOnly ? item.usageCount === 0 : true
-      const draftGate = draftOnly ? item.status === 'draft' : true
-      const svgGate = svgOnly ? item.type === 'svg' : true
-      return matchesSearch && altGate && desktopGate && mobileGate && unusedGate && draftGate && svgGate
+      return matchesSearch && statusGate && breakpointGate && typeGate && unusedGate
     })
-  }, [desktopOnly, draftOnly, mobileOnly, needsAltOnly, search, svgOnly, unusedOnly])
+  }, [globalBreakpoint, search, statusFilter, typeFilter, unusedOnly])
 
   const bucketStats = useMemo(() => {
-    return BUCKETS.map((bucket) => {
+    return visibleBuckets.map((bucket) => {
       const items = baseFilteredMedia.filter((m) => m.bucketId === bucket.id)
       const needsAlt = items.filter((m) => m.status === 'needs-alt').length
       return {
@@ -1273,7 +1333,7 @@ export default function MediaPage() {
         latest: items[0]?.createdAt,
       }
     })
-  }, [baseFilteredMedia])
+  }, [baseFilteredMedia, visibleBuckets])
 
   const handleToggleView = (bucketId: string, view: 'grid' | 'list') => {
     setBucketViews((prev) => ({ ...prev, [bucketId]: view }))
@@ -1291,12 +1351,11 @@ export default function MediaPage() {
   }
 
   const clearFilters = () => {
-    setNeedsAltOnly(false)
-    setDesktopOnly(false)
-    setMobileOnly(false)
+    setSearch('')
+    setStatusFilter('all')
+    setGlobalBreakpoint('all')
+    setTypeFilter('all')
     setUnusedOnly(false)
-    setDraftOnly(false)
-    setSvgOnly(false)
     setOversizeOnly(false)
   }
 
@@ -1317,18 +1376,22 @@ export default function MediaPage() {
     [],
   )
 
+  const totalAssets = baseFilteredMedia.length
+  const needsAltCount = baseFilteredMedia.filter((m) => m.status === 'needs-alt').length
+  const totalSizeMB = baseFilteredMedia.reduce((sum, m) => sum + m.sizeMB, 0)
+
   return (
     <AdminPageLayout
-      title="Media library"
-      subtitle="Buckets-first view with guarded uploads. Mocked UI — no live storage yet."
-          actions={
-            <div className="flex flex-wrap items-center gap-2">
-              <button
+      title={null}
+      subtitle={null}
+      actions={
+        <div className="flex flex-wrap items-center gap-2">
+          <button
             onClick={() => handleOpenUpload('blog-media')}
-                className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:shadow-lg transition"
-              >
-                <UploadCloud className="h-4 w-4" />
-                Upload
+            className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:shadow-lg"
+          >
+            <UploadCloud className="h-4 w-4" />
+            Upload
           </button>
           <button className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/70 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60">
             <Filter className="h-4 w-4" />
@@ -1337,47 +1400,214 @@ export default function MediaPage() {
         </div>
       }
     >
-      <div className="flex flex-col gap-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-semantic-text-primary/50" />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search filename, tag, alt text"
-              className="w-64 rounded-full border border-semantic-legacy-brand-blush/70 bg-brand-porcelain/40 py-2 pl-9 pr-3 text-sm outline-none ring-semantic-legacy-brand-cocoa/40 focus:ring"
-            />
-            {search ? (
+      <div className="flex flex-col gap-5">
+        <HighlightCard
+          title="Media library"
+          description="Buckets-first view with guarded uploads. Mocked UI — no live storage yet."
+          metricValue={`${totalAssets}`}
+          metricLabel={`${needsAltCount} need alt • ${totalSizeMB.toFixed(2)} MB total`}
+          buttonText="Upload"
+          onButtonClick={() => handleOpenUpload('blog-media')}
+          icon={<UploadCloud className="h-5 w-5" />}
+          color="violet"
+          className="max-w-full"
+        />
+
+        <div className="flex flex-col gap-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-semantic-text-primary/50" />
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search filename, tag, alt text"
+                className="w-64 rounded-full border border-semantic-legacy-brand-blush/70 bg-brand-porcelain/40 py-2 pl-9 pr-3 text-sm outline-none ring-semantic-legacy-brand-cocoa/40 focus:ring"
+              />
+              {search ? (
+                <button
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-semantic-text-primary/50 hover:bg-white"
+                  onClick={() => setSearch('')}
+                  aria-label="Clear search"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              ) : null}
+            </div>
+
+            <div className="relative" ref={filtersWrapRef}>
               <button
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-semantic-text-primary/50 hover:bg-white"
-                onClick={() => setSearch('')}
-                aria-label="Clear search"
+                onClick={() => setFiltersOpen((v) => !v)}
+                className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/70 bg-brand-porcelain/60 px-4 py-2 text-xs font-semibold text-semantic-text-primary/80 hover:bg-white"
+                aria-haspopup="dialog"
+                aria-expanded={filtersOpen}
               >
-                <X className="h-4 w-4" />
+                <Filter className="h-4 w-4" />
+                Filters
+                {(() => {
+                  const count =
+                    (search.trim() ? 1 : 0) +
+                    (statusFilter !== 'all' ? 1 : 0) +
+                    (globalBreakpoint !== 'all' ? 1 : 0) +
+                    (typeFilter !== 'all' ? 1 : 0) +
+                    (unusedOnly ? 1 : 0) +
+                    (oversizeOnly ? 1 : 0)
+                  return count > 0 ? (
+                    <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-semantic-legacy-brand-blush/70 px-2 text-[11px] font-bold text-semantic-legacy-brand-cocoa">
+                      {count}
+                    </span>
+                  ) : null
+                })()}
               </button>
-            ) : null}
+
+              {filtersOpen ? (
+                <div
+                  role="dialog"
+                  aria-label="Filters"
+                  className="absolute left-0 top-full z-30 mt-2 w-[340px] rounded-2xl border border-semantic-legacy-brand-blush/70 bg-white p-4 shadow-xl"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="text-sm font-semibold text-semantic-text-primary">Filters</div>
+                    <button
+                      onClick={() => setFiltersOpen(false)}
+                      className="inline-flex items-center justify-center rounded-full p-2 text-semantic-text-primary/60 hover:bg-brand-porcelain/70 hover:text-semantic-text-primary"
+                      aria-label="Close filters"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  <div className="mt-3 grid grid-cols-1 gap-3">
+                    <label className="grid gap-1">
+                      <span className="text-[11px] font-semibold uppercase tracking-wide text-semantic-text-primary/60">Status</span>
+                      <select
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value as StatusFilter)}
+                        className="rounded-xl border border-semantic-legacy-brand-blush/70 bg-brand-porcelain/50 px-3 py-2 text-sm text-semantic-text-primary outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30"
+                      >
+                        <option value="all">All</option>
+                        <option value="needs-alt">Needs alt</option>
+                        <option value="draft">Draft</option>
+                        <option value="ready">Ready</option>
+                      </select>
+                    </label>
+
+                    <label className="grid gap-1">
+                      <span className="text-[11px] font-semibold uppercase tracking-wide text-semantic-text-primary/60">Breakpoint</span>
+                      <select
+                        value={globalBreakpoint}
+                        onChange={(e) => setGlobalBreakpoint(e.target.value as BreakpointFilter)}
+                        className="rounded-xl border border-semantic-legacy-brand-blush/70 bg-brand-porcelain/50 px-3 py-2 text-sm text-semantic-text-primary outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30"
+                      >
+                        <option value="all">All</option>
+                        <option value="desktop">Desktop</option>
+                        <option value="mobile">Mobile</option>
+                      </select>
+                    </label>
+
+                    <label className="grid gap-1">
+                      <span className="text-[11px] font-semibold uppercase tracking-wide text-semantic-text-primary/60">Type</span>
+                      <select
+                        value={typeFilter}
+                        onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
+                        className="rounded-xl border border-semantic-legacy-brand-blush/70 bg-brand-porcelain/50 px-3 py-2 text-sm text-semantic-text-primary outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30"
+                      >
+                        <option value="all">All</option>
+                        <option value="image">Images</option>
+                        <option value="svg">SVG</option>
+                      </select>
+                    </label>
+
+                    <div className="flex flex-col gap-2">
+                      <label className="flex items-center justify-between gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/40 px-3 py-2">
+                        <span className="text-sm font-semibold text-semantic-text-primary/80">Unused only</span>
+                        <input
+                          type="checkbox"
+                          checked={unusedOnly}
+                          onChange={(e) => setUnusedOnly(e.target.checked)}
+                          className="h-4 w-4 accent-semantic-legacy-brand-cocoa"
+                        />
+                      </label>
+                      <label className="flex items-center justify-between gap-3 rounded-xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/40 px-3 py-2">
+                        <span className="text-sm font-semibold text-semantic-text-primary/80">Oversized only</span>
+                        <input
+                          type="checkbox"
+                          checked={oversizeOnly}
+                          onChange={(e) => setOversizeOnly(e.target.checked)}
+                          className="h-4 w-4 accent-semantic-legacy-brand-cocoa"
+                        />
+                      </label>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 pt-1">
+                      <button
+                        onClick={clearFilters}
+                        className="inline-flex items-center gap-1 rounded-full border border-semantic-legacy-brand-blush/80 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary/70 hover:bg-brand-porcelain/60"
+                      >
+                        <X className="h-3 w-3" /> Clear all
+                      </button>
+                      <span className="text-[11px] text-semantic-text-primary/60">Active filters show below</span>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
-          <FilterChip active={needsAltOnly} label="Needs alt" onClick={() => setNeedsAltOnly((v) => !v)} />
-          <FilterChip active={desktopOnly} label="Desktop" icon={<Monitor className="h-4 w-4" />} onClick={() => setDesktopOnly((v) => !v)} />
-          <FilterChip active={mobileOnly} label="Mobile" icon={<Smartphone className="h-4 w-4" />} onClick={() => setMobileOnly((v) => !v)} />
-          <FilterChip active={unusedOnly} label="Unused" icon={<Sparkles className="h-4 w-4" />} onClick={() => setUnusedOnly((v) => !v)} />
-          <FilterChip active={draftOnly} label="Draft" onClick={() => setDraftOnly((v) => !v)} />
-          <FilterChip active={svgOnly} label="SVG" onClick={() => setSvgOnly((v) => !v)} />
-          <FilterChip active={oversizeOnly} label="Oversized" onClick={() => setOversizeOnly((v) => !v)} />
-          {(needsAltOnly || desktopOnly || mobileOnly || unusedOnly || draftOnly || svgOnly || oversizeOnly || search) ? (
-            <button
-              onClick={clearFilters}
-              className="inline-flex items-center gap-1 rounded-full border border-semantic-legacy-brand-blush/80 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary/70 hover:bg-brand-porcelain/60"
-            >
-              <X className="h-3 w-3" /> Clear
-            </button>
-          ) : null}
-          <DensityToggle value={density} onChange={setDensity} />
-          <span className="text-xs text-semantic-text-primary/60">Mocked data — actions are non-destructive</span>
+
+          <div className="flex items-center gap-2">
+            <DensityToggle value={density} onChange={setDensity} />
+          </div>
         </div>
 
+        {(() => {
+          const active: { id: string; label: string; onClear: () => void; icon?: ReactNode }[] = []
+          if (search.trim()) active.push({ id: 'q', label: `Search: “${search.trim()}”`, onClear: () => setSearch('') })
+          if (statusFilter !== 'all') {
+            active.push({
+              id: 'status',
+              label: `Status: ${statusFilter === 'needs-alt' ? 'Needs alt' : statusFilter === 'draft' ? 'Draft' : 'Ready'}`,
+              onClear: () => setStatusFilter('all'),
+            })
+          }
+          if (globalBreakpoint !== 'all') {
+            active.push({
+              id: 'bp',
+              label: `Breakpoint: ${globalBreakpoint === 'desktop' ? 'Desktop' : 'Mobile'}`,
+              onClear: () => setGlobalBreakpoint('all'),
+              icon: globalBreakpoint === 'desktop' ? <Monitor className="h-4 w-4" /> : <Smartphone className="h-4 w-4" />,
+            })
+          }
+          if (typeFilter !== 'all') {
+            active.push({
+              id: 'type',
+              label: `Type: ${typeFilter === 'svg' ? 'SVG' : 'Images'}`,
+              onClear: () => setTypeFilter('all'),
+            })
+          }
+          if (unusedOnly) active.push({ id: 'unused', label: 'Unused', onClear: () => setUnusedOnly(false), icon: <Sparkles className="h-4 w-4" /> })
+          if (oversizeOnly) active.push({ id: 'oversize', label: 'Oversized', onClear: () => setOversizeOnly(false) })
+
+          if (active.length === 0) return null
+
+          return (
+            <div className="flex flex-wrap items-center gap-2">
+              {active.map((f) => (
+                <ActiveFilterChip key={f.id} label={f.label} icon={f.icon} onClear={f.onClear} />
+              ))}
+              <button
+                onClick={clearFilters}
+                className="inline-flex items-center gap-1 rounded-full border border-semantic-legacy-brand-blush/80 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary/70 hover:bg-brand-porcelain/60"
+              >
+                <X className="h-3 w-3" /> Clear
+              </button>
+            </div>
+          )
+        })()}
+
+        <div className="text-xs text-semantic-text-primary/60">Mocked data — actions are non-destructive</div>
+
         <div className="space-y-5">
-          {BUCKETS.map((bucket) => {
+          {visibleBuckets.map((bucket) => {
             const itemsPre = baseFilteredMedia.filter((m) => m.bucketId === bucket.id)
             const scoped = itemsPre.filter((m) => {
               const bp = bucketBreakpoints[bucket.id] ?? 'all'
@@ -1488,6 +1718,9 @@ export default function MediaPage() {
         </div>
       </div>
 
+      {/* End main media content wrapper */}
+      </div>
+
       <UploadDrawer
         open={Boolean(uploadBucketId)}
         bucketId={uploadBucketId}
@@ -1517,28 +1750,24 @@ function formatSize(sizeMB: number) {
   return `${sizeMB.toFixed(1)} MB`
 }
 
-function FilterChip({
-  active,
+function ActiveFilterChip({
   label,
   icon,
-  onClick,
+  onClear,
 }: {
-  active: boolean
   label: string
   icon?: ReactNode
-  onClick: () => void
+  onClear: () => void
 }) {
   return (
     <button
-      onClick={onClick}
-      className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold transition ${
-        active
-          ? 'border-semantic-legacy-brand-cocoa bg-semantic-legacy-brand-blush/60 text-semantic-legacy-brand-cocoa shadow-soft'
-          : 'border-semantic-legacy-brand-blush/70 bg-brand-porcelain/50 text-semantic-text-primary/80 hover:bg-white'
-      }`}
+      onClick={onClear}
+      className="inline-flex items-center gap-1 rounded-full border border-semantic-legacy-brand-blush/70 bg-brand-porcelain/50 px-3 py-1 text-xs font-semibold text-semantic-text-primary/80 hover:bg-white"
+      aria-label={`Remove filter: ${label}`}
     >
       {icon}
-      {label}
+      <span>{label}</span>
+      <X className="ml-1 h-3 w-3 text-semantic-text-primary/60" />
     </button>
   )
 }

@@ -1,0 +1,89 @@
+{
+  "count": 6,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": null,
+  "excluded_results_count": 6,
+  "generated_at_utc": "2025-12-29T05:30:30Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 200,
+  "queries_used": [
+    "internal tools open source stars:>=200 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool.",
+      "full_name": "illacloud/illa-builder",
+      "integration_score": 11,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 12306,
+      "updated_at": "2025-12-28T14:26:24Z",
+      "url": "https://github.com/illacloud/illa-builder"
+    },
+    {
+      "description": "ToolJet is the open-source foundation of ToolJet AI - the AI-native platform for building internal tools, dashboard, business applications, workflows and AI agents \ud83d\ude80",
+      "full_name": "ToolJet/ToolJet",
+      "integration_score": 9,
+      "language": "JavaScript",
+      "license_bucket": "flagged",
+      "license_spdx": "AGPL-3.0",
+      "stars": 37086,
+      "updated_at": "2025-12-29T04:21:00Z",
+      "url": "https://github.com/ToolJet/ToolJet"
+    },
+    {
+      "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+      "full_name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "integration_score": 7,
+      "language": "N/A",
+      "license_bucket": "flagged",
+      "license_spdx": "GPL-3.0",
+      "stars": 103017,
+      "updated_at": "2025-12-29T05:27:45Z",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+    },
+    {
+      "description": "Open-source internal tool framework. \ud83d\udcaa  Empower your team and collaborators to view and manage the data you already own in a nice easy-to-use protected tool. Basetool helps you have a better handle on your data in a collaborative way so you can focus on moving your business forward.",
+      "full_name": "basetool-io/basetool",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 282,
+      "updated_at": "2025-11-19T15:32:52Z",
+      "url": "https://github.com/basetool-io/basetool"
+    },
+    {
+      "description": "The open-source Retool alternative. Low-code platform for building internal tools fast!",
+      "full_name": "Toola-bakery/Toola",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 240,
+      "updated_at": "2025-11-19T15:32:49Z",
+      "url": "https://github.com/Toola-bakery/Toola"
+    },
+    {
+      "description": "This is an open source tool to dump the wifi profiles and cleartext passwords of the connected access points on the Windows machine. This tool will help you in a Wifi penetration testing. Furthermore, it is useful while performing red team or an internal infrastructure engagements.",
+      "full_name": "Viralmaniar/Wifi-Dumper",
+      "integration_score": 6,
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 290,
+      "updated_at": "2025-12-20T08:56:09Z",
+      "url": "https://github.com/Viralmaniar/Wifi-Dumper"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

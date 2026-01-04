@@ -1,0 +1,392 @@
+{
+  "candidates": [
+    {
+      "description": "\ud83d\udd25 A fully open source audit logs service and embeddable UI easily deployed to your own Kubernetes cluster. Brought to you by replicated.com and boxyhq.com  \ud83d\ude80",
+      "forks": 30,
+      "full_name": "retracedhq/retraced",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=426, updated=2025-12-26T13:02:23Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 426,
+      "tags": [],
+      "topics": [
+        "audit-logs",
+        "enterprise-ready",
+        "enterprise-software",
+        "javascript",
+        "kubernetes",
+        "security-audit",
+        "typescript"
+      ],
+      "updated_at": "2025-12-26T13:02:23Z",
+      "url": "https://github.com/retracedhq/retraced"
+    },
+    {
+      "description": "Open-source MCP gateway and control plane for teams to govern which tools agents can use, what they can do, and how it\u2019s audited\u2014across agentic IDEs like Cursor, or other agents and AI tools.",
+      "forks": 17,
+      "full_name": "aipotheosis-labs/gate22",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=150, updated=2025-12-18T05:59:34Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 150,
+      "tags": [
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "agents",
+        "ai",
+        "ai-agents",
+        "control-plane",
+        "gateway",
+        "guardrails",
+        "llm",
+        "mcp",
+        "mcp-tools",
+        "oauth2",
+        "open-source",
+        "permissions",
+        "policy-as-code",
+        "rbac"
+      ],
+      "updated_at": "2025-12-18T05:59:34Z",
+      "url": "https://github.com/aipotheosis-labs/gate22"
+    },
+    {
+      "description": "\ud83d\udcf1 Combine your Medusa.js e-commerce backend and/or web storefront with a Expo mobile app that matches Medusa  @nextjs  starter functionality, look and feel.",
+      "forks": 11,
+      "full_name": "bidah/mobile-medusa",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=115, updated=2025-11-19T22:59:57Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 115,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-11-19T22:59:57Z",
+      "url": "https://github.com/bidah/mobile-medusa"
+    },
+    {
+      "description": "Vue Storefront 2 integration for Vendure",
+      "forks": 51,
+      "full_name": "vuestorefront-community/vendure",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=72, updated=2025-09-22T02:15:34Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 72,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "graphql",
+        "nestjs",
+        "nuxt",
+        "vendure",
+        "vue",
+        "vue-storefront"
+      ],
+      "updated_at": "2025-09-22T02:15:34Z",
+      "url": "https://github.com/vuestorefront-community/vendure"
+    },
+    {
+      "description": "A containerized Vendure server and storefront",
+      "forks": 38,
+      "full_name": "vendure-ecommerce/vendure-docker-compose",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=39, updated=2025-12-15T21:06:45Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 39,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-15T21:06:45Z",
+      "url": "https://github.com/vendure-ecommerce/vendure-docker-compose"
+    },
+    {
+      "description": "Open Source, Google Zanzibar-inspired database for scalably storing and querying fine-grained authorization data",
+      "forks": 362,
+      "full_name": "authzed/spicedb",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=6310, updated=2025-12-29T23:57:22Z); license=15/15 (Apache-2.0); time_to_value=8/10",
+      "score": 69,
+      "stars": 6310,
+      "tags": [
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "abac",
+        "acl",
+        "authorization",
+        "ciam",
+        "cloud-native",
+        "database",
+        "distributed-systems",
+        "entitlements",
+        "fga",
+        "fine-grained-access-control",
+        "fine-grained-authorization",
+        "kubernetes",
+        "permissions",
+        "rbac",
+        "rebac",
+        "security",
+        "security-tools",
+        "zanzibar"
+      ],
+      "updated_at": "2025-12-29T23:57:22Z",
+      "url": "https://github.com/authzed/spicedb"
+    },
+    {
+      "description": "A beautiful NextJS storefront for a Medusa store (The opensource alternative to Shopify)",
+      "forks": 2,
+      "full_name": "yinkakun/medusa-starter-monster",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=14/20 (stars=25, updated=2025-07-17T01:33:10Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 68,
+      "stars": 25,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "hackathon",
+        "hacktoberfest"
+      ],
+      "updated_at": "2025-07-17T01:33:10Z",
+      "url": "https://github.com/yinkakun/medusa-starter-monster"
+    },
+    {
+      "description": "A context, a hook, and an API route handler, to manage a Shopify Storefront in your Next.js app.",
+      "forks": 3,
+      "full_name": "basementstudio/next-shopify",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=13/20 (stars=32, updated=2025-05-06T18:53:41Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 67,
+      "stars": 32,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "e-commerce",
+        "nextjs",
+        "react-query",
+        "shopify",
+        "storefront-api",
+        "typescript"
+      ],
+      "updated_at": "2025-05-06T18:53:41Z",
+      "url": "https://github.com/basementstudio/next-shopify"
+    },
+    {
+      "description": "Frontier is an all-in-one user management platform that provides identity, access and billing management to help organizations secure their systems and data. (Open source alternative to Clerk, WorkOS)",
+      "forks": 41,
+      "full_name": "raystack/frontier",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=314, updated=2025-12-29T03:52:36Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 66,
+      "stars": 314,
+      "tags": [
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "authentication",
+        "authorization",
+        "billing",
+        "clerkauth",
+        "dataops",
+        "golang",
+        "rbac",
+        "spicedb",
+        "user-management"
+      ],
+      "updated_at": "2025-12-29T03:52:36Z",
+      "url": "https://github.com/raystack/frontier"
+    },
+    {
+      "description": "An e-commerce storefront starter built with Qwik and Vendure",
+      "forks": 107,
+      "full_name": "vendure-ecommerce/storefront-qwik-starter",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=259, updated=2025-12-27T13:00:26Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 259,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "ecommerce",
+        "headless",
+        "qwik"
+      ],
+      "updated_at": "2025-12-27T13:00:26Z",
+      "url": "https://github.com/vendure-ecommerce/storefront-qwik-starter"
+    },
+    {
+      "description": "A storefront starter kit for Vendure built with Remix",
+      "forks": 145,
+      "full_name": "vendure-ecommerce/storefront-remix-starter",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=224, updated=2025-12-21T13:37:03Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 224,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "commerce",
+        "ecommerce",
+        "headless",
+        "remix",
+        "storefront"
+      ],
+      "updated_at": "2025-12-21T13:37:03Z",
+      "url": "https://github.com/vendure-ecommerce/storefront-remix-starter"
+    },
+    {
+      "description": "An example storefront PWA for Vendure built with Angular",
+      "forks": 150,
+      "full_name": "vendure-ecommerce/storefront-angular-starter",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=185, updated=2025-12-28T12:35:54Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 185,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "angular",
+        "e-commerce",
+        "pwa",
+        "storefront"
+      ],
+      "updated_at": "2025-12-28T12:35:54Z",
+      "url": "https://github.com/vendure-ecommerce/storefront-angular-starter"
+    },
+    {
+      "description": "NextJS Pages Router Storefront for MedusaJS",
+      "forks": 28,
+      "full_name": "pavlotsyhanok/medusa-plasmic-storefront",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=59, updated=2025-12-23T17:35:52Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 59,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-23T17:35:52Z",
+      "url": "https://github.com/pavlotsyhanok/medusa-plasmic-storefront"
+    },
+    {
+      "description": "Open source platform for X.509 certificate based service authentication and fine grained access control in dynamic infrastructures. Athenz supports provisioning and configuration (centralized authorization) use cases as well as serving/runtime (decentralized authorization) use cases.",
+      "forks": 297,
+      "full_name": "AthenZ/athenz",
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=20/20 (stars=978, updated=2025-12-27T14:44:44Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 62,
+      "stars": 978,
+      "tags": [
+        "support",
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "access-token",
+        "authorization",
+        "cloud",
+        "containers",
+        "dynamic-infrastructures",
+        "rbac",
+        "role-based-access-control",
+        "service-identity",
+        "spiffe",
+        "tls"
+      ],
+      "updated_at": "2025-12-27T14:44:44Z",
+      "url": "https://github.com/AthenZ/athenz"
+    },
+    {
+      "description": "Storefront for vendure and NextJS",
+      "forks": 35,
+      "full_name": "aexol-studio/vendure-nextjs-storefront",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=95, updated=2025-08-24T18:36:51Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 62,
+      "stars": 95,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "next",
+        "nextjs",
+        "react",
+        "storefront",
+        "vendure"
+      ],
+      "updated_at": "2025-08-24T18:36:51Z",
+      "url": "https://github.com/aexol-studio/vendure-nextjs-storefront"
+    },
+    {
+      "description": "Medusa + Next.js starter frontend UI project as a part of Open source contribution. A beautiful Next.js based storefront for @medusajs",
+      "forks": 7,
+      "full_name": "Seek4samurai/Medusa-NextJs-StoreFront",
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=14/20 (stars=28, updated=2025-11-26T11:54:46Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 58,
+      "stars": 28,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "ecommerce",
+        "gourav",
+        "medusajs",
+        "nextjs"
+      ],
+      "updated_at": "2025-11-26T11:54:46Z",
+      "url": "https://github.com/Seek4samurai/Medusa-NextJs-StoreFront"
+    }
+  ],
+  "count": 16,
+  "generated_at_utc": "2025-12-30T10:28:35Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1727_oss-discovery-github-oss-discovery-cycle-172727/oss/entries"
+  }
+}

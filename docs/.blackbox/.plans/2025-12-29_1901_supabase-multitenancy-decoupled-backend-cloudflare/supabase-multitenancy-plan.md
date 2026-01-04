@@ -1,0 +1,174 @@
+# Supabase Multitenancy Plan (one project, many clients)
+
+This document describes how to evolve toward a **single Supabase project** that supports **multiple tenants/clients**, without forcing you to do that migration immediately.
+
+Goal:
+- backend stays stable
+- frontends can be swapped
+- tenancy is explicit and enforceable (RLS)
+
+Non-goal (for now):
+- Implement multitenancy immediately
+- Split into multiple Supabase projects (we can revisit later)
+
+---
+
+## 1) Define “tenant” explicitly
+
+Pick one canonical meaning of tenant:
+- `tenant` = a client brand / customer / org
+- a tenant may have one or more storefronts / domains
+
+Recommendation:
+- Start with `tenant` = “brand/client”
+- Every user belongs to exactly one tenant (or has a default tenant)
+
+---
+
+## 2) Tenancy context: how requests know tenant
+
+You need a stable rule that works across web, admin, and future apps.
+
+Common options:
+
+### Option A: Domain-based tenancy (recommended for storefront)
+- Resolve tenant from request host:
+  - `shop.lumelle.com` → tenant `lumelle`
+  - `shop.client2.com` → tenant `client2`
+
+Pros:
+- great UX, no query params
+- works for static frontends
+
+Cons:
+- requires domain routing config
+
+### Option B: Path-based tenancy
+- `/t/:tenantSlug/...`
+
+Pros:
+- easy to test locally
+- simple routing
+
+Cons:
+- less “real world” for branded domains
+
+### Option C: Auth-based tenancy (good for admin)
+- tenant comes from user claims (Clerk JWT claim)
+
+Pros:
+- secure; no host parsing
+
+Cons:
+- not available for anonymous storefront users
+
+Pragmatic approach:
+- Storefront: domain-based
+- Admin: auth-based (with fallback to domain)
+
+---
+
+## 3) Database schema pattern (tenant_id everywhere)
+
+Core rule:
+- Every tenant-owned row includes `tenant_id` (UUID).
+- Every query must be constrained by `tenant_id` via RLS.
+
+Minimum tables:
+- `tenants (id, slug, name, created_at, status, ...)`
+- `tenant_domains (tenant_id, host, kind, ...)`
+- `tenant_integrations (tenant_id, provider, config_json, ...)`
+
+Domain data tables:
+- `cms_products (tenant_id, ...)`
+- `cms_pages (tenant_id, ...)`
+- `orders (tenant_id, ...)`
+- etc.
+
+---
+
+## 4) RLS strategy (how to keep tenants isolated)
+
+Two primary access modes:
+
+### A) Service-role backend (BFF)
+- backend uses Supabase service role
+- backend enforces tenant filtering itself
+
+Pros:
+- easiest for multi-frontend
+- avoids shipping DB logic to clients
+
+Cons:
+- backend becomes more important; must be correct
+
+### B) RLS + user JWT tokens (direct from client)
+- clients access Supabase directly with user token
+
+Pros:
+- less backend work
+
+Cons:
+- harder to keep frontend swappable; more logic in UI
+
+Recommendation for “frontend swappable”:
+- Prefer backend/service-role for most operations.
+- Use RLS tokens only when needed for realtime or user-scoped reads, and keep it behind a port.
+
+RLS building blocks:
+- `auth.uid()` based policies for user-owned rows
+- tenant membership mapping:
+  - `tenant_memberships (tenant_id, user_id, role)`
+- helper function:
+  - `current_tenant_id()` derived from JWT claim or request context (when proxied)
+
+---
+
+## 5) Tenant integration config (Shopify today)
+
+Avoid storing provider config in env vars for multi-tenant.
+
+Instead:
+- `tenant_integrations` row stores Shopify config per tenant:
+  - store domain
+  - API credentials references (or secrets manager pointer)
+  - feature flags/capabilities
+
+The backend resolves:
+- tenant → integration config
+- port runtime uses that config to create the adapter
+
+This aligns with your platform runtime pattern but moves config lookup to request-time.
+
+---
+
+## 6) Migration approach (don’t boil the ocean)
+
+Phase 0 (now):
+- keep single-tenant assumptions working
+- define the tenant model + config tables on paper (and optionally in Supabase, unused)
+
+Phase 1:
+- introduce a `tenant_id` column to the tables you own (Supabase-managed content, admin CMS data)
+- add RLS policies but keep service role backend as the primary access path
+
+Phase 2:
+- move Shopify store domain config from env to tenant config table
+- resolve tenant by domain in Cloudflare worker
+
+Phase 3:
+- onboard second tenant
+
+---
+
+## 7) Compatibility goals for frontend swapping
+
+To swap frontend without touching backend:
+- All provider-specific logic lives behind ports/adapters.
+- All tenancy logic lives in backend boundary (host → tenant resolution).
+- All frontend calls are against stable `/api/*` resources (same origin).
+
+See also:
+- `backend-boundary.md`
+- `migration-stages.md`
+

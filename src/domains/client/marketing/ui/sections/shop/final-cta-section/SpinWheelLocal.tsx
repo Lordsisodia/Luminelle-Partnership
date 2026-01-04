@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useAuth as useClerkAuth, useUser } from '@clerk/clerk-react'
 import { useAuthContext } from '@platform/auth/providers/AuthContext'
 import { createSupabaseClient } from '@/lib/supabase'
+import { getClerkSupabaseToken } from '@platform/auth/clerkSupabaseToken'
 import { useCart } from '@client/shop/cart/providers/CartContext'
 
 type Prize = {
@@ -78,7 +79,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
 
   const fetchClaim = async () => {
     if (!isLoaded || !isSignedIn || !user) return null
-    const token = await getToken({ template: 'supabase' }).catch(() => null)
+    const { token } = await getClerkSupabaseToken(getToken)
     const client = token ? createSupabaseClient(token) : null
     if (!client) return null
 
@@ -94,7 +95,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
 
   const claimWelcome = async () => {
     if (!isLoaded || !isSignedIn || !user) return null
-    const token = await getToken({ template: 'supabase' }).catch(() => null)
+    const { token } = await getClerkSupabaseToken(getToken)
     const client = token ? createSupabaseClient(token) : null
     if (!client) throw new Error('Supabase not configured')
 

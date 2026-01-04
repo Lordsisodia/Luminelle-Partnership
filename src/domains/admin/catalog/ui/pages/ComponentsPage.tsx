@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AdminPageLayout } from '@admin/shared/ui/layouts'
 import { componentMetaList, type ComponentMeta, type ComponentKey } from '@admin/shared/data/componentMeta'
+import { setAdminNavList } from '@admin/shared/application/adminNavLists'
 import {
   Megaphone,
   PanelsTopLeft,
@@ -83,6 +85,18 @@ function ComponentCard({ meta }: { meta: ComponentMeta }) {
 }
 
 export default function ComponentsPage() {
+  useEffect(() => {
+    // Feed the sidebar nav panel with the current component set.
+    // (This page uses a static `componentMetaList`, so we can set it once.)
+    setAdminNavList(
+      'components',
+      componentMetaList.map((m) => ({
+        label: m.name,
+        to: `/admin/components/${m.key}`,
+      })),
+    )
+  }, [])
+
   return (
     <AdminPageLayout
       title="Components"

@@ -1,0 +1,272 @@
+{
+  "candidates": [
+    {
+      "description": "An Excel-like grid component for React with custom cell editors, performant scroll & resizable columns",
+      "forks": 57,
+      "full_name": "denisraslov/react-spreadsheet-grid",
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (JavaScript); maintenance=20/20 (stars=1172, updated=2025-12-19T19:23:03Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1172,
+      "tags": [
+        "returns",
+        "cms"
+      ],
+      "topics": [
+        "data-grid",
+        "excel",
+        "grid",
+        "grid-component",
+        "javascript",
+        "keyboard",
+        "react",
+        "spreadsheet",
+        "table"
+      ],
+      "updated_at": "2025-12-19T19:23:03Z",
+      "url": "https://github.com/denisraslov/react-spreadsheet-grid"
+    },
+    {
+      "description": "\ud83d\udd25 A fully open source audit logs service and embeddable UI easily deployed to your own Kubernetes cluster. Brought to you by replicated.com and boxyhq.com  \ud83d\ude80",
+      "forks": 30,
+      "full_name": "retracedhq/retraced",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=426, updated=2025-12-26T13:02:23Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 426,
+      "tags": [],
+      "topics": [
+        "audit-logs",
+        "enterprise-ready",
+        "enterprise-software",
+        "javascript",
+        "kubernetes",
+        "security-audit",
+        "typescript"
+      ],
+      "updated_at": "2025-12-26T13:02:23Z",
+      "url": "https://github.com/retracedhq/retraced"
+    },
+    {
+      "description": "Open-source MCP gateway and control plane for teams to govern which tools agents can use, what they can do, and how it\u2019s audited\u2014across agentic IDEs like Cursor, or other agents and AI tools.",
+      "forks": 17,
+      "full_name": "aipotheosis-labs/gate22",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=150, updated=2025-12-18T05:59:34Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 150,
+      "tags": [
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "agents",
+        "ai",
+        "ai-agents",
+        "control-plane",
+        "gateway",
+        "guardrails",
+        "llm",
+        "mcp",
+        "mcp-tools",
+        "oauth2",
+        "open-source",
+        "permissions",
+        "policy-as-code",
+        "rbac"
+      ],
+      "updated_at": "2025-12-18T05:59:34Z",
+      "url": "https://github.com/aipotheosis-labs/gate22"
+    },
+    {
+      "description": "React Hooks implementation of a roving tabindex, now with grid support.",
+      "forks": 18,
+      "full_name": "stevejay/react-roving-tabindex",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=16/20 (stars=55, updated=2025-05-02T17:39:29Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 70,
+      "stars": 55,
+      "tags": [
+        "support"
+      ],
+      "topics": [],
+      "updated_at": "2025-05-02T17:39:29Z",
+      "url": "https://github.com/stevejay/react-roving-tabindex"
+    },
+    {
+      "description": "Open Source, Google Zanzibar-inspired database for scalably storing and querying fine-grained authorization data",
+      "forks": 362,
+      "full_name": "authzed/spicedb",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=6310, updated=2025-12-29T23:57:22Z); license=15/15 (Apache-2.0); time_to_value=8/10",
+      "score": 69,
+      "stars": 6310,
+      "tags": [
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "abac",
+        "acl",
+        "authorization",
+        "ciam",
+        "cloud-native",
+        "database",
+        "distributed-systems",
+        "entitlements",
+        "fga",
+        "fine-grained-access-control",
+        "fine-grained-authorization",
+        "kubernetes",
+        "permissions",
+        "rbac",
+        "rebac",
+        "security",
+        "security-tools",
+        "zanzibar"
+      ],
+      "updated_at": "2025-12-29T23:57:22Z",
+      "url": "https://github.com/authzed/spicedb"
+    },
+    {
+      "description": "Frontier is an all-in-one user management platform that provides identity, access and billing management to help organizations secure their systems and data. (Open source alternative to Clerk, WorkOS)",
+      "forks": 41,
+      "full_name": "raystack/frontier",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=314, updated=2025-12-29T03:52:36Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 66,
+      "stars": 314,
+      "tags": [
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "authentication",
+        "authorization",
+        "billing",
+        "clerkauth",
+        "dataops",
+        "golang",
+        "rbac",
+        "spicedb",
+        "user-management"
+      ],
+      "updated_at": "2025-12-29T03:52:36Z",
+      "url": "https://github.com/raystack/frontier"
+    },
+    {
+      "description": "Headless data grid (table) keyboard navigation library",
+      "forks": 3,
+      "full_name": "konsalex/table-nav",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=56, updated=2025-12-08T15:41:06Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 56,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "accessibility",
+        "javascript",
+        "keyboard",
+        "navigation",
+        "react",
+        "table"
+      ],
+      "updated_at": "2025-12-08T15:41:06Z",
+      "url": "https://github.com/konsalex/table-nav"
+    },
+    {
+      "description": "React components to display the list, table, and grid, without scrolling, use the keyboard keys to navigate through the data",
+      "forks": 0,
+      "full_name": "valqelyan/react-keyview",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=10/20 (stars=16, updated=2025-01-26T18:30:28Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 64,
+      "stars": 16,
+      "tags": [],
+      "topics": [
+        "components",
+        "data",
+        "grid",
+        "keyboard",
+        "keys",
+        "list",
+        "navigation",
+        "react",
+        "table",
+        "tabular-data"
+      ],
+      "updated_at": "2025-01-26T18:30:28Z",
+      "url": "https://github.com/valqelyan/react-keyview"
+    },
+    {
+      "description": "Open source platform for X.509 certificate based service authentication and fine grained access control in dynamic infrastructures. Athenz supports provisioning and configuration (centralized authorization) use cases as well as serving/runtime (decentralized authorization) use cases.",
+      "forks": 297,
+      "full_name": "AthenZ/athenz",
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Java); maintenance=20/20 (stars=978, updated=2025-12-27T14:44:44Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 62,
+      "stars": 978,
+      "tags": [
+        "support",
+        "auth",
+        "policy"
+      ],
+      "topics": [
+        "access-token",
+        "authorization",
+        "cloud",
+        "containers",
+        "dynamic-infrastructures",
+        "rbac",
+        "role-based-access-control",
+        "service-identity",
+        "spiffe",
+        "tls"
+      ],
+      "updated_at": "2025-12-27T14:44:44Z",
+      "url": "https://github.com/AthenZ/athenz"
+    },
+    {
+      "description": "AuditTrailJS is an open-source library built in JavaScript/TypeScript for Node.js applications, designed to provide a centralized and extensible layer for auditing and logging.",
+      "forks": 5,
+      "full_name": "Mario-Coxe/audittrailjs",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=13/20 (stars=13, updated=2025-12-12T03:47:08Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 57,
+      "stars": 13,
+      "tags": [
+        "observability"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-12T03:47:08Z",
+      "url": "https://github.com/Mario-Coxe/audittrailjs"
+    }
+  ],
+  "count": 10,
+  "generated_at_utc": "2025-12-30T11:53:27Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1852_oss-discovery-github-oss-discovery-cycle-185225/oss/entries"
+  }
+}

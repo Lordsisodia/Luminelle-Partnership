@@ -1,0 +1,4 @@
+# Fixups: Northbeam product/docs URLs (since /product was 404)
+https://www.northbeam.io/products/multi-touch-attribution northbeam-multi-touch-attribution
+https://www.northbeam.io/features/profit-benchmarks northbeam-profit-benchmarks
+https://docs.northbeam.io/docs/getting-started-with-northbeam northbeam-docs-getting-started

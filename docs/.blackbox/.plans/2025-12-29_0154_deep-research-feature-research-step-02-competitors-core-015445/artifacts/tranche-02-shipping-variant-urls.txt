@@ -1,0 +1,29 @@
+# Tranche 02 (Shipping labels / rate shopping / shipping ops) — variant snapshots (pricing/docs/features)
+#
+# Prefer labels like "<slug>-<topic>" so extract_competitor_evidence.py picks them up.
+
+# --- ShipStation ---
+https://www.shipstation.com/pricing/ shipstation-pricing
+https://www.shipstation.com/features/ shipstation-features
+https://help.shipstation.com/hc/en-us shipstation-help-center
+https://help.shipstation.com/hc/en-us/categories/360001747992-ShipStation-API shipstation-api-category
+https://www.shipstation.com/integrations/ shipstation-integrations
+https://apps.shopify.com/shipstation shipstation-shopify-app-store
+https://developer.shipstation.com shipstation-developer
+https://developer.shipstation.com/#/reference shipstation-developer-reference
+
+# --- Shippo ---
+https://goshippo.com/pricing/ shippo-pricing
+https://goshippo.com/shipping-api/ shippo-shipping-api
+https://docs.goshippo.com/ shippo-docs
+https://apps.shopify.com/shippo shippo-shopify-app-store
+
+# --- EasyPost ---
+https://www.easypost.com/pricing easypost-pricing
+https://www.easypost.com/docs easypost-docs
+https://www.easypost.com/docs/api easypost-docs-api
+https://www.easypost.com/shipping-api easypost-shipping-api
+https://www.easypost.com/docs/guide easypost-docs-guide
+https://docs.easypost.com easypost-docs-site
+https://docs.easypost.com/docs/api easypost-docs-site-api
+https://docs.easypost.com/docs/guide easypost-docs-site-guide

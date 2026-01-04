@@ -116,7 +116,7 @@ export const FeaturedTikTok = ({ heading, sectionId }: Props) => {
 
   return (
     <section id={sectionId} className="bg-white">
-      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-10">
+      <div className="mx-auto max-w-6xl px-5 py-16 md:px-6">
         <SectionHeading
           eyebrow={resolvedHeading.eyebrow}
           title={resolvedHeading.title ?? ''}

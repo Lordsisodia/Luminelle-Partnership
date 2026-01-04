@@ -1,0 +1,27 @@
+total 136
+drwxr-xr-x@ 20 shaansisodia  staff   640 Dec 28 19:57 _template
+drwxr-xr-x@ 26 shaansisodia  staff   832 Dec 29 06:44 .
+drwxr-xr-x@ 14 shaansisodia  staff   448 Dec 29 19:53 ..
+-rw-r--r--@  1 shaansisodia  staff   255 Dec 28 19:03 .gitignore
+drwxr-xr-x@ 61 shaansisodia  staff  1952 Dec 31 21:56 .local
+drwxr-xr-x@ 65 shaansisodia  staff  2080 Dec 31 22:18 .plans
+drwxr-xr-x@ 14 shaansisodia  staff   448 Dec 31 19:31 .prompts
+drwxr-xr-x@ 11 shaansisodia  staff   352 Dec 29 18:48 .skills
+drwxr-xr-x@  9 shaansisodia  staff   288 Dec 29 06:25 agents
+-rw-r--r--@  1 shaansisodia  staff  1109 Dec 28 20:07 context.md
+drwxr-xr-x@  9 shaansisodia  staff   288 Dec 31 19:19 deepresearch
+-rw-r--r--@  1 shaansisodia  staff   279 Dec 29 05:39 docs-ledger.md
+drwxr-xr-x@  4 shaansisodia  staff   128 Dec 29 05:27 experiments
+-rw-r--r--@  1 shaansisodia  staff   301 Dec 29 05:39 information-routing.md
+-rw-r--r--@  1 shaansisodia  staff  9375 Dec 31 20:20 journal.md
+-rw-r--r--@  1 shaansisodia  staff  2787 Dec 31 09:27 MAINTENANCE.md
+-rw-r--r--@  1 shaansisodia  staff  1008 Dec 28 20:07 manifest.yaml
+drwxr-xr-x@ 21 shaansisodia  staff   672 Dec 31 20:29 oss-catalog
+-rw-r--r--@  1 shaansisodia  staff  4546 Dec 29 05:27 protocol.md
+-rw-r--r--@  1 shaansisodia  staff  2882 Dec 29 05:38 README.md
+-rw-r--r--@  1 shaansisodia  staff  8460 Dec 29 19:11 RUN-NOW.md
+drwxr-xr-x@  4 shaansisodia  staff   128 Dec 28 19:09 schemas
+-rw-r--r--@  1 shaansisodia  staff   282 Dec 28 18:28 scratchpad.md
+drwxr-xr-x@ 42 shaansisodia  staff  1344 Dec 31 12:09 scripts
+drwxr-xr-x@  7 shaansisodia  staff   224 Dec 28 19:54 snippets
+-rw-r--r--@  1 shaansisodia  staff  1353 Dec 31 09:33 tasks.md

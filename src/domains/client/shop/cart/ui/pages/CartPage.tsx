@@ -24,7 +24,7 @@ const EmptyCartState = () => (
 )
 
 export const CartPage = () => {
-  const { items, subtotal, setQty, remove, checkoutUrl, discountCode, applyDiscount, setAttributes } = useCart()
+  const { items, subtotal, setQty, remove, checkoutUrl, checkoutCapabilities, checkoutStart, discountCode, applyDiscount, setAttributes } = useCart()
   const [promo, setPromo] = useState(discountCode ?? '')
   const [redirecting, setRedirecting] = useState(false)
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD_GBP || items.length === 0 ? 0 : STANDARD_SHIPPING
@@ -39,7 +39,7 @@ export const CartPage = () => {
     try {
       await initPosthogOnce()
       const attrs = buildCheckoutAttributionAttributes()
-      // Best-effort: don't block checkout forever if Shopify is slow.
+      // Best-effort: don't block checkout forever if the provider is slow.
       await Promise.race([
         setAttributes?.(attrs),
         new Promise((resolve) => setTimeout(resolve, 800)),
@@ -48,6 +48,9 @@ export const CartPage = () => {
       window.location.href = url
     }
   }
+
+  const checkoutLabel = checkoutCapabilities?.providerLabel ?? 'Secure checkout'
+  const checkoutDisabledReason = checkoutStart?.mode === 'none' ? checkoutStart.reason : undefined
 
   return (
     <>
@@ -190,7 +193,7 @@ export const CartPage = () => {
                   disabled={redirecting}
                   className="mt-5 block w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-center text-sm font-semibold text-white hover:-translate-y-0.5 transition disabled:opacity-60"
                 >
-                  {redirecting ? 'Redirecting…' : 'Continue to checkout'}
+                  {redirecting ? `Opening ${checkoutLabel.toLowerCase()}…` : checkoutLabel}
                 </button>
               ) : items.length > 0 ? (
                 <button
@@ -198,7 +201,7 @@ export const CartPage = () => {
                   disabled
                   className="mt-5 block w-full rounded-full bg-semantic-legacy-brand-cocoa/60 px-5 py-3 text-center text-sm font-semibold text-white opacity-80 cursor-not-allowed"
                 >
-                  Checkout coming soon
+                  {checkoutDisabledReason ? 'Checkout unavailable' : 'Preparing checkout…'}
                 </button>
               ) : (
                 <button
@@ -215,13 +218,15 @@ export const CartPage = () => {
             </div>
             {checkoutUrl ? (
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-semantic-text-primary/80">
-                <p className="text-sm font-semibold">Secure checkout</p>
-                <p className="text-xs text-semantic-text-primary/60">256-bit SSL. Apple Pay, Shop Pay, and major cards accepted.</p>
+                <p className="text-sm font-semibold">{checkoutLabel}</p>
+                <p className="text-xs text-semantic-text-primary/60">256-bit SSL. Major cards accepted.</p>
               </div>
             ) : (
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-semantic-text-primary/80">
                 <p className="text-sm font-semibold">Checkout status</p>
-                <p className="text-xs text-semantic-text-primary/60">Checkout is being configured on this storefront.</p>
+                <p className="text-xs text-semantic-text-primary/60">
+                  {checkoutDisabledReason ? checkoutDisabledReason : 'Preparing a checkout session…'}
+                </p>
               </div>
             )}
           </aside>

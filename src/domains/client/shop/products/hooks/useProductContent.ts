@@ -15,7 +15,7 @@ export const useProductContent = (handle: string) => {
 
   const [activeImage, setActiveImage] = useState(0)
   const [isAdding, setIsAdding] = useState(false)
-  const [variantId, setVariantId] = useState<string | null>(config.fallbackVariantId ?? null)
+  const [variantId, setVariantId] = useState<string | null>(config.fallbackVariantKey ?? null)
   const [price, setPrice] = useState<number>(config.defaultPrice ?? 15)
   const [gallery, setGallery] = useState<string[]>(baseGallery)
   const [sections, setSections] = useState<any>(null)
@@ -24,7 +24,7 @@ export const useProductContent = (handle: string) => {
 
   useEffect(() => {
     setActiveImage(0)
-    setVariantId(config.fallbackVariantId ?? null)
+    setVariantId(config.fallbackVariantKey ?? null)
     setPrice(config.defaultPrice ?? 15)
     setGallery(baseGallery)
     setSections(null)

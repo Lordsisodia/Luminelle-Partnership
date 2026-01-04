@@ -1,0 +1,61 @@
+{
+  "count": 2,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": "\\b(portfolio|resume|curriculum|cv|personal\\s*(site|website)?|my\\s*site)\\b",
+  "excluded_results_count": 0,
+  "generated_at_utc": "2025-12-30T14:28:28Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 200,
+  "queries_used": [
+    "algolia autocomplete ui react stars:>=200 fork:false archived:false",
+    "react instantsearch components stars:>=200 fork:false archived:false",
+    "react instantsearch hooks stars:>=200 fork:false archived:false",
+    "algolia autocomplete react component stars:>=200 fork:false archived:false",
+    "meilisearch instantsearch ui component stars:>=200 fork:false archived:false",
+    "meilisearch react instantsearch component stars:>=200 fork:false archived:false",
+    "typesense react instantsearch component stars:>=200 fork:false archived:false",
+    "typesense instantsearch adapter react stars:>=200 fork:false archived:false",
+    "querystring filter state react stars:>=200 fork:false archived:false",
+    "range slider filter component react stars:>=200 fork:false archived:false",
+    "\"refinementList\" component react stars:>=200 fork:false archived:false",
+    "facet filter component react stars:>=200 fork:false archived:false",
+    "autocomplete component react headless stars:>=200 fork:false archived:false",
+    "combobox autocomplete react headless stars:>=200 fork:false archived:false",
+    "search suggestions component react stars:>=200 fork:false archived:false",
+    "search results list component react stars:>=200 fork:false archived:false",
+    "highlight search results component react stars:>=200 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "React + Vue Search UI for Elasticsearch & Opensearch. Compatible with Algolia's Instantsearch and Autocomplete components.",
+      "full_name": "searchkit/searchkit",
+      "integration_score": 10,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 4854,
+      "updated_at": "2025-12-30T07:08:39Z",
+      "url": "https://github.com/searchkit/searchkit"
+    },
+    {
+      "description": "A JS adapter library to build rich search interfaces with Typesense and InstantSearch.js",
+      "full_name": "typesense/typesense-instantsearch-adapter",
+      "integration_score": 9,
+      "language": "JavaScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 505,
+      "updated_at": "2025-12-29T06:58:39Z",
+      "url": "https://github.com/typesense/typesense-instantsearch-adapter"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

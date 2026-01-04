@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AdminPageLayout } from '@admin/shared/ui/layouts'
+import { getAdminAuthHeaders, getAdminPass, setAdminPass } from '@admin/shared/data/adminInternalAuth'
 
 type Field = { key: string; value: string }
 
@@ -11,16 +12,25 @@ export default function ContentPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [handle, setHandle] = useState(routeHandle ?? 'shower-cap')
+  const [error, setError] = useState<string | null>(null)
 
-  const [pass, setPass] = useState<string>(sessionStorage.getItem('lumelle_admin_pass') || '')
-  const authHeader = pass ? { Authorization: `Bearer ${pass}` } : undefined
+  const [pass, setPass] = useState<string>(() => getAdminPass())
+  const authHeader = getAdminAuthHeaders(pass)
 
   const load = async (nextHandle: string) => {
     setLoading(true)
+    setError(null)
     try {
-      const res = await fetch(`/api/admin/sections/get?handle=${encodeURIComponent(nextHandle)}`, { headers: { 'content-type': 'application/json', ...(authHeader as any) } })
-      const j = await res.json()
+      const res = await fetch(`/api/admin/sections/get?handle=${encodeURIComponent(nextHandle)}`, {
+        headers: { 'content-type': 'application/json', ...authHeader },
+      })
+
+      const j = await readJsonResponse(res)
       setFields(j.fields || [])
+    } catch (e) {
+      const message = e instanceof Error ? e.message : String(e)
+      setError(message)
+      setFields([])
     } finally {
       setLoading(false)
     }
@@ -50,10 +60,10 @@ export default function ContentPage() {
     setSaving(true)
     try {
       const fieldsObj = Object.fromEntries(fields.map((f) => [f.key, parseMaybeJSON(f.value)]))
-      sessionStorage.setItem('lumelle_admin_pass', pass)
+      setAdminPass(pass)
       await fetch(`/api/admin/sections/update?handle=${encodeURIComponent(handle)}`, {
         method: 'POST',
-        headers: { 'content-type': 'application/json', ...(authHeader as any) },
+        headers: { 'content-type': 'application/json', ...authHeader },
         body: JSON.stringify({ fields: fieldsObj }),
       })
     } finally {
@@ -81,6 +91,16 @@ export default function ContentPage() {
         </button>
         <input className="rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm" type="password" placeholder="Admin pass" value={pass} onChange={(e) => setPass(e.target.value)} />
       </div>
+      {error ? (
+        <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-900">
+          <div className="font-semibold">Failed to load content</div>
+          <div className="mt-2 whitespace-pre-wrap font-mono text-[12px] leading-relaxed">{error}</div>
+          <div className="mt-3 text-red-900/80">
+            If you’re running the Vite dev server (`npm run dev`), the `/api/...` routes might not be executing (they’re Vercel functions).
+            Use `vercel dev` for full-stack local API support, or wire a proxy/middleware.
+          </div>
+        </div>
+      ) : null}
       {loading ? (
         <div className="mt-4 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-6 text-semantic-text-primary/80">Loading…</div>
       ) : (
@@ -110,4 +130,29 @@ function parseMaybeJSON(v: string): any {
   const trimmed = (v || '').trim()
   if (!trimmed) return ''
   try { return JSON.parse(trimmed) } catch { return v }
+}
+
+async function readJsonResponse(res: Response): Promise<any> {
+  const contentType = res.headers.get('content-type') || ''
+  const isJson = contentType.includes('application/json')
+  const bodyText = await res.text()
+
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status} ${res.statusText}\n${bodyText.slice(0, 800)}`)
+  }
+
+  if (!isJson) {
+    throw new Error(
+      `Expected JSON but got content-type "${contentType || 'unknown'}".\n` +
+        `This usually means the dev server returned an HTML page or a transformed JS module instead of running the API route.\n` +
+        `${bodyText.slice(0, 800)}`,
+    )
+  }
+
+  try {
+    return JSON.parse(bodyText)
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e)
+    throw new Error(`Failed to parse JSON: ${message}\n${bodyText.slice(0, 800)}`)
+  }
 }

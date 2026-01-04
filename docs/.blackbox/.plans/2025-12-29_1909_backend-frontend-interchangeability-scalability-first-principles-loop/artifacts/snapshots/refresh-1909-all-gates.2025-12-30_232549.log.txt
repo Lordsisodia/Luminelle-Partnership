@@ -1,0 +1,18 @@
+log: .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots/refresh-1909-all-gates.2025-12-30_232549.log.txt
+[0/5] Capturing gate script heads (for audit)
+[1/5] Refreshing contract evidence (endpoint inventories + v1.1 table + gaps)
+log: .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots/refresh-1909-contract-evidence.2025-12-30_232549.log.txt
+[1/5] Refreshing /functions/api inventories
+[2/5] Refreshing implementation cue scans (auth/tenant/cache/security)
+[3/5] Building per-file cue matrix
+[4/5] Regenerating contract v1.1 endpoint table + gaps report
+[5/5] Refreshing snapshot index
+done: refreshed contract evidence under .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop
+[2/5] Refreshing boundary import scans (UI/client must not import adapters)
+[3/5] Refreshing vendor leak scan (report-only until hard gate)
+[4/5] Refreshing platform inventories (ports/runtimes/adapters)
+[5/5] Refreshing legacy/aux inventories (repo top-level + api/ + server/)
+Computing api/** vs functions/api/** endpoint diff (drift signal)
+Refreshing api-only endpoint triage snapshots (usage scan + handler heads bundle)
+Refreshing snapshot index
+done: refreshed all gates under .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop

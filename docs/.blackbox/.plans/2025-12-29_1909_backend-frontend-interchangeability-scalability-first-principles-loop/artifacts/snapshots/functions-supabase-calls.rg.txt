@@ -1,0 +1,30 @@
+functions/api/orders/by-name.ts:15:  const { data, error } = await supabase.from('ShopOrders').select('*').eq('name', name).limit(1)
+functions/api/orders/get.ts:14:  const { data, error } = await supabase.from('ShopOrders').select('*').eq('order_id', id).limit(1)
+functions/api/metrics/top-skus.ts:13:  const { data, error } = await supabase.rpc('lumelle_metrics_top_skus', { days })
+functions/_lib/shopOrders.ts:60:  const { error } = await supabase.from('ShopOrders').upsert([record], { onConflict: 'shop,order_id' })
+functions/_lib/shopOrders.ts:76:  const { error } = await supabase.from('ShopOrders').update(update).eq('shop', shop).eq('order_id', orderId)
+functions/api/metrics/refund-rate.ts:13:  const { data, error } = await supabase.rpc('lumelle_metrics_refund_rate', { days })
+functions/api/experiment/track.ts:43:    const { error } = await supabase.from('experiment_exposures').insert(exposures)
+functions/api/experiment/track.ts:48:    const { error } = await supabase.from('events').insert(events)
+functions/api/metrics/source-revenue.ts:13:  const { data, error } = await supabase.rpc('lumelle_metrics_source_revenue', { days })
+functions/api/metrics/daily.ts:13:  const { data, error } = await supabase.rpc('lumelle_metrics_daily', { days })
+functions/api/metrics/refunds-by-sku.ts:13:  const { data, error } = await supabase.rpc('lumelle_metrics_refunds_by_sku', { days })
+functions/api/metrics/utm-sources.ts:13:  const { data, error } = await supabase.rpc('lumelle_metrics_utm_sources', { days })
+functions/api/metrics/repeat.ts:8:  const { data, error } = await supabase.rpc('lumelle_metrics_repeat')
+functions/_lib/shopCustomers.ts:55:  const { error } = await supabase.from('ShopCustomers').upsert([record], { onConflict: 'shop,customer_id' })
+functions/_lib/shopCustomers.ts:61:  const { error } = await supabase.from('ShopCustomers').delete().eq('shop', shop).eq('customer_id', id)
+functions/_lib/shopCustomers.ts:68:    const { error } = await supabase.from('ShopCustomers').delete().eq('shop', shop).eq('customer_id', emailOrId.id)
+functions/_lib/shopCustomers.ts:73:    const { error } = await supabase.from('ShopCustomers').delete().eq('shop', shop).eq('email', emailOrId.email.toLowerCase())
+functions/api/metrics/summary.ts:8:  const { data, error } = await supabase.rpc('lumelle_metrics_summary')
+functions/_lib/webhooks.ts:7:  const { data, error } = await supabase.from('ShopWebhookDeliveries').select('id').eq('id', deliveryId).limit(1)
+functions/_lib/webhooks.ts:15:  const { error } = await supabase.from('ShopWebhookDeliveries').upsert([{ id: deliveryId }], { onConflict: 'id' })
+functions/api/shopify/auth/callback.ts:35:  const { error } = await supabase.from('Session').upsert(
+functions/api/shopify/session.ts:13:  const { data, error } = await supabase.from('Session').select('id').eq('id', `offline_${shop}`).limit(1)
+functions/api/shopify/webhooks/shop-redact.ts:20:  const { error } = await supabase.from('ShopCustomers').delete().eq('shop', String(shop))
+functions/api/shopify/webhooks/app-uninstalled.ts:23:    await supabase.from('Session').delete().eq('id', `offline_${shop}`)
+functions/api/shopify/webhooks/orders-updated.ts:85:        await supabase.from('customers').upsert(
+functions/api/shopify/webhooks/orders-updated.ts:104:          const { error: insertError } = await supabase.from('loyalty_points_ledger').insert([
+functions/api/shopify/webhooks/fulfillments-create.ts:106:      await supabase.from('customers').upsert(
+functions/api/shopify/webhooks/fulfillments-create.ts:111:      const { error: insertError } = await supabase.from('loyalty_points_ledger').insert([
+functions/_lib/customers.ts:28:  const { error } = await supabase.from('customers').upsert([record], { onConflict: 'id' })
+functions/_lib/shopifyAdmin.ts:10:  const { data, error } = await supabase.from('Session').select('accesstoken').eq('id', `offline_${shop}`).limit(1).maybeSingle()

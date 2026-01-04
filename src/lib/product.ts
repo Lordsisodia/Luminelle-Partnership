@@ -1,3 +1,9 @@
+import { env } from '@/utils/env'
+import { commerce } from '@platform/commerce'
+import { PortError } from '@platform/ports'
+
+const FALLBACK_IMAGE = '/uploads/luminele/product-main.webp'
+
 export type Product = {
   id: string
   title: string
@@ -7,63 +13,8 @@ export type Product = {
   variantId: string
 }
 
-import { runStorefront, shopifyEnabled } from '@platform/commerce/shopify'
-
-const FALLBACK_IMAGE = '/uploads/luminele/product-main.webp'
-
-type StorefrontMoney = {
-  amount: string
-  currencyCode: string
-}
-
-type StorefrontVariant = {
-  id: string
-  availableForSale?: boolean
-  price: StorefrontMoney
-}
-
-type StorefrontImage = {
-  url: string
-}
-
-type ProductByHandleResponse = {
-  productByHandle: null | {
-    id: string
-    title: string
-    description: string
-    featuredImage?: StorefrontImage | null
-    images?: { nodes?: StorefrontImage[] | null } | null
-    variants: { nodes: StorefrontVariant[] }
-  }
-}
-
-const PRODUCT_BY_HANDLE_QUERY = /* GraphQL */ `
-  query ProductByHandle($handle: String!) {
-    productByHandle(handle: $handle) {
-      id
-      title
-      description
-      featuredImage {
-        url
-      }
-      images(first: 12) {
-        nodes {
-          url
-        }
-      }
-      variants(first: 20) {
-        nodes {
-          id
-          availableForSale
-          price {
-            amount
-            currencyCode
-          }
-        }
-      }
-    }
-  }
-`
+const isDev = () => import.meta.env.DEV
+const shouldUseRealCommerceInDev = () => env('USE_REAL_COMMERCE') === 'true'
 
 export const fetchProduct = async (id: string): Promise<Product> => {
   // Legacy placeholder; replaced when Shopify is configured and callers use `fetchProductByHandle`.
@@ -78,37 +29,33 @@ export const fetchProduct = async (id: string): Promise<Product> => {
 }
 
 export const fetchProductByHandle = async (handle: string): Promise<Product> => {
-  if (!shopifyEnabled) return fetchProduct(handle)
+  // Keep legacy behavior: in dev we don't want mock commerce results to overwrite hard-coded defaults
+  // unless we explicitly opt into the real adapter.
+  if (isDev() && !shouldUseRealCommerceInDev()) return fetchProduct(handle)
 
-  const data = await runStorefront<ProductByHandleResponse>(PRODUCT_BY_HANDLE_QUERY, { handle })
-  const p = data.productByHandle
-  if (!p) throw new Error(`Shopify product not found for handle: ${handle}`)
+  try {
+    const dto = await commerce.catalog.getProductByHandle(handle)
 
-  const firstVariant = p.variants.nodes[0]
-  if (!firstVariant) throw new Error(`Shopify product has no variants: ${handle}`)
+    const defaultVariant =
+      (dto.defaultVariantKey && dto.variants.find((v) => v.variantKey === dto.defaultVariantKey)) || dto.variants[0]
+    if (!defaultVariant) return fetchProduct(handle)
 
-  const amount = Number(firstVariant.price.amount)
-  const currencyCode = firstVariant.price.currencyCode
+    const mergedImages = dto.images.length ? dto.images : [FALLBACK_IMAGE]
 
-  const images = (p.images?.nodes ?? [])
-    .map((img) => img?.url)
-    .filter((url): url is string => typeof url === 'string' && url.length > 0)
-
-  const mergedImages = images.length
-    ? images
-    : p.featuredImage?.url
-      ? [p.featuredImage.url]
-      : [FALLBACK_IMAGE]
-
-  return {
-    id: p.id,
-    title: p.title,
-    description: p.description,
-    price: {
-      amount: Number.isFinite(amount) ? amount : 0,
-      currencyCode,
-    },
-    images: mergedImages,
-    variantId: firstVariant.id,
+    return {
+      id: dto.productKey,
+      title: dto.title,
+      description: dto.description ?? '',
+      price: {
+        amount: defaultVariant.unitPrice.amount,
+        currencyCode: defaultVariant.unitPrice.currencyCode,
+      },
+      images: mergedImages,
+      variantId: defaultVariant.variantKey,
+    }
+  } catch (error) {
+    // Prefer "no override" behavior for optional product enrichment rather than breaking the page.
+    if (error instanceof PortError) return fetchProduct(handle)
+    return fetchProduct(handle)
   }
 }

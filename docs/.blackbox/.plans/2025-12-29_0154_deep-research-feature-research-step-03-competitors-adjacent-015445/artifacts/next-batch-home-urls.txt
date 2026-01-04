@@ -1,0 +1,10 @@
+https://matomo.org Matomo
+https://heap.io Heap
+https://segment.com Segment
+https://www.rudderstack.com RudderStack
+https://superset.apache.org Apache Superset
+https://www.optimizely.com Optimizely
+https://vwo.com VWO
+https://www.abtasty.com AB Tasty
+https://www.split.io Split.io
+https://configcat.com ConfigCat

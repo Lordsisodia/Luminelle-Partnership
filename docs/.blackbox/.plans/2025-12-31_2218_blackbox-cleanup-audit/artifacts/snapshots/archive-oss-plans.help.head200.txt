@@ -1,0 +1,31 @@
+usage: archive-oss-plans.py [-h] [--keep-latest KEEP_LATEST] [--dry-run]
+                            [--rest-prefix REST_PREFIX]
+                            [--keep-file KEEP_FILE] [--ledger LEDGER]
+                            [--plans-dir PLANS_DIR]
+                            [--archive-root ARCHIVE_ROOT]
+
+Archive high-frequency OSS plan folders under docs/.blackbox/.plans by count
+(not age), keeping the newest N and protecting ledger-referenced + pinned
+runs.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --keep-latest KEEP_LATEST
+                        Keep the newest N OSS plan folders in .plans/
+                        (default: 12).
+  --dry-run             Print what would move, but do not move anything.
+  --rest-prefix REST_PREFIX
+                        Only archive plan folders whose <rest> segment starts
+                        with this prefix (default: oss-).
+  --keep-file KEEP_FILE
+                        If a plan folder contains this file, it will never be
+                        archived (default: .keep).
+  --ledger LEDGER       Docs ledger path (relative to docs/) used to protect
+                        referenced plan folders (default: 08-meta/repo/docs-
+                        ledger.md).
+  --plans-dir PLANS_DIR
+                        Plans directory path (relative to docs/) (default:
+                        .blackbox/.plans).
+  --archive-root ARCHIVE_ROOT
+                        Archive root (relative to docs/). Default is <plans-
+                        dir>/_archive. Example: .blackbox/.plans/_archive

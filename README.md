@@ -17,8 +17,8 @@ npm run build
 - `src/lib/` – shared helpers (`lib/utils/*`, `lib/ui.ts`).
 - `functions/api/**` – **Cloudflare Pages Functions** API implementation (`/api/*` on Cloudflare Pages).
 - `api/**` – legacy **Vercel** serverless snapshot (kept for reference; not used on Cloudflare).
-- `docs/` – project knowledge base; see `docs/ARCHITECTURE-HOWTO.md` and `docs/domains-README.md`.
-- Automated PR reviews (optional): see `docs/ai-code-review.md`.
+- `docs/` – project knowledge base; see `docs/architecture/ARCHITECTURE-HOWTO.md` and `docs/meta/domains-README.md`.
+- Automated PR reviews (optional): see `docs/tools/ai-code-review.md`.
 
 ## Conventions
 - If it renders, it lives in `ui/`.  
@@ -27,7 +27,7 @@ npm run build
 - Shared UI helpers live in `src/lib/ui.ts`.
 
 ## Environment
-Copy `.env.example` to `.env` and fill Shopify/Supabase/Clerk keys as needed. See `docs/ARCHITECTURE-HOWTO.md` for details.
+Copy `.env.example` to `.env` and fill Shopify/Supabase/Clerk keys as needed. See `docs/architecture/ARCHITECTURE-HOWTO.md` for details.
 
 ## Shopify webhooks (orders → Supabase)
 - Shopify signs Admin API webhooks with your app **API secret / client secret** (`SHOPIFY_API_SECRET`).

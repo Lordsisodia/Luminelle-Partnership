@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "description": "Beautiful code blocks for Markdown or MDX.",
+      "forks": 73,
+      "full_name": "rehype-pretty/rehype-pretty-code",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1265, updated=2025-12-29T07:02:05Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1265,
+      "tags": [
+        "cms"
+      ],
+      "topics": [
+        "markdown",
+        "mdx",
+        "shiki",
+        "syntax-highlighting",
+        "vscode"
+      ],
+      "updated_at": "2025-12-29T07:02:05Z",
+      "url": "https://github.com/rehype-pretty/rehype-pretty-code"
+    }
+  ],
+  "count": 1,
+  "generated_at_utc": "2025-12-30T15:03:05Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_2202_oss-discovery-github-oss-discovery-cycle-220241/oss/entries"
+  }
+}

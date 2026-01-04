@@ -3,7 +3,7 @@ import { useCart } from '@client/shop/cart/providers/CartContext'
 import TemporarilyUnavailablePage from '@/ui/pages/TemporarilyUnavailablePage'
 
 const CheckoutPage = () => {
-  const { checkoutUrl } = useCart()
+  const { checkoutUrl, checkoutStart, checkoutCapabilities } = useCart()
 
   useEffect(() => {
     if (!checkoutUrl) return
@@ -12,14 +12,20 @@ const CheckoutPage = () => {
 
   if (checkoutUrl) return null
 
+  const title = checkoutCapabilities?.providerLabel ? `${checkoutCapabilities.providerLabel} isn’t available yet` : 'Checkout isn’t available yet'
+  const reason = checkoutStart?.mode === 'none' ? checkoutStart.reason : null
+
   return (
     <TemporarilyUnavailablePage
       subtitle="Checkout"
-      title="Checkout isn’t available yet"
+      title={title}
       description={
         <>
-          This storefront is still wiring up a production checkout flow. For now, head back to your cart and we’ll keep
-          everything saved.
+          {reason ? (
+            <span>{reason}</span>
+          ) : (
+            <span>This storefront is still wiring up a production checkout flow. For now, head back to your cart and we’ll keep everything saved.</span>
+          )}
         </>
       }
       actions={[

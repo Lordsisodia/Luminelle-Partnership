@@ -1,0 +1,91 @@
+   250	- Treat as a small, readable Shopify storefront reference to mine:
+   251	  - product grid/card + pagination
+   252	  - search/listing page structure
+   253	  - PDP layout + variant selection
+   254	  - cart interactions + empty/loading states
+   255	- Extract file-level references for our kit blocks (ProductCard/Grid, VariantSelector, CartLines).
+   256	  - A modern Shopping Cart built with ESMate, Next.js, React.js, ShadCN, ESLint, Prettier, GraphQL, and Shopify Hydrogen.
+   257	- **bidah/mobile-medusa** — status=poc, priority=23, owner=Shaan, score=72, stars=115, license=safe, lang=TypeScript, tags=commerce, storefront (https://github.com/bidah/mobile-medusa) Seeded (storefront starters v3):seeded rank=3/25 ; score=72 ; stars=115 ; tags=commerce
+   258	
+   259	POC scoped (storefront mining): Extract mobile storefront patterns for commerce (catalog browsing, product detail, cart) using Medusa backend and Expo app integration.
+   260	
+   261	Mining notes (Mobile storefront patterns)
+   262	- What to extract:
+   263	  - navigation + deep link structure for PLP/PDP/cart
+   264	  - product card/list patterns and image loading
+   265	  - cart UX on mobile (sheet/drawer patterns, qty editing)
+   266	  - offline/error states and retry UX
+   267	- Use this as a “mobile constraints” reference when designing our web storefront components.
+   268	  - 📱 Combine your Medusa.js e-commerce backend and/or web storefront with a Expo mobile app that matches Medusa  @nextjs  starter functionality…
+   269	- **marmelab/react-admin** — status=poc, priority=23, owner=Shaan, score=77, stars=26436, license=safe, lang=TypeScript, tags=admin (https://github.com/marmelab/react-admin) Seeded:seeded rank=3/25 ; score=77 ; stars=26434 ; tags=admin
+   270	
+   271	Quick-win POC (1 day): Scaffold a minimal Returns Ops admin UI (list + filters + bulk action) against a mocked API, to validate time-to-value for admin surfaces.
+   272	  - A frontend Framework for single-page applications on top of REST/GraphQL APIs, using TypeScript, React and Material Design
+   273	- **Activiti/Activiti** — status=poc, priority=22, owner=Shaan, score=65, stars=10495, license=safe, lang=Java, tags=workflows (https://github.com/Activiti/Activiti) Platform primitive POC (2 days): Evaluate Activiti as a BPM/workflow engine primitive: model 1 returns approval process and run it end-to-end.
+   274	  - Activiti is a light-weight workflow and Business Process Management (BPM) Platform targeted at business people, developers and system admins…
+   275	- **basementstudio/next-shopify** — status=poc, priority=22, owner=Shaan, score=67, stars=32, license=safe, lang=TypeScript, tags=commerce, storefront (https://github.com/basementstudio/next-shopify) Seeded (storefront starters v3):seeded rank=8/25 ; score=67 ; stars=32 ; tags=commerce
+   276	
+   277	POC scoped (storefront mining): Extract a reusable Next.js Shopify Storefront API integration pattern (cart + product/collection fetching) and identify 4 UI/UX patterns to reuse (cart drawer, variant selector, product grid, filters).
+   278	
+   279	Mining notes (Storefront integration patterns)
+   280	- What to extract:
+   281	  - cart context/provider patterns and mutation handling
+   282	  - Storefront API query/mutation organization (fragments, cart lines, selectedOptions)
+   283	  - error recovery + idempotency patterns for cart mutations
+   284	- Treat as a small reference implementation (even if the repo is low-star).
+   285	  - A context, a hook, and an API route handler, to manage a Shopify Storefront in your Next.js app.
+   286	- **Mario-Coxe/audittrailjs** — status=poc, priority=22, owner=Shaan, score=57, stars=13, license=verify, lang=TypeScript, tags=observability (https://github.com/Mario-Coxe/audittrailjs) Seeded (returns/shipping v5 volume):seeded rank=9/25 ; score=57 ; stars=13 ; tags=observability
+   287	
+   288	POC scoped (audit primitive): Evaluate AuditTrailJS as an in-app audit event layer for our ops actions; use as complement/alternative to external audit services.
+   289	  - AuditTrailJS is an open-source library built in JavaScript/TypeScript for Node.js applications, designed to provide a centralized and extens…
+   290	- **packdigital/pack-hydrogen-theme-blueprint** — status=poc, priority=22, owner=Shaan, score=74, stars=88, license=safe, lang=TypeScript, tags=commerce (https://github.com/packdigital/pack-hydrogen-theme-blueprint) Seeded (storefront/blog/components pass):seeded rank=9/25 ; score=74 ; stars=88 ; tags=commerce
+   291	
+   292	POC scoped (component mining): Component mining POC: Hydrogen theme blueprint sections for marketing + commerce (hero, testimonials, product grid, featured collection).
+   293	
+   294	Mining notes (Storefront sections kit)
+   295	- Treat as a high-signal source for “storefront-ready sections” (not just marketing):
+   296	  - featured collection / product grid sections
+   297	  - hero + CTA blocks that integrate with commerce data
+   298	  - testimonials/newsletter blocks that match storefront styling
+   299	- Extraction goals:
+   300	  - identify canonical section shells (container + heading + body + CTA)
+   301	  - document how sections accept data props (collection, products)
+   302	  - capture a11y + responsive patterns for repeated sections
+   303	  - A fully-featured Shopify Hydrogen starter theme packed with versatile components designed to seamlessly integrate with Pack and Shopify Hydr…
+   304	- **sanjucta/shopify-easypost** — status=poc, priority=22, owner=Shaan, score=50, stars=10, license=verify, lang=JavaScript, tags=commerce, shipping (https://github.com/sanjucta/shopify-easypost) Seeded (shipping integrations v1):seeded rank=12/25 ; score=50 ; stars=10 ; tags=commerce, shipping
+   305	
+   306	POC scoped (shipping integration): Shopify + EasyPost patterns for labels/tracking; extract reusable integration steps + data schema.
+   307	  - A Shopify App to integrate with easypost fulfillment service
+   308	- **tomatophp/filament-ecommerce** — status=poc, priority=21, owner=Shaan, score=62, stars=96, license=safe, lang=PHP, tags=commerce, shipping (https://github.com/tomatophp/filament-ecommerce) Seeded (returns/shipping v6 precision):seeded rank=5/25 ; score=62 ; stars=96 ; tags=commerce, shipping
+   309	
+   310	POC scoped (shipping/admin patterns): Use Filament ecommerce as a reference for shipping/fulfillment admin UX (tables, filters, status transitions, bulk actions).
+   311	  - Build your own ecommerce store with Filament & Splade
+   312	- **AthenZ/athenz** — status=poc, priority=18, owner=Shaan, score=62, stars=978, license=safe, lang=Java, tags=auth, policy (https://github.com/AthenZ/athenz) Seeded (focus returns/shipping/policy/support pass):seeded rank=16/25 ; score=62 ; stars=978 ; tags=support, auth, policy
+   313	
+   314	Platform primitive POC (2 days): Assess Athenz as a policy/auth service for service-to-service and ops authorization; prove it can express 1 approval policy and audit it.
+   315	  - Open source platform for X.509 certificate based service authentication and fine grained access control in dynamic infrastructures. Athenz s…
+   316	- **paed01/bpmn-engine** — status=poc, priority=17, owner=Shaan, score=74, stars=958, license=safe, lang=JavaScript, tags=workflows (https://github.com/paed01/bpmn-engine) Seeded:seeded rank=15/25 ; score=74 ; stars=958 ; tags=workflows
+   317	
+   318	Platform primitive POC (2 days): Prototype a BPMN-based workflow primitive for a returns approval process and measure integration complexity.
+   319	  - BPMN 2.0 execution engine. Open source javascript workflow engine.
+   320	- **aipotheosis-labs/gate22** — status=poc, priority=16, owner=Shaan, score=74, stars=150, license=safe, lang=TypeScript, tags=policy (https://github.com/aipotheosis-labs/gate22) Seeded:seeded rank=22/25 ; score=74 ; stars=150 ; tags=auth, policy
+   321	
+   322	Platform primitive POC (2 days): Evaluate Gate22 as a policy/auth control plane for agent/tool usage: define 2 policies and enforce allow/deny for 2 tools.
+   323	  - Open-source MCP gateway and control plane for teams to govern which tools agents can use, what they can do, and how it’s audited—across agen…
+   324	- **kestra-io/kestra** — status=poc, priority=7, owner=Shaan, score=65, stars=26176, license=safe, lang=Java, tags=workflows (https://github.com/kestra-io/kestra) Seeded:seeded rank=19/25 ; score=65 ; stars=26154 ; tags=workflows
+   325	
+   326	Top 10 shortlist why: Battle-tested workflow orchestration primitive (schedules, retries, visibility) to run ops automations safely.
+   327	
+   328	Quick-win POC (1 day): Run Kestra locally and implement 1 webhook-driven ops workflow (e.g. return approval) with retries + audit-friendly logs.
+   329	  - Event Driven Orchestration & Scheduling Platform for Mission Critical Applications
+   330	- **Blazity/enterprise-commerce** — status=deepen, priority=25, owner=Shaan, score=74, stars=654, license=safe, lang=TypeScript, tags=commerce, storefront, search (https://github.com/Blazity/enterprise-commerce) Seeded (storefront pattern mining v3 2025-12-30):seeded rank=1/25 ; score=74 ; stars=654 ; tags=commerce, returns, search
+   331	
+   332	Promote to deepen: strong Next.js commerce starter; mine cart/variants/collection filters patterns + architecture decisions.
+   333	
+   334	Mining notes (Storefront patterns)
+   335	- Patterns to extract:
+   336	  - PLP filters/facets (URL-synced state, “clear all”, selected filters UI)
+   337	  - search UX (Algolia middle layer): autocomplete, zero-results states, facets
+   338	  - PDP variant selector patterns + availability/disabled options
+   339	  - cart UX (drawer/minicart if present) + line item editing
+   340	- Architecture to capture:

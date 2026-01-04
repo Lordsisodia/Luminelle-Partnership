@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import plugin from 'tailwindcss/plugin'
-import lineClamp from '@tailwindcss/line-clamp'
 import typography from '@tailwindcss/typography'
 
 const tokensPath = path.resolve('./src/theme/tokens.json')
@@ -132,6 +131,30 @@ export default {
           blush: rgbVar('--brand-blush-rgb', '253 212 220'),
           porcelain: rgbVar('--brand-porcelain-rgb', '247 239 232'),
         },
+        siso: {
+          black: 'var(--siso-black, #000000)',
+          orange: 'rgb(var(--siso-orange-rgb, 255 167 38) / <alpha-value>)',
+          red: 'rgb(var(--siso-red-rgb, 255 87 34) / <alpha-value>)',
+          'bg-primary': 'rgb(var(--siso-bg-primary-rgb, 18 18 18) / <alpha-value>)',
+          'bg-secondary': 'rgb(var(--siso-bg-secondary-rgb, 26 26 26) / <alpha-value>)',
+          'bg-tertiary': 'rgb(var(--siso-bg-tertiary-rgb, 36 36 36) / <alpha-value>)',
+          'bg-hover': 'rgb(var(--siso-bg-hover-rgb, 42 42 42) / <alpha-value>)',
+          'bg-active': 'rgb(var(--siso-bg-active-rgb, 51 51 51) / <alpha-value>)',
+          'text-primary': 'rgb(var(--siso-text-primary-rgb, 255 255 255) / <alpha-value>)',
+          'text-secondary': 'rgb(var(--siso-text-secondary-rgb, 245 245 245) / <alpha-value>)',
+          'text-muted': 'rgb(var(--siso-text-muted-rgb, 184 184 184) / <alpha-value>)',
+          'text-disabled': 'rgb(var(--siso-text-disabled-rgb, 117 117 117) / <alpha-value>)',
+          // Alias used throughout the imported SISO settings screens.
+          'text-bold': 'rgb(var(--siso-text-primary-rgb, 255 255 255) / <alpha-value>)',
+          border: 'rgb(var(--siso-border-primary-rgb, 42 42 42) / <alpha-value>)',
+          'border-secondary': 'rgb(var(--siso-border-secondary-rgb, 58 58 58) / <alpha-value>)',
+          'border-hover': 'rgb(var(--siso-border-hover-rgb, 74 74 74) / <alpha-value>)',
+          'border-active': 'rgb(var(--siso-border-active-rgb, 90 90 90) / <alpha-value>)',
+          success: 'var(--siso-success, #4CAF50)',
+          warning: 'var(--siso-warning, #FF9800)',
+          error: 'var(--siso-error, #F44336)',
+          info: 'var(--siso-info, #2196F3)',
+        },
         semantic: semanticColors,
       },
       fontFamily: {
@@ -140,6 +163,7 @@ export default {
       },
       boxShadow: {
         soft: '0 20px 60px rgb(var(--brand-peach-rgb, 251 199 178) / 0.35)',
+        siso: 'var(--siso-shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3))',
       },
       typography: ({ theme }) => ({
         DEFAULT: {
@@ -218,6 +242,5 @@ export default {
       })
     }),
     typography,
-    lineClamp,
   ],
 }

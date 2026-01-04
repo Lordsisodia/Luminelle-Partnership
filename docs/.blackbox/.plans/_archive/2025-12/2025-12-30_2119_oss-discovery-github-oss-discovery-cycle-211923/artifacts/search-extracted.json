@@ -1,0 +1,67 @@
+{
+  "count": 3,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": "\\b(portfolio|resume|curriculum|cv|personal\\s*(site|website)?|my\\s*site)\\b",
+  "excluded_results_count": 0,
+  "generated_at_utc": "2025-12-30T14:19:45Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 200,
+  "queries_used": [
+    "shiki code block component react stars:>=200 fork:false archived:false",
+    "mdx renderer react library stars:>=200 fork:false archived:false",
+    "react markdown renderer component stars:>=200 fork:false archived:false",
+    "remark react renderer stars:>=200 fork:false archived:false",
+    "code block component mdx stars:>=200 fork:false archived:false",
+    "table of contents component react stars:>=200 fork:false archived:false",
+    "toc component mdx stars:>=200 fork:false archived:false",
+    "reading time react component stars:>=200 fork:false archived:false",
+    "faq section component react stars:>=200 fork:false archived:false",
+    "testimonials section component react stars:>=200 fork:false archived:false",
+    "pricing section component react stars:>=200 fork:false archived:false",
+    "newsletter signup component react stars:>=200 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "This React component is used to render Markdown into a beautiful poster image, with support for copying as an image. Md to Poster/Image/Quote/Card/Instagram/Twitter/Facebook...",
+      "full_name": "gcui-art/markdown-to-image",
+      "integration_score": 9,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 1796,
+      "updated_at": "2025-12-27T02:06:24Z",
+      "url": "https://github.com/gcui-art/markdown-to-image"
+    },
+    {
+      "description": "React code blocks and code snippet components",
+      "full_name": "rajinwonderland/react-code-blocks",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 636,
+      "updated_at": "2025-11-27T14:16:37Z",
+      "url": "https://github.com/rajinwonderland/react-code-blocks"
+    },
+    {
+      "description": "React component and hook to use remark to render markdown",
+      "full_name": "remarkjs/react-remark",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 243,
+      "updated_at": "2025-12-26T15:59:23Z",
+      "url": "https://github.com/remarkjs/react-remark"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

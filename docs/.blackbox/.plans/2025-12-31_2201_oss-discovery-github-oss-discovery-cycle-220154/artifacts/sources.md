@@ -1,0 +1,31 @@
+# Sources
+
+- Base query bank: `.blackbox/.local/github-search-queries.returns-shipping-v6-precision.md`
+- Feature map: `/Users/shaansisodia/DEV/client-projects/lumelle/docs/05-planning/research/competitor-feature-map.md`
+- Derived query bank: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/feature-map-queries.md`
+- Combined query bank: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/query-bank.md`
+- Live search report: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/github-search.md`
+- Search extracted JSON: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/search-extracted.json`
+- Merged search JSON: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/search-extracted-merged.json`
+- Repo tranche: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/oss/tranche-001-repos.txt`
+- Raw metadata: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/oss/entries/*.json`
+- Entry stubs: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/oss/entries/*.md`
+- Deepening queue: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/deepening-queue.md`
+- Extracted candidates: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/extracted.json`
+- Coverage report: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/coverage.md`
+- Gap query suggestions: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/gap-queries.md`
+- Catalog gap queries (if used): `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/gap-queries.catalog.md`, `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/gap-queries.catalog.selected.md`, `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/gap-queries.catalog.selected.tags.json`
+- Coverage quota queries (if used): `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/gap-queries.quota.md`, `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/gap-queries.quota.selected.md`, `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/gap-queries.quota.selected.tags.json`
+- Auto picks: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/auto-picks.md`
+- Diagnostics: `.blackbox/.plans/2025-12-31_2201_oss-discovery-github-oss-discovery-cycle-220154/artifacts/diagnostics.md`
+
+## Notes
+
+- Token used: `yes` (set `GITHUB_TOKEN` to avoid rate limits)
+- This cycle catalogs metadata only; it does not clone or vendor code.
+- Search filters: min_stars=`25`, include_forks=`false`, include_archived=`true`
+- Excludes: keywords=`wordpress,woocommerce,magento,prestashop,opencart,shopware,drupal`, regex=`\b(portfolio|resume|curriculum|cv|homework|assignment|course|semester|leetcode|tutorial|cheatsheet|whitepaper|paper|book|erc20|ethereum|blockchain|ico|crowdsale|landofcoder|codecanyon|envato|ticksy)\b`
+- Query rotation: enabled=`true`, state_file=`/Users/shaansisodia/DEV/client-projects/lumelle/docs/.blackbox/.local/oss-discovery-state.json`
+- Gap boost: enabled=`false`, max_total_queries=`8`, min_count=`1`
+- Recent tag cache: window=`10`, state_recent_tags=`auth,policy,shipping,support,workflows,admin,cms,observability,commerce,analytics`
+- Diagnostics snapshot: search_count=5, gap_count=0, merged_count=5, metadata_json_count=2

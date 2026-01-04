@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useAuth as useClerkAuth, useUser } from '@clerk/clerk-react'
 import { createSupabaseClient, supabase } from '@platform/storage/supabase'
+import { getClerkSupabaseToken } from '@platform/auth/clerkSupabaseToken'
 
 const TABLE = 'customers'
 
@@ -44,7 +45,7 @@ export const useSyncUserToSupabase = () => {
     }
 
     const sync = async () => {
-      const token = await getToken({ template: 'supabase' }).catch(() => null)
+      const { token } = await getClerkSupabaseToken(getToken)
       const client = token ? createSupabaseClient(token) : supabase
       if (!client) return
       const { error } = await client.from(TABLE).upsert(payload, { onConflict: 'id' })

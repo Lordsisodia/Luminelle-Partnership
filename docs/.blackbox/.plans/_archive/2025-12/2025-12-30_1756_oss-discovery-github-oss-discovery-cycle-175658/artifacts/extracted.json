@@ -1,0 +1,114 @@
+{
+  "candidates": [
+    {
+      "description": "A frontend library for React and Vue that helps developers quickly build fast, accessible, and beautiful storefronts. Made with \ud83d\udc9a by Vue Storefront team and contributors.",
+      "forks": 461,
+      "full_name": "vuestorefront/storefront-ui",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=2424, updated=2025-12-29T22:57:59Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 2424,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "ecommerce",
+        "javascript",
+        "pwa",
+        "react",
+        "storefront",
+        "storefront-theme",
+        "ui",
+        "ui-components",
+        "ui-kit",
+        "vue",
+        "vue-components",
+        "vuejs",
+        "vuejs2",
+        "vuejs3"
+      ],
+      "updated_at": "2025-12-29T22:57:59Z",
+      "url": "https://github.com/vuestorefront/storefront-ui"
+    },
+    {
+      "description": "A fully-featured Shopify Hydrogen starter theme packed with versatile components designed to seamlessly integrate with Pack and Shopify Hydrogen",
+      "forks": 27,
+      "full_name": "packdigital/pack-hydrogen-theme-blueprint",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=88, updated=2025-12-27T23:14:32Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 88,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "ecommerce",
+        "hydrogen",
+        "remix",
+        "shopify",
+        "tailwindcss"
+      ],
+      "updated_at": "2025-12-27T23:14:32Z",
+      "url": "https://github.com/packdigital/pack-hydrogen-theme-blueprint"
+    },
+    {
+      "description": "\ud83c\udfaf Unlock the power of Material-UI version 5 with our sleek React component and npm package! Experience effortless, multi-faceted search and filtering capabilities like never before.",
+      "forks": 0,
+      "full_name": "gimnathperera/react-mui-multi-search",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=15/20 (stars=34, updated=2025-11-24T03:09:45Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 59,
+      "stars": 34,
+      "tags": [
+        "search"
+      ],
+      "topics": [
+        "featured",
+        "githubpackages",
+        "latest",
+        "muiv5",
+        "npm",
+        "npm-package",
+        "open-source",
+        "reactjs",
+        "search"
+      ],
+      "updated_at": "2025-11-24T03:09:45Z",
+      "url": "https://github.com/gimnathperera/react-mui-multi-search"
+    },
+    {
+      "description": "A modern e-commerce application built using Next.js App Router. The application is designed to interact with Shopify via the Shopify Storefront API, but utilizes Shopify solely as Content Management System (CMS) in a headless matter.",
+      "forks": 10,
+      "full_name": "btreitz/nextjs-shopify-ecom-demo",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=15/20 (stars=24, updated=2025-12-12T02:49:43Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 59,
+      "stars": 24,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "graphql",
+        "nextjs",
+        "reactjs",
+        "shopify"
+      ],
+      "updated_at": "2025-12-12T02:49:43Z",
+      "url": "https://github.com/btreitz/nextjs-shopify-ecom-demo"
+    }
+  ],
+  "count": 4,
+  "generated_at_utc": "2025-12-30T10:57:47Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_1756_oss-discovery-github-oss-discovery-cycle-175658/oss/entries"
+  }
+}

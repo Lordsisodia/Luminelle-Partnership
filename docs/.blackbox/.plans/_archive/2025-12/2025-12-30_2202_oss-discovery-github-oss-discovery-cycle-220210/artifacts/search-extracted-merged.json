@@ -1,0 +1,43 @@
+{
+  "count": 1,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": null,
+  "excluded_results_count": 4,
+  "generated_at_utc": "2025-12-30T15:02:28Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 100,
+  "queries_used": [
+    "shopify storefront api remix stars:>=100 fork:false archived:false",
+    "hydrogen storefront starter stars:>=100 fork:false archived:false",
+    "shopify storefront api nextjs stars:>=100 fork:false archived:false",
+    "commercetools storefront stars:>=100 fork:false archived:false",
+    "bigcommerce storefront stars:>=100 fork:false archived:false",
+    "medusa storefront nextjs stars:>=100 fork:false archived:false",
+    "vendure storefront stars:>=100 fork:false archived:false",
+    "product variants selector ecommerce stars:>=100 fork:false archived:false",
+    "collection page filters ecommerce stars:>=100 fork:false archived:false",
+    "cart drawer component ecommerce stars:>=100 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "Alokai is a Frontend as a Service solution that simplifies composable commerce. It connects all the technologies needed to build and deploy fast & scalable ecommerce frontends. It guides merchants to deliver exceptional customer experiences quickly and easily.",
+      "full_name": "vuestorefront/vue-storefront",
+      "integration_score": 11,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 10899,
+      "updated_at": "2025-12-30T01:44:58Z",
+      "url": "https://github.com/vuestorefront/vue-storefront"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

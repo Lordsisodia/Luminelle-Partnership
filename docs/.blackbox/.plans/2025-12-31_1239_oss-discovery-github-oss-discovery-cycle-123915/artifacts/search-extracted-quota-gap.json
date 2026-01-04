@@ -1,0 +1,10 @@
+{
+  "blocked": true,
+  "blocked_reason": "github_search_rate_limit",
+  "count": 0,
+  "generated_at_utc": "2025-12-31T05:40:15Z",
+  "queries_used": [
+    "open source error tracking stars:>=100 fork:false archived:false"
+  ],
+  "repos": []
+}

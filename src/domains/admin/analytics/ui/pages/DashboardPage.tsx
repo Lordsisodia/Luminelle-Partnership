@@ -9,16 +9,15 @@ type CardLink = {
 
 const contentLinks: CardLink[] = [
   { title: 'Pages', description: 'Edit landing pages and sections (cms_pages + cms_sections).', to: '/admin/pages' },
-  { title: 'Products', description: 'Manage product copy, SEO, and media (cms_products).', to: '/admin/products' },
+  { title: 'Catalog', description: 'Manage products, copy, SEO, and media (cms_products).', to: '/admin/products' },
   { title: 'Blogs', description: 'Draft and publish blog posts (cms_blogs + cms_blog_blocks).', to: '/admin/blogs' },
   { title: 'Media', description: 'Upload + organize assets across buckets.', to: '/admin/media' },
   { title: 'Components', description: 'Navigation, footer, promo bar, spin wheel config (visual editor).', to: '/admin/components' },
 ]
 
 const toolLinks: CardLink[] = [
-  { title: 'Orders', description: 'Browse orders and fulfillment status (planned).', to: '/admin/orders' },
-  { title: 'Analytics', description: 'Orders, revenue, cohorts, refunds (API-backed).', to: '/admin/analytics' },
-  { title: 'Product content', description: 'Edit Shopify metafield-backed sections (legacy).', to: '/admin/content' },
+  { title: 'Analytics', description: 'Dashboard, orders, and page insights (rolling out).', to: '/admin/analytics' },
+  { title: 'Orders', description: 'Browse orders and fulfillment status.', to: '/admin/orders' },
   { title: 'Activity', description: 'Audit trail across content changes (cms_audits).', to: '/admin/activity' },
   { title: 'Settings', description: 'Feature flags, integrations, org config (planned).', to: '/admin/settings' },
 ]

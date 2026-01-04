@@ -25,7 +25,7 @@ const SearchResultsPage = lazy(() => import('@client/shop/products/ui/pages/Sear
 const AccountPage = lazy(() => import('@client/account/ui/pages/AccountPage'))
 const OrdersPage = lazy(() => import('@client/account/ui/pages/OrdersPage'))
 const BrandStoryPage = lazy(() => import('@client/marketing/brand/ui/pages/BrandStoryPage'))
-const ShopifyCheckoutHandoffPage = lazy(() => import('@client/shop/cart/ui/pages/ShopifyCheckoutHandoffPage'))
+const CheckoutHandoffPage = lazy(() => import('@client/shop/cart/ui/pages/CheckoutHandoffPage'))
 const RewardsPage = lazy(() => import('@client/rewards/ui/pages/RewardsPage'))
 const SignInPage = lazy(() => import('@platform/auth/ui/pages/SignInPage'))
 const SignUpPage = lazy(() => import('@platform/auth/ui/pages/SignUpPage'))
@@ -35,7 +35,6 @@ const DashboardPage = lazy(() => import('@admin/analytics/ui/pages/DashboardPage
 const AnalyticsPage = lazy(() => import('@admin/analytics/ui/pages/AnalyticsPage'))
 const ActivityPage = lazy(() => import('@admin/analytics/ui/pages/ActivityPage'))
 
-const ContentPage = lazy(() => import('@admin/pages/ui/pages/ContentPage'))
 const PagesPage = lazy(() => import('@admin/pages/ui/pages/PagesPage'))
 
 const ProductsPage = lazy(() => import('@admin/catalog/ui/pages/ProductsPage'))
@@ -49,6 +48,8 @@ const BlogDetailPage = lazy(() => import('@admin/blog/ui/pages/BlogDetailPage'))
 const MediaPage = lazy(() => import('@admin/media/ui/pages/MediaPage'))
 const AdminOrdersPage = lazy(() => import('@admin/orders/ui/pages/OrdersPage'))
 const AdminSettingsPage = lazy(() => import('@admin/settings/ui/pages/SettingsPage'))
+const AdminSettingsSiso = lazy(() => import('@admin/settings-siso/SettingsPage'))
+const AdminProfilePage = lazy(() => import('@admin/profile/ui/pages/ProfilePage'))
 const AdminGuard = lazy(() => import('@admin/shared/ui/components/AdminGuard'))
 const ClerkShell = lazy(() => import('@/shells/ClerkShell'))
 const NotFoundPage = lazy(() => import('@ui/pages/NotFoundPage'))
@@ -106,8 +107,8 @@ const App = () => {
         <Route path="/creators" element={<LandingPage />} />
         <Route path="/brand" element={<BrandStoryPage />} />
         <Route path="/product/:handle" element={<ProductPage />} />
-        {/* Shopify cart checkout URLs can look like /cart/c/<id>?key=... */}
-        <Route path="/cart/c/*" element={<ShopifyCheckoutHandoffPage />} />
+        {/* Checkout handoff URLs can look like /cart/c/<id>?key=... */}
+        <Route path="/cart/c/*" element={<CheckoutHandoffPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/order/:orderId/confirm" element={<OrderConfirmationPage />} />
         <Route path="/order/track" element={<OrderTrackingPage />} />
@@ -148,8 +149,7 @@ const App = () => {
             <Route path="analytics" element={<AnalyticsPage />} />
             <Route path="orders" element={<AdminOrdersPage />} />
             <Route path="orders/:orderId" element={<AdminOrdersPage />} />
-            <Route path="content" element={<ContentPage />} />
-            <Route path="content/:handle" element={<ContentPage />} />
+            <Route path="content/*" element={<Navigate to="/admin/products" replace />} />
             <Route path="pages" element={<PagesPage />} />
             <Route path="pages/:slug" element={<PagesPage />} />
             <Route path="products" element={<ProductsPage />} />
@@ -163,7 +163,9 @@ const App = () => {
             <Route path="components" element={<ComponentsPage />} />
             <Route path="components/:key" element={<ComponentDetailPage />} />
             <Route path="activity" element={<ActivityPage />} />
-            <Route path="settings" element={<AdminSettingsPage />} />
+            {/* Route all settings traffic to the SISO-imported screens */}
+            <Route path="settings/*" element={<AdminSettingsSiso />} />
+            <Route path="profile" element={<AdminProfilePage />} />
             <Route path="*" element={<Navigate to="/admin" replace />} />
           </Route>
         </Route>

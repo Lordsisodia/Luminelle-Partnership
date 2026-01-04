@@ -1,0 +1,467 @@
+{
+  "candidates": [
+    {
+      "description": "Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool.",
+      "forks": 1191,
+      "full_name": "illacloud/illa-builder",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=12307, updated=2025-12-30T16:51:19Z); license=15/15 (Apache-2.0); time_to_value=10/10",
+      "score": 77,
+      "stars": 12307,
+      "tags": [
+        "admin",
+        "cms"
+      ],
+      "topics": [
+        "aiagent",
+        "app-builder",
+        "crud-application",
+        "developer-tool",
+        "developer-tools",
+        "gui",
+        "hacktoberfest",
+        "internal-development",
+        "internal-tool",
+        "internal-tools",
+        "low-code",
+        "low-code-development-platform",
+        "lowcode",
+        "react",
+        "self-hosted",
+        "typescript"
+      ],
+      "updated_at": "2025-12-30T16:51:19Z",
+      "url": "https://github.com/illacloud/illa-builder"
+    },
+    {
+      "description": "Open-source SaaS Starter with User Roles & Admin Panel. Built using Next.js 14, Prisma, Neon, Auth.js v5, Resend, React Email, Shadcn/ui, Stripe, Server Actions.",
+      "forks": 608,
+      "full_name": "mickasmt/next-saas-stripe-starter",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=2917, updated=2025-12-30T03:31:39Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 2917,
+      "tags": [
+        "admin",
+        "content",
+        "auth"
+      ],
+      "topics": [
+        "admin-panel",
+        "authjs",
+        "contentlayer",
+        "neondb",
+        "nextjs",
+        "nextjs14",
+        "pricing-table",
+        "prisma",
+        "react",
+        "react-email",
+        "resend",
+        "server-actions",
+        "shadcn-ui",
+        "stripe",
+        "userrole"
+      ],
+      "updated_at": "2025-12-30T03:31:39Z",
+      "url": "https://github.com/mickasmt/next-saas-stripe-starter"
+    },
+    {
+      "description": "Free React Tailwind CSS Admin Dashboard Template - TailAdmin is a free and open-source admin dashboard template built on React and Tailwind CSS, providing developers with everything they need to create a comprehensive, back-end, dashboard, or admin panel solution for upcoming web projects.",
+      "forks": 445,
+      "full_name": "TailAdmin/free-react-tailwind-admin-dashboard",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=1021, updated=2025-12-30T12:53:25Z); license=15/15 (MIT); time_to_value=9/10",
+      "score": 76,
+      "stars": 1021,
+      "tags": [
+        "admin"
+      ],
+      "topics": [
+        "admin",
+        "admin-dashboard",
+        "admin-template",
+        "admin-ui",
+        "backend",
+        "charts",
+        "dashboard",
+        "graph",
+        "react",
+        "react-components",
+        "react-dashboard",
+        "react-tailwind-css",
+        "react-template",
+        "tailwind",
+        "tailwind-dashboard",
+        "tailwind-template"
+      ],
+      "updated_at": "2025-12-30T12:53:25Z",
+      "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard"
+    },
+    {
+      "description": "A Next.JS boilerplate with the famous Open Source Boostrap Admin Template, CoreUI.",
+      "forks": 250,
+      "full_name": "kitloong/nextjs-dashboard",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=684, updated=2025-12-23T11:17:26Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 684,
+      "tags": [
+        "admin"
+      ],
+      "topics": [
+        "admin-dashboard",
+        "bootstrap5",
+        "nextjs",
+        "react",
+        "typescript"
+      ],
+      "updated_at": "2025-12-23T11:17:26Z",
+      "url": "https://github.com/kitloong/nextjs-dashboard"
+    },
+    {
+      "description": "Horizon UI TypeScript | The trendiest & innovative Open Source Admin Template for Chakra UI & React!",
+      "forks": 141,
+      "full_name": "horizon-ui/horizon-ui-chakra-ts",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=438, updated=2025-12-31T02:23:17Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 438,
+      "tags": [
+        "admin"
+      ],
+      "topics": [
+        "admin",
+        "admin-dashboard",
+        "admin-panel",
+        "admin-template",
+        "admin-ui",
+        "chakra-ui",
+        "chakra-ui-react",
+        "chakraui",
+        "dashboard",
+        "dashboard-template",
+        "dashboard-templates",
+        "dashboards",
+        "open-source",
+        "react",
+        "react-admin-dashboard",
+        "react-admin-template",
+        "react-dashboard",
+        "template",
+        "typescript",
+        "typescript-react"
+      ],
+      "updated_at": "2025-12-31T02:23:17Z",
+      "url": "https://github.com/horizon-ui/horizon-ui-chakra-ts"
+    },
+    {
+      "description": "\ud83d\udd25 A fully open source audit logs service and embeddable UI easily deployed to your own Kubernetes cluster. Brought to you by replicated.com and boxyhq.com  \ud83d\ude80",
+      "forks": 30,
+      "full_name": "retracedhq/retraced",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=426, updated=2025-12-26T13:02:23Z); license=15/15 (Apache-2.0); time_to_value=7/10",
+      "score": 74,
+      "stars": 426,
+      "tags": [],
+      "topics": [
+        "audit-logs",
+        "enterprise-ready",
+        "enterprise-software",
+        "javascript",
+        "kubernetes",
+        "security-audit",
+        "typescript"
+      ],
+      "updated_at": "2025-12-26T13:02:23Z",
+      "url": "https://github.com/retracedhq/retraced"
+    },
+    {
+      "description": "A free, open source, Next 16, React 18 admin dashboard template created using Mantine 8",
+      "forks": 81,
+      "full_name": "design-sparx/mantine-analytics-dashboard",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=342, updated=2025-12-28T06:44:00Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 342,
+      "tags": [
+        "admin",
+        "analytics"
+      ],
+      "topics": [
+        "admin-dashboard",
+        "apexcharts",
+        "dnd-kit",
+        "embla-carousel",
+        "full-calendar",
+        "lodash",
+        "mantine",
+        "mantine-datatable",
+        "mantine-ui",
+        "nextauth",
+        "nextjs",
+        "postcss",
+        "react",
+        "react-simple-maps",
+        "tabler-icons",
+        "tiptap",
+        "typescript"
+      ],
+      "updated_at": "2025-12-28T06:44:00Z",
+      "url": "https://github.com/design-sparx/mantine-analytics-dashboard"
+    },
+    {
+      "description": "Open-source Nextjs 14 Template Starter with Auth.js v5, User Roles & Admin Panel. Remove blog or docs parts with one cli.",
+      "forks": 65,
+      "full_name": "mickasmt/next-auth-roles-template",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=330, updated=2025-12-30T13:28:07Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 330,
+      "tags": [
+        "admin",
+        "blog",
+        "auth"
+      ],
+      "topics": [
+        "admin-dashboard",
+        "authjs",
+        "neondb",
+        "nextjs14",
+        "prisma",
+        "react",
+        "react-email",
+        "resend",
+        "shadcn-ui",
+        "userroles"
+      ],
+      "updated_at": "2025-12-30T13:28:07Z",
+      "url": "https://github.com/mickasmt/next-auth-roles-template"
+    },
+    {
+      "description": "Horizon UI NextJS | The trendiest & innovative Open Source Admin Template for Chakra UI & React!",
+      "forks": 140,
+      "full_name": "horizon-ui/horizon-ui-chakra-nextjs",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=308, updated=2025-12-26T20:24:10Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 74,
+      "stars": 308,
+      "tags": [
+        "admin"
+      ],
+      "topics": [
+        "admin",
+        "admin-dashboard",
+        "admin-panel",
+        "dashboard",
+        "dashboard-templates",
+        "dashboards",
+        "next",
+        "nextjs",
+        "nextjs-template",
+        "open-source",
+        "react",
+        "react-admin-dashboard",
+        "react-admin-panel",
+        "react-admin-template",
+        "template",
+        "typescript"
+      ],
+      "updated_at": "2025-12-26T20:24:10Z",
+      "url": "https://github.com/horizon-ui/horizon-ui-chakra-nextjs"
+    },
+    {
+      "description": "Horizon UI Tailwind CSS React TS \ud83d\udd35  The trendiest & innovative Open Source Admin Dashboard Template for Tailwind CSS & React!",
+      "forks": 32,
+      "full_name": "horizon-ui/horizon-tailwind-react-ts",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=100, updated=2025-11-24T20:51:30Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 100,
+      "tags": [
+        "admin"
+      ],
+      "topics": [
+        "admin",
+        "admin-dashboard",
+        "admin-panel",
+        "admin-template",
+        "dashboard",
+        "horizon-ui",
+        "react",
+        "react-admin",
+        "react-admin-dashboard",
+        "react-admin-template",
+        "tailwind",
+        "tailwind-admin",
+        "tailwind-dashboard",
+        "tailwind-react",
+        "tailwind-template",
+        "tailwindcss",
+        "tailwindcss-admin",
+        "tailwindcss-react",
+        "tailwindcss-template",
+        "typescript"
+      ],
+      "updated_at": "2025-11-24T20:51:30Z",
+      "url": "https://github.com/horizon-ui/horizon-tailwind-react-ts"
+    },
+    {
+      "description": "Open Policy Agent (OPA) is an open source, general-purpose policy engine.",
+      "forks": 1494,
+      "full_name": "open-policy-agent/opa",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=11029, updated=2025-12-30T23:04:30Z); license=15/15 (Apache-2.0); time_to_value=8/10",
+      "score": 69,
+      "stars": 11029,
+      "tags": [
+        "policy"
+      ],
+      "topics": [
+        "authorization",
+        "cloud-native",
+        "compliance",
+        "declarative",
+        "json",
+        "opa",
+        "open-policy-agent",
+        "policy"
+      ],
+      "updated_at": "2025-12-30T23:04:30Z",
+      "url": "https://github.com/open-policy-agent/opa"
+    },
+    {
+      "description": "Open-source Infrastructure as Code (IaC) orchestration platform: GitOps workflows, orchestration, code generation, observability, drift detection, asset management, policies, Slack notifications, and more. Integrates with Terraform, OpenTofu, Terragrunt, Kubernetes, GitHub Actions, GitLab CI/CD, BitBucket Pipelines, and any other CI/CD platform.",
+      "forks": 113,
+      "full_name": "terramate-io/terramate",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=3497, updated=2025-12-28T17:20:01Z); license=15/15 (MPL-2.0); time_to_value=7/10",
+      "score": 68,
+      "stars": 3497,
+      "tags": [
+        "workflows",
+        "observability"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-28T17:20:01Z",
+      "url": "https://github.com/terramate-io/terramate"
+    },
+    {
+      "description": "The open-source policy-as-code software that provides analysis for Multi-Cloud and SaaS environments, you can get insight with natural language (powered by OpenAI).",
+      "forks": 47,
+      "full_name": "selefra/selefra",
+      "language": "Go",
+      "license_bucket": "safe",
+      "license_spdx": "MPL-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Go); maintenance=20/20 (stars=542, updated=2025-12-15T16:24:22Z); license=15/15 (MPL-2.0); time_to_value=5/10",
+      "score": 66,
+      "stars": 542,
+      "tags": [
+        "policy"
+      ],
+      "topics": [
+        "aws",
+        "azure",
+        "chatgpt",
+        "cloud",
+        "cspm",
+        "devops",
+        "finops",
+        "gcp",
+        "golang",
+        "google",
+        "infrastructure-as-code",
+        "kubernetes",
+        "openai",
+        "policy-as-code",
+        "terraform"
+      ],
+      "updated_at": "2025-12-15T16:24:22Z",
+      "url": "https://github.com/selefra/selefra"
+    },
+    {
+      "description": "IAM Policy Autopilot is an open source static code analysis tool that helps you quickly create baseline AWS IAM policies that you can refine as your application evolves. This tool is available as a command-line utility and MCP server for use within AI coding assistants for quickly building IAM policies.",
+      "forks": 22,
+      "full_name": "awslabs/iam-policy-autopilot",
+      "language": "Rust",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Rust); maintenance=20/20 (stars=240, updated=2025-12-30T19:33:50Z); license=15/15 (Apache-2.0); time_to_value=5/10",
+      "score": 62,
+      "stars": 240,
+      "tags": [
+        "policy"
+      ],
+      "topics": [
+        "aws",
+        "iam"
+      ],
+      "updated_at": "2025-12-30T19:33:50Z",
+      "url": "https://github.com/awslabs/iam-policy-autopilot"
+    },
+    {
+      "description": "FastKit is an open-source admin panel and CMS base built with the FastAPI framework. It offers essential, commonly repeated functionalities required by most web applications, aiming to significantly reduce development time and provide developers with fast, secure, and well-organized code.",
+      "forks": 6,
+      "full_name": "radomirbrkovic/fast-kit",
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=16/25 (Python); maintenance=20/20 (stars=58, updated=2025-12-26T12:38:05Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 56,
+      "stars": 58,
+      "tags": [
+        "admin",
+        "cms"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-26T12:38:05Z",
+      "url": "https://github.com/radomirbrkovic/fast-kit"
+    },
+    {
+      "description": "Delivery Boy Flutter App + PHP Laravel Admin Panel, Mobile app solution using a flutter framework created by Google is open-source mobile application development. It is used to develop applications for Android and iOS, as well as being the primary method of creating applications Our solution uses Laravel (PHP Framework for Web Artisans). Laravel is a web application framework with an expressive, elegant syntax. We\u2019ve already laid the foundation \u2014 freeing you to create without sweating the small things. Here are the Flutter App Features:      - Grocery, Food, Pharmacy, Store Management System     - Google Maps for showing restaurants on the maps with direction to them     - Entities & Models are ready to use.     - Clean & organized Dart Language code using MVC Pattern     - Easy to restyle and theming by on your branding sites.    - Working fine with bright and dark mode.     - Awesome animations are ready to use: Hero Animations, Parallax Animations, Sliding & Swiping animations    - Working really well on both iOS and Android with support with 60 frames per second (fps).    - Cash on delivery and payment on pickup methods    - Support RTL languages (Arabic, Farisi\u2026)    - Push notification using FCM (Firebase Cloud Messaging)    - Login    - Register    - Orders   -  Notifications    - User Profile     - Orders History     - App Settings     - App Languages     - Help & Supports     - Account Settings",
+      "forks": 45,
+      "full_name": "BlondelSeumo/Delivery-Boy-for-Groceries-Foods-Pharmacies-Stores-Flutter-App",
+      "language": "Dart",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=12/25 (Dart); maintenance=20/20 (stars=114, updated=2025-12-23T02:01:47Z); license=5/15 (UNKNOWN); time_to_value=5/10",
+      "score": 52,
+      "stars": 114,
+      "tags": [
+        "admin"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-23T02:01:47Z",
+      "url": "https://github.com/BlondelSeumo/Delivery-Boy-for-Groceries-Foods-Pharmacies-Stores-Flutter-App"
+    }
+  ],
+  "count": 16,
+  "generated_at_utc": "2025-12-31T02:46:04Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-31_0944_oss-discovery-github-oss-discovery-cycle-094440/oss/entries"
+  }
+}

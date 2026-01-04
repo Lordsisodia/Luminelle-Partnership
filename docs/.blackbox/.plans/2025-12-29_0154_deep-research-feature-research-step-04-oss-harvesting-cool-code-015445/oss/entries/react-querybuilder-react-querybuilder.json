@@ -1,0 +1,10 @@
+{
+  "source": "npm",
+  "package": "react-querybuilder",
+  "repo_full_name": "react-querybuilder/react-querybuilder",
+  "repo_url": "https://github.com/react-querybuilder/react-querybuilder",
+  "homepage": "https://react-querybuilder.js.org/",
+  "license": "MIT",
+  "latest_version": "8.13.0",
+  "fetched_at": "2025-12-30"
+}

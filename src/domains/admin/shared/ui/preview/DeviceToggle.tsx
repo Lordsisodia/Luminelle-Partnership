@@ -40,7 +40,7 @@ export function DeviceToggle({
         'phone',
         'Phone',
         '1',
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg className="h-4 w-4 -mt-px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <rect x="6" y="2" width="12" height="20" rx="3" />
           <circle cx="12" cy="18" r="1" />
         </svg>,

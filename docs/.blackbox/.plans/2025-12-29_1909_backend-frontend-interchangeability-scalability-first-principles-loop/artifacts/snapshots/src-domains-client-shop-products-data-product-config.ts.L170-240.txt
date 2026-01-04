@@ -1,0 +1,71 @@
+  },
+  {
+    icon: 'RefreshCcw',
+    title: 'Works on all hair types',
+    body: 'Straight, wavy, thick or fine for smooth, long‑lasting curls.',
+  },
+  {
+    icon: 'Feather',
+    title: 'Curls last all day',
+    body:
+      'Many customers say that theirs hold up to 2–3 days depending on hair type and how tightly they wrap and the products they use.',
+  },
+]
+
+const curlerConfig: ProductConfig = {
+  handle: 'satin-overnight-curler',
+  fallbackItemId: 'satin-overnight-curler-set',
+  fallbackVariantKey: 'variant.satin-overnight-curler.default',
+  defaultTitle: 'Satin Overnight Heatless Curler Set',
+  defaultSubtitle: 'Comfortable overnight curls, zero damage.',
+  defaultPrice: 16.99,
+  compareAtPrice: 21.99,
+  discountPercentOverride: 20,
+  ratingValueOverride: 4.8,
+  ratingCountLabelOverride: '50+',
+  careLabelOverride: "What's included",
+  hideDetailsAccordion: true,
+  bottomCtaChips: ['Heatless curls', 'Satin bonnet included', '30-day returns'],
+  gallery: curlerGallery,
+  videoSlot: DEFAULT_VIDEO_SLOT,
+  essentials: essentialsCurler,
+  reasons: reasonsCurler,
+  qa: qaCurler,
+  how: howCurler,
+  care: careCurler,
+  featureCallouts: {
+    mediaSrc: DEFAULT_VIDEO_SLOT,
+    mediaAlt: 'Satin overnight curler demo',
+    mediaLabel: 'Heatless overnight curls',
+    mediaNote: 'Soft satin set that stays comfy all night',
+    heading: {
+      eyebrow: "How you'll use it",
+      title: 'Wrap it once, wake up flawless curls',
+      description: "You'll get effortless, frizz-free curls that last, with a comfy design that keeps your hair healthier every time you use it.",
+      alignment: 'left',
+    },
+  },
+  featuredTikTokHeading: {
+    eyebrow: undefined,
+    title: 'Watch How These Curls Came Out Flawless',
+    description: "See How Long Creators' Curls Last and How Effortlessly Gorgeous They Look.",
+    alignment: 'center',
+  },
+}
+
+export const productConfigs: Record<string, ProductConfig> = {
+  'shower-cap': {
+    handle: 'lumelle-shower-cap',
+    fallbackItemId: 'lumelle-cap',
+    fallbackVariantKey: 'variant.lumelle-shower-cap.default',
+    defaultTitle: 'Lumelle Shower Cap',
+    defaultSubtitle: 'Keep hair dry. Keep styles flawless.',
+    defaultPrice: 14.99,
+    compareAtPrice: 19.99,
+    badge: 'Buy 2, save 10%',
+    bottomCtaChips: ['Waterproof satin', 'No-frizz seal', '30-day returns'],
+    gallery: CAP_GALLERY,
+    videoSlot: DEFAULT_VIDEO_SLOT,
+    essentials: essentialsCap,
+    reasons: reasonsCap,
+    qa: qaCap,

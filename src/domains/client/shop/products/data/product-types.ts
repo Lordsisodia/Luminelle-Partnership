@@ -1,6 +1,6 @@
 export type ProductConfig = {
   handle: string
-  fallbackVariantId?: string | null
+  fallbackVariantKey?: string | null
   fallbackItemId?: string
   defaultTitle: string
   defaultSubtitle: string

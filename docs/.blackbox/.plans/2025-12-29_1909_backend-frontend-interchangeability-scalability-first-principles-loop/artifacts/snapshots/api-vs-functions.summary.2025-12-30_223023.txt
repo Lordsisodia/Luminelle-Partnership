@@ -1,0 +1,23 @@
+timestamp: 2025-12-30_223023
+api_endpoints:       69
+functions_endpoints:       52
+common:       47
+api_only:       22
+functions_only:        5
+
+api_only_top_prefixes:
+   9 shopify
+   4 admin
+   2 storefront
+   2 customer-auth
+   1 orders
+   1 og
+   1 newsletter
+   1 internal
+   1 cloudinary
+
+functions_only_top_prefixes:
+   2 experiment
+   1 storefront
+   1 payments
+   1 health

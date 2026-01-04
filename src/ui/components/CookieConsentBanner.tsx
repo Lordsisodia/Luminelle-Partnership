@@ -30,7 +30,7 @@ export const CookieConsentBanner = () => {
   return (
     <section
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-50 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]"
+      className="fixed inset-x-0 bottom-0 z-50 px-5 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]"
     >
       <div className="mx-auto max-w-3xl rounded-3xl border border-semantic-legacy-brand-blush/60 bg-white/95 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.14)] backdrop-blur">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">

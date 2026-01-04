@@ -1,0 +1,6 @@
+plan: .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop
+snapshots_dir: .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots
+md_files_scanned: 137
+unique_snapshot_refs: 225
+
+OK: no missing snapshot references found

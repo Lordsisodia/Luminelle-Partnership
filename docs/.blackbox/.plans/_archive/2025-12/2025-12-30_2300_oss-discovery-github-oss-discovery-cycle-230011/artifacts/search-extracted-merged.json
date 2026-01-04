@@ -1,0 +1,139 @@
+{
+  "count": 10,
+  "exclude_keywords": [
+    "awesome"
+  ],
+  "exclude_regex": "\\b(portfolio|resume|curriculum|cv|personal\\s*(site|website)?|my\\s*site)\\b",
+  "excluded_results_count": 0,
+  "generated_at_utc": "2025-12-30T16:00:34Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 50,
+  "queries_used": [
+    "shopify storefront api remix stars:>=50 fork:false archived:false",
+    "hydrogen storefront starter stars:>=50 fork:false archived:false",
+    "shopify storefront api nextjs stars:>=50 fork:false archived:false",
+    "commercetools storefront stars:>=50 fork:false archived:false",
+    "bigcommerce storefront stars:>=50 fork:false archived:false",
+    "medusa storefront nextjs stars:>=50 fork:false archived:false",
+    "vendure storefront stars:>=50 fork:false archived:false",
+    "saleor storefront stars:>=50 fork:false archived:false",
+    "commercejs storefront stars:>=50 fork:false archived:false",
+    "product variants selector ecommerce stars:>=50 fork:false archived:false",
+    "collection page filters ecommerce stars:>=50 fork:false archived:false",
+    "cart drawer component ecommerce stars:>=50 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "Alokai is a Frontend as a Service solution that simplifies composable commerce. It connects all the technologies needed to build and deploy fast & scalable ecommerce frontends. It guides merchants to deliver exceptional customer experiences quickly and easily.",
+      "full_name": "vuestorefront/vue-storefront",
+      "integration_score": 11,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 10899,
+      "updated_at": "2025-12-30T01:44:58Z",
+      "url": "https://github.com/vuestorefront/vue-storefront"
+    },
+    {
+      "description": "Saleor Storefront built using React, Next.js with App Router, TypeScript, GraphQL, and Tailwind CSS.",
+      "full_name": "saleor/storefront",
+      "integration_score": 9,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "stars": 1331,
+      "updated_at": "2025-12-26T00:29:03Z",
+      "url": "https://github.com/saleor/storefront"
+    },
+    {
+      "description": "Headless, composable ecommerce storefront built with Next.js, Typescript, and shadcn/ui.",
+      "full_name": "mirumee/nimara-ecommerce",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "BSD-3-Clause",
+      "stars": 96,
+      "updated_at": "2025-12-26T22:05:22Z",
+      "url": "https://github.com/mirumee/nimara-ecommerce"
+    },
+    {
+      "description": "An e-commerce storefront starter built with Qwik and Vendure",
+      "full_name": "vendure-ecommerce/storefront-qwik-starter",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 259,
+      "updated_at": "2025-12-27T13:00:26Z",
+      "url": "https://github.com/vendure-ecommerce/storefront-qwik-starter"
+    },
+    {
+      "description": "A storefront starter kit for Vendure built with Remix",
+      "full_name": "vendure-ecommerce/storefront-remix-starter",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 224,
+      "updated_at": "2025-12-21T13:37:03Z",
+      "url": "https://github.com/vendure-ecommerce/storefront-remix-starter"
+    },
+    {
+      "description": "An example storefront PWA for Vendure built with Angular",
+      "full_name": "vendure-ecommerce/storefront-angular-starter",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 185,
+      "updated_at": "2025-12-28T12:35:54Z",
+      "url": "https://github.com/vendure-ecommerce/storefront-angular-starter"
+    },
+    {
+      "description": "\ud83d\udcf1 Combine your Medusa.js e-commerce backend and/or web storefront with a Expo mobile app that matches Medusa  @nextjs  starter functionality, look and feel.",
+      "full_name": "bidah/mobile-medusa",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 115,
+      "updated_at": "2025-11-19T22:59:57Z",
+      "url": "https://github.com/bidah/mobile-medusa"
+    },
+    {
+      "description": "Vue Storefront 2 integration for Vendure",
+      "full_name": "vuestorefront-community/vendure",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 72,
+      "updated_at": "2025-09-22T02:15:34Z",
+      "url": "https://github.com/vuestorefront-community/vendure"
+    },
+    {
+      "description": "NextJS Pages Router Storefront for MedusaJS",
+      "full_name": "pavlotsyhanok/medusa-plasmic-storefront",
+      "integration_score": 7,
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 59,
+      "updated_at": "2025-12-23T17:35:52Z",
+      "url": "https://github.com/pavlotsyhanok/medusa-plasmic-storefront"
+    },
+    {
+      "description": "Storefront for vendure and NextJS",
+      "full_name": "aexol-studio/vendure-nextjs-storefront",
+      "integration_score": 6,
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 95,
+      "updated_at": "2025-08-24T18:36:51Z",
+      "url": "https://github.com/aexol-studio/vendure-nextjs-storefront"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

@@ -1,0 +1,8 @@
+# Tranche 03 (Support inbox + order context) — homepage-only snapshots
+
+https://www.gorgias.com gorgias
+https://www.reamaze.com re-amaze
+https://www.zendesk.com zendesk
+https://www.kustomer.com kustomer
+https://www.helpscout.com help-scout
+

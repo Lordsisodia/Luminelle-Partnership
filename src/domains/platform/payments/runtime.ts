@@ -1,0 +1,65 @@
+import { env } from '@/utils/env'
+import { PortError } from '@platform/ports'
+import type { PaymentsPort } from './ports'
+import { createStripePaymentsAdapter } from './adapters/stripe'
+
+type PaymentsRuntime = {
+  payments: PaymentsPort
+}
+
+const isDev = () => import.meta.env.DEV
+
+type PaymentsProvider = 'none' | 'stripe'
+
+const getPaymentsProvider = (): PaymentsProvider => {
+  const v = (env('PAYMENTS_PROVIDER') ?? '').trim().toLowerCase()
+  if (v === 'stripe') return 'stripe'
+  return 'none'
+}
+
+const createMockPayments = (): PaymentsRuntime => {
+  const payments: PaymentsPort = {
+    getCapabilities() {
+      return { mode: 'none', providerLabel: 'Payments unavailable (mock)' }
+    },
+    async beginPayment() {
+      return { mode: 'none', reason: 'Mock payments adapter (dev only).' }
+    },
+  }
+  return { payments }
+}
+
+const createDisabledPayments = (code: 'NOT_CONFIGURED' | 'UNAVAILABLE', message: string): PaymentsRuntime => {
+  const payments: PaymentsPort = {
+    getCapabilities() {
+      return { mode: 'none', providerLabel: 'Payments unavailable' }
+    },
+    async beginPayment() {
+      throw new PortError(code, message)
+    },
+  }
+  return { payments }
+}
+
+export const createPayments = (): PaymentsRuntime => {
+  // Default: keep behavior unchanged unless explicitly configured.
+  const provider = getPaymentsProvider()
+
+  if (provider === 'none') {
+    if (isDev()) return createMockPayments()
+    return createDisabledPayments('UNAVAILABLE', 'Payments adapter is not wired yet.')
+  }
+
+  // In dev, allow opting into the real provider via env (useful when local dev runs internal endpoints).
+  if (isDev() && env('USE_REAL_PAYMENTS') !== 'true') return createMockPayments()
+
+  if (provider === 'stripe') {
+    const adapter = createStripePaymentsAdapter()
+    return { payments: adapter.payments }
+  }
+
+  if (isDev()) return createMockPayments()
+  return createDisabledPayments('UNAVAILABLE', `Payments provider is not supported: ${provider}`)
+}
+
+export const payments = createPayments()

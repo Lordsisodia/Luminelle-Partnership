@@ -14,6 +14,7 @@ export default defineConfig({
       '@creator': path.resolve(__dirname, 'src/domains/creator'),
       '@blog': path.resolve(__dirname, 'src/domains/blog'),
       '@admin': path.resolve(__dirname, 'src/domains/admin'),
+      '@admin/settings-siso': path.resolve(__dirname, 'src/domains/admin/settings-siso'),
       '@client': path.resolve(__dirname, 'src/domains/client'),
       '@platform': path.resolve(__dirname, 'src/domains/platform'),
       '@ui-kit': path.resolve(__dirname, 'src/domains/ui-kit'),

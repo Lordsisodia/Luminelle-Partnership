@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { AdminPageLayout } from '@admin/shared/ui/layouts'
 import { Clock3, FileText, ShieldCheck, Sparkles } from 'lucide-react'
+import { setAdminNavList } from '@admin/shared/application/adminNavLists'
 
 type PageSection = {
   title: string
@@ -223,6 +224,16 @@ export default function PagesPage() {
     if (!title) return
     document.title = `Pages · ${title}`
   }, [selectedSlug])
+
+  useEffect(() => {
+    setAdminNavList(
+      'pages',
+      PAGES.map((p) => ({
+        label: p.title,
+        to: `/admin/pages/${p.slug}`,
+      })),
+    )
+  }, [])
   const selected = useMemo(() => (selectedSlug ? PAGES.find((p) => p.slug === selectedSlug) : null), [selectedSlug])
   const listQs = searchParams.toString()
   const filteredPages = useMemo(() => {

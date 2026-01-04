@@ -1,0 +1,103 @@
+sweep,name,slug,evidence_file,feature_flags,experimentation,analytics,session_replay,bi_dashboards,automation_workflows,cdp_pipelines,cms_content,page_builders,search_merchandising,personalization_recos,returns_exchanges,shipping_fulfillment,subscriptions,support_helpdesk,loyalty_reviews_ugc,ai_agent
+core,Adobe Commerce (Magento),adobe-commerce-magento,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/adobe-commerce-magento.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,AfterShip Returns,aftership-returns,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/aftership-returns.md,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+core,AfterShip,aftership,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/aftership.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Algolia,algolia,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/algolia.md,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+core,Attentive,attentive,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/attentive.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,BigCommerce,bigcommerce,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/bigcommerce.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Bold Subscriptions,bold-subscriptions,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/bold-subscriptions.md,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+core,commercetools,commercetools,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/commercetools.md,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+core,EasyPost,easypost,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/easypost.md,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+core,Ecwid,ecwid,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/ecwid.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+core,Elastic Path,elastic-path,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/elastic-path.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Gorgias,gorgias,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/gorgias.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+core,Happy Returns,happy-returns,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/happy-returns.md,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+core,Help Scout,help-scout,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/help-scout.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+core,Intercom,intercom,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/intercom.md,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1
+core,Judge.me,judge-me,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/judge-me.md,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0
+core,Klaviyo,klaviyo,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/klaviyo.md,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1
+core,Klevu,klevu,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/klevu.md,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0
+core,Kustomer,kustomer,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/kustomer.md,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0
+core,Lightspeed eCom,lightspeed-ecom,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/lightspeed-ecom.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Loop Returns,loop-returns,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/loop-returns.md,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+core,Loox,loox,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/loox.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+core,Mailchimp,mailchimp,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/mailchimp.md,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+core,Medusa,medusa,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/medusa.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Narvar,narvar,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/narvar.md,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+core,Nosto,nosto,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/nosto.md,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0
+core,OpenCart,opencart,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/opencart.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Ordergroove,ordergroove,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/ordergroove.md,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+core,Postscript,postscript,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/postscript.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,PrestaShop,prestashop,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/prestashop.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Re:amaze,re-amaze,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/re-amaze.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+core,Recharge,recharge,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/recharge.md,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+core,ReturnGO,returngo,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/returngo.md,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+core,Saleor,saleor,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/saleor.md,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+core,Salesforce Commerce Cloud,salesforce-commerce-cloud,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/salesforce-commerce-cloud.md,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1
+core,ShipBob,shipbob,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/shipbob.md,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+core,ShipHero,shiphero,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/shiphero.md,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+core,ShipMonk,shipmonk,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/shipmonk.md,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+core,Shippo,shippo,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/shippo.md,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+core,ShipStation,shipstation,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/shipstation.md,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+core,Shopify,shopify,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/shopify.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Shopware,shopware,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/shopware.md,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Skio,skio,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/skio.md,0,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,0
+core,Spree Commerce,spree-commerce,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/spree-commerce.md,0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0
+core,Square Online,square-online,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/square-online.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Squarespace Commerce,squarespace-commerce,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/squarespace-commerce.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Sylius,sylius,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/sylius.md,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+core,Vendure,vendure,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/vendure.md,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+core,VTEX,vtex,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/vtex.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,Wix eCommerce,wix-ecommerce,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/wix-ecommerce.md,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+core,WooCommerce,woocommerce,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/woocommerce.md,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+core,Yotpo,yotpo,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/yotpo.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+core,Zendesk,zendesk,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-02-competitors-core-015445/competitors/evidence/zendesk.md,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1
+adjacent,AB Tasty,ab-tasty,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/ab-tasty.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Airbyte,airbyte,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/airbyte.md,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Amplitude,amplitude,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/amplitude.md,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Apache Superset,apache-superset,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/apache-superset.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Appsmith,appsmith,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/appsmith.md,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Appwrite,appwrite,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/appwrite.md,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Budibase,budibase,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/budibase.md,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Builder.io,builder-io,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/builder-io.md,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+adjacent,ConfigCat,configcat,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/configcat.md,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Contentful,contentful,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/contentful.md,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Convert.com,convert-com,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/convert-com.md,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+adjacent,dbt,dbt,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/dbt.md,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0
+adjacent,Directus,directus,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/directus.md,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+adjacent,Firebase,firebase,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/firebase.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Flagsmith,flagsmith,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/flagsmith.md,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,FullStory,fullstory,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/fullstory.md,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+adjacent,GrowthBook,growthbook,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/growthbook.md,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Heap,heap,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/heap.md,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Hotjar,hotjar,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/hotjar.md,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,LaunchDarkly,launchdarkly,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/launchdarkly.md,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0
+adjacent,LogRocket,logrocket,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/logrocket.md,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0
+adjacent,Make (Integromat),make-integromat,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/make-integromat.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Matomo,matomo,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/matomo.md,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Meltano,meltano,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/meltano.md,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Metabase,metabase,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/metabase.md,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Mixpanel,mixpanel,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/mixpanel.md,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,n8n,n8n,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/n8n.md,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Optimizely,optimizely,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/optimizely.md,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+adjacent,Payload CMS,payload-cms,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/payload-cms.md,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+adjacent,Pipedream,pipedream,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/pipedream.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Plausible,plausible,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/plausible.md,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,PocketBase,pocketbase,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/pocketbase.md,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,PostHog,posthog,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/posthog.md,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Prismic,prismic,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/prismic.md,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0
+adjacent,Retool,retool,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/retool.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,RudderStack,rudderstack,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/rudderstack.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Sanity,sanity,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/sanity.md,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Segment,segment,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/segment.md,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,Split.io,split-io,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/split-io.md,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Storyblok,storyblok,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/storyblok.md,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0
+adjacent,Strapi,strapi,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/strapi.md,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+adjacent,Supabase,supabase,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/supabase.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Temporal,temporal,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/temporal.md,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+adjacent,ToolJet,tooljet,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/tooljet.md,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Umami,umami,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/umami.md,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Unleash,unleash,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/unleash.md,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+adjacent,VWO,vwo,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/vwo.md,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+adjacent,Webflow,webflow,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/webflow.md,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+adjacent,Zapier,zapier,.blackbox/.plans/2025-12-29_0154_deep-research-feature-research-step-03-competitors-adjacent-015445/competitors/evidence/zapier.md,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0

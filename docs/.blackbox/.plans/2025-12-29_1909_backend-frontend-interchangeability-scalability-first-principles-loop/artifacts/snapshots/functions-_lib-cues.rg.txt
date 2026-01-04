@@ -1,0 +1,30 @@
+../functions/_lib/shopifyCheckoutProxy.ts:62:          To make a proxy work, Shopify must serve checkout pages from an upstream domain (usually <code>…myshopify.com</code>) that does <em>not</em> redirect back here.
+../functions/_lib/types.ts:15:  // Optional: explicitly choose the upstream host for checkout proxying (e.g. myshopify.com).
+../functions/_lib/types.ts:34:  // Clerk webhooks
+../functions/_lib/internalAuth.ts:4:  const auth = request.headers.get('authorization') || request.headers.get('Authorization')
+../functions/_lib/internalAuth.ts:9:  if (!auth || !auth.startsWith('Bearer ')) {
+../functions/_lib/internalAuth.ts:12:  const token = auth.slice('Bearer '.length).trim()
+../functions/_lib/customerAccounts.ts:20:    fetch(`https://${shop}/.well-known/shopify/customer-account-api/unstable`).then((r) => r.json()),
+../functions/_lib/crypto.ts:27:export async function hmacSha256(secret: string, message: string) {
+../functions/_lib/crypto.ts:38:export async function hmacSha256Hex(secret: string, message: string) {
+../functions/_lib/crypto.ts:39:  return bytesToHex(await hmacSha256(secret, message))
+../functions/_lib/crypto.ts:42:export async function hmacSha256Base64(secret: string, message: string) {
+../functions/_lib/crypto.ts:43:  return bytesToBase64(new Uint8Array(await hmacSha256(secret, message)))
+../functions/_lib/shopifyWebhooks.ts:2:import { hmacSha256Base64, safeEqual } from './crypto'
+../functions/_lib/shopifyWebhooks.ts:7:): Promise<{ valid: boolean; body: any | null; rawBody: string | null; hmacHeader: string | null }> {
+../functions/_lib/shopifyWebhooks.ts:8:  const hmacHeader = request.headers.get('x-shopify-hmac-sha256') || request.headers.get('X-Shopify-Hmac-Sha256')
+../functions/_lib/shopifyWebhooks.ts:9:  if (!hmacHeader) return { valid: false, body: null, rawBody: null, hmacHeader: null }
+../functions/_lib/shopifyWebhooks.ts:16:  if (!apiSecret && !webhookSecret) return { valid: false, body: null, rawBody: null, hmacHeader }
+../functions/_lib/shopifyWebhooks.ts:19:  const expectedApi = apiSecret ? await hmacSha256Base64(apiSecret, rawBody) : null
+../functions/_lib/shopifyWebhooks.ts:21:    webhookSecret && webhookSecret !== apiSecret ? await hmacSha256Base64(webhookSecret, rawBody) : null
+../functions/_lib/shopifyWebhooks.ts:23:    (expectedApi && safeEqual(expectedApi, hmacHeader)) || (expectedWebhook && safeEqual(expectedWebhook, hmacHeader)),
+../functions/_lib/shopifyWebhooks.ts:26:  if (!valid) return { valid: false, body: null, rawBody, hmacHeader }
+../functions/_lib/shopifyWebhooks.ts:29:    return { valid: true, body, rawBody, hmacHeader }
+../functions/_lib/shopifyWebhooks.ts:31:    return { valid: true, body: null, rawBody, hmacHeader }
+../functions/_lib/shopifyOAuth.ts:2:import { hmacSha256Hex, safeEqual } from './crypto'
+../functions/_lib/shopifyOAuth.ts:6:  return /^(?:[a-z0-9][a-z0-9-]*)\\.myshopify\\.com$/i.test(shop)
+../functions/_lib/shopifyOAuth.ts:11:    .filter(([k]) => k !== 'hmac' && k !== 'signature')
+../functions/_lib/shopifyOAuth.ts:20:  const hmac = url.searchParams.get('hmac') || ''
+../functions/_lib/shopifyOAuth.ts:21:  if (!hmac) return false
+../functions/_lib/shopifyOAuth.ts:23:  const expected = await hmacSha256Hex(secret, message)
+../functions/_lib/shopifyOAuth.ts:24:  return safeEqual(hmac, expected)

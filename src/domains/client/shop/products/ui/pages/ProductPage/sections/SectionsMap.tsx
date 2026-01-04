@@ -51,7 +51,7 @@ export function renderSections(props: SectionProps): ReactNode {
 
   return (
     <>
-      <div id="pdp-hero" className="mx-auto max-w-6xl px-2 md:px-6 md:grid md:grid-cols-2 md:items-center md:gap-8 md:pt-6">
+      <div id="pdp-hero" className="mx-auto max-w-6xl px-5 md:px-6 md:grid md:grid-cols-2 md:items-center md:gap-8 md:pt-6">
         <HeroMedia
           gallery={props.gallery}
           activeImage={props.activeImage}

@@ -63,7 +63,7 @@ export const SearchResultsPage = () => {
       />
       <MarketingLayout navItems={[]} subtitle="Search">
         <section className="bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-8">
+          <div className="mx-auto max-w-6xl px-5 py-8 md:px-6">
             <h1 className="font-heading text-xl text-semantic-text-primary">Search results</h1>
             <p className="mt-1 text-sm text-semantic-text-primary/70">
               {hasQuery ? (

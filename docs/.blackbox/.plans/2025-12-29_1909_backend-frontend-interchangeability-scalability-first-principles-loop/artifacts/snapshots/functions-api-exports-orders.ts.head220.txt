@@ -1,0 +1,93 @@
+# source: functions/api/exports/orders.ts
+# captured: 2025-12-30T14:09:29Z
+
+import type { PagesFunction } from '../../_lib/types'
+import { getSupabase } from '../../_lib/supabase'
+import { requireInternalAuth } from '../../_lib/internalAuth'
+import { methodNotAllowed, text } from '../../_lib/response'
+
+function toCsvRow(values: (string | number | null | undefined)[]) {
+  return values
+    .map((v) => {
+      const s = v === null || v === undefined ? '' : String(v)
+      if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"'
+      return s
+    })
+    .join(',')
+}
+
+function extractNoteAttributes(raw: any): Record<string, string> {
+  const attrs: Record<string, string> = {}
+  const notes = Array.isArray(raw?.note_attributes) ? raw.note_attributes : []
+  for (const n of notes) {
+    if (n && typeof n.name === 'string' && typeof n.value === 'string' && n.value) {
+      attrs[n.name] = n.value
+    }
+  }
+  return attrs
+}
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'GET') return methodNotAllowed(['GET'])
+
+  const auth = requireInternalAuth(request, env)
+  if (!auth.ok) return text('Unauthorized', { status: auth.status })
+
+  const supabase = getSupabase(env)
+  const { data, error } = await supabase
+    .from('ShopOrders')
+    .select('order_id,name,email,currency,total,subtotal,financial_status,fulfillment_status,processed_at,created_at,raw')
+    .order('processed_at', { ascending: false })
+    .order('created_at', { ascending: false })
+    .limit(5000)
+  if (error) throw error
+
+  const header = [
+    'order_id',
+    'name',
+    'email',
+    'currency',
+    'subtotal',
+    'total',
+    'financial_status',
+    'fulfillment_status',
+    'date',
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_content',
+    'utm_term',
+  ]
+
+  const lines = [toCsvRow(header)]
+  for (const r of data || []) {
+    const attrs = extractNoteAttributes(r.raw)
+    const date = r.processed_at || r.created_at || null
+    lines.push(
+      toCsvRow([
+        r.order_id,
+        r.name,
+        r.email,
+        r.currency,
+        r.subtotal,
+        r.total,
+        r.financial_status,
+        r.fulfillment_status,
+        date,
+        attrs.utm_source,
+        attrs.utm_medium,
+        attrs.utm_campaign,
+        attrs.utm_content,
+        attrs.utm_term,
+      ]),
+    )
+  }
+
+  const body = lines.join('\n')
+  const headers = new Headers({
+    'content-type': 'text/csv; charset=utf-8',
+    'content-disposition': 'attachment; filename="orders.csv"',
+  })
+  return new Response(body, { headers })
+}
+

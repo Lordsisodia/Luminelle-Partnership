@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en">
+<head runat="server">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Verify | Allsaints.com </title>
+    <link rel="stylesheet" type="text/css" href="https://maintenance.allsaints.com/EU/style.css" />
+    <link rel="stylesheet" href="https://assets.ntcacdn.net/Mitigations/captcha-1.1.1.css">
+    <script src="https://www.recaptcha.net/recaptcha/api.js" async defer></script>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        .g-recaptcha >div {
+            margin: auto;
+        }
+        h1{
+            padding-top: 5%;
+        }
+        p{
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+    <section class="picture">
+        <h1></h1>
+        <picture><img class="desktop-picture"
+                src="https://images.allsaints.com/static/050923-WWLP-DT-C2.jpg" alt="Picture" />
+        </picture>
+    </section>
+
+    <div class="wrapper">
+
+        <div class="logo">
+            <img width="300" alt="logo" src="https://cdn-ukwest.onetrust.com/logos/bd54c197-488f-4970-a6d2-a48c5df09019/94e53830-248d-41cb-af91-8d50fe196443/c3ceed42-3f1b-4850-9e82-43b2381af90a/logo.png"/>
+        </div>
+
+    <h1>Help us verify real visitors</h1>
+    <p>We’re sorry about this, but please can you prove you’re not a robot by completing the below reCaptcha test.</p>
+        
+     <!-- Captcha Form -->
+     <form id="frmCaptcha" action="" method="POST">
+        <div class="g-recaptcha" data-sitekey="6Lfc7qsUAAAAAHrdz8yB4c5i-yd3Oc_p_4UZEgnl" data-callback="showButton"></div>
+        <br />
+        <input type="submit" value="Submit" class="btn btnHidden">
+        <input type="hidden" maxlength="40" id="hitid" name="hitid" value="acfa04bf-6853-402a-89ae-1cd8c4cf1eea">
+    </form>
+    <!-- End of captcha form -->
+
+        <div class="wrapper-values"></div>
+        <p>It’s getting harder to tell between bad actors and legit humans these days and our security is very important to us. </p>
+
+    
+    </div>
+    <script src="https://assets.ntcacdn.net/Mitigations/fetch-polyfill-3.6.2.js"></script>
+    <script src="https://assets.ntcacdn.net/Mitigations/submit-captcha-2.1.4.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9b62bc83ff1cdd8a","version":"2025.9.1","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"bbff517cbbfb4253bf393958acc956ba","b":1}' crossorigin="anonymous"></script>
+</body>
+</html>

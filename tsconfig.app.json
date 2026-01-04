@@ -24,6 +24,7 @@
       "@creator/*": ["src/domains/creator/*"],
       "@platform/*": ["src/domains/platform/*"],
       "@ui-kit/*": ["src/domains/ui-kit/*"],
+      "@admin/settings-siso/*": ["src/domains/admin/settings-siso/*"],
       "@content/*": ["src/content/*"],
       "@utils/*": ["src/utils/*"],
       "@layouts/*": ["src/layouts/*"],

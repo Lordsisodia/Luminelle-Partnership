@@ -1,0 +1,1826 @@
+<!doctype html>
+<html lang="en-US">
+<head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>(()=>{class RocketLazyLoadScripts{constructor(){this.v="2.0.4",this.userEvents=["keydown","keyup","mousedown","mouseup","mousemove","mouseover","mouseout","touchmove","touchstart","touchend","touchcancel","wheel","click","dblclick","input"],this.attributeEvents=["onblur","onclick","oncontextmenu","ondblclick","onfocus","onmousedown","onmouseenter","onmouseleave","onmousemove","onmouseout","onmouseover","onmouseup","onmousewheel","onscroll","onsubmit"]}async t(){this.i(),this.o(),/iP(ad|hone)/.test(navigator.userAgent)&&this.h(),this.u(),this.l(this),this.m(),this.k(this),this.p(this),this._(),await Promise.all([this.R(),this.L()]),this.lastBreath=Date.now(),this.S(this),this.P(),this.D(),this.O(),this.M(),await this.C(this.delayedScripts.normal),await this.C(this.delayedScripts.defer),await this.C(this.delayedScripts.async),await this.T(),await this.F(),await this.j(),await this.A(),window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this.everythingLoaded=!0,this.lastTouchEnd&&await new Promise(t=>setTimeout(t,500-Date.now()+this.lastTouchEnd)),this.I(),this.H(),this.U(),this.W()}i(){this.CSPIssue=sessionStorage.getItem("rocketCSPIssue"),document.addEventListener("securitypolicyviolation",t=>{this.CSPIssue||"script-src-elem"!==t.violatedDirective||"data"!==t.blockedURI||(this.CSPIssue=!0,sessionStorage.setItem("rocketCSPIssue",!0))},{isRocket:!0})}o(){window.addEventListener("pageshow",t=>{this.persisted=t.persisted,this.realWindowLoadedFired=!0},{isRocket:!0}),window.addEventListener("pagehide",()=>{this.onFirstUserAction=null},{isRocket:!0})}h(){let t;function e(e){t=e}window.addEventListener("touchstart",e,{isRocket:!0}),window.addEventListener("touchend",function i(o){o.changedTouches[0]&&t.changedTouches[0]&&Math.abs(o.changedTouches[0].pageX-t.changedTouches[0].pageX)<10&&Math.abs(o.changedTouches[0].pageY-t.changedTouches[0].pageY)<10&&o.timeStamp-t.timeStamp<200&&(window.removeEventListener("touchstart",e,{isRocket:!0}),window.removeEventListener("touchend",i,{isRocket:!0}),"INPUT"===o.target.tagName&&"text"===o.target.type||(o.target.dispatchEvent(new TouchEvent("touchend",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new MouseEvent("mouseover",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new PointerEvent("click",{target:o.target,bubbles:!0,cancelable:!0,detail:1,clientX:o.changedTouches[0].clientX,clientY:o.changedTouches[0].clientY})),event.preventDefault()))},{isRocket:!0})}q(t){this.userActionTriggered||("mousemove"!==t.type||this.firstMousemoveIgnored?"keyup"===t.type||"mouseover"===t.type||"mouseout"===t.type||(this.userActionTriggered=!0,this.onFirstUserAction&&this.onFirstUserAction()):this.firstMousemoveIgnored=!0),"click"===t.type&&t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),"touchstart"===this.lastEvent&&"touchend"===t.type&&(this.lastTouchEnd=Date.now()),"click"===t.type&&(this.lastTouchEnd=0),this.lastEvent=t.type,t.composedPath&&t.composedPath()[0].getRootNode()instanceof ShadowRoot&&(t.rocketTarget=t.composedPath()[0]),this.savedUserEvents.push(t)}u(){this.savedUserEvents=[],this.userEventHandler=this.q.bind(this),this.userEvents.forEach(t=>window.addEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.addEventListener("visibilitychange",this.userEventHandler,{isRocket:!0})}U(){this.userEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.removeEventListener("visibilitychange",this.userEventHandler,{isRocket:!0}),this.savedUserEvents.forEach(t=>{(t.rocketTarget||t.target).dispatchEvent(new window[t.constructor.name](t.type,t))})}m(){const t="return false",e=Array.from(this.attributeEvents,t=>"data-rocket-"+t),i="["+this.attributeEvents.join("],[")+"]",o="[data-rocket-"+this.attributeEvents.join("],[data-rocket-")+"]",s=(e,i,o)=>{o&&o!==t&&(e.setAttribute("data-rocket-"+i,o),e["rocket"+i]=new Function("event",o),e.setAttribute(i,t))};new MutationObserver(t=>{for(const n of t)"attributes"===n.type&&(n.attributeName.startsWith("data-rocket-")||this.everythingLoaded?n.attributeName.startsWith("data-rocket-")&&this.everythingLoaded&&this.N(n.target,n.attributeName.substring(12)):s(n.target,n.attributeName,n.target.getAttribute(n.attributeName))),"childList"===n.type&&n.addedNodes.forEach(t=>{if(t.nodeType===Node.ELEMENT_NODE)if(this.everythingLoaded)for(const i of[t,...t.querySelectorAll(o)])for(const t of i.getAttributeNames())e.includes(t)&&this.N(i,t.substring(12));else for(const e of[t,...t.querySelectorAll(i)])for(const t of e.getAttributeNames())this.attributeEvents.includes(t)&&s(e,t,e.getAttribute(t))})}).observe(document,{subtree:!0,childList:!0,attributeFilter:[...this.attributeEvents,...e]})}I(){this.attributeEvents.forEach(t=>{document.querySelectorAll("[data-rocket-"+t+"]").forEach(e=>{this.N(e,t)})})}N(t,e){const i=t.getAttribute("data-rocket-"+e);i&&(t.setAttribute(e,i),t.removeAttribute("data-rocket-"+e))}k(t){Object.defineProperty(HTMLElement.prototype,"onclick",{get(){return this.rocketonclick||null},set(e){this.rocketonclick=e,this.setAttribute(t.everythingLoaded?"onclick":"data-rocket-onclick","this.rocketonclick(event)")}})}S(t){function e(e,i){let o=e[i];e[i]=null,Object.defineProperty(e,i,{get:()=>o,set(s){t.everythingLoaded?o=s:e["rocket"+i]=o=s}})}e(document,"onreadystatechange"),e(window,"onload"),e(window,"onpageshow");try{Object.defineProperty(document,"readyState",{get:()=>t.rocketReadyState,set(e){t.rocketReadyState=e},configurable:!0}),document.readyState="loading"}catch(t){console.log("WPRocket DJE readyState conflict, bypassing")}}l(t){this.originalAddEventListener=EventTarget.prototype.addEventListener,this.originalRemoveEventListener=EventTarget.prototype.removeEventListener,this.savedEventListeners=[],EventTarget.prototype.addEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalAddEventListener.call(this,e,i,o):(t.savedEventListeners.push({target:this,remove:!1,type:e,func:i,options:o}),"mouseenter"!==e&&"mouseleave"!==e||t.originalAddEventListener.call(this,e,t.savedUserEvents.push,o))},EventTarget.prototype.removeEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalRemoveEventListener.call(this,e,i,o):t.savedEventListeners.push({target:this,remove:!0,type:e,func:i,options:o})}}J(t,e){this.savedEventListeners=this.savedEventListeners.filter(i=>{let o=i.type,s=i.target||window;return e!==o||t!==s||(this.B(o,s)&&(i.type="rocket-"+o),this.$(i),!1)})}H(){EventTarget.prototype.addEventListener=this.originalAddEventListener,EventTarget.prototype.removeEventListener=this.originalRemoveEventListener,this.savedEventListeners.forEach(t=>this.$(t))}$(t){t.remove?this.originalRemoveEventListener.call(t.target,t.type,t.func,t.options):this.originalAddEventListener.call(t.target,t.type,t.func,t.options)}p(t){let e;function i(e){return t.everythingLoaded?e:e.split(" ").map(t=>"load"===t||t.startsWith("load.")?"rocket-jquery-load":t).join(" ")}function o(o){function s(e){const s=o.fn[e];o.fn[e]=o.fn.init.prototype[e]=function(){return this[0]===window&&t.userActionTriggered&&("string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=i(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{const e=arguments[0][t];delete arguments[0][t],arguments[0][i(t)]=e})),s.apply(this,arguments),this}}if(o&&o.fn&&!t.allJQueries.includes(o)){const e={DOMContentLoaded:[],"rocket-DOMContentLoaded":[]};for(const t in e)document.addEventListener(t,()=>{e[t].forEach(t=>t())},{isRocket:!0});o.fn.ready=o.fn.init.prototype.ready=function(i){function s(){parseInt(o.fn.jquery)>2?setTimeout(()=>i.bind(document)(o)):i.bind(document)(o)}return"function"==typeof i&&(t.realDomReadyFired?!t.userActionTriggered||t.fauxDomReadyFired?s():e["rocket-DOMContentLoaded"].push(s):e.DOMContentLoaded.push(s)),o([])},s("on"),s("one"),s("off"),t.allJQueries.push(o)}e=o}t.allJQueries=[],o(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){o(t)}})}P(){const t=new Map;document.write=document.writeln=function(e){const i=document.currentScript,o=document.createRange(),s=i.parentElement;let n=t.get(i);void 0===n&&(n=i.nextSibling,t.set(i,n));const c=document.createDocumentFragment();o.setStart(c,0),c.appendChild(o.createContextualFragment(e)),s.insertBefore(c,n)}}async R(){return new Promise(t=>{this.userActionTriggered?t():this.onFirstUserAction=t})}async L(){return new Promise(t=>{document.addEventListener("DOMContentLoaded",()=>{this.realDomReadyFired=!0,t()},{isRocket:!0})})}async j(){return this.realWindowLoadedFired?Promise.resolve():new Promise(t=>{window.addEventListener("load",t,{isRocket:!0})})}M(){this.pendingScripts=[];this.scriptsMutationObserver=new MutationObserver(t=>{for(const e of t)e.addedNodes.forEach(t=>{"SCRIPT"!==t.tagName||t.noModule||t.isWPRocket||this.pendingScripts.push({script:t,promise:new Promise(e=>{const i=()=>{const i=this.pendingScripts.findIndex(e=>e.script===t);i>=0&&this.pendingScripts.splice(i,1),e()};t.addEventListener("load",i,{isRocket:!0}),t.addEventListener("error",i,{isRocket:!0}),setTimeout(i,1e3)})})})}),this.scriptsMutationObserver.observe(document,{childList:!0,subtree:!0})}async F(){await this.X(),this.pendingScripts.length?(await this.pendingScripts[0].promise,await this.F()):this.scriptsMutationObserver.disconnect()}D(){this.delayedScripts={normal:[],async:[],defer:[]},document.querySelectorAll("script[type$=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _(){await this.L();let t=[];document.querySelectorAll("script[type$=rocketlazyloadscript][data-rocket-src]").forEach(e=>{let i=e.getAttribute("data-rocket-src");if(i&&!i.startsWith("data:")){i.startsWith("//")&&(i=location.protocol+i);try{const o=new URL(i).origin;o!==location.origin&&t.push({src:o,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}catch(t){}}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this.Y(t,"preconnect")}async G(t){if(await this.K(),!0!==t.noModule||!("noModule"in HTMLScriptElement.prototype))return new Promise(e=>{let i;function o(){(i||t).setAttribute("data-rocket-status","executed"),e()}try{if(navigator.userAgent.includes("Firefox/")||""===navigator.vendor||this.CSPIssue)i=document.createElement("script"),[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),i.setAttribute(e,t.nodeValue))}),t.text&&(i.text=t.text),t.nonce&&(i.nonce=t.nonce),i.hasAttribute("src")?(i.addEventListener("load",o,{isRocket:!0}),i.addEventListener("error",()=>{i.setAttribute("data-rocket-status","failed-network"),e()},{isRocket:!0}),setTimeout(()=>{i.isConnected||e()},1)):(i.text=t.text,o()),i.isWPRocket=!0,t.parentNode.replaceChild(i,t);else{const i=t.getAttribute("data-rocket-type"),s=t.getAttribute("data-rocket-src");i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",o,{isRocket:!0}),t.addEventListener("error",i=>{this.CSPIssue&&i.target.src.startsWith("data:")?(console.log("WPRocket: CSP fallback activated"),t.removeAttribute("src"),this.G(t).then(e)):(t.setAttribute("data-rocket-status","failed-network"),e())},{isRocket:!0}),s?(t.fetchPriority="high",t.removeAttribute("data-rocket-src"),t.src=s):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}}catch(i){t.setAttribute("data-rocket-status","failed-transform"),e()}});t.setAttribute("data-rocket-status","skipped")}async C(t){const e=t.shift();return e?(e.isConnected&&await this.G(e),this.C(t)):Promise.resolve()}O(){this.Y([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}Y(t,e){this.trash=this.trash||[];let i=!0;var o=document.createDocumentFragment();t.forEach(t=>{const s=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(s&&!s.startsWith("data:")){const n=document.createElement("link");n.href=s,n.rel=e,"preconnect"!==e&&(n.as="script",n.fetchPriority=i?"high":"low"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),t.nonce&&(n.nonce=t.nonce),o.appendChild(n),this.trash.push(n),i=!1}}),document.head.appendChild(o)}W(){this.trash.forEach(t=>t.remove())}async T(){try{document.readyState="interactive"}catch(t){}this.fauxDomReadyFired=!0;try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(document,"DOMContentLoaded"),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this.K(),this.J(window,"DOMContentLoaded"),window.dispatchEvent(new Event("rocket-DOMContentLoaded"))}catch(t){console.error(t)}}async A(){try{document.readyState="complete"}catch(t){}try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(window,"load"),window.dispatchEvent(new Event("rocket-load")),await this.K(),window.rocketonload&&window.rocketonload(),await this.K(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this.K(),this.J(window,"pageshow");const t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this.K(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}catch(t){console.error(t)}}async K(){Date.now()-this.lastBreath>45&&(await this.X(),this.lastBreath=Date.now())}async X(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}B(t,e){return e===document&&"readystatechange"===t||(e===document&&"DOMContentLoaded"===t||(e===window&&"DOMContentLoaded"===t||(e===window&&"load"===t||e===window&&"pageshow"===t)))}static run(){(new RocketLazyLoadScripts).t()}}RocketLazyLoadScripts.run()})();</script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+
+	<!--tealium-->
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="//tags.tiqcdn.com/utag/sage/brightpearl/prod/utag.sync.js" data-rocket-defer defer></script> 
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v26.5 (Yoast SEO v26.5) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>#1 Retail Operating System - For Multichannel Ecommerce - Brightpearl</title>
+<link data-rocket-prefetch href="https://cdn.cookielaw.org" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://tags.tiqcdn.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://www.googletagmanager.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://js.hsforms.net" rel="dns-prefetch">
+	<meta name="description" content="Brightpearl is a Retail Operating System (ROS) for retailers and wholesalers that’s built for hyper scalability. Brightpearl automates the back office so merchants can get back time and grow fearlessly." />
+	<link rel="canonical" href="https://www.brightpearl.com/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Home Page" />
+	<meta property="og:description" content="Brightpearl is a Retail Operating System (ROS) for retailers and wholesalers that’s built for hyper scalability. Brightpearl automates the back office so merchants can get back time and grow fearlessly." />
+	<meta property="og:url" content="https://www.brightpearl.com/" />
+	<meta property="og:site_name" content="Brightpearl" />
+	<meta property="article:publisher" content="https://www.facebook.com/BrightpearlHQ" />
+	<meta property="article:modified_time" content="2025-04-16T14:53:04+00:00" />
+	<meta property="og:image" content="https://www.brightpearl.com/wp-content/uploads/2021/10/homepage-why-brightpearl1.png" />
+	<meta property="og:image:width" content="796" />
+	<meta property="og:image:height" content="556" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@BrightpearlHQ" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.brightpearl.com/","url":"https://www.brightpearl.com/","name":"#1 Retail Operating System - For Multichannel Ecommerce - Brightpearl","isPartOf":{"@id":"https://www.brightpearl.com/#website"},"about":{"@id":"https://www.brightpearl.com/#organization"},"datePublished":"2020-10-12T09:53:28+00:00","dateModified":"2025-04-16T14:53:04+00:00","description":"Brightpearl is a Retail Operating System (ROS) for retailers and wholesalers that’s built for hyper scalability. Brightpearl automates the back office so merchants can get back time and grow fearlessly.","breadcrumb":{"@id":"https://www.brightpearl.com/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.brightpearl.com/"]}]},{"@type":"BreadcrumbList","@id":"https://www.brightpearl.com/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https://www.brightpearl.com/#website","url":"https://www.brightpearl.com/","name":"Brightpearl","description":"Retail-tailored Digital Operations Platform","publisher":{"@id":"https://www.brightpearl.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.brightpearl.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://www.brightpearl.com/#organization","name":"Brightpearl","url":"https://www.brightpearl.com/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.brightpearl.com/#/schema/logo/image/","url":"https://www.brightpearl.com/wp-content/uploads/2020/12/cropped-favicon.png","contentUrl":"https://www.brightpearl.com/wp-content/uploads/2020/12/cropped-favicon.png","width":512,"height":512,"caption":"Brightpearl"},"image":{"@id":"https://www.brightpearl.com/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/BrightpearlHQ","https://x.com/BrightpearlHQ","https://www.linkedin.com/company/brightpearl/","https://www.youtube.com/user/brightpearldocs"]}]}</script>
+	<meta name="google-site-verification" content="ddIEeJvKvMdm0HaMXyOvsVjwmH6kXOYBOVDNa9W1694" />
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+
+<link rel="alternate" type="application/rss+xml" title="Brightpearl &raquo; Feed" href="https://www.brightpearl.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="Brightpearl &raquo; Comments Feed" href="https://www.brightpearl.com/comments/feed" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.brightpearl.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.brightpearl.com%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.brightpearl.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.brightpearl.com%2F&#038;format=xml" />
+<style id='wp-img-auto-sizes-contain-inline-css'>
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id='classic-theme-styles-inline-css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<link rel='stylesheet' id='bp-wp-2021-style-css' href='https://www.brightpearl.com/wp-content/themes/bp-wp-2021/style.min.css?ver=18022025' media='all' />
+<style id='rocket-lazyload-inline-css'>
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://www.brightpearl.com/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+/*# sourceURL=rocket-lazyload-inline-css */
+</style>
+<link rel="https://api.w.org/" href="https://www.brightpearl.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.brightpearl.com/wp-json/wp/v2/pages/46" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.brightpearl.com/xmlrpc.php?rsd" />
+<link rel='shortlink' href='https://www.brightpearl.com/' />
+
+<!-- Begin Added by flareAI WordPress Plugin VERSION 5 -->
+<meta name="msvalidate.01" content="2657D70150E1A480B584245B06F3D7FA"/><meta name="google-site-verification" content="m-faUe41uDV4JOrL_g1_XMGlFB6eZN8_Z7rWelEm94E"/><script type="rocketlazyloadscript" async data-rocket-src="https://www.googletagmanager.com/gtag/js?id=G-70WE8KLX4D"></script><script type="rocketlazyloadscript">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-70WE8KLX4D');</script>
+<!-- End Added by flareAI WordPress Plugin  -->
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>                    <script type="application/ld+json">
+                        {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"The backbone of your retail operations","acceptedAnswer":{"@type":"Answer","text":"<a href=\"https:\/\/brightpearl2.wpengine.com#The_backbone_of_your_retail_operations\">Brightpearl provides a robust infrastructure<\/a> to centralize and automate all your critical post-purchase operations. Including inventory, order management, warehousing, fulfillment, shipping, purchasing, accounting, supplier management, POS, CRM, and retail business intelligence. While all your core operations are optimized, you\u2019ll be able to swiftly adjust to any market changes and grow your business without any inefficiency holding you back."}},{"@type":"Question","name":"Why Brightpearl?","acceptedAnswer":{"@type":"Answer","text":"<a href=\"https:\/\/brightpearl2.wpengine.com#Why_Brightpearl\">Built for retail<\/a> Brightpearl is specifically designed for retail and wholesale businesses, which means you won\u2019t pay for any unnecessary functionality or costly customizations. Software with Service Our retail consultants accompany you throughout the entire partnership, from project scoping to implementation, offering 24\/7 tech support and ongoing business consulting. Agility at scale Whether it\u2019s preparing for the holiday rush or responding to sudden market changes or shifting business directions, Brightpearl\u2019s agile operations help you scale with a platform you can build your business on."}},{"@type":"Question","name":"Trusted by merchants in various retail industries","acceptedAnswer":{"@type":"Answer","text":"\"<a href=\"https:\/\/brightpearl2.wpengine.com#We_told_Brightpearl\">We told Brightpearl<\/a> we needed to go live in six weeks and we did! Having the fantastic training and implementation support that we did from Brightpearl meant that we were able to manage the holiday spike without breaking a sweat. If you can go live one week before Black Friday, you could do it at any time!\" Alida Sholl, Rep Fitness"}},{"@type":"Question","name":"Events, News, and Insights","acceptedAnswer":{"@type":"Answer","text":"Brightpearl is selected to power Shopify\u2019s lineup of retail hardware <a href=\"https:\/\/brightpearl2.wpengine.com#News\">Shopify is now employing Brightpearl<\/a> to automate and support the fulfillment and distribution of new merchants who are starting new, or expanding to, brick-and-mortar retail stores. "}},{"@type":"Question","name":"Contact us today for a customized demo of Brightpearl","acceptedAnswer":{"@type":"Answer","text":"And <a href=\"https:\/\/brightpearl2.wpengine.com#Contact\">see how we can help<\/a> you automate the ordinary and act on the exceptional."}}]}
+                    </script>
+
+                    <link rel="icon" href="https://www.brightpearl.com/wp-content/uploads/2024/02/cropped-brightpearl-favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.brightpearl.com/wp-content/uploads/2024/02/cropped-brightpearl-favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.brightpearl.com/wp-content/uploads/2024/02/cropped-brightpearl-favicon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.brightpearl.com/wp-content/uploads/2024/02/cropped-brightpearl-favicon-270x270.png" />
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<style id="rocket-lazyrender-inline-css">[data-wpr-lazyrender] {content-visibility: auto;}</style><meta name="generator" content="WP Rocket 3.20.2" data-wpr-features="wpr_delay_js wpr_defer_js wpr_lazyload_images wpr_lazyload_iframes wpr_preconnect_external_domains wpr_automatic_lazy_rendering wpr_image_dimensions wpr_preload_links wpr_desktop" /></head>
+
+<body class="home wp-singular page-template page-template-front-page page-template-front-page-php page page-id-46 wp-theme-bp-wp-2021">
+
+<!-- Tealium Universal Data Object -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+ var utag_data = {
+ }
+ </script>
+
+<!-- Tealium Universal Tag --> 
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript"> 
+(function(a,b,c,d){ 
+a='//tags.tiqcdn.com/utag/sage/brightpearl/prod/utag.js'; 
+b=document;c='script';d=b.createElement(c);d.src=a; 
+d.type='text/java'+c;d.async=true; 
+a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a) 
+})(); 
+</script> 
+
+
+<div  id="page" class="site m-transparent-header">
+
+	<a class="skip-link screen-reader-text" href="#primary">Skip to content</a>
+
+	<header  id="masthead" class="l-header site-header">
+
+		<div  class="l-header-inner">
+
+			<div class="l-wrapper">
+
+				<div class="w-100 pt2 pt3-l flex justify-start">
+				
+					<div class="l-header-logo-wrapper flex-auto relative z-9999">
+		              	<a aria-label="homepage" href="https://www.brightpearl.com/" rel="home" class="l-header-logo dib" data-wpel-link="internal">
+
+		              		<img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img//sage/brightpearl-by-sage-logo.svg" class="db no-lazyload" alt="Brightpearl by Sage" width="230px" height="45px" />
+		              	</a>
+			        </div>
+
+					<nav id="site-navigation" class="l-header-nav main-navigation flex-auto flex">
+
+						<span class="menu-toggle dib pointer js-nav-btn relative z-9999" aria-label="Open the menu">	
+							<span class="line bg-blue" aria-hidden="true"></span>
+							<span class="line bg-blue" aria-hidden="true"></span>
+							<span class="line bg-blue" aria-hidden="true"></span>
+						</span>
+
+						<!-- Hardcoded nav based on WP classes - note js uses class .menu-item-has-children -->
+
+<ul id="menu-main-navigation" class="menu menu-main js-nav-menu">
+  <li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children submenu">
+    <a href="#" class="nav-products-link js-sub-menu-link">Product Overview</a>
+
+    <div class="sub-menu sub-menu-column-3 dn">
+        <ul class="list w-33-l pa3-l">
+
+          <li id="menu-item-450" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <p class="list-title ttu">Forecasting &amp; Purchasing</p>
+          </li>
+          
+          <li id="menu-item-457" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="https://www.brightpearl.com/inventory-planning" class="icon-sm icon-demand " data-wpel-link="internal">Inventory Planning</a>
+          </li>
+
+        </ul>
+
+        <ul class="list w-33-l pa3-l">
+
+          <li id="menu-item-449" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <p class="list-title ttu">Operational efficiency</p>
+          </li>
+
+
+          <li id="menu-item-455" class="menu-item menu-item-type-custom menu-item-object-custom">
+
+            <a href="https://www.brightpearl.com/retail-management-software" class="icon-sm icon-order " data-wpel-link="internal">Inventory &amp; Order Management</a>
+          </li>
+
+          <li id="menu-item-458" class="menu-item menu-item-type-custom menu-item-object-custom">
+
+            <a href="https://www.brightpearl.com/shipping-fulfillment-software" class="icon-sm icon-shipping " data-wpel-link="internal" >Shipping &amp; Fulfillment</a>
+          </li>
+
+          <li id="menu-item-459" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="https://www.brightpearl.com/warehouse-management-system" class="icon-sm icon-warehouse " data-wpel-link="internal">Warehouse Management</a>
+          </li>
+
+          <li id="menu-item-465" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="https://www.brightpearl.com/retail-crm" class="icon-sm icon-crm " data-wpel-link="internal">CRM</a>
+          </li>
+
+        </ul>
+
+        <ul class="list w-33-l pa3-l">
+
+          <li id="menu-item-448" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <p class="list-title ttu">Data insights</p>
+          </li>
+
+           <li id="menu-item-463" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <a href="https://www.brightpearl.com/retail-reporting-analytics" class="icon-sm icon-reporting " data-wpel-link="internal">Retail Analytics</a>
+          </li>
+
+          <li id="menu-item-460" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <a href="https://www.brightpearl.com/retail-accounting-software" class="icon-sm icon-retail " data-wpel-link="internal">Retail Accounting</a>
+          </li>
+        </ul>
+
+    </div>
+
+  </li>
+
+  <li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children submenu">
+    <a href="#" class="nav-services-link js-sub-menu-link">Services</a>
+
+    <ul class="sub-menu dn">
+
+      <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/implementation-and-consultancy" class="" data-wpel-link="internal" ><span>Implementation</span></a>
+      </li>
+
+      <li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/training" class="" data-wpel-link="internal" ><span>Training</span></a>
+      </li>
+
+     <!--  <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="/customer-support" class="" data-wpel-link="internal" ><span>Support</span></a>
+      </li> -->
+
+      <li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/customer-success" class=""  data-wpel-link="internal" ><span>Customer Success</span></a>
+      </li>
+
+      <li id="menu-item-480" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/flexible-infrastructure" class="" data-wpel-link="internal">Flexible Infrastructure</a>
+        </li>
+    </ul>
+
+  </li>
+
+  <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom">
+    <a href="https://www.brightpearl.com/pricing" class="nav-pricing-link ">Pricing</a>
+  </li>
+
+  <li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children submenu">
+    <a href="https://www.brightpearl.com/integrations" class="nav-integrations-link js-sub-menu-link" data-wpel-link="internal">Integrations</a>
+
+    <div class="sub-menu sub-menu-column-3 dn flex-wrap">
+        <ul class="list w-33-l pa3-l">
+
+          <li id="menu-item-350" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <p class="list-title ttu">E-commerce</p>
+          </li>
+          
+          <li id="menu-item-351" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="https://www.brightpearl.com/integrations/ecommerce/shopify" class="" data-wpel-link="internal">Shopify</a>
+          </li>
+
+           <li id="menu-item-352" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="https://www.brightpearl.com/integrations/ecommerce/magento" class="" data-wpel-link="internal">Magento</a>
+          </li>
+
+           <li id="menu-item-353" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="https://www.brightpearl.com/integrations/ecommerce/bigcommerce" class="" data-wpel-link="internal">BigCommerce</a>
+          </li>
+
+        </ul>
+
+        <ul class="list w-33-l pa3-l">
+
+          <li id="menu-item-360" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <p class="list-title ttu">Accounting &amp; payments</p>
+          </li>
+
+
+          <li id="menu-item-361" class="menu-item menu-item-type-custom menu-item-object-custom">
+
+            <a href="https://www.brightpearl.com/integrations/payment/stripe" class="" data-wpel-link="internal">Stripe</a>
+          </li>
+
+          <li id="menu-item-362" class="menu-item menu-item-type-custom menu-item-object-custom">
+
+            <a href="https://www.brightpearl.com/integrations/payment/square" class="" data-wpel-link="internal">Square</a>
+          </li>
+
+          <li id="menu-item-363" class="menu-item menu-item-type-custom menu-item-object-custom">
+
+            <a href="https://www.brightpearl.com/integrations/accounting/xero" class="" data-wpel-link="internal">Xero</a>
+          </li>
+
+          <li id="menu-item-364" class="menu-item menu-item-type-custom menu-item-object-custom">
+
+            <a href="https://www.brightpearl.com/integrations/accounting/quickbooks-online" class="" data-wpel-link="internal">Quickbooks</a>
+          </li>
+
+          <li id="menu-item-365" class="menu-item menu-item-type-custom menu-item-object-custom">
+
+            <a href="https://www.brightpearl.com/integrations/accounting/sage-intacct" class="" data-wpel-link="internal">Sage</a>
+          </li>
+
+        </ul>
+
+        <ul class="list w-33-l pa3-l">
+
+          <li id="menu-item-370" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <p class="list-title ttu">Shipping &amp; Fulfillment</p>
+          </li>
+
+           <li id="menu-item-371" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <a href="https://www.brightpearl.com/integrations/shipping-and-fulfillment/royal-mail" class="" data-wpel-link="internal">Royal Mail</a>
+          </li>
+
+          <li id="menu-item-372" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <a href="https://www.brightpearl.com/integrations/shipping-and-fulfillment/united-states-postal-service" class="" data-wpel-link="internal">USPS</a>
+          </li>
+
+          <li id="menu-item-373" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <a href="https://www.brightpearl.com/integrations/shipping-and-fulfillment/dpd" class="" data-wpel-link="internal">DPD</a>
+          </li>
+
+          <li id="menu-item-374" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <a href="https://www.brightpearl.com/integrations/shipping-and-fulfillment/fedex" class="" data-wpel-link="internal">FedEx</a>
+          </li>
+
+         
+        </ul>
+
+        <div class="w-100 db">
+          <a href="https://www.brightpearl.com/integrations" class="fw6 link-underline" data-wpel-link="internal">See all integrations</a>
+        </div>
+
+    </div>
+
+  </li>
+
+  <li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children submenu">
+    <a href="#" class="nav-who-we-serve-link js-sub-menu-link">Who we serve</a>
+
+    <div class="sub-menu sub-menu-column-2 dn">
+     
+      <ul class="list w-50-l pa3-l">
+
+        <li id="menu-item-400" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <p class="list-title ttu">By Business Type</p>
+        </li>
+
+        <li id="menu-item-467" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/ecommerce-management" class="" data-wpel-link="internal" ><span>E-Commerce Businesses</span></a>
+        </li>
+
+        <li id="menu-item-470" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/multichannel" class="" data-wpel-link="internal" ><span>Multichannel Businesses</span></a>
+        </li>
+
+        <li id="menu-item-471" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/direct-to-consumer" class="" data-wpel-link="internal" ><span>Direct-To-Consumer Businesses</span></a>
+        </li>
+
+        <li id="menu-item-468" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/wholesale-management" class="" data-wpel-link="internal" ><span>Wholesale &amp; B2B Businesses</span></a>
+        </li>
+
+      </ul>
+
+      <ul class="list w-50-l pa3-l">
+
+        <li id="menu-item-401" class="menu-item menu-item-type-custom menu-item-object-custom">
+            <p class="list-title ttu">By Ecommerce Channel</p>
+        </li>
+
+        <li id="menu-item-472" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/bigcommerce" class="" data-wpel-link="internal" ><span>BigCommerce Businesses</span></a>
+        </li>
+
+        <li id="menu-item-473" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/magento" class="" data-wpel-link="internal" ><span>Magento Businesses</span></a>
+        </li>
+
+        <li id="menu-item-474" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/shopify" class="" data-wpel-link="internal" ><span>Shopify Businesses</span></a>
+        </li>
+
+        <li id="menu-item-475" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/amazon" class="" data-wpel-link="internal" ><span>Amazon Businesses</span></a>
+        </li>
+
+        <li id="menu-item-476" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="https://www.brightpearl.com/ebay" class="" data-wpel-link="internal" ><span>eBay Businesses</span></a>
+        </li>
+
+        <li id="menu-item-477" class="menu-item menu-item-type-custom menu-item-object-custom last-item">
+          <a href="https://www.brightpearl.com/walmart" class="" data-wpel-link="internal" ><span>Walmart Businesses</span></a>
+        </li>
+      </ul>
+
+    </div>
+
+  </li>
+
+  <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children submenu">
+    <a href="#" class="nav-why-brightpearl-link js-sub-menu-link">Why Brightpearl</a>
+
+    <ul class="sub-menu dn">
+
+      <li id="menu-item-23" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/why-brightpearl" class="" data-wpel-link="internal" ><span>Why Brightpearl</span></a>
+      </li>
+
+      <li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/customer-stories" class="" data-wpel-link="internal" ><span>Customer Stories</span></a>
+      </li>
+
+    </ul>
+  </li>
+
+  <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children submenu">
+    <a href="#" class="nav-resources-link js-sub-menu-link">Resources</a>
+
+    <ul class="sub-menu dn">
+
+      <li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/resource-center" class="" data-wpel-link="internal" ><span>Resource Center</span></a>
+      </li>
+
+      <li id="menu-item-28" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/ecommerce-guides" class="" data-wpel-link="internal" ><span>Guides</span></a>
+      </li>
+
+      <li id="menu-item-29" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
+        <a href="https://www.brightpearl.com/blog" class="nav-blog-link" data-wpel-link="internal"><span>Blog</span></a>
+      </li>
+
+      <li id="menu-item-30" class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="https://www.brightpearl.com/press-and-media" class="" data-wpel-link="internal" ><span>Press</span></a>
+      </li>
+
+      <li id="menu-item-31" class="menu-item menu-item-type-custom menu-item-object-custom last-item">
+        <a href="https://www.brightpearl.com/life-is-short-automate" class="" data-wpel-link="internal" ><span>Life is Short, Let's Automate</span></a>
+      </li>
+
+      <li id="menu-item-32" class="menu-item menu-item-type-custom menu-item-object-custom last-item">
+        <a href="https://www.brightpearl.com/retales" class="" data-wpel-link="internal" ><span>Re:tales Podcast</span></a>
+      </li>
+
+
+      <li id="menu-item-33" class="menu-item menu-item-type-custom menu-item-object-custom last-item">
+        <a href="https://www.brightpearl.com/peak-season-series-2023" class="" data-wpel-link="internal" ><span>Peak Season Series 2023</span></a>
+      </li>
+
+      <li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom last-item">
+        <a href="https://www.brightpearl.com/lightning-50" class="" data-wpel-link="internal" ><span>The Lightning 50</span></a>
+      </li>
+
+    </ul>
+
+  </li>
+
+  <li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom last">
+    <a href="https://www.brightpearl.com/bookdemo" data-wpel-link="internal" class="btn btn--block pv3 ph3-plus fw6 no-underline tc mt4 js-tlm-tracking">
+      Book a Demo
+    </a>
+  </li>
+
+</ul>
+
+						<!--  -->
+
+					</nav><!-- #site-navigation -->
+
+					<div class="l-utilities-nav flex-auto center tr dn">
+			            <ul class="list pl0 mv1 w-100">
+			              <li class="pr3 dib">
+			                <a href="https://login.brightpearlapp.com" id="login-btn-main" class="nav-link nav-link-login no-underline" data-wpel-link="external" target="_blank" rel="external noopener noreferrer">Login</a>
+			              </li>
+			              <li class="pl1 dib">
+			                <a class="btn btn--std ph3-plus pv3 demo-btn-main js-tlm-tracking" href="https://www.brightpearl.com/bookdemo" data-wpel-link="internal">Book a demo</a>
+			              </li>
+			            </ul>
+			        </div>
+
+				</div>
+
+			</div> <!-- l-wrapper -->
+
+		</div><!-- l-header-inner -->
+
+	</header><!-- #masthead l-header -->
+
+
+	<main  id="primary" class="site-main">
+
+		<section  class="m-hero-gf m-hero-gf-home bg-black relative z-1">
+
+			<div class="m-hero-gf-inner">
+				<div class="l-wrapper mw-82 pv4 pb5-l">
+
+				    <div class="flex-l flex-row-l h-100 relative">
+
+					    <div class="w-60-l pr5-l m-gf-hero-titles mw-700 max-w-none-l pb4 pb0-l center no-center-l"> 
+
+					        <div class="title-wrapper tl">
+
+					        	<h1 class="pre-header sg-jade-light ttu title-sequel lh-copy mb2">
+					        		Retail Operating System					        	</h1>
+
+					        	<h2 class="as-header-1 white pb3">
+				            		Save Hundreds of Hours. Eliminate Errors.				            	</h2>
+
+				            	<div class="cms m-checks-list white">
+				            		<p>Multi-channel merchants and wholesalers turn to Brightpearl to <strong>streamline operations</strong>, <strong>boost efficiency</strong> and <strong>stay ahead</strong> in a fast-changing retail landscape.</p>
+<p>Brightpearl customers are free to focus on growth. They use our Automation Engine to…</p>
+<ul>
+<li>Save two months a year, on average</li>
+<li>Reduce human errors by 65%</li>
+<li>Lower labor costs by 50%</li>
+</ul>
+				            	</div>
+					      		
+					      		<div class="flex-l flex-row-l justify-between pt3-l tc tl-l">
+
+					      			<div class="w-50-l pt2">
+					      				<a href="#" class="btn btn--std js-form-reveal">Book a free demo today</a>
+					      			</div>
+
+					      			<div class="w-50-l tc tl-l pt3 pt2-l">
+
+					      				<img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/sage/logo-capterra-with-score.svg" alt="Capterra" class="no-lazyload dib" width="130" height="42" />
+					      			</div>
+
+					      		</div>
+
+					        </div>
+
+					    </div>
+
+					    <div class="w-40-l ph3-l mw-500 max-w-none-l center no-center-l">
+					    	<img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/sage/brightpearl-hero-banner.webp" alt="Brightpearl Composite" class="no-lazyload" width="454" height="591" />
+					    </div>
+
+				    </div><!--/.m-gf-hero-wrapper-->
+
+
+
+				</div><!--/.l-wrapper mw-90-->
+			</div><!-- /.m-hero-gf-inner -->
+
+			<div class="l-wrapper mw-82 tc overflow-hidden pb4 pb0-l">
+
+				<p class="intro-text sg-jade-light mb0 pb4 pb5-l">5,000+ pioneering brands rely on Brightpearl to grow further and faster</p>
+
+				<ul class="m-company-logos-list m-columns-wrapper list flex flex-wrap flew-row justify-between">
+
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%2040'%3E%3C/svg%3E" alt="Wild" class="dib" width="128px" height="40px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-wild@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-wild@2x.png" alt="Wild" class="dib" width="128px" height="40px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%2020'%3E%3C/svg%3E" alt="Goose and Gander" class="dib" width="128px" height="20px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-goose-gander@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-goose-gander@2x.png" alt="Goose and Gander" class="dib" width="128px" height="20px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%2041'%3E%3C/svg%3E" alt="Monica and Andy" class="dib" width="128px" height="41px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-monica-and-andy.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-monica-and-andy.png" alt="Monica and Andy" class="dib" width="128px" height="41px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20112%2045'%3E%3C/svg%3E" alt="Piglet" class="dib" width="112px" height="45px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-piglet@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-piglet@2x.png" alt="Piglet" class="dib" width="112px" height="45px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2063%2045'%3E%3C/svg%3E" alt="Lovepop" class="dib" width="63px" height="45px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-lovepop@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-lovepop@2x.png" alt="Lovepop" class="dib" width="63px" height="45px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%2018'%3E%3C/svg%3E" alt="Finlay" class="dib" width="128px" height="18px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-finlay@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-finlay@2x.png" alt="Finlay" class="dib" width="128px" height="18px" /></noscript>
+					</li>
+
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%2013'%3E%3C/svg%3E" alt="Naturecan" class="dib" width="128px" height="13px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-naturecan.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-naturecan.png" alt="Naturecan" class="dib" width="128px" height="13px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2074%2045'%3E%3C/svg%3E" alt="Flex" class="dib" width="74px" height="45px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-flex.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-flex.png" alt="Flex" class="dib" width="74px" height="45px" /></noscript>
+					</li>
+					
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%2017'%3E%3C/svg%3E" alt="Passenger" class="dib" width="128px" height="17px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-passenger@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-passenger@2x.png" alt="Passenger" class="dib" width="128px" height="17px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb3 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%2036'%3E%3C/svg%3E" alt="Jimmy Lion" class="dib" width="128px" height="36px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-jimmy-lion@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-jimmy-lion@2x.png" alt="Jimmy Lion" class="dib" width="128px" height="36px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20120%2045'%3E%3C/svg%3E" alt="fairfax & Favor" class="dib" width="120px" height="45px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-fairfax-favor@2x.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-fairfax-favor@2x.png" alt="fairfax & Favor" class="dib" width="120px" height="45px" /></noscript>
+					</li>
+					<li class="ph3 ph4-l pb4 tc w-33 w-25-m w-15-l flex flex-row items-center justify-center">
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%208'%3E%3C/svg%3E" alt="Holland Cooper" class="dib" width="128px" height="8px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-holland-cooper.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/logos/logo-holland-cooper.png" alt="Holland Cooper" class="dib" width="128px" height="8px" /></noscript>
+					</li>
+					
+
+				</ul>
+
+
+			</div>
+
+		</section>
+		<!-- /.m-hero-gf .m-hero-gf-home -->
+
+		<section  class="introduction bg-black">
+
+			<div class="l-wrapper mw-82">
+
+				<div class="flex-l flex-row-l pb4 pb5-l pt4-l">
+
+					<div class="w-50-l tc tl-l pb4 pb0-l pt5-l pr5-l flex-l flex-row-l items-center-l">
+
+						<div class="intro-content">
+							<h2 class="mid title-sequel white mb0 pb4">Tough times don’t last.  <br /> <i>Brightpearl customers do.</i></h2>
+
+							<div class="cms white mw-600 center no-center-l">
+								<p>A global market slowdown. A supply chain crisis. Wavering consumer demand. Rising costs. It’s a tricky time to be in retail. But it doesn’t have to be.</p>
+<p>Out of the chaos, <strong>opportunities are emerging</strong>. Be ready to seize them with Brightpearl.</p>
+<p>Automate your operations, intelligently plan your inventory and make your investments go further with our #1 Retail Operating System.</p>
+							</div>
+
+							<a href="#" class="btn btn--std mt3 js-form-reveal">Book a demo</a>
+
+						</div>
+
+					</div>
+
+					<div class="w-50-l pl4-l flex-l flex-row-l">
+						<div class="center no-center-l mw-600 pt4-l tc tl-l">
+							<img width="1330" height="1148" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201330%201148'%3E%3C/svg%3E" alt="Brightpearl customers" class="dib"  data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/sage/tough-times-dont-last.png" /><noscript><img width="1330" height="1148" src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/sage/tough-times-dont-last.png" alt="Brightpearl customers" class="dib"  /></noscript>
+						</div>
+					</div>
+
+				</div><!--/.flex-l -->
+
+			</div>
+
+		</section>
+
+
+		<section  class="what-we-offer">
+
+
+			<div class="z-1">
+				<div class="l-wrapper mw-82">
+					<div class="row-1 flex-l flex-row-l pv4 pt5-l relative z-5">
+
+						<div class="w-50-l pr4-l pb3 center no-center-l mw-600">
+
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20568%20467'%3E%3C/svg%3E" class="db" alt="home-free-up-time" width="568px" height="467px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/03/home-free-up-time.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/03/home-free-up-time.png" class="db" alt="home-free-up-time" width="568px" height="467px" /></noscript>
+							
+						</div>
+
+						<div class="w-50-l pl5-l flex-l flex-row-l items-center-l">
+
+							<div class="center no-center-l mw-600 pt4-l tc tl-l">
+								<h2 class="mid title-sequel pt3">Free up your time, <i>keep up your profits</i></h2>
+								<h3>by automating (almost) everything</h3>
+<p>Right now, your business needs you to spend your time innovating, adapting and seizing opportunities – not getting bogged down by tedious, low-profit tasks.</p>
+<p>Easily automate everything from complex order fulfillment and multi-location inventory management to shipping and accounting with Brightpearl’s powerful Automation Engine. <strong>Save 1000s of hours</strong> and focus your energy where it counts.</p>
+							</div>
+
+
+						</div>
+
+					</div><!--/.row-1-->
+				</div><!--/.l-wrapper-->
+			</div><!--/.bg-grey-->
+
+			<div class="m-sections-wrapper bg-grey">
+				<div class="l-wrapper mw-82">
+					<div class="row-2 flex-l flex-row-l pv4 pt5-l">
+
+
+						<div class="w-50-l pl4-l pb3 center no-center-l mw-600 order-1-l flex-l flex-row-l items-center-l">
+
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20568%20414'%3E%3C/svg%3E" class="db" alt="home-supply-chain" width="568px" height="414px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/home-supply-chain.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/home-supply-chain.png" class="db" alt="home-supply-chain" width="568px" height="414px" /></noscript>
+							
+						</div>
+
+						<div class="w-50-l pr5-l order-0-l flex-l flex-row-l items-center-l">
+
+							<div class="center no-center-l mw-600 pt4-l tc tl-l">
+								<h2 class="mid title-sequel pt3">Dodge supply chain<br /> <i>curveballs</i></h2>
+								<h3>with smart sales forecasting and inventory planning</h3>
+<p>Delayed orders? Warehouse full of stock you can’t shift? Best-sellers always running low? You need an <a href="https://www.brightpearl.com/inventory-planning" data-wpel-link="internal">advanced inventory planning solution</a> that can handle unpredictable demand and supply chain disruption to <strong>keep your cash flow healthy</strong>. You need Brightpearl.</p>
+<p>Get buying recommendations based on accurate sales forecasting so you always know what to order, how much to order and when to order it. You can even factor in rapidly-changing trends and sudden market shifts into your planning – in the current market, it’s the only way to get ahead.</p>
+							</div>
+
+
+						</div>
+
+					</div><!--/.row-2-->
+				</div><!--/.l-wrapper-->
+			</div><!--/.m-sections-wrapper-->
+
+
+			
+			<div class="l-wrapper mw-82">
+				<div class="row-3 flex-l flex-row-l pv4 pt5-l">
+
+					<div class="w-50-l pr4-l pb3 center no-center-l mw-600">
+
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20568%20518'%3E%3C/svg%3E" class="db" alt="home-kpi-summary" width="568px" height="518px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/03/home-kpi-summary.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/03/home-kpi-summary.png" class="db" alt="home-kpi-summary" width="568px" height="518px" /></noscript>
+
+					</div>
+
+					<div class="w-50-l pl5-l flex-l flex-row-l items-center-l">
+
+						<div class="center no-center-l mw-600 pt4-l tc tl-l">
+							<h2 class="mid title-sequel pt3">Get more bang<br /> <i>for your buck</i></h2>
+							<h3>with advanced insights + analysis</h3>
+<p>Make smarter decisions and grow your business faster with <strong>Brightpearl’s retail analytics</strong>.</p>
+<p>Yes, our business intelligence tools include key KPIs like Customer Acquisition Cost (CAC), Lifetime Value (LTV), best-selling products and paid search and social performance – but, unlike other tools, our data is accurate and super easy to navigate.</p>
+<p>You can even <strong>access industry benchmarks</strong> to see how your performance compares to your competition.</p>
+						</div>
+
+
+					</div>
+
+				</div><!--/.row-3-->
+			</div><!--/.l-wrapper-->
+			
+
+			<div class="bg-grey">
+				<div class="l-wrapper mw-82">
+					<div class="row-4 flex-l flex-row-l pv4 pv5-l">
+
+
+						<div class="w-50-l pl4-l pb2 center no-center-l mw-600 order-1-l">
+
+							<div class="mw-400 center">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20363%20363'%3E%3C/svg%3E" class="db m-picture-block" alt="logos-plug-and-play-apps" width="363px" height="363px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/logos-plug-and-play-apps.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/logos-plug-and-play-apps.png" class="db m-picture-block" alt="logos-plug-and-play-apps" width="363px" height="363px" /></noscript>
+							</div>
+
+						</div>
+
+						<div class="w-50-l pr5-l order-0-l flex-l flex-row-l items-center-l">
+
+							<div class="center no-center-l mw-600 tc tl-l">
+								<h2 class="mid title-sequel pt3">Be where your<br /> <i>customers are</i></h2>
+								<h3>with a huge range of Plug &amp; Play apps</h3>
+<p>Attracting new customers (and being where your current ones hang out online) is key to growth but can introduce complexity. Brightpearl’s market-disrupting <a href="https://www.brightpearl.com/app-store" data-wpel-link="internal">library of Plug &amp; Play integrations</a> makes it simple.</p>
+<p>Add new sales channels – including TikTok, Instagram, live stream platforms and more – in minutes. Curate an ever-changing roster of the latest tech tools, as and when your business needs them. Access deep APIs and a certified network of development partners so that <strong>where other brands falter, you can soar</strong>.</p>
+							</div>
+
+
+						</div>
+
+					</div><!--/.row-4-->
+
+				</div><!--/.l-wrapper-->
+			</div><!--/.bg-grey-->
+
+			
+			<div class="l-wrapper mw-82">
+
+				<div class="row-5 flex-l flex-row-l pv4 pv5-l">
+
+					<div class="w-50-l pr4-l pb4 pb0-l center no-center-l mw-600">
+
+						<div class="br4 overflow-hidden">
+							<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20385'%3E%3C/svg%3E" alt="Sage Bristol team" class="db" width="600px" height="385px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/sage-bristol-team.jpg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/home-page/sage-bristol-team.jpg" alt="Sage Bristol team" class="db" width="600px" height="385px" /></noscript>
+						</div>
+
+					</div>
+
+					<div class="w-50-l pl5-l flex-l flex-row-l items-center-l">
+
+						<div class="center no-center-l mw-600 pt2-l tc tl-l">
+							<h2 class="mid title-sequel">Expert support<br /> <i>at every step</i></h2>
+							<h3>with our end-to-end services</h3>
+<p>The right software is important, but it’s not enough on its own. To unlock your unique growth potential, it has to be optimized by experts and backed up by training and support.</p>
+<p>At Brightpearl, our retail experts are with you every step of the way. From <a href="https://www.brightpearl.com/implementation-and-consultancy" data-wpel-link="internal">flawless implementation</a> with a proven <strong>97% success rate</strong> and bespoke onboarding training to ongoing consulting and 24/7 support, we’ll ensure you get the very best from Brightpearl.</p>
+						</div>
+
+
+					</div>
+
+				</div><!--/.row-5-->
+			</div><!--/.l-wrapper-->
+			
+
+		</section><!-- /.what-we-offer -->
+
+
+
+		<section data-wpr-lazyrender="1" class="get-connected-in-page bg-black">
+
+			<div class="l-wrapper mw-82 pb4 pt5 pv5-l">
+
+				<div class="row-5 flex-l flex-row-l">
+
+					<div class="w-40-l pb4 pb0-l pl5-l mw-350 max-w-none-l center no-center-l order-1-l">
+
+						<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20500%20385'%3E%3C/svg%3E" alt="Keep Growing" class="db" width="500px" height="385px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/sage/keep-growing.png" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/sage/keep-growing.png" alt="Keep Growing" class="db" width="500px" height="385px" /></noscript>
+
+					</div>
+
+					<div class="w-60-l pb4 pb0-l pr5-l center no-center-l mw-600 max-w-none-l flex-l flex-row-l items-center-l order-0-l">
+
+						<div class="white mw-800 mw-none-l center tc tl-l pv4">
+
+							<h2 class="as-header-1 white">Ready to keep growing?</h2>
+
+							<p class="intro-text mb4 fw6">Discover how Brightpearl can help control your cash flow</p>
+
+							<a href="#" class="btn btn--std fw6 js-form-reveal dib">Book a demo</a>
+						</div>
+
+					</div>
+
+				</div><!--/.row-5-->
+
+				
+
+			</div>
+
+		</section><!--/.get-connected-in-page -->
+
+
+
+		<section data-wpr-lazyrender="1" class="trusted-content">
+
+			<div class="l-wrapper mw-82 pv4 pt5-l overflow-hidden">
+
+				<div class="center mw-800 tc mb4 mb5-l">
+					<h2 class="as-intro-text sg-jade-mid mb0 pb2">Our customers</h2>
+					<h3 class="as-header-2 title-sequel">Trusted by merchants<br /> in every industry</h3>
+				</div>
+
+
+				<div class="flex flex-row flex-wrap m-columns-wrapper m-columns-wrapper--one-rem">
+
+					
+		    				<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100 pb2-l">
+
+						           	<a href="https://www.brightpearl.com/customer-stories/snow-cosmetics" class="db h-100 relative pb4-ns hover-opacity" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2022/12/customer-snow.png') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="mb0 black fw6">&quot;Brightpearl’s Automation Engine transformed how we manage peaks. Without it, I would have had to double our warehouse & operations staff. The inventory planning tool factors in seasonality so that we instantly say ’ok, we need to order 100,000 of that item, not 10,000'.&quot;</p>
+								            	
+
+			 								<p class="black o-5 fw6 mv3"> Trevor Martin, Snow’s Vice President of Operations</p> 
+
+											<p class="btn-ghost dib mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+							
+		    				<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100 pb2-l">
+
+						           	<a href="https://www.brightpearl.com/customer-stories/usa-lab" class="db h-100 relative pb4-ns hover-opacity" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2022/12/customer-usa-lab.jpg') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="mb0 black fw6">&quot;We had spreadsheets for everything and, at one point, a third of our products were out of stock. Brightpearl takes the guesswork out of managing stock. Automation with Brightpearl has been fantastic, I barely touch the system for standard orders.&quot;</p>
+								            	
+
+			 								<p class="black o-5 fw6 mv3">Matt Wisniewski, COO, USA Lab</p> 
+
+											<p class="btn-ghost dib mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+							
+		    				<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100 pb2-l">
+
+						           	<a href="https://www.brightpearl.com/customer-stories/nooz-optics" class="db h-100 relative pb4-ns hover-opacity" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2022/12/customer-nooz-optics.jpg') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="mb0 black fw6">&quot;Brightpearl scales as we do. Previously, we were reluctant to add the latest sales channels or tools because it added complexity. Brightpearl has got rid of that mentality – we now know we can quickly and easily connect the apps we need, when we need them.&quot;</p>
+								            	
+
+			 								<p class="black o-5 fw6 mv3">Antoine Doolaeghe, Co-Founder, Nooz Optics</p> 
+
+											<p class="btn-ghost dib mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+							
+		    				<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100 pb2-l">
+
+						           	<a href="https://www.brightpearl.com/customer-stories/bond-touch" class="db h-100 relative pb4-ns hover-opacity" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2022/05/Bond-touch466.jpg') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="mb0 black fw6">&quot;Our aim was to stop our team doing almost all manual tasks, and we were able to achieve that with Brightpearl’s Automation Engine. Now, everything except occasional warranty orders are handled automatically.&quot;</p>
+								            	
+
+			 								<p class="black o-5 fw6 mv3">Jorge Henriques, COO, Bond Touch</p> 
+
+											<p class="btn-ghost dib mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+							
+		    				<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100 pb2-l">
+
+						           	<a href="https://www.brightpearl.com/customer-stories/lovepop" class="db h-100 relative pb4-ns hover-opacity" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2020/08/Lovepop-graphic.png') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="mb0 black fw6">&quot;Our business is seasonal, we rely on Brightpearl to help manage peak order volumes as well as year-round implications for managing growth in overall order volume. Having a system that can scale in both elements is critical to our success.&quot;</p>
+								            	
+
+			 								<p class="black o-5 fw6 mv3">Dan Nephew, Director of Systems & Operations, Lovepop</p> 
+
+											<p class="btn-ghost dib mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+							
+		    				<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100 pb2-l">
+
+						           	<a href="https://www.brightpearl.com/customer-stories/cleva" class="db h-100 relative pb4-ns hover-opacity" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2022/12/customer-cleva.webp') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="mb0 black fw6">&quot;With Brightpearl, you can focus on innovation without being caught up in operational processes. With everything taken care of in the background, your business can grow at a good rate – and you feel confident to move the brand forward.&quot;</p>
+								            	
+
+			 								<p class="black o-5 fw6 mv3">Douglas Begg, Technical & Operations Director at Cleva Europe</p> 
+
+											<p class="btn-ghost dib mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+							
+				</div><!--/.flex-->	
+
+
+			</div>
+
+		</section>
+
+
+		<section data-wpr-lazyrender="1" class="brightpearl-at-a-glance bg-black">
+
+			<div class="l-wrapper mw-82 pt5 pb4 overflow-hidden">
+
+				<div class="pb4 white tc">
+
+					<h2 class="white mb0 pb4 pb5-l"><span id="Why_Brightpearl">Why Brightpearl</span></h2>
+
+				</div>
+
+				<div class="flex-m flex-row-m flex-wrap-m m-columns-wrapper m-columns-wrapper--one-rem">
+
+				
+					
+				                <div class="w-50-m w-33-l ph3 pb4 pb5-l">
+
+				                	<div class="flex flex-row">
+
+					                	<div class="m-sage-icon m-sage-icon-side w-20 pt2 pr3">
+						                  	<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20119%20118'%3E%3C/svg%3E" alt="glance-icon-award" class="dib" height="118px" width="119px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-award.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-award.png" alt="glance-icon-award" class="dib" height="118px" width="119px" /></noscript>
+						                </div>
+
+						                <div class="w-80 cms tl white">
+
+						                	<h3 class="white mb0 pb2">Cutting-edge software</h3>
+
+						                	<p class="mb0">Leading tech backed up with a 97% implementation success rate</p>
+						                	
+						                </div>
+
+						            </div>
+
+					            </div>
+
+		    				
+				                <div class="w-50-m w-33-l ph3 pb4 pb5-l">
+
+				                	<div class="flex flex-row">
+
+					                	<div class="m-sage-icon m-sage-icon-side w-20 pt2 pr3">
+						                  	<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20119%20118'%3E%3C/svg%3E" alt="glance-icon-sage" class="dib" height="118px" width="119px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-sage.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-sage.png" alt="glance-icon-sage" class="dib" height="118px" width="119px" /></noscript>
+						                </div>
+
+						                <div class="w-80 cms tl white">
+
+						                	<h3 class="white mb0 pb2">Part of Sage Group Plc</h3>
+
+						                	<p class="mb0">We're built on a solid foundation, which helps us invest in product R&D</p>
+						                	
+						                </div>
+
+						            </div>
+
+					            </div>
+
+		    				
+				                <div class="w-50-m w-33-l ph3 pb4 pb5-l">
+
+				                	<div class="flex flex-row">
+
+					                	<div class="m-sage-icon m-sage-icon-side w-20 pt2 pr3">
+						                  	<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20119%20118'%3E%3C/svg%3E" alt="glance-icon-shopify" class="dib" height="118px" width="119px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-shopify.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-shopify.png" alt="glance-icon-shopify" class="dib" height="118px" width="119px" /></noscript>
+						                </div>
+
+						                <div class="w-80 cms tl white">
+
+						                	<h3 class="white mb0 pb2">Certified Shopify Partner</h3>
+
+						                	<p class="mb0">We’re proud to be a founding member of Shopify’s global ERP Program</p>
+						                	
+						                </div>
+
+						            </div>
+
+					            </div>
+
+		    				
+				                <div class="w-50-m w-33-l ph3 pb4 pb5-l">
+
+				                	<div class="flex flex-row">
+
+					                	<div class="m-sage-icon m-sage-icon-side w-20 pt2 pr3">
+						                  	<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20119%20118'%3E%3C/svg%3E" alt="glance-icon-trusted" class="dib" height="118px" width="119px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-trusted.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-trusted.png" alt="glance-icon-trusted" class="dib" height="118px" width="119px" /></noscript>
+						                </div>
+
+						                <div class="w-80 cms tl white">
+
+						                	<h3 class="white mb0 pb2">Proven track record</h3>
+
+						                	<p class="mb0">We power millions of orders a month for some of the world’s biggest brands</p>
+						                	
+						                </div>
+
+						            </div>
+
+					            </div>
+
+		    				
+				                <div class="w-50-m w-33-l ph3 pb4 pb5-l">
+
+				                	<div class="flex flex-row">
+
+					                	<div class="m-sage-icon m-sage-icon-side w-20 pt2 pr3">
+						                  	<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20119%20118'%3E%3C/svg%3E" alt="glance-icon-star" class="dib" height="118px" width="119px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-star.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-star.png" alt="glance-icon-star" class="dib" height="118px" width="119px" /></noscript>
+						                </div>
+
+						                <div class="w-80 cms tl white">
+
+						                	<h3 class="white mb0 pb2">Excellent reviews</h3>
+
+						                	<p class="mb0">We’ve earned great reviews from customers, including 4.5 stars on Trustpilot</p>
+						                	
+						                </div>
+
+						            </div>
+
+					            </div>
+
+		    				
+				                <div class="w-50-m w-33-l ph3 pb4 pb5-l">
+
+				                	<div class="flex flex-row">
+
+					                	<div class="m-sage-icon m-sage-icon-side w-20 pt2 pr3">
+						                  	<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20119%20118'%3E%3C/svg%3E" alt="glance-icon-headset" class="dib" height="118px" width="119px" data-lazy-src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-headset.png" /><noscript><img src="https://www.brightpearl.com/wp-content/uploads/2024/02/glance-icon-headset.png" alt="glance-icon-headset" class="dib" height="118px" width="119px" /></noscript>
+						                </div>
+
+						                <div class="w-80 cms tl white">
+
+						                	<h3 class="white mb0 pb2">Expert support</h3>
+
+						                	<p class="mb0">Our experts are always on hand for training and support</p>
+						                	
+						                </div>
+
+						            </div>
+
+					            </div>
+
+		    				
+
+				</div>
+
+
+			</div>
+
+		</section><!--/.why-brightpearl -->
+
+
+		<section data-wpr-lazyrender="1" class="integrations bg-grey">
+
+			<div class="l-wrapper mw-82 pv5">
+
+				<div class="pb4">
+					<h2 class="as-intro-text sg-jade-mid mb0 pb2">Brightpearl App Store</h2>
+					
+					<h3 class="as-header-2">Instantly connect Brightpearl with the tools you need<br /> to grow fearlessly</h3>
+				</div>
+
+
+				<div class="m-integrations-grid flex flex-row flex-wrap m-columns-wrapper m-columns-wrapper--one-rem relative z-5 justify-center justify-start-l">
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Shopify Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-shopify-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-shopify-white-bg.svg" alt="Shopify Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Shopify</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Amazon icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-amazon-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-amazon-white-bg.svg" alt="Amazon icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Amazon</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="BigCommerce"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-bigcommerce-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-bigcommerce-white-bg.svg" alt="BigCommerce"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">BigCommerce</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Magento Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-magento-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-magento-white-bg.svg" alt="Magento Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Magento</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item-->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="eBay Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-ebay-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-ebay-white-bg.svg" alt="eBay Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">eBay</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Quickbooks Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-quickbooks-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-quickbooks-white-bg.svg" alt="Quickbooks Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Quickbooks</p>
+				<p class="mb0 lh-title">Accounting</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Lightspeed X-series Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-lightspeed-x-series-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-lightspeed-x-series-white-bg.svg" alt="Lightspeed X-series Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Lightspeed</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Shipstation Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-shipstation-green-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-shipstation-green-white-bg.svg" alt="Shipstation Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Shipstation</p>
+				<p class="mb0 lh-title">Shipping</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Dotdigital Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-dot-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-dot-white-bg.svg" alt="Dotdigital Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Dotdigital</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Xero Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-xero-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-xero-white-bg.svg" alt="Xero Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Xero</p>
+				<p class="mb0 lh-title">Accounting</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Square Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-square-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-square-white-bg.svg" alt="Square Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Square</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+	<div class="m-integrations-grid-item w-100 w-50-m w-25-l ph3 pb3">
+
+		<div class="bg-white br4 pa1 h-100 flex flex-row items-center">
+
+			<div class="m-integration-grid-logo">
+				<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2088%2088'%3E%3C/svg%3E" alt="Klaviyo Icon"  class="db m-picture-block" width="88px" height="88px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-klaviyo-white-bg.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/misc/icon-klaviyo-white-bg.svg" alt="Klaviyo Icon"  class="db m-picture-block" width="88px" height="88px" /></noscript>
+			</div>
+
+			<div class="m-integration-grid-text pl2">
+				<p class="intro-text mb0 lh-title pb2">Klaviyo</p>
+				<p class="mb0 lh-title">E-Commerce</p>
+			</div>
+		</div>
+
+	</div><!--/.m-integrations-grid-item -->
+
+</div>
+
+				<div class="pt4 pb3">
+
+					<a href="https://www.brightpearl.com/app-store" class="btn-ghost" data-wpel-link="internal">See all Brightpearl apps</a>
+
+				</div> 
+
+
+			</div>
+
+		</section><!--/.integrations -->
+
+
+		<section data-wpr-lazyrender="1" class="news-and-events relative overflow-hidden">
+
+			<div class="l-wrapper mw-82 pv4 pv5-l">
+
+		      	<div class="pb4">
+
+		      		<h2 class="as-intro-text sg-jade-mid mb0 pb2">More reading</h2>
+
+		      		<h3 class="as-header-2 title-sequel">Events, News and Insights</h3>
+
+		      	</div>
+
+
+		      	<div class="m-columns-wrapper-lg m-columns-wrapper m-columns-wrapper--one-rem">
+
+
+		      		<div class="m-news-events-slider-wrapper js-slider-news-events">
+
+
+			  			
+			        		<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100">
+
+						           	<a href="https://www.brightpearl.com/press-and-media/press-releases/brightpearl-acquires-inventory-planner-giving-savvy-merchants-better-ways-to-accurately-predict-demand" class="db h-100 relative pb4-ns hover-opacity" target="_blank" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2021/09/Brightpearl-Acquires-Inventory-Planner.png') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="fw6 sg-jade-mid"><span id="News">Brightpearl News</span></p>
+											<h3 class="mb3 lh-title black">Brightpearl Acquires Inventory Planner</h3>
+
+											<p class="btn-ghost mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+			      		
+			        		<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100">
+
+						           	<a href="https://www.brightpearl.com/lightning-50" class="db h-100 relative pb4-ns hover-opacity" target="_blank" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2022/03/Screenshot-2022-03-11-at-11.42.36.png') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="fw6 sg-jade-mid">Brightpearl News</p>
+											<h3 class="mb3 lh-title black">Sign-ups are open for Brightpearl’s Lightning 50 - ranking the fastest-growing UK & US e-commerce brands</h3>
+
+											<p class="btn-ghost mb0 absolute b-1 l-0">Learn more</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+			      		
+			        		<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100">
+
+						           	<a href="https://www.brightpearl.com/ecommerce-guides/tis-the-season-us" class="db h-100 relative pb4-ns hover-opacity" target="_blank" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2021/10/guide-detail-tis-the-season.png') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="fw6 sg-jade-mid">Market Insights</p>
+											<h3 class="mb3 lh-title black">[Exclusive report] Tis the Season (to be scalable) - US</h3>
+
+											<p class="btn-ghost mb0 absolute b-1 l-0">Download now</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+			      		
+			        		<div class="w-100 w-50-m w-33-l pb4 mw-500 center no-center-l">
+					        	<div class="ph3 h-100">
+
+						           	<a href="https://www.brightpearl.com/ecommerce-guides/tis-the-season-uk" class="db h-100 relative pb4-ns hover-opacity" target="_blank" data-wpel-link="internal">
+
+						           		<div class="m-further-reading-link-image-wrap br6 overflow-hidden aspect-ratio aspect-ratio--16x9" style="background: url('https://www.brightpearl.com/wp-content/uploads/2021/10/guide-detail-tis-the-season.png') center center;background-size: cover;">
+
+							            </div>
+							            	
+							            <div class="pt3 pb5 pb4-m pt4-l">
+
+							            	<p class="fw6 sg-jade-mid">Market Insights</p>
+											<h3 class="mb3 lh-title black">[Exclusive report] Tis the Season (to be scalable) - UK</h3>
+
+											<p class="btn-ghost mb0 absolute b-1 l-0">Download now</p> 
+										</div>
+							            
+						          	</a> 
+
+					        	</div>
+			      			</div>
+
+			      		
+			    	</div><!--/.slider-gf-->
+
+
+				</div><!-- /.m-columns-wrapper -->
+
+			
+			</div>
+
+		</section><!-- /.news-and-events -->
+
+
+		<section data-wpr-lazyrender="1" class="get-connected bg-black">
+
+			<div class="l-wrapper mw-82 pv4 pt5-l">
+
+				<div class="white mw-600 center tc pv4">
+
+					<h2 class="as-header-1 white"><span id="Contact">Got questions</span></h2>
+
+					<p class="intro-text mb4 fw6">Ready to reach your potential? Book a demo today to see how Brightpearl can help you do business better.</p>
+
+					<a href="#" class="btn btn--std btn--orange fw6 js-form-reveal dib">Book a demo</a>
+				</div>
+
+			</div>
+
+		</section><!--/.get-connected -->
+
+
+	</main><!-- #main -->
+
+	<div  class="m-slide-out-form bg-black js-slide-out-form">
+
+		<div  class="m-slide-out-form-inner mw-700 relative">
+
+			<a href="#" class="white m-slide-out-form-close js-slide-out-form-close db">
+				<span class="dib v-mid">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.819 14.819" width="22px" height="22px">
+						<title>cross</title>
+						<g id="Layer_2" data-name="Layer 2">
+							<g id="Layer_1-2" data-name="Layer 1">
+								<line x1="1.01" y1="1.01" x2="13.808" y2="13.808" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.021"/><line x1="13.808" y1="1.01" x2="1.01" y2="13.808" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.021"/></g></g>
+					</svg>
+				</span>
+				<span class="hide-text dib v-mid">Close</span>
+			</a>
+
+			<h2 class="white">See the benefits of Brightpearl's Retail Operating System in action</span>
+			</h2>
+
+			<div class="cta-form">
+
+				<script type="rocketlazyloadscript" charset="utf-8" data-rocket-type="text/javascript" data-rocket-src="//js.hsforms.net/forms/v2.js" defer></script>
+				
+				<script type="rocketlazyloadscript">
+
+				  window.onload = function() {
+
+				    hbspt.forms.create({
+				    portalId: "2304371",
+				    target: ".cta-form", 
+				    formId: "6befd380-b0ae-49cd-a4ae-5acc7099b315", onFormSubmit: (function($form) {
+                  
+                                        utag.link({
+                                            "event_name": "form_submit_success", 
+                                            "form_name": "demo_form",
+                                            "event_category": "contact",
+                                            "event_action": "form submit",
+                                            "event_label": "successful", 
+                                            "event_name_level_5": "demo_form"
+                                        })
+
+				  window.dataLayer = window.dataLayer || []; 
+				      window.dataLayer.push({
+				          "event": "HSsubmission",
+				          "formName": "Book a Demo - Home Page"   
+				      }); 
+
+				     
+				      }) 
+				    });
+
+				  };
+			  	</script>
+
+</div> <!-- /.cta-form -->
+		</div>
+
+	</div>
+
+	<!--home page banner-->
+	<!-- <div class="m-home-banner dn db-l bg-section-map-lines" style="position:fixed;bottom:0;left:0;right:0;z-index:100; background-color: #000;">
+    <div class="l-wrapper mw-72">
+
+      <a href="https://www.brightpearl.com/ecommerce-guides/hyper-scalable-era-explained" class="db" data-wpel-link="internal">
+        <div class="flex flex-row justify-center">  
+
+            <div class="w-40-l tl pv3"  style="background:url('https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/banner/bg-banner-hyper.png') center right no-repeat; background-size: contain; min-height: 100px;">
+             <h3 class="title-sequel white mb0">The <span class="bp-orange">Hyper-scalable</span> <br />Era Explained</h3>
+            </div>
+
+            <div class="w-30-l pv3 ph4 tl flex flex-row items-center">
+              <p class="white fw6 mb0">What it is, why it matters and how retailers can reap the benefits</p>
+            </div>
+
+            <div class="w-20-l pv3 flex flex-row items-center">
+              
+                <p class="btn ph4 pv3 btn--orange mb0 lh-solid dib ml3 nowrap fw6">Get the report</p>
+            </div>
+
+        </div>
+      </a>
+      
+  </div>
+</div> -->
+
+	
+
+
+	<footer data-wpr-lazyrender="1" id="colophon" class="l-footer site-footer bg-black">
+
+			
+		<div  class="l-wrapper mw-82 pv4 pv6-l lh-copy">
+
+			<div class="l-footer-inner">
+
+		    	<div class="footer-row-1 flex-l flex-row-l">
+
+		        	<div class="w-50-l pr4-l">
+
+		        		<div class="pv4 mb4 mt3-l br3">
+		        			<div class="mw-700 pb4 pb5-l">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20185%2045'%3E%3C/svg%3E" alt="Brightpearl by Sage" width="185px" height="45px" data-lazy-src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/logo-brightpearl-by-sage-white.svg" /><noscript><img src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/img/logo-brightpearl-by-sage-white.svg" alt="Brightpearl by Sage" width="185px" height="45px" /></noscript>
+							</div>
+
+							<div class="m-footer-social pt4-l">
+
+					        	<div class="flex-l flex-row-l w-50-l pr4-l">
+
+						        	<div class="w-50-l mb4 mb0-l">
+						        		<ul class="list pl0 lh-copy">
+
+						        			<li class="dib v-mid pr3">
+						        				<p class="intro-text mb0 white"><b>Follow Us</b></p>
+						        			</li>
+
+						                    <li class="m-footer-social-icon dib v-mid pr2">
+						                        <a href="https://www.facebook.com/BrightpearlHQ" target="_blank" class="facebook db hide-text hover-opacity white" data-wpel-link="external" rel="external noopener noreferrer">Facebook</a>
+						                    </li>
+						                    <li class="m-footer-social-icon dib v-mid pr2">
+						                        <a href="https://twitter.com/BrightpearlHQ" target="_blank" class="twitter db hide-text hover-opacity white" data-wpel-link="external" rel="external noopener noreferrer">X (Twitter)</a>
+						                    </li>
+						                    <li class="m-footer-social-icon dib v-mid pr2">
+						                        <a href="https://www.linkedin.com/company/brightpearl/" target="_blank" class="linkedin db hide-text hover-opacity white" data-wpel-link="external" rel="external noopener noreferrer">LinkedIn</a>
+						                    </li>
+						                    <li class="m-footer-social-icon dib v-mid">
+						                        <a href="https://www.youtube.com/user/brightpearldocs" target="_blank" class="youtube db hide-text hover-opacity white" data-wpel-link="external" rel="external noopener noreferrer">Youtube</a>
+						                    </li>
+
+						                </ul>
+						           
+						        	</div>
+
+						        </div>
+
+					        </div><!--/.m-footer-social-->
+		        		</div>
+
+		        	</div>
+
+		        	<div class="w-50-l pl5-l mb4 mb0-l">
+
+		        		<div class="flex-m flex-row-m pt4-l">
+
+		        			<div class="w-100 w-50-m w-33-l ph2-l">
+					            <div class="white f5 ">
+									<h2 class="mt3 o-7 h2-uppercase white">Company</h2>
+
+					              	<ul class="list pl0 lh-copy">
+
+					              		<li class="pt4-ns pt2 pb2">
+					                        <a href="https://www.brightpearl.com/brightpearl-history" class="link" data-wpel-link="internal">Brightpearl history</a>
+					                    </li>
+					                    <li class="pb2">
+					                        <a href="https://www.brightpearl.com/opportunities" class="link" data-wpel-link="internal">Opportunities</a>
+					                    </li>
+					                    <li class="pb2">
+					                        <a href="https://www.brightpearl.com/press-and-media" class="link" data-wpel-link="internal">Press</a>
+					                    </li>
+					                </ul>
+
+					            </div>
+					        </div>
+
+					        <div class="w-100 w-50-m w-33-l ph2-m">
+
+					        	<div class="white f5 ">
+												
+									<h2 class="mt3 o-7 h2-uppercase white">Partner Services</h2>
+
+					                <ul class="list pl0 lh-copy">
+
+					                	<li class="pb2 pt2">
+					                        <a href="https://www.brightpearl.com/partners" class="link" data-wpel-link="internal">Partner resources</a>
+					                    </li>
+
+					                    <li class="pt4-ns pb2">
+					                        <a href="https://www.brightpearl.com/partner-directory" class="link" data-wpel-link="internal">Find a partner</a>
+					                    </li>
+					                    
+					                    <li class="pb2">
+					                        <a href="https://www.brightpearl.com/become-a-partner" class="link" data-wpel-link="internal">Become a partner</a>
+					                    </li>
+
+					                    <li class="pb2">
+					                        <a href="https://www.brightpearl.com/refer-a-customer" class="link" data-wpel-link="internal">Refer a customer</a>
+					                    </li>
+
+					                </ul>
+					            </div>  
+					        </div>
+
+					        <div class="w-100 w-50-m w-33-l ph2-m">
+
+					        	<div class="white f5">
+									<h2 class="h2-uppercase mt3 o-7 white">Support</h2>
+					                <ul class="list pl0 lh-copy">
+
+					                    <li class="pt4-ns pt2 pb2">
+					                        <a href="https://help.brightpearl.com/s/" class="link" target="_blank" data-wpel-link="external" rel="external noopener noreferrer">Knowledge Center</a>
+					                    </li>
+
+					                    <li class="pb2">
+					                        <a href="https://api-docs.brightpearl.com/" class="link" target="_blank" data-wpel-link="external" rel="external noopener noreferrer">API</a>
+					                    </li>
+
+					                    <li class="pb2">
+					                        <a href="https://www.brightpearl.com/contact-us" class="link" data-wpel-link="internal">Get in touch</a>
+					                    </li>
+
+					                    <li class="pb2">
+					                        <a href="https://www.brightpearl.com/contact-support" class="link" data-wpel-link="internal">Contact Support</a>
+					                    </li>
+
+					                </ul>
+					            </div>
+					        </div>
+
+		        		</div>
+		           
+		        	</div>
+
+		        </div><!--/.footer-row-1-->
+
+		        <div class="footer-row-3 pt4 pt5-l">
+
+		        	<div class="flex-l flex-row-l">
+		        		<div class="w-50-l pr5-l">
+
+		        			<p class="white">
+					            &copy; Brightpearl Copyright 2025 All rights reserved
+					        </p>
+
+		        		</div>
+
+		        		<div class="w-50-l pl5-l pr4-l flex-l flex-row-l justify-between-l">
+
+		        			<a href="https://www.brightpearl.com/privacy-policy" class="db dib-m link white pr3-m" data-wpel-link="internal">Privacy policy</a>
+		        			<a href="https://www.brightpearl.com/our-cookie-policy" class="db dib-m link white ph3-m" data-wpel-link="internal">Cookie policy</a>
+			        		<a href="https://www.brightpearl.com/customer-terms" class="db dib-m link white ph3-m" data-wpel-link="internal">Customer Terms</a>
+			        		<a href="https://www.brightpearl.com/security" class="db dib-m link white ph3-m" data-wpel-link="internal">Security</a>
+
+		        		</div>
+
+		        	</div>
+
+		        </div><!--/.footer-row-3-->
+
+
+			</div><!-- .l-footer-inner -->
+
+		</div><!-- .l-footer -->
+
+
+	</footer><!-- #colophon -->
+
+</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/bp-wp-2021/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+//# sourceURL=rocket-browser-checker-js-after
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"/waf-block|/500|/(?:.+/)?feed(?:/(?:.+/?)?)?$|/(?:.+/)?embed/|/(index.php/)?(.*)wp-json(/.*|$)|/refer/|/go/|/recommend/|/recommends/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https://www.brightpearl.com","onHoverDelay":"100","rateThrottle":"3"};
+//# sourceURL=rocket-preload-links-js-extra
+</script>
+<script id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+
+//# sourceURL=rocket-preload-links-js-after
+</script>
+<script src="https://www.brightpearl.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/js/vendor.min.js?ver=6.9" id="bp_wp_2021-vendor-scripts-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-includes/js/dist/dom-ready.min.js?ver=f77871ff7694fffea381" id="wp-dom-ready-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-includes/js/dist/hooks.min.js?ver=dd5603f07f9220ed27f1" id="wp-hooks-js"></script>
+<script src="https://www.brightpearl.com/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375" id="wp-i18n-js"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script src="https://www.brightpearl.com/wp-includes/js/dist/a11y.min.js?ver=cb460b4676c94bd228ed" id="wp-a11y-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-includes/js/underscore.min.js?ver=1.13.7" id="underscore-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-includes/js/customize-base.min.js?ver=6.9" id="customize-base-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-includes/js/customize-preview.min.js?ver=6.9" id="customize-preview-js" data-rocket-defer defer></script>
+<script src="https://www.brightpearl.com/wp-content/themes/bp-wp-2021/assets/js/custom.min.js?ver=15102024" id="bp_wp_2021-custom-scripts-js" data-rocket-defer defer></script>
+
+<!-- This site is optimized with Phil Singleton's WP SEO Structured Data pro plugin v1.4.1 - https://kcseopro.com/wordpress-seo-structured-data-schema-plugin/ -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    "url": "https://brightpearl2.wpengine.com",
+    "name": "Brightpearl",
+    "alternateName": null
+}</script><script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.brightpearl.com",
+    "name": "Brightpearl",
+    "logo": "https://www.brightpearl.com/wp-content/uploads/2020/12/brightpearl-logo.png",
+    "url": "https://brightpearl2.wpengine.com",
+    "sameAs": [
+        "https://www.facebook.com/BrightpearlHQ",
+        "https://twitter.com/BrightpearlHQ",
+        "https://www.linkedin.com/company/brightpearl/",
+        "https://www.youtube.com/user/brightpearldocs"
+    ],
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "",
+        "contactType": "customer service",
+        "email": "",
+        "contactOption": "",
+        "areaServed": "",
+        "availableLanguage": null
+    },
+    "address": [
+        {
+            "@type": "PostalAddress",
+            "addressCountry": "United States",
+            "addressLocality": "Austin",
+            "addressRegion": "Texas",
+            "postalCode": "78701",
+            "streetAddress": "Suite 110 211 E 7th St"
+        },
+        {
+            "@type": "PostalAddress",
+            "addressCountry": "United Kingdom",
+            "addressLocality": "Bristol",
+            "addressRegion": "Bristol",
+            "postalCode": "BS2 9AG",
+            "streetAddress": "First Floor, New Bond House, Bond Street,"
+        }
+    ]
+}</script>
+<!-- / WP SEO Structured Data pro plugin. -->
+
+<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.brightpearl.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script><script>function lazyLoadThumb(e,alt,l){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="Play Youtube video"></button>';if(l){t=t.replace('data-lazy-','');t=t.replace('loading="lazy"','');t=t.replace(/<noscript>.*?<\/noscript>/g,'');}t=t.replace('alt=""','alt="'+alt+'"');return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?"":"&"+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow","accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var exclusions=["attachment-post-thumbnail size-post-thumbnail","no-lazyload"];var e,t,p,u,l,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)(e=document.createElement("div")),(u='https://i.ytimg.com/vi/ID/hqdefault.jpg'),(u=u.replace('ID',a[t].dataset.id)),(l=exclusions.some(exclusion=>u.includes(exclusion))),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query",a[t].dataset.query),e.setAttribute("data-src",a[t].dataset.src),(e.innerHTML=lazyLoadThumb(a[t].dataset.id,a[t].dataset.alt,l)),a[t].appendChild(e),(p=e.querySelector(".play")),(p.onclick=lazyLoadYoutubeIframe)});</script>
+</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

@@ -1,0 +1,11 @@
+# OSS Triage (from GitHub metadata)
+
+Source: `.blackbox/.plans/2025-12-29_1230_oss-discovery-github-oss-discovery-cycle-123024/oss/entries`
+
+| repo | stars | license | lang | updated | tags | url | description |
+|---|---:|---|---|---|---|---|---|
+| x1xhlol/system-prompts-and-models-of-ai-tools | 103017 | GPL-3.0 | N/A | 2025-12-29T05:27:45Z | experimentation | https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools | FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models |
+| ToolJet/ToolJet | 37086 | AGPL-3.0 | JavaScript | 2025-12-29T04:21:00Z | admin, workflows | https://github.com/ToolJet/ToolJet | ToolJet is the open-source foundation of ToolJet AI - the AI-native platform for building internal tools, dashboard, business applications, workflows and AI agents 🚀 |
+| illacloud/illa-builder | 12306 | Apache-2.0 | TypeScript | 2025-12-28T14:26:24Z | admin, cms, experimentation, workflows | https://github.com/illacloud/illa-builder | Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool. |
+| basetool-io/basetool | 282 | Apache-2.0 | TypeScript | 2025-11-19T15:32:52Z | admin, experimentation | https://github.com/basetool-io/basetool | Open-source internal tool framework. 💪 Empower your team and collaborators to view and manage the data you already own in a nice easy-to-use protected tool. Basetool helps you have a better handle on your data in a collaborative way so you can focus on moving your business forward. |
+| Toola-bakery/Toola | 240 | Apache-2.0 | TypeScript | 2025-11-19T15:32:49Z | admin, experimentation | https://github.com/Toola-bakery/Toola | The open-source Retool alternative. Low-code platform for building internal tools fast! |

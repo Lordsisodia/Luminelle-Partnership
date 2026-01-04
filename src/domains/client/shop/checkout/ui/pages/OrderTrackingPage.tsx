@@ -101,7 +101,7 @@ const OrderTrackingPage = () => {
               </div>
 
               <p className="mt-3 text-xs text-semantic-text-primary/60">
-                Tip: If you used Apple Pay / Shop Pay, the tracking email may come from Shopify or the carrier.
+                Tip: If you used Apple Pay / Shop Pay, the tracking email may come from the payment provider or the carrier.
               </p>
             </div>
 

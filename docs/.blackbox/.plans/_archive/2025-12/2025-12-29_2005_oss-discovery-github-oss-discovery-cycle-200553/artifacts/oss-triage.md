@@ -1,0 +1,15 @@
+# OSS Triage (from GitHub metadata)
+
+Source: `.blackbox/.plans/2025-12-29_2005_oss-discovery-github-oss-discovery-cycle-200553/oss/entries`
+
+| repo | stars | license | lang | updated | tags | url | description |
+|---|---:|---|---|---|---|---|---|
+| simstudioai/sim | 24640 | Apache-2.0 | TypeScript | 2025-12-29T12:10:04Z | workflows | https://github.com/simstudioai/sim | Open-source platform to build and deploy AI agent workflows. |
+| spree/spree | 15115 | NOASSERTION | Ruby | 2025-12-29T12:39:12Z | commerce, experimentation | https://github.com/spree/spree | An open source eCommerce platform giving you full control and customizability. Modular and API-first. Multi-vendor, multi-tenant, multi-store, multi-currency, multi-language. Built using Ruby on Rails. Developed by @vendo-dev |
+| illacloud/illa-builder | 12307 | Apache-2.0 | TypeScript | 2025-12-29T05:41:00Z | admin, cms, experimentation, workflows | https://github.com/illacloud/illa-builder | Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool. |
+| open-policy-agent/opa | 11023 | Apache-2.0 | Go | 2025-12-29T07:30:56Z |  | https://github.com/open-policy-agent/opa | Open Policy Agent (OPA) is an open source, general-purpose policy engine. |
+| Activiti/Activiti | 10494 | Apache-2.0 | Java | 2025-12-28T02:23:13Z | admin, workflows | https://github.com/Activiti/Activiti | Activiti is a light-weight workflow and Business Process Management (BPM) Platform targeted at business people, developers and system admins. Its core is a super-fast and rock-solid BPMN 2 process engine for Java. It's open-source and distributed under the Apache license. Activiti runs in any Java application, on a server, on a cluster or in the cloud. It integrates perfectly with Spring, it is extremely lightweight and based on simple concepts. |
+| authzed/spicedb | 6308 | Apache-2.0 | Go | 2025-12-29T08:29:07Z | experimentation | https://github.com/authzed/spicedb | Open Source, Google Zanzibar-inspired database for scalably storing and querying fine-grained authorization data |
+| paed01/bpmn-engine | 958 | MIT | JavaScript | 2025-12-28T02:16:19Z | workflows | https://github.com/paed01/bpmn-engine | BPMN 2.0 execution engine. Open source javascript workflow engine. |
+| retracedhq/retraced | 426 | Apache-2.0 | TypeScript | 2025-12-26T13:02:23Z | experimentation | https://github.com/retracedhq/retraced | 🔥 A fully open source audit logs service and embeddable UI easily deployed to your own Kubernetes cluster. Brought to you by replicated.com and boxyhq.com 🚀 |
+| aipotheosis-labs/gate22 | 150 | Apache-2.0 | TypeScript | 2025-12-18T05:59:34Z | experimentation | https://github.com/aipotheosis-labs/gate22 | Open-source MCP gateway and control plane for teams to govern which tools agents can use, what they can do, and how it’s audited—across agentic IDEs like Cursor, or other agents and AI tools. |

@@ -8,12 +8,14 @@ export default function FaqSection({
   onChange,
   highlight = false,
   activeAnchorId,
+  onPreviewClick,
 }: {
   id?: string
   items: FaqItem[]
   onChange: (index: number, field: 'q' | 'a', value: string) => void
   highlight?: boolean
   activeAnchorId?: string
+  onPreviewClick?: () => void
 }) {
   const activeSectionClass =
     'ring-2 ring-semantic-legacy-brand-cocoa/15 ring-offset-2 ring-offset-brand-porcelain shadow-sm'
@@ -31,13 +33,13 @@ export default function FaqSection({
           Questions & answers
         </span>
         <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-semantic-text-primary/70">
-          <span className="text-semantic-text-primary/60">{items.length} Q&A</span>
-          {missingQuestions ? (
-            <span className="text-semantic-legacy-brand-cocoa">{missingQuestions} missing questions</span>
-          ) : null}
-          {missingAnswers ? (
-            <span className="text-semantic-legacy-brand-cocoa">{missingAnswers} missing answers</span>
-          ) : null}
+          <button
+            type="button"
+            onClick={onPreviewClick}
+            className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/80 px-3 py-1 text-[11px] font-semibold text-semantic-text-primary shadow-sm transition hover:bg-white"
+          >
+            View in preview
+          </button>
         </div>
       </div>
       <div className="space-y-3">

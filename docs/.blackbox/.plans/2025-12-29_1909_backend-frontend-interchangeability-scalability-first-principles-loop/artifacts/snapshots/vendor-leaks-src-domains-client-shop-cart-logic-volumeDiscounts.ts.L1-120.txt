@@ -1,0 +1,33 @@
+     1	import { env } from '@/utils/env'
+     2	
+     3	export type VolumeDiscountTier = {
+     4	  minQty: number
+     5	  badge: string
+     6	  code: string
+     7	}
+     8	
+     9	export const SHOWER_CAP_VARIANT_ID = 'gid://shopify/ProductVariant/56829020504438'
+    10	
+    11	const normalizeDiscountCode = (code: string): string => code.trim().toUpperCase()
+    12	
+    13	// Public discount codes (configured in Shopify admin).
+    14	// Defaults are used if env vars are not set.
+    15	const SHOWER_CAP_QTY2_CODE = normalizeDiscountCode(env('SHOWER_CAP_DISCOUNT_CODE_QTY2') || 'CAP2SAVE10')
+    16	const SHOWER_CAP_QTY4_CODE = normalizeDiscountCode(env('SHOWER_CAP_DISCOUNT_CODE_QTY4') || 'CAP4SAVE15')
+    17	
+    18	export const SHOWER_CAP_TIERS: VolumeDiscountTier[] = [
+    19	  { minQty: 4, badge: 'Save 15%', code: SHOWER_CAP_QTY4_CODE },
+    20	  { minQty: 2, badge: 'Save 10%', code: SHOWER_CAP_QTY2_CODE },
+    21	]
+    22	
+    23	export const getVolumeDiscountTierForVariant = (
+    24	  variantId: string,
+    25	  qty: number,
+    26	): VolumeDiscountTier | null => {
+    27	  if (variantId !== SHOWER_CAP_VARIANT_ID) return null
+    28	  const safeQty = Number.isFinite(qty) ? qty : 0
+    29	  return SHOWER_CAP_TIERS.find((tier) => safeQty >= tier.minQty) ?? null
+    30	}
+    31	
+    32	export const getVolumeDiscountCodes = (): Set<string> => new Set(SHOWER_CAP_TIERS.map((t) => t.code))
+    33	

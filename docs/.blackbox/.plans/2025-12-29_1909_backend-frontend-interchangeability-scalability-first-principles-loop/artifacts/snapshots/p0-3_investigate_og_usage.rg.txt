@@ -1,0 +1,4 @@
+../docs/05-planning/strategy/gemini/extended_roi_features.md:40:*   Create a template: `api/og?title=Product+Name&price=$50`.
+../docs/05-planning/strategy/gemini/seo_strategy.md:36:*   **Action**: Create an API route `api/og.tsx`.
+../docs/05-planning/strategy/gemini/seo_strategy.md:42:3.  **Implement Vercel OG** (`api/og`) to fix the social sharing issue. This gives you 90% of the benefit of SSR with 1% of the effort.
+../docs/06-quality/incidents/004-api-handler-style-inconsistency-request-vs-vercelreq.md:28:- `api/og.ts`

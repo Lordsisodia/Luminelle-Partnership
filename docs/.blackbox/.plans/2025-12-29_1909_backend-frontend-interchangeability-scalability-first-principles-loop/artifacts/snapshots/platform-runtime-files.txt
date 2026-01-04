@@ -1,0 +1,3 @@
+src/domains/platform/commerce/runtime.ts
+src/domains/platform/content/runtime.ts
+src/domains/platform/payments/runtime.ts

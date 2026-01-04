@@ -1,0 +1,101 @@
+{
+  "count": 6,
+  "exclude_keywords": [
+    "template",
+    "starter",
+    "boilerplate",
+    "example",
+    "demo",
+    "awesome"
+  ],
+  "exclude_regex": null,
+  "excluded_results_count": 4,
+  "generated_at_utc": "2025-12-31T16:09:52Z",
+  "include_archived": false,
+  "include_forks": false,
+  "min_stars": 25,
+  "queries_used": [
+    "inbox pattern idempotent consumer stars:>=25 fork:false archived:false",
+    "transactional outbox pattern open source stars:>=25 fork:false archived:false",
+    "outbox pattern postgres stars:>=25 fork:false archived:false",
+    "outbox pattern kafka stars:>=25 fork:false archived:false",
+    "event deduplication store stars:>=25 fork:false archived:false",
+    "deduplication table postgres stars:>=25 fork:false archived:false",
+    "replay protection webhook stars:>=25 fork:false archived:false",
+    "idempotent consumer pattern stars:>=25 fork:false archived:false",
+    "at least once delivery idempotent stars:>=25 fork:false archived:false",
+    "exactly once semantics outbox stars:>=25 fork:false archived:false",
+    "webhook consumer at least once stars:>=25 fork:false archived:false",
+    "dead letter queue open source stars:>=25 fork:false archived:false",
+    "retry queue worker idempotent stars:>=25 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "Distributed transaction solution in micro-service base on eventually consistency, also an eventbus with Outbox pattern",
+      "full_name": "dotnetcore/CAP",
+      "integration_score": 8,
+      "language": "C#",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 7037,
+      "updated_at": "2025-12-31T08:27:20Z",
+      "url": "https://github.com/dotnetcore/CAP"
+    },
+    {
+      "description": "A library to implement the transactional outbox pattern for PostgreSQL, a message broker or event stream, and TypeScript.",
+      "full_name": "Zehelein/pg-transactional-outbox",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 35,
+      "updated_at": "2025-12-28T16:28:17Z",
+      "url": "https://github.com/Zehelein/pg-transactional-outbox"
+    },
+    {
+      "description": "a Change Data Capture (CDC) system using Outbox Pattern with Postgres WAL, Redis Streams and gRPC",
+      "full_name": "mrinalxdev/shadowstream",
+      "integration_score": 6,
+      "language": "Python",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 72,
+      "updated_at": "2025-12-19T08:51:30Z",
+      "url": "https://github.com/mrinalxdev/shadowstream"
+    },
+    {
+      "description": "Event-Driven Architecture for a microservices-based system with a clean architecture + Domain Driven Design (DDD) + CQRS pattern + Saga pattern + Outbox pattern + CDC.",
+      "full_name": "Armando1514/Event-Driven-Microservices-Advanced",
+      "integration_score": 5,
+      "language": "Java",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 138,
+      "updated_at": "2025-12-02T17:19:43Z",
+      "url": "https://github.com/Armando1514/Event-Driven-Microservices-Advanced"
+    },
+    {
+      "description": "Microservices data exchange with change data capture and outbox pattern.",
+      "full_name": "suadev/microservices-change-data-capture-with-debezium",
+      "integration_score": 4,
+      "language": "C#",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "stars": 104,
+      "updated_at": "2025-09-15T04:59:44Z",
+      "url": "https://github.com/suadev/microservices-change-data-capture-with-debezium"
+    },
+    {
+      "description": "Kafka delivery semantics in the case of failure depend on how and when offsets are stored. Spark output operations are at-least-once. So if you want the equivalent of exactly-once semantics, you must either store offsets after an idempotent output, or store offsets in an atomic transaction alongside output.There is Spark Streaming how to store Kafka topic offset with HBase.",
+      "full_name": "wangliangbd/SparkStreaming_Store_KafkaTopicOffset_To_HBase",
+      "integration_score": 3,
+      "language": "Java",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 37,
+      "updated_at": "2022-09-04T14:12:24Z",
+      "url": "https://github.com/wangliangbd/SparkStreaming_Store_KafkaTopicOffset_To_HBase"
+    }
+  ],
+  "title": "OSS Discovery \u2014 GitHub search (catalog only)"
+}

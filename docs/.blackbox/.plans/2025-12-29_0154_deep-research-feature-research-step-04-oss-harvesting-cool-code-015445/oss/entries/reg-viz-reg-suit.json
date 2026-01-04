@@ -1,0 +1,10 @@
+{
+  "source": "manual",
+  "repo_full_name": "reg-viz/reg-suit",
+  "repo_url": "https://github.com/reg-viz/reg-suit",
+  "license": "MIT",
+  "primary_language": "JavaScript",
+  "tags": ["visual-regression", "screenshots", "reports", "upgrade-review"],
+  "fetched_at": "2025-12-30"
+}
+

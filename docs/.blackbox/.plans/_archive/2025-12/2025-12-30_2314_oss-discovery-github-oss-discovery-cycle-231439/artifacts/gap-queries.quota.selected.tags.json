@@ -1,0 +1,18 @@
+{
+  "excluded_tags": [
+    "auth",
+    "policy",
+    "returns"
+  ],
+  "generated_at_utc": "2025-12-30T16:17:09Z",
+  "max_tags": 3,
+  "out": ".blackbox/.plans/2025-12-30_2314_oss-discovery-github-oss-discovery-cycle-231439/artifacts/gap-queries.quota.selected.md",
+  "selected_tags": [
+    "shipping",
+    "support"
+  ],
+  "source": ".blackbox/.plans/2025-12-30_2314_oss-discovery-github-oss-discovery-cycle-231439/artifacts/gap-queries.quota.md",
+  "start_index": 0,
+  "total_sections_after_exclude": 2,
+  "wrap": true
+}

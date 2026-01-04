@@ -16,17 +16,11 @@ type IPhonePreviewCardProps = {
   device?: DeviceMode
   onDeviceChange?: (device: DeviceMode) => void
   onIframeLoad?: () => void
-
-  // Optional UX helpers (owned by the parent page)
-  activeSectionLabel?: string
-  syncEnabled?: boolean
-  onSyncEnabledChange?: (enabled: boolean) => void
-  onJumpToEditorSection?: () => void
-  onCopyEditorLink?: () => void
 }
 
 const DEVICE_VIEWPORTS: Record<DeviceMode, { width: number; height: number }> = {
-  phone: { width: 390, height: 844 },
+  // Slightly smaller phone viewport to add breathing room in the preview column.
+  phone: { width: 370, height: 812 },
   tablet: { width: 820, height: 1180 },
   desktop: { width: 1280, height: 900 },
 }
@@ -103,11 +97,6 @@ export default function IPhonePreviewCard({
   device: controlledDevice,
   onDeviceChange,
   onIframeLoad,
-  activeSectionLabel,
-  syncEnabled,
-  onSyncEnabledChange,
-  onJumpToEditorSection,
-  onCopyEditorLink,
 }: IPhonePreviewCardProps) {
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)
@@ -120,7 +109,6 @@ export default function IPhonePreviewCard({
   const [internalDevice, setInternalDevice] = useState<DeviceMode>(defaultDevice)
   const [iframeLoaded, setIframeLoaded] = useState(false)
   const [deviceVisible, setDeviceVisible] = useState(true)
-  const [refreshNonce, setRefreshNonce] = useState<number | null>(null)
 
   const isControlled = controlledDevice !== undefined
   const device = isControlled ? controlledDevice : internalDevice
@@ -135,9 +123,9 @@ export default function IPhonePreviewCard({
 
     const measure = () => {
       const rect = el.getBoundingClientRect()
-      // Capture initial top only once so the device doesn't "drift" if the page is resized while scrolled.
-      // Clamp to a small positive value so we never end up with a negative sticky offset on restore/back navigation.
-      setStickyTopPx((prev) => prev ?? Math.max(16, rect.top))
+      // Keep a stable sticky top so the preview controls sit neatly beneath the admin top bar.
+      // (Measured offsets were causing excessive top whitespace and odd jumps on the products editor.)
+      setStickyTopPx((prev) => prev ?? 72)
       setViewportHeightPx(window.innerHeight)
       const cardRect = cardRef.current?.getBoundingClientRect()
       setAvailableWidthPx(cardRect?.width ?? rect.width)
@@ -187,17 +175,7 @@ export default function IPhonePreviewCard({
     }
   }, [device, src])
 
-  const srcForIframe = useMemo(() => {
-    if (!refreshNonce) return srcWithDevice
-    try {
-      const url = new URL(srcWithDevice, window.location.origin)
-      url.searchParams.set('_r', String(refreshNonce))
-      return `${url.pathname}${url.search}${url.hash}`
-    } catch {
-      const join = srcWithDevice.includes('?') ? '&' : '?'
-      return `${srcWithDevice}${join}_r=${encodeURIComponent(String(refreshNonce))}`
-    }
-  }, [refreshNonce, srcWithDevice])
+  const srcForIframe = srcWithDevice
 
   useEffect(() => {
     setIframeLoaded(false)
@@ -233,10 +211,12 @@ export default function IPhonePreviewCard({
     if (!deviceMaxWidthPx || !deviceMaxHeightPx) return 0.9
     const byWidth = deviceMaxWidthPx / phoneOuter.width
     const byHeight = deviceMaxHeightPx / phoneOuter.height
-    return clamp(Math.min(byWidth, byHeight), 0, 1)
+    // Nudge smaller to keep breathing room top/bottom.
+    return clamp(Math.min(byWidth, byHeight) * 0.9, 0, 1)
   })()
 
-  const phoneScale = typeof scale === 'number' ? scale : autoPhoneScale
+  // Cap default phone scale further to keep full device in view.
+  const phoneScale = typeof scale === 'number' ? scale : Math.min(autoPhoneScale, 0.9)
 
   const tabletScale = (() => {
     if (!deviceMaxWidthPx || !deviceMaxHeightPx) return 0.55
@@ -251,57 +231,12 @@ export default function IPhonePreviewCard({
     <div
       ref={wrapperRef}
       className="hidden xl:block sticky self-start"
-      style={stickyTopPx != null ? { top: `${stickyTopPx}px` } : undefined}
+      style={stickyTopPx != null ? { top: `${(stickyTopPx ?? 0) + 12}px` } : undefined}
     >
-      <div ref={cardRef} className={`${cardWidthClassName} flex flex-col items-center`}>
+      <div ref={cardRef} className={`${cardWidthClassName} flex flex-col items-start`}>
         {enableDeviceToggle ? (
-          <div ref={controlsRef} className="mb-1.5 flex w-full justify-center">
+          <div ref={controlsRef} className="mb-1.5 flex w-full justify-center px-1">
             <DeviceToggle device={device} onChange={setDevice} />
-          </div>
-        ) : null}
-
-        {activeSectionLabel || onJumpToEditorSection || onCopyEditorLink || onSyncEnabledChange ? (
-          <div className="mb-2 flex w-full flex-wrap items-center justify-center gap-2 px-1">
-            <button
-              type="button"
-              onClick={() => setRefreshNonce(Date.now())}
-              className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
-            >
-              Refresh
-            </button>
-            {typeof syncEnabled === 'boolean' && onSyncEnabledChange ? (
-              <button
-                type="button"
-                onClick={() => onSyncEnabledChange(!syncEnabled)}
-                className={`rounded-full border px-3 py-1.5 text-xs font-semibold ${
-                  syncEnabled
-                    ? 'border-semantic-legacy-brand-cocoa/40 bg-white text-semantic-text-primary'
-                    : 'border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary/70'
-                } hover:bg-brand-porcelain/60`}
-                aria-pressed={syncEnabled}
-              >
-                Sync {syncEnabled ? 'On' : 'Off'}
-              </button>
-            ) : null}
-            {onJumpToEditorSection ? (
-              <button
-                type="button"
-                onClick={onJumpToEditorSection}
-                className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
-                title={activeSectionLabel ? `Jump to ${activeSectionLabel}` : 'Jump to editor section'}
-              >
-                {activeSectionLabel ? `Jump · ${activeSectionLabel}` : 'Jump'}
-              </button>
-            ) : null}
-            {onCopyEditorLink ? (
-              <button
-                type="button"
-                onClick={onCopyEditorLink}
-                className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1.5 text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
-              >
-                Copy link
-              </button>
-            ) : null}
           </div>
         ) : null}
 
@@ -311,7 +246,7 @@ export default function IPhonePreviewCard({
             'motion-safe:transition-opacity motion-safe:duration-200 motion-safe:ease-out',
             deviceVisible ? 'opacity-100' : 'opacity-0',
           ].join(' ')}
-          style={{ willChange: 'opacity' }}
+          style={{ willChange: 'opacity', filter: 'drop-shadow(0 10px 24px rgba(0,0,0,0.18)) drop-shadow(0 0 12px rgba(0,0,0,0.08))' }}
         >
           {device === 'desktop' ? (
             (() => {

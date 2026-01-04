@@ -1,0 +1,20 @@
+run:
+  id: "2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop"
+  created_at: "2025-12-29T19:09:00-0800"
+  agent_id: "codex-cli"
+
+inputs:
+  prompts:
+    - "docs/.blackbox/.prompts/backend-frontend-interchangeability-loop.md"
+  context_pack:
+    - "docs/.blackbox/.prompts/deepresearch/context-pack.md"
+
+model:
+  name: "GPT-5.2 (Codex CLI)"
+  temperature: 0.2
+
+outputs:
+  raw: "N/A (docs-only run; outputs are markdown files in the plan folder)"
+  sources: "artifacts/sources.md"
+  extracted: "artifacts/extracted.json"
+  summary: "artifacts/summary.md"

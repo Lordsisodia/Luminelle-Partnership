@@ -1,0 +1,16 @@
+# Tranche 10 — Analytics / attribution / BI — variant pages (pricing/docs/integrations)
+https://www.daasity.com/pricing daasity-pricing
+https://www.daasity.com/product daasity-product
+https://www.daasity.com/integrations daasity-integrations
+
+https://www.peelinsights.com/pricing peel-pricing
+https://www.peelinsights.com/product peel-product
+
+https://www.northbeam.io/pricing northbeam-pricing
+https://www.northbeam.io/product northbeam-product
+
+https://apps.shopify.com/trueprofit trueprofit-shopify-app-store-dup
+
+https://metorik.com/pricing metorik-pricing
+https://metorik.com/features metorik-features
+https://metorik.com/integrations metorik-integrations

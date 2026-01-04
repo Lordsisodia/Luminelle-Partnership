@@ -1,4 +1,3 @@
-import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
 import { Link as RouterLink } from 'react-router-dom'
 import { UserRound, Menu } from 'lucide-react'
 import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
@@ -28,7 +27,7 @@ const PromoBar = ({ promos }: { promos: Promo[] }) => {
 }
 
 export const GlobalHeader = ({ promoMessages }: GlobalHeaderProps) => {
-  const { signedIn } = useAuth()
+  const { signedIn, user, signOut } = useAuth()
   const drawer = useDrawer()
 
   return (
@@ -61,18 +60,41 @@ export const GlobalHeader = ({ promoMessages }: GlobalHeaderProps) => {
           >
             Cart
           </button>
-          <SignedIn>
-            <UserButton appearance={{ elements: { avatarBox: 'h-8 w-8' } }} />
-          </SignedIn>
-          <SignedOut>
+          {signedIn ? (
+            <div className="flex items-center gap-2">
+              <RouterLink
+                to="/account"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30 border border-semantic-legacy-brand-blush/60"
+                aria-label="Open account"
+              >
+                {user?.avatarUrl ? (
+                  <img
+                    src={user.avatarUrl}
+                    alt=""
+                    className="h-8 w-8 rounded-full border border-semantic-legacy-brand-blush/60 object-cover"
+                  />
+                ) : (
+                  <UserRound className="h-4 w-4" />
+                )}
+                <span className="hidden sm:inline">{user?.fullName ?? 'Account'}</span>
+              </RouterLink>
+              <button
+                type="button"
+                onClick={() => void signOut()}
+                className="hidden sm:inline-flex rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30"
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
             <RouterLink
               to="/sign-in"
               className="inline-flex items-center gap-2 rounded-full bg-semantic-accent-cta px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:-translate-y-0.5 transition"
             >
               <UserRound className="h-4 w-4" />
-              {signedIn ? 'Account' : 'Sign in'}
+              Sign in
             </RouterLink>
-          </SignedOut>
+          )}
         </div>
       </div>
     </header>

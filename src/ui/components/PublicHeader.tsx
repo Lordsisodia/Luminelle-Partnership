@@ -31,7 +31,7 @@ export function PublicHeader({
     <>
       {/* Promo strip */}
       <div className="overflow-hidden bg-brand-blush text-brand-cocoa">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <div className="mx-auto max-w-6xl px-5 md:px-6">
           <div className="relative flex h-10 items-center justify-center text-xs font-semibold uppercase tracking-[0.24em] text-brand-cocoa sm:text-[13px]">
             {promoMessages.map((msg, idx) => (
               <span
@@ -59,7 +59,7 @@ export function PublicHeader({
       </div>
 
       {/* Top nav */}
-      <div className="w-full px-4 md:px-6">
+      <div className="w-full px-5 md:px-6">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4">
           <button
             aria-label="Open menu"

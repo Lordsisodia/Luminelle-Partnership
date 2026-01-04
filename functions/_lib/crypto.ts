@@ -24,6 +24,15 @@ export async function sha256Base64Url(data: string | Uint8Array) {
   return bytesToBase64Url(new Uint8Array(digest))
 }
 
+export async function sha1(data: string | Uint8Array) {
+  const bytes = typeof data === 'string' ? utf8ToBytes(data) : data
+  return crypto.subtle.digest('SHA-1', bytes as unknown as BufferSource)
+}
+
+export async function sha1Hex(data: string | Uint8Array) {
+  return bytesToHex(new Uint8Array(await sha1(data)))
+}
+
 export async function hmacSha256(secret: string, message: string) {
   const key = await crypto.subtle.importKey(
     'raw',

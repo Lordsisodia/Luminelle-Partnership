@@ -214,7 +214,7 @@ export function useProducts(): Return {
           video_slot: (cfg as any).videoSlot ?? '',
           care_label_override: '',
           hide_details_accordion: Boolean((cfg as any).hideDetailsAccordion ?? false),
-          fallback_variant_id: String((cfg as any).fallbackVariantId ?? ''),
+          fallback_variant_id: String((cfg as any).fallbackVariantKey ?? ''),
           fallback_item_id: String((cfg as any).fallbackItemId ?? ''),
           specs_text: JSON.stringify((cfg as any).specs ?? {}, null, 2),
           faq_text: JSON.stringify((cfg as any).qa ?? [], null, 2),

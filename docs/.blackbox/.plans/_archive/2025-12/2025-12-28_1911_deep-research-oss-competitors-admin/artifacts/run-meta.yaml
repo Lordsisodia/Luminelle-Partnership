@@ -1,0 +1,24 @@
+run:
+  name: "OSS competitors + admin dashboard harvesting"
+  started_at: "2025-12-28"
+  expected_duration_hours: "12-20"
+  owner: "deep-research"
+  prompt_pack: "docs/.blackbox/.prompts/oss-competitors-admin-dashboard.md"
+
+scope:
+  focus:
+    - "competitor landscape (including adjacent spaces)"
+    - "open-source code to leverage for admin dashboard + core functionality"
+    - "low-cost setups and fast integrations"
+  out_of_scope_for_now:
+    - "non-OSS proprietary implementations unless they inform patterns"
+    - "full implementation in the product codebase"
+
+constraints:
+  licensing:
+    - "Prefer permissive licenses; flag unclear licenses for decision"
+  stack_assumptions:
+    - "React/TypeScript UI"
+    - "Supabase/Postgres backend"
+    - "Shopify storefront/checkout integration"
+

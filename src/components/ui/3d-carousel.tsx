@@ -16,6 +16,7 @@ type ReviewCard = {
   author: string
   body: string
   stars?: number
+  image?: string
 }
 
 const IS_SERVER = typeof window === "undefined"
@@ -75,16 +76,57 @@ const reviewFallbacks: ReviewCard[] = [
   { author: "Tay", body: "Worth it for silk press protection alone.", stars: 5 },
 ]
 
+type AvatarSources = {
+  avif?: string
+  webp?: string
+  jpg: string
+}
+
+const fallbackAvatarKeys = ["rachel", "shannon", "randomlife"] as const
+
+const hashString = (input: string) => {
+  let hash = 0
+  for (let i = 0; i < input.length; i++) {
+    hash = (hash << 5) - hash + input.charCodeAt(i)
+    hash |= 0
+  }
+  return hash
+}
+
+const getInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("")
+
+const getFallbackAvatarSources = (key: (typeof fallbackAvatarKeys)[number]): AvatarSources => {
+  const base = `/images/avatar-${key}`
+  return {
+    avif: `${base}-320.avif`,
+    webp: `${base}-320.webp`,
+    jpg: `${base}.jpg`,
+  }
+}
+
+const getAvatarSources = (review: ReviewCard): AvatarSources => {
+  if (review.image) return { jpg: review.image }
+  const seed = review.author?.trim() || "customer"
+  const index = Math.abs(hashString(seed)) % fallbackAvatarKeys.length
+  return getFallbackAvatarSources(fallbackAvatarKeys[index] ?? "rachel")
+}
+
 const ReviewCardOrnaments = () => (
   <>
-    <div className="pointer-events-none absolute inset-0 rounded-[15px] bg-[radial-gradient(700px_circle_at_20%_0%,rgba(231,197,106,0.22),transparent_55%)]" />
-    <div className="pointer-events-none absolute inset-0 rounded-[15px] ring-1 ring-inset ring-[#E7C56A]/30" />
-    <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-[#E7C56A]/40 to-transparent" />
+    <div className="pointer-events-none absolute inset-0 rounded-[15px] bg-[radial-gradient(700px_circle_at_20%_0%,rgba(253,212,220,0.55),transparent_55%)]" />
+    <div className="pointer-events-none absolute inset-0 rounded-[15px] ring-1 ring-inset ring-brand-blush/55" />
+    <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-peach/45 to-transparent" />
 
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-[#C9A227]/45"
+      className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-brand-peach/55"
       fill="none"
     >
       <path
@@ -99,7 +141,7 @@ const ReviewCardOrnaments = () => (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="pointer-events-none absolute right-3 top-3 h-6 w-6 text-[#E7C56A]/55"
+      className="pointer-events-none absolute right-3 top-3 h-6 w-6 text-brand-peach/55"
       fill="none"
     >
       <path
@@ -112,18 +154,46 @@ const ReviewCardOrnaments = () => (
   </>
 )
 
-const ReviewCardContent = ({ review }: { review: ReviewCard }) => (
-  <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-white px-4 py-3 text-center">
-    <ReviewCardOrnaments />
-    <div className="relative flex justify-center">
-      <StarRating value={review.stars ?? 5} size={16} />
+const ReviewCardContent = ({ review }: { review: ReviewCard }) => {
+  const avatar = getAvatarSources(review)
+
+  return (
+    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-brand-blush/30 px-4 py-3 text-center">
+      <ReviewCardOrnaments />
+      <div className="relative flex justify-center">
+        <StarRating value={review.stars ?? 5} size={16} />
+      </div>
+      <p className="relative mt-2 text-[13px] leading-snug text-semantic-text-primary">“{review.body}”</p>
+      <div className="relative mt-3 flex items-center justify-center gap-2">
+        <div className="relative h-8 w-8 overflow-hidden rounded-full bg-white/70 ring-1 ring-brand-blush/55">
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 flex items-center justify-center text-[11px] font-semibold text-semantic-text-primary/80"
+          >
+            {getInitials(review.author)}
+          </span>
+          <picture className="relative z-10 block h-full w-full">
+            {avatar.avif ? <source srcSet={avatar.avif} type="image/avif" /> : null}
+            {avatar.webp ? <source srcSet={avatar.webp} type="image/webp" /> : null}
+            <img
+              src={avatar.jpg}
+              alt={`${review.author} profile photo`}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+              onError={(event) => {
+                event.currentTarget.style.display = "none"
+              }}
+            />
+          </picture>
+        </div>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
+          {review.author}
+        </p>
+      </div>
     </div>
-    <p className="relative mt-2 text-[13px] leading-snug text-semantic-text-primary">“{review.body}”</p>
-    <p className="relative mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
-      {review.author}
-    </p>
-  </div>
-)
+  )
+}
 
 const Reviews2DCarousel = memo(
   ({
@@ -202,7 +272,7 @@ const Reviews2DCarousel = memo(
       <div className="w-full">
         <div
           ref={listRef}
-          className="flex w-full gap-3 overflow-x-auto px-4 pb-1 pt-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex w-full gap-3 overflow-x-auto px-4 pb-1 pt-3 md:pt-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{
             scrollSnapType: "x mandatory",
             scrollPaddingLeft: "16px",
@@ -218,7 +288,7 @@ const Reviews2DCarousel = memo(
               className="shrink-0 snap-start"
               style={{ width: `${itemWidth}px` }}
             >
-              <div className="rounded-2xl bg-gradient-to-br from-[#E7C56A]/55 via-white to-brand-blush/40 p-[1px] shadow-[0_18px_45px_rgba(18,16,15,0.12)]">
+              <div className="rounded-2xl bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/60 p-[1px] shadow-[0_18px_45px_rgba(251,199,178,0.18)]">
                 <div style={{ height: `${itemHeight}px` }}>
                   <ReviewCardContent review={card} />
                 </div>
@@ -248,63 +318,33 @@ function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
   }, [activeIndex, cards])
 
   return (
-    <div className="relative">
-      <div
-        className="relative w-full overflow-visible rounded-3xl border border-semantic-border-subtle bg-[linear-gradient(180deg,#FFFFFF_0%,#FDF8F6_100%)] pt-8 pb-6 shadow-[0_26px_70px_rgba(251,199,178,0.12)] md:pt-10"
-        role="region"
-        aria-label="Customer reviews carousel"
-        aria-roledescription="carousel"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "ArrowLeft") {
-            e.preventDefault()
-            prev()
-          }
-          if (e.key === "ArrowRight") {
-            e.preventDefault()
-            next()
-          }
-        }}
-      >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(800px_circle_at_50%_0%,rgba(231,197,106,0.12),transparent_60%)]"
-        />
-        <div className="mx-auto flex w-full max-w-[520px] items-center justify-between px-4 md:px-6">
-          <button
-            type="button"
-            onClick={prev}
-            className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-xs font-semibold text-semantic-text-primary shadow-sm hover:bg-brand-porcelain/60 focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/25"
-            aria-label="Previous review"
-          >
-            ← Prev
-          </button>
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-            Reviews
-          </p>
-          <button
-            type="button"
-            onClick={next}
-            className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-4 py-2 text-xs font-semibold text-semantic-text-primary shadow-sm hover:bg-brand-porcelain/60 focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/25"
-            aria-label="Next review"
-          >
-            Next →
-          </button>
-        </div>
+    <div
+      className="relative w-full overflow-visible"
+      role="region"
+      aria-label="Customer reviews carousel"
+      aria-roledescription="carousel"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault()
+          prev()
+        }
+        if (e.key === "ArrowRight") {
+          e.preventDefault()
+          next()
+        }
+      }}
+    >
+      <p className="sr-only" aria-live="polite">
+        {activeLabel}
+      </p>
 
-        <p className="sr-only" aria-live="polite">
-          {activeLabel}
-        </p>
-
-        <div className="relative">
-          <Reviews2DCarousel
-            cards={cards}
-            activeIndex={activeIndex}
-            onActiveIndexChange={setActiveIndex}
-            prefersReducedMotion={Boolean(prefersReducedMotion)}
-          />
-        </div>
-      </div>
+      <Reviews2DCarousel
+        cards={cards}
+        activeIndex={activeIndex}
+        onActiveIndexChange={setActiveIndex}
+        prefersReducedMotion={Boolean(prefersReducedMotion)}
+      />
     </div>
   )
 }

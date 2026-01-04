@@ -1,0 +1,28 @@
+{
+  "type": "blocks_kit_v1_plan",
+  "version": 1,
+  "data": {
+    "plan_folder": "docs/.blackbox/.plans/2025-12-31_1922_blocks-kit-v1-mini-poc-blog-marketing-storefront",
+    "canonical_docs_created_or_updated": [
+      "docs/.blackbox/oss-catalog/blocks-kit-contracts.md",
+      "docs/.blackbox/oss-catalog/component-source-map.md",
+      "docs/.blackbox/oss-catalog/blocks-inventory.md",
+      "docs/.blackbox/oss-catalog/component-mining-playbook.md",
+      "docs/.blackbox/oss-catalog/storefront-reference-set.md"
+    ],
+    "repos_mined_for_file_pointers": [
+      "Shopify/hydrogen-v1",
+      "Blazity/enterprise-commerce",
+      "vuestorefront/storefront-ui",
+      "markmead/hyperui",
+      "mertJF/tailblocks",
+      "themesberg/flowbite",
+      "merakiuilabs/merakiui",
+      "saadeghi/daisyui"
+    ],
+    "stop_rules": [
+      "If 2 targeted discovery passes add 0 net-new curated items, pivot to component mining.",
+      "Treat license_bucket=verify as reference-only until confirmed."
+    ]
+  }
+}

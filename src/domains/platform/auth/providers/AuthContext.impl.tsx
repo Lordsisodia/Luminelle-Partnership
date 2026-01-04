@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useAuth as useClerkAuth, useUser as useClerkUser } from '@clerk/clerk-react'
+import { isClerkConfigured } from '@/config/clerk'
 
 // Minimal shim: mirrors previous AuthContext API.
 export type AuthContextValue = {
@@ -14,7 +15,7 @@ export type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+function AuthProviderWithClerk({ children }: { children: ReactNode }) {
   const { isSignedIn, isLoaded, getToken, signOut: clerkSignOut } = useClerkAuth()
   const { user } = useClerkUser()
   const [isLoading, setIsLoading] = useState(!isLoaded)
@@ -46,6 +47,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
+
+function AuthProviderNoClerk({ children }: { children: ReactNode }) {
+  const value: AuthContextValue = {
+    signedIn: false,
+    userId: null,
+    user: null,
+    isLoading: false,
+    signOut: async () => {},
+    refresh: async () => {},
+  }
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  // Critical: avoid calling Clerk hooks when Clerk isn't configured for the current build/env.
+  // This keeps public pages functional even if auth is disabled.
+  if (!isClerkConfigured) return <AuthProviderNoClerk>{children}</AuthProviderNoClerk>
+  return <AuthProviderWithClerk>{children}</AuthProviderWithClerk>
 }
 
 export function useAuthContext() {

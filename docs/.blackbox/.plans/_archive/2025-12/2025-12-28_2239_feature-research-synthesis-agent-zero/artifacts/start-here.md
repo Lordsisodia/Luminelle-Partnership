@@ -1,0 +1,52 @@
+<!-- AUTO-GENERATED: feature-research start-here -->
+---
+status: active
+last_reviewed: 2025-12-28
+owner: agent
+---
+
+# ✅ Start Here: Synthesis — Agent Zero
+
+Plan folder: `.blackbox/.plans/2025-12-28_2239_feature-research-synthesis-agent-zero`
+
+## 🎯 Your job
+
+- Follow the staged workflow: Align → Plan → Research → Synthesize → Report
+- Write outputs into `.blackbox/.plans/2025-12-28_2239_feature-research-synthesis-agent-zero/artifacts/` (use the seeded files)
+- Keep updates human-friendly (use comms templates)
+
+## 📌 Prompt pack to paste into your agent session
+
+- `docs/.blackbox/.prompts/feature-research-orchestrator.md`
+
+## 🧾 Expected artifacts (write into these files)
+
+- `artifacts/final-synthesis.md`
+- `artifacts/features-ranked.md`
+- `artifacts/oss-ranked.md`
+- `artifacts/open-questions.md`
+- `artifacts/evidence-index.md`
+- `artifacts/summary.md`
+- `artifacts/sources.md`
+- `artifacts/kickoff.md`
+
+## 🧠 Memory + compaction (required for long runs)
+
+Checkpoint after meaningful progress:
+
+```bash
+./docs/.blackbox/scripts/new-step.sh --plan .blackbox/.plans/2025-12-28_2239_feature-research-synthesis-agent-zero "Checkpoint: <what changed>"
+```
+
+Compact early if context grows:
+
+```bash
+./docs/.blackbox/scripts/compact-context.sh --plan .blackbox/.plans/2025-12-28_2239_feature-research-synthesis-agent-zero
+```
+
+## 🗣️ What to say to humans (templates)
+
+- Read-aloud update: `docs/07-templates/agent-comms/read-aloud-status-update.md`
+- Decision request: `docs/07-templates/agent-comms/decision-request.md`
+- End-of-run summary: `docs/07-templates/agent-comms/end-of-run-summary.md`
+

@@ -1,0 +1,112 @@
+{
+  "candidates": [
+    {
+      "description": "Alokai is a Frontend as a Service solution that simplifies composable commerce. It connects all the technologies needed to build and deploy fast & scalable ecommerce frontends. It guides merchants to deliver exceptional customer experiences quickly and easily.",
+      "forks": 2095,
+      "full_name": "vuestorefront/vue-storefront",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=10899, updated=2025-12-30T01:44:58Z); license=15/15 (MIT); time_to_value=10/10",
+      "score": 77,
+      "stars": 10899,
+      "tags": [
+        "commerce",
+        "cms"
+      ],
+      "topics": [
+        "commercetools",
+        "e-commerce",
+        "ecommerce",
+        "ecommerce-platform",
+        "headless",
+        "headless-commerce",
+        "integrations-team",
+        "magento",
+        "magento2",
+        "mobile",
+        "nuxt",
+        "open-source",
+        "pwa",
+        "shopify",
+        "shopware",
+        "storefront",
+        "typescript",
+        "vue",
+        "vue-storefront",
+        "vue3"
+      ],
+      "updated_at": "2025-12-30T01:44:58Z",
+      "url": "https://github.com/vuestorefront/vue-storefront"
+    },
+    {
+      "description": "Vue Storefront 2 integration for Vendure",
+      "forks": 51,
+      "full_name": "vuestorefront-community/vendure",
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=72, updated=2025-09-22T02:15:34Z); license=15/15 (MIT); time_to_value=7/10",
+      "score": 72,
+      "stars": 72,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "graphql",
+        "nestjs",
+        "nuxt",
+        "vendure",
+        "vue",
+        "vue-storefront"
+      ],
+      "updated_at": "2025-09-22T02:15:34Z",
+      "url": "https://github.com/vuestorefront-community/vendure"
+    },
+    {
+      "description": "NextJS Pages Router Storefront for MedusaJS",
+      "forks": 28,
+      "full_name": "pavlotsyhanok/medusa-plasmic-storefront",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=20/20 (stars=59, updated=2025-12-23T17:35:52Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 64,
+      "stars": 59,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [],
+      "updated_at": "2025-12-23T17:35:52Z",
+      "url": "https://github.com/pavlotsyhanok/medusa-plasmic-storefront"
+    },
+    {
+      "description": "Storefront for vendure and NextJS",
+      "forks": 35,
+      "full_name": "aexol-studio/vendure-nextjs-storefront",
+      "language": "TypeScript",
+      "license_bucket": "verify",
+      "license_spdx": "UNKNOWN",
+      "rationale": "usefulness=10/30 baseline; integration=22/25 (TypeScript); maintenance=18/20 (stars=95, updated=2025-08-24T18:36:51Z); license=5/15 (UNKNOWN); time_to_value=7/10",
+      "score": 62,
+      "stars": 95,
+      "tags": [
+        "commerce"
+      ],
+      "topics": [
+        "next",
+        "nextjs",
+        "react",
+        "storefront",
+        "vendure"
+      ],
+      "updated_at": "2025-08-24T18:36:51Z",
+      "url": "https://github.com/aexol-studio/vendure-nextjs-storefront"
+    }
+  ],
+  "count": 4,
+  "generated_at_utc": "2025-12-30T14:03:43Z",
+  "source": {
+    "entries_dir": ".blackbox/.plans/2025-12-30_2103_oss-discovery-github-oss-discovery-cycle-210313/oss/entries"
+  }
+}

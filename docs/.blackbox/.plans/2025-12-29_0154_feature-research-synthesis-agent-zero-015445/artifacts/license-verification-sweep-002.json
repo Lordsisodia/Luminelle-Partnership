@@ -1,0 +1,72 @@
+[
+  {
+    "full_name": "meilisearch/meilisearch",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "BUSL-1.1",
+    "html_url": "https://github.com/meilisearch/meilisearch/blob/main/LICENSE",
+    "api_url": "https://api.github.com/repos/meilisearch/meilisearch/license",
+    "fetched_at": "2025-12-28 22:45 UTC",
+    "notes": "Business Source License detected (not open source)"
+  },
+  {
+    "full_name": "metabase/metabase",
+    "spdx_id": "NOASSERTION",
+    "key": "other",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/metabase/metabase/blob/master/LICENSE.txt",
+    "api_url": "https://api.github.com/repos/metabase/metabase/license",
+    "fetched_at": "2025-12-28 22:45 UTC",
+    "notes": "could not confidently classify from text; dual-license language detected (treat as copyleft unless commercial terms)"
+  },
+  {
+    "full_name": "PostHog/posthog",
+    "spdx_id": "UNKNOWN",
+    "key": "UNKNOWN",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/PostHog/posthog",
+    "api_url": "https://api.github.com/repos/PostHog/posthog/license",
+    "fetched_at": "2025-12-28 22:45 UTC",
+    "notes": "HTTP 403"
+  },
+  {
+    "full_name": "chatwoot/chatwoot",
+    "spdx_id": "UNKNOWN",
+    "key": "UNKNOWN",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/chatwoot/chatwoot",
+    "api_url": "https://api.github.com/repos/chatwoot/chatwoot/license",
+    "fetched_at": "2025-12-28 22:45 UTC",
+    "notes": "HTTP 403"
+  },
+  {
+    "full_name": "airbytehq/airbyte",
+    "spdx_id": "UNKNOWN",
+    "key": "UNKNOWN",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/airbytehq/airbyte",
+    "api_url": "https://api.github.com/repos/airbytehq/airbyte/license",
+    "fetched_at": "2025-12-28 22:45 UTC",
+    "notes": "HTTP 403"
+  },
+  {
+    "full_name": "windmill-labs/windmill",
+    "spdx_id": "UNKNOWN",
+    "key": "UNKNOWN",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/windmill-labs/windmill",
+    "api_url": "https://api.github.com/repos/windmill-labs/windmill/license",
+    "fetched_at": "2025-12-28 22:45 UTC",
+    "notes": "HTTP 403"
+  },
+  {
+    "full_name": "mautic/mautic",
+    "spdx_id": "UNKNOWN",
+    "key": "UNKNOWN",
+    "spdx_guess": "UNKNOWN",
+    "html_url": "https://github.com/mautic/mautic",
+    "api_url": "https://api.github.com/repos/mautic/mautic/license",
+    "fetched_at": "2025-12-28 22:45 UTC",
+    "notes": "HTTP 403"
+  }
+]

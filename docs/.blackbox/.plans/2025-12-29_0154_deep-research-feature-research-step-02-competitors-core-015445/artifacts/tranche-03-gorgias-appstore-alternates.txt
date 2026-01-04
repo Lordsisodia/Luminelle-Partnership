@@ -1,0 +1,7 @@
+# Tranche 03 — Gorgias Shopify App Store alternates
+#
+# Goal: get auditable proof that a Shopify listing exists even if the direct listing URL returns a 404 shell.
+
+https://apps.shopify.com/search?q=gorgias&locale=en shopify-app-store-search-gorgias
+https://apps.shopify.com/categories/store-management-support-chat/all?locale=en shopify-app-store-support-chat-category
+

@@ -1,0 +1,87 @@
+# source: 05-planning/research/lumelle-architecture-map.md
+# captured: 2025-12-30T10:30:35Z
+
+# Lumelle Architecture Map (from `src/`)
+
+This document is a **human-facing** map of how the application is structured today.
+
+Scope:
+- Based on the current `src/` tree.
+- No code changes; this is an architecture understanding + planning artifact.
+
+For the deeper, “audit trail” version (run folder):
+- `docs/.blackbox/.plans/2025-12-29_1844_architecture-map-improvements-src/architecture-map.md`
+
+---
+
+## 1) How the app boots
+
+Entrypoints:
+- `src/main.tsx` — app bootstrap, global providers, analytics + service worker behavior.
+- `src/router.tsx` — root provider tree that wraps the app.
+- `src/App.tsx` — route table; the best high-level view of the product surfaces.
+
+Provider tree (from `src/router.tsx`):
+- Cart state: `CartProvider` (`src/domains/client/shop/cart/providers/CartContext`)
+- Auth state: `AuthProvider` (`src/domains/platform/auth/providers/AuthContext`)
+- Global drawer UX: `DrawerProvider` (`src/ui/providers/DrawerProvider`)
+
+---
+
+## 2) The big architectural buckets
+
+At the highest level:
+- `src/domains/*` — the primary “domain architecture” (client, admin, platform, blog, creator, ui-kit).
+- `src/ui/*` — shared/global UI components/pages/providers.
+- `src/lib/*` — shared helpers (some are legacy shims around platform ports).
+- `src/config/*` — configuration constants.
+
+Domains are organized consistently into:
+- `data/`, `logic/`, `hooks/`, `providers/`, `ui/`
+
+---
+
+## 3) The provider swap boundary (platform ports + adapters)
+
+The repo already has the key “UI plug-in” mechanism:
+- **Ports** (contracts): `src/domains/platform/**/ports/*`
+- **Adapters** (provider-specific): `src/domains/platform/**/adapters/**`
+- **Runtime selection** (mock/disabled/real): `src/domains/platform/**/runtime.ts`
+
+Concrete examples:
+- Commerce (Shopify today):
+  - Ports: `src/domains/platform/commerce/ports/*`
+  - Runtime: `src/domains/platform/commerce/runtime.ts`
+  - Adapter: `src/domains/platform/commerce/adapters/shopify/internal-api/*`
+- Content (Shopify today):
+  - Runtime: `src/domains/platform/content/runtime.ts`
+  - Adapter: `src/domains/platform/content/adapters/shopify/internal-api/*`
+- Payments (Stripe adapter exists):
+  - Runtime: `src/domains/platform/payments/runtime.ts`
+  - Adapter: `src/domains/platform/payments/adapters/stripe/*`
+
+Shared platform primitives:
+- `src/domains/platform/ports/primitives.ts` (`VariantKey`, etc.)
+- `src/domains/platform/ports/errors.ts` (`PortError`)
+
+---
+
+## 4) Key principle (already mostly implemented)
+
+UI and product domains should depend on:
+- `@platform/<domain>` runtimes (e.g. `@platform/commerce`)
+- port DTOs/interfaces (`@platform/<domain>/ports`)
+
+UI and product domains should not depend on:
+- provider adapters directly
+- raw provider IDs (e.g. `gid://shopify/...`)
+
+This boundary exists already; the remaining work is tightening and enforcing it.
+
+---
+
+## 5) Where to go next
+
+For “what’s leaking above adapters” and how to fix it:
+- `docs/05-planning/research/lumelle-architecture-improvements.md`
+

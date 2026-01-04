@@ -1,0 +1,11 @@
+# Tranche 03 fixups — follow redirects / unblock weak snapshots
+
+# Help Scout: Vercel 308 redirects need trailing slashes
+https://www.helpscout.com/pricing/ help-scout-pricing
+https://www.helpscout.com/features/ help-scout-features
+https://www.helpscout.com/knowledge-base/ help-scout-knowledge-base
+https://www.helpscout.com/inbox/ help-scout-inbox
+
+# Gorgias: Shopify App Store snapshot sometimes returns a 404 shell; retry with explicit locale
+# NOTE: The listing appears to live at handle `helpdesk` (category page shows “Gorgias: Helpdesk, Chat & FAQ” linking to apps.shopify.com/helpdesk).
+https://apps.shopify.com/helpdesk?locale=en gorgias-shopify-app-store

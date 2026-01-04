@@ -11,4 +11,4 @@ Domain-driven code. Each subfolder owns a bounded context with its pages, sectio
 Import rules:
 - Use domain aliases: `@client`, `@admin`, `@creator`, `@blog`, `@platform`, `@ui-kit`.
 - No cross-domain deep imports; go through the owning domain or platform.
-- Shared vendor clients live in platform (e.g., `@platform/commerce/shopify`, `@platform/storage/supabase`).
+- Shared platform entrypoints live under `@platform/*` and expose vendor-agnostic ports (e.g., `@platform/commerce`, `@platform/content`).

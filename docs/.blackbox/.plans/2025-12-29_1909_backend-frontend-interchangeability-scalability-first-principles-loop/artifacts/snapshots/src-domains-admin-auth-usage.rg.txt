@@ -1,0 +1,11 @@
+../src/domains/admin/pages/ui/pages/ContentPage.tsx:17:  const authHeader = pass ? { Authorization: `Bearer ${pass}` } : undefined
+../src/domains/admin/index.ts:11:export * from './shared/logic/clerkJwt'
+../src/domains/admin/catalog/data/useProducts.ts:3:import { decodeClerkJwtPayload, normalizeJwtRoles } from '@admin/shared/logic/clerkJwt'
+../src/domains/admin/catalog/ui/pages/ProductsPage.tsx:1:import { useAuth } from '@clerk/clerk-react'
+../src/domains/admin/catalog/ui/pages/ProductsPage.tsx:198:  const { getToken } = useAuth()
+../src/domains/admin/catalog/ui/pages/ProductsPage.tsx:1002:      const token = await getToken({ template: 'supabase' }).catch(() => null)
+../src/domains/admin/catalog/ui/pages/ProductsPage.tsx:1184:  }, [getToken])
+../src/domains/admin/catalog/ui/pages/ProductsPage.tsx:1372:      const token = await getToken({ template: 'supabase' }).catch(() => null)
+../src/domains/admin/catalog/ui/pages/ProductsPage.tsx:1477:  }, [getToken, product])
+../src/domains/admin/shared/ui/layouts/AdminShell.tsx:4:import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
+../src/domains/admin/shared/ui/layouts/AdminShell.tsx:15:  const { user, signedIn, signOut } = useAuth()

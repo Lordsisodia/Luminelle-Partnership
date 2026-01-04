@@ -1,91 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, createContext } from 'react'
+import type { ReactNode } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
 import { Avatar } from '@ui/components/Avatar'
-import type { LucideIcon } from 'lucide-react'
+import AdminSideNav from '@admin/shared/ui/components/AdminSideNav'
 import {
-  LayoutDashboard,
-  FileText,
-  Boxes,
-  PenLine,
-  Image as ImageIcon,
-  PanelsTopLeft,
-  BarChart3,
-  History,
-  ShoppingBag,
-  Settings,
   ChevronLeft,
   ChevronRight,
   Menu,
   LogOut,
+  UserRound,
 } from 'lucide-react'
 
-type NavItem = {
-  label: string
-  to: string
-  group: 'Core' | 'Content' | 'Tools'
-  icon: LucideIcon
-}
-
-const navItems: NavItem[] = [
-  { group: 'Core', label: 'Dashboard', to: '/admin', icon: LayoutDashboard },
-  { group: 'Core', label: 'Orders', to: '/admin/orders', icon: ShoppingBag },
-  { group: 'Content', label: 'Products', to: '/admin/products', icon: Boxes },
-  { group: 'Content', label: 'Product content', to: '/admin/content', icon: FileText },
-  { group: 'Content', label: 'Pages', to: '/admin/pages', icon: FileText },
-  { group: 'Content', label: 'Components', to: '/admin/components', icon: PanelsTopLeft },
-  { group: 'Content', label: 'Media', to: '/admin/media', icon: ImageIcon },
-  { group: 'Content', label: 'Blogs', to: '/admin/blogs', icon: PenLine },
-  { group: 'Tools', label: 'Analytics', to: '/admin/analytics', icon: BarChart3 },
-  { group: 'Tools', label: 'Activity', to: '/admin/activity', icon: History },
-  { group: 'Tools', label: 'Settings', to: '/admin/settings', icon: Settings },
-]
-
-function NavItemLink({
-  to,
-  label,
-  icon: Icon,
-  onNavigate,
-  collapsed,
-  trailing,
-}: {
-  to: string
-  label: string
-  icon: LucideIcon
-  onNavigate?: () => void
-  collapsed?: boolean
-  trailing?: React.ReactNode
-}) {
-  return (
-    <NavLink
-      to={to}
-      end={to === '/admin'}
-      onClick={onNavigate}
-      aria-label={collapsed ? label : undefined}
-      title={collapsed ? label : undefined}
-      className={({ isActive }) =>
-        [
-          'group flex w-full items-center rounded-xl px-3 py-2 text-sm font-semibold transition overflow-hidden',
-          isActive
-            ? 'bg-white text-semantic-text-primary shadow-sm ring-1 ring-semantic-legacy-brand-blush/60 shadow-[inset_3px_0_0_0_rgba(187,125,109,0.7)]'
-            : 'text-semantic-text-primary/80 hover:bg-white/70 hover:text-semantic-text-primary',
-          collapsed ? 'justify-center' : 'justify-start gap-2 pr-2',
-        ].join(' ')
-      }
-    >
-      <Icon className="h-4 w-4 shrink-0 text-semantic-text-primary/70 group-[.active]:text-semantic-text-primary" aria-hidden="true" />
-      {collapsed ? null : (
-        <>
-          <span className="truncate text-semantic-text-primary/90 group-[.active]:text-semantic-text-primary">{label}</span>
-          {trailing}
-        </>
-      )}
-    </NavLink>
-  )
-}
+export const TopBarActionsContext = createContext<{ setTopActions: (node: ReactNode | null) => void } | null>(null)
 
 export default function AdminShell() {
+  const [topActions, setTopActions] = useState<ReactNode | null>(null)
   const { user, signedIn, signOut } = useAuth()
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
@@ -109,14 +40,13 @@ export default function AdminShell() {
     const parts = path.split('/').filter(Boolean) // e.g. ['admin','products','lumelle-shower-cap']
     const items: { label: string; to?: string }[] = []
     const sectionMap: Record<string, { label: string; to: string }> = {
-      products: { label: 'Products', to: '/admin/products' },
+      products: { label: 'Catalog', to: '/admin/products' },
       pages: { label: 'Pages', to: '/admin/pages' },
       blogs: { label: 'Blogs', to: '/admin/blogs' },
       media: { label: 'Media', to: '/admin/media' },
       analytics: { label: 'Analytics', to: '/admin/analytics' },
       activity: { label: 'Activity', to: '/admin/activity' },
       orders: { label: 'Orders', to: '/admin/orders' },
-      content: { label: 'Product content', to: '/admin/content' },
       components: { label: 'Components', to: '/admin/components' },
       globals: { label: 'Components', to: '/admin/components' },
       settings: { label: 'Settings', to: '/admin/settings' },
@@ -164,6 +94,7 @@ export default function AdminShell() {
 
   useEffect(() => {
     setDrawerOpen(false)
+    setTopActions(null)
   }, [location.pathname])
 
   useEffect(() => {
@@ -265,12 +196,6 @@ export default function AdminShell() {
     }
   }, [])
 
-  const grouped = useMemo(() => {
-    const groups: Record<string, NavItem[]> = { Core: [], Content: [], Tools: [] }
-    for (const item of navItems) groups[item.group].push(item)
-    return groups as Record<NavItem['group'], NavItem[]>
-  }, [])
-
   const displayName = user?.fullName || (user?.email ? user.email.split('@')[0] : 'Admin')
   const avatar = user?.avatarUrl ? (
     <img
@@ -286,26 +211,41 @@ export default function AdminShell() {
     </span>
   )
 
+  const headerAvatar = user?.avatarUrl ? (
+    <img
+      src={user.avatarUrl}
+      alt={user.fullName || user.email || 'Avatar'}
+      className="h-8 w-8 rounded-full object-cover shadow-sm ring-1 ring-white/60"
+    />
+  ) : (
+    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-white/60">
+      <Avatar name={user?.fullName || user?.email || 'Admin'} size={28} />
+    </span>
+  )
+
+  const hasTopActions = Boolean(topActions)
+
   return (
-    <div className="min-h-screen bg-brand-porcelain text-semantic-text-primary">
-      <Helmet>
-        <meta name="robots" content="noindex,nofollow" />
-      </Helmet>
-      <a
-        href="#main-content"
-        onClick={() => {
-          const target = document.getElementById('main-content')
-          if (target instanceof HTMLElement) target.focus()
-        }}
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 rounded-full bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft ring-1 ring-semantic-legacy-brand-blush/60"
-      >
-        Skip to content
-      </a>
-      <div className="flex min-h-screen w-full">
+    <TopBarActionsContext.Provider value={{ setTopActions }}>
+      <div className="min-h-screen bg-brand-porcelain text-semantic-text-primary">
+        <Helmet>
+          <meta name="robots" content="noindex,nofollow" />
+        </Helmet>
+        <a
+          href="#main-content"
+          onClick={() => {
+            const target = document.getElementById('main-content')
+            if (target instanceof HTMLElement) target.focus()
+          }}
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 rounded-full bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft ring-1 ring-semantic-legacy-brand-blush/60"
+        >
+          Skip to content
+        </a>
+        <div className="flex min-h-screen w-full">
         {/* Desktop sidebar */}
         <aside
           className={`sticky top-0 hidden h-screen shrink-0 border-r border-semantic-legacy-brand-blush/60 bg-brand-porcelain p-2 md:block transition-[width] duration-200 ${
-            collapsed ? 'w-16' : 'w-48'
+            collapsed ? 'w-16' : 'w-72'
           }`}
         >
           <div className="flex h-full flex-col gap-3">
@@ -313,7 +253,7 @@ export default function AdminShell() {
               className={`rounded-2xl ${
                 collapsed
                   ? 'flex h-10 items-center justify-center px-1'
-                : 'relative flex items-center justify-between border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3'
+                  : 'relative flex items-center justify-between border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3'
               }`}
             >
               {!collapsed && (
@@ -342,143 +282,7 @@ export default function AdminShell() {
               </button>
             </div>
 
-            <nav className="flex-1 space-y-4 overflow-y-auto pr-1 min-h-0">
-              {(['Core', 'Content', 'Tools'] as const).map((group) => (
-                <div key={group}>
-                  {!collapsed && (
-                    <div className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/50 bg-brand-porcelain px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/70 shadow-sm">
-                      {group}
-                    </div>
-                  )}
-                  <div className={`mt-2 space-y-1 ${collapsed ? 'px-0' : ''}`}>
-                    {grouped[group].map((item) => (
-                      <NavItemLink
-                        key={item.to}
-                        to={item.to}
-                        label={item.label}
-                        icon={item.icon}
-                        collapsed={collapsed}
-                        trailing={
-                          !collapsed && item.to === '/admin/products' && productCount ? (
-                            <span className="ml-auto inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-[#f9e9e4] px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary/90 whitespace-nowrap">
-                              {productCount}
-                            </span>
-                          ) : null
-                        }
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </nav>
-
-            <div className="mt-auto space-y-2">
-              {!collapsed ? (
-                <NavLink
-                  to="/"
-                  className="inline-flex w-full items-center justify-center rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-xs font-semibold text-semantic-text-primary shadow-sm hover:bg-white/70"
-                >
-                  View storefront
-                </NavLink>
-              ) : null}
-
-              <div
-                className={`${
-                  collapsed
-                    ? 'flex items-center justify-center rounded-full p-2'
-                    : 'rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-sm'
-                }`}
-              >
-                {collapsed ? (
-                  <div className="relative" ref={userMenuRef}>
-                    <button
-                      type="button"
-                      aria-label="Account menu"
-                      aria-haspopup="menu"
-                      aria-expanded={userMenuOpen}
-                      title={`${signedIn ? 'Signed in' : 'Signed out'} · ${displayName}`}
-                      onClick={() => setUserMenuOpen((v) => !v)}
-                      className="inline-flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30 focus:ring-offset-2 focus:ring-offset-brand-porcelain"
-                    >
-                      {avatar}
-                    </button>
-
-                    {userMenuOpen ? (
-                      <div className="absolute bottom-full left-1/2 z-50 mb-2 w-56 -translate-x-1/2 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white shadow-xl">
-                        <div className="px-3 py-2">
-                          <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-                            {signedIn ? 'Signed in' : 'Signed out'}
-                          </div>
-                          <div className="mt-0.5 truncate text-sm font-semibold text-semantic-text-primary">
-                            {displayName}
-                          </div>
-                        </div>
-
-                        <div className="h-px bg-semantic-legacy-brand-blush/40" aria-hidden="true" />
-
-                        <NavLink
-                          to="/"
-                          className="flex w-full items-center px-3 py-2 text-left text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
-                          onClick={() => setUserMenuOpen(false)}
-                        >
-                          View storefront
-                        </NavLink>
-
-                        {signedIn ? (
-                          <button
-                            type="button"
-                            className="flex w-full items-center px-3 py-2 text-left text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
-                            onClick={() => {
-                              setUserMenuOpen(false)
-                              signOut()
-                            }}
-                          >
-                            Sign out
-                          </button>
-                        ) : (
-                          <NavLink
-                            to="/sign-in"
-                            className="flex w-full items-center px-3 py-2 text-left text-xs font-semibold text-semantic-text-primary hover:bg-brand-porcelain/60"
-                            onClick={() => setUserMenuOpen(false)}
-                          >
-                            Sign in
-                          </NavLink>
-                        )}
-                      </div>
-                    ) : null}
-                  </div>
-                ) : (
-                  <div className="flex min-w-0 items-start gap-3">
-                    {avatar}
-                    <div className="min-w-0 flex-1">
-                      <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-                        {signedIn ? 'Signed in' : 'Signed out'}
-                      </div>
-                      <div className="truncate text-sm font-semibold">{displayName}</div>
-                    </div>
-
-                    {signedIn ? (
-                      <button
-                        type="button"
-                        aria-label="Sign out"
-                        title="Sign out"
-                        onClick={signOut}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa text-white shadow-sm hover:bg-semantic-legacy-brand-cocoa/90"
-                      >
-                        <LogOut className="h-4 w-4" aria-hidden="true" />
-                      </button>
-                    ) : (
-                      <NavLink
-                        to="/sign-in"
-                        className="inline-flex h-9 items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-4 text-xs font-semibold text-white shadow-sm hover:bg-semantic-legacy-brand-cocoa/90"
-                      >
-                        Sign in
-                      </NavLink>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
+            <AdminSideNav collapsed={collapsed} productCount={productCount} />
           </div>
         </aside>
 
@@ -525,11 +329,17 @@ export default function AdminShell() {
                 })}
               </nav>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="text-sm font-semibold">Admin</div>
-              <span className="rounded-full border border-semantic-legacy-brand-blush/60 px-2 py-1 text-[11px] text-semantic-text-primary/70">
-                {import.meta.env.MODE}
-              </span>
+            <div className={`flex items-center gap-3 ${hasTopActions ? 'flex-1 justify-between' : ''}`}>
+              {topActions}
+              <NavLink
+                to="/admin/profile"
+                aria-label={`Open profile for ${displayName}`}
+                title={`Profile • ${displayName}`}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 backdrop-blur-md text-semantic-text-primary shadow-sm hover:bg-white/50 focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30 focus:ring-offset-2 focus:ring-offset-brand-porcelain"
+              >
+                <span className="sr-only">Profile</span>
+                {headerAvatar}
+              </NavLink>
             </div>
           </header>
 
@@ -559,24 +369,12 @@ export default function AdminShell() {
               </button>
             </div>
             <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-60px)]">
-              {(['Core', 'Content', 'Tools'] as const).map((group) => (
-                <div key={group}>
-                  <div className="px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-                    {group}
-                  </div>
-                  <div className="mt-2 space-y-1">
-                    {grouped[group].map((item) => (
-                      <NavItemLink
-                        key={item.to}
-                        to={item.to}
-                        label={item.label}
-                        icon={item.icon}
-                        onNavigate={() => setDrawerOpen(false)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
+              <AdminSideNav
+                collapsed={false}
+                productCount={productCount}
+                onNavigate={() => setDrawerOpen(false)}
+                mode="drawer"
+              />
 
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain px-4 py-3">
                 <div className="text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
@@ -584,13 +382,6 @@ export default function AdminShell() {
                 </div>
                 <div className="mt-2 text-sm font-semibold">{displayName}</div>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <NavLink
-                    to="/"
-                    className="inline-flex items-center rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1.5 text-xs font-semibold text-semantic-text-primary"
-                    onClick={() => setDrawerOpen(false)}
-                  >
-                    View storefront
-                  </NavLink>
                   {signedIn ? (
                     <button
                       onClick={() => {
@@ -626,10 +417,11 @@ export default function AdminShell() {
           ) : null}
 
           <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none">
-            <Outlet />
+            <Outlet context={{ setTopActions }} />
           </main>
         </div>
+        </div>
       </div>
-    </div>
+    </TopBarActionsContext.Provider>
   )
 }

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PropsWithChildren } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { UserRound } from 'lucide-react'
-import { useSignIn, useUser } from '@clerk/clerk-react'
 import { useCart } from '@client/shop/cart/providers/CartContext'
 import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
 import { getVolumeDiscountTierForVariant } from '@client/shop/cart/logic/volumeDiscounts'
@@ -25,6 +24,8 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [drawerMounted, setDrawerMounted] = useState(false)
   const drawerRef = useRef<HTMLDivElement | null>(null)
+  const menuPanelRef = useRef<HTMLDivElement | null>(null)
+  const cartPanelRef = useRef<HTMLDivElement | null>(null)
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
   const closeTimerRef = useRef<number | null>(null)
   const SHOW_LOYALTY = false
@@ -75,45 +76,13 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   }, [])
 
   const { items, qty, setQty, remove, add, checkoutUrl, setAttributes } = useCart()
-  const { signedIn } = useAuth()
+  const { signedIn, user } = useAuth()
   const location = useLocation()
-  const { isLoaded: signInLoaded, signIn } = useSignIn()
-  const { user } = useUser()
-  const [signInSubmitting, setSignInSubmitting] = useState(false)
-  const [signInError, setSignInError] = useState<string | null>(null)
 
   const redirectTo = useMemo(() => {
     const target = `${location.pathname}${location.search}${location.hash}` || '/'
     return target
   }, [location.hash, location.pathname, location.search])
-
-  const extractClerkErrorMessage = (error: unknown) => {
-    if (error && typeof error === 'object' && 'errors' in error) {
-      const clerkErrors = (error as { errors?: Array<{ message: string }> }).errors
-      if (clerkErrors && clerkErrors[0]?.message) return clerkErrors[0].message
-    }
-    if (error instanceof Error) return error.message
-    return 'Something went wrong — please try again.'
-  }
-
-  const handleGoogleSignIn = async () => {
-    if (!signInLoaded || !signIn) return
-    if (signInSubmitting) return
-    setSignInSubmitting(true)
-    setSignInError(null)
-    try {
-      await signIn.authenticateWithRedirect({
-        strategy: 'oauth_google',
-        redirectUrl: '/sso-callback',
-        redirectUrlComplete: redirectTo,
-      })
-    } catch (err) {
-      const message = extractClerkErrorMessage(err)
-      console.error('Google sign-in failed', err)
-      setSignInError(message)
-      setSignInSubmitting(false)
-    }
-  }
 
   const cartQty = qty
   const DRAWER_WIDTH = 320
@@ -134,19 +103,14 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
       window.location.href = checkoutUrl
     }
   }, [checkoutUrl, redirecting, setAttributes])
-  const loyaltyPoints = SHOW_LOYALTY
-    ? useMemo(() => {
-        const raw = user?.publicMetadata?.loyaltyPoints
-        return typeof raw === 'number' ? raw : 0
-      }, [user?.publicMetadata?.loyaltyPoints])
-    : 0
+  const loyaltyPoints = 0
   const nextTier = 500
   const loyaltyProgress = SHOW_LOYALTY ? Math.min(100, Math.round((loyaltyPoints / nextTier) * 100)) : 0
 
   const upsellProducts = useMemo(
     () => [
       {
-        variantId: 'gid://shopify/ProductVariant/56829020504438',
+        variantKey: 'variant.lumelle-shower-cap.default',
         id: 'shower-cap',
         title: 'Lumelle Shower Cap',
         price: 14.99,
@@ -154,7 +118,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
         href: '/product/lumelle-shower-cap',
       },
       {
-        variantId: 'gid://shopify/ProductVariant/56852779696502',
+        variantKey: 'variant.satin-overnight-curler.default',
         id: 'heatless-curler',
         title: 'Satin Overnight Curler Set',
         price: 16.99,
@@ -166,7 +130,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   )
   const cartIds = useMemo(() => new Set(items.map((i) => i.id)), [items])
   const filteredUpsells = useMemo(() => {
-    return upsellProducts.filter((p) => !cartIds.has(p.variantId))
+    return upsellProducts.filter((p) => !cartIds.has(p.variantKey))
   }, [upsellProducts, cartIds])
 
   const renderUpsellCard = useCallback(
@@ -188,7 +152,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
             <div className="mt-1 text-xs font-semibold text-semantic-text-primary">£{p.price.toFixed(2)}</div>
           </div>
           <button
-            onClick={() => add({ id: p.variantId, title: p.title, price: p.price, image: p.image }, 1)}
+            onClick={() => add({ id: p.variantKey, title: p.title, price: p.price, image: p.image }, 1)}
             className="absolute right-3 top-1/2 -translate-y-1/2 transform rounded-full border border-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-semantic-legacy-brand-cocoa hover:bg-semantic-legacy-brand-blush/30"
           >
             Add
@@ -288,6 +252,26 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
       root.style.paddingRight = originalPaddingRight
     }
   }, [drawerMounted])
+
+  // iOS/Safari can "rubber band" scroll even when an overflow container has no overflow.
+  // Lock scrolling for the active panel when its content fits.
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const applyScrollLock = () => {
+      const panel = activeTab === 'menu' ? menuPanelRef.current : cartPanelRef.current
+      if (!panel) return
+      const canScroll = panel.scrollHeight - panel.clientHeight > 2
+      panel.style.overflowY = canScroll ? 'auto' : 'hidden'
+    }
+
+    const raf = window.requestAnimationFrame(() => applyScrollLock())
+    window.addEventListener('resize', applyScrollLock)
+    return () => {
+      window.cancelAnimationFrame(raf)
+      window.removeEventListener('resize', applyScrollLock)
+    }
+  }, [activeTab, items.length, menuOpen])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -407,7 +391,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
             <div className="flex-1 min-h-0 overflow-hidden">
             {activeTab === 'menu' ? (
               <div id="drawer-panel-menu" role="tabpanel" aria-labelledby="drawer-tab-menu" className="flex h-full flex-col">
-              <div className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
+	              <div ref={menuPanelRef} className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
                   <nav className="px-2 py-2">
                   <div className="rounded-xl">
                     <div className="px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">Products</div>
@@ -478,9 +462,9 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
 	                  {signedIn ? (
 	                    <div className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-soft">
 	                      <div className="flex items-center gap-3">
-	                        {user?.imageUrl ? (
+	                        {user?.avatarUrl ? (
 	                          <img
-	                            src={user.imageUrl}
+	                            src={user.avatarUrl}
 	                            alt={user.fullName ? `${user.fullName} profile photo` : 'Profile photo'}
 	                            className="h-10 w-10 rounded-full object-cover"
 	                          />
@@ -489,12 +473,12 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
 	                            className="flex h-10 w-10 items-center justify-center rounded-full bg-semantic-legacy-brand-blush/40 text-sm font-semibold text-semantic-text-primary"
 	                            aria-hidden
 	                          >
-	                            {(user?.firstName ?? user?.fullName ?? 'U').slice(0, 1).toUpperCase()}
+	                            {(user?.fullName ?? user?.email ?? 'U').slice(0, 1).toUpperCase()}
 	                          </div>
 	                        )}
 	                        <div className="flex-1 leading-tight">
 	                          <div className="text-sm font-semibold text-semantic-text-primary">
-	                            Welcome back{user?.firstName ? `, ${user.firstName}` : ''}!
+	                            Welcome back{user?.fullName ? `, ${user.fullName}` : ''}!
 	                          </div>
                           <RouterLink
                             to="/account"
@@ -534,29 +518,20 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                         </span>
                       </div>
 
-                      {signInError ? (
-                        <p className="mt-3 rounded-xl bg-red-50 px-3 py-2 text-xs text-red-700">{signInError}</p>
-                      ) : null}
-
-                      <button
-                        type="button"
-                        onClick={() => { void handleGoogleSignIn() }}
-                        disabled={!signInLoaded || signInSubmitting}
-                        className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90 disabled:opacity-60"
+                      <RouterLink
+                        to={`/sign-in?redirect=${encodeURIComponent(redirectTo)}`}
+                        onClick={() => closeDrawer()}
+                        className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90"
                       >
-                        <img
-                          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                          alt=""
-                          className="h-4 w-4"
-                        />
-                        {signInSubmitting ? 'Redirecting…' : 'Continue with Google'}
-                      </button>
+                        <UserRound className="h-4 w-4" />
+                        Continue to sign in
+                      </RouterLink>
                     </div>
                   )}
                 </div>
               </div>
             ) : (
-              <div id="drawer-panel-cart" role="tabpanel" aria-labelledby="drawer-tab-cart" className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
+              <div ref={cartPanelRef} id="drawer-panel-cart" role="tabpanel" aria-labelledby="drawer-tab-cart" className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
                 <div className="px-4 pt-2">
                   <div className="mb-2 rounded-xl bg-semantic-legacy-brand-blush/30 px-3 py-2 text-xs text-semantic-text-primary/80">
                     {remainingForFreeShip > 0 ? `You are £${remainingForFreeShip.toFixed(2)} away from free shipping.` : 'You’ve unlocked free shipping!'}
@@ -726,18 +701,24 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                   <span>Subtotal</span>
                   <span className="font-semibold text-semantic-text-primary">£{displaySubtotal.toFixed(2)}</span>
                 </div>
-                <button
-                  className="mt-1 w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft transition disabled:cursor-not-allowed disabled:opacity-70 enabled:hover:-translate-y-0.5 enabled:hover:shadow-md"
-                  disabled={!checkoutUrl || redirecting || items.length === 0}
-                  onClick={beginCheckout}
-                >
-                  {redirecting ? 'Redirecting…' : checkoutUrl ? 'Checkout' : 'Checkout coming soon'}
-                </button>
-                {!checkoutUrl && items.length > 0 ? (
-                  <p className="text-center text-xs text-semantic-text-primary/60">
-                    Checkout is being configured on this storefront.
-                  </p>
-                ) : null}
+	                <button
+	                  className="mt-1 w-full rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-sm font-semibold text-white shadow-soft transition disabled:cursor-not-allowed disabled:opacity-70 enabled:hover:-translate-y-0.5 enabled:hover:shadow-md"
+	                  disabled={!checkoutUrl || redirecting || items.length === 0}
+	                  onClick={beginCheckout}
+	                >
+	                  {redirecting
+	                    ? 'Opening secure checkout…'
+	                    : checkoutUrl
+	                      ? 'Secure checkout'
+	                      : items.length > 0
+	                        ? 'Preparing checkout…'
+	                        : 'Checkout'}
+	                </button>
+	                {!checkoutUrl && items.length > 0 ? (
+	                  <p className="text-center text-xs text-semantic-text-primary/60">
+	                    Creating a checkout session…
+	                  </p>
+	                ) : null}
               </div>
             ) : null}
           </aside>

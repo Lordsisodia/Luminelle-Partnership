@@ -1,0 +1,100 @@
+{
+  "count": 8,
+  "generated_at_utc": "2025-12-28T23:07:25Z",
+  "queries_used": [
+    "admin panel open source react stars:>=200 fork:false archived:false",
+    "headless commerce open source stars:>=200 fork:false archived:false",
+    "returns portal ecommerce open source stars:>=200 fork:false archived:false",
+    "rma management open source stars:>=200 fork:false archived:false"
+  ],
+  "repos": [
+    {
+      "description": "Payload is the open-source, fullstack Next.js framework, giving you instant backend superpowers. Get a full TypeScript backend and admin panel instantly. Use Payload as a headless CMS or for building powerful applications.",
+      "full_name": "payloadcms/payload",
+      "integration_score": 11,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 39578,
+      "updated_at": "2025-12-28T22:46:50Z",
+      "url": "https://github.com/payloadcms/payload"
+    },
+    {
+      "description": "Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool.",
+      "full_name": "illacloud/illa-builder",
+      "integration_score": 11,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "Apache-2.0",
+      "stars": 12306,
+      "updated_at": "2025-12-28T14:26:24Z",
+      "url": "https://github.com/illacloud/illa-builder"
+    },
+    {
+      "description": "Open source headless commerce that\u2019s fast, flexible, and built to scale,launch stunning storefronts that convert and grow your business without limits.",
+      "full_name": "bagisto/nextjs-commerce",
+      "integration_score": 10,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 3472,
+      "updated_at": "2025-12-28T12:39:16Z",
+      "url": "https://github.com/bagisto/nextjs-commerce"
+    },
+    {
+      "description": "An open-source package that brings the power of modern headless e-commerce functionality to Laravel.",
+      "full_name": "lunarphp/lunar",
+      "integration_score": 8,
+      "language": "PHP",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 3363,
+      "updated_at": "2025-12-28T22:50:13Z",
+      "url": "https://github.com/lunarphp/lunar"
+    },
+    {
+      "description": "React Storefront - PWA for eCommerce. 100% offline, platform agnostic, headless, Magento 2 supported. Always Open Source, Apache-2.0 license. Join us as contributor (contributors@reactstorefront.io).",
+      "full_name": "storefront-foundation/react-storefront",
+      "integration_score": 8,
+      "language": "JavaScript",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "stars": 833,
+      "updated_at": "2025-12-24T14:21:02Z",
+      "url": "https://github.com/storefront-foundation/react-storefront"
+    },
+    {
+      "description": "\u2728 Open-Source Full-stack E-Commerce Storefront with CMS Admin Panel. Built with Typescript, Next.js 14 App Dir, Tailwind CSS ( @shadcn-ui ) and Prisma. Admin Panel: https://pardis.vercel.app",
+      "full_name": "slowfound/next-prisma-tailwind-ecommerce",
+      "integration_score": 8,
+      "language": "TypeScript",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 350,
+      "updated_at": "2025-12-25T16:22:25Z",
+      "url": "https://github.com/slowfound/next-prisma-tailwind-ecommerce"
+    },
+    {
+      "description": "ASP.NET Core eCommerce software. nopCommerce is a free and open-source shopping cart.",
+      "full_name": "nopSolutions/nopCommerce",
+      "integration_score": 7,
+      "language": "C#",
+      "license_bucket": "verify",
+      "license_spdx": "NOASSERTION",
+      "stars": 9920,
+      "updated_at": "2025-12-28T21:17:17Z",
+      "url": "https://github.com/nopSolutions/nopCommerce"
+    },
+    {
+      "description": "The open-source storefront for any ecommerce. Built with a headless approach, using a modern JS stack. Works with Litekart, Medusa. WIP for Shopify.",
+      "full_name": "itswadesh/svelte-commerce",
+      "integration_score": 7,
+      "language": "Svelte",
+      "license_bucket": "safe",
+      "license_spdx": "MIT",
+      "stars": 1758,
+      "updated_at": "2025-12-27T16:12:26Z",
+      "url": "https://github.com/itswadesh/svelte-commerce"
+    }
+  ]
+}

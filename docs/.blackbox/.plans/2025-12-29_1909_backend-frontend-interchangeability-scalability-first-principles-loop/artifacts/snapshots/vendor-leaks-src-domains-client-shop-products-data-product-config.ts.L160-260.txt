@@ -1,0 +1,101 @@
+   160	
+   161	const careCurler = [
+   162	  {
+   163	    icon: 'Shield',
+   164	    title: "What's inside",
+   165	    body:
+   166	      '• Satin heatless curling rod\n' +
+   167	      '• Luxury satin bonnet\n' +
+   168	      '• 2x matching satin scrunchies\n' +
+   169	      '• Claw clip',
+   170	  },
+   171	  {
+   172	    icon: 'RefreshCcw',
+   173	    title: 'Works on all hair types',
+   174	    body: 'Straight, wavy, thick or fine for smooth, long‑lasting curls.',
+   175	  },
+   176	  {
+   177	    icon: 'Feather',
+   178	    title: 'Curls last all day',
+   179	    body:
+   180	      'Many customers say that theirs hold up to 2–3 days depending on hair type and how tightly they wrap and the products they use.',
+   181	  },
+   182	]
+   183	
+   184	const curlerConfig: ProductConfig = {
+   185	  handle: 'satin-overnight-curler',
+   186	  fallbackItemId: 'satin-overnight-curler-set',
+   187	  fallbackVariantId: 'gid://shopify/ProductVariant/56852779696502',
+   188	  defaultTitle: 'Satin Overnight Heatless Curler Set',
+   189	  defaultSubtitle: 'Comfortable overnight curls, zero damage.',
+   190	  defaultPrice: 16.99,
+   191	  compareAtPrice: 21.99,
+   192	  discountPercentOverride: 20,
+   193	  ratingValueOverride: 4.8,
+   194	  ratingCountLabelOverride: '50+',
+   195	  careLabelOverride: "What's included",
+   196	  hideDetailsAccordion: true,
+   197	  bottomCtaChips: ['Heatless curls', 'Satin bonnet included', '30-day returns'],
+   198	  gallery: curlerGallery,
+   199	  videoSlot: DEFAULT_VIDEO_SLOT,
+   200	  essentials: essentialsCurler,
+   201	  reasons: reasonsCurler,
+   202	  qa: qaCurler,
+   203	  how: howCurler,
+   204	  care: careCurler,
+   205	  featureCallouts: {
+   206	    mediaSrc: DEFAULT_VIDEO_SLOT,
+   207	    mediaAlt: 'Satin overnight curler demo',
+   208	    mediaLabel: 'Heatless overnight curls',
+   209	    mediaNote: 'Soft satin set that stays comfy all night',
+   210	    heading: {
+   211	      eyebrow: "How you'll use it",
+   212	      title: 'Wrap it once, wake up flawless curls',
+   213	      description: "You'll get effortless, frizz-free curls that last, with a comfy design that keeps your hair healthier every time you use it.",
+   214	      alignment: 'left',
+   215	    },
+   216	  },
+   217	  featuredTikTokHeading: {
+   218	    eyebrow: undefined,
+   219	    title: 'Watch How These Curls Came Out Flawless',
+   220	    description: "See How Long Creators' Curls Last and How Effortlessly Gorgeous They Look.",
+   221	    alignment: 'center',
+   222	  },
+   223	}
+   224	
+   225	export const productConfigs: Record<string, ProductConfig> = {
+   226	  'shower-cap': {
+   227	    handle: 'lumelle-shower-cap',
+   228	    fallbackItemId: 'lumelle-cap',
+   229	    fallbackVariantId: 'gid://shopify/ProductVariant/56829020504438',
+   230	    defaultTitle: 'Lumelle Shower Cap',
+   231	    defaultSubtitle: 'Keep hair dry. Keep styles flawless.',
+   232	    defaultPrice: 14.99,
+   233	    compareAtPrice: 19.99,
+   234	    badge: 'Buy 2, save 10%',
+   235	    bottomCtaChips: ['Waterproof satin', 'No-frizz seal', '30-day returns'],
+   236	    gallery: CAP_GALLERY,
+   237	    videoSlot: DEFAULT_VIDEO_SLOT,
+   238	    essentials: essentialsCap,
+   239	    reasons: reasonsCap,
+   240	    qa: qaCap,
+   241	    how: howCap,
+   242	    care: careCap,
+   243	    featureCallouts: {
+   244	      mediaSrc: DEFAULT_VIDEO_SLOT,
+   245	      mediaAlt: 'Lumelle cap TikTok demo',
+   246	      mediaLabel: 'Watch it in action',
+   247	      mediaNote: 'Creator-tested frizz defense',
+   248	      heading: {
+   249	        eyebrow: 'Why you’ll love it',
+   250	        title: 'Effortless to put on, frizz-free when you take it off',
+   251	        description: 'Your small daily luxury that keeps styles smooth, comfy, and camera-ready.',
+   252	        alignment: 'left',
+   253	      },
+   254	    },
+   255	    featuredTikTokHeading: {
+   256	      eyebrow: 'Creator in action',
+   257	      title: 'Watch the cap stay flawless',
+   258	      description: 'See how creators keep their silk press perfect after every shower.',
+   259	      alignment: 'center',
+   260	    },

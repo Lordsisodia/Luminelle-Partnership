@@ -1,0 +1,20 @@
+# source: functions/api/metrics/utm-sources.ts
+# captured: 2025-12-30T14:09:29Z
+
+import type { PagesFunction } from '../../_lib/types'
+import { getSupabase } from '../../_lib/supabase'
+import { json, methodNotAllowed, text } from '../../_lib/response'
+
+export const onRequest: PagesFunction = async ({ request, env }) => {
+  if (request.method !== 'GET') return methodNotAllowed(['GET'])
+
+  const url = new URL(request.url)
+  const days = Math.min(parseInt(url.searchParams.get('days') || '30', 10), 365)
+  if (!Number.isFinite(days) || days <= 0) return text('Invalid days', { status: 400 })
+
+  const supabase = getSupabase(env)
+  const { data, error } = await supabase.rpc('lumelle_metrics_utm_sources', { days })
+  if (error) throw error
+  return json(data ?? [])
+}
+

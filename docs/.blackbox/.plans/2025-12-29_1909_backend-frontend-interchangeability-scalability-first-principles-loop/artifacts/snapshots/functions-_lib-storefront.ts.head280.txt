@@ -1,0 +1,51 @@
+import type { Env } from './types'
+
+export function getStorefrontConfig(env: Env) {
+  const version = env.SHOPIFY_API_VERSION || '2025-10'
+  const domain = env.SHOPIFY_STORE_DOMAIN
+  const privateToken = env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN
+  if (!domain || !privateToken) {
+    throw new Error('Storefront private token or domain not set (SHOPIFY_STORE_DOMAIN/SHOPIFY_STOREFRONT_PRIVATE_TOKEN)')
+  }
+  return { version, domain, privateToken }
+}
+
+export async function runStorefront<T>(env: Env, query: string, variables?: Record<string, unknown>): Promise<T> {
+  const { version, domain, privateToken } = getStorefrontConfig(env)
+  const res = await fetch(`https://${domain}/api/${version}/graphql.json`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'X-Shopify-Storefront-Private-Token': privateToken,
+    },
+    body: JSON.stringify({ query, variables }),
+  })
+  if (!res.ok) throw new Error(`Storefront ${res.status}`)
+  const json = await res.json()
+  if (json.errors) throw new Error(JSON.stringify(json.errors))
+  return json.data as T
+}
+
+export const CART_FRAGMENT = `
+fragment CartFields on Cart {
+  id
+  checkoutUrl
+  lines(first: 50) {
+    edges {
+      node {
+        id
+        quantity
+        merchandise {
+          ... on ProductVariant {
+            id
+            title
+            product { title }
+            price: priceV2 { amount currencyCode }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
