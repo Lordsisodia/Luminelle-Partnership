@@ -37,6 +37,10 @@ export type Env = {
 
   // Shopify Storefront (private token used server-side)
   SHOPIFY_STOREFRONT_PRIVATE_TOKEN?: string
+  // Shopify Storefront (public token; can be used server-side for proxying)
+  SHOPIFY_STOREFRONT_PUBLIC_TOKEN?: string
+  // Optional Vite storefront token; sometimes used as a fallback in functions.
+  VITE_SHOPIFY_STOREFRONT_PUBLIC_TOKEN?: string
 
   // Shopify Customer Accounts
   CUSTOMER_CLIENT_ID?: string

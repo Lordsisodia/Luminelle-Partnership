@@ -5,7 +5,7 @@ Generated from: `docs/06-quality/reviews/app-ui-review-2025-12-26.md`
 Workflow: `docs/06-quality/feedback/ui-issue-tracker/ai-loop.md`
 Prompt template: `docs/06-quality/feedback/ui-issue-tracker/templates/autonomous-agent-prompt.md`
 
-This is the execution tracker for the 183 UI issues (including post-audit additions).
+This is the execution tracker for the 184 UI issues (including post-audit additions).
 
 ## Status legend
 
@@ -224,3 +224,4 @@ These are the current top *open* items by `Priority` (excludes `DONE` / `DEFERRE
 | 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 4 | 4 | 3 | 2 | 29 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
 | 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 5 | 5 | 3 | 2 | 47 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 3 | 5 | 2 | 2 | 28 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
+| 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 5 | 5 | 2 | 3 | 73 | VERIFYING | [issue-184](ui-issues/issue-184.md) |

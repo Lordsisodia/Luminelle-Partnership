@@ -1,5 +1,5 @@
 import type { PagesFunction } from '../../../_lib/types'
-import { CART_FRAGMENT, runStorefront } from '../../../_lib/storefront'
+import { CART_FRAGMENT, runStorefront, storefrontError } from '../../../_lib/storefront'
 import { json, methodNotAllowed, text } from '../../../_lib/response'
 
 export const onRequest: PagesFunction = async ({ request, env }) => {
@@ -7,16 +7,20 @@ export const onRequest: PagesFunction = async ({ request, env }) => {
   const body = await request.json().catch(() => ({} as any))
   if (!body.cartId || !Array.isArray(body.attributes)) return text('Missing params', { status: 400 })
 
-  const data = await runStorefront<any>(
-    env,
-    `#graphql
-      mutation CartAttributesUpdate($cartId:ID!, $attributes:[AttributeInput!]!) {
-        cartAttributesUpdate(cartId:$cartId, attributes:$attributes) { cart { ...CartFields } }
-      }
-      ${CART_FRAGMENT}
-    `,
-    { cartId: body.cartId, attributes: body.attributes },
-  )
-  return json({ cart: data.cartAttributesUpdate.cart })
+  try {
+    const data = await runStorefront<any>(
+      env,
+      `#graphql
+        mutation CartAttributesUpdate($cartId:ID!, $attributes:[AttributeInput!]!) {
+          cartAttributesUpdate(cartId:$cartId, attributes:$attributes) { cart { ...CartFields } }
+        }
+        ${CART_FRAGMENT}
+      `,
+      { cartId: body.cartId, attributes: body.attributes },
+    )
+    return json({ cart: data.cartAttributesUpdate.cart })
+  } catch (err) {
+    console.error('[storefront/cart/attributes-update] failed', err)
+    return storefrontError(err)
+  }
 }
-

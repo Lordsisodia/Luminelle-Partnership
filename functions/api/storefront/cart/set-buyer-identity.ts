@@ -1,5 +1,5 @@
 import type { PagesFunction } from '../../../_lib/types'
-import { CART_FRAGMENT, runStorefront } from '../../../_lib/storefront'
+import { CART_FRAGMENT, runStorefront, storefrontError } from '../../../_lib/storefront'
 import { json, methodNotAllowed, text } from '../../../_lib/response'
 
 export const onRequest: PagesFunction = async ({ request, env }) => {
@@ -16,16 +16,20 @@ export const onRequest: PagesFunction = async ({ request, env }) => {
   }
   if (Object.keys(buyerIdentity).length === 0) return text('No buyer identity provided', { status: 400 })
 
-  const data = await runStorefront<any>(
-    env,
-    `#graphql
-      mutation CartBuyerIdentityUpdate($cartId:ID!, $buyerIdentity:CartBuyerIdentityInput!) {
-        cartBuyerIdentityUpdate(cartId:$cartId, buyerIdentity:$buyerIdentity) { cart { ...CartFields } }
-      }
-      ${CART_FRAGMENT}
-    `,
-    { cartId: body.cartId, buyerIdentity },
-  )
-  return json({ cart: data.cartBuyerIdentityUpdate.cart })
+  try {
+    const data = await runStorefront<any>(
+      env,
+      `#graphql
+        mutation CartBuyerIdentityUpdate($cartId:ID!, $buyerIdentity:CartBuyerIdentityInput!) {
+          cartBuyerIdentityUpdate(cartId:$cartId, buyerIdentity:$buyerIdentity) { cart { ...CartFields } }
+        }
+        ${CART_FRAGMENT}
+      `,
+      { cartId: body.cartId, buyerIdentity },
+    )
+    return json({ cart: data.cartBuyerIdentityUpdate.cart })
+  } catch (err) {
+    console.error('[storefront/cart/set-buyer-identity] failed', err)
+    return storefrontError(err)
+  }
 }
-
