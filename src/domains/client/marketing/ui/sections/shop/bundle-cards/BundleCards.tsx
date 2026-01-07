@@ -83,7 +83,7 @@ const BundleCards = ({ count = 0, active = 0, onSelect = () => {} }: BundleCards
                   selected ? 'border-semantic-legacy-brand-cocoa/60' : 'border-semantic-legacy-brand-blush/60'
                 }`}
               >
-	                <div className="relative aspect-square bg-semantic-legacy-brand-blush/15 md:aspect-auto md:h-72">
+		                <div className="relative aspect-square bg-semantic-legacy-brand-blush/15 md:aspect-auto md:h-80 lg:h-84">
 	                  {imageSrc ? (
 	                    <img
 	                      src={imageSrc}
