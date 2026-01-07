@@ -65,6 +65,7 @@ const proofChips = [
 const values = ['Satin-first comfort', 'Reusable, not disposable', 'Cruelty-free', '30-day returns', 'UK fulfillment']
 
 const BrandStoryPage = () => {
+  const SHOW_INSIDE_THE_BUILD = false
   const title = 'Brand story'
   const description = hero.description
   const image = cdnUrl(hero.image)
@@ -139,31 +140,33 @@ const BrandStoryPage = () => {
           </div>
         </section>
 
-        {/* Craft */}
-        <section className="bg-semantic-legacy-brand-blush/10 py-14">
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <SectionHeading
-              eyebrow="Inside the build"
-              title="Crafted to keep styles flawless"
-              description="Material science, comfort testing, and visual polish—all tuned for creators and their audiences."
-              alignment="center"
-            />
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {craftPoints.map((point) => (
-                <article
-                  key={point.title}
-                  className="rounded-3xl border border-semantic-accent-cta/40 bg-white p-5 shadow-soft"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-semantic-accent-cta/30 text-lg">{point.icon}</span>
-                    <h4 className="font-heading text-lg font-semibold text-semantic-text-primary">{point.title}</h4>
-                  </div>
-                  <p className="mt-3 text-sm text-semantic-text-primary/75 leading-relaxed">{point.body}</p>
-                </article>
-              ))}
+        {/* Craft (temporarily hidden per client request; keep code for later) */}
+        {SHOW_INSIDE_THE_BUILD ? (
+          <section className="bg-semantic-legacy-brand-blush/10 py-14">
+            <div className="mx-auto max-w-6xl px-4 md:px-6">
+              <SectionHeading
+                eyebrow="Inside the build"
+                title="Crafted to keep styles flawless"
+                description="Material science, comfort testing, and visual polish—all tuned for creators and their audiences."
+                alignment="center"
+              />
+              <div className="mt-10 grid gap-6 md:grid-cols-3">
+                {craftPoints.map((point) => (
+                  <article
+                    key={point.title}
+                    className="rounded-3xl border border-semantic-accent-cta/40 bg-white p-5 shadow-soft"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-semantic-accent-cta/30 text-lg">{point.icon}</span>
+                      <h4 className="font-heading text-lg font-semibold text-semantic-text-primary">{point.title}</h4>
+                    </div>
+                    <p className="mt-3 text-sm text-semantic-text-primary/75 leading-relaxed">{point.body}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
         {/* Proof */}
         <section className="py-12">
