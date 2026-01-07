@@ -7,9 +7,9 @@ import { successStories } from '@/content/landing'
 
 const hero = {
   eyebrow: 'Brand Story',
-  title: 'Designed for steam, loved by creators',
+  title: 'Designed for steam, loved by all',
   description:
-    'We started with a simple promise: keep silk presses, curls, and braids flawless—even in the steamiest shower. Every detail is co-created with the people who film, post, and sell with us.',
+    'We started with a simple promise: to keep your hair the way it’s meant to be. No frizz. No grease. Just your natural hair, protected and cared for, coming out exactly as it should. Whether that’s braids, lush curls or smooth, straight strands, Lumelle is designed to preserve what makes your hair yours.',
   ctaPrimary: { label: 'Shop the cap', href: '/product/lumelle-shower-cap' },
   ctaSecondary: { label: 'Meet the creators', href: '/creators' },
   image: '/uploads/luminele/page9-image.webp',
