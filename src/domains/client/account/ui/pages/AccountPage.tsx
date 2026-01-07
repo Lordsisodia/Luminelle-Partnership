@@ -1,6 +1,6 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { ArrowRight, CreditCard, LogOut, MapPin, PackageOpen, UserRound } from 'lucide-react'
+import { ArrowRight, LogOut, MapPin, PackageOpen, UserRound } from 'lucide-react'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { Seo } from '@/components/Seo'
 import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
@@ -45,8 +45,7 @@ const AccountPage = () => {
                   </>
                 ) : (
                   <>
-                    Sign in to view orders, addresses, and payment methods. You can still browse and shop without an
-                    account.
+                    Sign in to view orders and addresses. You can still browse and shop without an account.
                   </>
                 )}
               </p>
@@ -87,7 +86,7 @@ const AccountPage = () => {
             </div>
           ) : null}
 
-          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
             <RouterLink to="/account/orders" className={cardClass}>
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -112,21 +111,6 @@ const AccountPage = () => {
                   <div>
                     <div className="text-sm font-semibold text-semantic-text-primary">Addresses</div>
                     <div className="text-xs text-semantic-text-primary/60">Shipping details</div>
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-semantic-text-primary/40 transition group-hover:translate-x-0.5 group-hover:text-semantic-text-primary/70" aria-hidden="true" />
-              </div>
-            </RouterLink>
-
-            <RouterLink to="/account/payments" className={cardClass}>
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-porcelain text-semantic-legacy-brand-cocoa ring-1 ring-semantic-legacy-brand-blush/60">
-                    <CreditCard className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <div className="text-sm font-semibold text-semantic-text-primary">Payment methods</div>
-                    <div className="text-xs text-semantic-text-primary/60">Cards & Shop Pay</div>
                   </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-semantic-text-primary/40 transition group-hover:translate-x-0.5 group-hover:text-semantic-text-primary/70" aria-hidden="true" />
