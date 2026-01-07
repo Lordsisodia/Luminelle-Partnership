@@ -28,3 +28,4 @@ Client requested updated brand story hero copy and to replace the “Meet the cr
 - Updated hero title + description on `BrandStoryPage`.
 - Replaced secondary CTA with “Learn more” linking to `/blog/about-lumelle`.
 - Added a published blog post at `/blog/about-lumelle` as the target for the CTA (can be expanded later).
+- Updated the “How we got here” section heading + paragraph to match the latest client-provided copy.

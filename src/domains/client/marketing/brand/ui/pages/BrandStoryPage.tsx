@@ -115,8 +115,8 @@ const BrandStoryPage = () => {
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <SectionHeading
               eyebrow="How we got here"
-              title="From frizz fights to a creator-loved classic"
-              description="Every launch is tested on-camera, refined in real bathrooms, and shipped fast enough to keep momentum."
+              title="From Frizz fights to customer loved classic"
+              description="From shower time to sleep routines, our designs are made to work with your hair, not against it. Every detail is considered, from soft satin linings to thoughtful construction, so frizz, breakage, and unwanted grease don’t stand a chance."
               alignment="center"
             />
             <div className="mt-10 grid gap-6 md:grid-cols-3">
