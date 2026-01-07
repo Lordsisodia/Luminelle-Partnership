@@ -34,8 +34,8 @@ export const GlobalHeader = ({ promoMessages }: GlobalHeaderProps) => {
     <header className="sticky top-0 z-30 shadow-sm">
       <PromoBar promos={promoMessages} />
       <div className="bg-white px-4 py-3 border-b border-semantic-legacy-brand-blush/50">
-        <div className="mx-auto max-w-6xl grid grid-cols-[auto_1fr_auto] items-center gap-3">
-          <div className="flex items-center gap-3 justify-self-start">
+        <div className="mx-auto max-w-6xl grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <div className="flex items-center gap-3 justify-self-start min-w-0">
             <button
               aria-label="Open navigation"
               className="rounded-full border border-semantic-legacy-brand-blush/60 p-2 text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30"
@@ -49,7 +49,7 @@ export const GlobalHeader = ({ promoMessages }: GlobalHeaderProps) => {
             Lumelle
           </RouterLink>
 
-          <div className="flex items-center gap-3 justify-self-end">
+          <div className="flex items-center gap-3 justify-self-end min-w-0">
             <RouterLink
               to="/product/shower-cap"
               className="hidden sm:inline-flex rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/30"
