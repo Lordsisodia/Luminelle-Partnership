@@ -1,11 +1,11 @@
-# Issue 191: Brand story page copy needs update (per client screenshot)
+# Issue 191: Brand story page copy needs update + CTA should link to “Learn more” blog post
 
-Source: Client feedback screenshot `codex-clipboard-tpu4Jq.png` (Jan 2026)
+Source: Client feedback screenshots `codex-clipboard-tpu4Jq.png`, `codex-clipboard-tlhehe.png`, `codex-clipboard-meTfol.png` (Jan 2026)
 Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `NEEDS_DECISION`
+- Status: `DONE`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `3`
@@ -19,14 +19,12 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Problem statement
 
-Client provided updated copy for the brand story page. We need the exact text (or a transcript) to implement it safely.
+Client requested updated brand story hero copy and to replace the “Meet the creators” CTA with a “Learn more” CTA that points to an “about us” blog post.
 
 ---
 
-## Next step (blocking)
+## ✅ Resolution (shipped)
 
-- Provide the exact text to replace (copy/paste), and specify where it appears:
-  - headline/subhead?
-  - specific paragraph?
-  - section titles?
-
+- Updated hero title + description on `BrandStoryPage`.
+- Replaced secondary CTA with “Learn more” linking to `/blog/about-lumelle`.
+- Added a published blog post at `/blog/about-lumelle` as the target for the CTA (can be expanded later).

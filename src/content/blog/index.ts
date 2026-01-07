@@ -1,6 +1,7 @@
 import type { BlogPost } from './types'
 
 import lumelleJournalLaunch from './posts/lumelle-journal-launch'
+import aboutLumelle from './posts/about-lumelle'
 import frizzFreeShowersSeo from './posts/frizz-free-showers-seo'
 import silkPressShowerCapGuide from './posts/silk-press-shower-cap-guide'
 import protectiveStylesInTheShower from './posts/protective-styles-in-the-shower'
@@ -37,6 +38,7 @@ import howToReduceFrizzWithoutHeat from './posts/how-to-reduce-frizz-without-hea
 
 export const blogPosts: BlogPost[] = [
   lumelleJournalLaunch,
+  aboutLumelle,
   frizzFreeShowersSeo,
   silkPressShowerCapGuide,
   protectiveStylesInTheShower,
