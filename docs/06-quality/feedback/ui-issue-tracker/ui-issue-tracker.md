@@ -5,7 +5,7 @@ Generated from: `docs/06-quality/reviews/app-ui-review-2025-12-26.md`
 Workflow: `docs/06-quality/feedback/ui-issue-tracker/ai-loop.md`
 Prompt template: `docs/06-quality/feedback/ui-issue-tracker/templates/autonomous-agent-prompt.md`
 
-This is the execution tracker for the 181 UI issues (including post-audit additions).
+This is the execution tracker for the 182 UI issues (including post-audit additions).
 
 ## Status legend
 
@@ -222,3 +222,4 @@ These are the current top *open* items by `Priority` (excludes `DONE` / `DEFERRE
 | 179 | Creator | Floating WhatsApp CTA has the same invisible-focus problem (and exists in two copies) | 3 | 3 | 3 | 2 | 15 | DONE | [issue-179](ui-issues/issue-179.md) |
 | 180 | Admin | Admin mobile drawer is “hidden” only by transform (no `aria-hidden`/`inert`, still reachable in the DOM) | 3 | 2 | 3 | 3 | 15 | DONE | [issue-180](ui-issues/issue-180.md) |
 | 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 4 | 4 | 3 | 2 | 29 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
+| 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 5 | 5 | 3 | 2 | 47 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
