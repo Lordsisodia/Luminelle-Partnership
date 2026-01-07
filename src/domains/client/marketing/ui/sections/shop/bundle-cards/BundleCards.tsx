@@ -83,17 +83,17 @@ const BundleCards = ({ count = 0, active = 0, onSelect = () => {} }: BundleCards
                   selected ? 'border-semantic-legacy-brand-cocoa/60' : 'border-semantic-legacy-brand-blush/60'
                 }`}
               >
-	                <div className="relative bg-semantic-legacy-brand-blush/15">
+	                <div className="relative aspect-square bg-semantic-legacy-brand-blush/15 md:aspect-auto md:h-72">
 	                  {imageSrc ? (
 	                    <img
 	                      src={imageSrc}
 	                      alt={card.title}
-	                      className="h-64 w-full object-contain px-6 py-4 md:h-72"
+	                      className="h-full w-full object-contain p-6 md:p-8"
 	                      loading="lazy"
 	                      decoding="async"
 	                    />
 	                  ) : (
-	                    <div className="h-64 w-full md:h-72" aria-hidden />
+	                    <div className="h-full w-full" aria-hidden />
 	                  )}
 	                  {card.priceLabel ? (
                     <div className="absolute left-5 top-5 rounded-full bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary shadow-soft backdrop-blur">
