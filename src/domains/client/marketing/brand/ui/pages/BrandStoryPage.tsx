@@ -22,14 +22,19 @@ const storyHighlights = [
     body: 'We blended satin-soft lining with a waterproof core so styles survive heat and humidity without flimsy plastic caps.',
   },
   {
-    eyebrow: 'Creator-tested',
-    title: 'Iterated on camera',
-    body: '100+ creators tried, filmed, and fed back—shaping fit, band tension, and packaging that converts on TikTok Shop.',
+    eyebrow: 'Customer tested',
+    title: 'Refined through wear',
+    body: 'Refined through real customer wear, feedback, and repeat use, shaping the fit, band tension, and packaging people actually love.',
   },
   {
     eyebrow: 'Built to last',
     title: 'Reuse 100+ showers',
     body: 'Durable stitching, wipe-clean core, and stretch that rebounds—so it looks premium long after the unboxing.',
+  },
+  {
+    eyebrow: 'Made for all',
+    title: 'Flexible fit',
+    body: 'Designed with a flexible fit that adapts to your hair, making it easier to tuck everything in—without stretching, squeezing, or slipping like traditional caps.',
   },
 ]
 
