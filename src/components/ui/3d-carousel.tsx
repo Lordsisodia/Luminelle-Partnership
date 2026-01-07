@@ -14,6 +14,7 @@ type UseMediaQueryOptions = {
 
 type ReviewCard = {
   author: string
+  title?: string
   body: string
   stars?: number
 }
@@ -127,9 +128,16 @@ const ReviewCardContent = ({ review }: { review: ReviewCard }) => {
       <div className="relative flex justify-center">
         <StarRating value={review.stars ?? 5} size={18} />
       </div>
-      <p className="relative mt-3 text-sm leading-relaxed text-semantic-text-primary md:text-base md:leading-relaxed">
-        “{review.body}”
-      </p>
+      <div className="relative mt-3 space-y-2">
+        {review.title ? (
+          <p className="text-sm font-semibold leading-snug text-semantic-text-primary md:text-base">
+            {review.title}
+          </p>
+        ) : null}
+        <p className="text-sm leading-relaxed text-semantic-text-primary md:text-base md:leading-relaxed line-clamp-4 md:line-clamp-5">
+          “{review.body}”
+        </p>
+      </div>
       <div className="relative mt-4 flex items-center justify-center gap-2">
         <div
           className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-brand-blush/55"
@@ -162,7 +170,7 @@ const Reviews2DCarousel = memo(
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
     const isScreenSizeLg = useMediaQuery("(max-width: 1024px)")
     const itemWidth = isScreenSizeSm ? 220 : isScreenSizeLg ? 320 : 380
-    const itemHeight = isScreenSizeSm ? 170 : isScreenSizeLg ? 196 : 228
+    const itemHeight = isScreenSizeSm ? 184 : isScreenSizeLg ? 216 : 256
     const gapPx = 12
     const listRef = useRef<HTMLDivElement | null>(null)
     const isProgrammaticScrollRef = useRef(false)
