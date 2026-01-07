@@ -23,6 +23,8 @@ type Props = {
     tagline?: string
     rating?: number
     ratingLabel?: string
+    trustCountLabel?: string
+    trustAvatars?: string[]
   }
 }
 
@@ -61,6 +63,14 @@ export const HeroShop = ({ config, socialProof }: Props) => {
   const trustTagline = socialProof?.tagline ?? 'Trusted by 10k users'
   const ratingValue = Number.isFinite(socialProof?.rating) ? (socialProof?.rating as number) : 4.8
   const ratingLabel = socialProof?.ratingLabel ?? `${ratingValue.toFixed(1)} (100+)`
+  const trustCountLabel = socialProof?.trustCountLabel ?? '10k+'
+
+  const resolvedTrustAvatars = (() => {
+    const configured = (socialProof?.trustAvatars ?? []).filter((src) => typeof src === 'string' && src.length > 0)
+    if (configured.length > 0) return Array.from(new Set(configured)).slice(0, 3)
+
+    return [cdnUrl('/images/avatar-shannon.jpg'), cdnUrl('/images/avatar-rachel.jpg'), cdnUrl('/images/avatar-randomlife.jpg')]
+  })()
 
   return (
     <section className="relative min-h-[70vh] overflow-hidden bg-semantic-legacy-brand-blush/10 md:min-h-[76vh]">
@@ -128,22 +138,23 @@ export const HeroShop = ({ config, socialProof }: Props) => {
               <div className="mx-auto w-full max-w-xl p-5 text-center md:max-w-2xl lg:mx-0 lg:p-0 lg:text-left">
                 <div className="inline-flex flex-nowrap items-center gap-3 rounded-full bg-white/30 px-6 py-2 text-semantic-text-primary backdrop-blur-md shadow-soft ring-1 ring-white/50 min-w-[300px] justify-center lg:justify-start">
               <div className="flex -space-x-1.5 flex-shrink-0 pl-1">
-                {[
-                  cdnUrl('/images/avatar-shannon.jpg'),
-                  cdnUrl('/images/avatar-rachel.jpg'),
-                  cdnUrl('/images/avatar-randomlife.jpg'),
-                  cdnUrl('/images/avatar-shannon-320.webp'),
-                ].map((src, idx) => (
+                {resolvedTrustAvatars.map((src, idx) => (
                   <img
                     key={`${src}-${idx}`}
                     src={src}
-                    alt="Lumelle customer avatar"
+                    alt="Customer profile photo"
                     className="h-7 w-7 rounded-full border-2 border-white object-cover shadow-sm"
                     loading="lazy"
                     width={28}
                     height={28}
                   />
                 ))}
+                <span
+                  className="ml-2 inline-flex h-7 min-w-7 items-center justify-center rounded-full border-2 border-white bg-white/70 px-2 text-[10px] font-semibold tracking-[0.14em] text-semantic-text-primary/80 shadow-sm"
+                  aria-label={`${trustCountLabel} customers`}
+                >
+                  {trustCountLabel}
+                </span>
                 </div>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/80 whitespace-nowrap pl-1">
                   {trustTagline}
