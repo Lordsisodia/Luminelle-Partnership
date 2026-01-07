@@ -26,3 +26,9 @@ Date: **January 7, 2026**
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-183.md`
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-184.md`
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-185.md`
+- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-186.md`
+- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-187.md`
+- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-188.md`
+- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-189.md`
+- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-190.md`
+- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-191.md`

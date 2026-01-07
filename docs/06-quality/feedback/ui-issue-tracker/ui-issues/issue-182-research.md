@@ -11,6 +11,13 @@ Date started: `2026-01-07`
 - Expected:
 - Actual:
 
+## 1.1) New evidence (Jan 7, 2026)
+
+- Screenshot(s): `codex-clipboard-K7AGzc.png`, `codex-clipboard-WYi8EU.png`
+- Likely correlated platform errors:
+  - `/api/storefront/cart/create` returning 500 / Cloudflare Worker exception (see Issue 184)
+  - If cart/checkout URL cannot be computed, drawer CTA can remain stuck on “Preparing checkout…”
+
 ## 2) Evidence collected
 
 - Screenshots:
@@ -65,4 +72,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

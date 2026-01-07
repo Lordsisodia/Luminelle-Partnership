@@ -13,8 +13,10 @@ import { EmailCaptureBand } from '@client/marketing/ui/sections/shop/email-captu
 import { BenefitsSection } from '@client/marketing/ui/sections/shop/benefits-section/BenefitsSection'
 import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
 import { productConfigs } from '@client/shop/products/data/product-config'
+import { DEFAULT_CAP_VIDEOS } from '@client/shop/products/data/product-config'
 
 const ShopLandingPage = () => {
+  const SHOW_WHY_YOULL_LOVE_IT = false
   const image = cdnUrl(homeConfig.hero.image)
   const url = toPublicUrl('/')
   const title = 'Lumelle | Satin-lined waterproof shower cap'
@@ -53,13 +55,15 @@ const ShopLandingPage = () => {
         </section>
         <TrustBar />
         <ProductSpotlightSection teasers={homeConfig.pdpTeasers ?? [homeConfig.pdpTeaser]} />
-        <section id="benefits">
-          <BenefitsSection slides={homeConfig.slides} />
-        </section>
+        {SHOW_WHY_YOULL_LOVE_IT ? (
+          <section id="benefits">
+            <BenefitsSection slides={homeConfig.slides} />
+          </section>
+        ) : null}
         <section id="reviews">
           <ReviewsAutoCarousel reviews={homeConfig.reviews} />
         </section>
-        <FeaturedTikTok />
+        <FeaturedTikTok tiktoks={DEFAULT_CAP_VIDEOS} />
         <BundleCards />
         <FinalCtaSection />
         <section id="faq">

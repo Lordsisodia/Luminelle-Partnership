@@ -5,7 +5,7 @@ Generated from: `docs/06-quality/reviews/app-ui-review-2025-12-26.md`
 Workflow: `docs/06-quality/feedback/ui-issue-tracker/ai-loop.md`
 Prompt template: `docs/06-quality/feedback/ui-issue-tracker/templates/autonomous-agent-prompt.md`
 
-This is the execution tracker for the 185 UI issues (including post-audit additions).
+This is the execution tracker for the 191 UI issues (including post-audit additions).
 
 ## Status legend
 
@@ -226,3 +226,9 @@ These are the current top *open* items by `Priority` (excludes `DONE` / `DEFERRE
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 3 | 5 | 2 | 2 | 28 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 5 | 5 | 2 | 3 | 73 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
 | 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 4 | 5 | 2 | 2 | 38 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
+| 186 | Client | “Trusted by 10k users” avatars repeat (needs more authentic social proof) | 2 | 5 | 2 | 2 | 18 | UNTRIAGED | [issue-186](ui-issues/issue-186.md) |
+| 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 3 | 5 | 3 | 2 | 27 | UNTRIAGED | [issue-187](ui-issues/issue-187.md) |
+| 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 3 | 4 | 3 | 2 | 21 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
+| 189 | Client | Account “Payment methods” has dev artifacts; consider removing or simplifying (Shopify is the payment source-of-truth) | 3 | 3 | 2 | 2 | 16 | UNTRIAGED | [issue-189](ui-issues/issue-189.md) |
+| 190 | Client | WhatsApp + email support links need to be verified/simplified | 3 | 4 | 1 | 2 | 23 | UNTRIAGED | [issue-190](ui-issues/issue-190.md) |
+| 191 | Client | Brand story page copy needs update (per client screenshot) | 2 | 3 | 1 | 1 | 5 | NEEDS_DECISION | [issue-191](ui-issues/issue-191.md) |
