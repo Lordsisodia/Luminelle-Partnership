@@ -17,6 +17,7 @@ type ReviewCard = {
   title?: string
   body: string
   stars?: number
+  image?: string
 }
 
 const IS_SERVER = typeof window === "undefined"
@@ -121,7 +122,13 @@ const ReviewCardOrnaments = () => (
   </>
 )
 
-const ReviewCardContent = ({ review }: { review: ReviewCard }) => {
+const ReviewCardContent = ({
+  review,
+  showReviewerPhotos,
+}: {
+  review: ReviewCard
+  showReviewerPhotos: boolean
+}) => {
   return (
     <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-brand-blush/30 px-4 py-4 text-center md:px-5 md:py-5">
       <ReviewCardOrnaments />
@@ -139,14 +146,24 @@ const ReviewCardContent = ({ review }: { review: ReviewCard }) => {
         </p>
       </div>
       <div className="relative mt-4 flex items-center justify-center gap-2">
-        <div
-          className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-brand-blush/55"
-          aria-hidden="true"
-        >
-          <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-semantic-text-primary/80">
-            {getInitials(review.author)}
-          </span>
-        </div>
+        {showReviewerPhotos && review.image ? (
+          <img
+            src={review.image}
+            alt=""
+            className="h-9 w-9 rounded-full border border-white/70 object-cover shadow-soft"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div
+            className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-brand-blush/55"
+            aria-hidden="true"
+          >
+            <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-semantic-text-primary/80">
+              {getInitials(review.author)}
+            </span>
+          </div>
+        )}
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80 md:text-[13px]">
           {review.author}
         </p>
@@ -161,11 +178,13 @@ const Reviews2DCarousel = memo(
     activeIndex,
     onActiveIndexChange,
     prefersReducedMotion,
+    showReviewerPhotos,
   }: {
     cards: ReviewCard[]
     activeIndex: number
     onActiveIndexChange: (index: number) => void
     prefersReducedMotion: boolean
+    showReviewerPhotos: boolean
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
     const isScreenSizeLg = useMediaQuery("(max-width: 1024px)")
@@ -252,7 +271,7 @@ const Reviews2DCarousel = memo(
               >
                 <div className="rounded-2xl bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/60 p-[1px] shadow-[0_18px_45px_rgba(251,199,178,0.18)]">
                   <div style={{ height: `${itemHeight}px` }}>
-                    <ReviewCardContent review={card} />
+                    <ReviewCardContent review={card} showReviewerPhotos={showReviewerPhotos} />
                   </div>
                 </div>
               </div>
@@ -285,7 +304,13 @@ const Reviews2DCarousel = memo(
   }
 )
 
-function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
+function ThreeDPhotoCarousel({
+  reviews,
+  showReviewerPhotos = false,
+}: {
+  reviews?: ReviewCard[]
+  showReviewerPhotos?: boolean
+}) {
   const prefersReducedMotion = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState(0)
   const allCards = useMemo(() => (reviews?.length ? reviews : reviewFallbacks), [reviews])
@@ -328,6 +353,7 @@ function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
         activeIndex={activeIndex}
         onActiveIndexChange={setActiveIndex}
         prefersReducedMotion={Boolean(prefersReducedMotion)}
+        showReviewerPhotos={showReviewerPhotos}
       />
     </div>
   )
