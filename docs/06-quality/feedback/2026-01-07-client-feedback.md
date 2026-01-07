@@ -12,6 +12,7 @@ Date: **January 7, 2026**
   - **Delete the 5th tier**
 - In the **right-side drawer cart**, when changing quantity / adding to cart, the **dropdown can be blocked/clipped**.
   - Desired behavior: match the feel/behavior of the Shopify store cart drawer (reference screenshot: `codex-clipboard-tOkOmZ.png`).
+- On the landing experience, a block framed around **creators** needs to be reframed around **customers**, and the “Join creators” CTA should be replaced with “Learn more” linking to the blog post (reference screenshot: `codex-clipboard-LHhLp4.png`).
 
 ## Notes / Context
 
@@ -32,3 +33,4 @@ Date: **January 7, 2026**
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-189.md`
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-190.md`
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-191.md`
+- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-192.md`

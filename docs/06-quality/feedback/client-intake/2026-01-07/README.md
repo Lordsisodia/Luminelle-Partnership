@@ -67,10 +67,11 @@ Use this as your “today list”. Each item links to the deeper issue worklog i
 
 - ✅ Issue 191 — Brand story copy update (blocked until exact copy is provided).  
   Worklog: `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-191.md`
+- ✅ Issue 192 — Landing “creators” section should be customer-focused + “Join creators” CTA → “Learn more” (blog link).  
+  Worklog: `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-192.md`
 
 ---
 
 ## 🔗 Primary client feedback note
 
 - `docs/06-quality/feedback/2026-01-07-client-feedback.md`
-
