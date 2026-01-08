@@ -13,35 +13,34 @@ if ! command -v codex >/dev/null 2>&1; then
   exit 1
 fi
 
-PROMPT=$(cat <<'EOF'
+PROMPT=''
+read -r -d '' PROMPT <<'EOF' || true
 You are the monitor/dispatcher agent for this repo.
 
-Goal:
+Goal
 - Keep 6–10 Vibe Kanban tasks actively running via MCP workspace sessions for repo `lumelle` on base branch `dev`.
-- Enforce the Option-B DONE gate: a task is DONE only when (1) its PR is merged into `dev` AND (2) Black Box tracker status is DONE with worklog moved to `done-issues/`.
+- Enforce the Option-B DONE gate: a task is DONE only when its PR is merged into `dev` AND the Black Box tracker status is DONE with worklog moved to `done-issues/`.
 
-Source of truth:
+Source of truth
 - UI tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 - Black Box process: `docs/06-quality/feedback/ui-issue-tracker/ai-loop.md`
 - Status command: `node scripts/blackbox-status.mjs`
 
-Loop logic (do this once per run):
-1) Reality check: run `node scripts/blackbox-status.mjs` and summarize counts + hygiene.
-2) Pull GitHub PR state for `dev` (open + merged recent) via `gh` CLI.
-3) MCP: list Vibe Kanban tasks in `todo`, `inprogress`, `inreview`, `done` for project `lumelle`.
-4) Ensure queue is complete:
-   - For any UNTRIAGED tracker issue (esp. 181–192) that has no Kanban task matching `UI-###`, create a Kanban task in `todo` with a Black Box compliant description.
-5) Ensure work is running:
-   - If `inprogress` count < MAX_INPROGRESS, pick highest-priority `todo` tasks (prefer P5/P6 then triage batches) and start workspace sessions via MCP on repo `lumelle` base branch `dev`.
-6) Ensure statuses are accurate:
-   - If a task is `inreview` but no PR exists, move it back to `todo` with a note.
-   - If a task is `inprogress` but has no activity and no PR, keep it `inprogress` but add a note about what’s missing.
-   - Only move to `done` when BOTH merged-to-dev AND Black Box is DONE (tracker + moved worklog).
+Loop logic (do this once per run)
+- Reality check: run `node scripts/blackbox-status.mjs` and summarize counts + hygiene.
+- Pull GitHub PR state for `dev` (open + merged recent) via `gh` CLI.
+- MCP: list Vibe Kanban tasks in `todo`, `inprogress`, `inreview`, `done` for project `lumelle`.
+- Ensure queue is complete:
+  - For any UNTRIAGED tracker issue (esp. 181–192) with no Kanban task matching `UI-###`, create a Kanban task in `todo` with a Black Box compliant description.
+- Ensure work is running:
+  - If `inprogress` count < MAX_INPROGRESS, pick highest-priority `todo` tasks and start workspace sessions via MCP on repo `lumelle` base branch `dev`.
+- Ensure statuses are accurate:
+  - If a task is `inreview` but no PR exists, move it back to `todo` with a note.
+  - Only move to `done` when BOTH merged-to-dev AND Black Box is DONE.
 
-Output:
+Output
 - A short, scannable status summary (counts, which tasks started this run, any newly queued tasks).
 EOF
-)
 
 while true; do
   echo
@@ -59,4 +58,3 @@ while true; do
   echo "== sleep =="
   sleep "$SLEEP_SECONDS"
 done
-
