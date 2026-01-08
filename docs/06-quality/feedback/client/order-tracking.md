@@ -17,7 +17,7 @@ Order tracking entry + status view.
 ## Feedback backlog
 
 ### Internal UI review (2025-12-26)
-- [x] (#2) Order tracking is a stub (“temporarily unavailable”); ship a branded tracking entry + status page (or redirect to a real tracking provider). — Black-box: `DONE` ([issue-002](../ui-issue-tracker/ui-issues/issue-002.md))
+- [x] (#2) Order tracking is a stub (“temporarily unavailable”); ship a branded tracking entry + status page (or redirect to a real tracking provider). — Black-box: `DONE` ([issue-002](../ui-issue-tracker/done-issues/issue-002.md))
 
 ## Decisions / notes
 - _None yet._

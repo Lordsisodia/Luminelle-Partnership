@@ -17,7 +17,7 @@ Customer saved payment methods management.
 ## Feedback backlog
 
 ### Internal UI review (2025-12-26)
-- [x] (#3) Payment methods page is stubbed (“temporarily unavailable”); either implement or hide until supported. — Black-box: `DONE` ([issue-003](../ui-issue-tracker/ui-issues/issue-003.md))
+- [x] (#3) Payment methods page is stubbed (“temporarily unavailable”); either implement or hide until supported. — Black-box: `DONE` ([issue-003](../ui-issue-tracker/done-issues/issue-003.md))
 
 ## Decisions / notes
 - _None yet._

@@ -74,7 +74,7 @@ Plan (implemented under issue `165`):
 - [x] Validate (tests or best-effort manual checks).
 - [x] Record results and any regressions found.
 
-Implemented as part of issue `165` (see `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-165.md`).
+Implemented as part of issue `165` (see `docs/06-quality/feedback/ui-issue-tracker/done-issues/issue-165.md`).
 
 ## Step 7 — Record + Close
 - [x] Update `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md` (status + priority if changed).

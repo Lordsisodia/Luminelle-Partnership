@@ -17,7 +17,7 @@ Post-purchase confirmation page (summary, next steps, tracking links).
 ## Feedback backlog
 
 ### Internal UI review (2025-12-26)
-- [x] (#2) Order confirmation is a stub (“temporarily unavailable”); replace with a branded confirmation page or redirect/embed Shopify confirmation safely. — Black-box: `DONE` ([issue-002](../ui-issue-tracker/ui-issues/issue-002.md))
+- [x] (#2) Order confirmation is a stub (“temporarily unavailable”); replace with a branded confirmation page or redirect/embed Shopify confirmation safely. — Black-box: `DONE` ([issue-002](../ui-issue-tracker/done-issues/issue-002.md))
 
 ## Decisions / notes
 - _None yet._

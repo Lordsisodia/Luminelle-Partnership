@@ -20,7 +20,7 @@ Edit and preview reusable UI/content components used across pages + PDPs.
 
 ### Internal UI review (2025-12-26)
 - [ ] (#49) Components editor is localStorage-only (not publishable); define real persistence/publish flow. — Black-box: `UNTRIAGED` ([issue-049](../ui-issue-tracker/ui-issues/issue-049.md))
-- [x] (#58) Component detail route is a hard-coded placeholder; implement read-only detail or hide until ready. — Black-box: `DONE` ([issue-058](../ui-issue-tracker/ui-issues/issue-058.md))
+- [x] (#58) Component detail route is a hard-coded placeholder; implement read-only detail or hide until ready. — Black-box: `DONE` ([issue-058](../ui-issue-tracker/done-issues/issue-058.md))
 
 ## Decisions / notes
 - _None yet._

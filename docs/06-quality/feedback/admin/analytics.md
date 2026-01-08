@@ -17,7 +17,7 @@ Reporting surfaces (funnels, performance, content/product metrics, etc.).
 ## Feedback backlog
 
 ### Internal UI review (2025-12-26)
-- [x] (#56) Analytics page is mock data (hard-coded datasets + routes that don’t match the app); add “Demo data” banner or hide until wired to real sources. — Black-box: `DONE` ([issue-056](../ui-issue-tracker/ui-issues/issue-056.md))
+- [x] (#56) Analytics page is mock data (hard-coded datasets + routes that don’t match the app); add “Demo data” banner or hide until wired to real sources. — Black-box: `DONE` ([issue-056](../ui-issue-tracker/done-issues/issue-056.md))
 
 ## Decisions / notes
 - _None yet._

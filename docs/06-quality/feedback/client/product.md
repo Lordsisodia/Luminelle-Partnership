@@ -33,10 +33,10 @@ Product detail page (hero, gallery, pricing, variant selection, add-to-cart, sto
 - [x] (#26) Delivery countdown/delivery date are fake (client clock + `now + 2 days`); tie to real fulfillment rules or simplify copy. — Black-box: `NOT_AN_ISSUE` ([issue-026](../ui-issue-tracker/ui-issues/issue-026.md))
 - [ ] (#31) PDP video media can render at 0 height when selected (broken-looking). — Black-box: `UNTRIAGED` ([issue-031](../ui-issue-tracker/ui-issues/issue-031.md))
 - [x] (#38) Product fetching is stubbed (PDP can’t reflect real Shopify title/price/images). — Black-box: `NOT_AN_ISSUE` ([issue-038](../ui-issue-tracker/ui-issues/issue-038.md))
-- [x] (#53) PDP sections are loaded globally (not per product), so different products can show wrong copy/media. — Black-box: `DONE` ([issue-053](../ui-issue-tracker/ui-issues/issue-053.md))
-- [x] (#54) Unknown product handles fall back to the shower cap instead of a 404 (wrong content on wrong URL). — Black-box: `DONE` ([issue-054](../ui-issue-tracker/ui-issues/issue-054.md))
+- [x] (#53) PDP sections are loaded globally (not per product), so different products can show wrong copy/media. — Black-box: `DONE` ([issue-053](../ui-issue-tracker/done-issues/issue-053.md))
+- [x] (#54) Unknown product handles fall back to the shower cap instead of a 404 (wrong content on wrong URL). — Black-box: `DONE` ([issue-054](../ui-issue-tracker/done-issues/issue-054.md))
 - [x] (#69) PDP “Buy 2, save 10%” messaging is hard-coded for every product (must be product-specific). — Black-box: `NOT_AN_ISSUE` ([issue-069](../ui-issue-tracker/ui-issues/issue-069.md))
-- [x] (#52) Share button may fail silently and gives no success feedback (add confirmation + error handling). — Black-box: `DONE` ([issue-052](../ui-issue-tracker/ui-issues/issue-052.md))
+- [x] (#52) Share button may fail silently and gives no success feedback (add confirmation + error handling). — Black-box: `DONE` ([issue-052](../ui-issue-tracker/done-issues/issue-052.md))
 
 ### 2025-11-25 (baseline product page notes, screenshots 19–35)
 - [ ] Header alignment: match landing page top strip + icon order; remove excess white bar above the primary image.

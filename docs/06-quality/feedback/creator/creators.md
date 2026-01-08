@@ -17,7 +17,7 @@ Creator program landing page (pitch, proof, onboarding CTA, FAQs).
 ## Feedback backlog
 
 ### 2025-12-26 (internal UI review)
-- [x] (#17) `/creators` renders placeholder content; hide route until ready or replace with minimal real landing content. — Black-box: `DONE` ([issue-017](../ui-issue-tracker/ui-issues/issue-017.md))
+- [x] (#17) `/creators` renders placeholder content; hide route until ready or replace with minimal real landing content. — Black-box: `DONE` ([issue-017](../ui-issue-tracker/done-issues/issue-017.md))
 
 ### 2025-10-31 (initial notes)
 - [ ] Reduce desktop whitespace in “Why creators choose Lumelle” around the Explore Stories card.

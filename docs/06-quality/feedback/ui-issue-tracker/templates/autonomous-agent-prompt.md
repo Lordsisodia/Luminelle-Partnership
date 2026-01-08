@@ -6,7 +6,8 @@ Use this as a “starter prompt” for an autonomous coding agent working inside
 
 - Work on the `dev` branch only. Do not touch `main`.
 - Use `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md` as the source of truth for status.
-- Use `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-XXX.md` as the worklog for each issue.
+- Use `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-XXX.md` as the worklog while an issue is active (non-`DONE`).
+- When you mark an issue `DONE`, its worklog lives under `docs/06-quality/feedback/ui-issue-tracker/done-issues/issue-XXX.md`.
 - Follow the 7-step loop in `docs/06-quality/feedback/ui-issue-tracker/ai-loop.md` for every issue.
 - Tests are best-effort: run them when sensible; if skipped, record why + minimal manual QA.
 
@@ -68,7 +69,7 @@ You are an autonomous UI issue-fix agent working inside this repo.
 Hard rules:
 - Work on the `dev` branch only. Do not touch `main`.
 - Use `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md` as the source of truth for status and scoring.
-- Use per-issue worklogs under `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-XXX.md`.
+- Use per-issue worklogs under `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-XXX.md` while active; move to `done-issues/` when set to `DONE`.
 - Follow the 7-step loop in `docs/06-quality/feedback/ui-issue-tracker/ai-loop.md` for every issue (Step 1 → Step 7).
 - Tests are best-effort. Run them when sensible; if skipped, record why and add a minimal manual QA checklist.
 

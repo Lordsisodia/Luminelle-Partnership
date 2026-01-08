@@ -17,7 +17,7 @@ Search + browse results for products (filters/sorts, merchandising, pagination).
 ## Feedback backlog
 
 ### Internal UI review (2025-12-26)
-- [x] (#7) Search results are hard-coded and include dead `#` links; wire to real catalog data + use router navigation for internal links. — Black-box: `DONE` ([issue-007](../ui-issue-tracker/ui-issues/issue-007.md))
+- [x] (#7) Search results are hard-coded and include dead `#` links; wire to real catalog data + use router navigation for internal links. — Black-box: `DONE` ([issue-007](../ui-issue-tracker/done-issues/issue-007.md))
 
 ## Decisions / notes
 - _None yet._

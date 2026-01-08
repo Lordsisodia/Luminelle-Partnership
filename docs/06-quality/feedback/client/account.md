@@ -17,7 +17,7 @@ Customer account home (profile summary, navigation, quick actions).
 ## Feedback backlog
 
 ### Internal UI review (2025-12-26)
-- [x] (#3) `/account` is stubbed (“temporarily unavailable”); ship a minimal account home or remove entry points until ready. — Black-box: `DONE` ([issue-003](../ui-issue-tracker/ui-issues/issue-003.md))
+- [x] (#3) `/account` is stubbed (“temporarily unavailable”); ship a minimal account home or remove entry points until ready. — Black-box: `DONE` ([issue-003](../ui-issue-tracker/done-issues/issue-003.md))
 
 ## Decisions / notes
 - _None yet._
