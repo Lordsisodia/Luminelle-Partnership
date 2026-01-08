@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `IN_PROGRESS`
+- Status: `VALIDATING`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `4`
@@ -89,3 +89,4 @@ Update during research with confirmed evidence.
 
 - 2026-01-08: Marked `IN_PROGRESS`; starting implementation (update landing copy + swap CTA to blog “Learn more”).
 - 2026-01-08: Updated `BrandStoryPage` final CTA to customer-focused copy and swapped “Join creators” → “Learn more” linking to `/blog/about-lumelle`.
+- 2026-01-08: `npm run typecheck` + `npm run build` pass locally; ready for validation in PR preview.
