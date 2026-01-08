@@ -3,6 +3,13 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `PLANNED`
+- Notes:
+  - Checkout-critical; likely blocked/overlapping with Issue 184 (storefront proxy 500s) and overall cart/checkout handoff stability.
+  - Also requires confirming Shopify discount code configuration for the tiered rules (2/3/4 qty → 5/10/15%).
+
 ## 1) Repro summary
 
 - Environment:
@@ -70,4 +77,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

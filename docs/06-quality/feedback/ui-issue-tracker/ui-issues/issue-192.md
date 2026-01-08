@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `PLANNED`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `4`
@@ -82,4 +82,3 @@ Update during research with confirmed evidence.
 - Content data:
   - `src/content/landing.ts`
   - `src/content/blog/*`
-

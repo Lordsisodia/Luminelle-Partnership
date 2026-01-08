@@ -3,6 +3,12 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `PLANNED`
+- Notes:
+  - Small, high-confidence change: consolidate WhatsApp + email support links into a single source of truth and use valid mobile-friendly URL formats.
+
 ## 1) Current links
 
 - Email:
@@ -28,4 +34,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

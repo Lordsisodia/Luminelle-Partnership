@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `PLANNED`
 - Area: `Client`
 - Impact (1–5): `4`
 - Reach (1–5): `5`
@@ -70,4 +70,3 @@ On mobile, the site can be scrolled horizontally across pages. This is a UX bug:
 - On mobile, `scrollWidth === clientWidth` for the root document element on all primary routes.
 - No page-level horizontal scroll.
 - Intentional inner horizontal carousels still work (if present), but do not cause page overflow.
-

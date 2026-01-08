@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `PLANNED`
 - Area: `Client`
 - Impact (1–5): `4`
 - Reach (1–5): `4`
@@ -99,4 +99,3 @@ These are likely areas to inspect during research (update this list with confirm
   - Qty 4+ → 15% (no 5th tier)
 - If discount cannot be applied (missing code / restriction), UI shows a clear, non-deceptive message.
 - No regression in checkout flow (checkout still loads reliably).
-

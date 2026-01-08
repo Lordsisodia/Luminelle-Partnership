@@ -3,6 +3,13 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `DEFERRED`
+- Notes:
+  - Conversion/polish opportunity, but requires brand-approved assets and consent considerations.
+  - Revisit once checkout + core stability items (184/182/181/185) are resolved.
+
 ## 1) Where the avatars come from
 
 - Component:
@@ -36,4 +43,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `VERIFYING`
+- Status: `PLANNED`
 - Area: `Platform`
 - Impact (1–5): `5`
 - Reach (1–5): `5`
@@ -100,4 +100,3 @@ In code, the Storefront client throws if Storefront env isn’t configured.
 - `/api/storefront/*` endpoints respond with JSON (never Cloudflare HTML exception pages).
 - If not configured, responses include a clear `NOT_CONFIGURED` error payload.
 - With correct env vars, cart creation + product/landing fetch succeed reliably.
-

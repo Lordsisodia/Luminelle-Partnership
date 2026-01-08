@@ -3,6 +3,13 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `PLANNED`
+- Notes:
+  - Platform unblocker that likely cascades into Issues 181/182 (discounts + checkout CTA).
+  - Treat as “make endpoints reliable + never return Cloudflare HTML 1101 pages”.
+
 ## 1) Repro summary
 
 - Environment:
@@ -46,4 +53,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

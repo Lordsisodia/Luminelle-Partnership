@@ -3,6 +3,13 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `NEEDS_DECISION`
+- Notes:
+  - Implementation approach is clear (SVG labels + popup), but the reward mapping is ambiguous (labels vs actual award %).
+  - Requires confirming whether the wheel is cosmetic or the discount outcome is truly 5/10/15/20%.
+
 ## 1) Current wheel implementation
 
 - Component: `src/domains/client/marketing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx`

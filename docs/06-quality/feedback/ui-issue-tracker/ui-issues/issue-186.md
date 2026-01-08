@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `DEFERRED`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `5`
@@ -46,4 +46,3 @@ In the “Trusted by 10k users” section, the profile images look repeated/plac
 #### Deliverable
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-186-research.md`
-

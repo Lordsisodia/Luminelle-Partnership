@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `PLANNED`
 - Area: `Client`
 - Impact (1–5): `5`
 - Reach (1–5): `5`
@@ -88,4 +88,3 @@ This blocks purchase completion and looks broken to users.
 - When a cart has items, the drawer CTA transitions from “Preparing…” to a working checkout CTA within a reasonable time.
 - If checkout cannot be started, CTA clearly explains why (no infinite “Preparing…”).
 - Checkout navigation is reliable on mobile and desktop (no blocked taps/clicks).
-
