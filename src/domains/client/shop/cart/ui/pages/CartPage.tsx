@@ -24,7 +24,7 @@ const EmptyCartState = () => (
 )
 
 export const CartPage = () => {
-  const { items, subtotal, setQty, remove, checkoutUrl, checkoutCapabilities, checkoutStart, discountCode, applyDiscount, setAttributes } = useCart()
+  const { items, subtotal, setQty, remove, checkoutUrl, checkoutLoading, checkoutCapabilities, checkoutStart, refreshCheckout, discountCode, applyDiscount, setAttributes } = useCart()
   const [promo, setPromo] = useState(discountCode ?? '')
   const [redirecting, setRedirecting] = useState(false)
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD_GBP || items.length === 0 ? 0 : STANDARD_SHIPPING
@@ -201,7 +201,7 @@ export const CartPage = () => {
                   disabled
                   className="mt-5 block w-full rounded-full bg-semantic-legacy-brand-cocoa/60 px-5 py-3 text-center text-sm font-semibold text-white opacity-80 cursor-not-allowed"
                 >
-                  {checkoutDisabledReason ? 'Checkout unavailable' : 'Preparing checkout…'}
+                  {checkoutLoading ? 'Preparing checkout…' : checkoutDisabledReason ? 'Checkout unavailable' : 'Preparing checkout…'}
                 </button>
               ) : (
                 <button
@@ -225,8 +225,18 @@ export const CartPage = () => {
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 text-semantic-text-primary/80">
                 <p className="text-sm font-semibold">Checkout status</p>
                 <p className="text-xs text-semantic-text-primary/60">
-                  {checkoutDisabledReason ? checkoutDisabledReason : 'Preparing a checkout session…'}
+                  {checkoutLoading ? 'Preparing a checkout session…' : checkoutDisabledReason ? checkoutDisabledReason : 'Preparing a checkout session…'}
                 </p>
+                {checkoutDisabledReason ? (
+                  <button
+                    type="button"
+                    className="mt-2 text-xs underline disabled:opacity-60"
+                    disabled={Boolean(checkoutLoading)}
+                    onClick={() => void refreshCheckout?.()}
+                  >
+                    Retry
+                  </button>
+                ) : null}
               </div>
             )}
           </aside>

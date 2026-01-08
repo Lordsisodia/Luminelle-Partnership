@@ -88,7 +88,6 @@ This is the list you should use day-to-day to see what is still *live*.
 | 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 1 | UNTRIAGED | [issue-085](ui-issues/issue-085.md) |
 | 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 1 | UNTRIAGED | [issue-095](ui-issues/issue-095.md) |
 | 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
-| 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
 | 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
@@ -288,7 +287,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 179 | Creator | Floating WhatsApp CTA has the same invisible-focus problem (and exists in two copies) | 3 | 3 | 3 | 2 | 15 | DONE | [issue-179](done-issues/issue-179.md) |
 | 180 | Admin | Admin mobile drawer is “hidden” only by transform (no `aria-hidden`/`inert`, still reachable in the DOM) | 3 | 2 | 3 | 3 | 15 | DONE | [issue-180](done-issues/issue-180.md) |
 | 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 4 | 4 | 3 | 2 | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
-| 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 5 | 5 | 3 | 2 | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
+| 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 5 | 5 | 3 | 2 | 47 | DONE | [issue-182](done-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 3 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 5 | 5 | 2 | 3 | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
 | 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 4 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
