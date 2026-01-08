@@ -92,6 +92,22 @@ const mapCartToItems = (cart: CartDTO): CartItem[] => {
 
 const isLegacyShopifyGid = (id: string) => id.startsWith('gid://shopify/')
 
+const withCheckoutDiscountCode = (url: string | undefined, code: string | null | undefined): string | undefined => {
+  if (!url) return undefined
+  const normalized = String(code ?? '').trim().toUpperCase()
+  if (!normalized) return url
+
+  try {
+    const base = typeof window !== 'undefined' ? window.location.origin : 'http://localhost'
+    const parsed = new URL(url, base)
+    parsed.searchParams.set('discount', normalized)
+    return parsed.toString()
+  } catch {
+    // If URL parsing fails (unexpected provider URL format), fall back to the raw URL.
+    return url
+  }
+}
+
 const clearLegacyShopifyCartId = () => {
   try {
     localStorage.removeItem('lumelle_shopify_cart_id')
@@ -148,6 +164,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const [checkoutUrl, setCheckoutUrl] = useState<string | undefined>(undefined)
   const [checkoutStart, setCheckoutStart] = useState<CheckoutStart | undefined>(undefined)
+  const checkoutUrlWithDiscount = useMemo(() => withCheckoutDiscountCode(checkoutUrl, discountCode), [checkoutUrl, discountCode])
 
   const itemsRef = useRef<CartItem[]>(items)
   const discountCodeRef = useRef<string | null>(discountCode)
@@ -446,7 +463,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     clear,
     subtotal,
     qty,
-    checkoutUrl,
+    checkoutUrl: checkoutUrlWithDiscount,
     checkoutCapabilities,
     checkoutStart,
     setEmail,

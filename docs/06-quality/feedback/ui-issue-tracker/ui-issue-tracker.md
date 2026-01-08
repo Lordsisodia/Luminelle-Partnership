@@ -87,7 +87,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 5 | UNTRIAGED | [issue-154](ui-issues/issue-154.md) |
 | 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 1 | UNTRIAGED | [issue-085](ui-issues/issue-085.md) |
 | 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 1 | DONE | [issue-095](done-issues/issue-095.md) |
-| 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
+| 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 0 | VALIDATING | [issue-181](ui-issues/issue-181.md) |
 | 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
@@ -287,7 +287,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 178 | Client | Floating “Buy Now” CTA is hidden with `opacity-0` but remains focusable (invisible focus target) | 3 | 3 | 2 | 2 | 16 | DONE | [issue-178](done-issues/issue-178.md) |
 | 179 | Creator | Floating WhatsApp CTA has the same invisible-focus problem (and exists in two copies) | 3 | 3 | 3 | 2 | 15 | DONE | [issue-179](done-issues/issue-179.md) |
 | 180 | Admin | Admin mobile drawer is “hidden” only by transform (no `aria-hidden`/`inert`, still reachable in the DOM) | 3 | 2 | 3 | 3 | 15 | DONE | [issue-180](done-issues/issue-180.md) |
-| 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 4 | 4 | 3 | 2 | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
+| 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 4 | 4 | 3 | 2 | 0 | VALIDATING | [issue-181](ui-issues/issue-181.md) |
 | 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 5 | 5 | 3 | 2 | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 3 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 5 | 5 | 2 | 3 | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
