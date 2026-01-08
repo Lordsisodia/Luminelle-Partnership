@@ -27,6 +27,7 @@ export const CartPage = () => {
   const { items, subtotal, setQty, remove, checkoutUrl, checkoutCapabilities, checkoutStart, discountCode, applyDiscount, setAttributes } = useCart()
   const [promo, setPromo] = useState(discountCode ?? '')
   const [redirecting, setRedirecting] = useState(false)
+  const discountsEnabled = Boolean(applyDiscount) && Boolean(checkoutCapabilities?.supportsDiscounts)
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD_GBP || items.length === 0 ? 0 : STANDARD_SHIPPING
   const total = subtotal + shipping
   const remainingForFreeShip = Math.max(0, FREE_SHIPPING_THRESHOLD_GBP - subtotal)
@@ -155,36 +156,40 @@ export const CartPage = () => {
                   <span>£{total.toFixed(2)}</span>
                 </div>
               </div>
-              <div className="mt-4 grid gap-2">
-                <div className="flex gap-2">
-                  <label htmlFor="promo-code" className="sr-only">
-                    Promo code
-                  </label>
-                  <input
-                    id="promo-code"
-                    name="promo-code"
-                    value={promo}
-                    onChange={(e) => setPromo(e.target.value)}
-                    placeholder="Promo code"
-                    className="flex-1 rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm"
-                    inputMode="text"
-                    autoCapitalize="characters"
-                  />
-                  <button
-                    type="button"
-                    className="rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary disabled:opacity-60"
-                    onClick={() => applyDiscount?.(promo)}
-                    disabled={!promo.trim()}
-                  >
-                    Apply
-                  </button>
-                </div>
-                {discountCode ? (
-                  <p className="text-xs text-semantic-text-primary/60">
-                    Saved code: <span className="font-semibold">{discountCode}</span>. It will be applied when checkout is available.
-                  </p>
-                ) : null}
-              </div>
+	              <div className="mt-4 grid gap-2">
+	                {discountsEnabled ? (
+	                  <>
+	                    <div className="flex gap-2">
+	                      <label htmlFor="promo-code" className="sr-only">
+	                        Promo code
+	                      </label>
+	                      <input
+	                        id="promo-code"
+	                        name="promo-code"
+	                        value={promo}
+	                        onChange={(e) => setPromo(e.target.value)}
+	                        placeholder="Promo code"
+	                        className="flex-1 rounded-xl border border-semantic-legacy-brand-blush/60 px-3 py-2 text-sm"
+	                        inputMode="text"
+	                        autoCapitalize="characters"
+	                      />
+	                      <button
+	                        type="button"
+	                        className="rounded-full border border-semantic-legacy-brand-blush/60 px-4 py-2 text-sm font-semibold text-semantic-text-primary disabled:opacity-60"
+	                        onClick={() => applyDiscount?.(promo)}
+	                        disabled={!promo.trim()}
+	                      >
+	                        Apply
+	                      </button>
+	                    </div>
+	                    {discountCode ? (
+	                      <p className="text-xs text-semantic-text-primary/60">
+	                        Saved code: <span className="font-semibold">{discountCode}</span>. It will be applied at checkout.
+	                      </p>
+	                    ) : null}
+	                  </>
+	                ) : null}
+	              </div>
               {items.length > 0 && checkoutUrl ? (
                 <button
                   type="button"

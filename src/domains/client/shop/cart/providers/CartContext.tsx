@@ -102,6 +102,7 @@ const clearLegacyShopifyCartId = () => {
 
 const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const checkoutCapabilities = useMemo(() => commerce.checkout.getCapabilities(), [])
+  const discountsSupported = checkoutCapabilities.supportsDiscounts && typeof commerce.cart.applyDiscount === 'function'
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -118,6 +119,16 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const [discountCode, setDiscountCode] = useState<string | null>(() => {
     try {
+      if (!discountsSupported) {
+        try {
+          localStorage.removeItem(DISCOUNT_KEY)
+          localStorage.removeItem(PENDING_DISCOUNT_KEY)
+        } catch {
+          // ignore
+        }
+        return null
+      }
+
       const normalize = (code: unknown) => String(code ?? '').trim().toUpperCase()
 
       const raw = localStorage.getItem(DISCOUNT_KEY)
@@ -220,6 +231,8 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const syncVolumeDiscountFromItems = useCallback(
     (nextItems: CartItem[]) => {
+      if (!discountsSupported) return { managed: false as const, code: null }
+
       const current = discountCodeRef.current ? discountCodeRef.current.toUpperCase() : null
       const currentIsVolume = current ? volumeDiscountCodes.has(current) : false
 
@@ -234,7 +247,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
       setDiscountCode(desired)
       return { managed: true as const, code: desired }
     },
-    [getDesiredVolumeDiscountTier, volumeDiscountCodes]
+    [discountsSupported, getDesiredVolumeDiscountTier, volumeDiscountCodes]
   )
 
   const applyDiscountToBackendIfSupported = useCallback(async (code: string | null) => {
@@ -266,7 +279,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
         try {
           cart = await commerce.cart.syncFromDraft({
             lines: compatibleSeed.map((i) => ({ variantKey: i.id, qty: clampLineQty(i.qty) })),
-            discountCode: discountCodeRef.current ?? undefined,
+            discountCode: discountsSupported ? (discountCodeRef.current ?? undefined) : undefined,
           })
         } catch (err) {
           console.warn('Failed to seed cart from local draft:', err)
@@ -278,9 +291,10 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
       const { managed, code } = syncVolumeDiscountFromItems(nextItems)
 
       // Keep the provider cart in sync with our tiered discount policy so checkout reflects it.
-      if (managed && commerce.cart.applyDiscount) {
+      const applyDiscountToCart = commerce.cart.applyDiscount
+      if (discountsSupported && managed && applyDiscountToCart) {
         try {
-          cart = await commerce.cart.applyDiscount(code ?? '')
+          cart = await applyDiscountToCart(code ?? '')
         } catch (err) {
           console.warn('Failed to apply volume discount during cart rehydrate:', err)
         }
@@ -398,6 +412,8 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   const qty = useMemo(() => items.reduce((sum, item) => sum + item.qty, 0), [items])
 
   const applyDiscount: CartState['applyDiscount'] = (code) => {
+    if (!discountsSupported) return
+
     const trimmed = (code ?? '').trim()
     if (!trimmed) {
       setDiscountCode(null)
@@ -451,7 +467,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     checkoutStart,
     setEmail,
     setAttributes,
-    applyDiscount,
+    applyDiscount: discountsSupported ? applyDiscount : undefined,
   }
 
   return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>

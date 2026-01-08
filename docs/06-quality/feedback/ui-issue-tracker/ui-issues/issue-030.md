@@ -5,63 +5,73 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
-- Area: `TBD`
-- Impact (1–5): `TBD`
-- Reach (1–5): `TBD`
-- Effort (1–5): `TBD`
-- Confidence (1–3): `TBD`
-- Priority: `TBD`
+- Status: `VALIDATING`
+- Area: `Client / Commerce`
+- Impact (1–5): `2`
+- Reach (1–5): `3`
+- Effort (1–5): `3`
+- Confidence (1–3): `2`
+- Priority: `9`
 - Owner: `AI`
 - Created: `2025-12-27`
 
 ---
 
 ## Step 1 — Intake
-- [ ] Restate the issue (1 sentence).
-- [ ] Link to the audit issue and copy the key claim.
-- [ ] Identify likely files/components.
+- [x] Restate the issue (1 sentence).
+- [x] Link to the audit issue and copy the key claim.
+- [x] Identify likely files/components.
 
 ## Step 2 — Verify
-- [ ] Confirm evidence in code (paths + what’s wrong).
-- [ ] Write repro steps (route + actions).
-- [ ] Mark `Verified: YES/NO` and set status accordingly.
+- [x] Confirm evidence in code (paths + what’s wrong).
+- [x] Write repro steps (route + actions).
+- [x] Mark `Verified: YES/NO` and set status accordingly.
 
 ## Step 3 — Assess
-- [ ] Score impact/reach/effort/confidence and compute priority.
-- [ ] Decide: `FIX` / `DEFER` / `WONT_FIX` / `NEEDS_DECISION`.
-- [ ] Note dependencies (data, product decision, auth, etc.).
+- [x] Score impact/reach/effort/confidence and compute priority.
+- [x] Decide: `FIX` (gate messaging on capabilities).
+- [x] Note dependencies (data, product decision, auth, etc.).
 
 ## Step 4 — Options
-- [ ] Option A: (describe)
-- [ ] Option B: (describe)
-- [ ] (Optional) Option C: (describe)
-- [ ] Pick one + rationale (fit with domain architecture).
+- [x] Option A: Hide discount/promo UI when checkout/discounts are not supported.
+- [x] Option B: Keep messaging, but show “coming soon” text.
+- [x] Pick one + rationale: Option A (avoids promise-vs-reality).
 
 ## Step 5 — Plan
-- [ ] Write implementation plan (bullets).
-- [ ] Write acceptance criteria (testable).
-- [ ] Risks/rollback notes.
+- [x] Write implementation plan (bullets).
+- [x] Write acceptance criteria (testable).
+- [x] Risks/rollback notes.
 
 ## Step 6 — Execute + Validate
-- [ ] Implement changes.
-- [ ] Validate (tests or best-effort manual checks).
-- [ ] Record results and any regressions found.
+- [x] Implement changes.
+- [x] Validate (tests or best-effort manual checks).
+- [x] Record results and any regressions found.
 
 ## Step 7 — Record + Close
 - [ ] Update `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md` (status + priority if changed).
-- [ ] Summarize what changed + where.
+- [x] Summarize what changed + where.
 - [ ] Mark DONE/DEFERRED/etc.
 
 ---
 
 ## Evidence / Links
 
+- Verified: **YES** (2026-01-08)
+- Repro (when discounts are not supported / checkout is unavailable):
+  - Start dev with default mock commerce (no `USE_REAL_COMMERCE=true`) and visit `/shop` and `/cart`.
+  - Observe “Get 10% off…”, wheel reward messaging, and promo code entry even though checkout is unavailable.
 - Code refs:
+  - `src/domains/client/marketing/ui/sections/shop/email-capture-band/EmailCaptureBand.tsx`
+  - `src/domains/client/marketing/ui/sections/shop/final-cta-section/FinalCtaSection.tsx`
+  - `src/domains/client/shop/cart/ui/pages/CartPage.tsx`
+  - `src/domains/client/shop/cart/providers/CartContext.tsx`
 - Screenshots:
 - Logs/traces:
 
 ## Outcome
 
-- Final status:
-- Final notes:
+- Final status: `VALIDATING`
+- Implementation notes:
+  - Gate discount/promo UI on `commerce.checkout.getCapabilities().supportsDiscounts` and the presence of the `applyDiscount` port.
+  - Clear any persisted discount codes when discounts are not supported (prevents stale “saved code” messaging).
+  - Validation: `npm run typecheck` + `npm run build` pass on branch `vk/34f3-ui-030-client-p9`.
