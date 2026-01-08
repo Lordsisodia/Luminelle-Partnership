@@ -49,9 +49,9 @@ while true; do
   echo
 
   if [[ -n "$MODEL" ]]; then
-    codex exec -s danger-full-access -a never -C "$ROOT_DIR" -m "$MODEL" "$PROMPT" || true
+    codex exec --dangerously-bypass-approvals-and-sandbox -C "$ROOT_DIR" -m "$MODEL" "$PROMPT" || true
   else
-    codex exec -s danger-full-access -a never -C "$ROOT_DIR" "$PROMPT" || true
+    codex exec --dangerously-bypass-approvals-and-sandbox -C "$ROOT_DIR" "$PROMPT" || true
   fi
 
   echo
