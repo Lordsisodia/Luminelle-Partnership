@@ -28,7 +28,7 @@ const AccountPage = () => {
           <meta name="robots" content="noindex" />
         </Helmet>
         <section className="bg-white">
-          <div className="mx-auto max-w-4xl px-4 py-14 md:px-6">
+          <div className="mx-auto max-w-4xl px-5 py-14 md:px-6">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Account</p>
 
           <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

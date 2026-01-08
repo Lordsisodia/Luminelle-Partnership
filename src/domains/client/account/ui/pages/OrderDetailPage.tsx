@@ -46,7 +46,7 @@ const OrderDetailPage = () => {
         </Helmet>
 
         <section className="bg-white">
-          <div className="mx-auto max-w-3xl px-4 py-14 md:px-6">
+          <div className="mx-auto max-w-3xl px-5 py-14 md:px-6">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Account</p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-semantic-text-primary">Order details</h1>
             <p className="mt-4 text-sm leading-relaxed text-semantic-text-primary/70">

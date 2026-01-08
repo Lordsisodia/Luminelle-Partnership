@@ -105,7 +105,7 @@ export function PublicHeader({
             >
               <ShoppingBag className="h-6 w-6" />
               {qty > 0 ? (
-                <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-semantic-accent-cta px-1 text-[11px] font-semibold text-semantic-text-primary shadow-soft ring-1 ring-semantic-legacy-brand-cocoa/10">
+                <span className="absolute right-0.5 top-0.5 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-semantic-accent-cta px-1 text-[11px] font-semibold text-semantic-text-primary shadow-soft ring-1 ring-semantic-legacy-brand-cocoa/10">
                   {qtyLabel}
                 </span>
               ) : null}
