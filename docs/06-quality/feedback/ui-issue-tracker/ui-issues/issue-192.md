@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `IN_PROGRESS`
+- Status: `VALIDATING`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `4`
@@ -88,3 +88,5 @@ Update during research with confirmed evidence.
 ## Worklog
 
 - 2026-01-08: Marked issue as `IN_PROGRESS`; starting implementation for customer-focused copy + “Learn more” blog CTA.
+- 2026-01-08: Updated `BrandStoryPage` CTA copy to customer-focused and changed secondary CTA to “Learn more” → `/blog/about-lumelle`. PR: #9.
+- 2026-01-08: `npm run typecheck` + `npm run build` OK; `npm run lint` currently fails with pre-existing repo-wide lint errors (not introduced by UI-192).
