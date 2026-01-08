@@ -13,7 +13,7 @@ type Prize = {
 
 type SpinWheelProps = {
   prizes?: Prize[]
-  onSpun?: () => void
+  onSpun?: (result: { label: string; discountCode: string }) => void
 }
 
 // Welcome wheel: the spin is a playful reveal for a guaranteed welcome deal.
@@ -66,6 +66,12 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
   const [notified, setNotified] = useState(false)
 
   const slice = 360 / prizes.length
+  const wheelLabels = useMemo(() => {
+    return prizes.map((prize) => {
+      const match = prize.label.match(/(\d+)\s*%/i)
+      return match ? `${match[1]}%` : prize.label
+    })
+  }, [prizes])
 
   const gradient = useMemo(() => {
     let acc = ''
@@ -164,7 +170,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
 
   useEffect(() => {
     if (hasSpun && onSpun && !notified) {
-      onSpun()
+      onSpun({ label: guaranteedAward.label, discountCode: WELCOME_DISCOUNT_CODE })
       setNotified(true)
     }
   }, [hasSpun, notified, onSpun])
@@ -243,14 +249,43 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
         </div>
 
         {/* Wheel */}
-        <div
-          className="absolute inset-0 rounded-full border-8 border-white shadow-[0_18px_38px_rgba(0,0,0,0.12)] transition-transform duration-[3200ms] ease-out"
-          style={{
-            backgroundImage: gradient,
-            transform: `rotate(${rotation}deg)`,
-          }}
-          aria-live="polite"
-        />
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 rounded-full border-8 border-white shadow-[0_18px_38px_rgba(0,0,0,0.12)] transition-transform duration-[3200ms] ease-out"
+            style={{
+              backgroundImage: gradient,
+              transform: `rotate(${rotation}deg)`,
+            }}
+            aria-live="polite"
+          />
+
+          {/* Labels (rotate with wheel) */}
+          <div
+            className="absolute inset-0 select-none transition-transform duration-[3200ms] ease-out"
+            style={{
+              transform: `rotate(${rotation}deg)`,
+            }}
+            aria-hidden="true"
+          >
+            {wheelLabels.map((label, idx) => {
+              const angleDeg = idx * slice + slice / 2
+              const angleRad = (angleDeg * Math.PI) / 180
+              const radius = 32
+              const x = 50 + radius * Math.sin(angleRad)
+              const y = 50 - radius * Math.cos(angleRad)
+
+              return (
+                <div
+                  key={`${label}-${idx}`}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/85 px-2 py-1 text-[11px] font-semibold text-semantic-legacy-brand-cocoa shadow-sm backdrop-blur"
+                  style={{ left: `${x}%`, top: `${y}%` }}
+                >
+                  {label}
+                </div>
+              )
+            })}
+          </div>
+        </div>
 
         {/* Center puck */}
         <div className="absolute inset-0 flex items-center justify-center">
