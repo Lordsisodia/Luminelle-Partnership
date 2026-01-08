@@ -1,0 +1,105 @@
+name: AI Merge to dev on CI success
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ai-merge-on-ci-dev-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    name: Merge eligible PRs (vk/* -> dev)
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Merge PRs targeting dev when eligible
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const run = context.payload.workflow_run;
+
+            const prs = run.pull_requests || [];
+
+            // If CI ran on a vk/* branch push, GitHub may not attach pull_requests in the payload.
+            // In that case, look up an open PR from that head branch into dev.
+            if (!prs.length && typeof run.head_branch === "string" && run.head_branch.startsWith("vk/")) {
+              core.info(`No PRs in workflow_run payload; searching PRs for head branch '${run.head_branch}'`);
+              const found = await github.rest.pulls.list({
+                owner,
+                repo,
+                state: "open",
+                base: "dev",
+                head: `${owner}:${run.head_branch}`,
+                per_page: 20,
+              });
+              prs.push(...found.data.map((p) => ({ number: p.number })));
+            }
+
+            if (!prs.length) {
+              core.info("No pull requests associated with this CI run; nothing to do.");
+              return;
+            }
+
+            for (const prRef of prs) {
+              const number = prRef.number;
+              const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
+
+              // Safety gates
+              if (pr.draft) {
+                core.info(`PR #${number} is draft; skipping.`);
+                continue;
+              }
+              if (pr.base?.ref !== "dev") {
+                core.info(`PR #${number} base is '${pr.base?.ref}'; skipping.`);
+                continue;
+              }
+              if (pr.head?.repo?.fork) {
+                core.info(`PR #${number} is from a fork; skipping.`);
+                continue;
+              }
+
+              const head = pr.head?.ref || "";
+              const labels = new Set((pr.labels || []).map(l => l.name));
+              const isVkBranch = head.startsWith("vk/");
+              const hasAutomergeLabel = labels.has("automerge") || labels.has("ai-automerge");
+
+              if (!isVkBranch && !hasAutomergeLabel) {
+                core.info(`PR #${number} not vk/* and not labeled automerge; skipping.`);
+                continue;
+              }
+
+              // Ensure label exists for visibility.
+              if (isVkBranch && !hasAutomergeLabel) {
+                core.info(`Adding 'automerge' label to PR #${number}`);
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  labels: ["automerge"],
+                });
+              }
+
+              // At this point, the CI workflow has completed successfully for this head SHA.
+              // Merge directly (squash) so external non-required checks (e.g. preview deploys) can't stall execution.
+              core.info(`Attempting squash-merge for PR #${number} (${head} -> dev)`);
+              try {
+                await github.rest.pulls.merge({
+                  owner,
+                  repo,
+                  pull_number: number,
+                  merge_method: "squash",
+                });
+                core.info(`Merged PR #${number}`);
+              } catch (err) {
+                core.warning(`Could not merge PR #${number}: ${err.message}`);
+              }
