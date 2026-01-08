@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `IN_PROGRESS`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `5`
@@ -14,6 +14,12 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 - Priority: `(3×5×2)−2 = 28`
 - Owner: `AI`
 - Created: `2026-01-07`
+
+---
+
+## Worklog
+
+- `2026-01-09 01:16 (+07)` Started implementation pass: set tracker/worklog → `IN_PROGRESS`, then reproduce overflow and apply minimal CSS/layout fix with incremental commits.
 
 ---
 
@@ -92,4 +98,3 @@ Horizontal scrolling should not be possible under normal layout.
 - On mobile, `document.documentElement.scrollWidth === document.documentElement.clientWidth` (no horizontal overflow).
 - Footer and account content have consistent, comfortable side padding (no edge-to-edge text).
 - No regressions to drawer/checkout overlays (they should still slide correctly).
-
