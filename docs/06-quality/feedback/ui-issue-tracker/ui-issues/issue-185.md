@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `IN_PROGRESS`
+- Status: `VALIDATING`
 - Area: `Client`
 - Impact (1–5): `4`
 - Reach (1–5): `5`
@@ -76,3 +76,4 @@ On mobile, the site can be scrolled horizontally across pages. This is a UX bug:
 ## Work log
 
 - 2026-01-08: Marked `IN_PROGRESS` and starting overflow investigation.
+- 2026-01-08: Validated locally (Playwright mobile emulation) — `document.documentElement.scrollWidth === clientWidth` across key routes (see `issue-185-research.md`). No horizontal scroll reproduced in current `dev` code; suspected fixed already by `src/index.css` (`fix(ui): prevent horizontal scroll on mobile`, commit `6ee9d168`).
