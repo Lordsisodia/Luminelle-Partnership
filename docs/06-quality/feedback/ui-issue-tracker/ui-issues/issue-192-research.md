@@ -3,6 +3,13 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `PLANNED`
+- Notes:
+  - Copy/CTA update is straightforward; treat the blog target as `/blog/about-lumelle` unless client specifies a different post.
+  - If the target slug is not `/blog/about-lumelle`, promote to `NEEDS_DECISION` with the correct target.
+
 ## 1) Repro summary
 
 - Environment:
@@ -68,4 +75,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

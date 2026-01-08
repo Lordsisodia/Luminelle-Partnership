@@ -3,6 +3,13 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `NEEDS_DECISION`
+- Notes:
+  - “Feels bland” is subjective; needs a clear design direction (layout choice + what assets are allowed: faces/UGC vs typographic-only).
+  - Once decided, this can be promoted to `PLANNED` with an execution-ready spec.
+
 ## 1) Current implementation
 
 - Component:
@@ -30,4 +37,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

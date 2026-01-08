@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `NEEDS_DECISION`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `4`
@@ -52,4 +52,3 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 #### Deliverable
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-188-research.md`
-

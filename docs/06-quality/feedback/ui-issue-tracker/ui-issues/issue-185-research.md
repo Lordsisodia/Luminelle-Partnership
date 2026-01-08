@@ -3,6 +3,13 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `PLANNED`
+- Notes:
+  - Global mobile layout bug; likely one (or a small set of) overflow culprits.
+  - Fix here should cover Issue 183’s account/footer-specific report as well.
+
 ## 1) Repro summary
 
 - Environment:
@@ -49,4 +56,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

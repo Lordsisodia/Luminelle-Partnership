@@ -3,6 +3,12 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `NEEDS_DECISION`
+- Notes:
+  - Product decision needed: remove vs replace with a “payments handled at checkout” info surface vs link out to Shopify customer account portal.
+
 ## 1) Current state
 
 - Page:
@@ -21,4 +27,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-

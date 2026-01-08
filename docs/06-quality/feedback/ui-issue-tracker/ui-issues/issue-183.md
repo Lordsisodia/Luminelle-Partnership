@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `NOT_AN_ISSUE`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `5`
@@ -92,4 +92,3 @@ Horizontal scrolling should not be possible under normal layout.
 - On mobile, `document.documentElement.scrollWidth === document.documentElement.clientWidth` (no horizontal overflow).
 - Footer and account content have consistent, comfortable side padding (no edge-to-edge text).
 - No regressions to drawer/checkout overlays (they should still slide correctly).
-

@@ -3,6 +3,12 @@
 Owner: `AI`
 Date started: `2026-01-07`
 
+## 0) Triage update (2026-01-09T01:21:31+07:00)
+
+- Decision: `NOT_AN_ISSUE`
+- Notes:
+  - Duplicate framing of Issue 185 (global mobile horizontal scrolling); keep the overflow root-cause investigation consolidated under 185.
+
 ## 1) Repro summary
 
 - Environment:
@@ -66,4 +72,3 @@ Date started: `2026-01-07`
 
 - Suggested option:
 - Why:
-
