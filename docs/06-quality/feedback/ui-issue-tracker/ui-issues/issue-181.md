@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `NEEDS_DECISION`
 - Area: `Client`
 - Impact (1–5): `4`
 - Reach (1–5): `4`
@@ -100,3 +100,8 @@ These are likely areas to inspect during research (update this list with confirm
 - If discount cannot be applied (missing code / restriction), UI shows a clear, non-deceptive message.
 - No regression in checkout flow (checkout still loads reliably).
 
+---
+
+## Worklog
+
+- 2026-01-08 18:19 UTC — Triage batch 3: set status to `NEEDS_DECISION` (discounting approach + Shopify admin configuration required before implementation).

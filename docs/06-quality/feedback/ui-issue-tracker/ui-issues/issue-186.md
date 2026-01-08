@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `NEEDS_DECISION`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `5`
@@ -47,3 +47,8 @@ In the “Trusted by 10k users” section, the profile images look repeated/plac
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-186-research.md`
 
+---
+
+## Worklog
+
+- 2026-01-08 18:19 UTC — Triage batch 3: set status to `NEEDS_DECISION` (requires asset/consent decision for “authentic” avatars and a privacy posture).
