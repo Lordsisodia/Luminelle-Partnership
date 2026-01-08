@@ -37,7 +37,7 @@ export type HomeConfig = {
     assurances?: { label: string }[]
   }
   slides: { title: string; copy: string; image: string; ctaHref: string; tag?: string; proof?: string }[]
-  socialProof: { rating: number; count: number; tagline: string }
+  socialProof: { rating: number; count: number; tagline: string; trustCountLabel?: string; trustAvatars?: string[] }
   problemSolution: { problems: string[]; solutions: string[] }
   ugc: { src: string; type: 'image' | 'video'; caption?: string }[]
   benefits3?: { title: string; body: string; icon?: string }[]
@@ -170,7 +170,19 @@ export const homeConfig: HomeConfig = {
       proof: '',
     }
   ],
-  socialProof: { rating: 4.8, count: 10000, tagline: 'Trusted by 10k users' },
+  socialProof: {
+    rating: 4.8,
+    count: 10000,
+    tagline: 'Trusted by 10k users',
+    trustCountLabel: '10k+',
+    trustAvatars: [
+      '/images/avatar-shannon.jpg',
+      '/images/avatar-rachel.jpg',
+      '/images/avatar-randomlife.jpg',
+      '/images/avatar-jade.jpg',
+      '/images/avatar-maya.jpg',
+    ],
+  },
   problemSolution: {
     problems: [
       'Plastic caps trap humidity → frizz',

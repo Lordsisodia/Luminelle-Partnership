@@ -41,17 +41,19 @@ const ShopLandingPage = () => {
             const rating = showerCapConfig.ratingValueOverride ?? homeConfig.socialProof.rating
             const countLabel = showerCapConfig.ratingCountLabelOverride ?? '100+'
 
-	            return (
-	          <HeroShop
-	            config={homeConfig.hero}
-	            socialProof={{
-	              tagline: homeConfig.socialProof.tagline,
-	              rating,
-	              ratingLabel: `${rating.toFixed(1)} (${countLabel})`,
-	            }}
-	          />
-	            )
-	          })()}
+            return (
+              <HeroShop
+                config={homeConfig.hero}
+                socialProof={{
+                  tagline: homeConfig.socialProof.tagline,
+                  rating,
+                  ratingLabel: `${rating.toFixed(1)} (${countLabel})`,
+                  trustCountLabel: homeConfig.socialProof.trustCountLabel,
+                  trustAvatars: homeConfig.socialProof.trustAvatars,
+                }}
+              />
+            )
+          })()}
         </section>
         <TrustBar />
         <ProductSpotlightSection teasers={homeConfig.pdpTeasers ?? [homeConfig.pdpTeaser]} />
