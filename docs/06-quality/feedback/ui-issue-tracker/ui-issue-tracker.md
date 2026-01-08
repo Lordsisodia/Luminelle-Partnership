@@ -85,7 +85,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 147 | Admin | Admin product gallery selection can’t truly be closed (state forces `editingMediaIdx` back to 0) | 5 | UNTRIAGED | [issue-147](ui-issues/issue-147.md) |
 | 148 | Admin | Admin “Upload” relies on Cloudinary’s external widget script with no loading/progress UI (fragile + inconsistent asset pipeline) | 5 | UNTRIAGED | [issue-148](ui-issues/issue-148.md) |
 | 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 5 | UNTRIAGED | [issue-154](ui-issues/issue-154.md) |
-| 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 1 | UNTRIAGED | [issue-085](ui-issues/issue-085.md) |
+| 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 7 | DONE | [issue-085](done-issues/issue-085.md) |
 | 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 1 | UNTRIAGED | [issue-095](ui-issues/issue-095.md) |
 | 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
 | 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
@@ -191,7 +191,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 82 | Client | PDP hero image preload can miss the CDN URL (wasted bandwidth + slower hero render) | 2 | 5 | 3 | 2 | 17 | DONE | [issue-082](done-issues/issue-082.md) |
 | 83 | Client | PDP quantity picker uses ARIA “listbox” semantics but lacks keyboard listbox behavior | 3 | 4 | 2 | 2 | 22 | DONE | [issue-083](done-issues/issue-083.md) |
 | 84 | Client | Drawer uses extremely small type (`text-[9px]`) for high-salience information | 2 | 5 | 3 | 2 | 17 | DONE | [issue-084](done-issues/issue-084.md) |
-| 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 2 | 2 | 3 | 1 | 1 | UNTRIAGED | [issue-085](ui-issues/issue-085.md) |
+| 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 2 | 2 | 1 | 2 | 7 | DONE | [issue-085](done-issues/issue-085.md) |
 | 86 | Admin | Admin “collapsed sidebar” mode creates unlabeled icon-only navigation (a11y + usability) | 3 | 2 | 3 | 3 | 15 | NOT_AN_ISSUE | [issue-086](ui-issues/issue-086.md) |
 | 87 | Client | TikTok section hides the “Watch on TikTok” fallback link on mobile (no escape hatch if embeds fail) | 4 | 3 | 3 | 2 | 21 | DONE | [issue-087](done-issues/issue-087.md) |
 | 88 | Client | PDP hero media uses generic alt text for key product imagery (accessibility + SEO loss) | 3 | 5 | 3 | 2 | 27 | DONE | [issue-088](done-issues/issue-088.md) |
