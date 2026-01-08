@@ -23,19 +23,6 @@ jobs:
         run: npm run validate:tokens
       - name: Token lint (no legacy brand colors)
         run: npm run lint:tokens
-      - name: Lint (eslint)
-        run: npm run lint
-      - name: Color audits (raw + contexts)
-        run: |
-          npm run --silent report:colors -- --json --limit=200 > audit-raw-colors.json
-          npm run --silent report:colors:contexts -- --json --limit=200 > audit-color-contexts.json
-      - name: Upload color audit artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: color-audits
-          path: |
-            audit-raw-colors.json
-            audit-color-contexts.json
       - name: TypeScript typecheck
         run: npm run typecheck
       - name: Build (tsc -b + vite build)

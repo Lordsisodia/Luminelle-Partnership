@@ -23,7 +23,7 @@ export default function Testimonial() {
               “Radiant made undercutting all of our competitors an absolute breeze.”
             </p>
             <p className="mt-4">— John Doe</p>
-            <p className="bg-gradient-to-r from-brand-peach via-brand-cocoa to-brand-peach bg-clip-text text-sm font-medium text-transparent">
+            <p className="bg-gradient-to-r from-semantic-accent-cta via-semantic-legacy-brand-cocoa to-semantic-accent-cta bg-clip-text text-sm font-medium text-transparent">
               Content Marketing
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function Testimonial() {
               “Radiant made undercutting all of our competitors an absolute breeze.”
             </p>
             <p className="mt-4">— John Doe</p>
-            <p className="bg-gradient-to-r from-brand-peach via-brand-cocoa to-brand-peach bg-clip-text text-sm font-medium text-transparent">
+            <p className="bg-gradient-to-r from-semantic-accent-cta via-semantic-legacy-brand-cocoa to-semantic-accent-cta bg-clip-text text-sm font-medium text-transparent">
               Content Marketing
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function Testimonial() {
               “Radiant made undercutting all of our competitors an absolute breeze.”
             </p>
             <p className="mt-4">— John Doe</p>
-            <p className="bg-gradient-to-r from-brand-peach via-brand-cocoa to-brand-peach bg-clip-text text-sm font-medium text-transparent">
+            <p className="bg-gradient-to-r from-semantic-accent-cta via-semantic-legacy-brand-cocoa to-semantic-accent-cta bg-clip-text text-sm font-medium text-transparent">
               Content Marketing
             </p>
           </div>

@@ -96,3 +96,22 @@ When you need a fast, accurate update:
 
 - 🧱 Don’t create nested `.blackbox/` folders inside visible docs categories; the only docs black box lives at `docs/.blackbox/`.
 - 🧩 Prefer updating the trackers (`docs/.blackbox/tasks.md`, UI issue tracker) as part of the work so “what changed?” is always derivable.
+
+---
+
+## 🧑‍✈️ Autonomous monitor (Vibe Kanban + Black Box)
+
+To run hands-off for a few hours, use the dispatcher/monitor loop:
+
+```bash
+# Keep up to 10 tasks running; refresh every 2 minutes
+MAX_INPROGRESS=10 SLEEP_SECONDS=120 ./scripts/run-monitor-agent.sh
+```
+
+Manual spot checks:
+
+```bash
+./scripts/monitor-dev.sh
+node scripts/blackbox-status.mjs
+gh pr list --base dev --state open
+```
