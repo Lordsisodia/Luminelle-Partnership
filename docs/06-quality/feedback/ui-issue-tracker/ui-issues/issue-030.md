@@ -74,4 +74,5 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 - Implementation notes:
   - Gate discount/promo UI on `commerce.checkout.getCapabilities().supportsDiscounts` and the presence of the `applyDiscount` port.
   - Clear any persisted discount codes when discounts are not supported (prevents stale “saved code” messaging).
-  - Validation: `npm run typecheck` + `npm run build` pass on branch `vk/34f3-ui-030-client-p9`.
+- Validation: `npm run typecheck` + `npm run build` pass on branch `vk/34f3-ui-030-client-p9`.
+- PR: `#6` (base: `dev`, branch: `vk/34f3-ui-030-client-p9`)
