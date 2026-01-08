@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `IN_PROGRESS`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `4`
@@ -83,3 +83,8 @@ Update during research with confirmed evidence.
   - `src/content/landing.ts`
   - `src/content/blog/*`
 
+---
+
+## Worklog
+
+- 2026-01-08: Marked issue as `IN_PROGRESS`; starting implementation for customer-focused copy + “Learn more” blog CTA.

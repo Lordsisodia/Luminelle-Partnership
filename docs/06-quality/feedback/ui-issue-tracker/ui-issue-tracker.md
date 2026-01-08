@@ -97,7 +97,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 0 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
 | 189 | Client | Account “Payment methods” has dev artifacts; consider removing or simplifying (Shopify is the payment source-of-truth) | 0 | UNTRIAGED | [issue-189](ui-issues/issue-189.md) |
 | 190 | Client | WhatsApp + email support links need to be verified/simplified | 0 | UNTRIAGED | [issue-190](ui-issues/issue-190.md) |
-| 192 | Client | Landing “creators” section copy should be customer-focused + “Join creators” CTA should become “Learn more” (blog link) | 0 | UNTRIAGED | [issue-192](ui-issues/issue-192.md) |
+| 192 | Client | Landing “creators” section copy should be customer-focused + “Join creators” CTA should become “Learn more” (blog link) | 0 | IN_PROGRESS | [issue-192](ui-issues/issue-192.md) |
 
 ## Full tracker (includes completed / closed)
 
@@ -298,4 +298,4 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 189 | Client | Account “Payment methods” has dev artifacts; consider removing or simplifying (Shopify is the payment source-of-truth) | 3 | 3 | 2 | 2 | 0 | UNTRIAGED | [issue-189](ui-issues/issue-189.md) |
 | 190 | Client | WhatsApp + email support links need to be verified/simplified | 3 | 4 | 1 | 2 | 0 | UNTRIAGED | [issue-190](ui-issues/issue-190.md) |
 | 191 | Client | Brand story page copy needs update + CTA should link to “Learn more” blog post | 2 | 3 | 1 | 1 | 0 | DONE | [issue-191](done-issues/issue-191.md) |
-| 192 | Client | Landing “creators” section copy should be customer-focused + “Join creators” CTA should become “Learn more” (blog link) | 2 | 4 | 1 | 2 | 0 | UNTRIAGED | [issue-192](ui-issues/issue-192.md) |
+| 192 | Client | Landing “creators” section copy should be customer-focused + “Join creators” CTA should become “Learn more” (blog link) | 2 | 4 | 1 | 2 | 0 | IN_PROGRESS | [issue-192](ui-issues/issue-192.md) |
