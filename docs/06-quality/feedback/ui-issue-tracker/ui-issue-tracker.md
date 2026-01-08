@@ -86,7 +86,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 148 | Admin | Admin “Upload” relies on Cloudinary’s external widget script with no loading/progress UI (fragile + inconsistent asset pipeline) | 5 | UNTRIAGED | [issue-148](ui-issues/issue-148.md) |
 | 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 5 | UNTRIAGED | [issue-154](ui-issues/issue-154.md) |
 | 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 1 | UNTRIAGED | [issue-085](ui-issues/issue-085.md) |
-| 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 1 | UNTRIAGED | [issue-095](ui-issues/issue-095.md) |
+| 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 1 | DONE | [issue-095](done-issues/issue-095.md) |
 | 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
 | 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
@@ -201,7 +201,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 92 | Blog | Blog markdown renders internal links as plain `<a href>` (full reload + state loss in a SPA) | 2 | 2 | 3 | 2 | 5 | UNTRIAGED | [issue-092](ui-issues/issue-092.md) |
 | 93 | Client | Search results show hard-coded prices that don’t match actual product pricing | 4 | 4 | 3 | 2 | 29 | DONE | [issue-093](done-issues/issue-093.md) |
 | 94 | Client | Cart stepper controls and promo input lack accessible labels (hard for screen readers) | 3 | 5 | 3 | 2 | 27 | DONE | [issue-094](done-issues/issue-094.md) |
-| 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 2 | 2 | 3 | 1 | 1 | UNTRIAGED | [issue-095](ui-issues/issue-095.md) |
+| 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 2 | 2 | 1 | 3 | 11 | DONE | [issue-095](done-issues/issue-095.md) |
 | 96 | Client | PDP “Hero proof strip” trust claims are hard-coded (including “Source: TikTok Shop + verified store reviews”) | 4 | 4 | 3 | 2 | 29 | DONE | [issue-096](done-issues/issue-096.md) |
 | 97 | Client | PDP structured data hard-codes review rating/count (can contradict what the UI displays) | 4 | 5 | 3 | 2 | 37 | DONE | [issue-097](done-issues/issue-097.md) |
 | 98 | Admin | Shared `Button` component has no focus-visible styling (keyboard users lose their place) | 3 | 2 | 2 | 3 | 16 | DONE | [issue-098](done-issues/issue-098.md) |
