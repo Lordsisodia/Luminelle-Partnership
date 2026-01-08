@@ -30,7 +30,7 @@ These are the current top *open* items by `Priority` (excludes `DONE` / `DEFERRE
 | Rank | ID | Area | Title | I | R | E | C | P | Status |
 |----:|---:|:-----|:------|:-:|:-:|:-:|:-:|--:|:------|
 | 1 | 18 | Client | Discounts / promo codes / rewards UI is present but the underlying logic is stubbed | 2 | 3 | 3 | 2 | 9 | UNTRIAGED |
-| 2 | 30 | Client | Discount messaging is shown widely, but there’s no working discount system in the app | 2 | 3 | 3 | 2 | 9 | UNTRIAGED |
+| 2 | 30 | Client | Discount messaging is shown widely, but there’s no working discount system in the app | 2 | 3 | 3 | 2 | 9 | VALIDATING |
 | 3 | 37 | Platform | Shopify Storefront client is stubbed (dynamic content never loads) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED |
 | 4 | 50 | Client | Two different “spin wheel” experiences exist (inconsistent UX + obvious duplication) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED |
 | 5 | 120 | Client | Two different color token systems are used in global UI (`brand-*` vs `semantic-legacy-brand-*`) (design consistency drift risk) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED |
@@ -58,7 +58,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | ID | Area | Title | Priority | Status | Worklog |
 |---:|:-----|:------|:--------:|:-------|:-------|
 | 18 | Client | Discounts / promo codes / rewards UI is present but the underlying logic is stubbed | 9 | UNTRIAGED | [issue-018](ui-issues/issue-018.md) |
-| 30 | Client | Discount messaging is shown widely, but there’s no working discount system in the app | 9 | UNTRIAGED | [issue-030](ui-issues/issue-030.md) |
+| 30 | Client | Discount messaging is shown widely, but there’s no working discount system in the app | 9 | VALIDATING | [issue-030](ui-issues/issue-030.md) |
 | 37 | Platform | Shopify Storefront client is stubbed (dynamic content never loads) | 8 | UNTRIAGED | [issue-037](ui-issues/issue-037.md) |
 | 50 | Client | Two different “spin wheel” experiences exist (inconsistent UX + obvious duplication) | 8 | UNTRIAGED | [issue-050](ui-issues/issue-050.md) |
 | 120 | Client | Two different color token systems are used in global UI (`brand-*` vs `semantic-legacy-brand-*`) (design consistency drift risk) | 8 | UNTRIAGED | [issue-120](ui-issues/issue-120.md) |
@@ -136,7 +136,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 27 | Client | Policy/support pages link to broken routes | 3 | 3 | 3 | 2 | 15 | DONE | [issue-027](done-issues/issue-027.md) |
 | 28 | Platform | Auth pages likely render “double layout” (squashed/overflowing sign-in UI) | 4 | 3 | 3 | 3 | 33 | NOT_AN_ISSUE | [issue-028](ui-issues/issue-028.md) |
 | 29 | Platform | “Sign out” UI exists but sign-out behavior is a no-op | 2 | 3 | 3 | 3 | 15 | NOT_AN_ISSUE | [issue-029](ui-issues/issue-029.md) |
-| 30 | Client | Discount messaging is shown widely, but there’s no working discount system in the app | 2 | 3 | 3 | 2 | 9 | UNTRIAGED | [issue-030](ui-issues/issue-030.md) |
+| 30 | Client | Discount messaging is shown widely, but there’s no working discount system in the app | 2 | 3 | 3 | 2 | 9 | VALIDATING | [issue-030](ui-issues/issue-030.md) |
 | 31 | Client | PDP “video” media likely renders at 0 height (looks broken when you tap the video thumbnail) | 2 | 4 | 3 | 1 | 5 | UNTRIAGED | [issue-031](ui-issues/issue-031.md) |
 | 32 | Client | Cart access is hidden behind the hamburger menu (no cart icon / qty badge in the header) | 2 | 5 | 3 | 2 | 17 | DONE | [issue-032](done-issues/issue-032.md) |
 | 33 | Client | Signed-in drawer profile uses a random “placekitten” avatar fallback | 2 | 5 | 3 | 2 | 17 | DONE | [issue-033](done-issues/issue-033.md) |

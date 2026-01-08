@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Lock } from 'lucide-react'
+import { commerce } from '@platform/commerce'
 
 const DISCOUNT_CODE = 'LUMELLE10'
 const EMAIL_CAPTURE_KEY = 'lumelle_email_capture'
 
 export const EmailCaptureBand = () => {
+  const discountsEnabled = commerce.checkout.getCapabilities().supportsDiscounts
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState<string | null>(null)
@@ -67,9 +69,13 @@ export const EmailCaptureBand = () => {
   return (
     <section className="bg-semantic-legacy-brand-blush/20 py-12">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-4 text-center md:px-6">
-        <h3 className="font-heading text-2xl font-bold text-semantic-text-primary">Get 10% off your first order</h3>
+        <h3 className="font-heading text-2xl font-bold text-semantic-text-primary">
+          {discountsEnabled ? 'Get 10% off your first order' : 'Get updates for launch'}
+        </h3>
         <p className="text-sm font-serif text-semantic-text-primary/80">
-          Join for exclusive creator tutorials, drops, and early access.
+          {discountsEnabled
+            ? 'Join for exclusive creator tutorials, drops, and early access.'
+            : 'Join for creator tutorials, drops, and early access.'}
         </p>
 
         {status === 'success' ? (
@@ -77,16 +83,20 @@ export const EmailCaptureBand = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Welcome</p>
             <p className="mt-2 text-base font-semibold text-semantic-text-primary">You’re in.</p>
             {message ? <p className="mt-1 text-sm text-semantic-text-primary/70">{message}</p> : null}
-            <p className="mt-2 text-sm text-semantic-text-primary/70">
-              Use code <span className="font-semibold">{DISCOUNT_CODE}</span> at checkout.
-            </p>
-            <button
-              type="button"
-              onClick={() => void handleCopy()}
-              className="mt-4 inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5"
-            >
-              {copied ? 'Copied' : 'Copy code'}
-            </button>
+            {discountsEnabled ? (
+              <>
+                <p className="mt-2 text-sm text-semantic-text-primary/70">
+                  Use code <span className="font-semibold">{DISCOUNT_CODE}</span> at checkout.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => void handleCopy()}
+                  className="mt-4 inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5"
+                >
+                  {copied ? 'Copied' : 'Copy code'}
+                </button>
+              </>
+            ) : null}
           </div>
         ) : (
           <form
