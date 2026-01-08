@@ -1,0 +1,75 @@
+name: AI Auto-merge to dev
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
+    branches: [dev]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ai-automerge-dev-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  automerge:
+    name: Enable auto-merge (squash) when eligible
+    runs-on: ubuntu-latest
+    # Skip forked PRs; GITHUB_TOKEN won't have write perms and we don't want surprise merges.
+    if: ${{ github.event.pull_request.head.repo.fork == false && github.event.pull_request.draft == false }}
+    steps:
+      - name: Enable auto-merge for vk/* or labeled PRs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+
+            // Gate: only for PRs targeting dev.
+            if (pr.base.ref !== "dev") {
+              core.info(`Base is ${pr.base.ref}; skipping.`);
+              return;
+            }
+
+            // Gate: only allow auto-merge for known AI branches or explicit opt-in label.
+            const labels = new Set((pr.labels || []).map(l => l.name));
+            const head = pr.head.ref || "";
+            const isVkBranch = head.startsWith("vk/");
+            const hasAutomergeLabel = labels.has("automerge") || labels.has("ai-automerge");
+
+            if (!isVkBranch && !hasAutomergeLabel) {
+              core.info(`PR head '${head}' is not vk/* and has no automerge label; skipping.`);
+              return;
+            }
+
+            // If it's a vk/* PR, ensure it gets an explicit label for visibility.
+            if (isVkBranch && !hasAutomergeLabel) {
+              core.info(`Adding 'automerge' label to vk/* PR.`);
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: ["automerge"],
+              });
+            }
+
+            // Enable auto-merge (squash). GitHub will wait for required checks to pass.
+            core.info(`Enabling auto-merge (SQUASH) for PR #${pr.number}.`);
+
+            const mutation = `
+              mutation EnableAutoMerge($pullRequestId: ID!) {
+                enablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId, mergeMethod: SQUASH }) {
+                  pullRequest { number autoMergeRequest { enabledAt } }
+                }
+              }
+            `;
+
+            try {
+              await github.graphql(mutation, { pullRequestId: pr.node_id });
+            } catch (err) {
+              // Common reasons: auto-merge disabled at repo level, PR not mergeable yet, etc.
+              core.warning(`Could not enable auto-merge: ${err.message}`);
+            }
+
