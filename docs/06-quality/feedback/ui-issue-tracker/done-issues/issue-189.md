@@ -15,6 +15,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 - Owner: `AI`
 - Created: `2026-01-07`
 - Closed: `2026-01-08`
+- PR: `#14`
 
 ---
 
