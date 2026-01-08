@@ -20,6 +20,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 ## Worklog
 
 - `2026-01-09 01:16 (+07)` Started implementation pass: set tracker/worklog → `IN_PROGRESS`, then reproduce overflow and apply minimal CSS/layout fix with incremental commits.
+- `2026-01-09 01:20 (+07)` Implemented minimal guardrails: align `/account` container padding with header/footer (`px-5`) and prevent long email/support strings from forcing page width (`break-words`/`break-all`).
 
 ---
 

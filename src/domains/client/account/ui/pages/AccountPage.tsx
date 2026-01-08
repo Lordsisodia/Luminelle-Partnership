@@ -28,7 +28,7 @@ const AccountPage = () => {
           <meta name="robots" content="noindex" />
         </Helmet>
         <section className="bg-white">
-          <div className="mx-auto max-w-4xl px-4 py-14 md:px-6">
+          <div className="mx-auto max-w-4xl px-5 py-14 md:px-6">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Account</p>
 
           <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -36,12 +36,12 @@ const AccountPage = () => {
               <h1 className="text-3xl font-semibold tracking-tight text-semantic-text-primary">
                 {signedIn ? `Hi ${displayName}` : 'Manage your account'}
               </h1>
-              <p className="mt-2 text-sm text-semantic-text-primary/70">
+              <p className="mt-2 break-words text-sm text-semantic-text-primary/70">
                 {isLoading ? (
                   'Loading your account…'
                 ) : signedIn ? (
                   <>
-                    Signed in as <span className="font-semibold">{user?.email ?? 'your account'}</span>.
+                    Signed in as <span className="break-all font-semibold">{user?.email ?? 'your account'}</span>.
                   </>
                 ) : (
                   <>
