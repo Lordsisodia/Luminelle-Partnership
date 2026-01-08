@@ -156,7 +156,7 @@ const ReviewCardContent = ({
           />
         ) : (
           <div
-          className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-semantic-legacy-brand-blush/55"
+            className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-semantic-legacy-brand-blush/55"
             aria-hidden="true"
           >
             <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-semantic-text-primary/80">
@@ -215,9 +215,9 @@ const Reviews2DCarousel = memo(
       }, prefersReducedMotion ? 0 : 450)
     }
 
-	    useEffect(() => {
-	      scrollToIndex(activeIndex)
-	    }, [activeIndex, itemWidth, cards.length])
+    useEffect(() => {
+      scrollToIndex(activeIndex)
+    }, [activeIndex, itemWidth, cards.length])
 
     useEffect(() => {
       const el = listRef.current
@@ -277,6 +277,15 @@ const Reviews2DCarousel = memo(
               </div>
             ))}
           </div>
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-semantic-bg-subtle via-semantic-bg-subtle/60 to-transparent md:block"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-gradient-to-l from-semantic-bg-subtle via-semantic-bg-subtle/60 to-transparent md:block"
+          />
 
           <div className="pointer-events-none absolute inset-y-0 left-0 hidden items-center md:flex">
             <button

@@ -61,7 +61,7 @@ const ShopLandingPage = () => {
           </section>
         ) : null}
         <section id="reviews">
-          <ReviewsAutoCarousel reviews={homeConfig.reviews} />
+          <ReviewsAutoCarousel reviews={homeConfig.reviews} summary={homeConfig.socialProof} />
         </section>
         <FeaturedTikTok tiktoks={DEFAULT_CAP_VIDEOS} />
         <BundleCards />

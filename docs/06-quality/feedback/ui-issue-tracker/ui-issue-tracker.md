@@ -93,7 +93,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
 | 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
 | 186 | Client | “Trusted by 10k users” avatars repeat (needs more authentic social proof) | 0 | UNTRIAGED | [issue-186](ui-issues/issue-186.md) |
-| 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 0 | UNTRIAGED | [issue-187](ui-issues/issue-187.md) |
+| 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 0 | IN_PROGRESS | [issue-187](ui-issues/issue-187.md) |
 | 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 0 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
 | 189 | Client | Account “Payment methods” has dev artifacts; consider removing or simplifying (Shopify is the payment source-of-truth) | 0 | UNTRIAGED | [issue-189](ui-issues/issue-189.md) |
 | 190 | Client | WhatsApp + email support links need to be verified/simplified | 0 | UNTRIAGED | [issue-190](ui-issues/issue-190.md) |
@@ -293,7 +293,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 5 | 5 | 2 | 3 | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
 | 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 4 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
 | 186 | Client | “Trusted by 10k users” avatars repeat (needs more authentic social proof) | 2 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-186](ui-issues/issue-186.md) |
-| 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 3 | 5 | 3 | 2 | 0 | UNTRIAGED | [issue-187](ui-issues/issue-187.md) |
+| 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 3 | 5 | 3 | 2 | 0 | IN_PROGRESS | [issue-187](ui-issues/issue-187.md) |
 | 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 3 | 4 | 3 | 2 | 0 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
 | 189 | Client | Account “Payment methods” has dev artifacts; consider removing or simplifying (Shopify is the payment source-of-truth) | 3 | 3 | 2 | 2 | 0 | UNTRIAGED | [issue-189](ui-issues/issue-189.md) |
 | 190 | Client | WhatsApp + email support links need to be verified/simplified | 3 | 4 | 1 | 2 | 0 | UNTRIAGED | [issue-190](ui-issues/issue-190.md) |
