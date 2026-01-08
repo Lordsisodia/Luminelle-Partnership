@@ -18,7 +18,8 @@ jobs:
     name: Post automated AI review
     runs-on: ubuntu-latest
     # Secrets are not available to forked PRs; skip to avoid confusing failures.
-    if: ${{ github.event.pull_request.draft == false && github.event.pull_request.head.repo.fork == false }}
+    # Also skip if OPENAI_API_KEY isn't configured, so this job never blocks merges.
+    if: ${{ github.event.pull_request.draft == false && github.event.pull_request.head.repo.fork == false && secrets.OPENAI_API_KEY != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,4 +41,3 @@ jobs:
           OPENAI_REVIEW_MAX_OUTPUT_TOKENS: ${{ vars.OPENAI_REVIEW_MAX_OUTPUT_TOKENS }}
           OPENAI_REVIEW_TEMPERATURE: ${{ vars.OPENAI_REVIEW_TEMPERATURE }}
         run: node scripts/ai-review/review-pr.mjs
-
