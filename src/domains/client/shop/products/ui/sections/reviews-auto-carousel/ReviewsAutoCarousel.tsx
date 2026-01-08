@@ -36,8 +36,8 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId, showReviewerP
       className="relative overflow-hidden bg-semantic-bg-subtle py-12 md:py-14"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-28 left-1/2 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-brand-peach/25 blur-3xl" />
-        <div className="absolute -bottom-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-brand-blush/30 blur-3xl" />
+        <div className="absolute -top-28 left-1/2 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-semantic-accent-cta/25 blur-3xl" />
+        <div className="absolute -bottom-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-semantic-legacy-brand-blush/30 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-5xl px-4 md:px-6">

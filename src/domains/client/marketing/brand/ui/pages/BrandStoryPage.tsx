@@ -76,7 +76,7 @@ const BrandStoryPage = () => {
       <MarketingLayout navItems={[]} subtitle="Brand">
         <div className="bg-white text-semantic-text-primary">
         {/* Hero */}
-        <section className="bg-gradient-to-b from-brand-porcelain via-white to-brand-porcelain">
+        <section className="bg-gradient-to-b from-semantic-bg-subtle via-white to-semantic-bg-subtle">
           <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-14 md:flex-row md:items-center md:gap-12 md:px-6">
             <div className="space-y-4 md:w-1/2">
               <p className="inline-flex items-center rounded-full bg-semantic-accent-cta/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary">
@@ -254,7 +254,7 @@ const BrandStoryPage = () => {
 
         {/* Final CTA */}
         <section className="py-16">
-          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-semantic-accent-cta/50 bg-gradient-to-r from-brand-porcelain via-white to-brand-peach/25 p-8 shadow-[0_22px_60px_rgba(0,0,0,0.08)]">
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-semantic-accent-cta/50 bg-gradient-to-r from-semantic-bg-subtle via-white to-semantic-accent-cta/25 p-8 shadow-[0_22px_60px_rgba(0,0,0,0.08)]">
             <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
               <div className="space-y-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.26em] text-semantic-text-primary/70">Ready when you are</p>

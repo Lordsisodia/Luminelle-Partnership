@@ -23,10 +23,10 @@ type RowProps = { title: string; to: string; icon: any; badge?: string }
 const Row = ({ title, to, icon: Icon, badge }: RowProps) => (
   <Link
     to={to}
-    className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white transition bg-brand-cocoa/85 hover:bg-brand-cocoa/75"
+    className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white transition bg-semantic-legacy-brand-cocoa/85 hover:bg-semantic-legacy-brand-cocoa/75"
   >
     <span className="flex items-center gap-3">
-      <Icon className="h-4 w-4 text-brand-blush" />
+      <Icon className="h-4 w-4 text-semantic-legacy-brand-blush" />
       <span>{title}</span>
     </span>
     <span className="flex items-center gap-2 text-xs text-white/70">
@@ -46,9 +46,9 @@ export default function SettingsHubPage() {
           title="Basics & Account"
           subtitle="General preferences, identity and devices"
           showChevron={false}
-          className="border-white/10 bg-brand-cocoa/90 backdrop-blur-sm shadow-soft text-white"
+          className="border-white/10 bg-semantic-legacy-brand-cocoa/90 backdrop-blur-sm shadow-soft text-white"
         >
-          <div className="divide-y divide-white/12 rounded-2xl border border-white/12 bg-brand-cocoa/85 p-1">
+          <div className="divide-y divide-white/12 rounded-2xl border border-white/12 bg-semantic-legacy-brand-cocoa/85 p-1">
             {basics.map((item) => (
               <Row key={item.id} {...item} />
             ))}
@@ -61,9 +61,9 @@ export default function SettingsHubPage() {
           title="Safety & Compliance"
           subtitle="Security, privacy and legal policies"
           showChevron={false}
-          className="border-white/10 bg-brand-cocoa/90 backdrop-blur-sm shadow-soft text-white"
+          className="border-white/10 bg-semantic-legacy-brand-cocoa/90 backdrop-blur-sm shadow-soft text-white"
         >
-          <div className="divide-y divide-white/12 rounded-2xl border border-white/12 bg-brand-cocoa/85 p-1">
+          <div className="divide-y divide-white/12 rounded-2xl border border-white/12 bg-semantic-legacy-brand-cocoa/85 p-1">
             {safety.map((item) => (
               <Row key={item.id} {...item} />
             ))}
@@ -76,9 +76,9 @@ export default function SettingsHubPage() {
           title="Integrations"
           subtitle="Connect external tools and data sources"
           showChevron={false}
-          className="border-white/10 bg-brand-cocoa/90 backdrop-blur-sm shadow-soft text-white"
+          className="border-white/10 bg-semantic-legacy-brand-cocoa/90 backdrop-blur-sm shadow-soft text-white"
         >
-          <div className="divide-y divide-white/12 rounded-2xl border border-white/12 bg-brand-cocoa/85 p-1">
+          <div className="divide-y divide-white/12 rounded-2xl border border-white/12 bg-semantic-legacy-brand-cocoa/85 p-1">
             {integrations.map((item) => (
               <Row key={item.id} {...item} />
             ))}

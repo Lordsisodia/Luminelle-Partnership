@@ -88,13 +88,13 @@ const getInitials = (name: string) =>
 const ReviewCardOrnaments = () => (
   <>
     <div className="pointer-events-none absolute inset-0 rounded-[15px] bg-[radial-gradient(700px_circle_at_20%_0%,rgba(253,212,220,0.55),transparent_55%)]" />
-    <div className="pointer-events-none absolute inset-0 rounded-[15px] ring-1 ring-inset ring-brand-blush/55" />
-    <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-peach/45 to-transparent" />
+    <div className="pointer-events-none absolute inset-0 rounded-[15px] ring-1 ring-inset ring-semantic-legacy-brand-blush/55" />
+    <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-semantic-accent-cta/45 to-transparent" />
 
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-brand-peach/55"
+      className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-semantic-accent-cta/55"
       fill="none"
     >
       <path
@@ -109,7 +109,7 @@ const ReviewCardOrnaments = () => (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="pointer-events-none absolute right-3 top-3 h-6 w-6 text-brand-peach/55"
+      className="pointer-events-none absolute right-3 top-3 h-6 w-6 text-semantic-accent-cta/55"
       fill="none"
     >
       <path
@@ -130,7 +130,7 @@ const ReviewCardContent = ({
   showReviewerPhotos: boolean
 }) => {
   return (
-    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-brand-blush/30 px-4 py-4 text-center md:px-5 md:py-5">
+    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-semantic-legacy-brand-blush/30 px-4 py-4 text-center md:px-5 md:py-5">
       <ReviewCardOrnaments />
       <div className="relative flex justify-center">
         <StarRating value={review.stars ?? 5} size={18} />
@@ -156,7 +156,7 @@ const ReviewCardContent = ({
           />
         ) : (
           <div
-            className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-brand-blush/55"
+          className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-semantic-legacy-brand-blush/55"
             aria-hidden="true"
           >
             <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-semantic-text-primary/80">
@@ -269,7 +269,7 @@ const Reviews2DCarousel = memo(
                 className="shrink-0 snap-start"
                 style={{ width: `${itemWidth}px` }}
               >
-                <div className="rounded-2xl bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/60 p-[1px] shadow-[0_18px_45px_rgba(251,199,178,0.18)]">
+                <div className="rounded-2xl bg-gradient-to-br from-semantic-legacy-brand-blush/70 via-white to-semantic-accent-cta/60 p-[1px] shadow-[0_18px_45px_rgba(251,199,178,0.18)]">
                   <div style={{ height: `${itemHeight}px` }}>
                     <ReviewCardContent review={card} showReviewerPhotos={showReviewerPhotos} />
                   </div>
