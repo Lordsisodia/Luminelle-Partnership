@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `NEEDS_DECISION`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `3`
@@ -42,3 +42,8 @@ The account “Payment methods” section contains development/debug UX, but pay
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-189-research.md`
 
+---
+
+## Worklog
+
+- 2026-01-08 18:19 UTC — Triage batch 3: set status to `NEEDS_DECISION` (product decision: remove vs replace vs deep-link; needs clarity on Shopify account source-of-truth).

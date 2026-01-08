@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `PLANNED`
 - Area: `Client`
 - Impact (1–5): `2`
 - Reach (1–5): `4`
@@ -81,5 +81,10 @@ Update during research with confirmed evidence.
   - `src/domains/client/marketing/ui/sections/*`
 - Content data:
   - `src/content/landing.ts`
-  - `src/content/blog/*`
+- `src/content/blog/*`
 
+---
+
+## Worklog
+
+- 2026-01-08 18:19 UTC — Triage batch 3: set status to `PLANNED` (copy + CTA-only change; likely reuse the `/blog/about-lumelle` pattern from issue 191).

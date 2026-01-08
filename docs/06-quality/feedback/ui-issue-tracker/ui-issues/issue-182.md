@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `PLANNED`
 - Area: `Client`
 - Impact (1–5): `5`
 - Reach (1–5): `5`
@@ -89,3 +89,8 @@ This blocks purchase completion and looks broken to users.
 - If checkout cannot be started, CTA clearly explains why (no infinite “Preparing…”).
 - Checkout navigation is reliable on mobile and desktop (no blocked taps/clicks).
 
+---
+
+## Worklog
+
+- 2026-01-08 18:19 UTC — Triage batch 3: set status to `PLANNED` (likely blocked by platform storefront failures in issue 184, but the UI should not hang indefinitely even when checkout can’t be created).

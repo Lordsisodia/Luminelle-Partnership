@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `PLANNED`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `4`
@@ -45,3 +45,8 @@ Client wants support links to be simple and correct:
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-190-research.md`
 
+---
+
+## Worklog
+
+- 2026-01-08 18:19 UTC — Triage batch 3: set status to `PLANNED` (support link sources already exist; consolidate to a single WhatsApp/email source-of-truth and verify defaults/env vars).

@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `NEEDS_DECISION`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `4`
@@ -53,3 +53,8 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-188-research.md`
 
+---
+
+## Worklog
+
+- 2026-01-08 18:19 UTC — Triage batch 3: set status to `NEEDS_DECISION` (spec conflict: slice labels vs “always 20%” popup; also depends on a decided discount mechanism).
