@@ -35,8 +35,9 @@ Loop logic (do this once per run)
 - Ensure work is running:
   - If `inprogress` count < MAX_INPROGRESS, pick highest-priority `todo` tasks and start workspace sessions via MCP on repo `lumelle` base branch `dev`.
 - Ensure statuses are accurate:
-  - If a task is `inreview` but no PR exists, move it back to `todo` with a note.
-  - Only move to `done` when BOTH merged-to-dev AND Black Box is DONE.
+  - NEVER move a task to `inreview` unless there is an open PR into `dev` that clearly corresponds to the task (branch/title includes `UI-###` or the exact task title).
+  - If a task is `inreview` but no matching PR exists, immediately move it back to `todo` with a note.
+  - NEVER move a task to `done` unless BOTH merged-to-dev AND Black Box is DONE.
 
 Output
 - A short, scannable status summary (counts, which tasks started this run, any newly queued tasks).
