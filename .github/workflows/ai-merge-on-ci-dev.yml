@@ -28,8 +28,23 @@ jobs:
             const repo = context.repo.repo;
             const run = context.payload.workflow_run;
 
-            // workflow_run payload includes PRs related to this run (if any).
             const prs = run.pull_requests || [];
+
+            // If CI ran on a vk/* branch push, GitHub may not attach pull_requests in the payload.
+            // In that case, look up an open PR from that head branch into dev.
+            if (!prs.length && typeof run.head_branch === "string" && run.head_branch.startsWith("vk/")) {
+              core.info(`No PRs in workflow_run payload; searching PRs for head branch '${run.head_branch}'`);
+              const found = await github.rest.pulls.list({
+                owner,
+                repo,
+                state: "open",
+                base: "dev",
+                head: `${owner}:${run.head_branch}`,
+                per_page: 20,
+              });
+              prs.push(...found.data.map((p) => ({ number: p.number })));
+            }
+
             if (!prs.length) {
               core.info("No pull requests associated with this CI run; nothing to do.");
               return;
