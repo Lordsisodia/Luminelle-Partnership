@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `IN_PROGRESS`
+- Status: `VALIDATING`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `5`
@@ -21,6 +21,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 - `2026-01-09 01:16 (+07)` Started implementation pass: set tracker/worklog → `IN_PROGRESS`, then reproduce overflow and apply minimal CSS/layout fix with incremental commits.
 - `2026-01-09 01:20 (+07)` Implemented minimal guardrails: align `/account` container padding with header/footer (`px-5`) and prevent long email/support strings from forcing page width (`break-words`/`break-all`).
+- `2026-01-09 01:22 (+07)` Ran local checks: `npm run typecheck` and `npm run build` pass. `npm run lint` currently fails in multiple unrelated files (pre-existing repo lint debt), so cannot use lint as a gating signal for this specific fix.
 
 ---
 
