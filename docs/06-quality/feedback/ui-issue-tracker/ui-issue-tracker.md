@@ -91,7 +91,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
-| 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
+| 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 38 | DONE | [issue-185](done-issues/issue-185.md) |
 | 186 | Client | “Trusted by 10k users” avatars repeat (needs more authentic social proof) | 0 | UNTRIAGED | [issue-186](ui-issues/issue-186.md) |
 | 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 0 | UNTRIAGED | [issue-187](ui-issues/issue-187.md) |
 | 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 0 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
@@ -291,7 +291,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 5 | 5 | 3 | 2 | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
 | 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 3 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
 | 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 5 | 5 | 2 | 3 | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
-| 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 4 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
+| 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 4 | 5 | 2 | 2 | 38 | DONE | [issue-185](done-issues/issue-185.md) |
 | 186 | Client | “Trusted by 10k users” avatars repeat (needs more authentic social proof) | 2 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-186](ui-issues/issue-186.md) |
 | 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 3 | 5 | 3 | 2 | 0 | UNTRIAGED | [issue-187](ui-issues/issue-187.md) |
 | 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 3 | 4 | 3 | 2 | 0 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
