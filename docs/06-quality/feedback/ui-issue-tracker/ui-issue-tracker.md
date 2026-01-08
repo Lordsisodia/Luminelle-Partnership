@@ -79,7 +79,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 66 | Admin | Admin blog editor inputs are not wired to the “draft” state and preview is not a live draft | 5 | UNTRIAGED | [issue-066](ui-issues/issue-066.md) |
 | 67 | Blog | Blog “Related reads” carousel hides scrollbars and provides no accessible controls | 5 | UNTRIAGED | [issue-067](ui-issues/issue-067.md) |
 | 75 | Admin | Admin product cards say “Updated” but don’t show an updated timestamp (low utility + confusion) | 5 | UNTRIAGED | [issue-075](ui-issues/issue-075.md) |
-| 92 | Blog | Blog markdown renders internal links as plain `<a href>` (full reload + state loss in a SPA) | 5 | UNTRIAGED | [issue-092](ui-issues/issue-092.md) |
+| 92 | Blog | Blog markdown renders internal links as plain `<a href>` (full reload + state loss in a SPA) | 6 | DONE | [issue-092](done-issues/issue-092.md) |
 | 145 | Admin | Admin Products list silently hides any CMS products not present in `product-config` (admin ≠ source of truth) | 5 | UNTRIAGED | [issue-145](ui-issues/issue-145.md) |
 | 146 | Admin | Admin product live preview is only available on XL screens (most editors won’t see a preview) | 5 | UNTRIAGED | [issue-146](ui-issues/issue-146.md) |
 | 147 | Admin | Admin product gallery selection can’t truly be closed (state forces `editingMediaIdx` back to 0) | 5 | UNTRIAGED | [issue-147](ui-issues/issue-147.md) |
@@ -198,7 +198,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 89 | Client | Non-standard Tailwind utilities are used in production UI (silent styling failures) | 2 | 4 | 3 | 2 | 13 | DONE | [issue-089](done-issues/issue-089.md) |
 | 90 | Client | Footer “Stay in the loop” CTA is a `mailto:` link (not a real signup; breaks expectation on many devices) | 2 | 4 | 3 | 2 | 13 | DONE | [issue-090](done-issues/issue-090.md) |
 | 91 | Blog | Blog post contains internal links to slugs that don’t exist (dead navigation inside the article) | 2 | 3 | 1 | 3 | 17 | DONE | [issue-091](done-issues/issue-091.md) |
-| 92 | Blog | Blog markdown renders internal links as plain `<a href>` (full reload + state loss in a SPA) | 2 | 2 | 3 | 2 | 5 | UNTRIAGED | [issue-092](ui-issues/issue-092.md) |
+| 92 | Blog | Blog markdown renders internal links as plain `<a href>` (full reload + state loss in a SPA) | 2 | 2 | 2 | 2 | 6 | DONE | [issue-092](done-issues/issue-092.md) |
 | 93 | Client | Search results show hard-coded prices that don’t match actual product pricing | 4 | 4 | 3 | 2 | 29 | DONE | [issue-093](done-issues/issue-093.md) |
 | 94 | Client | Cart stepper controls and promo input lack accessible labels (hard for screen readers) | 3 | 5 | 3 | 2 | 27 | DONE | [issue-094](done-issues/issue-094.md) |
 | 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 2 | 2 | 3 | 1 | 1 | UNTRIAGED | [issue-095](ui-issues/issue-095.md) |

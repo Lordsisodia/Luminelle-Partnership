@@ -10,12 +10,94 @@ import { Seo } from '@/components/Seo'
 import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
 import { SUPPORT_EMAIL } from '@/config/constants'
 import { useCallback, useState, useEffect, useRef } from 'react'
+import type { ComponentPropsWithoutRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Post' },
   { id: 'faq', label: 'FAQ' },
 ]
+
+type MarkdownAnchorProps = ComponentPropsWithoutRef<'a'> & {
+  href?: string
+}
+
+const isExternalHref = (href: string) => {
+  const trimmed = href.trim()
+  return /^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(trimmed) || /^[a-z][a-z0-9+.-]*:/i.test(trimmed)
+}
+
+const hasFileExtension = (href: string) => {
+  // Avoid treating direct static asset/doc links as SPA routes (router would 404).
+  // Examples: `/docs/foo.md`, `/files/terms.pdf`, `/images/x.png`
+  return /\.[a-z0-9]{2,6}(?:[?#]|$)/i.test(href)
+}
+
+const isSpaInternalRouteHref = (href: string) => {
+  const trimmed = href.trim()
+  if (!trimmed) return false
+  if (trimmed.startsWith('#')) return false
+  if (isExternalHref(trimmed)) return false
+  if (hasFileExtension(trimmed)) return false
+  if (trimmed.startsWith('/docs/')) return false
+
+  if (trimmed.startsWith('/')) {
+    if (trimmed === '/') return true
+    const allowedPrefixes = [
+      '/welcome',
+      '/landing',
+      '/creators',
+      '/brand',
+      '/product/',
+      '/blog',
+      '/cart',
+      '/checkout',
+      '/order/',
+      '/search',
+      '/returns',
+      '/terms',
+      '/privacy',
+      '/brief',
+      '/rewards',
+      '/sign-in',
+      '/sign-up',
+      '/sso-callback',
+      '/account',
+      '/admin',
+    ]
+    return allowedPrefixes.some((p) => trimmed === p || trimmed.startsWith(p))
+  }
+
+  // Relative links in markdown (rare in our blog content) are still safe to route client-side.
+  if (trimmed.startsWith('.') || trimmed.startsWith('?')) return true
+
+  return false
+}
+
+const BlogMarkdownLink = ({ href = '', children, ...rest }: MarkdownAnchorProps) => {
+  if (isSpaInternalRouteHref(href)) {
+    // `react-router-dom`'s <Link> renders an <a> but intercepts clicks for SPA navigation.
+    return (
+      <RouterLink to={href} {...rest}>
+        {children}
+      </RouterLink>
+    )
+  }
+
+  return (
+    <a href={href} {...rest}>
+      {children}
+    </a>
+  )
+}
+
+const markdownOptions = {
+  overrides: {
+    a: {
+      component: BlogMarkdownLink,
+    },
+  },
+} as const
 
 const BLOG_SLUG_ALIASES: Record<string, string> = {
   'frizz-free-showers': 'frizz-free-showers-seo',
@@ -401,7 +483,7 @@ export const BlogPostPage = () => {
                             key={pIdx}
                             className="prose prose-lg text-semantic-text-primary prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-semantic-text-primary prose-li:marker:text-semantic-text-primary/60"
                           >
-                            <Markdown>{para}</Markdown>
+                            <Markdown options={markdownOptions}>{para}</Markdown>
                           </div>
                         ))}
                         {section.productCard ? (
@@ -476,7 +558,7 @@ export const BlogPostPage = () => {
 	              </div>
 	            ) : (
 	              <div className="prose prose-lg mt-8 text-semantic-text-primary prose-headings:font-heading prose-p:leading-relaxed prose-strong:text-semantic-text-primary">
-	                <Markdown>{post.body ?? ''}</Markdown>
+	                <Markdown options={markdownOptions}>{post.body ?? ''}</Markdown>
 	              </div>
 	            )}
 	          </div>
