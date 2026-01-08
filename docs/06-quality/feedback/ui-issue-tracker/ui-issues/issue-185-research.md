@@ -1,52 +1,77 @@
-# Issue 185 — Research Notes (Agent 1)
+# UI-185 research — Mobile horizontal scroll
 
-Owner: `AI`
-Date started: `2026-01-07`
+Date: 2026-01-08
 
-## 1) Repro summary
+## Summary
 
-- Environment:
-- Routes tested:
-- Device:
-- Expected:
-- Actual:
+UI-185 reports that the **entire site can be scrolled horizontally on mobile**.
 
-## 2) Evidence collected
+Local repro attempts (Playwright + Vite) did **not** show any document-level overflow on common routes.
+Because this issue can be caused by environment-specific factors (fonts, third-party injected elements, auth-driven UI, etc),
+the fix here is a **minimal, defensive global clamp** to prevent app-root horizontal panning even when a child overflows.
 
-- `document.documentElement.clientWidth`:
-- `document.documentElement.scrollWidth`:
-- Culprit element(s):
-  - Selector(s):
-  - Why it overflows:
+## What I checked
 
-## 3) Root cause hypothesis
+### Automated viewport checks (local dev)
 
-- Hypothesis A:
-- Hypothesis B:
-- Hypothesis C:
+Using Playwright with mobile viewports, verified on routes:
 
-## 4) Three solution options
+- `/`
+- `/product/lumelle-shower-cap`
+- `/account`
+- `/terms`
+- `/privacy`
+- `/creators`
+- `/blog`
 
-### Option 1 — Fix the specific overflowing element(s)
+and viewports:
 
-- What:
-- Pros:
-- Cons:
+- 320×700
+- 360×740
+- 390×844
 
-### Option 2 — Layout-system correction (consistent container padding + max-width)
+Result: `document.documentElement.scrollWidth === document.documentElement.clientWidth` (no overflow).
 
-- What:
-- Pros:
-- Cons:
+### Notes / constraints
 
-### Option 3 — Defensive global `overflow-x` containment (mitigation)
+- This repo renders a “Configuration required” screen when `VITE_CLERK_PUBLISHABLE_KEY` is missing (local dev).
+- Forcing a dummy `VITE_CLERK_PUBLISHABLE_KEY` causes ClerkProvider to error/blank the app, which limits realistic UI reproduction
+  for authenticated pages (menu/cart drawers, account, etc).
 
-- What:
-- Pros:
-- Cons:
+## Likely causes (production / device-specific)
 
-## 5) Recommendation
+Even when we can’t reproduce locally, site-wide horizontal panning is usually due to one (or more) of:
 
-- Suggested option:
-- Why:
+- An off-canvas element that extends past the viewport (e.g. fixed drawer/backdrop, translated elements).
+- A child that uses a width larger than the viewport (e.g. `100vw` + padding, long unbroken text, wide images).
+- An injected third-party element (cookie banner, analytics widget, etc).
+- iOS Safari allowing panning even when `html/body { overflow-x: hidden; }` (app-root overflow edge cases).
+
+## Fix options (tradeoffs)
+
+### Option A (implemented): defensive global clamp
+
+Add `overflow-x: hidden` on `#root` and use `overflow-x: clip` where supported for `html`, `body`, and `#root`.
+
+- ✅ Minimal and low-risk.
+- ✅ Keeps intentional inner carousels working (they still scroll inside their own containers).
+- ⚠️ Can “hide” a real overflow bug instead of fixing the exact culprit (but that’s acceptable as a first containment step).
+
+### Option B: find the exact offender and fix locally
+
+Use DevTools on a real device + production build and identify the widest element (common culprits: drawers, fixed CTAs, carousels).
+
+- ✅ Best long-term correctness.
+- ❌ Takes longer; requires production-like environment.
+
+### Option C: stricter global constraints
+
+Apply `max-width: 100%` / `min-width: 0` defaults to more elements / wrappers.
+
+- ✅ Can prevent some overflow classes of bugs.
+- ❌ Higher risk of layout regressions; not recommended without a clear offender.
+
+## Implemented change
+
+See: `src/index.css` — added root-level horizontal overflow clamping (`#root` + `overflow: clip` support).
 
