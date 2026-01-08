@@ -65,6 +65,23 @@ body {
   overflow-x: hidden;
 }
 
+/*
+ * Some mobile browsers can still allow “sideways panning” when the app root overflows,
+ * even if `html/body` are clipped. Keep the app root from creating its own horizontal
+ * scroll container.
+ */
+#root {
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html,
+  body,
+  #root {
+    overflow-x: clip;
+  }
+}
+
 /* Defensive: media should never force the page wider than the viewport. */
 img,
 video,

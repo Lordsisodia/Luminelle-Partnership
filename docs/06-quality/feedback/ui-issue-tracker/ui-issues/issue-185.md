@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `VALIDATING`
 - Area: `Client`
 - Impact (1–5): `4`
 - Reach (1–5): `5`
@@ -71,3 +71,9 @@ On mobile, the site can be scrolled horizontally across pages. This is a UX bug:
 - No page-level horizontal scroll.
 - Intentional inner horizontal carousels still work (if present), but do not cause page overflow.
 
+---
+
+## Worklog
+
+- 2026-01-08: Moved tracker to `IN_PROGRESS` and started reproducing + tracing the overflow source.
+- 2026-01-08: Added a defensive global overflow clamp (`overflow-x: clip` where supported) on `#root`/`html`/`body` and started validating on mobile routes.
