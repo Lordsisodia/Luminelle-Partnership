@@ -258,9 +258,9 @@ const BrandStoryPage = () => {
             <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
               <div className="space-y-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.26em] text-semantic-text-primary/70">Ready when you are</p>
-                <h3 className="font-heading text-3xl font-bold text-semantic-text-primary">See why creators won’t film without it</h3>
+                <h3 className="font-heading text-3xl font-bold text-semantic-text-primary">See why customers won’t shower without it</h3>
                 <p className="text-base text-semantic-text-primary/75">
-                  Steam-proof, satin-soft, and camera-ready out of the box. Ships in 48 hours with 30-day returns.
+                  Steam-proof, satin-soft, and style-ready out of the box. Ships in 48 hours with 30-day returns.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -270,10 +270,10 @@ const BrandStoryPage = () => {
                     Shop the cap
                   </Link>
                   <Link
-                    to="/creators"
+                    to={hero.ctaSecondary.href}
                     className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-cocoa px-5 py-2.5 text-sm font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-blush/30"
                   >
-                    Join creators
+                    Learn more
                   </Link>
                 </div>
               </div>

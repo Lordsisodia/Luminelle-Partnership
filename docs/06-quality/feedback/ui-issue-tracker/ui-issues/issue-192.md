@@ -88,3 +88,4 @@ Update during research with confirmed evidence.
 ## Worklog
 
 - 2026-01-08: Marked `IN_PROGRESS`; starting implementation (update landing copy + swap CTA to blog “Learn more”).
+- 2026-01-08: Updated `BrandStoryPage` final CTA to customer-focused copy and swapped “Join creators” → “Learn more” linking to `/blog/about-lumelle`.
