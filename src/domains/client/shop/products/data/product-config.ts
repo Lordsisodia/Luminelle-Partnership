@@ -1,5 +1,75 @@
 import type { ProductConfig } from './product-types'
 
+// TikTok embeds supplied for the Satin Overnight Curler (see docs/marketing/tiktok-heatless-curler-videos.md)
+export const DEFAULT_CURLER_VIDEOS = [
+  {
+    name: 'Lumelle UK',
+    handle: '@lumelleuk',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7576640339788746006?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@lumelleuk/video/7576640339788746006',
+  },
+  {
+    name: 'Louaira',
+    handle: '@louaira',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7581520947211980054?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@louaira/video/7581520947211980054',
+  },
+  {
+    name: 'Hannah H. Styless',
+    handle: '@hannahh.styless',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7582990745552948502?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@hannahh.styless/video/7582990745552948502',
+  },
+  {
+    name: 'Lumelle UK Tutorial',
+    handle: '@lumelleuk',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7581498853610769667?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@lumelleuk/video/7581498853610769667',
+  },
+]
+
+export const DEFAULT_CAP_VIDEOS = [
+  {
+    name: 'Shannon Mitchell',
+    handle: '@shannon_mitch',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7562893092957719830?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@shannon_mitch/video/7562893092957719830',
+  },
+  {
+    name: 'Rachel',
+    handle: '@rachelsummergreenie._',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7543668112630058262?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@rachelsummergreenie._/video/7543668112630058262',
+  },
+  {
+    name: 'Random Life UK',
+    handle: '@randomlifeuk',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7544353160429587734?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@randomlifeuk/video/7544353160429587734',
+  },
+  {
+    name: 'Winging Ma Life',
+    handle: '@wingingmalife',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7567328998158585110?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@wingingmalife/video/7567328998158585110',
+  },
+  {
+    name: 'By Latticia',
+    handle: '@bylatticia',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7566245669250387222?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@bylatticia/video/7566245669250387222',
+  },
+  {
+    name: 'Hannah Styles',
+    handle: '@hannahh.styless',
+    embedUrl: 'https://www.tiktok.com/embed/v2/7575168979711397142?embed_source=lite',
+    videoUrl: 'https://www.tiktok.com/@hannahh.styless/video/7575168979711397142',
+  },
+]
+
+const CURLER_VIDEO_SLOT = `video://${DEFAULT_CURLER_VIDEOS[0].embedUrl}`
+
+// Default fallback video (shower cap) used by other products; curler overrides below.
 export const DEFAULT_VIDEO_SLOT = 'video://https://www.tiktok.com/embed/v2/7567328998158585110'
 
 const CAP_GALLERY = [
@@ -83,7 +153,7 @@ const curlerGallery = [
   '/uploads/curler/6.webp',
   '/uploads/curler/7.webp',
   '/uploads/curler/8.webp',
-  DEFAULT_VIDEO_SLOT,
+  CURLER_VIDEO_SLOT,
 ]
 
 const essentialsCurler = [
@@ -196,14 +266,15 @@ const curlerConfig: ProductConfig = {
   hideDetailsAccordion: true,
   bottomCtaChips: ['Heatless curls', 'Satin bonnet included', '30-day returns'],
   gallery: curlerGallery,
-  videoSlot: DEFAULT_VIDEO_SLOT,
+  // Use curler-specific hero video (first client-provided TikTok)
+  videoSlot: CURLER_VIDEO_SLOT,
   essentials: essentialsCurler,
   reasons: reasonsCurler,
   qa: qaCurler,
   how: howCurler,
   care: careCurler,
   featureCallouts: {
-    mediaSrc: DEFAULT_VIDEO_SLOT,
+    mediaSrc: CURLER_VIDEO_SLOT,
     mediaAlt: 'Satin overnight curler demo',
     mediaLabel: 'Heatless overnight curls',
     mediaNote: 'Soft satin set that stays comfy all night',
@@ -220,6 +291,7 @@ const curlerConfig: ProductConfig = {
     description: "See How Long Creators' Curls Last and How Effortlessly Gorgeous They Look.",
     alignment: 'center',
   },
+  featuredTikToks: DEFAULT_CURLER_VIDEOS,
 }
 
 export const productConfigs: Record<string, ProductConfig> = {
@@ -231,7 +303,7 @@ export const productConfigs: Record<string, ProductConfig> = {
     defaultSubtitle: 'Keep hair dry. Keep styles flawless.',
     defaultPrice: 14.99,
     compareAtPrice: 19.99,
-    badge: 'Buy 2, save 10%',
+    badge: 'Buy 2, save 5%',
     bottomCtaChips: ['Waterproof satin', 'No-frizz seal', '30-day returns'],
     gallery: CAP_GALLERY,
     videoSlot: DEFAULT_VIDEO_SLOT,
@@ -258,6 +330,7 @@ export const productConfigs: Record<string, ProductConfig> = {
       description: 'See how creators keep their silk press perfect after every shower.',
       alignment: 'center',
     },
+    featuredTikToks: DEFAULT_CAP_VIDEOS,
     ratingValueOverride: 4.8,
     ratingCountLabelOverride: '100+',
   },

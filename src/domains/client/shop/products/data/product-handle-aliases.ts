@@ -8,6 +8,7 @@
 // should not require duplicating full config entries.
 export const CANONICAL_PRODUCT_HANDLES: Record<string, string> = {
   'satin-overnight-curler-set': 'satin-overnight-curler',
+  'satin-overnight-curler-sets': 'satin-overnight-curler',
 }
 
 export function canonicalizeProductHandle(handle: string): string {
@@ -15,4 +16,3 @@ export function canonicalizeProductHandle(handle: string): string {
   if (!trimmed) return ''
   return CANONICAL_PRODUCT_HANDLES[trimmed] ?? trimmed
 }
-

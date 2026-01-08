@@ -5,7 +5,7 @@ Generated from: `docs/06-quality/reviews/app-ui-review-2025-12-26.md`
 Workflow: `docs/06-quality/feedback/ui-issue-tracker/ai-loop.md`
 Prompt template: `docs/06-quality/feedback/ui-issue-tracker/templates/autonomous-agent-prompt.md`
 
-This is the execution tracker for the 180 UI issues discovered in the audit.
+This is the execution tracker for the 192 UI issues (including post-audit additions).
 
 ## Status legend
 
@@ -31,19 +31,22 @@ These are the current top *open* items by `Priority` (excludes `DONE` / `DEFERRE
 |----:|---:|:-----|:------|:-:|:-:|:-:|:-:|--:|:------|
 | 1 | 18 | Client | Discounts / promo codes / rewards UI is present but the underlying logic is stubbed | 2 | 3 | 3 | 2 | 9 | UNTRIAGED |
 | 2 | 30 | Client | Discount messaging is shown widely, but there’s no working discount system in the app | 2 | 3 | 3 | 2 | 9 | UNTRIAGED |
-| 3 | 37 | Platform | Shopify Storefront client is stubbed (dynamic content never loads) | 2 | 3 | 3 | 2 | 8 | UNTRIAGED |
-| 4 | 50 | Client | Two different “spin wheel” experiences exist (inconsistent UX + obvious duplication) | 2 | 3 | 3 | 2 | 8 | UNTRIAGED |
+| 3 | 37 | Platform | Shopify Storefront client is stubbed (dynamic content never loads) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED |
+| 4 | 50 | Client | Two different “spin wheel” experiences exist (inconsistent UX + obvious duplication) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED |
 | 5 | 120 | Client | Two different color token systems are used in global UI (`brand-*` vs `semantic-legacy-brand-*`) (design consistency drift risk) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED |
 | 6 | 130 | Client | Duplicate `StarRating` components exist (UI drift + bug fixes won’t apply consistently) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED |
 | 7 | 103 | Blog | Blog index “tag” chips look like filters but are inert, and pillar filtering is effectively unreachable | 2 | 2 | 2 | 2 | 6 | UNTRIAGED |
+| 8 | 20 | Admin | Admin on mobile: drawer can’t be opened (no “burger” button) | 2 | 2 | 3 | 2 | 5 | UNTRIAGED |
+| 9 | 31 | Client | PDP “video” media likely renders at 0 height (looks broken when you tap the video thumbnail) | 2 | 4 | 3 | 1 | 5 | UNTRIAGED |
+| 10 | 34 | Blog | Blog “social” section is blank (component returns `null`), creating dead whitespace | 2 | 2 | 3 | 2 | 5 | UNTRIAGED |
 
-## Quick status (live vs completed)
+## Quick status (live vs completed)## Quick status (live vs completed)
 
 As of the current tracker state:
 
-- Total: **180**
-- Open / live backlog (not `DONE` / `NOT_AN_ISSUE` / `DUPLICATE` / `DEFERRED`): **30**
-- Completed (`DONE`): **133**
+- Total: **192**
+- Open / live backlog (not `DONE` / `NOT_AN_ISSUE` / `DUPLICATE` / `DEFERRED`): **41**
+- Completed (`DONE`): **134**
 - Closed as `NOT_AN_ISSUE`: **17**
 
 > This tracker was introduced in git on **2026-01-05** (commit `535309d3`).
@@ -84,6 +87,17 @@ This is the list you should use day-to-day to see what is still *live*.
 | 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 5 | UNTRIAGED | [issue-154](ui-issues/issue-154.md) |
 | 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 1 | UNTRIAGED | [issue-085](ui-issues/issue-085.md) |
 | 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 1 | UNTRIAGED | [issue-095](ui-issues/issue-095.md) |
+| 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
+| 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
+| 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
+| 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
+| 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
+| 186 | Client | “Trusted by 10k users” avatars repeat (needs more authentic social proof) | 0 | UNTRIAGED | [issue-186](ui-issues/issue-186.md) |
+| 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 0 | UNTRIAGED | [issue-187](ui-issues/issue-187.md) |
+| 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 0 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
+| 189 | Client | Account “Payment methods” has dev artifacts; consider removing or simplifying (Shopify is the payment source-of-truth) | 0 | UNTRIAGED | [issue-189](ui-issues/issue-189.md) |
+| 190 | Client | WhatsApp + email support links need to be verified/simplified | 0 | UNTRIAGED | [issue-190](ui-issues/issue-190.md) |
+| 192 | Client | Landing “creators” section copy should be customer-focused + “Join creators” CTA should become “Learn more” (blog link) | 0 | UNTRIAGED | [issue-192](ui-issues/issue-192.md) |
 
 ## Full tracker (includes completed / closed)
 
@@ -273,3 +287,15 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 178 | Client | Floating “Buy Now” CTA is hidden with `opacity-0` but remains focusable (invisible focus target) | 3 | 3 | 2 | 2 | 16 | DONE | [issue-178](done-issues/issue-178.md) |
 | 179 | Creator | Floating WhatsApp CTA has the same invisible-focus problem (and exists in two copies) | 3 | 3 | 3 | 2 | 15 | DONE | [issue-179](done-issues/issue-179.md) |
 | 180 | Admin | Admin mobile drawer is “hidden” only by transform (no `aria-hidden`/`inert`, still reachable in the DOM) | 3 | 2 | 3 | 3 | 15 | DONE | [issue-180](done-issues/issue-180.md) |
+| 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 4 | 4 | 3 | 2 | 0 | UNTRIAGED | [issue-181](ui-issues/issue-181.md) |
+| 182 | Client | Drawer checkout CTA is stuck on “Preparing checkout…” (no working “Go to checkout”) | 5 | 5 | 3 | 2 | 0 | UNTRIAGED | [issue-182](ui-issues/issue-182.md) |
+| 183 | Client | Mobile account + footer has weird padding / horizontal scroll (should not scroll sideways) | 3 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-183](ui-issues/issue-183.md) |
+| 184 | Platform | `/api/storefront/*` endpoints return 500 (Cloudflare Worker 1101) — cart create, landing sections, product fetch | 5 | 5 | 2 | 3 | 0 | VERIFYING | [issue-184](ui-issues/issue-184.md) |
+| 185 | Client | Entire site allows horizontal scrolling on mobile (layout should be flush + centered) | 4 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-185](ui-issues/issue-185.md) |
+| 186 | Client | “Trusted by 10k users” avatars repeat (needs more authentic social proof) | 2 | 5 | 2 | 2 | 0 | UNTRIAGED | [issue-186](ui-issues/issue-186.md) |
+| 187 | Client | Landing reviews section feels bland on desktop (needs higher-impact design) | 3 | 5 | 3 | 2 | 0 | UNTRIAGED | [issue-187](ui-issues/issue-187.md) |
+| 188 | Client | Spin wheel needs visible % labels + “Congrats! You’ve won 20% off…” popup | 3 | 4 | 3 | 2 | 0 | UNTRIAGED | [issue-188](ui-issues/issue-188.md) |
+| 189 | Client | Account “Payment methods” has dev artifacts; consider removing or simplifying (Shopify is the payment source-of-truth) | 3 | 3 | 2 | 2 | 0 | UNTRIAGED | [issue-189](ui-issues/issue-189.md) |
+| 190 | Client | WhatsApp + email support links need to be verified/simplified | 3 | 4 | 1 | 2 | 0 | UNTRIAGED | [issue-190](ui-issues/issue-190.md) |
+| 191 | Client | Brand story page copy needs update + CTA should link to “Learn more” blog post | 2 | 3 | 1 | 1 | 0 | DONE | [issue-191](done-issues/issue-191.md) |
+| 192 | Client | Landing “creators” section copy should be customer-focused + “Join creators” CTA should become “Learn more” (blog link) | 2 | 4 | 1 | 2 | 0 | UNTRIAGED | [issue-192](ui-issues/issue-192.md) |

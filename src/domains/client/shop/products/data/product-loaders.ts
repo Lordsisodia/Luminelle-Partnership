@@ -2,6 +2,7 @@ import { productConfigs } from './product-config'
 import type { ProductConfig } from './product-types'
 import { fetchProductByHandle } from '@/lib/product'
 import { fetchSections } from '@/lib/sections'
+import { canonicalizeProductHandle } from './product-handle-aliases'
 
 export type LoadedProduct = Partial<{
   title: string
@@ -51,5 +52,13 @@ export async function loadSections(handle: string) {
 }
 
 export function getConfig(handle: string): ProductConfig {
-  return productConfigs[handle] ?? productConfigs['shower-cap']
+  const canonical = canonicalizeProductHandle(handle)
+  const direct = productConfigs[canonical]
+  if (direct) return direct
+
+  // Some callers pass the Shopify handle (e.g. `lumelle-shower-cap`) rather than our config key (e.g. `shower-cap`).
+  const byHandle = Object.values(productConfigs).find((cfg) => cfg.handle === canonical)
+  if (byHandle) return byHandle
+
+  return productConfigs['shower-cap']
 }

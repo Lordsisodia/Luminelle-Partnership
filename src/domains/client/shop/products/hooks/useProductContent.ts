@@ -7,6 +7,22 @@ export const useProductContent = (handle: string) => {
   const isCurler = config.handle.startsWith('satin-overnight-curler')
   const videoSlot = config.videoSlot ?? DEFAULT_VIDEO_SLOT
 
+  const sanitizeGallery = (items: unknown[]): string[] => {
+    const strings = items.filter((item): item is string => typeof item === 'string' && item.length > 0)
+    // Guard: never allow remote/admin-provided `video://...` slots to leak across products.
+    // We always re-append the product's own `videoSlot` at the end.
+    const withoutVideos = strings.filter((src) => !src.startsWith('video://'))
+    // De-dupe while keeping order (helps avoid repeated thumbs).
+    const unique: string[] = []
+    const seen = new Set<string>()
+    for (const src of withoutVideos) {
+      if (seen.has(src)) continue
+      seen.add(src)
+      unique.push(src)
+    }
+    return unique
+  }
+
   const baseGallery = useMemo(() => {
     const g = config.gallery ?? []
     const withoutDup = g.filter((src) => src !== videoSlot)
@@ -43,7 +59,7 @@ export const useProductContent = (handle: string) => {
         if (p.title) setProductTitle(p.title)
         if (p.description) setProductDesc(p.description)
         if (!isCurler && Array.isArray(p.images) && p.images.length > 0) {
-          setGallery([...p.images, videoSlot])
+          setGallery([...sanitizeGallery(p.images), videoSlot])
         }
       })
       .catch(() => undefined)
@@ -53,7 +69,9 @@ export const useProductContent = (handle: string) => {
         if (!s) return
         setSections(s)
         if (s.heroSubtitle) setProductDesc(s.heroSubtitle)
-        if (!isCurler && s.gallery && s.gallery.length > 0) setGallery([...s.gallery, videoSlot])
+        if (!isCurler && Array.isArray(s.gallery) && s.gallery.length > 0) {
+          setGallery([...sanitizeGallery(s.gallery), videoSlot])
+        }
       })
       .catch(() => undefined)
   }, [handle, isCurler, videoSlot])

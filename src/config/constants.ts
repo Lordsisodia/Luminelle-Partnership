@@ -2,9 +2,34 @@ export const WHATSAPP_INVITE_URL =
   import.meta.env.VITE_WHATSAPP_INVITE_URL ??
   'https://chat.whatsapp.com/DDxJHZzpW003WZhayKJnWd'
 
+const normalizeWhatsAppPhone = (raw: unknown): string | null => {
+  const value = String(raw ?? '').trim()
+  if (!value) return null
+  const digits = value.replace(/[^\d]/g, '')
+  // WhatsApp uses E.164 digits without "+"; typical lengths are 8–15.
+  if (digits.length < 8) return null
+  return digits
+}
+
+export const WHATSAPP_SUPPORT_PHONE = normalizeWhatsAppPhone(import.meta.env.VITE_WHATSAPP_SUPPORT_PHONE)
+
+export const WHATSAPP_SUPPORT_TEXT =
+  (import.meta.env.VITE_WHATSAPP_SUPPORT_TEXT ?? '').trim() || 'Hi Lumelle team — I need help with my order.'
+
+const buildWhatsAppUrl = (phone: string | null, text: string | null): string | null => {
+  if (!phone) return null
+  const base = `https://wa.me/${phone}`
+  const msg = (text ?? '').trim()
+  if (!msg) return base
+  return `${base}?text=${encodeURIComponent(msg)}`
+}
+
 export const WHATSAPP_SUPPORT_URL =
-  import.meta.env.VITE_WHATSAPP_SUPPORT_URL ??
-  'https://wa.me/message/lumellecaps'
+  buildWhatsAppUrl(WHATSAPP_SUPPORT_PHONE, WHATSAPP_SUPPORT_TEXT) ??
+  (() => {
+    const fallback = (import.meta.env.VITE_WHATSAPP_SUPPORT_URL ?? '').trim()
+    return fallback || null
+  })()
 
 export const INSTAGRAM_URL =
   import.meta.env.VITE_INSTAGRAM_URL ??

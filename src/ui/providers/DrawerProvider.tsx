@@ -196,6 +196,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   const remainingForFreeShip = Math.max(0, FREE_SHIPPING_THRESHOLD_GBP - displaySubtotal)
   const freeShipProgress = Math.min(100, Math.round((displaySubtotal / FREE_SHIPPING_THRESHOLD_GBP) * 100))
   const [qtyOpen, setQtyOpen] = useState<string | null>(null)
+  const [qtyOpenDirection, setQtyOpenDirection] = useState<'up' | 'down'>('down')
 
   const handleDrawerTabKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
@@ -615,14 +616,37 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                                 <div className="flex w-full flex-col gap-1">
                                   <button
                                     type="button"
-                                    onClick={() => setQtyOpen(qtyOpen === it.id ? null : it.id)}
+                                    onClick={(e) => {
+                                      if (qtyOpen === it.id) {
+                                        setQtyOpen(null)
+                                        return
+                                      }
+
+                                      const btnRect = e.currentTarget.getBoundingClientRect()
+                                      const panelRect = cartPanelRef.current?.getBoundingClientRect()
+
+                                      if (panelRect) {
+                                        const spaceBelow = panelRect.bottom - btnRect.bottom
+                                        const spaceAbove = btnRect.top - panelRect.top
+                                        // If there isn't enough space below for the dropdown, open upwards.
+                                        setQtyOpenDirection(spaceBelow < 240 && spaceAbove > spaceBelow ? 'up' : 'down')
+                                      } else {
+                                        setQtyOpenDirection('down')
+                                      }
+
+                                      setQtyOpen(it.id)
+                                    }}
                                     className="inline-flex w-full items-center justify-between gap-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/20"
                                   >
                                     <span className="text-sm font-semibold">Qty: {it.qty}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                                   </button>
                                   {qtyOpen === it.id ? (
-                                    <div className="absolute z-30 mt-1 w-full max-w-full rounded-lg border border-semantic-legacy-brand-blush/60 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] overflow-hidden left-0">
+                                    <div
+                                      className={`absolute left-0 z-30 w-full max-w-full rounded-lg border border-semantic-legacy-brand-blush/60 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] overflow-auto max-h-72 ${
+                                        qtyOpenDirection === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
+                                      }`}
+                                    >
                                       {Array.from({ length: MAX_CART_ITEM_QTY }, (_, i) => i + 1).map((n) => (
                                         <button
                                           key={n}

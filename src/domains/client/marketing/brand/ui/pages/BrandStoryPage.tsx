@@ -7,11 +7,11 @@ import { successStories } from '@/content/landing'
 
 const hero = {
   eyebrow: 'Brand Story',
-  title: 'Designed for steam, loved by creators',
+  title: 'Designed for steam, loved by all',
   description:
-    'We started with a simple promise: keep silk presses, curls, and braids flawless—even in the steamiest shower. Every detail is co-created with the people who film, post, and sell with us.',
+    'We started with a simple promise: to keep your hair the way it’s meant to be. No frizz. No grease. Just your natural hair, protected and cared for, coming out exactly as it should. Whether that’s braids, lush curls or smooth, straight strands, Lumelle is designed to preserve what makes your hair yours.',
   ctaPrimary: { label: 'Shop the cap', href: '/product/lumelle-shower-cap' },
-  ctaSecondary: { label: 'Meet the creators', href: '/creators' },
+  ctaSecondary: { label: 'Learn more', href: '/blog/about-lumelle' },
   image: '/uploads/luminele/page9-image.webp',
 }
 
@@ -22,14 +22,19 @@ const storyHighlights = [
     body: 'We blended satin-soft lining with a waterproof core so styles survive heat and humidity without flimsy plastic caps.',
   },
   {
-    eyebrow: 'Creator-tested',
-    title: 'Iterated on camera',
-    body: '100+ creators tried, filmed, and fed back—shaping fit, band tension, and packaging that converts on TikTok Shop.',
+    eyebrow: 'Customer tested',
+    title: 'Refined through wear',
+    body: 'Refined through real customer wear, feedback, and repeat use, shaping the fit, band tension, and packaging people actually love.',
   },
   {
     eyebrow: 'Built to last',
     title: 'Reuse 100+ showers',
     body: 'Durable stitching, wipe-clean core, and stretch that rebounds—so it looks premium long after the unboxing.',
+  },
+  {
+    eyebrow: 'Made for all',
+    title: 'Flexible fit',
+    body: 'Designed with a flexible fit that adapts to your hair, making it easier to tuck everything in—without stretching, squeezing, or slipping like traditional caps.',
   },
 ]
 
@@ -60,6 +65,7 @@ const proofChips = [
 const values = ['Satin-first comfort', 'Reusable, not disposable', 'Cruelty-free', '30-day returns', 'UK fulfillment']
 
 const BrandStoryPage = () => {
+  const SHOW_INSIDE_THE_BUILD = false
   const title = 'Brand story'
   const description = hero.description
   const image = cdnUrl(hero.image)
@@ -115,8 +121,8 @@ const BrandStoryPage = () => {
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <SectionHeading
               eyebrow="How we got here"
-              title="From frizz fights to a creator-loved classic"
-              description="Every launch is tested on-camera, refined in real bathrooms, and shipped fast enough to keep momentum."
+              title="From Frizz fights to customer loved classic"
+              description="From shower time to sleep routines, our designs are made to work with your hair, not against it. Every detail is considered, from soft satin linings to thoughtful construction, so frizz, breakage, and unwanted grease don’t stand a chance."
               alignment="center"
             />
             <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -134,31 +140,33 @@ const BrandStoryPage = () => {
           </div>
         </section>
 
-        {/* Craft */}
-        <section className="bg-semantic-legacy-brand-blush/10 py-14">
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <SectionHeading
-              eyebrow="Inside the build"
-              title="Crafted to keep styles flawless"
-              description="Material science, comfort testing, and visual polish—all tuned for creators and their audiences."
-              alignment="center"
-            />
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {craftPoints.map((point) => (
-                <article
-                  key={point.title}
-                  className="rounded-3xl border border-semantic-accent-cta/40 bg-white p-5 shadow-soft"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-semantic-accent-cta/30 text-lg">{point.icon}</span>
-                    <h4 className="font-heading text-lg font-semibold text-semantic-text-primary">{point.title}</h4>
-                  </div>
-                  <p className="mt-3 text-sm text-semantic-text-primary/75 leading-relaxed">{point.body}</p>
-                </article>
-              ))}
+        {/* Craft (temporarily hidden per client request; keep code for later) */}
+        {SHOW_INSIDE_THE_BUILD ? (
+          <section className="bg-semantic-legacy-brand-blush/10 py-14">
+            <div className="mx-auto max-w-6xl px-4 md:px-6">
+              <SectionHeading
+                eyebrow="Inside the build"
+                title="Crafted to keep styles flawless"
+                description="Material science, comfort testing, and visual polish—all tuned for creators and their audiences."
+                alignment="center"
+              />
+              <div className="mt-10 grid gap-6 md:grid-cols-3">
+                {craftPoints.map((point) => (
+                  <article
+                    key={point.title}
+                    className="rounded-3xl border border-semantic-accent-cta/40 bg-white p-5 shadow-soft"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-semantic-accent-cta/30 text-lg">{point.icon}</span>
+                      <h4 className="font-heading text-lg font-semibold text-semantic-text-primary">{point.title}</h4>
+                    </div>
+                    <p className="mt-3 text-sm text-semantic-text-primary/75 leading-relaxed">{point.body}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
         {/* Proof */}
         <section className="py-12">

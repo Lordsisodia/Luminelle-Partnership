@@ -56,6 +56,26 @@ body {
   @apply min-h-screen bg-white text-semantic-text-primary font-body antialiased;
 }
 
+/*
+ * Prevent page-level horizontal scrolling on mobile.
+ * (Individual components can still scroll horizontally within their own containers.)
+ */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Defensive: media should never force the page wider than the viewport. */
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+iframe {
+  max-width: 100%;
+}
+
 /* Helpers used by SISO settings' shared class strings */
 .siso-inner-card {
   background-color: rgb(var(--siso-bg-tertiary-rgb, 36 36 36) / 1);

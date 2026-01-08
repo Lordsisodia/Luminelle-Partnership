@@ -13,6 +13,7 @@ type ReviewsAutoCarouselProps = {
   reviews: ReviewType[]
   heading?: Heading
   sectionId?: string
+  showReviewerPhotos?: boolean
 }
 
 const defaultHeading: Required<Heading> = {
@@ -22,7 +23,7 @@ const defaultHeading: Required<Heading> = {
   alignment: 'center',
 }
 
-export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAutoCarouselProps) => {
+export const ReviewsAutoCarousel = ({ reviews, heading, sectionId, showReviewerPhotos }: ReviewsAutoCarouselProps) => {
   const resolvedHeading = {
     ...defaultHeading,
     ...heading,
@@ -49,7 +50,7 @@ export const ReviewsAutoCarousel = ({ reviews, heading, sectionId }: ReviewsAuto
         />
 
         <div className="mt-4 md:mt-6">
-          <ThreeDPhotoCarousel reviews={reviews} />
+          <ThreeDPhotoCarousel reviews={reviews} showReviewerPhotos={showReviewerPhotos} />
         </div>
       </div>
     </section>

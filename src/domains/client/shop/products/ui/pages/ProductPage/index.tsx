@@ -271,6 +271,11 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
     return { ...(featureCopyBase as any), mediaSrc: galleryVideo }
   }, [draftOverrides?.gallery, featureCopyBase])
   const featuredTikTokHeading = draftOverrides?.specs?.featuredTikTokHeading ?? config.featuredTikTokHeading
+  const featuredTikToks = (() => {
+    const raw = draftOverrides?.specs?.featuredTikToks
+    if (Array.isArray(raw) && raw.length > 0) return raw
+    return config.featuredTikToks
+  })()
 
   useEffect(() => {
     setDraftOverrides(null)
@@ -587,6 +592,7 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
         essentials,
         faqs,
         featuredTikTokHeading,
+        featuredTikToks,
       })}
     </MarketingLayout>
   )

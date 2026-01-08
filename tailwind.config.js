@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import plugin from 'tailwindcss/plugin'
+import lineClamp from '@tailwindcss/line-clamp'
 import typography from '@tailwindcss/typography'
 
 const tokensPath = path.resolve('./src/theme/tokens.json')
@@ -241,6 +242,7 @@ export default {
         },
       })
     }),
+    lineClamp,
     typography,
   ],
 }

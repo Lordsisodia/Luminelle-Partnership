@@ -43,7 +43,7 @@ export const ProductSpotlightSection = ({ teasers }: Props) => {
                       <img
                         src={imageSrc}
                         alt={teaser.title}
-                        className="h-full w-full object-cover object-[center_25%] md:object-[center_22%]"
+                        className="h-full w-full object-contain p-4"
                         loading="lazy"
                         decoding="async"
                       />

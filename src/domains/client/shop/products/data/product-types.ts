@@ -38,4 +38,10 @@ export type ProductConfig = {
     description?: string
     alignment?: 'left' | 'center' | 'right'
   }
+  featuredTikToks?: {
+    name: string
+    handle: string
+    embedUrl: string
+    videoUrl?: string
+  }[]
 }

@@ -14,6 +14,7 @@ type UseMediaQueryOptions = {
 
 type ReviewCard = {
   author: string
+  title?: string
   body: string
   stars?: number
   image?: string
@@ -76,23 +77,6 @@ const reviewFallbacks: ReviewCard[] = [
   { author: "Tay", body: "Worth it for silk press protection alone.", stars: 5 },
 ]
 
-type AvatarSources = {
-  avif?: string
-  webp?: string
-  jpg: string
-}
-
-const fallbackAvatarKeys = ["rachel", "shannon", "randomlife"] as const
-
-const hashString = (input: string) => {
-  let hash = 0
-  for (let i = 0; i < input.length; i++) {
-    hash = (hash << 5) - hash + input.charCodeAt(i)
-    hash |= 0
-  }
-  return hash
-}
-
 const getInitials = (name: string) =>
   name
     .split(/\s+/)
@@ -100,22 +84,6 @@ const getInitials = (name: string) =>
     .slice(0, 2)
     .map((part) => part[0]?.toUpperCase())
     .join("")
-
-const getFallbackAvatarSources = (key: (typeof fallbackAvatarKeys)[number]): AvatarSources => {
-  const base = `/images/avatar-${key}`
-  return {
-    avif: `${base}-320.avif`,
-    webp: `${base}-320.webp`,
-    jpg: `${base}.jpg`,
-  }
-}
-
-const getAvatarSources = (review: ReviewCard): AvatarSources => {
-  if (review.image) return { jpg: review.image }
-  const seed = review.author?.trim() || "customer"
-  const index = Math.abs(hashString(seed)) % fallbackAvatarKeys.length
-  return getFallbackAvatarSources(fallbackAvatarKeys[index] ?? "rachel")
-}
 
 const ReviewCardOrnaments = () => (
   <>
@@ -154,40 +122,49 @@ const ReviewCardOrnaments = () => (
   </>
 )
 
-const ReviewCardContent = ({ review }: { review: ReviewCard }) => {
-  const avatar = getAvatarSources(review)
-
+const ReviewCardContent = ({
+  review,
+  showReviewerPhotos,
+}: {
+  review: ReviewCard
+  showReviewerPhotos: boolean
+}) => {
   return (
-    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-brand-blush/30 px-4 py-3 text-center">
+    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-brand-blush/30 px-4 py-4 text-center md:px-5 md:py-5">
       <ReviewCardOrnaments />
       <div className="relative flex justify-center">
-        <StarRating value={review.stars ?? 5} size={16} />
+        <StarRating value={review.stars ?? 5} size={18} />
       </div>
-      <p className="relative mt-2 text-[13px] leading-snug text-semantic-text-primary">“{review.body}”</p>
-      <div className="relative mt-3 flex items-center justify-center gap-2">
-        <div className="relative h-8 w-8 overflow-hidden rounded-full bg-white/70 ring-1 ring-brand-blush/55">
-          <span
+      <div className="relative mt-3 space-y-2">
+        {review.title ? (
+          <p className="text-sm font-semibold leading-snug text-semantic-text-primary md:text-base">
+            {review.title}
+          </p>
+        ) : null}
+        <p className="text-sm leading-relaxed text-semantic-text-primary md:text-base md:leading-relaxed line-clamp-4 md:line-clamp-5">
+          “{review.body}”
+        </p>
+      </div>
+      <div className="relative mt-4 flex items-center justify-center gap-2">
+        {showReviewerPhotos && review.image ? (
+          <img
+            src={review.image}
+            alt=""
+            className="h-9 w-9 rounded-full border border-white/70 object-cover shadow-soft"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div
+            className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-brand-blush/55"
             aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center text-[11px] font-semibold text-semantic-text-primary/80"
           >
-            {getInitials(review.author)}
-          </span>
-          <picture className="relative z-10 block h-full w-full">
-            {avatar.avif ? <source srcSet={avatar.avif} type="image/avif" /> : null}
-            {avatar.webp ? <source srcSet={avatar.webp} type="image/webp" /> : null}
-            <img
-              src={avatar.jpg}
-              alt={`${review.author} profile photo`}
-              className="h-full w-full object-cover"
-              loading="lazy"
-              decoding="async"
-              onError={(event) => {
-                event.currentTarget.style.display = "none"
-              }}
-            />
-          </picture>
-        </div>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
+            <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-semantic-text-primary/80">
+              {getInitials(review.author)}
+            </span>
+          </div>
+        )}
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80 md:text-[13px]">
           {review.author}
         </p>
       </div>
@@ -201,15 +178,18 @@ const Reviews2DCarousel = memo(
     activeIndex,
     onActiveIndexChange,
     prefersReducedMotion,
+    showReviewerPhotos,
   }: {
     cards: ReviewCard[]
     activeIndex: number
     onActiveIndexChange: (index: number) => void
     prefersReducedMotion: boolean
+    showReviewerPhotos: boolean
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
-    const itemWidth = isScreenSizeSm ? 208 : 280
-    const itemHeight = 156
+    const isScreenSizeLg = useMediaQuery("(max-width: 1024px)")
+    const itemWidth = isScreenSizeSm ? 220 : isScreenSizeLg ? 320 : 380
+    const itemHeight = isScreenSizeSm ? 184 : isScreenSizeLg ? 216 : 256
     const gapPx = 12
     const listRef = useRef<HTMLDivElement | null>(null)
     const isProgrammaticScrollRef = useRef(false)
@@ -270,38 +250,67 @@ const Reviews2DCarousel = memo(
 
     return (
       <div className="w-full">
-        <div
-          ref={listRef}
-          className="flex w-full gap-3 overflow-x-auto px-4 pb-1 pt-3 md:pt-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          style={{
-            scrollSnapType: "x mandatory",
-            scrollPaddingLeft: "16px",
-            scrollPaddingRight: "16px",
-            // Allow horizontal swipe scrolling on mobile.
-            touchAction: "pan-x",
-          }}
-          aria-label="Customer reviews"
-        >
-          {cards.map((card, i) => (
-            <div
-              key={`review-${card.author}-${i}`}
-              className="shrink-0 snap-start"
-              style={{ width: `${itemWidth}px` }}
-            >
-              <div className="rounded-2xl bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/60 p-[1px] shadow-[0_18px_45px_rgba(251,199,178,0.18)]">
-                <div style={{ height: `${itemHeight}px` }}>
-                  <ReviewCardContent review={card} />
+        <div className="relative">
+          <div
+            ref={listRef}
+            className="flex w-full gap-3 overflow-x-auto px-4 pb-2 pt-3 md:pt-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            style={{
+              scrollSnapType: "x mandatory",
+              scrollPaddingLeft: "16px",
+              scrollPaddingRight: "16px",
+              // Allow horizontal swipe scrolling on mobile.
+              touchAction: "pan-x",
+            }}
+            aria-label="Customer reviews"
+          >
+            {cards.map((card, i) => (
+              <div
+                key={`review-${card.author}-${i}`}
+                className="shrink-0 snap-start"
+                style={{ width: `${itemWidth}px` }}
+              >
+                <div className="rounded-2xl bg-gradient-to-br from-brand-blush/70 via-white to-brand-peach/60 p-[1px] shadow-[0_18px_45px_rgba(251,199,178,0.18)]">
+                  <div style={{ height: `${itemHeight}px` }}>
+                    <ReviewCardContent review={card} showReviewerPhotos={showReviewerPhotos} />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden items-center md:flex">
+            <button
+              type="button"
+              aria-label="Scroll reviews left"
+              onClick={() => scrollToIndex(activeIndex - 1)}
+              className="pointer-events-auto ml-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/85 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center md:flex">
+            <button
+              type="button"
+              aria-label="Scroll reviews right"
+              onClick={() => scrollToIndex(activeIndex + 1)}
+              className="pointer-events-auto mr-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/85 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     )
   }
 )
 
-function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
+function ThreeDPhotoCarousel({
+  reviews,
+  showReviewerPhotos = false,
+}: {
+  reviews?: ReviewCard[]
+  showReviewerPhotos?: boolean
+}) {
   const prefersReducedMotion = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState(0)
   const allCards = useMemo(() => (reviews?.length ? reviews : reviewFallbacks), [reviews])
@@ -344,6 +353,7 @@ function ThreeDPhotoCarousel({ reviews }: { reviews?: ReviewCard[] }) {
         activeIndex={activeIndex}
         onActiveIndexChange={setActiveIndex}
         prefersReducedMotion={Boolean(prefersReducedMotion)}
+        showReviewerPhotos={showReviewerPhotos}
       />
     </div>
   )
