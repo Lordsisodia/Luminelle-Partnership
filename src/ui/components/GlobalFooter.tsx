@@ -87,7 +87,7 @@ export function GlobalFooter({ supportEmail }: GlobalFooterProps) {
             </RouterLink>
             <a
               href={`mailto:${supportEmail}`}
-              className="transition hover:text-semantic-text-primary hover:underline underline-offset-4"
+              className="break-all transition hover:text-semantic-text-primary hover:underline underline-offset-4"
             >
               {supportEmail}
             </a>
