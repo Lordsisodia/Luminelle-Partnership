@@ -1,22 +1,15 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 type BlogSocialProps = {
-  slug?: string
+  url: string
+  title?: string
 }
 
-export default function BlogSocial({ slug }: BlogSocialProps) {
+export default function BlogSocial({ url, title }: BlogSocialProps) {
   const [copied, setCopied] = useState(false)
 
-  const shareUrl = useMemo(() => {
-    if (!slug) return ''
-    try {
-      return new URL(`/blog/${slug}`, window.location.origin).toString()
-    } catch {
-      return `/blog/${slug}`
-    }
-  }, [slug])
-
-  if (!slug) return null
+  const shareUrl = url.trim()
+  if (!shareUrl) return null
 
   const copy = async () => {
     if (!shareUrl) return
@@ -55,7 +48,7 @@ export default function BlogSocial({ slug }: BlogSocialProps) {
             {copied ? 'Copied' : 'Copy link'}
           </button>
           <a
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title ?? '')}&url=${encodeURIComponent(shareUrl)}`}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-blush/70 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-brand-porcelain"
@@ -78,4 +71,3 @@ export default function BlogSocial({ slug }: BlogSocialProps) {
     </div>
   )
 }
-

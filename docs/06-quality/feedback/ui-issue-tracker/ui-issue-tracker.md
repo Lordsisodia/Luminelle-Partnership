@@ -38,15 +38,15 @@ These are the current top *open* items by `Priority` (excludes `DONE` / `DEFERRE
 | 7 | 103 | Blog | Blog index “tag” chips look like filters but are inert, and pillar filtering is effectively unreachable | 2 | 2 | 2 | 2 | 6 | UNTRIAGED |
 | 8 | 20 | Admin | Admin on mobile: drawer can’t be opened (no “burger” button) | 2 | 2 | 3 | 2 | 5 | UNTRIAGED |
 | 9 | 31 | Client | PDP “video” media likely renders at 0 height (looks broken when you tap the video thumbnail) | 2 | 4 | 3 | 1 | 5 | UNTRIAGED |
-| 10 | 34 | Blog | Blog “social” section is blank (component returns `null`), creating dead whitespace | 2 | 2 | 3 | 2 | 5 | UNTRIAGED |
+| 10 | 48 | Blog | Blog “Shop now” CTAs use raw `<a href>` even for internal routes (full reload + state loss) | 2 | 2 | 3 | 2 | 5 | UNTRIAGED |
 
 ## Quick status (live vs completed)## Quick status (live vs completed)
 
 As of the current tracker state:
 
 - Total: **192**
-- Open / live backlog (not `DONE` / `NOT_AN_ISSUE` / `DUPLICATE` / `DEFERRED`): **41**
-- Completed (`DONE`): **134**
+- Open / live backlog (not `DONE` / `NOT_AN_ISSUE` / `DUPLICATE` / `DEFERRED`): **40**
+- Completed (`DONE`): **135**
 - Closed as `NOT_AN_ISSUE`: **17**
 
 > This tracker was introduced in git on **2026-01-05** (commit `535309d3`).
@@ -66,7 +66,6 @@ This is the list you should use day-to-day to see what is still *live*.
 | 103 | Blog | Blog index “tag” chips look like filters but are inert, and pillar filtering is effectively unreachable | 6 | UNTRIAGED | [issue-103](ui-issues/issue-103.md) |
 | 20 | Admin | Admin on mobile: drawer can’t be opened (no “burger” button) | 5 | UNTRIAGED | [issue-020](ui-issues/issue-020.md) |
 | 31 | Client | PDP “video” media likely renders at 0 height (looks broken when you tap the video thumbnail) | 5 | UNTRIAGED | [issue-031](ui-issues/issue-031.md) |
-| 34 | Blog | Blog “social” section is blank (component returns `null`), creating dead whitespace | 5 | UNTRIAGED | [issue-034](ui-issues/issue-034.md) |
 | 48 | Blog | Blog “Shop now” CTAs use raw `<a href>` even for internal routes (full reload + state loss) | 5 | UNTRIAGED | [issue-048](ui-issues/issue-048.md) |
 | 49 | Admin | Admin “Components” editor isn’t truly an admin system (localStorage-only, not publishable) | 5 | UNTRIAGED | [issue-049](ui-issues/issue-049.md) |
 | 57 | Admin | Admin “Activity log” is a nav-linked placeholder (“Not wired yet”) | 5 | UNTRIAGED | [issue-057](ui-issues/issue-057.md) |
@@ -140,7 +139,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 31 | Client | PDP “video” media likely renders at 0 height (looks broken when you tap the video thumbnail) | 2 | 4 | 3 | 1 | 5 | UNTRIAGED | [issue-031](ui-issues/issue-031.md) |
 | 32 | Client | Cart access is hidden behind the hamburger menu (no cart icon / qty badge in the header) | 2 | 5 | 3 | 2 | 17 | DONE | [issue-032](done-issues/issue-032.md) |
 | 33 | Client | Signed-in drawer profile uses a random “placekitten” avatar fallback | 2 | 5 | 3 | 2 | 17 | DONE | [issue-033](done-issues/issue-033.md) |
-| 34 | Blog | Blog “social” section is blank (component returns `null`), creating dead whitespace | 2 | 2 | 3 | 2 | 5 | UNTRIAGED | [issue-034](ui-issues/issue-034.md) |
+| 34 | Blog | Blog “social” section is blank (component returns `null`), creating dead whitespace | 2 | 2 | 3 | 2 | 5 | DONE | [issue-034](done-issues/issue-034.md) |
 | 35 | Blog | Blog author links fall back to `#` (dead link + unexpected page jump) | 3 | 2 | 3 | 3 | 15 | NOT_AN_ISSUE | [issue-035](ui-issues/issue-035.md) |
 | 36 | Platform | Two different `cdnUrl` helpers exist (inconsistent asset loading + CDN-bypass mismatch) | 2 | 5 | 4 | 2 | 16 | DONE | [issue-036](done-issues/issue-036.md) |
 | 37 | Platform | Shopify Storefront client is stubbed (dynamic content never loads) | 2 | 3 | 4 | 2 | 8 | UNTRIAGED | [issue-037](ui-issues/issue-037.md) |
