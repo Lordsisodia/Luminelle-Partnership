@@ -484,7 +484,7 @@ export const BlogPostPage = () => {
 
         <section className="bg-white">
           <div className="mx-auto max-w-4xl px-4 pb-12 md:px-6">
-            <BlogSocial slug={post.slug} />
+            <BlogSocial url={url} title={post.title} />
           </div>
         </section>
 
