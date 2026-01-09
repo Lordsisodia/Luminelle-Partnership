@@ -12,6 +12,11 @@ type PageSection = {
 
 type AdminPage = {
   slug: string
+  /**
+   * Public-facing route for the page.
+   * Note: this is not always `/${slug}` (e.g. slug "brand-story" is served at `/brand`).
+   */
+  publicPath: string
   title: string
   type: 'Marketing' | 'Story' | 'Legal'
   status: 'Published' | 'Draft' | 'In review'
@@ -34,6 +39,7 @@ type AdminPage = {
 const PAGES: AdminPage[] = [
   {
     slug: 'creators',
+    publicPath: '/creators',
     title: 'Creators',
     type: 'Marketing',
     status: 'Published',
@@ -60,6 +66,7 @@ const PAGES: AdminPage[] = [
   },
   {
     slug: 'brand-story',
+    publicPath: '/brand',
     title: 'Brand Story',
     type: 'Story',
     status: 'Published',
@@ -86,6 +93,7 @@ const PAGES: AdminPage[] = [
   },
   {
     slug: 'landing',
+    publicPath: '/',
     title: 'Landing Page',
     type: 'Marketing',
     status: 'Published',
@@ -112,6 +120,7 @@ const PAGES: AdminPage[] = [
   },
   {
     slug: 'terms',
+    publicPath: '/terms',
     title: 'Terms & Conditions',
     type: 'Legal',
     status: 'Published',
@@ -138,6 +147,7 @@ const PAGES: AdminPage[] = [
   },
   {
     slug: 'privacy',
+    publicPath: '/privacy',
     title: 'Privacy Policy',
     type: 'Legal',
     status: 'Published',
@@ -169,6 +179,8 @@ const STATUS_COLORS: Record<AdminPage['status'], string> = {
   Draft: 'bg-amber-50 text-amber-700 border-amber-200',
   'In review': 'bg-blue-50 text-blue-700 border-blue-200',
 }
+
+const getSlugPath = (page: Pick<AdminPage, 'slug'>) => `/${page.slug}`
 
 export default function PagesPage() {
   const { slug } = useParams<{ slug?: string }>()
@@ -245,6 +257,7 @@ export default function PagesPage() {
       return (
         page.title.toLowerCase().includes(q) ||
         page.slug.toLowerCase().includes(q) ||
+        page.publicPath.toLowerCase().includes(q) ||
         page.summary.toLowerCase().includes(q)
       )
     })
@@ -271,7 +284,7 @@ export default function PagesPage() {
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search title or /slug"
+                placeholder="Search title, slug, or /route"
                 className="w-full rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm text-semantic-text-primary placeholder:text-semantic-text-primary/40 md:w-[260px]"
               />
               <button
@@ -342,11 +355,16 @@ export default function PagesPage() {
                     {page.status}
                   </span>
                 </div>
-                <div className="mt-1 flex items-center gap-2 text-[12px] text-semantic-text-primary/70">
-                  <FileText className="h-3.5 w-3.5" />
-                  <span className="font-mono text-[11px]">/{page.slug}</span>
-                  <span>• {page.type}</span>
-                </div>
+	                <div className="mt-1 flex items-center gap-2 text-[12px] text-semantic-text-primary/70">
+	                  <FileText className="h-3.5 w-3.5" />
+	                  <span className="font-mono text-[11px]">{page.publicPath}</span>
+	                  {getSlugPath(page) !== page.publicPath ? (
+	                    <span className="text-[11px] text-semantic-text-primary/55">
+	                      slug <span className="font-mono">{page.slug}</span>
+	                    </span>
+	                  ) : null}
+	                  <span>• {page.type}</span>
+	                </div>
                 <p className="mt-2 text-sm text-semantic-text-primary/80 line-clamp-3">{page.summary}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-2 text-[12px] text-semantic-text-primary/70">
                   <span className="rounded-full bg-brand-porcelain/80 px-2.5 py-1 font-semibold">Sections: {page.sections.length}</span>
@@ -387,14 +405,19 @@ export default function PagesPage() {
 	              </button>
               <div>
                 <div className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Page detail</div>
-                <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-semantic-text-primary/80">
-                  <span className="font-semibold">{selected.title}</span>
-                  <span className="text-semantic-text-primary/50">•</span>
-                  <span className="font-mono text-[12px]">/{selected.slug}</span>
-                  <span className="text-semantic-text-primary/50">•</span>
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">{selected.type}</span>
-                  {selected.tone ? <span className="rounded-full bg-brand-porcelain px-2.5 py-1 text-[11px] font-semibold text-semantic-text-primary/80">Tone: {selected.tone}</span> : null}
-                </div>
+	                <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-semantic-text-primary/80">
+	                  <span className="font-semibold">{selected.title}</span>
+	                  <span className="text-semantic-text-primary/50">•</span>
+	                  <span className="font-mono text-[12px]">{selected.publicPath}</span>
+	                  {getSlugPath(selected) !== selected.publicPath ? (
+	                    <span className="text-[11px] text-semantic-text-primary/55">
+	                      slug <span className="font-mono">{selected.slug}</span>
+	                    </span>
+	                  ) : null}
+	                  <span className="text-semantic-text-primary/50">•</span>
+	                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">{selected.type}</span>
+	                  {selected.tone ? <span className="rounded-full bg-brand-porcelain px-2.5 py-1 text-[11px] font-semibold text-semantic-text-primary/80">Tone: {selected.tone}</span> : null}
+	                </div>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -456,18 +479,26 @@ export default function PagesPage() {
 
             <div className="space-y-4">
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain/30 p-4">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">Summary</div>
-                <p className="mt-2 text-sm text-semantic-text-primary/85">{selected.summary}</p>
-                <div className="mt-3 grid gap-2 text-[12px] text-semantic-text-primary/70">
-                  <div className="flex items-center gap-2"><FileText className="h-3.5 w-3.5" /> <span className="font-mono text-[11px]">/{selected.slug}</span></div>
-                  <div className="flex items-center gap-2"><Clock3 className="h-3.5 w-3.5" /> <span>Updated {selected.updatedAt}</span> {selected.publishedAt ? <span className="text-semantic-text-primary/60">• Published {selected.publishedAt}</span> : null}</div>
-                  {selected.notes ? (
-                    <div className="inline-flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-[12px] font-semibold text-semantic-text-primary shadow-sm">
-                      <ShieldCheck className="h-4 w-4 text-blue-600" />
-                      <span>{selected.notes}</span>
-                    </div>
-                  ) : null}
-                </div>
+	                <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">Summary</div>
+	                <p className="mt-2 text-sm text-semantic-text-primary/85">{selected.summary}</p>
+	                <div className="mt-3 grid gap-2 text-[12px] text-semantic-text-primary/70">
+	                  <div className="flex items-center gap-2">
+	                    <FileText className="h-3.5 w-3.5" />
+	                    <span className="font-mono text-[11px]">{selected.publicPath}</span>
+	                    {getSlugPath(selected) !== selected.publicPath ? (
+	                      <span className="text-[11px] text-semantic-text-primary/55">
+	                        slug <span className="font-mono">{selected.slug}</span>
+	                      </span>
+	                    ) : null}
+	                  </div>
+	                  <div className="flex items-center gap-2"><Clock3 className="h-3.5 w-3.5" /> <span>Updated {selected.updatedAt}</span> {selected.publishedAt ? <span className="text-semantic-text-primary/60">• Published {selected.publishedAt}</span> : null}</div>
+	                  {selected.notes ? (
+	                    <div className="inline-flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-[12px] font-semibold text-semantic-text-primary shadow-sm">
+	                      <ShieldCheck className="h-4 w-4 text-blue-600" />
+	                      <span>{selected.notes}</span>
+	                    </div>
+	                  ) : null}
+	                </div>
               </div>
 
               <div className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4">

@@ -83,7 +83,7 @@ This is the list you should use day-to-day to see what is still *live*.
 | 146 | Admin | Admin product live preview is only available on XL screens (most editors won’t see a preview) | 5 | UNTRIAGED | [issue-146](ui-issues/issue-146.md) |
 | 147 | Admin | Admin product gallery selection can’t truly be closed (state forces `editingMediaIdx` back to 0) | 5 | UNTRIAGED | [issue-147](ui-issues/issue-147.md) |
 | 148 | Admin | Admin “Upload” relies on Cloudinary’s external widget script with no loading/progress UI (fragile + inconsistent asset pipeline) | 5 | UNTRIAGED | [issue-148](ui-issues/issue-148.md) |
-| 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 5 | UNTRIAGED | [issue-154](ui-issues/issue-154.md) |
+| 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 5 | DONE | [issue-154](done-issues/issue-154.md) |
 | 85 | Admin | Admin sidebar icon active-state styling likely never activates (current section is harder to spot) | 1 | UNTRIAGED | [issue-085](ui-issues/issue-085.md) |
 | 95 | Admin | Admin product-count badge likely never updates (sessionStorage + `storage` listener doesn’t fire in-tab) | 1 | DONE | [issue-095](done-issues/issue-095.md) |
 | 181 | Client | Multi-buy discount codes don’t apply at checkout (tiered discounts requested) | 0 | VALIDATING | [issue-181](ui-issues/issue-181.md) |
@@ -259,7 +259,7 @@ This is the full historical list (including `DONE` and `NOT_AN_ISSUE` rows).
 | 151 | Client | JSON-LD structured data uses relative URLs (logo/images), which can break rich results | 4 | 5 | 3 | 2 | 37 | DONE | [issue-151](done-issues/issue-151.md) |
 | 152 | Client | Terminology inconsistency: PDP says “Basket” while the rest of the UI says “Cart” | 1 | 5 | 1 | 3 | 14 | DONE | [issue-152](done-issues/issue-152.md) |
 | 153 | Client | Responsive image variants exist, but key pages still load a single full-size JPG without `srcSet`/AVIF | 3 | 3 | 2 | 2 | 16 | DONE | [issue-153](done-issues/issue-153.md) |
-| 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 2 | 2 | 3 | 2 | 5 | UNTRIAGED | [issue-154](ui-issues/issue-154.md) |
+| 154 | Admin | Admin “Pages” UI shows `/{slug}` as if it’s the live route, but `brand-story` doesn’t exist (`/brand` is the real route) | 3 | 2 | 1 | 3 | 17 | DONE | [issue-154](done-issues/issue-154.md) |
 | 155 | Platform | Tailwind color `brand-porcelain` is referenced but not defined (styles silently fail) | 2 | 3 | 3 | 2 | 9 | DONE | [issue-155](done-issues/issue-155.md) |
 | 156 | TBD | Service worker returns `offline.html` for failed asset requests (can break images/JS on flaky networks) | 4 | 5 | 3 | 2 | 37 | DONE | [issue-156](done-issues/issue-156.md) |
 | 157 | Client | PDP meta description (and Product JSON-LD description) always appends “Blocks steam…” even for non-shower-cap products | 4 | 5 | 3 | 2 | 37 | DONE | [issue-157](done-issues/issue-157.md) |
