@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `IN_PROGRESS`
 - Area: `Client`
 - Impact (1–5): `4`
 - Reach (1–5): `5`
@@ -71,3 +71,13 @@ On mobile, the site can be scrolled horizontally across pages. This is a UX bug:
 - No page-level horizontal scroll.
 - Intentional inner horizontal carousels still work (if present), but do not cause page overflow.
 
+---
+
+## Worklog
+
+### 2026-01-08
+
+- Monitor note: no matching open PR for this issue yet; keeping status as `IN_PROGRESS` until a PR exists.
+- Implemented a defensive, global horizontal overflow containment pass in `src/index.css`:
+  - Apply `overflow-x: clip` (with `overflow-x: hidden` fallback), `max-width: 100%`, and `overscroll-behavior-x: none` to `html`, `body`, and `#root`.
+  - Goal: prevent small layout overflows / iOS-like “sideways drag” from turning into page-level horizontal scroll, while preserving intentional inner `overflow-x-auto` carousels.
