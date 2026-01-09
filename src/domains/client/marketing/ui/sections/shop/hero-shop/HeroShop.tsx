@@ -66,10 +66,18 @@ export const HeroShop = ({ config, socialProof }: Props) => {
   const trustCountLabel = socialProof?.trustCountLabel ?? '10k+'
 
   const resolvedTrustAvatars = (() => {
-    const configured = (socialProof?.trustAvatars ?? []).filter((src) => typeof src === 'string' && src.length > 0)
-    if (configured.length > 0) return Array.from(new Set(configured)).slice(0, 3)
+    const configured = (socialProof?.trustAvatars ?? [])
+      .filter((src) => typeof src === 'string' && src.length > 0)
+      .map((src) => cdnUrl(src))
+    if (configured.length > 0) return Array.from(new Set(configured)).slice(0, 5)
 
-    return [cdnUrl('/images/avatar-shannon.jpg'), cdnUrl('/images/avatar-rachel.jpg'), cdnUrl('/images/avatar-randomlife.jpg')]
+    return [
+      cdnUrl('/images/avatar-shannon.jpg'),
+      cdnUrl('/images/avatar-rachel.jpg'),
+      cdnUrl('/images/avatar-randomlife.jpg'),
+      cdnUrl('/images/avatar-jade.jpg'),
+      cdnUrl('/images/avatar-maya.jpg'),
+    ]
   })()
 
   return (
