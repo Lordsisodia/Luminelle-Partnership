@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `IN_PROGRESS`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `5`
@@ -28,6 +28,18 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ---
 
+## Worklog
+
+- 2026-01-08: Implementation started on branch `vk/aee6-ui-187-client-p2`
+  - Updated landing reviews section to be more “high-impact” on desktop via a 2-column layout (copy + stats on the left, carousel on the right).
+  - Added a desktop-only rating + social-proof summary line (using `homeConfig.socialProof` on the shop landing).
+  - Added subtle edge fades to the carousel on desktop to make the section feel more interactive/scrollable.
+
+Files touched:
+- `src/domains/client/marketing/ui/pages/ShopLandingPage.tsx`
+- `src/domains/client/shop/products/ui/sections/reviews-auto-carousel/ReviewsAutoCarousel.tsx`
+- `src/components/ui/3d-carousel.tsx`
+
 ## 🔁 Multi-agent workflow (runbook)
 
 ### Agent 1 — Research + design options (NO CODE CHANGES)
@@ -49,4 +61,3 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 #### Deliverable
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-187-research.md`
-
