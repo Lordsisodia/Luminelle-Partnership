@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { MAX_CART_ITEM_QTY } from '@/config/constants'
 import { getVolumeDiscountCodes, getVolumeDiscountTierForVariant, type VolumeDiscountTier } from '@client/shop/cart/logic/volumeDiscounts'
 import { commerce } from '@platform/commerce'
+import { PortError } from '@platform/ports'
 import type { CartDTO, CartLineDTO, CheckoutCapabilities, CheckoutStart } from '@platform/commerce/ports'
 
 export type CartItem = {
@@ -28,8 +29,10 @@ type CartState = {
   subtotal: number
   qty: number
   checkoutUrl?: string
+  checkoutLoading?: boolean
   checkoutCapabilities?: CheckoutCapabilities
   checkoutStart?: CheckoutStart
+  refreshCheckout?: () => Promise<void>
   setEmail?: (email: string) => Promise<void>
   setAttributes?: (attrs: Record<string, string>) => Promise<void>
   applyDiscount?: (code: string) => void
@@ -92,22 +95,6 @@ const mapCartToItems = (cart: CartDTO): CartItem[] => {
 
 const isLegacyShopifyGid = (id: string) => id.startsWith('gid://shopify/')
 
-const withCheckoutDiscountCode = (url: string | undefined, code: string | null | undefined): string | undefined => {
-  if (!url) return undefined
-  const normalized = String(code ?? '').trim().toUpperCase()
-  if (!normalized) return url
-
-  try {
-    const base = typeof window !== 'undefined' ? window.location.origin : 'http://localhost'
-    const parsed = new URL(url, base)
-    parsed.searchParams.set('discount', normalized)
-    return parsed.toString()
-  } catch {
-    // If URL parsing fails (unexpected provider URL format), fall back to the raw URL.
-    return url
-  }
-}
-
 const clearLegacyShopifyCartId = () => {
   try {
     localStorage.removeItem('lumelle_shopify_cart_id')
@@ -164,7 +151,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const [checkoutUrl, setCheckoutUrl] = useState<string | undefined>(undefined)
   const [checkoutStart, setCheckoutStart] = useState<CheckoutStart | undefined>(undefined)
-  const checkoutUrlWithDiscount = useMemo(() => withCheckoutDiscountCode(checkoutUrl, discountCode), [checkoutUrl, discountCode])
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
 
   const itemsRef = useRef<CartItem[]>(items)
   const discountCodeRef = useRef<string | null>(discountCode)
@@ -181,6 +168,8 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
   useEffect(() => {
     persist(items)
+
+  const checkoutUrlWithDiscount = useMemo(() => withCheckoutDiscountCode(checkoutUrl, discountCode), [checkoutUrl, discountCode])
   }, [items])
 
   useEffect(() => {
@@ -196,7 +185,18 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     return queueRef.current
   }, [])
 
+  const toCheckoutUnavailableReason = useCallback((err: unknown): string => {
+    if (err instanceof PortError) {
+      if (err.code === 'NOT_FOUND') return 'No cart found. Please retry.'
+      if (err.code === 'NOT_CONFIGURED') return 'Checkout is temporarily unavailable.'
+      if (err.code === 'UNAVAILABLE') return 'Checkout is temporarily unavailable. Please retry.'
+      return 'Checkout is temporarily unavailable.'
+    }
+    return 'Checkout is temporarily unavailable. Please retry.'
+  }, [])
+
   const syncCheckoutUrl = useCallback(async () => {
+    setCheckoutLoading(true)
     try {
       const start = await commerce.checkout.beginCheckout()
       setCheckoutStart(start)
@@ -207,10 +207,12 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
       setCheckoutUrl(undefined)
     } catch (err) {
       console.warn('Failed to compute checkout URL:', err)
-      setCheckoutStart({ mode: 'none', reason: 'Checkout unavailable' })
+      setCheckoutStart({ mode: 'none', reason: toCheckoutUnavailableReason(err) })
       setCheckoutUrl(undefined)
+    } finally {
+      setCheckoutLoading(false)
     }
-  }, [])
+  }, [toCheckoutUnavailableReason])
 
   const setFromCart = useCallback(
     async (cart: CartDTO) => {
@@ -219,6 +221,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
       if ((cart.lines ?? []).length > 0) {
         await syncCheckoutUrl()
       } else {
+        setCheckoutStart(undefined)
         setCheckoutUrl(undefined)
       }
     },
@@ -393,6 +396,7 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   const clear: CartState['clear'] = async () => {
     setItems([])
     setCheckoutUrl(undefined)
+    setCheckoutStart(undefined)
     setDiscountCode(null)
     itemsRef.current = []
 
@@ -454,6 +458,17 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     })
   }
 
+  const refreshCheckout: CartState['refreshCheckout'] = async () => {
+    if (itemsRef.current.length === 0) {
+      setCheckoutStart(undefined)
+      setCheckoutUrl(undefined)
+      return
+    }
+    await enqueue(async () => {
+      await syncCheckoutUrl()
+    })
+  }
+
   const value: CartState = {
     items,
     discountCode,
@@ -464,8 +479,10 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     subtotal,
     qty,
     checkoutUrl: checkoutUrlWithDiscount,
+    checkoutLoading,
     checkoutCapabilities,
     checkoutStart,
+    refreshCheckout,
     setEmail,
     setAttributes,
     applyDiscount,

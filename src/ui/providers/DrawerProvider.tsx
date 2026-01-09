@@ -75,7 +75,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
     return () => clearCloseTimer()
   }, [])
 
-  const { items, qty, setQty, remove, add, checkoutUrl, setAttributes } = useCart()
+  const { items, qty, setQty, remove, add, checkoutUrl, checkoutLoading, checkoutCapabilities, checkoutStart, refreshCheckout, setAttributes } = useCart()
   const { signedIn, user } = useAuth()
   const location = useLocation()
 
@@ -103,6 +103,9 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
       window.location.href = checkoutUrl
     }
   }, [checkoutUrl, redirecting, setAttributes])
+
+  const checkoutLabel = checkoutCapabilities?.providerLabel ?? 'Secure checkout'
+  const checkoutDisabledReason = checkoutStart?.mode === 'none' ? checkoutStart.reason : undefined
   const loyaltyPoints = 0
   const nextTier = 500
   const loyaltyProgress = SHOW_LOYALTY ? Math.min(100, Math.round((loyaltyPoints / nextTier) * 100)) : 0
@@ -733,15 +736,35 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
 	                  {redirecting
 	                    ? 'Opening secure checkout…'
 	                    : checkoutUrl
-	                      ? 'Secure checkout'
+	                      ? checkoutLabel
 	                      : items.length > 0
-	                        ? 'Preparing checkout…'
+	                        ? checkoutDisabledReason
+	                          ? 'Checkout unavailable'
+	                          : checkoutLoading
+	                            ? 'Preparing checkout…'
+	                            : 'Preparing checkout…'
 	                        : 'Checkout'}
 	                </button>
 	                {!checkoutUrl && items.length > 0 ? (
-	                  <p className="text-center text-xs text-semantic-text-primary/60">
-	                    Creating a checkout session…
-	                  </p>
+	                  <div className="text-center text-xs text-semantic-text-primary/60">
+	                    <p>
+	                      {checkoutDisabledReason
+	                        ? checkoutDisabledReason
+	                        : checkoutLoading
+	                          ? 'Creating a checkout session…'
+	                          : 'Creating a checkout session…'}
+	                    </p>
+	                    {checkoutDisabledReason ? (
+	                      <button
+	                        type="button"
+	                        className="mt-1 inline-flex items-center justify-center underline disabled:opacity-60"
+	                        disabled={Boolean(checkoutLoading)}
+	                        onClick={() => void refreshCheckout?.()}
+	                      >
+	                        Retry
+	                      </button>
+	                    ) : null}
+	                  </div>
 	                ) : null}
               </div>
             ) : null}

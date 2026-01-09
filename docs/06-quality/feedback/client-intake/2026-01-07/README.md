@@ -33,7 +33,7 @@ Use this as your “today list”. Each item links to the deeper issue worklog i
 - ✅ Issue 181 — Multi-buy discounts not applying at checkout (tiers requested).  
   Worklog: `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-181.md`
 - ✅ Issue 182 — Drawer checkout CTA stuck on “Preparing checkout…” (no working checkout CTA).  
-  Worklog: `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-182.md`
+  Worklog: `docs/06-quality/feedback/ui-issue-tracker/done-issues/issue-182.md`
 - ✅ Issue 184 — `/api/storefront/*` returning 500 / CF Worker 1101 (cart create, landing sections, product fetch).  
   Worklog: `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-184.md`
 

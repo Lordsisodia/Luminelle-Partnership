@@ -23,7 +23,7 @@ Date: **January 7, 2026**
 ## Linked issues
 
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-181.md`
-- `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-182.md`
+- `docs/06-quality/feedback/ui-issue-tracker/done-issues/issue-182.md`
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-183.md`
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-184.md`
 - `docs/06-quality/feedback/ui-issue-tracker/ui-issues/issue-185.md`
