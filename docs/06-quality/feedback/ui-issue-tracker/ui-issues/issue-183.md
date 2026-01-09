@@ -5,7 +5,7 @@ Tracker: `docs/06-quality/feedback/ui-issue-tracker/ui-issue-tracker.md`
 
 ## Metadata
 
-- Status: `UNTRIAGED`
+- Status: `VALIDATING`
 - Area: `Client`
 - Impact (1–5): `3`
 - Reach (1–5): `5`
@@ -34,6 +34,8 @@ On mobile view (notably the account page + footer), the layout appears to have:
 - Unwanted horizontal scrolling (page can scroll sideways)
 
 Horizontal scrolling should not be possible under normal layout.
+
+Note (2026-01-08): monitor moved the kanban status from `inreview` → `todo` because there was no open PR into `dev`. Keep this issue in `VALIDATING` until a PR exists and mobile verification is complete.
 
 ---
 
@@ -93,3 +95,55 @@ Horizontal scrolling should not be possible under normal layout.
 - Footer and account content have consistent, comfortable side padding (no edge-to-edge text).
 - No regressions to drawer/checkout overlays (they should still slide correctly).
 
+---
+
+## Step 2 — Verify (evidence)
+
+Verified (static code review): **LIKELY YES**.
+
+Likely culprit:
+- `src/ui/components/PublicHeader.tsx` — the cart quantity badge was positioned with `absolute -right-1 -top-1`, which can extend beyond the viewport on mobile and introduce horizontal scroll.
+
+Secondary issue:
+- Account pages used `px-4` while the shared header/footer used `px-5`, making the account page feel “tighter” than the footer on mobile.
+
+---
+
+## Step 4 — Options (3 viable fixes)
+
+Option A — Fix the overflowing element(s) (recommended + implemented):
+- Keep the cart badge fully within the icon button bounds (remove negative right/top offsets).
+- Align account page container padding with header/footer (`px-5` on mobile).
+
+Option B — Global overflow guard:
+- Add `overflow-x: clip` / `hidden` on `html, body` to prevent any horizontal scroll.
+- Faster, but can mask real overflow regressions and occasionally breaks off-canvas UIs if not tested carefully.
+
+Option C — Layout wrapper “safe width” utility:
+- Introduce a shared wrapper component/class that enforces `max-w-full` and consistent horizontal padding.
+- Higher refactor cost, but improves consistency across the app.
+
+---
+
+## Step 6 — Execute + Validate
+
+Changes (implementation in this branch):
+- `src/ui/components/PublicHeader.tsx`
+  - Moved cart badge from `-right-1 -top-1` to `right-0.5 top-0.5` to avoid viewport overflow.
+- Account pages (MarketingLayout-based):
+  - `src/domains/client/account/ui/pages/AccountPage.tsx`
+  - `src/domains/client/account/ui/pages/OrdersPage.tsx`
+  - `src/domains/client/account/ui/pages/OrderDetailPage.tsx`
+  - `src/domains/client/account/ui/pages/AddressesPage.tsx`
+  - `src/domains/client/account/ui/pages/PaymentMethodsPage.tsx`
+  - Updated mobile padding from `px-4` → `px-5` to match header/footer.
+
+Validation:
+- `npm run validate:tokens` ✅
+- `npm run lint:tokens` ✅
+- `npm run typecheck` ✅
+- `npm run build` ✅
+- `npm run lint` ❌ (fails repo-wide due to pre-existing lint errors unrelated to this issue; changed files lint clean when run directly)
+
+Next validation needed:
+- Manual mobile check (iPhone XR or similar): confirm no sideways scroll on `/account` and the footer looks consistently padded.
