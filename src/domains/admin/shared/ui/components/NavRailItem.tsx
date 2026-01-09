@@ -32,6 +32,8 @@ export function NavRailItem({
       title={label}
       className={({ isActive }) =>
         [
+          // Add an explicit `.active` class for any styling that targets it (e.g. `group-[.active]:...`).
+          isActive ? 'active' : '',
           'relative group flex h-11 w-11 items-center justify-center rounded-2xl transition overflow-visible',
           isActive
             ? activeClassName ??

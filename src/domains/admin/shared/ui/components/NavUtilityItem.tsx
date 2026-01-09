@@ -27,6 +27,8 @@ export function NavUtilityItem({
       title={label}
       className={({ isActive }) =>
         [
+          // Add an explicit `.active` class for any styling that targets it (e.g. `group-[.active]:...`).
+          isActive ? 'active' : '',
           'relative group flex items-center rounded-2xl',
           navSizing.transition,
           'overflow-visible',
