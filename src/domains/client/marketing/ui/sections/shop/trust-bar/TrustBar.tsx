@@ -49,7 +49,10 @@ export const TrustBar = () => {
             duration === 0
               ? undefined
               : {
-                  animation: `marquee ${duration}s linear infinite`,
+                  animationName: 'marquee',
+                  animationDuration: `${duration}s`,
+                  animationTimingFunction: 'linear',
+                  animationIterationCount: 'infinite',
                   animationPlayState: paused ? 'paused' : 'running',
                   willChange: 'transform',
                 }

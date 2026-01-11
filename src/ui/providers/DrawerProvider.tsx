@@ -350,7 +350,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="drawer-title"
-            aria-hidden={menuOpen ? undefined : true}
+            {...(menuOpen ? {} : { inert: '' })}
             ref={drawerRef}
           >
             <h2 id="drawer-title" className="sr-only">
