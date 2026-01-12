@@ -1,9 +1,12 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Seo } from '@/components/Seo'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { cdnUrl } from '@/lib/utils/cdn'
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { successStories } from '@/content/landing'
+import { TikTokEmbedPlaceholder } from '../components/TikTokEmbedPlaceholder'
+import { StickyMobileCTA } from '../components/StickyMobileCTA'
 
 const hero = {
   eyebrow: 'Brand Story',
@@ -66,7 +69,20 @@ const values = ['Satin-first comfort', 'Reusable, not disposable', 'Cruelty-free
 
 const BrandStoryPage = () => {
   const SHOW_INSIDE_THE_BUILD = false
-  const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 768
+  const [visibleStories, setVisibleStories] = useState(3)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    setVisibleStories(isMobile ? 3 : 6)
+  }, [isMobile])
+
   const title = 'Brand story'
   const description = hero.description
   const image = cdnUrl(hero.image)
@@ -197,7 +213,7 @@ const BrandStoryPage = () => {
               className="mt-8 flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
               style={{ scrollSnapType: 'x mandatory' }}
             >
-              {successStories.slice(0, isMobile() ? 3 : 6).map((story) => (
+              {successStories.slice(0, visibleStories).map((story) => (
                 <article
                   key={story.handle}
                   className="min-w-[min(82vw,340px)] snap-center rounded-3xl border border-semantic-accent-cta/35 bg-white/92 p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] md:min-w-[320px]"
@@ -211,21 +227,26 @@ const BrandStoryPage = () => {
                   </div>
                   <p className="mt-3 text-sm font-semibold text-semantic-text-primary/90 leading-relaxed">{story.highlight}</p>
                   <p className="text-sm text-semantic-text-primary/70">{story.stats} · {story.earnings}</p>
-                  <p className="mt-2 text-sm text-semantic-text-primary/75 leading-relaxed">“{story.quote}”</p>
-                  <div className="relative mt-3 overflow-hidden rounded-2xl border border-semantic-accent-cta/30 pb-[158%] bg-black">
-                    <iframe
-                      src={story.embedUrl.includes('lang=') ? story.embedUrl : `${story.embedUrl}&lang=en`}
-                      title={`${story.name} TikTok embed`}
-                      loading="lazy"
-                      allow="encrypted-media; fullscreen; clipboard-write"
-                      sandbox="allow-scripts allow-same-origin allow-presentation"
-                      allowFullScreen
-                      className="absolute inset-0 h-full w-full"
-                      style={{ border: 0 }}
-                    />
-                  </div>
+                  <p className="mt-2 text-sm text-semantic-text-primary/75 leading-relaxed">"{story.quote}"</p>
+                  <TikTokEmbedPlaceholder
+                    embedUrl={story.embedUrl}
+                    title={`${story.name} TikTok embed`}
+                  />
                 </article>
               ))}
+              {visibleStories < successStories.length && (
+                <div className="flex justify-center pt-6 pb-2">
+                  <button
+                    onClick={() => setVisibleStories(successStories.length)}
+                    className="group inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-cocoa px-6 py-2.5 text-sm font-semibold text-semantic-text-primary transition hover:bg-semantic-legacy-brand-blush/30 hover:-translate-y-0.5"
+                  >
+                    View {successStories.length - visibleStories} more creators
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -286,6 +307,7 @@ const BrandStoryPage = () => {
         </section>
         </div>
       </MarketingLayout>
+      <StickyMobileCTA />
     </>
   )
 }
