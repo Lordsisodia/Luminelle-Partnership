@@ -24,12 +24,11 @@ const buildWhatsAppUrl = (phone: string | null, text: string | null): string | n
   return `${base}?text=${encodeURIComponent(msg)}`
 }
 
+const WHATSAPP_SUPPORT_URL_FALLBACK = (import.meta.env.VITE_WHATSAPP_SUPPORT_URL ?? '').trim() || null
+
 export const WHATSAPP_SUPPORT_URL =
-  buildWhatsAppUrl(WHATSAPP_SUPPORT_PHONE, WHATSAPP_SUPPORT_TEXT) ??
-  (() => {
-    const fallback = (import.meta.env.VITE_WHATSAPP_SUPPORT_URL ?? '').trim()
-    return fallback || null
-  })()
+  buildWhatsAppUrl(WHATSAPP_SUPPORT_PHONE, WHATSAPP_SUPPORT_TEXT) ||
+  WHATSAPP_SUPPORT_URL_FALLBACK
 
 export const INSTAGRAM_URL =
   import.meta.env.VITE_INSTAGRAM_URL ??

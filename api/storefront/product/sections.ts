@@ -1,4 +1,4 @@
-import { runStorefront } from '../../storefront/_client.js'
+import { runStorefront } from '../../storefront/_client.ts'
 
 export default async function handler(req: Request) {
   const url = new URL(req.url)

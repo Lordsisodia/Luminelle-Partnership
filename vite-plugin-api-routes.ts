@@ -44,7 +44,9 @@ export function apiRoutes(): Plugin {
         // Build the file path from the URL
         // /api/storefront/cart/add-lines -> api/storefront/cart/add-lines.ts
         const urlPath = req.url!
-        const fsPath = join(process.cwd(), urlPath + '.ts')
+        // Strip query parameters and hash from the URL
+        const pathWithoutQuery = urlPath.split('?')[0].split('#')[0]
+        const fsPath = join(process.cwd(), pathWithoutQuery + '.ts')
 
         // Check if the API file exists
         if (!existsSync(fsPath)) {
