@@ -66,7 +66,7 @@ export function apiRoutes(): Plugin {
           const requestBody = await getRequestJson(req)
           const request = new Request(urlPath, {
             method: req.method,
-            headers: req.headers as HeadersInit,
+            headers: req.headers as any,
             body: req.method !== 'GET' && req.method !== 'HEAD'
               ? JSON.stringify(requestBody)
               : undefined,
@@ -78,7 +78,7 @@ export function apiRoutes(): Plugin {
           // Send the response
           const responseData = await response.text()
           res.statusCode = response.status
-          response.headers.forEach((value, key) => {
+          ;(response.headers as any).forEach((value: string, key: string) => {
             res.setHeader(key, value)
           })
           res.end(responseData)

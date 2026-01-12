@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom'
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PropsWithChildren } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { UserRound, Users, BookOpen, Newspaper } from 'lucide-react'
@@ -210,7 +211,13 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   const remainingForFreeShip = Math.max(0, FREE_SHIPPING_THRESHOLD_GBP - displaySubtotal)
   const freeShipProgress = Math.min(100, Math.round((displaySubtotal / FREE_SHIPPING_THRESHOLD_GBP) * 100))
   const [qtyOpen, setQtyOpen] = useState<string | null>(null)
-  const [qtyOpenDirection, setQtyOpenDirection] = useState<'up' | 'down'>('down')
+  const [qtyDropdownStyle, setQtyDropdownStyle] = useState<{
+    top: number
+    left: number
+    width: number
+    maxHeight: number
+    direction: 'up' | 'down'
+  } | null>(null)
 
   const handleDrawerTabKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
@@ -241,6 +248,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
       const menu = document.getElementById(currentId)
       if (menu && !menu.contains(e.target as Node)) {
         setQtyOpen(null)
+        setQtyDropdownStyle(null)
       }
     }
     document.addEventListener('mousedown', onClick)
@@ -331,6 +339,38 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
     window.addEventListener('lumelle:open-cart', onOpenCart)
     return () => window.removeEventListener('lumelle:open-cart', onOpenCart)
   }, [])
+
+  const updateQtyDropdownPosition = useCallback((btn: HTMLElement | null) => {
+    if (!btn) return
+    const rect = btn.getBoundingClientRect()
+    const padding = 8
+    const desiredHeight = 360
+    const spaceBelow = window.innerHeight - rect.bottom - padding
+    const spaceAbove = rect.top - padding
+    const openUp = spaceBelow < 220 && spaceAbove > spaceBelow
+    const maxHeight = Math.max(200, Math.min(desiredHeight, Math.max(spaceBelow, spaceAbove)))
+    const width = rect.width
+    const left = Math.min(Math.max(padding, rect.left), window.innerWidth - width - padding)
+    const top = openUp ? Math.max(padding, rect.top - maxHeight - 6) : rect.bottom + 6
+    setQtyDropdownStyle({ top, left, width, maxHeight, direction: openUp ? 'up' : 'down' })
+  }, [])
+
+  // Reposition dropdown on resize/scroll while open
+  useEffect(() => {
+    if (!qtyOpen) return
+    const btn = document.getElementById(`qty-button-${qtyOpen}`)
+    updateQtyDropdownPosition(btn)
+    const onReflow = () => updateQtyDropdownPosition(btn)
+    const panel = cartPanelRef.current
+    panel?.addEventListener('scroll', onReflow)
+    window.addEventListener('resize', onReflow)
+    window.addEventListener('scroll', onReflow, true)
+    return () => {
+      window.removeEventListener('resize', onReflow)
+      window.removeEventListener('scroll', onReflow, true)
+      panel?.removeEventListener('scroll', onReflow)
+    }
+  }, [qtyOpen, updateQtyDropdownPosition])
 
   const drawerApi = useMemo(
     () => ({
@@ -649,61 +689,68 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                                 </span>
                                 <span className="text-semantic-text-primary/70">{reviewMeta[displayTitle]?.reviews ?? it.reviewsCount ?? 103} reviews</span>
                               </div>
-                              <div className="mt-3 flex items-start justify-between gap-3 relative" id={`qty-menu-${it.id}`}>
+                              <div className="mt-3 flex items-start justify-between gap-3 relative">
                                 <div className="flex w-full flex-col gap-1">
                                   <button
+                                    id={`qty-button-${it.id}`}
                                     type="button"
                                     onClick={(e) => {
                                       if (qtyOpen === it.id) {
                                         setQtyOpen(null)
+                                        setQtyDropdownStyle(null)
                                         return
                                       }
 
-                                      const btnRect = e.currentTarget.getBoundingClientRect()
-                                      const panelRect = cartPanelRef.current?.getBoundingClientRect()
-
-                                      if (panelRect) {
-                                        const spaceBelow = panelRect.bottom - btnRect.bottom
-                                        const spaceAbove = btnRect.top - panelRect.top
-                                        // If there isn't enough space below for the dropdown, open upwards.
-                                        setQtyOpenDirection(spaceBelow < 240 && spaceAbove > spaceBelow ? 'up' : 'down')
-                                      } else {
-                                        setQtyOpenDirection('down')
-                                      }
-
                                       setQtyOpen(it.id)
+                                      updateQtyDropdownPosition(e.currentTarget)
                                     }}
                                     className="inline-flex w-full items-center justify-between gap-2 rounded-xl border border-semantic-legacy-brand-blush/60 bg-white px-3 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/20"
                                   >
                                     <span className="text-sm font-semibold">Qty: {it.qty}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                                   </button>
-                                  {qtyOpen === it.id ? (
-                                    <div
-                                      className={`absolute left-0 z-30 w-full max-w-full rounded-lg border border-semantic-legacy-brand-blush/60 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] overflow-auto max-h-72 ${
-                                        qtyOpenDirection === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
-                                      }`}
-                                    >
-                                      {Array.from({ length: MAX_CART_ITEM_QTY }, (_, i) => i + 1).map((n) => (
-                                        <button
-                                          key={n}
-                                          className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm ${n === it.qty ? 'bg-semantic-legacy-brand-blush/30 font-semibold text-semantic-text-primary' : 'text-semantic-text-primary/80 hover:bg-semantic-legacy-brand-blush/20'}`}
-                                          onClick={() => { setQty(it.id, n); setQtyOpen(null) }}
+                                  {qtyOpen === it.id && qtyDropdownStyle
+                                    ? createPortal(
+                                        <div
+                                          id={`qty-menu-${it.id}`}
+                                          className="fixed z-[70] rounded-lg border border-semantic-legacy-brand-blush/60 bg-white shadow-[0_14px_36px_rgba(0,0,0,0.16)] overflow-auto"
+                                          style={{
+                                            top: qtyDropdownStyle.top,
+                                            left: qtyDropdownStyle.left,
+                                            width: qtyDropdownStyle.width,
+                                            maxHeight: qtyDropdownStyle.maxHeight,
+                                          }}
                                         >
-                                          <span>{n}</span>
-                                          {(() => {
-                                            const tier = getVolumeDiscountTierForVariant(it.id, n)
-                                            if (!tier) return null
-                                            return (
-                                              <span className="rounded-full bg-semantic-legacy-brand-blush/50 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary/70">
-                                                {tier.badge}
-                                              </span>
-                                            )
-                                          })()}
-                                        </button>
-                                      ))}
-                                    </div>
-                                  ) : null}
+                                          {Array.from({ length: MAX_CART_ITEM_QTY }, (_, i) => i + 1).map((n) => (
+                                            <button
+                                              key={n}
+                                              className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm ${
+                                                n === it.qty
+                                                  ? 'bg-semantic-legacy-brand-blush/30 font-semibold text-semantic-text-primary'
+                                                  : 'text-semantic-text-primary/80 hover:bg-semantic-legacy-brand-blush/20'
+                                              }`}
+                                              onClick={() => {
+                                                setQty(it.id, n)
+                                                setQtyOpen(null)
+                                                setQtyDropdownStyle(null)
+                                              }}
+                                            >
+                                              <span>{n}</span>
+                                              {(() => {
+                                                const tier = getVolumeDiscountTierForVariant(it.id, n)
+                                                if (!tier) return null
+                                                return (
+                                                  <span className="rounded-full bg-semantic-legacy-brand-blush/50 px-2 py-0.5 text-[11px] font-semibold text-semantic-text-primary/70">
+                                                    {tier.badge}
+                                                  </span>
+                                                )
+                                              })()}
+                                            </button>
+                                          ))}
+                                        </div>,
+                                        document.body,
+                                      )
+                                    : null}
                                 </div>
                                 <div className="text-right leading-tight">
                                   {(() => {
