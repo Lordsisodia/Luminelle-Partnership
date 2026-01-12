@@ -7,6 +7,7 @@ import { SectionHeading } from '@ui/components/SectionHeading'
 import { successStories } from '@/content/landing'
 import { TikTokEmbedPlaceholder } from '../components/TikTokEmbedPlaceholder'
 import { StickyMobileCTA } from '../components/StickyMobileCTA'
+import { ReadingProgress } from '../components/ReadingProgress'
 
 const hero = {
   eyebrow: 'Brand Story',
@@ -90,6 +91,7 @@ const BrandStoryPage = () => {
   return (
     <>
       <Seo title={title} description={description} image={image} url="/brand" type="website" />
+      <ReadingProgress />
       <MarketingLayout navItems={[]} subtitle="Brand">
         <div className="bg-white text-semantic-text-primary">
         {/* Hero */}
@@ -187,11 +189,11 @@ const BrandStoryPage = () => {
 
         {/* Proof */}
         <section className="py-12">
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-3 px-4 text-sm text-semantic-text-primary/80">
+          <div className="mx-auto flex max-w-5xl gap-3 overflow-x-auto px-4 pb-2 text-sm text-semantic-text-primary/80 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {proofChips.map((chip) => (
               <div
                 key={chip.label}
-                className="inline-flex items-center gap-2 rounded-full border border-semantic-accent-cta/40 bg-semantic-legacy-brand-blush/30 px-4 py-2 shadow-soft"
+                className="flex-shrink-0 inline-flex items-center gap-2 rounded-full border border-semantic-accent-cta/40 bg-semantic-legacy-brand-blush/30 px-4 py-2 shadow-soft"
               >
                 <span className="text-semantic-text-primary font-semibold">{chip.value}</span>
                 <span className="text-semantic-text-primary/70">{chip.label}</span>
