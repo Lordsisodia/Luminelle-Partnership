@@ -350,7 +350,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="drawer-title"
-            {...(menuOpen ? {} : { inert: '' })}
+            {...(menuOpen ? {} : { inert: true })}
             ref={drawerRef}
           >
             <h2 id="drawer-title" className="sr-only">
@@ -412,13 +412,13 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                           loading="lazy"
                         />
                         <div className="min-w-0 flex-1 text-left">
+                          <span className="inline-block rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/70 whitespace-nowrap mb-1">
+                            Best Seller
+                          </span>
                           <div className="leading-tight">
                             <div>Lumelle Shower Cap</div>
                             <div className="mt-1 text-xs font-medium text-semantic-text-primary/60 whitespace-nowrap">Satin-lined, steam-blocking</div>
                           </div>
-                          <span className="ml-auto mt-2 rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/70 whitespace-nowrap">
-                            Best Seller
-                          </span>
                         </div>
                       </RouterLink>
                       <RouterLink
@@ -433,6 +433,9 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                           loading="lazy"
                         />
                         <div className="min-w-0 flex-1 text-left">
+                          <span className="inline-block rounded-full bg-semantic-accent-cta/80 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white whitespace-nowrap mb-1">
+                            New
+                          </span>
                           <div className="leading-tight">
                             <div>Satin Overnight Heatless Curler Set</div>
                             <div className="mt-1 text-xs font-medium text-semantic-text-primary/60">Crease-free curls while you sleep</div>

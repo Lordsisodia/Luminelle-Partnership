@@ -124,17 +124,25 @@ const mapCartToItems = (cart: CartDTO): CartItem[] => {
 const isLegacyShopifyGid = (id: string) => id.startsWith('gid://shopify/')
 
 const withCheckoutDiscountCode = (url: string | undefined, code: string | null | undefined): string | undefined => {
+  console.log('[🔍 CART-DIAGNOSTIC] withCheckoutDiscountCode called', { url, code })
   if (!url) return undefined
   const normalized = String(code ?? '').trim().toUpperCase()
-  if (!normalized) return url
+  console.log('[🔍 CART-DIAGNOSTIC] Normalized discount code', { normalized, original: code })
+  if (!normalized) {
+    console.log('[🔍 CART-DIAGNOSTIC] No discount code, returning original URL')
+    return url
+  }
 
   try {
     const base = typeof window !== 'undefined' ? window.location.origin : 'http://localhost'
     const parsed = new URL(url, base)
     parsed.searchParams.set('discount', normalized)
-    return parsed.toString()
+    const finalUrl = parsed.toString()
+    console.log('[🔍 CART-DIAGNOSTIC] Discount appended to URL', { finalUrl })
+    return finalUrl
   } catch {
     // If URL parsing fails (unexpected provider URL format), fall back to the raw URL.
+    console.log('[🔍 CART-DIAGNOSTIC] URL parsing failed, returning original URL')
     return url
   }
 }

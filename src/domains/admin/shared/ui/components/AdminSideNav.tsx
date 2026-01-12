@@ -191,7 +191,7 @@ export function AdminSideNav({
   // Desktop collapsed: only show the icon rail (no inner divider / “empty” right panel).
   if (mode === 'desktop' && collapsed) {
     return (
-      <div className="flex min-h-0 flex-1 overflow-hidden rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain">
+      <div className="flex min-h-0 flex-1 overflow-visible rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain">
         <nav
           aria-label="Admin navigation"
           className={`flex w-full flex-col bg-brand-porcelain ${navSizing.railPadding} overflow-visible`}
@@ -212,7 +212,7 @@ export function AdminSideNav({
   return (
     <div
       className={[
-        'flex min-h-0 flex-1 overflow-x-visible overflow-y-hidden rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain',
+        'flex min-h-0 flex-1 overflow-visible rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain',
         mode === 'drawer' ? 'flex-col' : 'flex-row',
       ].join(' ')}
     >
@@ -253,7 +253,7 @@ export function AdminSideNav({
 
       {/* Expanded panel */}
       {collapsed && mode !== 'drawer' ? null : (
-        <div className="flex min-w-0 flex-1 flex-col gap-3 overflow-hidden p-2 w-[clamp(19.5rem,30vw,26rem)] max-w-full">
+        <div className="flex min-w-0 flex-1 flex-col gap-3 overflow-visible p-2 w-[clamp(19.5rem,30vw,26rem)] max-w-full">
           <div className="min-h-0 flex-1 overflow-y-auto pr-1">
             {activeSection.id === 'catalog' ? (
               <div className="space-y-3">
