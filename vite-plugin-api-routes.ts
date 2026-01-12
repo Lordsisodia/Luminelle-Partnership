@@ -1,7 +1,26 @@
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Plugin } from 'vite'
 import { build } from 'esbuild'
+
+// Load environment variables from .env file
+const loadEnv = () => {
+  try {
+    const envPath = join(process.cwd(), '.env')
+    const envContent = readFileSync(envPath, 'utf-8')
+    envContent.split('\n').forEach((line) => {
+      const [key, ...valueParts] = line.split('=')
+      const value = valueParts.join('=').trim()
+      if (key && value && !key.startsWith('#')) {
+        process.env[key] = value
+      }
+    })
+    console.log('[API Routes] Loaded environment variables, SHOPIFY_STORE_DOMAIN:', process.env.SHOPIFY_STORE_DOMAIN?.substring(0, 20))
+  } catch (err) {
+    console.log('[API Routes] Failed to load .env:', err)
+    // .env file not found, ignore
+  }
+}
 
 /**
  * Vite plugin to serve API routes during development.
@@ -13,6 +32,9 @@ export function apiRoutes(): Plugin {
   return {
     name: 'api-routes',
     configureServer(server) {
+      // Load environment variables for API routes
+      loadEnv()
+
       server.middlewares.use(async (req, res, next) => {
         // Only handle API requests
         if (!req.url?.startsWith('/api/')) {
@@ -41,12 +63,19 @@ export function apiRoutes(): Plugin {
             const tempOutPath = fsPath + '.js'
             await build({
               entryPoints: [fsPath],
-              bundle: false,
+              bundle: true,
               format: 'esm',
               target: 'node18',
               outfile: tempOutPath,
               platform: 'node',
               write: true,
+              external: ['node:*'],
+              define: {
+                'process.env.SHOPIFY_API_VERSION': JSON.stringify(process.env.SHOPIFY_API_VERSION || '2025-10'),
+                'process.env.SHOPIFY_STORE_DOMAIN': JSON.stringify(process.env.SHOPIFY_STORE_DOMAIN || ''),
+                'process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN': JSON.stringify(process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN || ''),
+                'process.env.VITE_SHOPIFY_STOREFRONT_PUBLIC_TOKEN': JSON.stringify(process.env.VITE_SHOPIFY_STOREFRONT_PUBLIC_TOKEN || ''),
+              },
             })
 
             // Import the transpiled module
@@ -64,7 +93,9 @@ export function apiRoutes(): Plugin {
 
           // Create a Request object from the Node.js req
           const requestBody = await getRequestJson(req)
-          const request = new Request(urlPath, {
+          const origin = req.headers.origin || `http://${req.headers.host}`
+          const fullUrl = new URL(urlPath, origin)
+          const request = new Request(fullUrl.toString(), {
             method: req.method,
             headers: req.headers as any,
             body: req.method !== 'GET' && req.method !== 'HEAD'

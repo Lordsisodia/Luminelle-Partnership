@@ -1,4 +1,4 @@
-import { CART_FRAGMENT, runStorefront } from '../_client.js'
+import { CART_FRAGMENT, runStorefront } from '../_client.ts'
 
 export default async function handler(req: Request) {
   const body = await req.json().catch(() => ({}))

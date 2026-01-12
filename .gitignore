@@ -34,3 +34,5 @@ components-library/
 **/.blackbox/.cache/
 **/.blackbox/*.log
 .worktrees/
+# Transpiled API files from vite plugin
+**/*.ts.js

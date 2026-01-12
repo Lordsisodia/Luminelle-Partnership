@@ -1,18 +1,21 @@
 const API_VERSION = process.env.SHOPIFY_API_VERSION || '2025-10'
 const DOMAIN = process.env.SHOPIFY_STORE_DOMAIN
+const PUBLIC_TOKEN = process.env.VITE_SHOPIFY_STOREFRONT_PUBLIC_TOKEN
 const PRIVATE_TOKEN = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN
 
 function assertEnv() {
-  if (!DOMAIN || !PRIVATE_TOKEN) throw new Error('Storefront private token or domain not set')
+  if (!DOMAIN) throw new Error('Storefront domain not set')
+  if (!PUBLIC_TOKEN && !PRIVATE_TOKEN) throw new Error('Storefront token not set')
 }
 
 export async function runStorefront<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
   assertEnv()
+  const token = (PRIVATE_TOKEN || PUBLIC_TOKEN) as string
   const res = await fetch(`https://${DOMAIN}/api/${API_VERSION}/graphql.json`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
-      'X-Shopify-Storefront-Private-Token': PRIVATE_TOKEN as string,
+      'X-Shopify-Storefront-Access-Token': token,
     },
     body: JSON.stringify({ query, variables }),
   })
