@@ -5,6 +5,33 @@ import { commerce } from '@platform/commerce'
 import { PortError } from '@platform/ports'
 import type { CartDTO, CartLineDTO, CheckoutCapabilities, CheckoutStart } from '@platform/commerce/ports'
 
+/**
+ * Maps product handles to their primary product page image.
+ * These must match the first image in the gallery config for each product.
+ *
+ * See src/domains/client/shop/products/data/product-config.ts for the source of truth.
+ */
+const PRODUCT_PAGE_IMAGES: Record<string, string> = {
+  // Shower cap: /uploads/luminele/shower-cap-01.webp (first image in CAP_GALLERY)
+  'lumelle-shower-cap': '/uploads/luminele/shower-cap-01.webp',
+
+  // Overnight curler: /uploads/curler/1.webp (first image in curlerGallery)
+  'satin-overnight-curler': '/uploads/curler/1.webp',
+}
+
+/**
+ * Normalizes cart item images to match the first image shown on product pages.
+ */
+const normalizeCartImage = (variantKey: string, fallbackImage?: string): string | undefined => {
+  // Extract handle from variant key (format: variant.{handle}.{variant})
+  const match = variantKey.match(/^variant\.([\w-]+)\./)
+  if (!match) return fallbackImage
+
+  const handle = match[1]
+  // Map the handle to the product page primary image
+  return PRODUCT_PAGE_IMAGES[handle] ?? fallbackImage
+}
+
 export type CartItem = {
   id: string
   title: string
@@ -85,7 +112,8 @@ const mapCartLineToItem = (line: CartLineDTO): CartItem => {
     price: unitPrice,
     compareAt,
     qty: clampLineQty(line.qty),
-    image: line.image,
+    // Normalize cart image to match the first image shown on product pages
+    image: normalizeCartImage(line.variantKey, line.image),
   }
 }
 
@@ -196,7 +224,12 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
     queueRef.current = queueRef.current
       .then(op)
       .catch((err) => {
-        console.error('Cart sync failed:', err)
+        // In development, suppress errors when backend isn't available
+        const isDevelopment = import.meta.env.DEV
+        const isBackendUnavailable = err instanceof PortError && err.code === 'NOT_CONFIGURED'
+        if (!isDevelopment || !isBackendUnavailable) {
+          console.error('Cart sync failed:', err)
+        }
       })
     return queueRef.current
   }, [])

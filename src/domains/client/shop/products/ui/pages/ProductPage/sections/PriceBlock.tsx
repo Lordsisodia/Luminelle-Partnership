@@ -64,8 +64,8 @@ export const PriceBlock = ({
   }, [shareToast])
 
   return (
-    <div className="space-y-5 text-semantic-text-primary min-w-0 w-full md:pl-0">
-      <div>
+    <div className="space-y-5 text-semantic-text-primary min-w-0 w-full md:pl-0 overflow-visible">
+      <div className="overflow-visible">
         <div id="pdp-hero-text" className="h-0 scroll-mt-24" />
         <div className="mt-2 flex items-start gap-3">
           <h1 className="font-heading text-[1.95rem] font-bold leading-tight md:text-4xl">{productTitle}</h1>
@@ -162,7 +162,7 @@ export const PriceBlock = ({
           <div className="text-semantic-text-primary/80">Dispatch target: 48h · Free 30-day returns</div>
         </div>
         <div className="mt-3 space-y-1">
-          <div className="relative">
+          <div className="relative z-10">
             <label htmlFor="pdp-quantity" className="sr-only">
               Quantity
             </label>
@@ -174,7 +174,8 @@ export const PriceBlock = ({
                 const next = Number(e.target.value)
                 if (Number.isFinite(next) && next >= 1) setQuantity(next)
               }}
-              className="flex w-full appearance-none items-center justify-between rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3 pr-12 text-base font-semibold text-semantic-text-primary shadow-soft focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30"
+              className="flex w-full appearance-none items-center justify-between rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3 pr-12 text-sm font-semibold text-semantic-text-primary shadow-sm transition hover:bg-brand-porcelain/60 focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30 relative z-50"
+              style={{ position: 'relative', zIndex: 50 }}
             >
               {Array.from({ length: MAX_CART_ITEM_QTY }, (_, i) => i + 1).map((qty) => (
                 <option key={qty} value={qty}>
@@ -192,7 +193,8 @@ export const PriceBlock = ({
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
-              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-semantic-text-primary/70"
+              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-semantic-text-primary/70 z-50"
+              style={{ position: 'relative', zIndex: 50 }}
             >
               <path d="M6 9l6 6 6-6" />
             </svg>

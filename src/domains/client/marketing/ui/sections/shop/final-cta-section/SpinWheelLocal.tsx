@@ -18,18 +18,18 @@ type SpinWheelProps = {
 
 // Welcome wheel: the spin is a playful reveal for a guaranteed welcome deal.
 const defaultPrizes: Prize[] = [
-  { label: '10% off', helper: 'Welcome deal', color: '#F9A58A' },
+  { label: '5% off', helper: 'Welcome deal', color: '#F9A58A' },
   { label: '10% off', helper: 'Welcome deal', color: '#F4C7B7' },
   { label: '10% off', helper: 'Welcome deal', color: '#FDD9C3' },
-  { label: '10% off', helper: 'Welcome deal', color: '#F7B8A0' },
-  { label: '10% off', helper: 'Welcome deal', color: '#F9A58A' },
+  { label: '15% off', helper: 'Welcome deal', color: '#F7B8A0' },
+  { label: '5% off', helper: 'Welcome deal', color: '#F9A58A' },
   { label: '10% off', helper: 'Welcome deal', color: '#F7B8A0' },
   { label: '10% off', helper: 'Welcome deal', color: '#FDD9C3' },
-  { label: '10% off', helper: 'Welcome deal', color: '#F7B8A0' },
+  { label: '5% off', helper: 'Welcome deal', color: '#F7B8A0' },
 ]
 
 const guaranteedAward: Prize = {
-  label: '10% off',
+  label: 'Free Shipping on orders over £20',
   helper: 'Welcome deal',
   color: '#F7B8A0',
 }
@@ -183,7 +183,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
     setError(null)
     setApplyStatus('idle')
 
-    // Always land visually on a consistent "welcome deal" slice.
+    // Always land visually on a consistent "welcome deal" slice (10% off slice).
     let targetIndex = prizes.length - 1
     for (let i = prizes.length - 1; i >= 0; i--) {
       const label = prizes[i].label.toLowerCase()
@@ -312,7 +312,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
             </p>
           ) : (
             <p className="text-center text-xs text-semantic-text-primary/70">
-              Guaranteed welcome code: {WELCOME_DISCOUNT_CODE}. Applies on orders over £{WELCOME_MIN_SPEND_GBP}+ (1 per account).
+              Guaranteed welcome deal: Free Shipping on orders over £{WELCOME_MIN_SPEND_GBP}+. Sign in to claim (1 per account).
             </p>
           )}
         </div>
@@ -321,7 +321,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
       <div className="mt-2 w-full max-w-md rounded-2xl bg-white/70 p-4 text-sm text-semantic-text-primary/80 shadow-[0_6px_18px_rgba(0,0,0,0.06)]">
         <div className="font-semibold text-semantic-text-primary">Guaranteed welcome deal</div>
         <div className="mt-1 text-xs text-semantic-text-primary/70">
-          Use code <span className="font-semibold">{WELCOME_DISCOUNT_CODE}</span> for 10% off on orders over £{WELCOME_MIN_SPEND_GBP}+.
+          Use code <span className="font-semibold">{WELCOME_DISCOUNT_CODE}</span> for Free Shipping on orders over £{WELCOME_MIN_SPEND_GBP}+.
         </div>
       </div>
 
@@ -331,7 +331,7 @@ export const SpinWheel = ({ prizes = defaultPrizes, onSpun }: SpinWheelProps) =>
             {claim ? 'Welcome deal unlocked!' : 'You unlocked a welcome deal!'}
           </p>
           <p className="mt-1 text-sm text-semantic-text-primary/80">
-            Code <span className="font-semibold">{WELCOME_DISCOUNT_CODE}</span> • 10% off (min £{WELCOME_MIN_SPEND_GBP}+)
+            Code <span className="font-semibold">{WELCOME_DISCOUNT_CODE}</span> • Free Shipping on orders over £{WELCOME_MIN_SPEND_GBP}+
           </p>
           {!signedIn ? (
             <button

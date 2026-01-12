@@ -57,7 +57,7 @@ export const SuccessStoriesSection = () => {
                 {featured.stats} · {featured.earnings}
               </p>
               <blockquote className="rounded-2xl bg-semantic-legacy-brand-blush/40 p-4 text-sm leading-relaxed text-semantic-text-primary/80">
-                “{featured.quote}”
+                <p className="whitespace-pre-line">{featured.quote}</p>
               </blockquote>
               <LazyVisible
                 placeholder={

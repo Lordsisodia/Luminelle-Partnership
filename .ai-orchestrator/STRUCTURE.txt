@@ -1,0 +1,142 @@
+# AI Orchestrator - File Structure
+
+```
+.ai-orchestrator/
+├── 📁 config/
+│   └── settings.ts                  # Configuration, system prompts
+│
+├── 📁 orchestrator/
+│   ├── index.ts                     # Main orchestrator entry point
+│   ├── classifier.ts                # Task classification logic
+│   ├── task-generator.ts            # Task breakdown logic
+│   └── mcp-client.ts                # Vibe Kanban MCP wrapper
+│
+├── 📁 workers/
+│   └── glm-worker.ts                # GLM worker automation loop
+│
+├── 📁 types/
+│   └── index.d.ts                   # TypeScript type definitions
+│
+├── 📄 package.json                  # Dependencies and scripts
+├── 📄 tsconfig.json                 # TypeScript configuration
+├── 📄 demo.ts                       # Demo script
+├── 📄 README.md                     # Project documentation
+├── 📄 QUICKSTART.md                 # Getting started guide
+├── 📄 PROJECT_SUMMARY.md            # Project summary and metrics
+└── 📄 STRUCTURE.txt                 # This file
+```
+
+## 📝 File Descriptions
+
+### Core Modules
+
+**orchestrator/index.ts** (280 lines)
+- Main orchestration workflow
+- Coordinates classification, breakdown, and task creation
+- Prints summaries and reports
+
+**orchestrator/classifier.ts** (180 lines)
+- Task complexity analysis (1-5 scale)
+- Category determination
+- Executor recommendation
+
+**orchestrator/task-generator.ts** (650 lines)
+- Breaks down complex tasks into subtasks
+- Pattern-based subtask generation
+- Creates detailed task specifications
+
+**orchestrator/mcp-client.ts** (150 lines)
+- Vibe Kanban MCP wrapper
+- Task creation, updates, and listing
+- Demo mode support
+
+### Worker Module
+
+**workers/glm-worker.ts** (300 lines)
+- Automated GLM task execution loop
+- Claims tasks from Vibe Kanban
+- Executes and updates status
+
+### Configuration
+
+**config/settings.ts** (150 lines)
+- System prompts for different AI tiers
+- Model configurations
+- Worker settings
+
+### Types
+
+**types/index.d.ts** (100 lines)
+- TypeScript definitions
+- Interfaces for tasks, projects, configurations
+
+### Documentation
+
+**README.md** - Project overview, features, and setup
+**QUICKSTART.md** - Step-by-step getting started guide
+**PROJECT_SUMMARY.md** - Complete project summary and metrics
+**STRUCTURE.txt** - This file
+
+## 🎯 Key Features by File
+
+### Classification & Routing
+- `classifier.ts`: Analyzes task complexity
+- `task-generator.ts`: Creates subtasks
+- `settings.ts`: System prompts for classification
+
+### Vibe Kanban Integration
+- `mcp-client.ts`: All MCP operations
+- `index.ts`: Orchestrates task creation
+
+### Worker Automation
+- `glm-worker.ts`: Claims and executes tasks
+- `settings.ts`: Worker configuration
+
+### Configuration
+- `settings.ts`: All system prompts and settings
+- `types/index.d.ts`: Type safety throughout
+
+## 📊 Lines of Code
+
+```
+orchestrator/:   ~1,260 lines
+workers/:         ~300 lines
+config/:           ~150 lines
+types/:            ~100 lines
+────────────────────────────
+Total:           ~1,810 lines
+```
+
+## 🔗 Dependencies
+
+```json
+{
+  "@types/node": "^20.0.0",
+  "typescript": "^5.0.0",
+  "ts-node": "^10.9.0"
+}
+```
+
+## 🎓 Usage Flow
+
+1. **User runs**: `npx ts-node orchestrator/index.ts "task description"`
+2. **orchestrator/index.ts**: Main workflow starts
+3. **orchestrator/classifier.ts`: Analyzes complexity
+4. **orchestrator/task-generator.ts**: Creates subtasks
+5. **orchestrator/mcp-client.ts`: Creates tasks in Vibe Kanban
+6. **workers/glm-worker.ts**: Claims and executes tasks (separate process)
+
+## 🚀 Scripts
+
+```bash
+npm run orchestrate "task"    # Create and delegate tasks
+npm run worker                # Start GLM worker
+npm run status                # Check task status
+npm run build                 # Compile TypeScript
+```
+
+---
+
+**Total Files**: 13
+**Total Code**: ~1,810 lines
+**Languages**: TypeScript, JSON, Markdown

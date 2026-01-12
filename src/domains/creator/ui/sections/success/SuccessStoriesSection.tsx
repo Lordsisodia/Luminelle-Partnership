@@ -28,22 +28,14 @@ export const SuccessStoriesSection = () => {
         {successStories.map((story) => (
           <article
             key={story.handle}
-            className="min-w-[min(82vw,360px)] snap-center rounded-3xl border border-semantic-accent-cta/35 bg-white/92 p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] md:min-w-[340px] lg:min-w-[360px]"
+            className="min-w-[min(85vw,420px)] snap-center rounded-3xl border border-semantic-accent-cta/35 bg-white/92 p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] md:min-w-[400px] lg:min-w-[420px]"
           >
-            <div className="flex items-center gap-3">
-              <img
-                src={story.avatarSrc}
-                alt={story.avatarAlt}
-                className="h-16 w-16 rounded-full object-cover"
-                loading="lazy"
-              />
-              <div className="flex-1">
-                <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">
-                  <span className="text-semantic-text-primary/60">{story.handle}</span>
-                </div>
-                <h3 className="font-heading text-xl font-bold text-semantic-text-primary leading-tight">{story.name}</h3>
-                <p className="text-sm text-semantic-text-primary/70">{story.stats} · {story.earnings}</p>
+            <div className="mb-3 text-center">
+              <div className="flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">
+                <span className="text-semantic-text-primary/60">{story.handle}</span>
               </div>
+              <h3 className="mt-2 font-heading text-2xl font-bold text-semantic-text-primary leading-tight">{story.name}</h3>
+              <p className="mt-1 text-sm text-semantic-text-primary/70">{story.stats} · {story.earnings}</p>
             </div>
 
             <p className="mt-3 text-sm font-semibold text-semantic-text-primary/90 leading-relaxed">{story.highlight}</p>

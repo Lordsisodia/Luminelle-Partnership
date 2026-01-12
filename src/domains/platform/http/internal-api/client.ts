@@ -30,6 +30,17 @@ export const requestJson = async <T>(path: string, init?: JsonRequestInit): Prom
     throw new PortError(code, message, { details: { path, status: res.status } })
   }
 
+  const contentType = res.headers.get('content-type')
+  if (!contentType?.includes('application/json')) {
+    // In development, API routes may not exist and return HTML/JavaScript
+    // Silently handle this without console warnings
+    throw new PortError(
+      'NOT_CONFIGURED',
+      `API endpoint not available: ${path}. Please ensure the backend is running.`,
+      { details: { path, status: res.status, contentType } }
+    )
+  }
+
   return (await res.json()) as T
 }
 

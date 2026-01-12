@@ -101,7 +101,7 @@ export function PublicHeader({
               type="button"
               aria-label="Open cart"
               onClick={openCart}
-              className="relative inline-flex h-10 w-10 items-center justify-center text-semantic-text-primary hover:text-semantic-text-primary/80"
+              className="relative hidden h-10 w-10 items-center justify-center text-semantic-text-primary hover:text-semantic-text-primary/80 md:inline-flex"
             >
               <ShoppingBag className="h-6 w-6" />
               {qty > 0 ? (

@@ -142,7 +142,7 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
             {(tiktoks ?? successStories).map((s, idx) => {
               const shouldLoad = hydrated && readyIndexes.has(idx)
               return (
-                <article key={s.handle} data-tiktok-card className="min-w-[min(72vw,300px)] snap-center lg:min-w-[min(340px,26vw)]">
+                <article key={`${s.handle}-${idx}`} data-tiktok-card className="min-w-[min(72vw,300px)] snap-center lg:min-w-[min(340px,26vw)]">
                   <LazyVisible
                     placeholder={
                       <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/40 pb-[158%] shadow-soft bg-semantic-legacy-brand-blush/20" />

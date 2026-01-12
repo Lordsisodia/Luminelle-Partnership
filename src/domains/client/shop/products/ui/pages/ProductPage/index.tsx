@@ -173,15 +173,20 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
     if (existing && existing.href === desiredHref) return
     if (existing) existing.remove()
 
-    const l = document.createElement('link')
-    l.rel = 'preload'
-    l.as = 'image'
-    l.href = href
-    l.setAttribute('data-hero', 'pdp-hero')
-    document.head.appendChild(l)
+    // Delay preload slightly to avoid warnings if user navigates away quickly
+    const timeoutId = setTimeout(() => {
+      const l = document.createElement('link')
+      l.rel = 'preload'
+      l.as = 'image'
+      l.href = href
+      l.setAttribute('data-hero', 'pdp-hero')
+      document.head.appendChild(l)
+    }, 100)
 
     return () => {
-      l.remove()
+      clearTimeout(timeoutId)
+      const link = document.querySelector(selector) as HTMLLinkElement | null
+      if (link) link.remove()
     }
   }, [gallery])
 

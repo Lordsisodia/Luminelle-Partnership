@@ -1,0 +1,221 @@
+{
+  "spec_id": "001-testdt",
+  "created_at": "2026-01-08T20:33:00.008024+00:00",
+  "updated_at": "2026-01-08T20:34:40.497346+00:00",
+  "phases": {
+    "planning": {
+      "phase": "planning",
+      "status": "failed",
+      "started_at": "2026-01-08T20:34:28.001013+00:00",
+      "completed_at": "2026-01-08T20:34:40.496997+00:00",
+      "entries": [
+        {
+          "timestamp": "2026-01-08T20:33:00.008389+00:00",
+          "type": "phase_start",
+          "content": "Starting spec creation process",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:15.934097+00:00",
+          "type": "info",
+          "content": "Starting phase 1: PROJECT DISCOVERY",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:30.981288+00:00",
+          "type": "success",
+          "content": "Discovered 32 files in project",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:30.982069+00:00",
+          "type": "info",
+          "content": "Starting phase 2: REQUIREMENTS GATHERING",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:34.851804+00:00",
+          "type": "info",
+          "content": "Starting phase 3: COMPLEXITY ASSESSMENT",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:34.855873+00:00",
+          "type": "info",
+          "content": "Analyzing task complexity with AI...",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:37.124170+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:38.102351+00:00",
+          "type": "info",
+          "content": "Starting phase 4: HISTORICAL CONTEXT",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:38.154515+00:00",
+          "type": "info",
+          "content": "Knowledge graph not configured, skipping",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:38.155282+00:00",
+          "type": "info",
+          "content": "Starting phase 5: CONTEXT DISCOVERY",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:40.349757+00:00",
+          "type": "info",
+          "content": "Starting phase 6: SPEC DOCUMENT CREATION",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:42.636236+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:44.256299+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:46.074282+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:46.089228+00:00",
+          "type": "error",
+          "content": "Phase 'spec_writing' failed: Attempt 1: Agent did not create spec.md; Attempt 2: Agent did not create spec.md; Attempt 3: Agent did not create spec.md",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:33:46.089975+00:00",
+          "type": "phase_end",
+          "content": "Phase spec_writing failed",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:28.001187+00:00",
+          "type": "phase_start",
+          "content": "Starting spec creation process",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:28.002235+00:00",
+          "type": "info",
+          "content": "Starting phase 1: PROJECT DISCOVERY",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:28.002865+00:00",
+          "type": "success",
+          "content": "Discovered 32 files in project",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:30.195668+00:00",
+          "type": "info",
+          "content": "Starting phase 2: REQUIREMENTS GATHERING",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:31.659622+00:00",
+          "type": "info",
+          "content": "Starting phase 3: COMPLEXITY ASSESSMENT",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:31.660602+00:00",
+          "type": "info",
+          "content": "Analyzing task complexity with AI...",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:33.253732+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:33.265606+00:00",
+          "type": "info",
+          "content": "Starting phase 4: HISTORICAL CONTEXT",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:33.272437+00:00",
+          "type": "success",
+          "content": "Historical context already available",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:33.273234+00:00",
+          "type": "info",
+          "content": "Starting phase 5: CONTEXT DISCOVERY",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:34.962773+00:00",
+          "type": "info",
+          "content": "Starting phase 6: SPEC DOCUMENT CREATION",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:36.576758+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:38.839894+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:40.486726+00:00",
+          "type": "text",
+          "content": "Your account does not have access to Claude Code. Please run /login.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:40.496413+00:00",
+          "type": "error",
+          "content": "Phase 'spec_writing' failed: Attempt 1: Agent did not create spec.md; Attempt 2: Agent did not create spec.md; Attempt 3: Agent did not create spec.md",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-08T20:34:40.497007+00:00",
+          "type": "phase_end",
+          "content": "Phase spec_writing failed",
+          "phase": "planning"
+        }
+      ]
+    },
+    "coding": {
+      "phase": "coding",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "entries": []
+    },
+    "validation": {
+      "phase": "validation",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "entries": []
+    }
+  }
+}

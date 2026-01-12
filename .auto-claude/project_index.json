@@ -1,0 +1,501 @@
+{
+  "project_root": "/Users/shaansisodia/DEV/client-projects/lumelle",
+  "project_type": "single",
+  "services": {
+    "main": {
+      "name": "main",
+      "path": "/Users/shaansisodia/DEV/client-projects/lumelle",
+      "language": "TypeScript",
+      "framework": "React",
+      "type": "frontend",
+      "package_manager": "npm",
+      "default_port": 6006,
+      "build_tool": "Vite",
+      "styling": "Tailwind CSS",
+      "state_management": "Zustand",
+      "dev_command": "npm run dev",
+      "key_directories": {
+        "src": {
+          "path": "src",
+          "purpose": "Source code"
+        },
+        "api": {
+          "path": "api",
+          "purpose": "API endpoints"
+        }
+      },
+      "entry_point": "src/App.tsx",
+      "dependencies": [
+        "@clerk/clerk-react",
+        "@cloudinary/react",
+        "@cloudinary/url-gen",
+        "@hookform/resolvers",
+        "@shopify/app-bridge-react",
+        "@shopify/polaris",
+        "@stripe/react-stripe-js",
+        "@stripe/stripe-js",
+        "@supabase/supabase-js",
+        "@tanstack/react-query",
+        "@vercel/node",
+        "@vercel/og",
+        "@vercel/routing-utils",
+        "cloudinary",
+        "clsx",
+        "dotenv",
+        "fast-glob",
+        "framer-motion",
+        "lucide-react",
+        "markdown-to-jsx"
+      ],
+      "dev_dependencies": [
+        "@eslint/js",
+        "@tailwindcss/line-clamp",
+        "@playwright/test",
+        "@storybook/addon-a11y",
+        "@storybook/addon-essentials",
+        "@storybook/addon-interactions",
+        "@storybook/react-vite",
+        "@storybook/test",
+        "@tailwindcss/typography",
+        "@types/markdown-to-jsx"
+      ],
+      "e2e_testing": "Playwright",
+      "environment": {
+        "variables": {
+          "SHOPIFY_API_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "SHOPIFY_API_SECRET": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "SHOPIFY_STORE_DOMAIN": {
+            "value": "lumelle-3.myshopify.com",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "SHOPIFY_API_VERSION": {
+            "value": "2025-10",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_SHOPIFY_API_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": false
+          },
+          "APP_URL": {
+            "value": "https://choir-holly-assist-cases.trycloudflare.com",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_SUPABASE_URL": {
+            "value": "https://tmsbyiwqzesmirbargxv.supabase.co",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_SUPABASE_ANON_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "DATABASE_URL": {
+            "value": "postgresql://postgres.tmsbyiwqzesmirbargxv:Million2025%40SISO@aws-1-eu-west-2.pooler.supabase.com:6543/postgres",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CLERK_PUBLISHABLE_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "VITE_WHATSAPP_INVITE_URL": {
+            "value": "https://chat.whatsapp.com/your-invite-link",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_SUPPORT_EMAIL": {
+            "value": "creators@lumellebeauty.co.uk",
+            "source": ".env",
+            "type": "email",
+            "sensitive": false,
+            "required": false
+          },
+          "VITE_CONTENT_BRIEF_URL": {
+            "value": "https://lumellebeauty.co.uk/content-brief.pdf",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_ASSET_BASE_URL": {
+            "value": "https://tmsbyiwqzesmirbargxv.supabase.co/storage/v1/object/public/public",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_SHOPIFY_STOREFRONT_PUBLIC_TOKEN": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "VITE_SHOPIFY_STORE_DOMAIN": {
+            "value": "lumelle-3.myshopify.com",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "SHOPIFY_WEBHOOK_SECRET": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "SHOPIFY_ADMIN_API_ACCESS_TOKEN": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": false
+          },
+          "CLERK_WEBHOOK_SECRET": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "path",
+            "sensitive": true,
+            "required": true
+          },
+          "SUPABASE_SERVICE_ROLE_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "SUPABASE_BUCKET": {
+            "value": "public",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": false
+          },
+          "SHOPIFY_STOREFRONT_PRIVATE_TOKEN": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": false
+          },
+          "SHOPIFY_DEFAULT_VARIANT_ID": {
+            "value": "",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": false
+          },
+          "VITE_USE_SERVER_CART": {
+            "value": "0",
+            "source": ".env",
+            "type": "boolean",
+            "sensitive": false,
+            "required": true
+          },
+          "CUSTOMER_CLIENT_ID": {
+            "value": "",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "CUSTOMER_CLIENT_SECRET": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "VITE_ADMIN_EMAILS": {
+            "value": "you@example.com",
+            "source": ".env",
+            "type": "email",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_ANALYTICS_ENABLED": {
+            "value": "true",
+            "source": ".env",
+            "type": "boolean",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_EXPERIMENTS_ENABLED": {
+            "value": "true",
+            "source": ".env",
+            "type": "boolean",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_POSTHOG_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "VITE_POSTHOG_HOST": {
+            "value": "https://us.i.posthog.com",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "POSTHOG_API_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "POSTHOG_HOST": {
+            "value": "https://us.i.posthog.com",
+            "source": ".env",
+            "type": "url",
+            "sensitive": false,
+            "required": true
+          },
+          "CLOUDINARY_CLOUD_NAME": {
+            "value": "dbowtimdn",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "CLOUDINARY_API_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "number",
+            "sensitive": true,
+            "required": true
+          },
+          "CLOUDINARY_API_SECRET": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "CLOUDINARY_URL": {
+            "value": "cloudinary://162511853292628:5SwAwF_7Xm0KA2q6FfM-GxspaTQ@dbowtimdn",
+            "source": ".env",
+            "type": "path",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CLOUDINARY_CLOUD_NAME": {
+            "value": "dbowtimdn",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CLOUDINARY_UPLOAD_PRESET": {
+            "value": "",
+            "source": ".env",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CLOUDINARY_API_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "number",
+            "sensitive": true,
+            "required": true
+          },
+          "ADMIN_SHARED_SECRET": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "VITE_SHOWER_CAP_DISCOUNT_CODE_QTY2": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_SHOWER_CAP_DISCOUNT_CODE_QTY3": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_SHOWER_CAP_DISCOUNT_CODE_QTY4": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CLERK_SUPABASE_JWT_TEMPLATE": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_WHATSAPP_SUPPORT_PHONE": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_WHATSAPP_SUPPORT_TEXT": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_WHATSAPP_SUPPORT_URL": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_USE_ASSET_CDN": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CART_RECOVERY_ENABLED": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CART_SHARE_ENABLED": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_HEATMAP_ENABLED": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "VITE_CLARITY_PROJECT_ID": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "SHOPIFY_SCOPES": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "SHOPIFY_APP_URL": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "SUPABASE_URL": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          },
+          "INTERNAL_SHARED_SECRET": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          },
+          "EMAIL_SEND": {
+            "value": null,
+            "source": ".env.example",
+            "type": "string",
+            "sensitive": false,
+            "required": true
+          }
+        },
+        "required_count": 52,
+        "optional_count": 0,
+        "detected_count": 58
+      },
+      "services": {
+        "databases": [
+          {
+            "type": "postgresql",
+            "client": "pg"
+          }
+        ]
+      }
+    }
+  },
+  "infrastructure": {
+    "ci": "GitHub Actions",
+    "ci_workflows": [
+      "ai-open-pr-dev.yml",
+      "ai-automerge-dev.yml",
+      "ai-review.yml",
+      "ci.yml",
+      "ai-merge-on-ci-dev.yml"
+    ],
+    "deployment": "Vercel"
+  },
+  "conventions": {
+    "js_linting": "ESLint",
+    "typescript": true
+  }
+}

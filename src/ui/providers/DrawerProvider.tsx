@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PropsWithChildren } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
-import { UserRound } from 'lucide-react'
+import { UserRound, Users, BookOpen, Newspaper } from 'lucide-react'
 import { useCart } from '@client/shop/cart/providers/CartContext'
 import { useAuthContext as useAuth } from '@platform/auth/providers/AuthContext'
 import { getVolumeDiscountTierForVariant } from '@client/shop/cart/logic/volumeDiscounts'
@@ -396,68 +396,88 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
             {activeTab === 'menu' ? (
               <div id="drawer-panel-menu" role="tabpanel" aria-labelledby="drawer-tab-menu" className="flex h-full flex-col">
 	              <div ref={menuPanelRef} className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
-                  <nav className="px-2 py-2">
-                  <div className="rounded-xl">
-                    <div className="px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">Products</div>
-                    <RouterLink
-                      to="/product/shower-cap"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/product/shower-cap' }) }}
-                    >
-                      <div className="leading-tight">
-                        <div>Lumelle Shower Cap</div>
-                        <div className="text-xs font-medium text-semantic-text-primary/60 whitespace-nowrap">Satin-lined, steam-blocking</div>
-                      </div>
-                      <span className="ml-2 rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/70 whitespace-nowrap">
-                        Best Seller
-                      </span>
-                    </RouterLink>
-                    <RouterLink
-                      to="/product/satin-overnight-curler"
-                      className="mt-1 flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/product/satin-overnight-curler' }) }}
-                    >
-                      <div className="leading-tight">
-                        <div>Satin Overnight Heatless Curler Set</div>
-                        <div className="text-xs font-medium text-semantic-text-primary/60">Crease-free curls while you sleep</div>
-                      </div>
-                    </RouterLink>
+                  <nav className="px-2 py-2 space-y-3">
+                  <div className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-soft">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">Products</div>
+                    <div className="space-y-3">
+                      <RouterLink
+                        to="/product/shower-cap"
+                        className="grid grid-cols-[96px_1fr] items-start gap-3 w-full rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                        onClick={() => { closeDrawer(); track('nav_link_click', { to: '/product/shower-cap' }) }}
+                      >
+                        <img
+                          src="/uploads/luminele/shower-cap-01.webp"
+                          alt="Lumelle Shower Cap"
+                          className="h-24 w-24 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover"
+                          loading="lazy"
+                        />
+                        <div className="min-w-0 flex-1 text-left">
+                          <div className="leading-tight">
+                            <div>Lumelle Shower Cap</div>
+                            <div className="mt-1 text-xs font-medium text-semantic-text-primary/60 whitespace-nowrap">Satin-lined, steam-blocking</div>
+                          </div>
+                          <span className="ml-auto mt-2 rounded-full bg-semantic-legacy-brand-blush/60 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/70 whitespace-nowrap">
+                            Best Seller
+                          </span>
+                        </div>
+                      </RouterLink>
+                      <RouterLink
+                        to="/product/satin-overnight-curler"
+                        className="grid grid-cols-[96px_1fr] items-start gap-3 w-full rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                        onClick={() => { closeDrawer(); track('nav_link_click', { to: '/product/satin-overnight-curler' }) }}
+                      >
+                        <img
+                          src="/uploads/curler/1.webp"
+                          alt="Satin Overnight Heatless Curler Set"
+                          className="h-24 w-24 rounded-lg border border-semantic-legacy-brand-blush/60 object-cover"
+                          loading="lazy"
+                        />
+                        <div className="min-w-0 flex-1 text-left">
+                          <div className="leading-tight">
+                            <div>Satin Overnight Heatless Curler Set</div>
+                            <div className="mt-1 text-xs font-medium text-semantic-text-primary/60">Crease-free curls while you sleep</div>
+                          </div>
+                        </div>
+                      </RouterLink>
+                    </div>
                   </div>
-                  <div className="mt-2 rounded-xl">
-                    <div className="px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/50">More</div>
-                    <RouterLink
-                      to="/creators"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/creators' }) }}
-                    >
-                      <div className="flex flex-col leading-tight">
-                        <span>Creators</span>
-                        <span className="text-xs font-medium text-semantic-text-primary/60">Collabs, scripts, and payouts</span>
-                      </div>
-                      <span className="text-semantic-text-primary/60">›</span>
-                    </RouterLink>
-                    <RouterLink
-                      to="/brand"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/brand' }) }}
-                    >
-                      <div className="flex flex-col leading-tight">
-                        <span>Brand story</span>
-                        <span className="text-xs font-medium text-semantic-text-primary/60">Origins, values, and build</span>
-                      </div>
-                      <span className="text-semantic-text-primary/60">›</span>
-                    </RouterLink>
-                    <RouterLink
-                      to="/blog"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
-                      onClick={() => { closeDrawer(); track('nav_link_click', { to: '/blog' }) }}
-                    >
-                      <div className="flex flex-col leading-tight">
-                        <span>Blog</span>
-                        <span className="text-xs font-medium text-semantic-text-primary/60">Care tips, launches, routines</span>
-                      </div>
-                      <span className="text-semantic-text-primary/60">›</span>
-                    </RouterLink>
+                  <div className="space-y-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-4 shadow-soft">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">More</div>
+                    <div className="space-y-3">
+                      <RouterLink
+                        to="/creators"
+                        className="flex items-center gap-3 w-full rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                        onClick={() => { closeDrawer(); track('nav_link_click', { to: '/creators' }) }}
+                      >
+                        <Users className="h-5 w-5 text-semantic-text-primary/70 flex-shrink-0" />
+                        <div className="flex flex-col leading-tight">
+                          <span>Creators</span>
+                          <span className="text-xs font-medium text-semantic-text-primary/60">Collabs, scripts, and payouts</span>
+                        </div>
+                      </RouterLink>
+                      <RouterLink
+                        to="/brand"
+                        className="flex items-center gap-3 w-full rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                        onClick={() => { closeDrawer(); track('nav_link_click', { to: '/brand' }) }}
+                      >
+                        <BookOpen className="h-5 w-5 text-semantic-text-primary/70 flex-shrink-0" />
+                        <div className="flex flex-col leading-tight">
+                          <span>Brand story</span>
+                          <span className="text-xs font-medium text-semantic-text-primary/60">Origins, values, and build</span>
+                        </div>
+                      </RouterLink>
+                      <RouterLink
+                        to="/blog"
+                        className="flex items-center gap-3 w-full rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/40"
+                        onClick={() => { closeDrawer(); track('nav_link_click', { to: '/blog' }) }}
+                      >
+                        <Newspaper className="h-5 w-5 text-semantic-text-primary/70 flex-shrink-0" />
+                        <div className="flex flex-col leading-tight">
+                          <span>Blog</span>
+                          <span className="text-xs font-medium text-semantic-text-primary/60">Care tips, launches, routines</span>
+                        </div>
+                      </RouterLink>
+                    </div>
                   </div>
                 </nav>
 

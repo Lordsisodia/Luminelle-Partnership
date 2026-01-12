@@ -135,36 +135,13 @@ const ReviewCardContent = ({
       <div className="relative flex justify-center">
         <StarRating value={review.stars ?? 5} size={18} />
       </div>
-      <div className="relative mt-3 space-y-2">
-        {review.title ? (
-          <p className="text-sm font-semibold leading-snug text-semantic-text-primary md:text-base">
-            {review.title}
-          </p>
-        ) : null}
-        <p className="text-sm leading-relaxed text-semantic-text-primary md:text-base md:leading-relaxed line-clamp-4 md:line-clamp-5">
-          “{review.body}”
+      <div className="relative mt-3">
+        <p className="text-sm leading-relaxed text-semantic-text-primary md:text-base md:leading-relaxed whitespace-pre-line">
+          "{review.body}"
         </p>
       </div>
-      <div className="relative mt-4 flex items-center justify-center gap-2">
-        {showReviewerPhotos && review.image ? (
-          <img
-            src={review.image}
-            alt=""
-            className="h-9 w-9 rounded-full border border-white/70 object-cover shadow-soft"
-            loading="lazy"
-            decoding="async"
-          />
-        ) : (
-          <div
-            className="relative h-9 w-9 overflow-hidden rounded-full bg-white/70 ring-1 ring-semantic-legacy-brand-blush/55"
-            aria-hidden="true"
-          >
-            <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-semantic-text-primary/80">
-              {getInitials(review.author)}
-            </span>
-          </div>
-        )}
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80 md:text-[13px]">
+      <div className="relative mt-4 flex items-center justify-center">
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80 md:text-base">
           {review.author}
         </p>
       </div>
@@ -188,8 +165,8 @@ const Reviews2DCarousel = memo(
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
     const isScreenSizeLg = useMediaQuery("(max-width: 1024px)")
-    const itemWidth = isScreenSizeSm ? 220 : isScreenSizeLg ? 320 : 380
-    const itemHeight = isScreenSizeSm ? 184 : isScreenSizeLg ? 216 : 256
+    const itemWidth = isScreenSizeSm ? 340 : isScreenSizeLg ? 400 : 480
+    const itemHeight = isScreenSizeSm ? 340 : isScreenSizeLg ? 280 : 320
     const gapPx = 12
     const listRef = useRef<HTMLDivElement | null>(null)
     const isProgrammaticScrollRef = useRef(false)

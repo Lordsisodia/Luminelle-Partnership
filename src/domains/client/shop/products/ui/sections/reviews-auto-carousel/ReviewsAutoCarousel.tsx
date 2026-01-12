@@ -92,22 +92,22 @@ const ReviewsDesktopHeading = ({
       ) : null}
 
       {ratingLabel || countLabel || tagline ? (
-        <div className="mt-1 flex flex-wrap items-center gap-3 text-sm text-semantic-text-primary/80">
+        <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-semantic-text-primary/80">
           {ratingLabel ? (
             <span className="inline-flex items-center gap-2">
-              <StarRating value={rating ?? 5} size={16} />
-              <span className="font-semibold text-semantic-text-primary">{ratingLabel}</span>
+              <StarRating value={rating ?? 5} size={18} />
+              <span className="font-semibold text-semantic-text-primary text-base">{ratingLabel}</span>
             </span>
           ) : null}
 
           {countLabel ? (
-            <span className="inline-flex items-center rounded-full bg-white/75 px-3 py-1 font-semibold ring-1 ring-semantic-legacy-brand-blush/50 backdrop-blur">
+            <span className="inline-flex items-center rounded-full bg-white/75 px-4 py-1.5 font-semibold text-base ring-1 ring-semantic-legacy-brand-blush/50 backdrop-blur">
               {countLabel} reviews
             </span>
           ) : null}
 
           {tagline ? (
-            <span className="inline-flex items-center rounded-full bg-white/60 px-3 py-1 text-semantic-text-primary/70 ring-1 ring-semantic-legacy-brand-blush/40 backdrop-blur">
+            <span className="inline-flex items-center rounded-full bg-white/60 px-4 py-1.5 text-semantic-text-primary/70 text-base ring-1 ring-semantic-legacy-brand-blush/40 backdrop-blur">
               {tagline}
             </span>
           ) : null}

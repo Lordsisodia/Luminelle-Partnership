@@ -58,6 +58,8 @@ export type HomeConfig = {
     image: string
     href: string
     ctaLabel: string
+    objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
+    objectPosition?: string
   }
   pdpTeasers?: HomeConfig['pdpTeaser'][]
   faq: { q: string; a: string }[]

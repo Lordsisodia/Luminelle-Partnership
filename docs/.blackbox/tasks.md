@@ -4,6 +4,10 @@
 - [x] Define the canonical `.blackbox` template structure
 - [x] Add starter agents (docs feedback)
 - [x] Add scaffolding scripts (new plan, new agent, new run, promote, check)
+- [ ] Implement landing page UI updates (Jan 2026)
+  - Plan: `.blackbox/.plans/2026-01-11_1631_landing-page-ui-updates-jan-2026/`
+  - Tasks: Hero (2), Customer Stories (4), Spin Wheel (2), Footer (1)
+  - Status: Ready for execution
 - [ ] Reverse-engineer + unify Shopify WebhookInbox (verify + dedupe + replay + audit)
   - Plan: `.blackbox/.plans/2026-01-02_0012_reverse-engineer-shopify-webhookinbox-best-of-both-worlds/`
   - Process: `.blackbox/.plans/2026-01-02_0012_reverse-engineer-shopify-webhookinbox-best-of-both-worlds/reverse-engineering-process.md`

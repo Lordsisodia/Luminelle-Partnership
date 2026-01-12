@@ -157,12 +157,6 @@ export const HeroShop = ({ config, socialProof }: Props) => {
                     height={28}
                   />
                 ))}
-                <span
-                  className="ml-2 inline-flex h-7 min-w-7 items-center justify-center rounded-full border-2 border-white bg-white/70 px-2 text-[10px] font-semibold tracking-[0.14em] text-semantic-text-primary/80 shadow-sm"
-                  aria-label={`${trustCountLabel} customers`}
-                >
-                  {trustCountLabel}
-                </span>
                 </div>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-semantic-text-primary/80 whitespace-nowrap pl-1">
                   {trustTagline}
@@ -215,7 +209,8 @@ export const HeroShop = ({ config, socialProof }: Props) => {
                 </a>
               )}
             </div>
-            <div className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-full border border-white/80 bg-white/70 px-3 py-1 shadow-[0_0_18px_rgba(255,255,255,0.7)] backdrop-blur-sm lg:justify-start">
+            {/* Star rating - below the shop button */}
+            <div className="mt-3 flex items-center justify-center gap-1.5 lg:justify-start">
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star
                   key={idx}
@@ -225,7 +220,7 @@ export const HeroShop = ({ config, socialProof }: Props) => {
                   strokeWidth={1}
                 />
               ))}
-              <span className="ml-2 text-sm font-semibold text-semantic-text-primary">{ratingLabel}</span>
+              <span className="ml-2 text-sm font-semibold text-semantic-text-primary">4.8 (100)</span>
             </div>
               </div>
               <div className="hidden lg:flex lg:justify-center">

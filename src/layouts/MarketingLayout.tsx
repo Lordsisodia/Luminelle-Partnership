@@ -100,7 +100,7 @@ export const MarketingLayout = ({
           </div>
         </nav>
       ) : null}
-      <main id="main-content" tabIndex={-1} className="focus:outline-none">
+      <main id="main-content" tabIndex={-1} className="focus:outline-none overflow-visible">
         {children}
       </main>
       <GlobalFooter supportEmail={SUPPORT_EMAIL} />

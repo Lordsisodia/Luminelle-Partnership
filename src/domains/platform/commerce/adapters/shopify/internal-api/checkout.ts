@@ -11,6 +11,12 @@ type ShopifyCart = {
 const toFirstPartyHandoffUrl = (checkoutUrl: string) => {
   try {
     const u = new URL(checkoutUrl)
+    // In development, use the original checkout URL (Shopify domain)
+    // In production, use first-party proxy/handoff URLs
+    const isDevelopment = import.meta.env.DEV
+    if (isDevelopment) {
+      return checkoutUrl
+    }
     return `${window.location.origin}${u.pathname}${u.search}${u.hash}`
   } catch {
     return checkoutUrl
