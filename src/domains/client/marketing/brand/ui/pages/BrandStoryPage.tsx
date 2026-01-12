@@ -66,6 +66,7 @@ const values = ['Satin-first comfort', 'Reusable, not disposable', 'Cruelty-free
 
 const BrandStoryPage = () => {
   const SHOW_INSIDE_THE_BUILD = false
+  const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 768
   const title = 'Brand story'
   const description = hero.description
   const image = cdnUrl(hero.image)
@@ -76,8 +77,8 @@ const BrandStoryPage = () => {
       <MarketingLayout navItems={[]} subtitle="Brand">
         <div className="bg-white text-semantic-text-primary">
         {/* Hero */}
-        <section className="bg-gradient-to-b from-semantic-bg-subtle via-white to-semantic-bg-subtle">
-          <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-14 md:flex-row md:items-center md:gap-12 md:px-6">
+        <section className="bg-gradient-to-b from-semantic-bg-subtle via-white to-semantic-bg-subtle py-8 md:py-14">
+          <div className="mx-auto flex max-w-6xl flex-col-reverse gap-6 px-4 md:flex-row md:items-center md:gap-12 md:px-6">
             <div className="space-y-4 md:w-1/2">
               <p className="inline-flex items-center rounded-full bg-semantic-accent-cta/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary">
                 {hero.eyebrow}
@@ -87,13 +88,13 @@ const BrandStoryPage = () => {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to={hero.ctaPrimary.href}
-                  className="inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,0,0,0.14)]"
+                  className="inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 md:px-5 md:py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,0,0,0.14)]"
                 >
                   {hero.ctaPrimary.label}
                 </Link>
                 <Link
                   to={hero.ctaSecondary.href}
-                  className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-cocoa px-5 py-2.5 text-sm font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-blush/30"
+                  className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-cocoa px-4 py-2 md:px-5 md:py-2.5 text-sm font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-blush/30"
                 >
                   {hero.ctaSecondary.label}
                 </Link>
@@ -104,7 +105,7 @@ const BrandStoryPage = () => {
                 <img
                   src={image}
                   alt="Lumelle shower cap lifestyle"
-                  className="h-full w-full object-cover"
+                  className="h-64 w-full object-cover md:h-full"
                   loading="eager"
                   decoding="async"
                   fetchPriority="high"
@@ -125,15 +126,15 @@ const BrandStoryPage = () => {
               description="From shower time to sleep routines, our designs are made to work with your hair, not against it. Every detail is considered, from soft satin linings to thoughtful construction, so frizz, breakage, and unwanted grease don’t stand a chance."
               alignment="center"
             />
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
+            <div className="mt-10 grid gap-3 grid-cols-2 md:gap-6 md:grid-cols-3">
               {storyHighlights.map((item) => (
                 <article
                   key={item.title}
-                  className="space-y-3 rounded-3xl border border-semantic-accent-cta/40 bg-white p-5 shadow-[0_14px_30px_rgba(0,0,0,0.06)]"
+                  className="space-y-3 rounded-3xl border border-semantic-accent-cta/40 bg-white p-3 md:p-5 shadow-[0_14px_30px_rgba(0,0,0,0.06)]"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">{item.eyebrow}</p>
-                  <h3 className="font-heading text-xl font-bold text-semantic-text-primary">{item.title}</h3>
-                  <p className="text-sm text-semantic-text-primary/75 leading-relaxed">{item.body}</p>
+                  <h3 className="font-heading text-base font-bold md:text-xl text-semantic-text-primary">{item.title}</h3>
+                  <p className="text-xs md:text-sm text-semantic-text-primary/75 leading-relaxed">{item.body}</p>
                 </article>
               ))}
             </div>
@@ -196,7 +197,7 @@ const BrandStoryPage = () => {
               className="mt-8 flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
               style={{ scrollSnapType: 'x mandatory' }}
             >
-              {successStories.map((story) => (
+              {successStories.slice(0, isMobile() ? 3 : 6).map((story) => (
                 <article
                   key={story.handle}
                   className="min-w-[min(82vw,340px)] snap-center rounded-3xl border border-semantic-accent-cta/35 bg-white/92 p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] md:min-w-[320px]"
@@ -265,13 +266,13 @@ const BrandStoryPage = () => {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to="/product/lumelle-shower-cap"
-                    className="inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,0,0,0.14)]"
+                    className="inline-flex items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 md:px-5 md:py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,0,0,0.14)]"
                   >
                     Shop the cap
                   </Link>
                   <Link
                     to="/creators"
-                    className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-cocoa px-5 py-2.5 text-sm font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-blush/30"
+                    className="inline-flex items-center justify-center rounded-full border border-semantic-legacy-brand-cocoa px-4 py-2 md:px-5 md:py-2.5 text-sm font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-blush/30"
                   >
                     Join creators
                   </Link>
