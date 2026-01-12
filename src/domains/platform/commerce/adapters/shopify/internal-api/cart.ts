@@ -146,21 +146,27 @@ export const createShopifyCartPort = (): CartPort => {
     },
 
     async addLine({ variantKey, qty }) {
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] addLine called', { variantKey, qty })
       const stored = getStoredCartKey()
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] Stored cart key', { stored })
       if (!stored) {
+        console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] No cart exists, creating new cart')
         const created = await requestJson<{ cart: ShopifyCart }>(`/api/storefront/cart/create`, {
           method: 'POST',
           body: { merchandiseId: resolveShopifyVariantGid(variantKey), quantity: qty },
         })
+        console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] Cart created', { cart: created.cart })
         updateStoredKey(created.cart)
         return mapCart(created.cart)
       }
 
       const rawCartId = decodeCartKey(stored)
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] Adding line to existing cart', { rawCartId, variantKey, qty })
       const updated = await requestJson<{ cart: ShopifyCart }>(`/api/storefront/cart/add-lines`, {
         method: 'POST',
         body: { cartId: rawCartId, merchandiseId: resolveShopifyVariantGid(variantKey), quantity: qty },
       })
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] Line added, cart updated', { cart: updated.cart })
       updateStoredKey(updated.cart)
       return mapCart(updated.cart)
     },
@@ -190,13 +196,18 @@ export const createShopifyCartPort = (): CartPort => {
     },
 
     async applyDiscount(code) {
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] applyDiscount called', { code })
       const rawCartId = await ensureCartRawId()
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] Applying discount to cart', { rawCartId, code })
       const updated = await requestJson<{ cart: ShopifyCart }>(`/api/storefront/cart/discount-codes-update`, {
         method: 'POST',
         body: { cartId: rawCartId, codes: code ? [code] : [] },
       })
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] Discount applied, cart updated', { cart: updated.cart })
       updateStoredKey(updated.cart)
-      return mapCart(updated.cart)
+      const mapped = mapCart(updated.cart)
+      console.log('[🔍 SHOPIFY-CART-DIAGNOSTIC] Mapped cart', { mapped })
+      return mapped
     },
 
     async setBuyerIdentity({ email }) {

@@ -28,6 +28,17 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
   const cartPanelRef = useRef<HTMLDivElement | null>(null)
   const [activeTab, setActiveTab] = useState<'menu' | 'cart'>('menu')
   const closeTimerRef = useRef<number | null>(null)
+
+  // Set inert attribute on drawer when menu is closed
+  useEffect(() => {
+    if (drawerRef.current) {
+      if (!menuOpen) {
+        drawerRef.current.setAttribute('inert', 'true')
+      } else {
+        drawerRef.current.removeAttribute('inert')
+      }
+    }
+  }, [menuOpen])
   const SHOW_LOYALTY = false
 
   const clearCloseTimer = () => {
@@ -350,7 +361,6 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="drawer-title"
-            {...(menuOpen ? {} : { inert: true })}
             ref={drawerRef}
           >
             <h2 id="drawer-title" className="sr-only">

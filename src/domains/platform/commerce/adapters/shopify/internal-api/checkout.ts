@@ -36,15 +36,23 @@ export const createShopifyCheckoutPort = (): CheckoutPort => {
     },
 
     async beginCheckout() {
+      console.log('[🔍 CHECKOUT-DIAGNOSTIC] beginCheckout called')
       const stored = __internalShopifyCartKeyStorage.getStoredCartKey()
-      if (!stored) return { mode: 'none', reason: 'No cart exists' }
+      console.log('[🔍 CHECKOUT-DIAGNOSTIC] Stored cart key', { stored })
+      if (!stored) {
+        console.log('[🔍 CHECKOUT-DIAGNOSTIC] No cart exists')
+        return { mode: 'none', reason: 'No cart exists' }
+      }
 
       const rawCartId = decodeCartKey(stored)
+      console.log('[🔍 CHECKOUT-DIAGNOSTIC] Fetching cart', { rawCartId })
       const data = await requestJson<{ cart: ShopifyCart }>(`/api/storefront/cart/fetch?id=${encodeURIComponent(rawCartId)}`)
       const checkoutUrl = data.cart.checkoutUrl
+      console.log('[🔍 CHECKOUT-DIAGNOSTIC] Shopify cart checkout URL', { checkoutUrl })
 
       // Default policy: prefer first-party proxy/handoff URLs when possible.
       const url = typeof window !== 'undefined' ? toFirstPartyHandoffUrl(checkoutUrl) : checkoutUrl
+      console.log('[🔍 CHECKOUT-DIAGNOSTIC] Final checkout URL (after handoff transformation)', { url })
       return { mode: 'redirect', url }
     },
   }

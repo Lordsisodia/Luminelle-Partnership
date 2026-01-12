@@ -205,7 +205,10 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   const [checkoutStart, setCheckoutStart] = useState<CheckoutStart | undefined>(undefined)
   const [checkoutLoading, setCheckoutLoading] = useState(false)
 
-  const checkoutUrlWithDiscount = useMemo(() => withCheckoutDiscountCode(checkoutUrl, discountCode), [checkoutUrl, discountCode])
+  const checkoutUrlWithDiscount = useMemo(() => {
+    console.log('[🔍 CART-DIAGNOSTIC] checkoutUrlWithDiscount recalculated', { checkoutUrl, discountCode })
+    return withCheckoutDiscountCode(checkoutUrl, discountCode)
+  }, [checkoutUrl, discountCode])
 
   const itemsRef = useRef<CartItem[]>(items)
   const discountCodeRef = useRef<string | null>(discountCode)
@@ -253,17 +256,21 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   }, [])
 
   const syncCheckoutUrl = useCallback(async () => {
+    console.log('[🔍 CART-DIAGNOSTIC] syncCheckoutUrl called')
     setCheckoutLoading(true)
     try {
       const start = await commerce.checkout.beginCheckout()
+      console.log('[🔍 CART-DIAGNOSTIC] beginCheckout response', { start })
       setCheckoutStart(start)
       if (start.mode === 'redirect') {
+        console.log('[🔍 CART-DIAGNOSTIC] Setting checkout URL', { url: start.url })
         setCheckoutUrl(start.url)
         return
       }
+      console.log('[🔍 CART-DIAGNOSTIC] Checkout mode is not redirect', { mode: start.mode })
       setCheckoutUrl(undefined)
     } catch (err) {
-      console.warn('Failed to compute checkout URL:', err)
+      console.warn('[🔍 CART-DIAGNOSTIC] Failed to compute checkout URL:', err)
       setCheckoutStart({ mode: 'none', reason: toCheckoutUnavailableReason(err) })
       setCheckoutUrl(undefined)
     } finally {
@@ -297,16 +304,26 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const syncVolumeDiscountFromItems = useCallback(
     (nextItems: CartItem[]) => {
+      console.log('[🔍 CART-DIAGNOSTIC] syncVolumeDiscountFromItems called', { nextItems })
       const current = discountCodeRef.current ? discountCodeRef.current.toUpperCase() : null
       const currentIsVolume = current ? volumeDiscountCodes.has(current) : false
+      console.log('[🔍 CART-DIAGNOSTIC] Current discount state', { current, currentIsVolume })
 
       const desiredTier = getDesiredVolumeDiscountTier(nextItems)
       const desired = desiredTier?.code ?? null
       const shouldManage = currentIsVolume || (!current && Boolean(desired))
+      console.log('[🔍 CART-DIAGNOSTIC] Volume discount calculation', { desiredTier, desired, shouldManage })
 
-      if (!shouldManage) return { managed: false as const, code: current }
-      if (desired === current) return { managed: true as const, code: current }
+      if (!shouldManage) {
+        console.log('[🔍 CART-DIAGNOSTIC] Should not manage discount', { managed: false, code: current })
+        return { managed: false as const, code: current }
+      }
+      if (desired === current) {
+        console.log('[🔍 CART-DIAGNOSTIC] Discount already matches desired', { managed: true, code: current })
+        return { managed: true as const, code: current }
+      }
 
+      console.log('[🔍 CART-DIAGNOSTIC] Updating discount code', { old: current, new: desired })
       discountCodeRef.current = desired
       setDiscountCode(desired)
       return { managed: true as const, code: desired }
@@ -315,12 +332,18 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   )
 
   const applyDiscountToBackendIfSupported = useCallback(async (code: string | null) => {
-    if (!commerce.cart.applyDiscount) return
+    console.log('[🔍 CART-DIAGNOSTIC] applyDiscountToBackendIfSupported called', { code })
+    if (!commerce.cart.applyDiscount) {
+      console.log('[🔍 CART-DIAGNOSTIC] applyDiscount not supported by commerce adapter')
+      return
+    }
     try {
+      console.log('[🔍 CART-DIAGNOSTIC] Calling commerce.cart.applyDiscount', { code: code ?? '' })
       const cart = await commerce.cart.applyDiscount(code ?? '')
+      console.log('[🔍 CART-DIAGNOSTIC] applyDiscount response', { cart })
       await setFromCart(cart)
     } catch (err) {
-      console.warn('Failed to apply discount code to cart:', err)
+      console.error('[🔍 CART-DIAGNOSTIC] Failed to apply discount code to cart:', err)
     }
   }, [setFromCart])
 
@@ -368,32 +391,44 @@ const CartProviderBase: React.FC<{ children: React.ReactNode }> = ({ children })
   }, [enqueue, setFromCart, syncVolumeDiscountFromItems])
 
   const add: CartState['add'] = async (item, qty = 1) => {
+    console.log('[🔍 CART-DIAGNOSTIC] add called', { item, qty })
     const safeQty = clampLineQty(qty)
     const prev = itemsRef.current
     const existing = prev.find((p) => p.id === item.id)
     const nextQty = existing ? clampLineQty(existing.qty + safeQty) : safeQty
-    if (existing && nextQty === existing.qty) return
+    if (existing && nextQty === existing.qty) {
+      console.log('[🔍 CART-DIAGNOSTIC] Quantity unchanged, skipping')
+      return
+    }
 
     const nextItems = existing
       ? prev.map((p) => (p.id === item.id ? { ...p, qty: nextQty } : p))
       : [...prev, { ...item, qty: safeQty }]
 
+    console.log('[🔍 CART-DIAGNOSTIC] Updated items list', { nextItems })
     itemsRef.current = nextItems
     setItems(nextItems)
     const { managed, code } = syncVolumeDiscountFromItems(nextItems)
+    console.log('[🔍 CART-DIAGNOSTIC] Volume discount result', { managed, code })
 
     await enqueue(async () => {
       const localLineKey = itemsRef.current.find((i) => i.id === item.id)?.lineId
       let cart: CartDTO
 
       if (localLineKey) {
+        console.log('[🔍 CART-DIAGNOSTIC] Updating existing line', { localLineKey, qty: nextQty })
         cart = await commerce.cart.updateLine({ lineKey: localLineKey, qty: nextQty })
       } else {
+        console.log('[🔍 CART-DIAGNOSTIC] Adding new line', { variantKey: item.id, qty: existing ? safeQty : nextQty })
         cart = await commerce.cart.addLine({ variantKey: item.id, qty: existing ? safeQty : nextQty })
       }
 
+      console.log('[🔍 CART-DIAGNOSTIC] Cart updated', { cart })
       await setFromCart(cart)
-      if (managed) await applyDiscountToBackendIfSupported(code)
+      if (managed) {
+        console.log('[🔍 CART-DIAGNOSTIC] Applying volume discount to backend')
+        await applyDiscountToBackendIfSupported(code)
+      }
     })
   }
 
