@@ -33,3 +33,4 @@ components-library/
 **/.blackbox/.local/
 **/.blackbox/.cache/
 **/.blackbox/*.log
+.worktrees/
