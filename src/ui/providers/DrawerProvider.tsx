@@ -277,7 +277,8 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
       const panel = activeTab === 'menu' ? menuPanelRef.current : cartPanelRef.current
       if (!panel) return
       const canScroll = panel.scrollHeight - panel.clientHeight > 2
-      panel.style.overflowY = canScroll ? 'auto' : 'hidden'
+      const allowOverflow = activeTab === 'cart' && qtyOpen && !canScroll
+      panel.style.overflowY = canScroll ? 'auto' : allowOverflow ? 'visible' : 'hidden'
     }
 
     const raf = window.requestAnimationFrame(() => applyScrollLock())
@@ -286,7 +287,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
       window.cancelAnimationFrame(raf)
       window.removeEventListener('resize', applyScrollLock)
     }
-  }, [activeTab, items.length, menuOpen])
+  }, [activeTab, items.length, menuOpen, qtyOpen])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -402,7 +403,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
               </div>
             </div>
 
-            <div className="flex-1 min-h-0 overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-visible">
             {activeTab === 'menu' ? (
               <div id="drawer-panel-menu" role="tabpanel" aria-labelledby="drawer-tab-menu" className="flex h-full flex-col">
 	              <div ref={menuPanelRef} className="flex-1 min-h-0 overflow-y-auto overscroll-none pb-4">
