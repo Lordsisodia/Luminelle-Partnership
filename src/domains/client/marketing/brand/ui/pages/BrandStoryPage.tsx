@@ -99,8 +99,8 @@ const BrandStoryPage = () => {
               <p className="inline-flex items-center rounded-full bg-semantic-accent-cta/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-semantic-text-primary">
                 {hero.eyebrow}
               </p>
-              <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl">{hero.title}</h1>
-              <p className="text-base text-semantic-text-primary/75 md:text-lg">{hero.description}</p>
+              <h1 className="font-heading text-2xl font-bold leading-tight md:text-4xl">{hero.title}</h1>
+              <p className="text-sm md:text-base text-semantic-text-primary/75 md:text-lg">{hero.description}</p>
               <div className="flex flex-wrap gap-3">
                 <Link
                   to={hero.ctaPrimary.href}
@@ -134,7 +134,7 @@ const BrandStoryPage = () => {
         </section>
 
         {/* Story */}
-        <section className="py-14">
+        <section className="py-12 md:py-16">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <SectionHeading
               eyebrow="How we got here"
@@ -201,7 +201,7 @@ const BrandStoryPage = () => {
         </section>
 
         {/* Creator stories carousel */}
-        <section className="py-14">
+        <section className="py-12 md:py-16">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <SectionHeading
               eyebrow="Creator proof"
@@ -252,7 +252,7 @@ const BrandStoryPage = () => {
         </section>
 
         {/* Values */}
-        <section className="py-12 bg-semantic-legacy-brand-blush/10">
+        <section className="py-12 md:py-16 bg-semantic-legacy-brand-blush/10">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <SectionHeading
               eyebrow="What we stand for"
@@ -264,9 +264,8 @@ const BrandStoryPage = () => {
               {values.map((val) => (
                 <span
                   key={val}
-                  className="inline-flex items-center gap-2 rounded-full border border-semantic-accent-cta/40 bg-white px-4 py-2 text-sm font-semibold text-semantic-text-primary shadow-soft"
+                  className="inline-flex items-center rounded-full bg-semantic-accent-cta/10 border border-semantic-accent-cta/20 px-3 py-1.5 text-xs md:text-sm font-semibold text-semantic-text-primary"
                 >
-                  <span className="h-2 w-2 rounded-full bg-semantic-accent-cta" />
                   {val}
                 </span>
               ))}
@@ -275,7 +274,7 @@ const BrandStoryPage = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="py-16">
+        <section className="py-16 hidden md:block">
           <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-semantic-accent-cta/50 bg-gradient-to-r from-semantic-bg-subtle via-white to-semantic-accent-cta/25 p-8 shadow-[0_22px_60px_rgba(0,0,0,0.08)]">
             <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
               <div className="space-y-4">
