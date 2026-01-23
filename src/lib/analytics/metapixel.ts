@@ -2,6 +2,7 @@
  * Meta (Facebook) Pixel integration
  * Tracks e-commerce events for ad attribution and retargeting
  */
+import { captureEvent } from './posthog'
 
 type PixelEvent =
   | 'ViewContent'
@@ -125,7 +126,6 @@ export function trackMetaEvent(
 
   // Send to PostHog (for your analytics)
   const phEvent = posthogEventName || `meta_${event.toLowerCase()}`
-  const { captureEvent } = require('./posthog')
   captureEvent(phEvent, {
     ...(props || {}),
     meta_pixel_event: event,
@@ -190,7 +190,6 @@ export function trackCustomEvent(eventName: string, props?: Record<string, unkno
   }
 
   // Send to PostHog
-  const { captureEvent } = require('./posthog')
   captureEvent(`meta_custom_${eventName}`, {
     ...(props || {}),
     source: 'metapixel',
