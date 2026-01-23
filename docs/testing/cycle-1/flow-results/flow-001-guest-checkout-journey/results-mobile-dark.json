@@ -1,0 +1,606 @@
+{
+  "flowId": "flow-001",
+  "flowName": "Guest Checkout Journey",
+  "priority": "P0",
+  "phase": 1,
+  "viewport": "Mobile",
+  "theme": "dark",
+  "timestamp": "2026-01-12T14:58:52.301Z",
+  "steps": [
+    {
+      "step": 1,
+      "action": "navigate",
+      "description": "Navigate to homepage",
+      "success": true,
+      "error": null,
+      "duration": 1316
+    },
+    {
+      "step": 2,
+      "action": "wait",
+      "description": "Wait for products to load",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card') to be visible\u001b[22m\n",
+      "duration": 10001
+    },
+    {
+      "step": 3,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 372
+    },
+    {
+      "step": 4,
+      "action": "click",
+      "description": "Click first product",
+      "success": false,
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card:first-child a')\u001b[22m\n\u001b[2m    - waiting for\" http://localhost:5174/\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"http://localhost:5174/\"\u001b[22m\n",
+      "duration": 30240
+    },
+    {
+      "step": 5,
+      "action": "wait",
+      "description": "Wait for product page",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")') to be visible\u001b[22m\n",
+      "duration": 10006
+    },
+    {
+      "step": 6,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 365
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "description": "Add to cart",
+      "success": false,
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")')\u001b[22m\n",
+      "duration": 30004
+    },
+    {
+      "step": 8,
+      "action": "wait",
+      "description": "Wait for cart update",
+      "success": true,
+      "error": null,
+      "duration": 2000
+    },
+    {
+      "step": 9,
+      "action": "navigate",
+      "description": "Go to cart",
+      "success": false,
+      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/cart\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/cart\", waiting until \"networkidle\"\u001b[22m\n",
+      "duration": 28
+    },
+    {
+      "step": 10,
+      "action": "wait",
+      "description": "Wait for cart to load",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item') to be visible\u001b[22m\n",
+      "duration": 10002
+    },
+    {
+      "step": 11,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 32
+    },
+    {
+      "step": 12,
+      "action": "click",
+      "description": "Proceed to checkout",
+      "success": false,
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a:has-text(\"Checkout\")')\u001b[22m\n",
+      "duration": 30002
+    },
+    {
+      "step": 13,
+      "action": "wait",
+      "description": "Wait for checkout form",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[name=\"checkout\"]') to be visible\u001b[22m\n",
+      "duration": 10002
+    },
+    {
+      "step": 14,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 23
+    }
+  ],
+  "consoleErrors": [
+    {
+      "text": "Cart sync failed: TypeError: Failed to fetch\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:16:21)\n    at fetchCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:56:24)\n    at Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:63:26)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18",
+      "location": {
+        "url": "http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx",
+        "lineNumber": 172,
+        "columnNumber": 16
+      }
+    },
+    {
+      "text": "Cart sync failed: TypeError: Failed to fetch\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:16:21)\n    at fetchCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:56:24)\n    at Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:63:26)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229944636:270:18",
+      "location": {
+        "url": "http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229944636",
+        "lineNumber": 163,
+        "columnNumber": 16
+      }
+    },
+    {
+      "text": "Cart sync failed: TypeError: Failed to fetch\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:16:21)\n    at fetchCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:56:24)\n    at Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:63:26)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229958057:266:18",
+      "location": {
+        "url": "http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229958057",
+        "lineNumber": 163,
+        "columnNumber": 16
+      }
+    },
+    {
+      "text": "Cart sync failed: TypeError: Failed to fetch\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:16:21)\n    at fetchCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:56:24)\n    at Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:63:26)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229966974:260:18",
+      "location": {
+        "url": "http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229966974",
+        "lineNumber": 163,
+        "columnNumber": 16
+      }
+    },
+    {
+      "text": "Cart sync failed: TypeError: Failed to fetch\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:16:21)\n    at fetchCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:56:24)\n    at Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:63:26)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229974960:256:18",
+      "location": {
+        "url": "http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx?t=1768229974960",
+        "lineNumber": 163,
+        "columnNumber": 16
+      }
+    },
+    {
+      "text": "Failed to load resource: net::ERR_CONNECTION_RESET",
+      "location": {
+        "url": "http://localhost:5174/src/domains/client/marketing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx?t=1768229983164",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: net::ERR_CONNECTION_RESET",
+      "location": {
+        "url": "http://localhost:5174/src/ui/components/PublicHeader.tsx?t=1768229983164",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "[vite] Failed to reload /src/domains/client/marketing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 881,
+        "columnNumber": 28
+      }
+    },
+    {
+      "text": "[vite] Failed to reload /src/ui/components/PublicHeader.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 881,
+        "columnNumber": 28
+      }
+    },
+    {
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/src/ui/providers/DrawerProvider.tsx?t=1768229983164",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "[vite] Failed to reload /src/ui/providers/DrawerProvider.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 881,
+        "columnNumber": 28
+      }
+    },
+    {
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/src/router.tsx?t=1768229983164",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "[vite] Failed to reload /src/router.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 881,
+        "columnNumber": 28
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "WebSocket connection to 'ws://localhost:5174/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5174/@vite/client",
+        "lineNumber": 1034,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "homepage",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/homepage-mobile-dark.png",
+      "viewport": "Mobile",
+      "theme": "dark"
+    },
+    {
+      "name": "product-page",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/product-page-mobile-dark.png",
+      "viewport": "Mobile",
+      "theme": "dark"
+    },
+    {
+      "name": "cart-page",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/cart-page-mobile-dark.png",
+      "viewport": "Mobile",
+      "theme": "dark"
+    },
+    {
+      "name": "checkout-page",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/checkout-page-mobile-dark.png",
+      "viewport": "Mobile",
+      "theme": "dark"
+    }
+  ],
+  "success": false,
+  "notes": [
+    "Step 2 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card') to be visible\u001b[22m\n",
+    "Step 4 failed: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card:first-child a')\u001b[22m\n\u001b[2m    - waiting for\" http://localhost:5174/\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"http://localhost:5174/\"\u001b[22m\n",
+    "Step 5 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")') to be visible\u001b[22m\n",
+    "Step 7 failed: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")')\u001b[22m\n",
+    "Step 9 failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/cart\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/cart\", waiting until \"networkidle\"\u001b[22m\n",
+    "Step 10 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item') to be visible\u001b[22m\n",
+    "Step 12 failed: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a:has-text(\"Checkout\")')\u001b[22m\n",
+    "Step 13 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[name=\"checkout\"]') to be visible\u001b[22m\n"
+  ],
+  "metrics": {
+    "title": "",
+    "url": "chrome-error://chromewebdata/",
+    "headingCount": 0,
+    "imageCount": 0,
+    "buttonCount": 0,
+    "linkCount": 0
+  }
+}

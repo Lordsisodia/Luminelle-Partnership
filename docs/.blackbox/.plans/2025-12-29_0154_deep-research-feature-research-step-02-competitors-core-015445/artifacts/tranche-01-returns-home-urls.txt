@@ -1,6 +1,0 @@
-# Tranche 01 (Returns/Post-purchase) — homepage-only snapshots
-#
-# Keep this file restricted to true homepages so `competitors/snapshots-home/` stays clean.
-
-https://www.loopreturns.com loop-returns
-

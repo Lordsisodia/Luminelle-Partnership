@@ -1,9 +1,0 @@
-# OSS Triage (from GitHub metadata)
-
-Source: `.blackbox/.plans/2025-12-29_1245_oss-discovery-github-oss-discovery-cycle-124510/oss/entries`
-
-| repo | stars | license | lang | updated | tags | url | description |
-|---|---:|---|---|---|---|---|---|
-| payloadcms/payload | 39580 | MIT | TypeScript | 2025-12-29T03:57:49Z | admin, cms | https://github.com/payloadcms/payload | Payload is the open-source, fullstack Next.js framework, giving you instant backend superpowers. Get a full TypeScript backend and admin panel instantly. Use Payload as a headless CMS or for building powerful applications. |
-| illacloud/illa-builder | 12307 | Apache-2.0 | TypeScript | 2025-12-29T05:41:00Z | admin, cms, experimentation, workflows | https://github.com/illacloud/illa-builder | Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool. |
-| slowfound/next-prisma-tailwind-ecommerce | 350 | MIT | TypeScript | 2025-12-25T16:22:25Z | commerce, admin, cms | https://github.com/slowfound/next-prisma-tailwind-ecommerce | ✨ Open-Source Full-stack E-Commerce Storefront with CMS Admin Panel. Built with Typescript, Next.js 14 App Dir, Tailwind CSS ( @shadcn-ui ) and Prisma. Admin Panel: https://pardis.vercel.app |

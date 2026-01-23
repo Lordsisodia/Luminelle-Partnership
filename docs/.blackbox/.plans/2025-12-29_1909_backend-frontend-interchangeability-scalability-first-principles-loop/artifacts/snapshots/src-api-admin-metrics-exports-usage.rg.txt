@@ -1,3 +1,0 @@
-../src/domains/admin/orders/data/adminOrdersApi.ts:32:  const url = sp.toString() ? `/api/admin/orders/list?${sp.toString()}` : '/api/admin/orders/list'
-../src/domains/admin/orders/data/adminOrdersApi.ts:48:  const res = await fetch(`/api/admin/orders/get?${sp.toString()}`, { headers: { Accept: 'application/json' } })
-../src/domains/admin/orders/ui/pages/OrdersPage.tsx:214:                If you’re on Vite dev (`localhost:5174`), `/api/admin/orders/*` won’t exist unless your backend is also running. Mock data is shown for now.

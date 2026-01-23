@@ -1,7 +1,0 @@
-src/domains/admin/catalog/ui/pages/ProductsPage.tsx
-src/domains/client/account/hooks/useSyncUserToSupabase.ts
-src/domains/client/marketing/ui/sections/shop/final-cta-section/SpinWheelLocal.tsx
-src/hooks/useSyncUserToSupabase.ts
-src/main.tsx
-src/ui/components/GlobalHeader.tsx
-src/ui/providers/DrawerProvider.tsx

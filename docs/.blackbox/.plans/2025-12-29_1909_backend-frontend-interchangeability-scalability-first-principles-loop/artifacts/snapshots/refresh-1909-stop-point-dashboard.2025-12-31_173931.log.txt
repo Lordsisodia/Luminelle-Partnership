@@ -1,2 +1,0 @@
-log: .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/artifacts/snapshots/refresh-1909-stop-point-dashboard.2025-12-31_173931.log.txt
-done: wrote .blackbox/.plans/2025-12-29_1909_backend-frontend-interchangeability-scalability-first-principles-loop/stop-point-status-dashboard.md

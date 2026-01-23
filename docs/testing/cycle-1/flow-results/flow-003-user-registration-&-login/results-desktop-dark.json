@@ -1,0 +1,16 @@
+{
+  "flowId": "flow-003",
+  "flowName": "User Registration & Login",
+  "priority": "P0",
+  "phase": 1,
+  "viewport": "Desktop",
+  "theme": "dark",
+  "timestamp": "2026-01-12T15:01:17.555Z",
+  "steps": [],
+  "consoleErrors": [],
+  "screenshots": [],
+  "success": false,
+  "notes": [
+    "Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/\", waiting until \"networkidle\"\u001b[22m\n"
+  ]
+}

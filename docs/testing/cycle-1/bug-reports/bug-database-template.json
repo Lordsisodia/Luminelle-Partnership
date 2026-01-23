@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "generated": "2026-01-12T21:55:00Z",
+    "testSession": "session-2026-01-12-001",
+    "baseUrl": "http://localhost:5174",
+    "totalFlowsTested": 24,
+    "totalCombinations": 144
+  },
+  "bugs": [],
+  "summary": {
+    "total": 0,
+    "bySeverity": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0,
+      "P3": 0
+    },
+    "byCategory": {
+      "functional": 0,
+      "visual": 0,
+      "accessibility": 0,
+      "performance": 0,
+      "navigation": 0
+    },
+    "byFlow": {}
+  },
+  "flowAnalysis": {
+    "dropOffPoints": [],
+    "frictionPoints": [],
+    "performanceBottlenecks": [],
+    "accessibilityIssues": []
+  }
+}

@@ -1,3 +1,0 @@
-# Shopify "Subscriptions" seed listing to find category/feature handles
-https://apps.shopify.com/shopify-subscriptions?locale=en shopify-subscriptions-app-store
-

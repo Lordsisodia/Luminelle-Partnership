@@ -1,5 +1,0 @@
-# Fixups: Daasity product/pricing URLs (since /product and /pricing returned Not Found)
-https://www.daasity.com/shopify-reporting daasity-shopify-reporting
-https://www.daasity.com/Shopify-Plus-reporting daasity-shopify-plus-reporting
-https://www.daasity.com/case-studies daasity-case-studies
-https://apps.shopify.com/daasity daasity-shopify-app-store

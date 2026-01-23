@@ -1,0 +1,2723 @@
+{
+  "board_name": "lumelle-refactoring",
+  "columns": {
+    "backlog": {
+      "id": "backlog",
+      "name": "Backlog",
+      "position": 0,
+      "card_ids": [
+        "1538ce05",
+        "de3162ab",
+        "12c3305c",
+        "c77bb639",
+        "447b3452",
+        "92978663",
+        "71529160",
+        "ae6d541a",
+        "12512516",
+        "51778a70",
+        "76428cc3",
+        "0d4bf361",
+        "a44f933f",
+        "73850049",
+        "38511711",
+        "db0488e9",
+        "72f1b7b2",
+        "36506d09",
+        "89406e06",
+        "403369a3",
+        "efc3e7bf",
+        "77e290fa",
+        "65b14999",
+        "a78399a1",
+        "18ca2bc9",
+        "4e19e4bc",
+        "5f551df8",
+        "abf7f530",
+        "ff5dbe60",
+        "4816fe40"
+      ]
+    },
+    "todo": {
+      "id": "todo",
+      "name": "Todo",
+      "position": 1,
+      "card_ids": []
+    },
+    "in_progress": {
+      "id": "in_progress",
+      "name": "In Progress",
+      "position": 2,
+      "card_ids": []
+    },
+    "in_review": {
+      "id": "in_review",
+      "name": "In Review",
+      "position": 3,
+      "card_ids": []
+    },
+    "done": {
+      "id": "done",
+      "name": "Done",
+      "position": 4,
+      "card_ids": []
+    }
+  },
+  "cards": {
+    "1538ce05": {
+      "id": "1538ce05",
+      "title": "Task 1.1: Catalog All Admin Routes",
+      "description": "Find and document every admin page route",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-1",
+        "audit",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.724860",
+      "updated_at": "2026-01-15T19:21:44.734566",
+      "position": 0,
+      "metadata": {
+        "phase": 1,
+        "category": "audit",
+        "estimated": "2h",
+        "steps": 5,
+        "agents": [
+          "architect"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin"
+        ],
+        "output": "admin-routes-map.md"
+      }
+    },
+    "de3162ab": {
+      "id": "de3162ab",
+      "title": "Task 1.2: Test Dashboard Page Load",
+      "description": "Verify dashboard loads without errors",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-1",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.735144",
+      "updated_at": "2026-01-15T19:21:44.735146",
+      "position": 1,
+      "metadata": {
+        "phase": 1,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 7,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/dashboard"
+        ],
+        "output": "dashboard-test-report.md"
+      }
+    },
+    "12c3305c": {
+      "id": "12c3305c",
+      "title": "Task 1.3: Verify Dashboard Data Sources",
+      "description": "Test all dashboard API endpoints",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-1",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.737400",
+      "updated_at": "2026-01-15T19:21:44.737407",
+      "position": 2,
+      "metadata": {
+        "phase": 1,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 6,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/dashboard",
+          "apps/api/routes/admin"
+        ],
+        "output": "dashboard-api-test-report.md"
+      }
+    },
+    "c77bb639": {
+      "id": "c77bb639",
+      "title": "Task 2.1: Test Products Listing Page",
+      "description": "Verify products list loads and filters work",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-2",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.738118",
+      "updated_at": "2026-01-15T19:21:44.738120",
+      "position": 3,
+      "metadata": {
+        "phase": 2,
+        "category": "testing",
+        "estimated": "4h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/products"
+        ],
+        "output": "products-listing-test-report.md"
+      }
+    },
+    "447b3452": {
+      "id": "447b3452",
+      "title": "Task 2.2: Test Product Creation Form",
+      "description": "Verify new product can be created",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-2",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.739371",
+      "updated_at": "2026-01-15T19:21:44.739378",
+      "position": 4,
+      "metadata": {
+        "phase": 2,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/products/new"
+        ],
+        "output": "product-creation-test-report.md"
+      }
+    },
+    "92978663": {
+      "id": "92978663",
+      "title": "Task 2.3: Test Product Edit Form",
+      "description": "Verify existing product can be edited",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-2",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.740636",
+      "updated_at": "2026-01-15T19:21:44.740639",
+      "position": 5,
+      "metadata": {
+        "phase": 2,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/products/edit"
+        ],
+        "output": "product-edit-test-report.md"
+      }
+    },
+    "71529160": {
+      "id": "71529160",
+      "title": "Task 3.1: Test Orders Listing Page",
+      "description": "Verify orders list loads and filters work",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-3",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.741100",
+      "updated_at": "2026-01-15T19:21:44.741102",
+      "position": 6,
+      "metadata": {
+        "phase": 3,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/orders"
+        ],
+        "output": "orders-listing-test-report.md"
+      }
+    },
+    "ae6d541a": {
+      "id": "ae6d541a",
+      "title": "Task 3.2: Test Order Detail View",
+      "description": "Verify order details display correctly",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-3",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.741597",
+      "updated_at": "2026-01-15T19:21:44.741600",
+      "position": 7,
+      "metadata": {
+        "phase": 3,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/orders/[id]"
+        ],
+        "output": "order-detail-test-report.md"
+      }
+    },
+    "12512516": {
+      "id": "12512516",
+      "title": "Task 4.1: Test Customers Listing",
+      "description": "Verify customers list loads and search works",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-4",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.745103",
+      "updated_at": "2026-01-15T19:21:44.745110",
+      "position": 8,
+      "metadata": {
+        "phase": 4,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 7,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/customers"
+        ],
+        "output": "customers-listing-test-report.md"
+      }
+    },
+    "51778a70": {
+      "id": "51778a70",
+      "title": "Task 4.2: Test Customer Detail View",
+      "description": "Verify customer history displays correctly",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-4",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.747457",
+      "updated_at": "2026-01-15T19:21:44.747463",
+      "position": 9,
+      "metadata": {
+        "phase": 4,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 7,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/customers/[id]"
+        ],
+        "output": "customer-detail-test-report.md"
+      }
+    },
+    "76428cc3": {
+      "id": "76428cc3",
+      "title": "Task 5.1: Test Content Listing",
+      "description": "Verify content pages list and manage",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-5",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.749427",
+      "updated_at": "2026-01-15T19:21:44.749434",
+      "position": 10,
+      "metadata": {
+        "phase": 5,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/content"
+        ],
+        "output": "content-management-test-report.md"
+      }
+    },
+    "0d4bf361": {
+      "id": "0d4bf361",
+      "title": "Task 6.1: Test Settings Pages",
+      "description": "Verify all settings pages work",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-6",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.751245",
+      "updated_at": "2026-01-15T19:21:44.751251",
+      "position": 11,
+      "metadata": {
+        "phase": 6,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 10,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/settings"
+        ],
+        "output": "settings-test-report.md"
+      }
+    },
+    "a44f933f": {
+      "id": "a44f933f",
+      "title": "Task 7.1: Test Analytics Pages",
+      "description": "Verify analytics and reports work",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-7",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.754711",
+      "updated_at": "2026-01-15T19:21:44.754746",
+      "position": 12,
+      "metadata": {
+        "phase": 7,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/analytics"
+        ],
+        "output": "analytics-test-report.md"
+      }
+    },
+    "73850049": {
+      "id": "73850049",
+      "title": "Task 8.1: Test Admin API Endpoints",
+      "description": "Verify all admin API endpoints work",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-8",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.756860",
+      "updated_at": "2026-01-15T19:21:44.756864",
+      "position": 13,
+      "metadata": {
+        "phase": 8,
+        "category": "testing",
+        "estimated": "4h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/api/routes/admin"
+        ],
+        "output": "admin-api-test-report.md"
+      }
+    },
+    "38511711": {
+      "id": "38511711",
+      "title": "Task 9.1: Document Admin UI Status",
+      "description": "Create comprehensive admin UI audit report",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-9",
+        "documentation",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:44.759149",
+      "updated_at": "2026-01-15T19:21:44.759161",
+      "position": 14,
+      "metadata": {
+        "phase": 9,
+        "category": "documentation",
+        "estimated": "4h",
+        "steps": 8,
+        "agents": [
+          "architect"
+        ],
+        "files_to_check": [
+          ".blackbox/.memory/test-reports"
+        ],
+        "output": "admin-ui-audit-final-report.md"
+      }
+    },
+    "db0488e9": {
+      "id": "db0488e9",
+      "title": "Task 1.1: Catalog All Admin Routes",
+      "description": "Find and document every admin page route",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-1",
+        "audit",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "187e80de",
+          "text": "1. Search for all admin routes in codebase",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.534462"
+        },
+        {
+          "id": "7cd0820c",
+          "text": "2. List all page files under /admin",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.540540"
+        },
+        {
+          "id": "f812a9ac",
+          "text": "3. Document each route and its purpose",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.543136"
+        },
+        {
+          "id": "e40a80dc",
+          "text": "4. Note any missing routes",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.546035"
+        },
+        {
+          "id": "ce35bac1",
+          "text": "5. Create admin route map",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.548438"
+        },
+        {
+          "id": "5031f140",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.549490"
+        },
+        {
+          "id": "b8757281",
+          "text": "\u2713 All admin routes documented",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.550245"
+        },
+        {
+          "id": "93e2e94b",
+          "text": "\u2713 Route map created",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.551795"
+        },
+        {
+          "id": "1145eb6c",
+          "text": "\u2713 Missing routes identified",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.554779"
+        },
+        {
+          "id": "fcd7328d",
+          "text": "\u2713 Purpose of each route clear",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.558002"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:55.530018",
+      "updated_at": "2026-01-15T19:21:55.531618",
+      "position": 15,
+      "metadata": {
+        "phase": 1,
+        "category": "audit",
+        "estimated": "2h",
+        "steps": 5,
+        "agents": [
+          "architect"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin"
+        ],
+        "output": "admin-routes-map.md"
+      }
+    },
+    "72f1b7b2": {
+      "id": "72f1b7b2",
+      "title": "Task 1.2: Test Dashboard Page Load",
+      "description": "Verify dashboard loads without errors",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-1",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "b91bcec4",
+          "text": "1. Start dev server",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.565525"
+        },
+        {
+          "id": "2f298c82",
+          "text": "2. Navigate to /admin/dashboard",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.568484"
+        },
+        {
+          "id": "5569f8a9",
+          "text": "3. Open browser console",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.570477"
+        },
+        {
+          "id": "b084a714",
+          "text": "4. Check for errors",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.573007"
+        },
+        {
+          "id": "c220e000",
+          "text": "5. Verify all widgets load",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.574722"
+        },
+        {
+          "id": "9b7fd18b",
+          "text": "6. Check data refresh works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.578654"
+        },
+        {
+          "id": "5081a5ae",
+          "text": "7. Test on mobile viewport",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.590960"
+        },
+        {
+          "id": "ea70c69c",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.604482"
+        },
+        {
+          "id": "7e56716c",
+          "text": "\u2713 Page loads in <3s",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.615507"
+        },
+        {
+          "id": "1484f4a0",
+          "text": "\u2713 No console errors",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.618169"
+        },
+        {
+          "id": "548d2d99",
+          "text": "\u2713 All widgets display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.621639"
+        },
+        {
+          "id": "6e70753b",
+          "text": "\u2713 Data refreshes correctly",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.633232"
+        },
+        {
+          "id": "39fdddb5",
+          "text": "\u2713 Mobile layout works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.634312"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:55.561615",
+      "updated_at": "2026-01-15T19:21:55.561769",
+      "position": 16,
+      "metadata": {
+        "phase": 1,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 7,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/dashboard"
+        ],
+        "output": "dashboard-test-report.md"
+      }
+    },
+    "36506d09": {
+      "id": "36506d09",
+      "title": "Task 1.3: Verify Dashboard Data Sources",
+      "description": "Test all dashboard API endpoints",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-1",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "7ece6a6e",
+          "text": "1. Identify all dashboard API calls",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.639786"
+        },
+        {
+          "id": "8d74a5c6",
+          "text": "2. Test each endpoint directly",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.641471"
+        },
+        {
+          "id": "4cb13788",
+          "text": "3. Verify data structure matches",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.642526"
+        },
+        {
+          "id": "3a9f4d13",
+          "text": "4. Check error handling",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.643436"
+        },
+        {
+          "id": "124c2467",
+          "text": "5. Test with sample data",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.646812"
+        },
+        {
+          "id": "3f6c6589",
+          "text": "6. Verify authentication",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.650266"
+        },
+        {
+          "id": "76fb1ef0",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.655719"
+        },
+        {
+          "id": "714b4fa1",
+          "text": "\u2713 All endpoints return data",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.659626"
+        },
+        {
+          "id": "4b4cf9a9",
+          "text": "\u2713 Data structure correct",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.663589"
+        },
+        {
+          "id": "98a1b56e",
+          "text": "\u2713 Error handling works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.668482"
+        },
+        {
+          "id": "86cc6356",
+          "text": "\u2713 Auth required and enforced",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.671080"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:55.638496",
+      "updated_at": "2026-01-15T19:21:55.638501",
+      "position": 17,
+      "metadata": {
+        "phase": 1,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 6,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/dashboard",
+          "apps/api/routes/admin"
+        ],
+        "output": "dashboard-api-test-report.md"
+      }
+    },
+    "89406e06": {
+      "id": "89406e06",
+      "title": "Task 2.1: Test Products Listing Page",
+      "description": "Verify products list loads and filters work",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-2",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "3ebe1b4a",
+          "text": "1. Navigate to /admin/products",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.682777"
+        },
+        {
+          "id": "f8a84e09",
+          "text": "2. Verify products display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.686185"
+        },
+        {
+          "id": "3797e8b3",
+          "text": "3. Test pagination",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.690254"
+        },
+        {
+          "id": "770d663e",
+          "text": "4. Test search functionality",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.698965"
+        },
+        {
+          "id": "f02357f2",
+          "text": "5. Test category filter",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.703924"
+        },
+        {
+          "id": "e675221f",
+          "text": "6. Test status filter",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.705517"
+        },
+        {
+          "id": "d3b7420a",
+          "text": "7. Test sorting",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.707965"
+        },
+        {
+          "id": "a36254d6",
+          "text": "8. Check responsive design",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.710000"
+        },
+        {
+          "id": "21d55be3",
+          "text": "9. Verify no console errors",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.713394"
+        },
+        {
+          "id": "d690a775",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.716245"
+        },
+        {
+          "id": "8ef41035",
+          "text": "\u2713 All products load",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.719844"
+        },
+        {
+          "id": "4061b846",
+          "text": "\u2713 Pagination works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.762929"
+        },
+        {
+          "id": "99ed6691",
+          "text": "\u2713 Search returns results",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.773731"
+        },
+        {
+          "id": "01f4b2b7",
+          "text": "\u2713 Filters apply correctly",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.775973"
+        },
+        {
+          "id": "9d23e38d",
+          "text": "\u2713 Sorting works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.781620"
+        },
+        {
+          "id": "852917ae",
+          "text": "\u2713 Mobile responsive",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.787549"
+        },
+        {
+          "id": "d6f5f920",
+          "text": "\u2713 No errors",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.792620"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:55.677801",
+      "updated_at": "2026-01-15T19:21:55.677809",
+      "position": 18,
+      "metadata": {
+        "phase": 2,
+        "category": "testing",
+        "estimated": "4h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/products"
+        ],
+        "output": "products-listing-test-report.md"
+      }
+    },
+    "403369a3": {
+      "id": "403369a3",
+      "title": "Task 2.2: Test Product Creation Form",
+      "description": "Verify new product can be created",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-2",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "62388e14",
+          "text": "1. Navigate to /admin/products/new",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.799714"
+        },
+        {
+          "id": "be3ad716",
+          "text": "2. Fill in required fields",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.801049"
+        },
+        {
+          "id": "6cf77855",
+          "text": "3. Upload test image",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.804979"
+        },
+        {
+          "id": "a70312b0",
+          "text": "4. Add variants",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.806698"
+        },
+        {
+          "id": "ceb56265",
+          "text": "5. Set inventory",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.812847"
+        },
+        {
+          "id": "d69e78a5",
+          "text": "6. Submit form",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.816794"
+        },
+        {
+          "id": "077c3001",
+          "text": "7. Verify product created",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.829784"
+        },
+        {
+          "id": "3d95ae05",
+          "text": "8. Check database",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.834896"
+        },
+        {
+          "id": "43ad6129",
+          "text": "9. Test validation errors",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.838586"
+        },
+        {
+          "id": "15654287",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.840540"
+        },
+        {
+          "id": "a5dcdcf7",
+          "text": "\u2713 Form validation works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.845380"
+        },
+        {
+          "id": "ff2c3f2f",
+          "text": "\u2713 Image uploads successfully",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.848645"
+        },
+        {
+          "id": "c86f8d79",
+          "text": "\u2713 Variants save correctly",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.872103"
+        },
+        {
+          "id": "6c5bc347",
+          "text": "\u2713 Product appears in list",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.877150"
+        },
+        {
+          "id": "c3a14926",
+          "text": "\u2713 Database record created",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.879530"
+        },
+        {
+          "id": "a2fa71ef",
+          "text": "\u2713 Errors handled gracefully",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.883117"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:55.794166",
+      "updated_at": "2026-01-15T19:21:55.794176",
+      "position": 19,
+      "metadata": {
+        "phase": 2,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/products/new"
+        ],
+        "output": "product-creation-test-report.md"
+      }
+    },
+    "efc3e7bf": {
+      "id": "efc3e7bf",
+      "title": "Task 2.3: Test Product Edit Form",
+      "description": "Verify existing product can be edited",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-2",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "bb65b39a",
+          "text": "1. Open existing product",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.892646"
+        },
+        {
+          "id": "74296b88",
+          "text": "2. Modify name",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.899436"
+        },
+        {
+          "id": "900999ce",
+          "text": "3. Update price",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.911820"
+        },
+        {
+          "id": "365b4279",
+          "text": "4. Change variants",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.916506"
+        },
+        {
+          "id": "1daad289",
+          "text": "5. Upload new image",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.921688"
+        },
+        {
+          "id": "10431f3a",
+          "text": "6. Save changes",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.925573"
+        },
+        {
+          "id": "0af20e85",
+          "text": "7. Verify updates saved",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.929821"
+        },
+        {
+          "id": "7fc090ed",
+          "text": "8. Check database",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.933895"
+        },
+        {
+          "id": "da866278",
+          "text": "9. Test cancel functionality",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.938462"
+        },
+        {
+          "id": "7f43acc0",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.942850"
+        },
+        {
+          "id": "db85f3fb",
+          "text": "\u2713 Form pre-fills correctly",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.947321"
+        },
+        {
+          "id": "1ed41354",
+          "text": "\u2713 Changes save properly",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.953211"
+        },
+        {
+          "id": "27a65d9c",
+          "text": "\u2713 Images update",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.959376"
+        },
+        {
+          "id": "bbef9d62",
+          "text": "\u2713 Variants modify correctly",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.963258"
+        },
+        {
+          "id": "5aa4f1cd",
+          "text": "\u2713 Cancel works without saving",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.967717"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:55.888024",
+      "updated_at": "2026-01-15T19:21:55.888040",
+      "position": 20,
+      "metadata": {
+        "phase": 2,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/products/edit"
+        ],
+        "output": "product-edit-test-report.md"
+      }
+    },
+    "77e290fa": {
+      "id": "77e290fa",
+      "title": "Task 3.1: Test Orders Listing Page",
+      "description": "Verify orders list loads and filters work",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-3",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "03dcf70a",
+          "text": "1. Navigate to /admin/orders",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.976370"
+        },
+        {
+          "id": "4b4c916a",
+          "text": "2. Verify orders display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.984061"
+        },
+        {
+          "id": "016bd430",
+          "text": "3. Test pagination",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.987906"
+        },
+        {
+          "id": "956a45c1",
+          "text": "4. Test date range filter",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.991608"
+        },
+        {
+          "id": "f812625b",
+          "text": "5. Test status filter",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:55.996516"
+        },
+        {
+          "id": "0ff2466b",
+          "text": "6. Test customer search",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.001517"
+        },
+        {
+          "id": "03ce1632",
+          "text": "7. Verify order details",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.003174"
+        },
+        {
+          "id": "efd0d4d6",
+          "text": "8. Check responsive design",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.008109"
+        },
+        {
+          "id": "e865a71c",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.011656"
+        },
+        {
+          "id": "c68e2b19",
+          "text": "\u2713 All orders load",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.023014"
+        },
+        {
+          "id": "51552045",
+          "text": "\u2713 Pagination works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.027750"
+        },
+        {
+          "id": "ec9bb74c",
+          "text": "\u2713 Date filter works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.034319"
+        },
+        {
+          "id": "095bf43c",
+          "text": "\u2713 Status filter works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.083576"
+        },
+        {
+          "id": "aee2a76c",
+          "text": "\u2713 Search finds orders",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.085288"
+        },
+        {
+          "id": "3dbd53bd",
+          "text": "\u2713 Order details accurate",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.103587"
+        },
+        {
+          "id": "ed758f83",
+          "text": "\u2713 Mobile responsive",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.106543"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:55.971300",
+      "updated_at": "2026-01-15T19:21:55.971313",
+      "position": 21,
+      "metadata": {
+        "phase": 3,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/orders"
+        ],
+        "output": "orders-listing-test-report.md"
+      }
+    },
+    "65b14999": {
+      "id": "65b14999",
+      "title": "Task 3.2: Test Order Detail View",
+      "description": "Verify order details display correctly",
+      "column_id": "backlog",
+      "priority": "high",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-3",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "b1d612ab",
+          "text": "1. Open specific order",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.152463"
+        },
+        {
+          "id": "fff399f0",
+          "text": "2. Verify line items display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.155701"
+        },
+        {
+          "id": "f472580c",
+          "text": "3. Check customer info",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.158656"
+        },
+        {
+          "id": "4eb844fb",
+          "text": "4. Verify shipping address",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.162013"
+        },
+        {
+          "id": "0b37b053",
+          "text": "5. Check payment status",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.167942"
+        },
+        {
+          "id": "bb716155",
+          "text": "6. Test status update",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.179702"
+        },
+        {
+          "id": "b8c8d81f",
+          "text": "7. Add order notes",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.188825"
+        },
+        {
+          "id": "b8db49e2",
+          "text": "8. Send notification",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.223163"
+        },
+        {
+          "id": "00d9d0a0",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.273392"
+        },
+        {
+          "id": "5685cbce",
+          "text": "\u2713 Line items accurate",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.276200"
+        },
+        {
+          "id": "4026ac8d",
+          "text": "\u2713 Customer info correct",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.280892"
+        },
+        {
+          "id": "0e98b85b",
+          "text": "\u2713 Shipping address accurate",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.285219"
+        },
+        {
+          "id": "dd450b56",
+          "text": "\u2713 Payment status shows",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.289048"
+        },
+        {
+          "id": "ac666ebe",
+          "text": "\u2713 Status update works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.293861"
+        },
+        {
+          "id": "1109e21f",
+          "text": "\u2713 Notes save",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.298249"
+        },
+        {
+          "id": "43922229",
+          "text": "\u2713 Notifications send",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.301314"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.109140",
+      "updated_at": "2026-01-15T19:21:56.109146",
+      "position": 22,
+      "metadata": {
+        "phase": 3,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/orders/[id]"
+        ],
+        "output": "order-detail-test-report.md"
+      }
+    },
+    "a78399a1": {
+      "id": "a78399a1",
+      "title": "Task 4.1: Test Customers Listing",
+      "description": "Verify customers list loads and search works",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-4",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "5e43c8cd",
+          "text": "1. Navigate to /admin/customers",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.310841"
+        },
+        {
+          "id": "3c810ba7",
+          "text": "2. Verify customers display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.316431"
+        },
+        {
+          "id": "20a9fe90",
+          "text": "3. Test search by name",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.322676"
+        },
+        {
+          "id": "c67f39a9",
+          "text": "4. Test search by email",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.326681"
+        },
+        {
+          "id": "7d6e0699",
+          "text": "5. Test filters",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.333655"
+        },
+        {
+          "id": "bdfad661",
+          "text": "6. Check pagination",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.342104"
+        },
+        {
+          "id": "b47ec853",
+          "text": "7. Verify responsive design",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.346253"
+        },
+        {
+          "id": "6163392c",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.351206"
+        },
+        {
+          "id": "eb8ed4c1",
+          "text": "\u2713 Customers load",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.355968"
+        },
+        {
+          "id": "d53e6b7c",
+          "text": "\u2713 Name search works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.361020"
+        },
+        {
+          "id": "7b5884a2",
+          "text": "\u2713 Email search works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.367338"
+        },
+        {
+          "id": "e20e4426",
+          "text": "\u2713 Filters apply",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.375142"
+        },
+        {
+          "id": "da9ac357",
+          "text": "\u2713 Pagination works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.379212"
+        },
+        {
+          "id": "d35e3cc2",
+          "text": "\u2713 Mobile responsive",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.383080"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.307322",
+      "updated_at": "2026-01-15T19:21:56.307330",
+      "position": 23,
+      "metadata": {
+        "phase": 4,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 7,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/customers"
+        ],
+        "output": "customers-listing-test-report.md"
+      }
+    },
+    "18ca2bc9": {
+      "id": "18ca2bc9",
+      "title": "Task 4.2: Test Customer Detail View",
+      "description": "Verify customer history displays correctly",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-4",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "4b75d2a7",
+          "text": "1. Open specific customer",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.394337"
+        },
+        {
+          "id": "e3784e1a",
+          "text": "2. Verify customer info",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.402724"
+        },
+        {
+          "id": "51c4882e",
+          "text": "3. Check order history",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.406638"
+        },
+        {
+          "id": "41a07c70",
+          "text": "4. Verify total spent",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.411139"
+        },
+        {
+          "id": "67e44a73",
+          "text": "5. Test customer edit",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.415500"
+        },
+        {
+          "id": "cff55cb6",
+          "text": "6. Add customer tags",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.419171"
+        },
+        {
+          "id": "e2bf0fb2",
+          "text": "7. View customer analytics",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.425283"
+        },
+        {
+          "id": "fe42004c",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.433455"
+        },
+        {
+          "id": "1ebdbe97",
+          "text": "\u2713 Info accurate",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.438616"
+        },
+        {
+          "id": "bb11601a",
+          "text": "\u2713 Order history complete",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.443292"
+        },
+        {
+          "id": "5c4be939",
+          "text": "\u2713 Total spent correct",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.447464"
+        },
+        {
+          "id": "9affd592",
+          "text": "\u2713 Edits save",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.456688"
+        },
+        {
+          "id": "b951eff7",
+          "text": "\u2713 Tags apply",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.461677"
+        },
+        {
+          "id": "af74ba86",
+          "text": "\u2713 Analytics display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.466995"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.388353",
+      "updated_at": "2026-01-15T19:21:56.388360",
+      "position": 24,
+      "metadata": {
+        "phase": 4,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 7,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/customers/[id]"
+        ],
+        "output": "customer-detail-test-report.md"
+      }
+    },
+    "4e19e4bc": {
+      "id": "4e19e4bc",
+      "title": "Task 5.1: Test Content Listing",
+      "description": "Verify content pages list and manage",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-5",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "cd0ba14b",
+          "text": "1. Navigate to /admin/content",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.526962"
+        },
+        {
+          "id": "cc569d25",
+          "text": "2. Verify pages display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.538489"
+        },
+        {
+          "id": "5755aeb0",
+          "text": "3. Test page creation",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.551045"
+        },
+        {
+          "id": "3e909f5e",
+          "text": "4. Test page editing",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.555263"
+        },
+        {
+          "id": "aa6a1123",
+          "text": "5. Test rich text editor",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.559863"
+        },
+        {
+          "id": "db611431",
+          "text": "6. Upload images",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.565317"
+        },
+        {
+          "id": "3b1c44af",
+          "text": "7. Test page preview",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.571216"
+        },
+        {
+          "id": "2a8a0b0c",
+          "text": "8. Test publish workflow",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.575988"
+        },
+        {
+          "id": "954608ec",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.589222"
+        },
+        {
+          "id": "ec76ae8b",
+          "text": "\u2713 Pages list loads",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.596955"
+        },
+        {
+          "id": "b9dab1aa",
+          "text": "\u2713 Create works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.602616"
+        },
+        {
+          "id": "2eb6e6d1",
+          "text": "\u2713 Editor functions",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.606627"
+        },
+        {
+          "id": "a9c19349",
+          "text": "\u2713 Images upload",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.613121"
+        },
+        {
+          "id": "934d731d",
+          "text": "\u2713 Preview works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.618065"
+        },
+        {
+          "id": "87995fe4",
+          "text": "\u2713 Publish workflow works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.622733"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.472280",
+      "updated_at": "2026-01-15T19:21:56.472287",
+      "position": 25,
+      "metadata": {
+        "phase": 5,
+        "category": "testing",
+        "estimated": "2h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/content"
+        ],
+        "output": "content-management-test-report.md"
+      }
+    },
+    "5f551df8": {
+      "id": "5f551df8",
+      "title": "Task 6.1: Test Settings Pages",
+      "description": "Verify all settings pages work",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-6",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "89617723",
+          "text": "1. Navigate to /admin/settings/general",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.639526"
+        },
+        {
+          "id": "e02d5933",
+          "text": "2. Test general settings save",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.644447"
+        },
+        {
+          "id": "e6d33c20",
+          "text": "3. Navigate to /admin/settings/shipping",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.650416"
+        },
+        {
+          "id": "f8a34a86",
+          "text": "4. Test shipping settings",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.655391"
+        },
+        {
+          "id": "53bb9cab",
+          "text": "5. Navigate to /admin/settings/payments",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.662874"
+        },
+        {
+          "id": "791333f3",
+          "text": "6. Test payment settings",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.670725"
+        },
+        {
+          "id": "c970844c",
+          "text": "7. Navigate to /admin/settings/taxes",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.675489"
+        },
+        {
+          "id": "38bdd4cd",
+          "text": "8. Test tax settings",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.681682"
+        },
+        {
+          "id": "a735071b",
+          "text": "9. Test email notifications",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.690977"
+        },
+        {
+          "id": "dffbdaa6",
+          "text": "10. Verify validation",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.698340"
+        },
+        {
+          "id": "762f22b8",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.704275"
+        },
+        {
+          "id": "a8e22fe7",
+          "text": "\u2713 General settings save",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.707992"
+        },
+        {
+          "id": "f8480302",
+          "text": "\u2713 Shipping settings work",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.713771"
+        },
+        {
+          "id": "ed10b744",
+          "text": "\u2713 Payment settings work",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.723078"
+        },
+        {
+          "id": "334f4032",
+          "text": "\u2713 Tax settings work",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.729156"
+        },
+        {
+          "id": "2093c0f3",
+          "text": "\u2713 Email settings save",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.734842"
+        },
+        {
+          "id": "88d26176",
+          "text": "\u2713 Validation works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.739946"
+        },
+        {
+          "id": "d417043d",
+          "text": "\u2713 Changes persist",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.748386"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.633129",
+      "updated_at": "2026-01-15T19:21:56.633136",
+      "position": 26,
+      "metadata": {
+        "phase": 6,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 10,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/settings"
+        ],
+        "output": "settings-test-report.md"
+      }
+    },
+    "abf7f530": {
+      "id": "abf7f530",
+      "title": "Task 7.1: Test Analytics Pages",
+      "description": "Verify analytics and reports work",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-7",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "b1f44d77",
+          "text": "1. Navigate to /admin/analytics",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.754088"
+        },
+        {
+          "id": "634299c1",
+          "text": "2. Verify sales report loads",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.756247"
+        },
+        {
+          "id": "61d6ac01",
+          "text": "3. Test date range selector",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.758301"
+        },
+        {
+          "id": "996e0f23",
+          "text": "4. Check data accuracy",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.760472"
+        },
+        {
+          "id": "3c950c5d",
+          "text": "5. Test export functionality",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.763018"
+        },
+        {
+          "id": "8801eefa",
+          "text": "6. Test customer analytics",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.765304"
+        },
+        {
+          "id": "d986a364",
+          "text": "7. Test product analytics",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.767446"
+        },
+        {
+          "id": "0c4756de",
+          "text": "8. Verify chart displays",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.769680"
+        },
+        {
+          "id": "17bf99b5",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.772058"
+        },
+        {
+          "id": "babcc6ec",
+          "text": "\u2713 Reports load",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.774626"
+        },
+        {
+          "id": "8dd9a5c7",
+          "text": "\u2713 Date filter works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.776949"
+        },
+        {
+          "id": "5c628b72",
+          "text": "\u2713 Data accurate",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.781050"
+        },
+        {
+          "id": "34f0d0fa",
+          "text": "\u2713 Export works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.783685"
+        },
+        {
+          "id": "b2ddc1a0",
+          "text": "\u2713 Customer analytics work",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.786724"
+        },
+        {
+          "id": "ff80b897",
+          "text": "\u2713 Product analytics work",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.789669"
+        },
+        {
+          "id": "cd2589da",
+          "text": "\u2713 Charts display",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.791962"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.751290",
+      "updated_at": "2026-01-15T19:21:56.751295",
+      "position": 27,
+      "metadata": {
+        "phase": 7,
+        "category": "testing",
+        "estimated": "3h",
+        "steps": 8,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/web/src/app/admin/analytics"
+        ],
+        "output": "analytics-test-report.md"
+      }
+    },
+    "ff5dbe60": {
+      "id": "ff5dbe60",
+      "title": "Task 8.1: Test Admin API Endpoints",
+      "description": "Verify all admin API endpoints work",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-8",
+        "testing",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "78d35095",
+          "text": "1. List all admin API routes",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.797066"
+        },
+        {
+          "id": "99a68153",
+          "text": "2. Test GET endpoints",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.799421"
+        },
+        {
+          "id": "dfd7e094",
+          "text": "3. Test POST endpoints",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.801578"
+        },
+        {
+          "id": "575b21f5",
+          "text": "4. Test PUT/PATCH endpoints",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.804258"
+        },
+        {
+          "id": "1b0d68eb",
+          "text": "5. Test DELETE endpoints",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.809231"
+        },
+        {
+          "id": "575599cc",
+          "text": "6. Verify authentication",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.818998"
+        },
+        {
+          "id": "bfe92f20",
+          "text": "7. Test error responses",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.826789"
+        },
+        {
+          "id": "cb80434c",
+          "text": "8. Check rate limiting",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.831312"
+        },
+        {
+          "id": "d943a97e",
+          "text": "9. Verify CORS",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.834579"
+        },
+        {
+          "id": "4e610c4f",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.841020"
+        },
+        {
+          "id": "6ac5664e",
+          "text": "\u2713 All endpoints respond",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.847869"
+        },
+        {
+          "id": "93411ba7",
+          "text": "\u2713 GET works",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.856083"
+        },
+        {
+          "id": "b08ab1dd",
+          "text": "\u2713 POST creates data",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.864451"
+        },
+        {
+          "id": "5e2f06e8",
+          "text": "\u2713 PUT updates data",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.869498"
+        },
+        {
+          "id": "7518b40d",
+          "text": "\u2713 DELETE removes data",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.871682"
+        },
+        {
+          "id": "63072723",
+          "text": "\u2713 Auth enforced",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.874911"
+        },
+        {
+          "id": "ba625607",
+          "text": "\u2713 Errors handled",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.877303"
+        },
+        {
+          "id": "fe0ec58e",
+          "text": "\u2713 CORS configured",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.879811"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.794541",
+      "updated_at": "2026-01-15T19:21:56.794545",
+      "position": 28,
+      "metadata": {
+        "phase": 8,
+        "category": "testing",
+        "estimated": "4h",
+        "steps": 9,
+        "agents": [
+          "qa-agent"
+        ],
+        "files_to_check": [
+          "apps/api/routes/admin"
+        ],
+        "output": "admin-api-test-report.md"
+      }
+    },
+    "4816fe40": {
+      "id": "4816fe40",
+      "title": "Task 9.1: Document Admin UI Status",
+      "description": "Create comprehensive admin UI audit report",
+      "column_id": "backlog",
+      "priority": "medium",
+      "assignee": null,
+      "due_date": null,
+      "labels": [
+        "phase-9",
+        "documentation",
+        "admin-ui",
+        "executable"
+      ],
+      "checklist": [
+        {
+          "id": "996c80b5",
+          "text": "1. Gather all test reports",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.885339"
+        },
+        {
+          "id": "98fe0d1c",
+          "text": "2. Identify issues found",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.921771"
+        },
+        {
+          "id": "6389e18d",
+          "text": "3. Categorize by severity",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.932389"
+        },
+        {
+          "id": "733285f9",
+          "text": "4. List fixes needed",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.934697"
+        },
+        {
+          "id": "33c8fa60",
+          "text": "5. Estimate fix times",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.936861"
+        },
+        {
+          "id": "24d115e0",
+          "text": "6. Create issue cards",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.939031"
+        },
+        {
+          "id": "33c571fd",
+          "text": "7. Generate final report",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.941324"
+        },
+        {
+          "id": "f0eba051",
+          "text": "8. Create recommendations",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.946064"
+        },
+        {
+          "id": "b9beeb2f",
+          "text": "--- Test Criteria ---",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.948309"
+        },
+        {
+          "id": "3c999b29",
+          "text": "\u2713 All reports compiled",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.950464"
+        },
+        {
+          "id": "230b0ba4",
+          "text": "\u2713 Issues categorized",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.952937"
+        },
+        {
+          "id": "2d9f3d6a",
+          "text": "\u2713 Fix estimates created",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.955142"
+        },
+        {
+          "id": "f4b7879c",
+          "text": "\u2713 Cards added to Kanban",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.957345"
+        },
+        {
+          "id": "3f4b1f5b",
+          "text": "\u2713 Report generated",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.964043"
+        },
+        {
+          "id": "8b7e0ec5",
+          "text": "\u2713 Recommendations clear",
+          "completed": false,
+          "created_at": "2026-01-15T19:21:56.973603"
+        }
+      ],
+      "attachments": [],
+      "watchers": [],
+      "created_at": "2026-01-15T19:21:56.882488",
+      "updated_at": "2026-01-15T19:21:56.882491",
+      "position": 29,
+      "metadata": {
+        "phase": 9,
+        "category": "documentation",
+        "estimated": "4h",
+        "steps": 8,
+        "agents": [
+          "architect"
+        ],
+        "files_to_check": [
+          ".blackbox/.memory/test-reports"
+        ],
+        "output": "admin-ui-audit-final-report.md"
+      }
+    }
+  },
+  "wip_limits": {},
+  "activity_log": [
+    {
+      "timestamp": "2026-01-15T19:21:44.734657",
+      "action": "card_created",
+      "details": {
+        "card_id": "1538ce05",
+        "title": "Task 1.1: Catalog All Admin Routes",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.735150",
+      "action": "card_created",
+      "details": {
+        "card_id": "de3162ab",
+        "title": "Task 1.2: Test Dashboard Page Load",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.737413",
+      "action": "card_created",
+      "details": {
+        "card_id": "12c3305c",
+        "title": "Task 1.3: Verify Dashboard Data Sources",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.738125",
+      "action": "card_created",
+      "details": {
+        "card_id": "c77bb639",
+        "title": "Task 2.1: Test Products Listing Page",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.739526",
+      "action": "card_created",
+      "details": {
+        "card_id": "447b3452",
+        "title": "Task 2.2: Test Product Creation Form",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.740644",
+      "action": "card_created",
+      "details": {
+        "card_id": "92978663",
+        "title": "Task 2.3: Test Product Edit Form",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.741105",
+      "action": "card_created",
+      "details": {
+        "card_id": "71529160",
+        "title": "Task 3.1: Test Orders Listing Page",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.741604",
+      "action": "card_created",
+      "details": {
+        "card_id": "ae6d541a",
+        "title": "Task 3.2: Test Order Detail View",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.745122",
+      "action": "card_created",
+      "details": {
+        "card_id": "12512516",
+        "title": "Task 4.1: Test Customers Listing",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.747476",
+      "action": "card_created",
+      "details": {
+        "card_id": "51778a70",
+        "title": "Task 4.2: Test Customer Detail View",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.749441",
+      "action": "card_created",
+      "details": {
+        "card_id": "76428cc3",
+        "title": "Task 5.1: Test Content Listing",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.751256",
+      "action": "card_created",
+      "details": {
+        "card_id": "0d4bf361",
+        "title": "Task 6.1: Test Settings Pages",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.754767",
+      "action": "card_created",
+      "details": {
+        "card_id": "a44f933f",
+        "title": "Task 7.1: Test Analytics Pages",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.756870",
+      "action": "card_created",
+      "details": {
+        "card_id": "73850049",
+        "title": "Task 8.1: Test Admin API Endpoints",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:44.759174",
+      "action": "card_created",
+      "details": {
+        "card_id": "38511711",
+        "title": "Task 9.1: Document Admin UI Status",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:55.531632",
+      "action": "card_created",
+      "details": {
+        "card_id": "db0488e9",
+        "title": "Task 1.1: Catalog All Admin Routes",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:55.561778",
+      "action": "card_created",
+      "details": {
+        "card_id": "72f1b7b2",
+        "title": "Task 1.2: Test Dashboard Page Load",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:55.638506",
+      "action": "card_created",
+      "details": {
+        "card_id": "36506d09",
+        "title": "Task 1.3: Verify Dashboard Data Sources",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:55.677824",
+      "action": "card_created",
+      "details": {
+        "card_id": "89406e06",
+        "title": "Task 2.1: Test Products Listing Page",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:55.794187",
+      "action": "card_created",
+      "details": {
+        "card_id": "403369a3",
+        "title": "Task 2.2: Test Product Creation Form",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:55.888056",
+      "action": "card_created",
+      "details": {
+        "card_id": "efc3e7bf",
+        "title": "Task 2.3: Test Product Edit Form",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:55.971328",
+      "action": "card_created",
+      "details": {
+        "card_id": "77e290fa",
+        "title": "Task 3.1: Test Orders Listing Page",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.109152",
+      "action": "card_created",
+      "details": {
+        "card_id": "65b14999",
+        "title": "Task 3.2: Test Order Detail View",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.307346",
+      "action": "card_created",
+      "details": {
+        "card_id": "a78399a1",
+        "title": "Task 4.1: Test Customers Listing",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.388366",
+      "action": "card_created",
+      "details": {
+        "card_id": "18ca2bc9",
+        "title": "Task 4.2: Test Customer Detail View",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.472293",
+      "action": "card_created",
+      "details": {
+        "card_id": "4e19e4bc",
+        "title": "Task 5.1: Test Content Listing",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.633166",
+      "action": "card_created",
+      "details": {
+        "card_id": "5f551df8",
+        "title": "Task 6.1: Test Settings Pages",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.751300",
+      "action": "card_created",
+      "details": {
+        "card_id": "abf7f530",
+        "title": "Task 7.1: Test Analytics Pages",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.794550",
+      "action": "card_created",
+      "details": {
+        "card_id": "ff5dbe60",
+        "title": "Task 8.1: Test Admin API Endpoints",
+        "column": "backlog"
+      }
+    },
+    {
+      "timestamp": "2026-01-15T19:21:56.882495",
+      "action": "card_created",
+      "details": {
+        "card_id": "4816fe40",
+        "title": "Task 9.1: Document Admin UI Status",
+        "column": "backlog"
+      }
+    }
+  ],
+  "last_updated": "2026-01-15T19:21:56.973642"
+}

@@ -1,6 +1,0 @@
-# Loop Returns — fix redirect-only snapshots by using trailing slashes
-
-https://www.loopreturns.com/features/ loop-returns-features
-https://www.loopreturns.com/docs/ loop-returns-docs
-https://www.loopreturns.com/product/ loop-returns-product
-

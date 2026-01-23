@@ -1,2 +1,0 @@
-No plan folders eligible for archiving.
-- cutoff: 2025-12-17 (older-than-days=14)

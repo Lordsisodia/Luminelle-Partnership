@@ -1,5 +1,0 @@
-# EasyPost docs fixups (docs.easypost.com appears to be the canonical docs site)
-
-https://docs.easypost.com/docs/api/ easypost-docs-site-api2
-https://docs.easypost.com/docs/guide/ easypost-docs-site-guide2
-

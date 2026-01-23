@@ -1,3 +1,0 @@
-# Tranche 10 — category discovery pages
-https://apps.shopify.com/categories/store-management shopify-cat-store-management
-https://apps.shopify.com/categories/marketing-and-conversion shopify-cat-marketing-conversion

@@ -1,0 +1,91 @@
+{
+  "flowId": "flow-001",
+  "flowName": "Guest Checkout Journey",
+  "priority": "P0",
+  "businessImpact": "DIRECT REVENUE",
+  "startedAt": "2026-01-12T21:51:00Z",
+  "baseUrl": "http://localhost:5174",
+  "steps": [
+    {
+      "step": 1,
+      "action": "navigate",
+      "target": "/",
+      "description": "Navigate to homepage",
+      "expected": "Homepage loads with products",
+      "actual": "PENDING",
+      "status": "pending",
+      "screenshot": "homepage.png"
+    },
+    {
+      "step": 2,
+      "action": "select",
+      "target": "product",
+      "description": "Select a product from homepage",
+      "expected": "Navigate to product page",
+      "actual": "PENDING",
+      "status": "pending",
+      "screenshot": "product-selection.png"
+    },
+    {
+      "step": 3,
+      "action": "interact",
+      "target": "/product/:handle",
+      "description": "On product page: check images, variants, add to cart",
+      "expected": "Product displays correctly, add to cart works",
+      "actual": "PENDING",
+      "status": "pending",
+      "screenshot": "product-page.png"
+    },
+    {
+      "step": 4,
+      "action": "navigate",
+      "target": "/cart",
+      "description": "Navigate to cart",
+      "expected": "Cart shows added item",
+      "actual": "PENDING",
+      "status": "pending",
+      "screenshot": "cart-page.png"
+    },
+    {
+      "step": 5,
+      "action": "test",
+      "target": "/cart",
+      "description": "Test cart operations (update qty, remove, etc.)",
+      "expected": "All cart operations work",
+      "actual": "PENDING",
+      "status": "pending"
+    },
+    {
+      "step": 6,
+      "action": "navigate",
+      "target": "/checkout",
+      "description": "Proceed to checkout",
+      "expected": "Checkout page loads",
+      "actual": "PENDING",
+      "status": "pending",
+      "screenshot": "checkout-page.png"
+    },
+    {
+      "step": 7,
+      "action": "fill",
+      "target": "/checkout",
+      "description": "Fill checkout forms (shipping, payment)",
+      "expected": "Forms accept input, validation works",
+      "actual": "PENDING",
+      "status": "pending"
+    },
+    {
+      "step": 8,
+      "action": "submit",
+      "target": "/checkout",
+      "description": "Submit order",
+      "expected": "Order created, redirect to confirmation",
+      "actual": "PENDING",
+      "status": "pending",
+      "screenshot": "confirmation-page.png"
+    }
+  ],
+  "viewports": ["mobile", "tablet", "desktop"],
+  "themes": ["light", "dark"],
+  "totalScreenshots": 48
+}

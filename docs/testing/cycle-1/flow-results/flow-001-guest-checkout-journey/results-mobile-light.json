@@ -1,0 +1,181 @@
+{
+  "flowId": "flow-001",
+  "flowName": "Guest Checkout Journey",
+  "priority": "P0",
+  "phase": 1,
+  "viewport": "Mobile",
+  "theme": "light",
+  "timestamp": "2026-01-12T14:56:29.884Z",
+  "steps": [
+    {
+      "step": 1,
+      "action": "navigate",
+      "description": "Navigate to homepage",
+      "success": true,
+      "error": null,
+      "duration": 1136
+    },
+    {
+      "step": 2,
+      "action": "wait",
+      "description": "Wait for products to load",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card') to be visible\u001b[22m\n",
+      "duration": 10004
+    },
+    {
+      "step": 3,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 394
+    },
+    {
+      "step": 4,
+      "action": "click",
+      "description": "Click first product",
+      "success": false,
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card:first-child a')\u001b[22m\n",
+      "duration": 30002
+    },
+    {
+      "step": 5,
+      "action": "wait",
+      "description": "Wait for product page",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")') to be visible\u001b[22m\n",
+      "duration": 10002
+    },
+    {
+      "step": 6,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 352
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "description": "Add to cart",
+      "success": false,
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")')\u001b[22m\n",
+      "duration": 30002
+    },
+    {
+      "step": 8,
+      "action": "wait",
+      "description": "Wait for cart update",
+      "success": true,
+      "error": null,
+      "duration": 2001
+    },
+    {
+      "step": 9,
+      "action": "navigate",
+      "description": "Go to cart",
+      "success": true,
+      "error": null,
+      "duration": 1563
+    },
+    {
+      "step": 10,
+      "action": "wait",
+      "description": "Wait for cart to load",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item') to be visible\u001b[22m\n",
+      "duration": 10005
+    },
+    {
+      "step": 11,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 67
+    },
+    {
+      "step": 12,
+      "action": "click",
+      "description": "Proceed to checkout",
+      "success": false,
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a:has-text(\"Checkout\")')\u001b[22m\n",
+      "duration": 30002
+    },
+    {
+      "step": 13,
+      "action": "wait",
+      "description": "Wait for checkout form",
+      "success": false,
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[name=\"checkout\"]') to be visible\u001b[22m\n",
+      "duration": 10001
+    },
+    {
+      "step": 14,
+      "action": "screenshot",
+      "success": true,
+      "error": null,
+      "duration": 68
+    }
+  ],
+  "consoleErrors": [
+    {
+      "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+      "location": {
+        "url": "https://golden-frog-53.clerk.accounts.dev/npm/@clerk/clerk-js@4/dist/clerk.browser.js",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+      "location": {
+        "url": "https://golden-frog-53.clerk.accounts.dev/npm/@clerk/clerk-js@4/dist/clerk.browser.js",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "homepage",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/homepage-mobile-light.png",
+      "viewport": "Mobile",
+      "theme": "light"
+    },
+    {
+      "name": "product-page",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/product-page-mobile-light.png",
+      "viewport": "Mobile",
+      "theme": "light"
+    },
+    {
+      "name": "cart-page",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/cart-page-mobile-light.png",
+      "viewport": "Mobile",
+      "theme": "light"
+    },
+    {
+      "name": "checkout-page",
+      "path": "docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/screenshots/checkout-page-mobile-light.png",
+      "viewport": "Mobile",
+      "theme": "light"
+    }
+  ],
+  "success": false,
+  "notes": [
+    "Step 2 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card') to be visible\u001b[22m\n",
+    "Step 4 failed: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card:first-child a')\u001b[22m\n",
+    "Step 5 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")') to be visible\u001b[22m\n",
+    "Step 7 failed: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")')\u001b[22m\n",
+    "Step 10 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item') to be visible\u001b[22m\n",
+    "Step 12 failed: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a:has-text(\"Checkout\")')\u001b[22m\n",
+    "Step 13 failed: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[name=\"checkout\"]') to be visible\u001b[22m\n"
+  ],
+  "metrics": {
+    "title": "LUMELLE™ | Cart",
+    "url": "http://localhost:5174/cart",
+    "headingCount": 0,
+    "imageCount": 1,
+    "buttonCount": 8,
+    "linkCount": 19
+  }
+}

@@ -1,5 +1,0 @@
-https://stripe.com/ stripe
-https://www.adyen.com/ adyen
-https://www.paypal.com/us/home paypal
-https://www.braintreepayments.com/ braintree
-https://www.bolt.com/ bolt

@@ -1,3 +1,0 @@
-# Tranche 05 fixups — correct Shopify App Store subscriptions category
-https://apps.shopify.com/categories/selling-products-payments-subscriptions/all?locale=en shopify-app-store-subscriptions-category-correct
-

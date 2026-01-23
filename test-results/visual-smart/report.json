@@ -1,0 +1,386 @@
+{
+  "url": "http://localhost:5174",
+  "timestamp": "2026-01-12T11:03:07.649Z",
+  "screenshots": [
+    {
+      "name": "desktop-light",
+      "path": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/desktop-light.png",
+      "viewport": "Desktop",
+      "size": "1920x1080",
+      "theme": "light",
+      "metadata": {
+        "title": "LUMELLE™ | Satin-lined waterproof shower cap",
+        "url": "http://localhost:5174/",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "theme": "light",
+        "elementCount": 926,
+        "imageCount": 13,
+        "headingCount": 12
+      },
+      "errors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 400 ()"
+        }
+      ],
+      "status": "has-errors"
+    },
+    {
+      "name": "tablet-light",
+      "path": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/tablet-light.png",
+      "viewport": "Tablet",
+      "size": "768x1024",
+      "theme": "light",
+      "metadata": {
+        "title": "LUMELLE™ | Satin-lined waterproof shower cap",
+        "url": "http://localhost:5174/",
+        "viewport": {
+          "width": 768,
+          "height": 1024
+        },
+        "theme": "light",
+        "elementCount": 926,
+        "imageCount": 13,
+        "headingCount": 12
+      },
+      "errors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 400 ()"
+        }
+      ],
+      "status": "has-errors"
+    },
+    {
+      "name": "mobile-light",
+      "path": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/mobile-light.png",
+      "viewport": "Mobile",
+      "size": "375x667",
+      "theme": "light",
+      "metadata": {
+        "title": "LUMELLE™ | Satin-lined waterproof shower cap",
+        "url": "http://localhost:5174/",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "theme": "light",
+        "elementCount": 926,
+        "imageCount": 13,
+        "headingCount": 12
+      },
+      "errors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 400 ()"
+        }
+      ],
+      "status": "has-errors"
+    },
+    {
+      "name": "desktop-dark",
+      "path": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/desktop-dark.png",
+      "viewport": "Desktop",
+      "size": "1920x1080",
+      "theme": "dark",
+      "metadata": {
+        "title": "LUMELLE™ | Satin-lined waterproof shower cap",
+        "url": "http://localhost:5174/",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "theme": "dark",
+        "elementCount": 926,
+        "imageCount": 13,
+        "headingCount": 12
+      },
+      "errors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 400 ()"
+        }
+      ],
+      "status": "has-errors"
+    },
+    {
+      "name": "tablet-dark",
+      "path": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/tablet-dark.png",
+      "viewport": "Tablet",
+      "size": "768x1024",
+      "theme": "dark",
+      "metadata": {
+        "title": "LUMELLE™ | Satin-lined waterproof shower cap",
+        "url": "http://localhost:5174/",
+        "viewport": {
+          "width": 768,
+          "height": 1024
+        },
+        "theme": "dark",
+        "elementCount": 926,
+        "imageCount": 13,
+        "headingCount": 12
+      },
+      "errors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 400 ()"
+        }
+      ],
+      "status": "has-errors"
+    },
+    {
+      "name": "mobile-dark",
+      "path": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/mobile-dark.png",
+      "viewport": "Mobile",
+      "size": "375x667",
+      "theme": "dark",
+      "metadata": {
+        "title": "LUMELLE™ | Satin-lined waterproof shower cap",
+        "url": "http://localhost:5174/",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "theme": "dark",
+        "elementCount": 926,
+        "imageCount": 13,
+        "headingCount": 12
+      },
+      "errors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        },
+        {
+          "type": "error",
+          "text": "Cart sync failed: PortError: {\"error\":\"Internal Server Error\",\"message\":\"Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\",\"stack\":\"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/_client.js' imported from /Users/shaansisodia/DEV/client-projects/lumelle/api/storefront/cart/create.ts.js\\n    at finalizeResolution (node:internal/modules/esm/resolve:283:11)\\n    at moduleResolve (node:internal/modules/esm/resolve:952:10)\\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\\n    at ModuleJob._link (node:internal/modules/esm/module_job:168:49)\"}\n    at requestJson (http://localhost:5174/src/domains/platform/http/internal-api/client.ts:25:11)\n    at async ensureCartRawId (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:50:21)\n    at async Object.getCart (http://localhost:5174/src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts:62:21)\n    at async http://localhost:5174/src/domains/client/shop/cart/providers/CartContext.tsx:279:18"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 400 ()"
+        }
+      ],
+      "status": "has-errors"
+    }
+  ],
+  "issues": [],
+  "analysis": [
+    {
+      "screenshot": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/desktop-light.png",
+      "type": "visual-analysis",
+      "context": "Desktop viewport, light theme",
+      "checks": [
+        "alignment",
+        "typography",
+        "contrast",
+        "layout",
+        "accessibility",
+        "responsive",
+        "visual-bugs"
+      ]
+    },
+    {
+      "screenshot": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/tablet-light.png",
+      "type": "visual-analysis",
+      "context": "Tablet viewport, light theme",
+      "checks": [
+        "alignment",
+        "typography",
+        "contrast",
+        "layout",
+        "accessibility",
+        "responsive",
+        "visual-bugs"
+      ]
+    },
+    {
+      "screenshot": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/mobile-light.png",
+      "type": "visual-analysis",
+      "context": "Mobile viewport, light theme",
+      "checks": [
+        "alignment",
+        "typography",
+        "contrast",
+        "layout",
+        "accessibility",
+        "responsive",
+        "visual-bugs"
+      ]
+    },
+    {
+      "screenshot": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/desktop-dark.png",
+      "type": "visual-analysis",
+      "context": "Desktop viewport, dark theme",
+      "checks": [
+        "alignment",
+        "typography",
+        "contrast",
+        "layout",
+        "accessibility",
+        "responsive",
+        "visual-bugs"
+      ]
+    },
+    {
+      "screenshot": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/tablet-dark.png",
+      "type": "visual-analysis",
+      "context": "Tablet viewport, dark theme",
+      "checks": [
+        "alignment",
+        "typography",
+        "contrast",
+        "layout",
+        "accessibility",
+        "responsive",
+        "visual-bugs"
+      ]
+    },
+    {
+      "screenshot": "/Users/shaansisodia/DEV/client-projects/lumelle/test-results/visual-smart/mobile-dark.png",
+      "type": "visual-analysis",
+      "context": "Mobile viewport, dark theme",
+      "checks": [
+        "alignment",
+        "typography",
+        "contrast",
+        "layout",
+        "accessibility",
+        "responsive",
+        "visual-bugs"
+      ]
+    }
+  ],
+  "summary": {
+    "totalScreenshots": 6,
+    "withErrors": 6,
+    "clean": 0,
+    "byTheme": {
+      "light": 3,
+      "dark": 3
+    },
+    "byViewport": {
+      "desktop": 2,
+      "tablet": 2,
+      "mobile": 2
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "P0",
+      "category": "console-errors",
+      "message": "Fix console errors shown in screenshots",
+      "action": "Review console logs and fix JavaScript errors"
+    },
+    {
+      "priority": "P1",
+      "category": "visual-analysis",
+      "message": "Run AI analysis on screenshots",
+      "action": "Use vision model to analyze screenshots for UI issues",
+      "prompts": 6
+    },
+    {
+      "priority": "P2",
+      "category": "baseline",
+      "message": "Create visual baseline",
+      "action": "Save current screenshots as baseline for regression testing"
+    },
+    {
+      "priority": "P3",
+      "category": "schedule",
+      "message": "Schedule regular visual tests",
+      "action": "Run visual tests after each significant change"
+    }
+  ]
+}

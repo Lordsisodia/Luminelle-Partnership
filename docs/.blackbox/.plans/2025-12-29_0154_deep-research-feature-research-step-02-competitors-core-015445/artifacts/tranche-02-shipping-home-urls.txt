@@ -1,6 +1,0 @@
-# Tranche 02 (Shipping labels / rate shopping / shipping ops) — homepage-only snapshots
-
-https://www.shipstation.com shipstation
-https://goshippo.com shippo
-https://www.easypost.com easypost
-

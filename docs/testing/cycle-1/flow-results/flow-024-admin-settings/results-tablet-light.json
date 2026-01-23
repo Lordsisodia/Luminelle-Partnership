@@ -1,0 +1,16 @@
+{
+  "flowId": "flow-024",
+  "flowName": "Admin Settings",
+  "priority": "P3",
+  "phase": 4,
+  "viewport": "Tablet",
+  "theme": "light",
+  "timestamp": "2026-01-12T15:01:24.079Z",
+  "steps": [],
+  "consoleErrors": [],
+  "screenshots": [],
+  "success": false,
+  "notes": [
+    "Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/\", waiting until \"networkidle\"\u001b[22m\n"
+  ]
+}

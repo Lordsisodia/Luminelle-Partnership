@@ -1,9 +1,0 @@
-src/domains/platform/commerce/adapters/shopify/internal-api/cart.ts
-src/domains/platform/commerce/adapters/shopify/internal-api/catalog.ts
-src/domains/platform/commerce/adapters/shopify/internal-api/checkout.ts
-src/domains/platform/commerce/adapters/shopify/internal-api/index.ts
-src/domains/platform/commerce/adapters/shopify/internal-api/keyRegistry.ts
-src/domains/platform/commerce/adapters/shopify/internal-api/keys.ts
-src/domains/platform/content/adapters/shopify/internal-api/index.ts
-src/domains/platform/content/adapters/shopify/internal-api/sections.ts
-src/domains/platform/payments/adapters/stripe/index.ts

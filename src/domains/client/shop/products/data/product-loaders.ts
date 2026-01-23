@@ -9,6 +9,7 @@ export type LoadedProduct = Partial<{
   description: string
   price: number
   variantId: string | null
+  productId: string | null
   images: string[]
 }>
 
@@ -31,6 +32,7 @@ export async function loadProduct(handle: string): Promise<LoadedProduct | null>
       description: p.description,
       price: p.price?.amount ? Number(p.price.amount) : undefined,
       variantId: p.variantId ?? null,
+      productId: p.id ?? null,
       images: Array.isArray(p.images) ? p.images : undefined,
     }
   } catch {

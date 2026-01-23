@@ -1,7 +1,0 @@
-# Tranche 05 fixups — Shopify App Store category pages (to recover correct app handles)
-#
-# Search pages often defer-load results. Category pages usually include app-card metadata in HTML.
-
-https://apps.shopify.com/categories/selling-products-subscriptions/all?locale=en shopify-app-store-subscriptions-category
-https://apps.shopify.com/categories/selling-products-subscriptions/all shopify-app-store-subscriptions-category-nolocale
-

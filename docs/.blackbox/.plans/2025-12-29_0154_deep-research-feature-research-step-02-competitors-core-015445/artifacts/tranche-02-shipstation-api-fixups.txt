@@ -1,6 +1,0 @@
-# ShipStation API docs fixups (some older help center pages are bot-protected)
-
-https://www.shipstation.com/developer-api/ shipstation-developer-api
-https://www.shipstation.com/developer-api/#/reference shipstation-developer-api-reference
-https://api.shipstation.com shipstation-api-root
-

@@ -1,0 +1,35 @@
+
+📊 Analyzing Test Results...
+
+✅ Loaded 144 test results
+✅ Found 214 bugs
+✅ Bug database saved: docs/testing/cycle-1/bug-reports/all-bugs.json
+✅ Bugs categorized by severity
+✅ Flow analysis complete
+   - Drop-off points: 15
+   - Performance bottlenecks: 14
+   - Friction points: 24
+✅ Flow optimization analysis saved
+✅ Testing report saved
+
+📊 Analysis Complete!
+
+Summary:
+- Total Bugs: 214
+- P0 (Critical): 17
+- P1 (High): 62
+- P2 (Medium): 117
+- P3 (Low): 18
+
+Reports saved to: docs/testing/cycle-1/bug-reports/
+file:///Users/shaansisodia/DEV/client-projects/lumelle/scripts/analyze-test-results.mjs:418
+main().catch(console.error);
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'catch')
+    at file:///Users/shaansisodia/DEV/client-projects/lumelle/scripts/analyze-test-results.mjs:418:7
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.19.6

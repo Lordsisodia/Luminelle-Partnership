@@ -1,8 +1,9 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SUPPORT_EMAIL } from '@/config/constants'
 import { GlobalFooter } from '@ui/components/GlobalFooter'
+import { initMetaPixel } from '@/lib/analytics/metapixel'
 
 const LandingPage = lazy(() => import('@creator/ui/pages/CreatorsPage'))
 const WelcomePage = lazy(() => import('@client/marketing/ui/pages/WelcomePage'))
@@ -90,6 +91,14 @@ const AppLoadingFallback = () => {
 }
 
 const App = () => {
+  // Initialize Meta Pixel for ad tracking and attribution
+  useEffect(() => {
+    const analyticsEnabled = import.meta.env.VITE_ANALYTICS_ENABLED === 'true'
+    if (analyticsEnabled) {
+      initMetaPixel()
+    }
+  }, [])
+
   return (
     <Suspense fallback={<AppLoadingFallback />}>
       <Helmet>

@@ -1,8 +1,0 @@
-../functions/_lib/shopifyCheckoutProxy.ts:8:    (env.SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN as string | undefined) ||
-../functions/_lib/shopifyCheckoutProxy.ts:127:        reason: 'Missing SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN / SHOPIFY_STORE_DOMAIN in Pages environment variables.',
-../scripts/test-webhook.mjs:73:console.log(`Sending webhook to ${appUrl}/api/shopify/webhooks/products_create...`);
-../scripts/test-webhook.mjs:77:        const res = await fetch(`${appUrl}/api/shopify/webhooks/products_create`, {
-../scripts/test-webhook.mjs:81:                'X-Shopify-Topic': 'products/create',
-../functions/_lib/types.ts:17:  SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN?: string
-../docs/02-engineering/technical/shopify-integration.md:96:- `VITE_SHOPIFY_CHECKOUT_PROXY=1`
-../docs/02-engineering/technical/shopify-integration.md:99:- `SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN=yourshop.myshopify.com` (defaults to `SHOPIFY_STORE_DOMAIN`)

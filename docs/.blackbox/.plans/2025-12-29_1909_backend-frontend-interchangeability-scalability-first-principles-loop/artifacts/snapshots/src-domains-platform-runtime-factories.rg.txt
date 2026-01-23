@@ -1,9 +1,0 @@
-../src/domains/platform/content/runtime.ts:19:const createMockContent = (): ContentRuntime => {
-../src/domains/platform/content/runtime.ts:38:const createDisabledContent = (code: 'NOT_CONFIGURED' | 'UNAVAILABLE', message: string): ContentRuntime => {
-../src/domains/platform/content/runtime.ts:47:export const createContent = (): ContentRuntime => {
-../src/domains/platform/payments/runtime.ts:20:const createMockPayments = (): PaymentsRuntime => {
-../src/domains/platform/payments/runtime.ts:32:const createDisabledPayments = (code: 'NOT_CONFIGURED' | 'UNAVAILABLE', message: string): PaymentsRuntime => {
-../src/domains/platform/payments/runtime.ts:44:export const createPayments = (): PaymentsRuntime => {
-../src/domains/platform/commerce/runtime.ts:21:const createMockCommerce = (): CommerceRuntime => {
-../src/domains/platform/commerce/runtime.ts:82:const createDisabledCommerce = (code: 'NOT_CONFIGURED' | 'UNAVAILABLE', message: string): CommerceRuntime => {
-../src/domains/platform/commerce/runtime.ts:125:export const createCommerce = (): CommerceRuntime => {

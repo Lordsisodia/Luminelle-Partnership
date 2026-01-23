@@ -1,0 +1,24 @@
+{
+  "id": "76cc6202-c9c0-40af-a445-90e7ad16a1d4",
+  "description": "Phase 1: Critical Issues Resolution",
+  "expected_output": "All 8 critical issues resolved with tests and documentation",
+  "completed": false,
+  "depth": 0,
+  "parent_id": null,
+  "children": [
+    "f0a296e9-eb47-4e61-848d-4aa7fd46844d",
+    "30eb7c16-7909-4c38-b580-ac54154bf308",
+    "b3b0cc45-e76a-41eb-8630-e863afd7b5b9",
+    "6c088153-4717-41ac-a6dc-d5a50dcf7ff4",
+    "9215dfe3-488f-4ede-acee-d8d207c02f29",
+    "861f368c-90a4-484c-9a74-ae10d53e5cbf",
+    "1664b2db-7b44-4207-bc82-3479db272b24",
+    "e9e29f13-1e89-419c-89b3-88268f9b0106"
+  ],
+  "metadata": {
+    "phase": "Phase 1",
+    "duration": "Weeks 1-4",
+    "total_issues": 8,
+    "priority_level": "P0"
+  }
+}

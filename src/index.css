@@ -1,5 +1,6 @@
 @import './theme/siso-color-system.css/color-system.css';
 @import './theme/siso-tw-animate.css';
+@import './theme/accessibility-fixes.css';
 
 @tailwind base;
 @tailwind components;

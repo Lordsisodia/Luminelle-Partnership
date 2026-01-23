@@ -1,0 +1,21 @@
+{
+  "id": "1664b2db-7b44-4207-bc82-3479db272b24",
+  "description": "Issue #199: Debug Code Cleanup",
+  "expected_output": "All debug code removed, proper logging in place",
+  "completed": false,
+  "depth": 1,
+  "parent_id": "76cc6202-c9c0-40af-a445-90e7ad16a1d4",
+  "children": [
+    "bcb2ec7c-818f-4786-8914-c827e2be2507",
+    "642708e9-00f3-4a4f-b0e1-61346e6e5a4a",
+    "1147e687-df8f-450c-ba51-0ed363e8a833",
+    "6457f9b6-0618-43f0-8351-38e29c968781",
+    "8030b1c8-ef97-4587-a74b-96216e3aa997"
+  ],
+  "metadata": {
+    "priority": "P0",
+    "estimated_days": "2-3 hours",
+    "phase": "Phase 1",
+    "issue_number": 199
+  }
+}

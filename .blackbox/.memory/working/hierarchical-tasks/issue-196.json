@@ -1,0 +1,24 @@
+{
+  "id": "6c088153-4717-41ac-a6dc-d5a50dcf7ff4",
+  "description": "Issue #196: TypeScript Configuration",
+  "expected_output": "Proper TypeScript configuration with strict type checking",
+  "completed": false,
+  "depth": 1,
+  "parent_id": "76cc6202-c9c0-40af-a445-90e7ad16a1d4",
+  "children": [
+    "07a0bb92-3c31-4ef9-8f9b-5553282455ef",
+    "ac07fff2-d2cd-4229-b635-e1a1d1c35d4b",
+    "bd01a072-a963-4002-a0a1-be0371c026d7",
+    "8ec4c103-afe2-48f1-8997-3aeff3764f23",
+    "bc6fd106-f032-4c7a-aec2-5db8ce788cc9",
+    "a627d537-9f5d-4740-8c57-e5c400566824",
+    "cce12916-41e6-499f-b617-c163bc7d55ae",
+    "84b35c3b-4031-4468-a8d4-e18b62c54f62"
+  ],
+  "metadata": {
+    "priority": "P0",
+    "estimated_days": "2-3",
+    "phase": "Phase 1",
+    "issue_number": 196
+  }
+}

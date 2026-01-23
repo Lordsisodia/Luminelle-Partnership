@@ -1,0 +1,483 @@
+{
+  "dropOffPoints": [
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 2,
+      "action": "wait",
+      "description": "Wait for products to load",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 4,
+      "action": "click",
+      "description": "Click first product",
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card:first-child a')\u001b[22m\n\u001b[2m    - waiting for\" http://localhost:5174/\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"http://localhost:5174/\"\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 5,
+      "action": "wait",
+      "description": "Wait for product page",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 7,
+      "action": "click",
+      "description": "Add to cart",
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")')\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 9,
+      "action": "navigate",
+      "description": "Go to cart",
+      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/cart\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/cart\", waiting until \"networkidle\"\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 1
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 10,
+      "action": "wait",
+      "description": "Wait for cart to load",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 12,
+      "action": "click",
+      "description": "Proceed to checkout",
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a:has-text(\"Checkout\")')\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 13,
+      "action": "wait",
+      "description": "Wait for checkout form",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[name=\"checkout\"]') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "dark",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 2,
+      "action": "wait",
+      "description": "Wait for products to load",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "light",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 4,
+      "action": "click",
+      "description": "Click first product",
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.product-card:first-child a')\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "light",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 5,
+      "action": "wait",
+      "description": "Wait for product page",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "light",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 7,
+      "action": "click",
+      "description": "Add to cart",
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Add to Cart\")')\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "light",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 10,
+      "action": "wait",
+      "description": "Wait for cart to load",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "light",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 12,
+      "action": "click",
+      "description": "Proceed to checkout",
+      "error": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a:has-text(\"Checkout\")')\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "light",
+      "frequency": 2
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 13,
+      "action": "wait",
+      "description": "Wait for checkout form",
+      "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[name=\"checkout\"]') to be visible\u001b[22m\n",
+      "viewport": "Mobile",
+      "theme": "light",
+      "frequency": 2
+    }
+  ],
+  "frictionPoints": [
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-002",
+      "flowName": "Cart Management",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-003",
+      "flowName": "User Registration & Login",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-004",
+      "flowName": "Product Discovery",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-005",
+      "flowName": "Product Search",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-006",
+      "flowName": "Login Flow",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-007",
+      "flowName": "Order Tracking",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-008",
+      "flowName": "Account Dashboard",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-009",
+      "flowName": "Address Book",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-010",
+      "flowName": "Payment Methods",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-011",
+      "flowName": "Brand Story",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-012",
+      "flowName": "Returns Process",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-013",
+      "flowName": "Blog Browsing",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-014",
+      "flowName": "Creator Welcome",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-015",
+      "flowName": "Creators Page",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-016",
+      "flowName": "Order History",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-017",
+      "flowName": "Order Details",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-018",
+      "flowName": "Admin Dashboard",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-019",
+      "flowName": "Order Management",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-020",
+      "flowName": "Product Catalog",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-021",
+      "flowName": "Content Management",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-022",
+      "flowName": "Media Library",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-023",
+      "flowName": "Component Library",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    },
+    {
+      "flowId": "flow-024",
+      "flowName": "Admin Settings",
+      "issue": "Elements not found or slow to load",
+      "occurrences": 6,
+      "impact": "high"
+    }
+  ],
+  "performanceBottlenecks": [
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 2,
+      "action": "wait",
+      "duration": 10001,
+      "description": "Wait for products to load"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 4,
+      "action": "click",
+      "duration": 30240,
+      "description": "Click first product"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 5,
+      "action": "wait",
+      "duration": 10006,
+      "description": "Wait for product page"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 7,
+      "action": "click",
+      "duration": 30004,
+      "description": "Add to cart"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 10,
+      "action": "wait",
+      "duration": 10002,
+      "description": "Wait for cart to load"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 12,
+      "action": "click",
+      "duration": 30002,
+      "description": "Proceed to checkout"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 13,
+      "action": "wait",
+      "duration": 10002,
+      "description": "Wait for checkout form"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 2,
+      "action": "wait",
+      "duration": 10004,
+      "description": "Wait for products to load"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 4,
+      "action": "click",
+      "duration": 30002,
+      "description": "Click first product"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 5,
+      "action": "wait",
+      "duration": 10002,
+      "description": "Wait for product page"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 7,
+      "action": "click",
+      "duration": 30002,
+      "description": "Add to cart"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 10,
+      "action": "wait",
+      "duration": 10005,
+      "description": "Wait for cart to load"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 12,
+      "action": "click",
+      "duration": 30002,
+      "description": "Proceed to checkout"
+    },
+    {
+      "flowId": "flow-001",
+      "flowName": "Guest Checkout Journey",
+      "step": 13,
+      "action": "wait",
+      "duration": 10001,
+      "description": "Wait for checkout form"
+    }
+  ],
+  "accessibilityIssues": [],
+  "suggestions": [
+    {
+      "category": "UX",
+      "priority": "P1",
+      "title": "Fix critical drop-off points",
+      "description": "15 steps are failing across flows",
+      "impact": "high",
+      "effort": "medium",
+      "recommendation": "Prioritize fixing steps with highest failure rates"
+    },
+    {
+      "category": "Performance",
+      "priority": "P1",
+      "title": "Optimize slow-loading steps",
+      "description": "14 steps take >3 seconds",
+      "impact": "high",
+      "effort": "low",
+      "recommendation": "Add loading states, optimize queries, implement lazy loading"
+    },
+    {
+      "category": "Technical",
+      "priority": "P1",
+      "title": "Fix element selector issues",
+      "description": "24 flows have selector/timeout issues",
+      "impact": "high",
+      "effort": "low",
+      "recommendation": "Add data-testid attributes, improve element visibility"
+    }
+  ]
+}

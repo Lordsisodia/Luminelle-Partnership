@@ -1,9 +1,0 @@
-# Extra Tier‑B seed list (pattern gap fill)
-#
-# Purpose: capture a few direct pages that strengthen pattern cards (wishlist, back-in-stock)
-# without modifying the baseline Top‑25 funnel pack counts.
-
-https://www.ganni.com/en-vn/wishlist womens-top25-apparel-ganni-wishlist
-https://triangl.com/pages/wishlist womens-top25-apparel-triangl-wishlist
-https://frankiesbikinis.com/collections/back-in-stock womens-top25-apparel-frankies-bikinis-back-in-stock
-

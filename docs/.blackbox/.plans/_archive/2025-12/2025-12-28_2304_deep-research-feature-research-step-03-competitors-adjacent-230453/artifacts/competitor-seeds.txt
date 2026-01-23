@@ -1,5 +1,0 @@
-# Competitor seeds (pipe-delimited): name|category|website|notes
-#
-# Examples:
-# Shopify|commerce platform|https://www.shopify.com|Baseline platform
-# Medusa|headless commerce|https://medusajs.com|OSS headless backend

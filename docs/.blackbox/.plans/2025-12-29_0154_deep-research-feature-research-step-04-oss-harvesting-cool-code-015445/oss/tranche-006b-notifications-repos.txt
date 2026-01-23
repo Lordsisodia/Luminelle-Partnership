@@ -1,5 +1,0 @@
-# Tranche 006b — Notifications primitives (replace proprietary options)
-# Goal: permissive OSS for alerts/inbox primitives; we can build the admin UX on top.
-gotify/server
-binwiederhier/ntfy
-caronc/apprise

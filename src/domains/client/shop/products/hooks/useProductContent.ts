@@ -32,6 +32,7 @@ export const useProductContent = (handle: string) => {
   const [activeImage, setActiveImage] = useState(0)
   const [isAdding, setIsAdding] = useState(false)
   const [variantId, setVariantId] = useState<string | null>(config.fallbackVariantKey ?? null)
+  const [productId, setProductId] = useState<string | null>(null)
   const [price, setPrice] = useState<number>(config.defaultPrice ?? 15)
   const [gallery, setGallery] = useState<string[]>(baseGallery)
   const [sections, setSections] = useState<any>(null)
@@ -55,6 +56,7 @@ export const useProductContent = (handle: string) => {
         if (!p || isStub) return
 
         if (p.variantId) setVariantId(p.variantId)
+        if (p.productId) setProductId(p.productId)
         if (p.price) setPrice(Number(p.price))
         if (p.title) setProductTitle(p.title)
         if (p.description) setProductDesc(p.description)
@@ -94,6 +96,7 @@ export const useProductContent = (handle: string) => {
     setIsAdding,
     variantId,
     setVariantId,
+    productId,
     price,
     setPrice,
     sections,

@@ -8,7 +8,7 @@ import { productConfigs } from '@client/shop/products/data/product-config'
 import { CANONICAL_PRODUCT_HANDLES } from '@client/shop/products/data/product-handle-aliases'
 import { renderSections } from './sections/SectionsMap'
 import { useProductContent } from '@client/shop/products/hooks/useProductContent'
-import { captureEvent } from '@/lib/analytics/posthog'
+import { formatShopifyContentId, trackAddToCart, trackViewContent } from '@/lib/analytics/metapixel'
 import SpinWheelPrompt from '@client/shop/products/ui/components/SpinWheelPrompt'
 import { Seo } from '@/components/Seo'
 import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
@@ -39,6 +39,7 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
     productDesc,
     setProductDesc,
     heroImage,
+    productId,
   } = useProductContent(handleKey)
   const [draftOverrides, setDraftOverrides] = useState<any | null>(null)
   const [justAdded, setJustAdded] = useState(false)
@@ -93,10 +94,10 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
   const aggregateRating =
     Number.isFinite(ratingValue) && typeof ratingCount === 'number' && ratingCount > 0
       ? {
-          '@type': 'AggregateRating' as const,
-          ratingValue: Math.round(ratingValue * 10) / 10,
-          reviewCount: ratingCount,
-        }
+        '@type': 'AggregateRating' as const,
+        ratingValue: Math.round(ratingValue * 10) / 10,
+        reviewCount: ratingCount,
+      }
       : undefined
 
   const navigate = useNavigate()
@@ -115,11 +116,11 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
         },
         quantity,
       )
-      captureEvent('add_to_cart', {
-        product_handle: config.handle,
-        variant_id: variantId,
-        quantity,
-        price_gbp: price,
+      trackAddToCart({
+        content_name: productTitle || config.defaultTitle,
+        content_ids: [formatShopifyContentId(productId, variantId)],
+        value: price,
+        currency: 'GBP',
       })
       window.dispatchEvent(new CustomEvent('lumelle:open-cart'))
       setJustAdded(true)
@@ -145,14 +146,12 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
         },
         quantity,
       )
-      captureEvent('add_to_cart', {
-        product_handle: config.handle,
-        variant_id: variantId,
-        quantity,
-        price_gbp: price,
-        source: 'buy_now',
+      trackAddToCart({
+        content_name: productTitle || config.defaultTitle,
+        content_ids: [formatShopifyContentId(productId, variantId)],
+        value: price,
+        currency: 'GBP',
       })
-      captureEvent('cta_click', { click_id: 'pdp-buy-now', product_handle: config.handle })
       navigate('/checkout')
     } catch (error) {
       console.error('Buy now failed:', error)
@@ -333,6 +332,18 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
     window.addEventListener('message', handler)
     return () => window.removeEventListener('message', handler)
   }, [handleKey, setGallery, setPrice, setProductDesc, setProductTitle])
+
+  // Track ViewContent on mount whenever variant/handle changes
+  useEffect(() => {
+    if (variantId) {
+      trackViewContent({
+        content_name: productTitle || config.defaultTitle,
+        content_ids: [formatShopifyContentId(productId, variantId)],
+        value: price,
+        currency: 'GBP',
+      })
+    }
+  }, [variantId, productId, config.handle])
 
   useEffect(() => {
     // Report height to admin iframe preview (if embedded)

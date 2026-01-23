@@ -1,0 +1,16 @@
+{
+  "flowId": "flow-005",
+  "flowName": "Product Search",
+  "priority": "P1",
+  "phase": 2,
+  "viewport": "Mobile",
+  "theme": "light",
+  "timestamp": "2026-01-12T15:01:17.893Z",
+  "steps": [],
+  "consoleErrors": [],
+  "screenshots": [],
+  "success": false,
+  "notes": [
+    "Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/\", waiting until \"networkidle\"\u001b[22m\n"
+  ]
+}

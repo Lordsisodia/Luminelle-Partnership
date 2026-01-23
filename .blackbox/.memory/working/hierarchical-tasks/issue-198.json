@@ -1,0 +1,22 @@
+{
+  "id": "861f368c-90a4-484c-9a74-ae10d53e5cbf",
+  "description": "Issue #198: Platform Commerce Runtime",
+  "expected_output": "Fixed platform commerce runtime configuration",
+  "completed": false,
+  "depth": 1,
+  "parent_id": "76cc6202-c9c0-40af-a445-90e7ad16a1d4",
+  "children": [
+    "1cf55e64-1bde-48ba-8141-ce15318f7a36",
+    "59816318-af9a-416e-8c1e-9e5aa2e890c0",
+    "e98ec30e-c312-4d07-9090-152532ec5086",
+    "3c6db6e6-7962-4738-806d-f0857c1c1d97",
+    "19ea0e47-29ad-41ae-b50d-b522f2d7875f",
+    "83eaba59-8a3b-4b70-aabf-9c38b0060a2c"
+  ],
+  "metadata": {
+    "priority": "P0",
+    "estimated_days": "4-6 hours",
+    "phase": "Phase 1",
+    "issue_number": 198
+  }
+}

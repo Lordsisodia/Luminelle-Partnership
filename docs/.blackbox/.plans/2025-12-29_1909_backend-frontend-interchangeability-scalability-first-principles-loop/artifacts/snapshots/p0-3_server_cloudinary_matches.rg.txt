@@ -1,1 +1,0 @@
-../server/migrations/2025-12-16_cms_product_media.sql:1:-- cms_product_media: stores Cloudinary media for PDP/admin

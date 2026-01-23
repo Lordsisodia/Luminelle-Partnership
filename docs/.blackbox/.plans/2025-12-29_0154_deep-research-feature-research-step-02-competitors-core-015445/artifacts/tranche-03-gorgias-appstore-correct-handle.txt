@@ -1,7 +1,0 @@
-# Tranche 03 — Gorgias Shopify App Store listing (correct handle)
-#
-# Category page indicates “Gorgias: Helpdesk, Chat & FAQ” links to apps.shopify.com/helpdesk.
-
-https://apps.shopify.com/helpdesk?locale=en gorgias-shopify-app-store-helpdesk
-https://apps.shopify.com/helpdesk gorgias-shopify-app-store-helpdesk-nolocale
-

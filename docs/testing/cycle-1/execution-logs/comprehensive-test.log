@@ -1,0 +1,1643 @@
+
+🚀 Starting Comprehensive Flow Testing
+
+Base URL: http://localhost:5174
+Total Flows: 24
+Viewports: 3
+Themes: 2
+Total Test Combinations: 144
+
+
+================================================================================
+Phase 1: Guest Checkout Journey (P0)
+================================================================================
+
+🧪 Testing: Guest Checkout Journey
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  Step 1: Navigate to homepage
+  Step 2: Wait for products to load
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('.product-card') to be visible[22m
+
+  Step 3: undefined
+    ✅ Screenshot saved: homepage
+  Step 4: Click first product
+    ❌ Failed: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.product-card:first-child a')[22m
+
+  Step 5: Wait for product page
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Add to Cart")') to be visible[22m
+
+  Step 6: undefined
+    ✅ Screenshot saved: product-page
+  Step 7: Add to cart
+    ❌ Failed: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Add to Cart")')[22m
+
+  Step 8: Wait for cart update
+  Step 9: Go to cart
+  Step 10: Wait for cart to load
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('.cart-item') to be visible[22m
+
+  Step 11: undefined
+    ✅ Screenshot saved: cart-page
+  Step 12: Proceed to checkout
+    ❌ Failed: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('a:has-text("Checkout")')[22m
+
+  Step 13: Wait for checkout form
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('form[name="checkout"]') to be visible[22m
+
+  Step 14: undefined
+    ✅ Screenshot saved: checkout-page
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/results-mobile-light.json
+  ❌ FAILED - 14 steps, 2 console errors
+
+🧪 Testing: Guest Checkout Journey
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  Step 1: Navigate to homepage
+  Step 2: Wait for products to load
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('.product-card') to be visible[22m
+
+  Step 3: undefined
+    ✅ Screenshot saved: homepage
+  Step 4: Click first product
+    ❌ Failed: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.product-card:first-child a')[22m
+[2m    - waiting for" http://localhost:5174/" navigation to finish...[22m
+[2m    - navigated to "http://localhost:5174/"[22m
+
+  Step 5: Wait for product page
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Add to Cart")') to be visible[22m
+
+  Step 6: undefined
+    ✅ Screenshot saved: product-page
+  Step 7: Add to cart
+    ❌ Failed: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Add to Cart")')[22m
+
+  Step 8: Wait for cart update
+  Step 9: Go to cart
+    ❌ Failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/cart
+Call log:
+[2m  - navigating to "http://localhost:5174/cart", waiting until "networkidle"[22m
+
+  Step 10: Wait for cart to load
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('.cart-item') to be visible[22m
+
+  Step 11: undefined
+    ✅ Screenshot saved: cart-page
+  Step 12: Proceed to checkout
+    ❌ Failed: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('a:has-text("Checkout")')[22m
+
+  Step 13: Wait for checkout form
+    ❌ Failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('form[name="checkout"]') to be visible[22m
+
+  Step 14: undefined
+    ✅ Screenshot saved: checkout-page
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/results-mobile-dark.json
+  ❌ FAILED - 14 steps, 55 console errors
+
+🧪 Testing: Guest Checkout Journey
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Guest Checkout Journey
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Guest Checkout Journey
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Guest Checkout Journey
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-001-guest-checkout-journey/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 1: Cart Management (P0)
+================================================================================
+
+🧪 Testing: Cart Management
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-002-cart-management/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Cart Management
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-002-cart-management/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Cart Management
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-002-cart-management/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Cart Management
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-002-cart-management/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Cart Management
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-002-cart-management/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Cart Management
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-002-cart-management/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 1: User Registration & Login (P0)
+================================================================================
+
+🧪 Testing: User Registration & Login
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-003-user-registration-&-login/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: User Registration & Login
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-003-user-registration-&-login/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: User Registration & Login
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-003-user-registration-&-login/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: User Registration & Login
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-003-user-registration-&-login/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: User Registration & Login
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-003-user-registration-&-login/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: User Registration & Login
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-003-user-registration-&-login/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Product Discovery (P1)
+================================================================================
+
+🧪 Testing: Product Discovery
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-004-product-discovery/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Discovery
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-004-product-discovery/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Discovery
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-004-product-discovery/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Discovery
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-004-product-discovery/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Discovery
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-004-product-discovery/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Discovery
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-004-product-discovery/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Product Search (P1)
+================================================================================
+
+🧪 Testing: Product Search
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-005-product-search/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Search
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-005-product-search/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Search
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-005-product-search/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Search
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-005-product-search/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Search
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-005-product-search/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Search
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-005-product-search/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Login Flow (P1)
+================================================================================
+
+🧪 Testing: Login Flow
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-006-login-flow/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Login Flow
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-006-login-flow/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Login Flow
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-006-login-flow/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Login Flow
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-006-login-flow/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Login Flow
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-006-login-flow/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Login Flow
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-006-login-flow/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Order Tracking (P1)
+================================================================================
+
+🧪 Testing: Order Tracking
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-007-order-tracking/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Tracking
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-007-order-tracking/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Tracking
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-007-order-tracking/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Tracking
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-007-order-tracking/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Tracking
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-007-order-tracking/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Tracking
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-007-order-tracking/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Account Dashboard (P1)
+================================================================================
+
+🧪 Testing: Account Dashboard
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-008-account-dashboard/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Account Dashboard
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-008-account-dashboard/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Account Dashboard
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-008-account-dashboard/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Account Dashboard
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-008-account-dashboard/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Account Dashboard
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-008-account-dashboard/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Account Dashboard
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-008-account-dashboard/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Address Book (P1)
+================================================================================
+
+🧪 Testing: Address Book
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-009-address-book/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Address Book
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-009-address-book/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Address Book
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-009-address-book/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Address Book
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-009-address-book/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Address Book
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-009-address-book/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Address Book
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-009-address-book/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Payment Methods (P1)
+================================================================================
+
+🧪 Testing: Payment Methods
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-010-payment-methods/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Payment Methods
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-010-payment-methods/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Payment Methods
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-010-payment-methods/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Payment Methods
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-010-payment-methods/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Payment Methods
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-010-payment-methods/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Payment Methods
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-010-payment-methods/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 2: Brand Story (P1)
+================================================================================
+
+🧪 Testing: Brand Story
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-011-brand-story/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Brand Story
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-011-brand-story/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Brand Story
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-011-brand-story/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Brand Story
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-011-brand-story/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Brand Story
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-011-brand-story/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Brand Story
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-011-brand-story/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 3: Returns Process (P2)
+================================================================================
+
+🧪 Testing: Returns Process
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-012-returns-process/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Returns Process
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-012-returns-process/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Returns Process
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-012-returns-process/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Returns Process
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-012-returns-process/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Returns Process
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-012-returns-process/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Returns Process
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-012-returns-process/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 3: Blog Browsing (P2)
+================================================================================
+
+🧪 Testing: Blog Browsing
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-013-blog-browsing/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Blog Browsing
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-013-blog-browsing/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Blog Browsing
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-013-blog-browsing/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Blog Browsing
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-013-blog-browsing/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Blog Browsing
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-013-blog-browsing/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Blog Browsing
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-013-blog-browsing/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 3: Creator Welcome (P2)
+================================================================================
+
+🧪 Testing: Creator Welcome
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-014-creator-welcome/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creator Welcome
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-014-creator-welcome/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creator Welcome
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-014-creator-welcome/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creator Welcome
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-014-creator-welcome/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creator Welcome
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-014-creator-welcome/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creator Welcome
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-014-creator-welcome/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 3: Creators Page (P2)
+================================================================================
+
+🧪 Testing: Creators Page
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-015-creators-page/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creators Page
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-015-creators-page/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creators Page
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-015-creators-page/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creators Page
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-015-creators-page/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creators Page
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-015-creators-page/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Creators Page
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-015-creators-page/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 3: Order History (P2)
+================================================================================
+
+🧪 Testing: Order History
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-016-order-history/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order History
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-016-order-history/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order History
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-016-order-history/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order History
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-016-order-history/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order History
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-016-order-history/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order History
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-016-order-history/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 3: Order Details (P2)
+================================================================================
+
+🧪 Testing: Order Details
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-017-order-details/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Details
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-017-order-details/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Details
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-017-order-details/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Details
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-017-order-details/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Details
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-017-order-details/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Details
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-017-order-details/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 4: Admin Dashboard (P2)
+================================================================================
+
+🧪 Testing: Admin Dashboard
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-018-admin-dashboard/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Dashboard
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-018-admin-dashboard/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Dashboard
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-018-admin-dashboard/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Dashboard
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-018-admin-dashboard/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Dashboard
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-018-admin-dashboard/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Dashboard
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-018-admin-dashboard/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 4: Order Management (P2)
+================================================================================
+
+🧪 Testing: Order Management
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-019-order-management/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Management
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-019-order-management/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Management
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-019-order-management/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Management
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-019-order-management/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Management
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-019-order-management/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Order Management
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-019-order-management/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 4: Product Catalog (P2)
+================================================================================
+
+🧪 Testing: Product Catalog
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-020-product-catalog/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Catalog
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-020-product-catalog/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Catalog
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-020-product-catalog/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Catalog
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-020-product-catalog/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Catalog
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-020-product-catalog/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Product Catalog
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-020-product-catalog/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 4: Content Management (P2)
+================================================================================
+
+🧪 Testing: Content Management
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-021-content-management/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Content Management
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-021-content-management/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Content Management
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-021-content-management/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Content Management
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-021-content-management/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Content Management
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-021-content-management/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Content Management
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-021-content-management/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 4: Media Library (P3)
+================================================================================
+
+🧪 Testing: Media Library
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-022-media-library/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Media Library
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-022-media-library/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Media Library
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-022-media-library/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Media Library
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-022-media-library/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Media Library
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-022-media-library/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Media Library
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-022-media-library/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 4: Component Library (P3)
+================================================================================
+
+🧪 Testing: Component Library
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-023-component-library/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Component Library
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-023-component-library/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Component Library
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-023-component-library/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Component Library
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-023-component-library/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Component Library
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-023-component-library/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Component Library
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-023-component-library/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+Phase 4: Admin Settings (P3)
+================================================================================
+
+🧪 Testing: Admin Settings
+📱 Viewport: Mobile (375x667)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-024-admin-settings/results-mobile-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Settings
+📱 Viewport: Mobile (375x667)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-024-admin-settings/results-mobile-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Settings
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-024-admin-settings/results-tablet-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Settings
+📱 Viewport: Tablet (768x1024)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-024-admin-settings/results-tablet-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Settings
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: light
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-024-admin-settings/results-desktop-light.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+🧪 Testing: Admin Settings
+📱 Viewport: Desktop (1920x1080)
+🎨 Theme: dark
+  ❌ Flow failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5174/
+Call log:
+[2m  - navigating to "http://localhost:5174/", waiting until "networkidle"[22m
+
+  ✅ Results saved: docs/testing/cycle-1/flow-results/flow-024-admin-settings/results-desktop-dark.json
+  ❌ FAILED - 0 steps, 0 console errors
+
+================================================================================
+📊 TESTING COMPLETE
+
+Summary: 0 passed, 24 failed
+Results saved to: docs/testing/cycle-1/flow-results/test-summary.json
+================================================================================
+
