@@ -97,6 +97,86 @@ function rewriteSetCookieDomain(setCookie: string, upstreamHost: string, current
   return setCookie
 }
 
+/**
+ * Rewrites URLs in response body content from upstream host to current host.
+ * Handles HTML, JavaScript, and JSON responses.
+ */
+function rewriteResponseBody(
+  body: string,
+  contentType: string | null,
+  upstreamOrigin: string,
+  currentOrigin: string
+): string {
+  if (!contentType) return body
+
+  const type = contentType.toLowerCase()
+  const upstreamHost = new URL(upstreamOrigin).host
+  // Escape special regex characters in the host
+  const escapedHost = upstreamHost.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+  // HTML: rewrite URLs in href, src, action, content attributes
+  if (type.includes('text/html')) {
+    let result = body
+
+    // Rewrite URLs in common attributes (href, src, action, content, data-url, etc.)
+    result = result.replace(
+      /((?:href|src|action|content|data-url|data-href|data-src)=["'])(https?:\/\/[^"']*?)(["'])/gi,
+      (match, prefix, url, suffix) => {
+        try {
+          const parsed = new URL(url)
+          if (parsed.host === upstreamHost || url.includes(upstreamHost)) {
+            return `${prefix}${currentOrigin}${parsed.pathname}${parsed.search}${suffix}`
+          }
+        } catch {
+          // Invalid URL, leave as-is
+        }
+        return match
+      }
+    )
+
+    // Rewrite protocol-relative URLs (//host/path)
+    result = result.replace(
+      new RegExp(`((?:href|src|action|content|data-url)=["'])//${escapedHost}([^"']*?)(["'])`, 'gi'),
+      `$1${currentOrigin}$2$3`
+    )
+
+    // Rewrite absolute URLs in inline scripts and JSON
+    result = result.replace(
+      new RegExp(`(["'])https://${escapedHost}([^"']*?\\1)`, 'g'),
+      `$1${currentOrigin}$2`
+    )
+
+    // Rewrite protocol-relative URLs in strings
+    result = result.replace(
+      new RegExp(`(["'])//${escapedHost}([^"']*?\\1)`, 'g'),
+      `$1${currentOrigin}$2`
+    )
+
+    return result
+  }
+
+  // JavaScript: rewrite string literals containing upstream URLs
+  if (type.includes('javascript') || type.includes('application/json')) {
+    let result = body
+
+    // Rewrite https:// URLs
+    result = result.replace(
+      new RegExp(`(["'])https://${escapedHost}([^"']*?\\1)`, 'g'),
+      `$1${currentOrigin}$2`
+    )
+
+    // Rewrite protocol-relative URLs
+    result = result.replace(
+      new RegExp(`(["'])//${escapedHost}([^"']*?\\1)`, 'g'),
+      `$1${currentOrigin}$2`
+    )
+
+    return result
+  }
+
+  return body
+}
+
 export async function proxyShopifyCheckout(context: PagesContext<Env & Record<string, unknown>>): Promise<Response> {
   const { request, env } = context
 
@@ -197,7 +277,21 @@ export async function proxyShopifyCheckout(context: PagesContext<Env & Record<st
     }
   }
 
-  return new Response(upstreamResponse.body, {
+  // Read and potentially rewrite response body
+  const contentType = headers.get('content-type')
+  const upstreamOrigin = `https://${upstreamHost}`
+  const currentOrigin = currentUrl.origin
+
+  let responseBody = upstreamResponse.body
+
+  // Only rewrite textual content types
+  if (contentType && (contentType.includes('text/') || contentType.includes('application/json') || contentType.includes('application/javascript'))) {
+    const originalBody = await upstreamResponse.text()
+    const rewrittenBody = rewriteResponseBody(originalBody, contentType, upstreamOrigin, currentOrigin)
+    responseBody = rewrittenBody
+  }
+
+  return new Response(responseBody, {
     status: upstreamResponse.status,
     statusText: upstreamResponse.statusText,
     headers,
