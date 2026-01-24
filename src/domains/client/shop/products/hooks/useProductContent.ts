@@ -31,8 +31,8 @@ export const useProductContent = (handle: string) => {
 
   const [activeImage, setActiveImage] = useState(0)
   const [isAdding, setIsAdding] = useState(false)
-  const [variantId, setVariantId] = useState<string | null>(config.fallbackVariantKey ?? null)
-  const [productId, setProductId] = useState<string | null>(null)
+  const [variantId, setVariantId] = useState<string | null>(config.shopifyVariantId ?? config.fallbackVariantKey ?? null)
+  const [productId, setProductId] = useState<string | null>(config.shopifyId ?? null)
   const [price, setPrice] = useState<number>(config.defaultPrice ?? 15)
   const [gallery, setGallery] = useState<string[]>(baseGallery)
   const [sections, setSections] = useState<any>(null)

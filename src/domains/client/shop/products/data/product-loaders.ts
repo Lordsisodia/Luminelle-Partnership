@@ -27,12 +27,16 @@ export async function loadProduct(handle: string): Promise<LoadedProduct | null>
     const resolvedHandle = config.handle || handle
     const p = await fetchProductByHandle(resolvedHandle)
     if (isStub(p)) return null
+    // Prefer hardcoded IDs from config if available (fixes fallback/stub scenarios)
+    const pid = config.shopifyId || p.id || null
+    const vid = config.shopifyVariantId || p.variantId || null
+
     return {
       title: p.title,
       description: p.description,
       price: p.price?.amount ? Number(p.price.amount) : undefined,
-      variantId: p.variantId ?? null,
-      productId: p.id ?? null,
+      variantId: vid,
+      productId: pid,
       images: Array.isArray(p.images) ? p.images : undefined,
     }
   } catch {

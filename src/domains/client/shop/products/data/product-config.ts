@@ -255,6 +255,8 @@ const curlerConfig: ProductConfig = {
   handle: 'satin-overnight-curler',
   fallbackItemId: 'satin-overnight-curler-set',
   fallbackVariantKey: 'variant.satin-overnight-curler.default',
+  shopifyId: 'gid://shopify/Product/15496397848950',
+  shopifyVariantId: 'gid://shopify/ProductVariant/56852779696502',
   defaultTitle: 'Satin Overnight Heatless Curler Set',
   defaultSubtitle: 'Comfortable overnight curls, zero damage.',
   defaultPrice: 16.99,
@@ -298,6 +300,8 @@ export const productConfigs: Record<string, ProductConfig> = {
   'shower-cap': {
     handle: 'lumelle-shower-cap',
     fallbackItemId: 'lumelle-cap',
+    shopifyId: 'gid://shopify/Product/15488242581878',
+    shopifyVariantId: 'gid://shopify/ProductVariant/56829020504438',
     fallbackVariantKey: 'variant.lumelle-shower-cap.default',
     defaultTitle: 'Lumelle Shower Cap',
     defaultSubtitle: 'Keep hair dry. Keep styles flawless.',
