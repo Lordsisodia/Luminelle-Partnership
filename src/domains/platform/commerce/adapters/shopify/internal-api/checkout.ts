@@ -11,15 +11,21 @@ type ShopifyCart = {
 const toFirstPartyHandoffUrl = (checkoutUrl: string) => {
   try {
     const u = new URL(checkoutUrl)
-    // Always transform to first-party URL (in both dev and production)
-    // This ensures the proxy route handles checkout properly
+
+    // In development, go directly to Shopify (no proxy locally)
+    // In production, use first-party proxy/handoff URLs
+    const isDevelopment = import.meta.env.DEV
+    if (isDevelopment) {
+      console.log('[Checkout] Dev mode: using Shopify domain directly', { url: checkoutUrl })
+      return checkoutUrl
+    }
+
     const transformed = `${window.location.origin}${u.pathname}${u.search}${u.hash}`
     console.log('[Checkout URL Transform]', {
       original: checkoutUrl,
       transformed,
       hostname: u.hostname,
       currentOrigin: window.location.origin,
-      isDev: import.meta.env.DEV,
     })
     return transformed
   } catch {
