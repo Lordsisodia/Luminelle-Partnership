@@ -48,15 +48,60 @@ function getPixelId(): string | undefined {
 }
 
 /**
+ * Extract the numeric variant ID from various variant key formats.
+ * Handles:
+ * - Stable keys: variant.lumelle-shower-cap.default
+ * - Encoded keys: variant.<base64>
+ * - Legacy GIDs: gid://shopify/ProductVariant/56829020504438
+ *
+ * Returns the numeric variant ID (e.g., "56829020504438") or the original key if no number is found.
+ */
+export function extractVariantId(variantKey: string): string {
+  // Handle legacy GID format: gid://shopify/ProductVariant/123456789
+  const gidMatch = variantKey.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
+  if (gidMatch) return gidMatch[1]
+
+  // Handle stable keys: variant.{handle}.{variant} - extract numeric suffix if present
+  // e.g., variant.lumelle-shower-cap.default -> no numeric suffix
+  // We'll need to look up the actual GID for stable keys
+  if (variantKey.startsWith('variant.') && variantKey.includes('.')) {
+    // For stable keys, we need to map to the actual Shopify variant ID
+    // This is a fallback - ideally we'd use the product config mapping
+    return variantKey // Return as-is for now, will be handled by caller
+  }
+
+  // Handle encoded keys: variant.<base64> - these need to be decoded
+  // For now, return as-is since we can't decode without the key registry
+  return variantKey
+}
+
+/**
  * Format content ID to match Shopify's Facebook Catalog format:
  * shopify_{COUNTRY}_{PRODUCT_ID}_{VARIANT_ID}
  * Defaults to GB for country.
+ *
+ * For legacy GID format, extracts the numeric ID and formats correctly.
+ * For stable keys, requires the numeric variant ID to be passed.
  */
 export function formatShopifyContentId(productId: string | null, variantId: string | null): string {
   if (!variantId) return ''
 
-  const cleanId = (id: string) => id.replace(/gid:\/\/shopify\/(Product|ProductVariant)\//, '')
+  const cleanId = (id: string) => {
+    // Remove GID prefix if present
+    const gidMatch = id.match(/gid:\/\/shopify\/(Product|ProductVariant)\/(\d+)/)
+    if (gidMatch) return gidMatch[2]
+    // Otherwise return as-is
+    return id.replace(/gid:\/\/shopify\/(Product|ProductVariant)\//, '')
+  }
+
   const vId = cleanId(variantId)
+
+  // If it's already a stable key (variant.xxx.yyy), we need the numeric variant ID
+  if (vId.startsWith('variant.') && !/^\d+$/.test(vId)) {
+    // This is a stable key, we need the numeric variant ID
+    // Return empty string to signal we need the actual numeric ID
+    return ''
+  }
 
   if (productId) {
     const pId = cleanId(productId)
@@ -64,6 +109,33 @@ export function formatShopifyContentId(productId: string | null, variantId: stri
   }
 
   return vId
+}
+
+/**
+ * Format content ID for cart items using variant keys.
+ * Maps stable variant keys to their numeric Shopify variant IDs.
+ */
+export function formatCartItemId(variantKey: string): string {
+  // Map stable variant keys to their numeric Shopify variant IDs
+  const STABLE_VARIANT_TO_NUMERIC_ID: Record<string, string> = {
+    'variant.lumelle-shower-cap.default': '56829020504438',
+    'variant.satin-overnight-curler.default': '56852779696502',
+  }
+
+  // Check if it's a stable key we have a mapping for
+  if (STABLE_VARIANT_TO_NUMERIC_ID[variantKey]) {
+    return `shopify_GB_${STABLE_VARIANT_TO_NUMERIC_ID[variantKey]}`
+  }
+
+  // Handle legacy GID format
+  const gidMatch = variantKey.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
+  if (gidMatch) {
+    return `shopify_GB_${gidMatch[1]}`
+  }
+
+  // Handle encoded keys (variant.<base64>) - return as-is for now
+  // In production, these should be decoded to get the actual numeric ID
+  return variantKey
 }
 
 /**
