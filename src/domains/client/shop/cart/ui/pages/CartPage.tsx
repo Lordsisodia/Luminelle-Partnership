@@ -42,11 +42,14 @@ export const CartPage = () => {
     let checkoutUrl = url
     try {
       const parsed = new URL(url, window.location.origin)
+      console.log('[CartPage Checkout] Original URL:', url, 'Parsed hostname:', parsed.hostname)
       // If URL points to myshopify.com, rewrite to current domain
       if (parsed.hostname.includes('myshopify.com') || parsed.hostname !== window.location.hostname) {
         checkoutUrl = `${window.location.origin}${parsed.pathname}${parsed.search}${parsed.hash}`
+        console.log('[CartPage Checkout] Transformed to:', checkoutUrl)
       }
-    } catch {
+    } catch (e) {
+      console.error('[CartPage Checkout] URL parsing failed:', e)
       // URL parsing failed, use original
     }
 
