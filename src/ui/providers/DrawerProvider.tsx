@@ -484,7 +484,7 @@ export const DrawerProvider = ({ children }: DrawerProviderProps) => {
                           loading="lazy"
                         />
                         <div className="min-w-0 flex-1 text-left">
-                          <span className="inline-block rounded-full bg-semantic-accent-cta/80 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white whitespace-nowrap mb-1">
+                          <span className="inline-block rounded-full bg-semantic-accent-cta/80 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-semantic-legacy-brand-cocoa whitespace-nowrap mb-1">
                             New
                           </span>
                           <div className="leading-tight">

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Pixel Test - Lumelle</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #1a1a1a; margin-bottom: 10px; }
+        h2 { color: #333; font-size: 18px; margin-bottom: 15px; }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .status.passed { background: #d4edda; color: #155724; }
+        .status.failed { background: #f8d7da; color: #721c24; }
+        .status.pending { background: #fff3cd; color: #856404; }
+        button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover { background: #333; }
+        .code {
+            background: #f4f4f4;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+        .event-log {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        .event-log .timestamp { color: #888; }
+        .event-log .event { color: #0ff; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔍 Meta Pixel Test Page - Lumelle</h1>
+        <p>Use this page to verify the Meta Pixel is working correctly.</p>
+    </div>
+
+    <div class="card">
+        <h2>1. Pixel Status</h2>
+        <div id="pixelStatus">
+            <span class="status pending">Checking...</span>
+        </div>
+        <div class="code" id="pixelDetails"></div>
+    </div>
+
+    <div class="card">
+        <h2>2. Test Events</h2>
+        <p>Click each button to test different events. Check the Network tab (F12) for Facebook requests.</p>
+
+        <button onclick="testViewContent()">Test ViewContent</button>
+        <button onclick="testAddToCart()">Test AddToCart</button>
+        <button onclick="testInitiateCheckout()">Test InitiateCheckout</button>
+
+        <div class="event-log" id="eventLog">
+            <div>// Event logs will appear here...</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>3. Manual Console Checks</h2>
+        <p>Open browser console (F12) and run these commands:</p>
+        <div class="code">
+            <div>// Check if pixel is loaded</div>
+            <div>typeof fbq</div>
+            <div><br>// Check pixel ID</div>
+            <div>fbq.instance?.pixelId</div>
+            <div><br>// Check queued events</div>
+            <div>fbq.queue?.length</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>4. Network Tab Instructions</h2>
+        <ol>
+            <li>Open DevTools (F12)</li>
+            <li>Go to Network tab</li>
+            <li>Filter by "facebook" or "fbevents"</li>
+            <li>Click test buttons above</li>
+            <li>Look for POST requests to facebook.com/tr/</li>
+            <li>Click the request → Payload tab</li>
+            <li>Verify event_name and content_ids</li>
+        </ol>
+    </div>
+
+    <script>
+        const PIXEL_ID = '1494559081624608';
+        const VARIANT_ID = '56829020504438';
+
+        function log(message, type = 'info') {
+            const log = document.getElementById('eventLog');
+            const time = new Date().toLocaleTimeString();
+            const color = type === 'success' ? '#0f0' : type === 'error' ? '#f00' : '#0ff';
+            log.innerHTML += `<div><span class="timestamp">[${time}]</span> <span class="event" style="color:${color}">${message}</span></div>`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function checkPixelStatus() {
+            const statusDiv = document.getElementById('pixelStatus');
+            const detailsDiv = document.getElementById('pixelDetails');
+
+            if (typeof fbq === 'undefined') {
+                statusDiv.innerHTML = '<span class="status failed">❌ Pixel NOT loaded</span>';
+                detailsDiv.innerHTML = 'fbq is undefined. Pixel script may not be installed.';
+                log('Pixel not found - fbq is undefined', 'error');
+                return;
+            }
+
+            const pixelId = fbq.instance?.pixelId;
+            if (pixelId === PIXEL_ID) {
+                statusDiv.innerHTML = '<span class="status passed">✅ Pixel loaded with correct ID</span>';
+                detailsDiv.innerHTML = `Pixel ID: ${pixelId}<br>Agent: ${navigator.userAgent}`;
+                log(`Pixel loaded successfully: ${pixelId}`, 'success');
+            } else {
+                statusDiv.innerHTML = '<span class="status failed">⚠️ Wrong Pixel ID</span>';
+                detailsDiv.innerHTML = `Expected: ${PIXEL_ID}<br>Found: ${pixelId}`;
+                log(`Wrong pixel ID: ${pixelId}`, 'error');
+            }
+        }
+
+        function testViewContent() {
+            log('Sending ViewContent event...', 'info');
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'ViewContent', {
+                    content_name: 'Lumelle Shower Cap',
+                    content_ids: [`shopify_GB_${VARIANT_ID}`],
+                    value: 15.00,
+                    currency: 'GBP'
+                });
+                log(`✅ ViewContent sent with content_ids: ["shopify_GB_${VARIANT_ID}"]`, 'success');
+            } else {
+                log('❌ Cannot send - pixel not loaded', 'error');
+            }
+        }
+
+        function testAddToCart() {
+            log('Sending AddToCart event...', 'info');
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'AddToCart', {
+                    content_name: 'Lumelle Shower Cap',
+                    content_ids: [`shopify_GB_${VARIANT_ID}`],
+                    value: 15.00,
+                    currency: 'GBP'
+                });
+                log(`✅ AddToCart sent with content_ids: ["shopify_GB_${VARIANT_ID}"]`, 'success');
+            } else {
+                log('❌ Cannot send - pixel not loaded', 'error');
+            }
+        }
+
+        function testInitiateCheckout() {
+            log('Sending InitiateCheckout event...', 'info');
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout', {
+                    content_ids: [`shopify_GB_${VARIANT_ID}`],
+                    value: 15.00,
+                    currency: 'GBP',
+                    num_items: 1
+                });
+                log(`✅ InitiateCheckout sent with content_ids: ["shopify_GB_${VARIANT_ID}"]`, 'success');
+            } else {
+                log('❌ Cannot send - pixel not loaded', 'error');
+            }
+        }
+
+        // Check pixel status on page load
+        window.addEventListener('load', () => {
+            setTimeout(checkPixelStatus, 1000);
+        });
+
+        // Also check if pixel loads asynchronously
+        let checks = 0;
+        const checkInterval = setInterval(() => {
+            checks++;
+            if (typeof fbq !== 'undefined' || checks > 10) {
+                clearInterval(checkInterval);
+                checkPixelStatus();
+            }
+        }, 500);
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1494559081624608');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1494559081624608&ev=PageView&noscript=1"/>
+    </noscript>
+</body>
+</html>

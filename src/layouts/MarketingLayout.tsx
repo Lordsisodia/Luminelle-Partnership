@@ -75,8 +75,8 @@ export const MarketingLayout = ({
         />
       </header>
       {navItems && navItems.length > 0 ? (
-        <nav aria-label="Page sections" className="border-b border-semantic-legacy-brand-blush/40 bg-white/95">
-          <div className="mx-auto max-w-6xl px-5 md:px-6">
+        <nav aria-label="Page sections" className="hidden md:block border-b border-semantic-legacy-brand-blush/40 bg-white/95">
+          <div className="mx-auto max-w-6xl px-6">
             <div className="flex items-center gap-2 overflow-x-auto py-3">
               {navItems.map((item) => {
                 const isActive = activeId ? item.id === activeId : false

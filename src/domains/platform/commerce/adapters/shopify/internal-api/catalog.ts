@@ -34,7 +34,7 @@ export const createShopifyCatalogPort = (): CatalogPort => {
         title: v.title ?? undefined,
         available: true,
         unitPrice: {
-          amount: Number(v.price?.amount ?? 0),
+          amount: Math.round(Number(v.price?.amount ?? 0) * 100) / 100,
           currencyCode: v.price?.currencyCode ?? 'GBP',
         },
       }))
