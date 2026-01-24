@@ -36,7 +36,21 @@ export const CartPage = () => {
   const beginCheckout = async (url: string) => {
     if (!url || redirecting) return
     setRedirecting(true)
-    captureEvent('begin_checkout', { source: 'cart_page', href: url })
+
+    // Ensure checkout URL uses the current domain (first-party proxy)
+    // This transforms myshopify.com URLs to lumellebeauty.co.uk
+    let checkoutUrl = url
+    try {
+      const parsed = new URL(url, window.location.origin)
+      // If URL points to myshopify.com, rewrite to current domain
+      if (parsed.hostname.includes('myshopify.com') || parsed.hostname !== window.location.hostname) {
+        checkoutUrl = `${window.location.origin}${parsed.pathname}${parsed.search}${parsed.hash}`
+      }
+    } catch {
+      // URL parsing failed, use original
+    }
+
+    captureEvent('begin_checkout', { source: 'cart_page', href: checkoutUrl })
 
     // Track InitiateCheckout event for Meta Pixel
     if (items.length > 0) {
@@ -59,7 +73,7 @@ export const CartPage = () => {
         new Promise((resolve) => setTimeout(resolve, 800)),
       ])
     } finally {
-      window.location.href = url
+      window.location.href = checkoutUrl
     }
   }
 
