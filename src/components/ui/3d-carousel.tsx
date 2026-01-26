@@ -129,17 +129,47 @@ const ReviewCardContent = ({
   review: ReviewCard
   showReviewerPhotos: boolean
 }) => {
+  const initials = getInitials(review.author)
+
   return (
     <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl bg-white px-5 py-6 shadow-soft">
+      {/* Background ornaments - subtle visual interest */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(600px_circle_at_50%_0%,rgba(251,199,178,0.25),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-semantic-legacy-brand-blush/30" />
+      <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-semantic-accent-cta/40 to-transparent" />
+
+      {/* Corner decoration - subtle sparkle */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="pointer-events-none absolute right-4 top-4 h-5 w-5 text-semantic-accent-cta/30"
+        fill="none"
+      >
+        <path
+          d="M12 3l1.25 5.1L18 9.4l-4.75 1.3L12 16l-1.25-5.3L6 9.4l4.75-1.3L12 3Z"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinejoin="round"
+        />
+      </svg>
+
+      {/* Rating stars */}
       <div className="relative flex justify-center">
         <StarRating value={review.stars ?? 5} size={14} />
       </div>
+
+      {/* Review text */}
       <div className="relative mt-4 flex-1">
         <p className="text-base leading-relaxed text-left text-semantic-text-primary font-medium line-clamp-4">
           {review.body}
         </p>
       </div>
-      <div className="relative mt-4 flex items-center justify-center">
+
+      {/* Author with avatar badge */}
+      <div className="relative mt-4 flex items-center justify-center gap-3">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-semantic-accent-cta to-semantic-accent-cta/70 text-xs font-semibold text-white shadow-soft">
+          {initials}
+        </div>
         <p className="text-sm font-medium text-semantic-text-primary">
           {review.author}
         </p>
