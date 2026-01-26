@@ -211,7 +211,7 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
               key={i}
               aria-label={`Go to TikTok slide ${i + 1}`}
               onClick={() => goTo(i)}
-              className={`h-2.5 w-2.5 rounded-full transition ${i === active ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-cocoa/30'}`}
+              className={`h-1.5 w-1.5 rounded-full transition ${i === active ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-cocoa/30'}`}
             />
           ))}
         </div>

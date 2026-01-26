@@ -122,10 +122,10 @@ export const ProductSpotlightSection = ({ teasers }: Props) => {
                   aria-label={`Show ${teaser.title}`}
                   aria-current={idx === active ? 'true' : undefined}
                   onClick={() => setActive(idx)}
-                  className={`h-2.5 rounded-full transition-all ${
+                  className={`h-1.5 rounded-full transition-all ${
                     idx === active
-                      ? 'w-8 bg-semantic-legacy-brand-cocoa'
-                      : 'w-2.5 bg-semantic-legacy-brand-cocoa/30 hover:bg-semantic-legacy-brand-cocoa/70'
+                      ? 'w-6 bg-semantic-legacy-brand-cocoa'
+                      : 'w-1.5 bg-semantic-legacy-brand-cocoa/30 hover:bg-semantic-legacy-brand-cocoa/70'
                   }`}
                 />
               ))}
