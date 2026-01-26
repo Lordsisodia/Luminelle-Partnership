@@ -13,7 +13,7 @@ export function useCountUpAnimation(
   targetValue: number,
   duration: number = 1500,
   threshold: number = 0.5
-): { displayValue: number; hasAnimated: boolean; elementRef: React.RefObject<HTMLDivElement> } {
+): { displayValue: number; hasAnimated: boolean; elementRef: React.RefObject<HTMLDivElement | null> } {
   const [displayValue, setDisplayValue] = useState(0)
   const [hasAnimated, setHasAnimated] = useState(false)
   const elementRef = useRef<HTMLDivElement | null>(null)
