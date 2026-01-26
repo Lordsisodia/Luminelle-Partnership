@@ -130,18 +130,17 @@ const ReviewCardContent = ({
   showReviewerPhotos: boolean
 }) => {
   return (
-    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-white px-4 py-4 text-center md:px-5 md:py-5 shadow-soft">
-      <ReviewCardOrnaments />
+    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl bg-white px-5 py-6 shadow-soft">
       <div className="relative flex justify-center">
-        <StarRating value={review.stars ?? 5} size={16} />
+        <StarRating value={review.stars ?? 5} size={14} />
       </div>
-      <div className="relative mt-3">
-        <p className="text-sm leading-snug text-semantic-text-primary md:text-base md:leading-snug font-medium line-clamp-5">
-          "{review.body}"
+      <div className="relative mt-4 flex-1">
+        <p className="text-base leading-relaxed text-left text-semantic-text-primary font-medium line-clamp-4">
+          {review.body}
         </p>
       </div>
-      <div className="relative mt-3 flex items-center justify-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/90 md:text-sm">
+      <div className="relative mt-4 flex items-center justify-center">
+        <p className="text-sm font-medium text-semantic-text-primary">
           {review.author}
         </p>
       </div>
@@ -166,7 +165,7 @@ const Reviews2DCarousel = memo(
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
     const isScreenSizeLg = useMediaQuery("(max-width: 1024px)")
     const itemWidth = isScreenSizeSm ? 300 : isScreenSizeLg ? 400 : 480
-    const itemHeight = isScreenSizeSm ? 360 : isScreenSizeLg ? 280 : 320
+    const itemHeight = isScreenSizeSm ? 380 : isScreenSizeLg ? 280 : 320
     const gapPx = 16
     const listRef = useRef<HTMLDivElement | null>(null)
     const isProgrammaticScrollRef = useRef(false)
