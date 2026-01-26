@@ -35,7 +35,8 @@ const defaultCta = {
 
 export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel, hideCta = false }: Props) => {
   const [query, setQuery] = useState('')
-  const [openIndex, setOpenIndex] = useState(0)
+  // On mobile, start collapsed (none open). On desktop, open first item.
+  const [openIndex, setOpenIndex] = useState<number>(-1)
 
   const normalizedQuery = query.toLowerCase().trim()
   const hasQuery = normalizedQuery.length > 0
@@ -142,7 +143,7 @@ export const FaqSectionShop = ({ items, heading, sectionId, ctaHref, ctaLabel, h
                 </button>
                 {isOpen ? (
                   f.a.toLowerCase().startsWith('customer review') ? (
-                    <div className="mt-3 space-y-2 rounded-2xl bg-semantic-legacy-brand-blush/15 p-4">
+                    <div className="mt-3 space-y-2 rounded-2xl bg-white p-4">
                       <div className="flex flex-wrap items-center gap-2 text-semantic-text-primary">
                         <span className="rounded-full bg-semantic-accent-cta/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-semantic-text-primary">
                           Customer review

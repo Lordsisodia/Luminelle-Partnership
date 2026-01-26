@@ -210,8 +210,6 @@ export function renderSections(props: SectionProps): ReactNode {
         }}
       />
 
-      <FeaturedTikTok heading={props.featuredTikTokHeading} sectionId="tiktok" tiktoks={props.featuredTikToks} />
-
       <FaqSectionShop
         sectionId="faq"
         items={props.faqs as any}
@@ -223,6 +221,8 @@ export function renderSections(props: SectionProps): ReactNode {
         }}
         hideCta
       />
+
+      <FeaturedTikTok heading={props.featuredTikTokHeading} sectionId="tiktok" tiktoks={props.featuredTikToks} />
 
       {/* Bottom CTA just above footer */}
       <section id="pdp-bottom-cta" className="border-t border-semantic-legacy-brand-blush/50 bg-semantic-legacy-brand-blush/10 py-10">

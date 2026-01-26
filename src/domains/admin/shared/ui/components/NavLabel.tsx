@@ -7,7 +7,7 @@ interface NavLabelProps {
 }
 
 export function NavLabel({ label, showLabel, inlineLabel }: NavLabelProps) {
-  const baseClasses = 'text-[11px] font-semibold uppercase tracking-[0.08em] text-semantic-text-primary/80 transition-all duration-200'
+  const baseClasses = `text-[11px] font-semibold uppercase tracking-[0.08em] text-semantic-text-primary/80 ${navSizing.transition}`
 
   // Inline label mode (for drawer)
   if (inlineLabel) {

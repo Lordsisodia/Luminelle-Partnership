@@ -33,6 +33,8 @@ export const DetailsAccordion = ({ items, heading, sectionId }: DetailsAccordion
             key={i}
             id={sectionId ? `${sectionId}-item-${i + 1}` : undefined}
             className="group scroll-mt-24"
+            // On mobile, only expand first 2 items by default. On desktop (md+), expand all.
+            open={i < 2}
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 text-semantic-text-primary">
               <div className="flex items-center gap-3">

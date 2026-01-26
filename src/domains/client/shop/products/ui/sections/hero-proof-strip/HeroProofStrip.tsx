@@ -105,7 +105,7 @@ export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quote
             {displayQuotes.map((quote, idx) => (
               <div
                 key={idx}
-                className="relative rounded-xl border border-semantic-legacy-brand-blush/30 bg-semantic-legacy-brand-blush/5 p-4 text-left transition-all hover:shadow-sm"
+                className="relative rounded-xl border border-semantic-legacy-brand-blush/30 bg-white p-4 text-left transition-all hover:shadow-sm"
               >
                 <div className="mb-2 flex items-center gap-2">
                   <Quote className="h-4 w-4 text-semantic-accent-cta/60" />
@@ -149,7 +149,7 @@ export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quote
                 <button
                   type="button"
                   onClick={() => toggleFact(idx)}
-                  className="w-full flex items-center gap-3 rounded-2xl border border-semantic-legacy-brand-blush/50 bg-semantic-legacy-brand-blush/20 px-5 py-4 shadow-soft transition-all hover:shadow-md md:px-6 md:py-4"
+                  className="w-full flex items-center gap-3 rounded-2xl border border-semantic-legacy-brand-blush/50 bg-white px-5 py-4 shadow-soft transition-all hover:shadow-md md:px-6 md:py-4"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-semantic-text-primary">
                     <Icon className="h-5 w-5" />
@@ -173,7 +173,7 @@ export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quote
 
                 {/* Expandable Details */}
                 {isExpanded && fact.details && (
-                  <div className="mt-2 rounded-xl border border-semantic-legacy-brand-blush/30 bg-semantic-legacy-brand-blush/5 p-3 text-sm leading-snug text-semantic-text-primary/80">
+                  <div className="mt-2 rounded-xl border border-semantic-legacy-brand-blush/30 bg-white p-3 text-sm leading-snug text-semantic-text-primary/80">
                     {fact.details}
                   </div>
                 )}
