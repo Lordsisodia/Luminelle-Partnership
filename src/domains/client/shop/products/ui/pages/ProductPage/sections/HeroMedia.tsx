@@ -157,30 +157,29 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               >
-              (() => {
-                const sources = buildSources(gallery[activeImage])
-                const img = (
-                  <img
-                    src={sources?.fallback ?? toCdn(gallery[activeImage])}
-                    alt={heroLabel}
-                    className="w-full h-full object-contain"
-                    width={960}
-                    height={960}
-                    draggable="false"
-                    loading="eager"
-                    decoding="async"
-                  />
-                )
-                if (!sources) return img
-                return (
-                  <picture>
-                    <source type="image/avif" srcSet={sources.avif} sizes={sources.sizes} />
-                    <source type="image/webp" srcSet={sources.webp} sizes={sources.sizes} />
-                    {img}
-                  </picture>
-                )
-              })()
-            )}
+                {(() => {
+                  const sources = buildSources(gallery[activeImage])
+                  const img = (
+                    <img
+                      src={sources?.fallback ?? toCdn(gallery[activeImage])}
+                      alt={heroLabel}
+                      className="w-full h-full object-contain"
+                      width={960}
+                      height={960}
+                      draggable="false"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  )
+                  if (!sources) return img
+                  return (
+                    <picture>
+                      <source type="image/avif" srcSet={sources.avif} sizes={sources.sizes} />
+                      <source type="image/webp" srcSet={sources.webp} sizes={sources.sizes} />
+                      {img}
+                    </picture>
+                  )
+                })()}
               </button>
 
             {/* Image counter badge */}
