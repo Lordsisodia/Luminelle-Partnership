@@ -168,6 +168,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
   const videoLabel = `${titleBase} — product video`
 
   return (
+    <>
     <section id="media" className="bg-white">
       <div id="pdp-hero-gallery" className="h-0 scroll-mt-24" />
       <div className="w-full flex flex-col gap-3">
@@ -225,6 +226,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
                   )
                 })()}
               </button>
+            )}
 
             {/* Image counter badge */}
             {gallery.length > 1 && !zoomModalOpen && (
@@ -448,27 +450,25 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
               className="w-full h-full rounded-2xl"
               allowFullScreen
             />
-          ) : (
-            (() => {
-              const sources = buildSources(gallery[zoomImageIndex])
-              const img = (
-                <img
-                  src={sources?.fallback ?? toCdn(gallery[zoomImageIndex])}
-                  alt={`${productTitle} — image ${zoomImageIndex + 1} of ${gallery.length}`}
-                  className="w-full h-full object-contain"
-                  loading="eager"
-                />
-              )
-              if (!sources) return img
-              return (
-                <picture>
-                  <source type="image/avif" srcSet={sources.avif} sizes="(max-width: 768px) 100vw, 80vw" />
-                  <source type="image/webp" srcSet={sources.webp} sizes="(max-width: 768px) 100vw, 80vw" />
-                  {img}
-                </picture>
-              )
-            })()
-          )}
+          ) : (() => {
+            const sources = buildSources(gallery[zoomImageIndex])
+            const img = (
+              <img
+                src={sources?.fallback ?? toCdn(gallery[zoomImageIndex])}
+                alt={`${productTitle} — image ${zoomImageIndex + 1} of ${gallery.length}`}
+                className="w-full h-full object-contain"
+                loading="eager"
+              />
+            )
+            if (!sources) return img
+            return (
+              <picture>
+                <source type="image/avif" srcSet={sources.avif} sizes="(max-width: 768px) 100vw, 80vw" />
+                <source type="image/webp" srcSet={sources.webp} sizes="(max-width: 768px) 100vw, 80vw" />
+                {img}
+              </picture>
+            )
+          })()}
         </div>
 
         {/* Image counter in modal */}
@@ -479,6 +479,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
         </div>
       </div>
     )}
+    </>
 	  )
 })
 
