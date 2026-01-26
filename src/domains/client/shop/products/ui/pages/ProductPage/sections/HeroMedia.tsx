@@ -132,7 +132,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
               <span aria-hidden>→</span>
             </Link>
           ) : null}
-          <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-semantic-legacy-brand-blush/60 bg-white md:bg-semantic-legacy-brand-blush/20">
+          <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-semantic-legacy-brand-blush/60 bg-white md:bg-semantic-legacy-brand-blush/20 group">
             {gallery[activeImage]?.startsWith('video://') ? (
               <iframe
                 src={gallery[activeImage].replace('video://', '')}
@@ -173,6 +173,30 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
               })()
             )}
               </button>
+
+            {/* Navigation arrows on main image */}
+            {gallery.length > 1 && !zoomModalOpen && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => onSelect(activeImage > 0 ? activeImage - 1 : gallery.length - 1)}
+                  disabled={gallery.length <= 1}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-semantic-text-primary shadow-lg backdrop-blur opacity-100 transition hover:bg-white md:opacity-0 md:group-hover:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onSelect(activeImage < gallery.length - 1 ? activeImage + 1 : 0)}
+                  disabled={gallery.length <= 1}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-semantic-text-primary shadow-lg backdrop-blur opacity-100 transition hover:bg-white md:opacity-0 md:group-hover:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
+                </button>
+              </>
+            )}
 	          </div>
 	          <div className="relative mt-4 w-full">
 	            <div
@@ -189,7 +213,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
 	                      key={src}
 	                      type="button"
 	                      onClick={() => onSelect(idx)}
-	                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-2xl border snap-start md:h-14 md:w-14 ${idx === activeImage ? 'border-semantic-legacy-brand-cocoa ring-2 ring-semantic-accent-cta/30' : 'border-semantic-legacy-brand-blush/60'}`}
+	                      className={`h-20 w-20 shrink-0 overflow-hidden rounded-2xl border snap-start md:h-16 md:w-16 ${idx === activeImage ? 'border-semantic-legacy-brand-cocoa ring-2 ring-semantic-accent-cta/30' : 'border-semantic-legacy-brand-blush/60'}`}
 	                      aria-label={`Show media ${idx + 1}`}
 	                    >
 	                      {isVideo ? (

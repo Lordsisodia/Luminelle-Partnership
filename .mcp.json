@@ -1,15 +1,8 @@
 {
   "mcpServers": {
-    "lumelle-supabase": {
-      "type": "http",
-      "url": "https://mcp.supabase.com/mcp",
-      "headers": {
-        "Authorization": "Bearer sbp_b6d2e650268ab16b2c12489c714bb005d58cbe9d"
-      }
-    },
-    "shopify-dev-mcp": {
-      "type": "http",
-      "url": "http://localhost:3000/mcp/shopify"
+    "lazy-mcp": {
+      "command": "sh",
+      "args": ["-c", "cd /Users/shaansisodia/.lazy-mcp && exec lazy-mcp --config config.json"]
     }
   }
 }
