@@ -3,7 +3,11 @@ import { Menu, ShoppingBag, UserRound } from 'lucide-react'
 import { useDrawer } from '@ui/providers/DrawerContext'
 import { useCart } from '@client/shop/cart/providers/CartContext'
 
+type Promo = { label: string; href?: string }
+
 type PublicHeaderProps = {
+  promoMessages: Promo[]
+  activePromo: number
   subtitle?: string | null
   primaryLabel?: string
   onPrimaryAction?: () => void
@@ -11,6 +15,8 @@ type PublicHeaderProps = {
 }
 
 export function PublicHeader({
+  promoMessages,
+  activePromo,
   subtitle,
   primaryLabel = 'Join WhatsApp',
   onPrimaryAction,
@@ -23,6 +29,35 @@ export function PublicHeader({
 
   return (
     <>
+      {/* Promo strip */}
+      <div className="overflow-hidden bg-semantic-legacy-brand-blush">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <div className="relative flex h-7 md:h-9 items-center justify-center text-[10px] font-semibold uppercase tracking-[0.18em] md:text-xs md:tracking-[0.24em] text-semantic-legacy-brand-cocoa">
+            {promoMessages.map((msg, idx) => (
+              <span
+                key={msg.label}
+                className={`absolute whitespace-nowrap transition-opacity duration-300 ${
+                  idx === activePromo ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}
+                aria-hidden={idx !== activePromo}
+              >
+                {msg.href ? (
+                  <RouterLink
+                    to={msg.href}
+                    tabIndex={idx === activePromo ? 0 : -1}
+                    className="underline decoration-semantic-legacy-brand-cocoa/50 underline-offset-4 hover:text-semantic-legacy-brand-cocoa/80"
+                  >
+                    {msg.label}
+                  </RouterLink>
+                ) : (
+                  msg.label
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Top nav */}
       <div className="w-full px-3 md:px-6">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 md:gap-3 py-2 md:py-3">

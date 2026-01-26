@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { SUPPORT_EMAIL } from '@/config/constants'
+import { useEffect, useState } from 'react'
+import { FREE_SHIPPING_THRESHOLD_LABEL, SUPPORT_EMAIL } from '@/config/constants'
 import PublicHeader from '@ui/components/PublicHeader'
 import { GlobalFooter } from '@ui/components/GlobalFooter'
 
@@ -25,6 +26,23 @@ export const MarketingLayout = ({
   primaryLabel = 'Join WhatsApp',
   subtitle = 'Creator Program',
 }: MarketingLayoutProps) => {
+  // Top bar: Urgency & promotions (rotating)
+  const promoMessages = [
+    { label: 'Buy 2, save 10% — Shop now', href: '/product/lumelle-shower-cap' },
+    { label: `Free shipping ${FREE_SHIPPING_THRESHOLD_LABEL}` },
+    { label: '30-day money back guarantee' },
+  ]
+  const [activePromo, setActivePromo] = useState(0)
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false
+    if (reducedMotion) return
+    const id = window.setInterval(() => {
+      setActivePromo((prev) => (prev + 1) % promoMessages.length)
+    }, 4000)
+    return () => window.clearInterval(id)
+  }, [promoMessages.length])
+
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id)
     if (!el) return
@@ -50,6 +68,8 @@ export const MarketingLayout = ({
         className="border-b border-semantic-legacy-brand-blush/40 bg-white/95 backdrop-blur-0 md:backdrop-blur"
       >
         <PublicHeader
+          promoMessages={promoMessages}
+          activePromo={activePromo}
           subtitle={subtitle ?? undefined}
           primaryLabel={primaryLabel}
           onPrimaryAction={onPrimaryAction}
