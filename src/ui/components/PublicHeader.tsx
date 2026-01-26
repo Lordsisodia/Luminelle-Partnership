@@ -111,18 +111,10 @@ export function PublicHeader({
               ) : null}
             </button>
 
-            {/* Account text - desktop only */}
+            {/* Account icon - desktop and mobile */}
             <RouterLink
               to="/account"
-              className="hidden rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold text-semantic-legacy-brand-cocoa transition hover:bg-semantic-legacy-brand-blush/40 md:inline-flex"
-            >
-              Account
-            </RouterLink>
-
-            {/* Profile icon - mobile only */}
-            <RouterLink
-              to="/account"
-              className="inline-flex h-11 w-11 md:h-12 md:w-12 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70 md:hidden"
+              className="inline-flex h-11 w-11 md:h-12 md:w-12 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70"
               aria-label="Account"
               style={{ minWidth: '44px', minHeight: '44px' }}
             >
