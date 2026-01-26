@@ -180,8 +180,8 @@ export const BenefitsSection = ({ slides = [] }: { slides?: Slide[] }) => {
               aria-label={`Show ${slide.title}`}
               aria-current={idx === active ? 'true' : undefined}
               onClick={() => scrollToSlide(idx)}
-              className={`h-2.5 rounded-full transition-all ${
-                idx === active ? 'w-8 bg-semantic-legacy-brand-cocoa' : 'w-2.5 bg-semantic-legacy-brand-cocoa/30'
+              className={`h-1 rounded-full transition-all ${
+                idx === active ? 'w-6 bg-semantic-legacy-brand-cocoa' : 'w-1 bg-semantic-legacy-brand-cocoa/30'
               }`}
             />
           ))}
