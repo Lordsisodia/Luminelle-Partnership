@@ -130,18 +130,18 @@ const ReviewCardContent = ({
   showReviewerPhotos: boolean
 }) => {
   return (
-    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-white px-4 py-5 text-center md:px-6 md:py-6 shadow-soft">
+    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-white px-4 py-4 text-center md:px-5 md:py-5 shadow-soft">
       <ReviewCardOrnaments />
       <div className="relative flex justify-center">
-        <StarRating value={review.stars ?? 5} size={18} />
+        <StarRating value={review.stars ?? 5} size={16} />
       </div>
-      <div className="relative mt-4">
-        <p className="text-[15px] leading-relaxed text-semantic-text-primary md:text-lg md:leading-relaxed font-medium whitespace-pre-line">
+      <div className="relative mt-3">
+        <p className="text-sm leading-snug text-semantic-text-primary md:text-base md:leading-snug font-medium line-clamp-5">
           "{review.body}"
         </p>
       </div>
-      <div className="relative mt-5 flex items-center justify-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/90 md:text-base">
+      <div className="relative mt-3 flex items-center justify-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-semantic-text-primary/90 md:text-sm">
           {review.author}
         </p>
       </div>
@@ -257,61 +257,15 @@ const Reviews2DCarousel = memo(
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-semantic-bg-subtle via-semantic-bg-subtle/70 to-transparent md:w-16 md:block"
+            className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-semantic-bg-subtle via-semantic-bg-subtle/70 to-transparent md:w-16 md:block"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-semantic-bg-subtle via-semantic-bg-subtle/70 to-transparent md:w-16 md:block"
+            className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-semantic-bg-subtle via-semantic-bg-subtle/70 to-transparent md:w-16 md:block"
           />
 
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center md:hidden">
-            <button
-              type="button"
-              aria-label="Scroll reviews left"
-              onClick={() => scrollToIndex(activeIndex - 1)}
-              disabled={activeIndex === 0}
-              className="pointer-events-auto ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/90 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40 disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center md:hidden">
-            <button
-              type="button"
-              aria-label="Scroll reviews right"
-              onClick={() => scrollToIndex(activeIndex + 1)}
-              disabled={activeIndex === cards.length - 1}
-              className="pointer-events-auto mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/90 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40 disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
-
-          <div className="pointer-events-none absolute inset-y-0 left-0 hidden items-center md:flex">
-            <button
-              type="button"
-              aria-label="Scroll reviews left"
-              onClick={() => scrollToIndex(activeIndex - 1)}
-              disabled={activeIndex === 0}
-              className="pointer-events-auto ml-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/85 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40 disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center md:flex">
-            <button
-              type="button"
-              aria-label="Scroll reviews right"
-              onClick={() => scrollToIndex(activeIndex + 1)}
-              disabled={activeIndex === cards.length - 1}
-              className="pointer-events-auto mr-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/85 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40 disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
-
           {/* Pagination dots */}
-          <div className="flex items-center justify-center gap-2 pt-3 md:pt-4" aria-hidden="true">
+          <div className="flex items-center justify-center gap-2 pt-3 md:pt-4">
             {cards.map((_, idx) => (
               <button
                 key={`dot-${idx}`}
