@@ -205,13 +205,13 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-2 text-sm text-semantic-text-primary/80">
+        <div className="mt-4 flex items-center justify-center gap-1.5 text-sm text-semantic-text-primary/80">
           {(tiktoks ?? successStories).map((_, i) => (
             <button
               key={i}
               aria-label={`Go to TikTok slide ${i + 1}`}
               onClick={() => goTo(i)}
-              className={`h-1 w-1 rounded-full transition ${i === active ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-cocoa/30'}`}
+              className={`h-0.5 w-0.5 rounded-full transition ${i === active ? 'bg-semantic-legacy-brand-cocoa' : 'bg-semantic-legacy-brand-cocoa/30'}`}
             />
           ))}
         </div>
