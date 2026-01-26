@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 import { NavLink } from 'react-router-dom'
 import { navSizing } from './AdminSideNav.tokens'
+import { getNavItemStateClasses } from './useNavItemStyles'
 
 type Props = {
   to: string
@@ -27,15 +28,10 @@ export function NavUtilityItem({
       title={label}
       className={({ isActive }) =>
         [
-          // Add an explicit `.active` class for any styling that targets it (e.g. `group-[.active]:...`).
           isActive ? 'active' : '',
-          'relative group flex items-center rounded-2xl',
+          'relative group flex items-center rounded-2xl overflow-visible h-11 w-11 justify-center',
           navSizing.transition,
-          'overflow-visible',
-          'h-11 w-11 justify-center',
-          isActive
-            ? 'bg-white text-semantic-text-primary shadow-sm ring-1 ring-semantic-legacy-brand-blush/60'
-            : 'text-semantic-text-primary/70 hover:bg-white/70 hover:text-semantic-text-primary',
+          getNavItemStateClasses({ isActive, activeClassName: undefined }),
         ].join(' ')
       }
     >

@@ -11,4 +11,5 @@ export const navSizing = {
   utilityClusterPadTop: 'pt-3',
   utilityPillText: 'text-[11px] font-semibold uppercase tracking-[0.08em]',
   transition: 'transition-all duration-200 ease-out',
+  badgeOffset: '-right-1 -top-1',
 }

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import type { ComponentType } from 'react'
 import { navSizing } from './AdminSideNav.tokens'
+import { getNavItemStateClasses } from './useNavItemStyles'
 
 type BaseProps = {
   to: string
@@ -32,13 +33,9 @@ export function NavRailItem({
       title={label}
       className={({ isActive }) =>
         [
-          // Add an explicit `.active` class for any styling that targets it (e.g. `group-[.active]:...`).
           isActive ? 'active' : '',
-          'relative group flex h-11 w-11 items-center justify-center rounded-2xl transition overflow-visible',
-          isActive
-            ? activeClassName ??
-              'bg-white text-semantic-text-primary shadow-sm ring-1 ring-semantic-legacy-brand-blush/60'
-            : 'text-semantic-text-primary/70 hover:bg-white/70 hover:text-semantic-text-primary',
+          'relative group flex h-11 w-11 items-center justify-center rounded-2xl overflow-visible transition',
+          getNavItemStateClasses({ isActive, activeClassName }),
         ].join(' ')
       }
     >
@@ -61,7 +58,7 @@ export function NavRailItem({
         {label}
       </span>
       {badge ? (
-        <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-1.5 py-0.5 text-[10px] font-semibold text-white shadow-sm">
+        <span className={`absolute inline-flex min-w-5 items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-1.5 py-0.5 text-[10px] font-semibold text-white shadow-sm ${navSizing.badgeOffset}`}>
           {badge}
         </span>
       ) : null}

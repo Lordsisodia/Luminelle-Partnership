@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { homeConfig } from '@/content/home.config'
 import type { Review as ReviewType } from '@/content/home.config'
-import { FeatureCallouts, DetailsAccordion, HeroProofStrip, ReviewsAutoCarousel, FaqSectionShop, FeaturedTikTok } from '@client/shop/products/ui/sections'
+import { FeatureCallouts, DetailsAccordion, ReviewsAutoCarousel, FaqSectionShop, FeaturedTikTok } from '@client/shop/products/ui/sections'
 import { HeroMedia } from './HeroMedia'
 import { PriceBlock } from './PriceBlock'
 import { HowToSection } from './HowToSection'
@@ -95,23 +95,6 @@ export function renderSections(props: SectionProps): ReactNode {
           onBuy={props.onBuy}
           isAdding={props.isAdding}
           justAdded={props.justAdded}
-        />
-      </div>
-
-      <div id="pdp-proof">
-        <HeroProofStrip
-          rating={props.ratingValue}
-          count={props.ratingCount}
-          tagline="Creator-loved protection"
-          price={props.price}
-          facts={
-            Array.isArray(props.proofStrip)
-              ? props.proofStrip.map((item: any) => ({
-                  label: typeof item?.label === 'string' ? item.label : '',
-                  value: typeof item?.body === 'string' ? item.body : '',
-                }))
-              : undefined
-          }
         />
       </div>
 
