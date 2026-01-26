@@ -24,8 +24,8 @@ export function PublicHeader({
   return (
     <>
       {/* Top nav */}
-      <div className="w-full px-4 md:px-6">
-        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-4 py-2 md:py-3">
+      <div className="w-full px-3 md:px-6">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 md:gap-3 py-1 md:py-2">
           {/* Burger menu - left */}
           <button
             aria-label="Open menu"
@@ -37,12 +37,12 @@ export function PublicHeader({
           </button>
 
           {/* Logo - center */}
-          <RouterLink to="/" className="flex flex-col items-center justify-center gap-1 text-center justify-self-center">
-            <span className="font-heading text-lg md:text-xl font-bold tracking-wide text-semantic-legacy-brand-cocoa leading-none">
+          <RouterLink to="/" className="flex flex-col items-center justify-center gap-0.5 text-center justify-self-center">
+            <span className="font-heading text-base md:text-lg font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-semantic-legacy-brand-cocoa leading-none">
               Lumelle
             </span>
             {subtitle ? (
-              <span className="text-xs font-semibold uppercase tracking-wider text-semantic-legacy-brand-cocoa">
+              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-semantic-legacy-brand-cocoa/60">
                 {subtitle}
               </span>
             ) : null}
