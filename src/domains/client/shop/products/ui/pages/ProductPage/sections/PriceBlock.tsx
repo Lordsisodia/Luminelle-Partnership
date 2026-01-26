@@ -70,6 +70,22 @@ export const PriceBlock = ({
         <h1 className="font-heading text-[1.95rem] font-bold leading-tight md:text-4xl">{productTitle}</h1>
         <p className="mt-2 text-semantic-text-primary/70">{productDesc}</p>
 
+        {/* Bullet points for key benefits */}
+        <ul className="mt-3 space-y-1.5 text-sm text-semantic-text-primary/80">
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden="true" />
+            <span>Waterproof exterior keeps water completely out</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden="true" />
+            <span>Satin lining prevents frizz and breakage</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden="true" />
+            <span>Adjustable elastic stays secure all night</span>
+          </li>
+        </ul>
+
         <div id="pdp-hero-reviews" className="h-0 scroll-mt-24" />
         <button
           type="button"
