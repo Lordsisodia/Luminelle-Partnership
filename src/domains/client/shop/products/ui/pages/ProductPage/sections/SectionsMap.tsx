@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { useEffect, useRef, useState } from 'react'
 import { homeConfig } from '@/content/home.config'
 import type { Review as ReviewType } from '@/content/home.config'
 import { FeatureCallouts, DetailsAccordion, HeroProofStrip, ReviewsAutoCarousel, FaqSectionShop, FeaturedTikTok } from '@client/shop/products/ui/sections'
@@ -65,75 +64,24 @@ export function renderSections(props: SectionProps): ReactNode {
     { id: 'faq', label: 'FAQ' },
   ]
 
-  // Active section tracking for sticky nav
-  const [activeSection, setActiveSection] = useState('pdp-hero')
-  const observerRef = useRef<IntersectionObserver | null>(null)
-
-  useEffect(() => {
-    const sections = mobileNavItems.map(({ id }) => document.getElementById(id)).filter(Boolean) as HTMLElement[]
-
-    if (observerRef.current) {
-      observerRef.current.disconnect()
-    }
-
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries.filter((entry) => entry.isIntersecting)
-
-        if (visibleEntries.length > 0) {
-          // Get the topmost visible section
-          const topmost = visibleEntries.reduce((prev, curr) =>
-            curr.boundingClientRect.top < prev.boundingClientRect.top ? curr : prev
-          )
-          const id = topmost.target.id
-          if (id) {
-            setActiveSection(id)
-          }
-        }
-      },
-      {
-        threshold: 0.3,
-        rootMargin: '-100px 0px -60% 0px',
-      }
-    )
-
-    sections.forEach((section) => {
-      if (section) observerRef.current?.observe(section)
-    })
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect()
-      }
-    }
-  }, [])
-
   return (
     <>
-      {/* Mobile section nav - sticky with active states */}
+      {/* Mobile section nav - static, non-sticky */}
       <nav
         aria-label="Page sections"
-        className="md:hidden sticky top-[132px] z-20 bg-white/95 backdrop-blur border-b border-semantic-legacy-brand-blush/40"
+        className="md:hidden bg-white border-b border-semantic-legacy-brand-blush/40"
       >
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex items-center gap-2 overflow-x-auto py-2">
-            {mobileNavItems.map((item) => {
-              const isActive = activeSection === item.id
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold border transition ${
-                    isActive
-                      ? 'border-semantic-accent-cta bg-semantic-accent-cta text-semantic-legacy-brand-cocoa'
-                      : 'border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/20'
-                  }`}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {item.label}
-                </a>
-              )
-            })}
+            {mobileNavItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/20 transition"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
