@@ -1,7 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom'
-import { Menu, ShoppingBag, UserRound } from 'lucide-react'
+import { Menu, UserRound } from 'lucide-react'
 import { useDrawer } from '@ui/providers/DrawerContext'
-import { useCart } from '@client/shop/cart/providers/CartContext'
 
 type Promo = { label: string; href?: string }
 
@@ -22,10 +21,8 @@ export function PublicHeader({
   onPrimaryAction,
   onOpenMenu,
 }: PublicHeaderProps) {
-  const { openCart, openMenu } = useDrawer()
+  const { openMenu } = useDrawer()
   const handleOpenMenu = onOpenMenu ?? openMenu
-  const { qty } = useCart()
-  const qtyLabel = qty > 99 ? '99+' : String(qty)
 
   return (
     <>
@@ -95,21 +92,6 @@ export function PublicHeader({
                 {primaryLabel}
               </button>
             ) : null}
-
-            {/* Cart - desktop only */}
-            <button
-              type="button"
-              aria-label="Open cart"
-              onClick={openCart}
-              className="relative hidden h-11 w-11 md:h-12 md:w-12 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70 md:inline-flex"
-            >
-              <ShoppingBag className="h-6 w-6 md:h-7 md:w-7" strokeWidth={2} />
-              {qty > 0 ? (
-                <span className="absolute -top-0.5 -right-0.5 inline-flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-semantic-accent-cta px-1 text-[10px] font-semibold text-semantic-legacy-brand-cocoa shadow-soft">
-                  {qtyLabel}
-                </span>
-              ) : null}
-            </button>
 
             {/* Account icon - desktop and mobile */}
             <RouterLink
