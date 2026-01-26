@@ -145,7 +145,7 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
                 <article key={`${s.handle}-${idx}`} data-tiktok-card className="min-w-[min(72vw,300px)] snap-center lg:min-w-[min(340px,26vw)]">
                   <LazyVisible
                     placeholder={
-                      <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/40 pb-[158%] shadow-soft bg-white" />
+                      <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/40 pb-[158%] shadow-soft bg-semantic-legacy-brand-blush/20" />
                     }
                   >
                     <div className="relative overflow-hidden rounded-2xl border border-semantic-accent-cta/40 pb-[158%] shadow-soft bg-black">
@@ -162,7 +162,7 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
                           style={{ border: 0 }}
                         />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-white text-semantic-text-primary/60 text-xs">
+                    <div className="absolute inset-0 flex items-center justify-center bg-semantic-legacy-brand-blush/20 text-semantic-text-primary/60 text-xs">
                       Loading…
                     </div>
                   )}
@@ -174,7 +174,7 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
                       href={s.videoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold text-semantic-text-primary/80 hover:bg-white"
+                      className="inline-flex items-center gap-2 rounded-full border border-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold text-semantic-text-primary/80 hover:bg-semantic-legacy-brand-blush/40"
                     >
                       Watch on TikTok
                       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
@@ -188,7 +188,7 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
               <button
                 aria-label="Scroll videos left"
                 onClick={() => nudge('left')}
-                className="pointer-events-auto ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-semantic-legacy-brand-cocoa"
+                className="pointer-events-auto ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-semantic-legacy-brand-cocoa"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
               </button>
@@ -197,7 +197,7 @@ export const FeaturedTikTok = ({ heading, sectionId, tiktoks }: Props) => {
               <button
                 aria-label="Scroll videos right"
                 onClick={() => nudge('right')}
-                className="pointer-events-auto mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-semantic-legacy-brand-cocoa"
+                className="pointer-events-auto mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft hover:bg-semantic-legacy-brand-blush/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-semantic-legacy-brand-cocoa"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
               </button>

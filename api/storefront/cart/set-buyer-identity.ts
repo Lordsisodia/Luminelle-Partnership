@@ -1,4 +1,4 @@
-import { CART_FRAGMENT, runStorefront } from '../_client.ts'
+import { CART_FRAGMENT, runStorefront, processCartResponse } from '../_client.ts'
 
 export default async function handler(req: Request) {
   const body = await req.json().catch(() => ({}))
@@ -20,5 +20,7 @@ export default async function handler(req: Request) {
   `,
     { cartId: body.cartId, buyerIdentity },
   )
+  // Rewrite the checkout URL to use SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN
+  processCartResponse(data.cartBuyerIdentityUpdate.cart)
   return new Response(JSON.stringify({ cart: data.cartBuyerIdentityUpdate.cart }), { headers: { 'content-type': 'application/json' } })
 }

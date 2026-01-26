@@ -74,7 +74,7 @@ const ReviewsDesktopHeading = ({
   return (
     <div className="hidden lg:flex lg:flex-col lg:items-start lg:gap-4 lg:text-left">
       {eyebrow ? (
-        <span className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
+        <span className="inline-flex rounded-full bg-semantic-legacy-brand-blush/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
           {eyebrow}
         </span>
       ) : null}
@@ -139,7 +139,7 @@ export const ReviewsAutoCarousel = ({
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute -top-28 left-1/2 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-semantic-accent-cta/25 blur-3xl" />
-        <div className="absolute -bottom-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-transparent blur-3xl" />
+        <div className="absolute -bottom-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-semantic-legacy-brand-blush/30 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 md:px-6">

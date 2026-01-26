@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { Crown, Droplets, Leaf, Heart, Award, Sparkles, Shield, RefreshCw } from 'lucide-react'
+import { Crown, Droplets, Leaf, Heart } from 'lucide-react'
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { LazyVisible } from '@ui/components/LazyVisible'
 
@@ -46,13 +46,6 @@ const defaultItems: FeatureCallout[] = [
 ]
 
 const iconCycle = [Droplets, Heart, Leaf, Crown]
-
-// Icon mapping for benefit cards based on common patterns
-const benefitIcons = [Award, Sparkles, Shield, RefreshCw]
-
-const getIconForBenefit = (idx: number): ComponentType<{ className?: string }> => {
-  return benefitIcons[idx % benefitIcons.length]
-}
 
 export const FeatureCallouts = ({
   items,
@@ -149,22 +142,15 @@ export const FeatureCallouts = ({
             <div className="relative rounded-3xl border border-semantic-accent-cta/60 bg-white/85 p-5 shadow-[0_22px_60px_rgba(0,0,0,0.08)] sm:p-6 lg:max-w-[540px] lg:mx-auto">
               <div className="absolute left-6 top-4 bottom-4 w-px bg-gradient-to-b from-semantic-accent-cta/60 via-semantic-accent-cta/30 to-transparent" />
               <div className="flex flex-col gap-4">
-              {list.map(({ title, desc, image }, idx) => {
-                const BenefitIcon = getIconForBenefit(idx)
-                const isFirst = idx === 0
-                return (
+              {list.map(({ title, desc, image }, idx) => (
                   <div
                     key={title}
                     id={sectionId ? `${sectionId}-item-${idx + 1}` : undefined}
-                    className={`scroll-mt-24 relative flex gap-4 rounded-2xl border bg-gradient-to-br from-[#FFF6F2] via-white to-[#FFE8DC] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] ${
-                      isFirst ? 'border-semantic-accent-cta shadow-[0_12px_30px_rgba(0,0,0,0.08)]' : 'border-semantic-accent-cta/60 shadow-[0_10px_26px_rgba(0,0,0,0.06)]'
-                    }`}
+                    className="scroll-mt-24 relative flex gap-4 rounded-2xl border border-semantic-accent-cta/60 bg-gradient-to-br from-[#FFF6F2] via-white to-[#FFE8DC] p-4 shadow-[0_10px_26px_rgba(0,0,0,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]"
                   >
                     <div className="relative flex-shrink-0">
-                      <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-semantic-text-primary shadow-soft ring-2 ring-white ${
-                        isFirst ? 'bg-gradient-to-br from-semantic-accent-cta to-semantic-legacy-brand-cocoa' : 'bg-gradient-to-br from-semantic-accent-cta to-semantic-legacy-brand-blush'
-                      }`}>
-                        <BenefitIcon className="h-5 w-5" />
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-semantic-accent-cta to-semantic-legacy-brand-blush text-base font-extrabold text-semantic-text-primary shadow-soft ring-2 ring-white">
+                        {idx + 1}
                       </span>
                       <span className="absolute left-1/2 top-10 h-6 w-px -translate-x-1/2 bg-semantic-accent-cta/30" />
                     </div>
@@ -178,13 +164,12 @@ export const FeatureCallouts = ({
                             loading="lazy"
                           />
                         ) : null}
-                        <div className={`font-heading leading-tight ${isFirst ? 'text-xl font-extrabold text-semantic-text-primary' : 'text-lg font-bold text-semantic-text-primary'}`}>{title}</div>
+                        <div className="font-heading text-xl font-extrabold text-semantic-text-primary leading-tight">{title}</div>
                       </div>
                       <p className="text-[15px] leading-relaxed text-semantic-text-primary/90">{desc}</p>
                     </div>
                   </div>
-                )
-              })}
+                ))}
               </div>
               {sectionId ? <div id={`${sectionId}-pills`} className="h-0 scroll-mt-24" /> : null}
               {pillList.length ? (
@@ -230,7 +215,7 @@ export const FeatureCallouts = ({
         <div className="mt-8 rounded-3xl border border-semantic-accent-cta/40 bg-white/90 p-6 shadow-soft md:p-8">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             {list.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-5">
+              <div key={title} className="rounded-2xl border border-semantic-legacy-brand-blush/60 bg-semantic-legacy-brand-blush/20 p-5">
                 <div className="flex items-start gap-3">
                   {Icon ? (
                     <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-semantic-accent-cta/60 text-semantic-text-primary">

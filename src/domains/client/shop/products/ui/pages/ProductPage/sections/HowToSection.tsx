@@ -116,7 +116,7 @@ export const HowToSection = ({ steps }: Props) => {
               }}
               id={`pdp-sign-step-${idx + 1}`}
               onClick={() => handleStepClick(idx)}
-              className={`scroll-mt-24 flex cursor-pointer gap-3 rounded-2xl border bg-white p-3 shadow-[0_8px_18px_rgba(0,0,0,0.04)] transition-all ${
+              className={`scroll-mt-24 flex cursor-pointer gap-3 rounded-2xl border bg-semantic-legacy-brand-blush/10 p-3 shadow-[0_8px_18px_rgba(0,0,0,0.04)] transition-all ${
                 isActive
                   ? 'border-semantic-accent-cta ring-2 ring-semantic-accent-cta/30 bg-white'
                   : 'border-semantic-legacy-brand-blush/60'
@@ -166,7 +166,7 @@ export const HowToSection = ({ steps }: Props) => {
                       )}
                     </button>
                     {isExpanded && (
-                      <div className="mt-2.5 space-y-2 rounded-xl border border-semantic-legacy-brand-blush/40 bg-white p-3">
+                      <div className="mt-2.5 space-y-2 rounded-xl border border-semantic-legacy-brand-blush/40 bg-semantic-legacy-brand-blush/5 p-3">
                         {step.tips.map((tip, tipIdx) => (
                           <div key={tipIdx} className="flex flex-col gap-0.5">
                             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-semantic-legacy-brand-cocoa/80">
