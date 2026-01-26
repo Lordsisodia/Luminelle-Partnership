@@ -63,9 +63,10 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (!touchStartRef.current) return
     const touch = e.changedTouches[0]
-    const deltaX = touch.clientX - touchStartRef.current.x
-    const deltaY = touch.clientY - touchStartRef.current
-    const deltaTime = Date.now() - touchStartRef.current.time
+    const touchStart = touchStartRef.current
+    const deltaX = touch.clientX - touchStart.x
+    const deltaY = touch.clientY - touchStart.y
+    const deltaTime = Date.now() - touchStart.time
 
     // Reset
     touchStartRef.current = null

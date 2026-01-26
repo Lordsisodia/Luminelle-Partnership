@@ -108,7 +108,9 @@ export const HowToSection = ({ steps }: Props) => {
           return (
             <div
               key={step.title}
-              ref={(el) => (stepRefs.current[idx] = el)}
+              ref={(el) => {
+                stepRefs.current[idx] = el
+              }}
               id={`pdp-sign-step-${idx + 1}`}
               onClick={() => handleStepClick(idx)}
               className={`scroll-mt-24 flex cursor-pointer gap-3 rounded-2xl border bg-semantic-legacy-brand-blush/10 p-3 shadow-[0_8px_18px_rgba(0,0,0,0.04)] transition-all ${

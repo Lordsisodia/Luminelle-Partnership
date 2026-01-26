@@ -62,13 +62,7 @@ export const TrustBar = () => {
         >
           {[...items, ...items, ...items].map((item, idx) => (
             <span key={`${item.label}-${idx}`} className="inline-flex items-center gap-2 whitespace-nowrap">
-              {item.href ? (
-                <RouterLink to={item.href} className="underline decoration-semantic-text-primary/50 underline-offset-4 hover:text-semantic-text-primary/80">
-                  {item.label}
-                </RouterLink>
-              ) : (
-                item.label
-              )}
+              {item.label}
               <span className="h-1 w-1 rounded-full bg-semantic-legacy-brand-cocoa/35" aria-hidden />
             </span>
           ))}
