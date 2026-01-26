@@ -45,6 +45,7 @@ export type SectionProps = {
   }[]
   reviews?: ReviewType[]
   hideDetailsAccordion?: boolean
+  productBadges?: Array<{ label: string; variant?: 'peach' | 'cocoa' | 'rose' }>
 }
 
 export function renderSections(props: SectionProps): ReactNode {
@@ -54,34 +55,9 @@ export function renderSections(props: SectionProps): ReactNode {
     ? props.bottomCtaChips.map((chip) => (typeof chip === 'string' ? chip.trim() : '')).filter(Boolean)
     : []
 
-  // Mobile nav items for product page
-  const mobileNavItems = [
-    { id: 'pdp-hero', label: 'Photo' },
-    { id: 'details', label: 'Details' },
-    { id: 'essentials', label: 'Materials' },
-    { id: 'reviews', label: 'Reviews' },
-    { id: 'faq', label: 'FAQ' },
-  ]
-
   return (
     <>
-      {/* Mobile section nav - anchored in document flow */}
-      <nav aria-label="Page sections" className="md:hidden bg-white border-b border-semantic-legacy-brand-blush/40">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="flex items-center gap-2 overflow-x-auto py-2">
-            {mobileNavItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary hover:bg-semantic-legacy-brand-blush/20 transition"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </nav>
-
+      {/* Mobile section nav removed - users can scroll naturally */}
       <div id="pdp-hero" className="mx-auto max-w-6xl px-5 md:px-6 md:grid md:grid-cols-2 md:items-start md:gap-8 md:pt-6 overflow-visible">
         <HeroMedia
           gallery={props.gallery}
@@ -89,6 +65,7 @@ export function renderSections(props: SectionProps): ReactNode {
           onSelect={props.setActiveImage}
           productTitle={props.productTitle}
           showLaunchBanner={showLaunchBanner}
+          badges={props.productBadges}
         />
 
         <PriceBlock

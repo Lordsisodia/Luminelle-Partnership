@@ -70,10 +70,10 @@ export const BrandStorySection = () => {
                   type="button"
                   aria-label={`Show slide ${index + 1}`}
                   onClick={() => goToSlide(index)}
-                  className={`pointer-events-auto h-2.5 rounded-full transition-all ${
+                  className={`pointer-events-auto h-1 rounded-full transition-all ${
                     index === activeIndex
-                      ? 'w-8 bg-semantic-legacy-brand-cocoa'
-                      : 'w-2.5 bg-semantic-legacy-brand-cocoa/30 hover:bg-semantic-legacy-brand-cocoa/70'
+                      ? 'w-6 bg-semantic-legacy-brand-cocoa'
+                      : 'w-1 bg-semantic-legacy-brand-cocoa/30 hover:bg-semantic-legacy-brand-cocoa/70'
                   }`}
                 />
               ))}

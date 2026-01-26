@@ -1,4 +1,0 @@
-#!/bin/bash
-# Quick semantic search wrapper for Blackbox4
-cd /Users/shaansisodia/DEV/client-projects/lumelle
-python3 .blackbox/search-memory-simple.py "$@"

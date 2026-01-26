@@ -87,14 +87,14 @@ const getInitials = (name: string) =>
 
 const ReviewCardOrnaments = () => (
   <>
-    <div className="pointer-events-none absolute inset-0 rounded-[15px] bg-[radial-gradient(700px_circle_at_20%_0%,rgba(253,212,220,0.55),transparent_55%)]" />
-    <div className="pointer-events-none absolute inset-0 rounded-[15px] ring-1 ring-inset ring-semantic-legacy-brand-blush/55" />
-    <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-semantic-accent-cta/45 to-transparent" />
+    <div className="pointer-events-none absolute inset-0 rounded-[15px] bg-[radial-gradient(700px_circle_at_50%_0%,rgba(251,199,178,0.3),transparent_60%)]" />
+    <div className="pointer-events-none absolute inset-0 rounded-[15px] ring-1 ring-inset ring-semantic-legacy-brand-blush/40" />
+    <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-semantic-accent-cta/50 to-transparent" />
 
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-semantic-accent-cta/55"
+      className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-semantic-accent-cta/40"
       fill="none"
     >
       <path
@@ -109,7 +109,7 @@ const ReviewCardOrnaments = () => (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="pointer-events-none absolute right-3 top-3 h-6 w-6 text-semantic-accent-cta/55"
+      className="pointer-events-none absolute right-3 top-3 h-6 w-6 text-semantic-accent-cta/40"
       fill="none"
     >
       <path
@@ -129,19 +129,48 @@ const ReviewCardContent = ({
   review: ReviewCard
   showReviewerPhotos: boolean
 }) => {
+  const initials = getInitials(review.author)
+
   return (
-    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[15px] bg-semantic-legacy-brand-blush/30 px-4 py-4 text-center md:px-5 md:py-5">
-      <ReviewCardOrnaments />
+    <div className="pointer-events-none relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl bg-white px-5 py-6 shadow-soft">
+      {/* Background ornaments - subtle visual interest */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(600px_circle_at_50%_0%,rgba(251,199,178,0.25),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-semantic-legacy-brand-blush/30" />
+      <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-semantic-accent-cta/40 to-transparent" />
+
+      {/* Corner decoration - subtle sparkle */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="pointer-events-none absolute right-4 top-4 h-5 w-5 text-semantic-accent-cta/30"
+        fill="none"
+      >
+        <path
+          d="M12 3l1.25 5.1L18 9.4l-4.75 1.3L12 16l-1.25-5.3L6 9.4l4.75-1.3L12 3Z"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinejoin="round"
+        />
+      </svg>
+
+      {/* Rating stars */}
       <div className="relative flex justify-center">
-        <StarRating value={review.stars ?? 5} size={18} />
+        <StarRating value={review.stars ?? 5} size={14} />
       </div>
-      <div className="relative mt-3">
-        <p className="text-sm leading-relaxed text-semantic-text-primary md:text-base md:leading-relaxed whitespace-pre-line">
-          "{review.body}"
+
+      {/* Review text */}
+      <div className="relative mt-4 flex-1">
+        <p className="text-base leading-relaxed text-center text-semantic-text-primary font-medium">
+          {review.body}
         </p>
       </div>
-      <div className="relative mt-4 flex items-center justify-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80 md:text-base">
+
+      {/* Author with avatar badge */}
+      <div className="relative mt-4 flex items-center justify-center gap-3">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-semantic-accent-cta to-semantic-accent-cta/70 text-xs font-semibold text-white shadow-soft">
+          {initials}
+        </div>
+        <p className="text-sm font-medium text-semantic-text-primary">
           {review.author}
         </p>
       </div>
@@ -165,9 +194,9 @@ const Reviews2DCarousel = memo(
   }) => {
     const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
     const isScreenSizeLg = useMediaQuery("(max-width: 1024px)")
-    const itemWidth = isScreenSizeSm ? 340 : isScreenSizeLg ? 400 : 480
-    const itemHeight = isScreenSizeSm ? 340 : isScreenSizeLg ? 280 : 320
-    const gapPx = 12
+    const itemWidth = isScreenSizeSm ? 300 : isScreenSizeLg ? 400 : 480
+    const itemHeight = isScreenSizeSm ? 380 : isScreenSizeLg ? 280 : 320
+    const gapPx = 16
     const listRef = useRef<HTMLDivElement | null>(null)
     const isProgrammaticScrollRef = useRef(false)
     const programmaticScrollTimeoutRef = useRef<number | null>(null)
@@ -230,7 +259,7 @@ const Reviews2DCarousel = memo(
         <div className="relative">
           <div
             ref={listRef}
-            className="flex w-full gap-3 overflow-x-auto px-4 pb-2 pt-3 md:pt-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex w-full gap-4 overflow-x-auto px-4 pb-4 pt-3 md:pt-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             style={{
               scrollSnapType: "x mandatory",
               scrollPaddingLeft: "16px",
@@ -246,7 +275,7 @@ const Reviews2DCarousel = memo(
                 className="shrink-0 snap-start"
                 style={{ width: `${itemWidth}px` }}
               >
-                <div className="rounded-2xl bg-gradient-to-br from-semantic-legacy-brand-blush/70 via-white to-semantic-accent-cta/60 p-[1px] shadow-[0_18px_45px_rgba(251,199,178,0.18)]">
+                <div className="rounded-2xl bg-gradient-to-br from-semantic-legacy-brand-blush/50 via-white to-semantic-accent-cta/40 p-[1px] shadow-[0_12px_35px_rgba(85,54,42,0.08)]">
                   <div style={{ height: `${itemHeight}px` }}>
                     <ReviewCardContent review={card} showReviewerPhotos={showReviewerPhotos} />
                   </div>
@@ -257,33 +286,12 @@ const Reviews2DCarousel = memo(
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-semantic-bg-subtle via-semantic-bg-subtle/60 to-transparent md:block"
+            className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-semantic-bg-subtle via-semantic-bg-subtle/70 to-transparent md:w-16 md:block"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-gradient-to-l from-semantic-bg-subtle via-semantic-bg-subtle/60 to-transparent md:block"
+            className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-semantic-bg-subtle via-semantic-bg-subtle/70 to-transparent md:w-16 md:block"
           />
-
-          <div className="pointer-events-none absolute inset-y-0 left-0 hidden items-center md:flex">
-            <button
-              type="button"
-              aria-label="Scroll reviews left"
-              onClick={() => scrollToIndex(activeIndex - 1)}
-              className="pointer-events-auto ml-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/85 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center md:flex">
-            <button
-              type="button"
-              aria-label="Scroll reviews right"
-              onClick={() => scrollToIndex(activeIndex + 1)}
-              className="pointer-events-auto mr-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white/85 text-semantic-text-primary shadow-soft backdrop-blur hover:bg-semantic-legacy-brand-blush/40"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
         </div>
       </div>
     )
