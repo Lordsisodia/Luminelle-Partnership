@@ -46,6 +46,50 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
   const [zoomModalOpen, setZoomModalOpen] = useState(false)
   const [zoomImageIndex, setZoomImageIndex] = useState(activeImage)
 
+  // Touch handling for swipe detection
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0]
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY, time: Date.now() }
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    // Prevent default to stop page scroll while touching image
+    if (touchStartRef.current) {
+      // Optional: e.preventDefault() if you want to prevent scroll
+    }
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStartRef.current) return
+    const touch = e.changedTouches[0]
+    const deltaX = touch.clientX - touchStartRef.current.x
+    const deltaY = touch.clientY - touchStartRef.current
+    const deltaTime = Date.now() - touchStartRef.current.time
+
+    // Reset
+    touchStartRef.current = null
+
+    // Check if this was a tap (not a swipe)
+    const isTap = Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10 && deltaTime < 300
+    if (isTap) {
+      // Tap triggers zoom (already handled by onClick)
+      return
+    }
+
+    // Check for horizontal swipe
+    const isHorizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY) * 1.5 && Math.abs(deltaX) > 30
+    if (isHorizontalSwipe) {
+      if (deltaX > 0) {
+        // Swipe right - previous image
+        onSelect(activeImage > 0 ? activeImage - 1 : gallery.length - 1)
+      } else {
+        // Swipe left - next image
+        onSelect(activeImage < gallery.length - 1 ? activeImage + 1 : 0)
+      }
+    }
+  }
+
   useEffect(() => {
     const el = thumbnailsRef.current
     if (!el) return
