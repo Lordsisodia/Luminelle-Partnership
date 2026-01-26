@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { ChevronDown, ChevronUp, Clock } from 'lucide-react'
 
-import { useState, useEffect, useRef } from 'react'
-import { ChevronDown, ChevronUp, Clock, ShoppingBag, Zap } from 'lucide-react'
-
 type Tip = {
   title: string
   content: string
@@ -19,11 +16,6 @@ type Step = {
 
 type Props = {
   steps: Step[]
-  price?: number
-  onAdd?: () => void
-  onBuy?: () => void
-  isAdding?: boolean
-  justAdded?: boolean
 }
 
 export const HowToSection = ({ steps }: Props) => {
@@ -112,40 +104,6 @@ export const HowToSection = ({ steps }: Props) => {
         )}
       </div>
 
-      {/* CTA Section */}
-      {onAdd && onBuy && (
-        <div className="mb-5 rounded-2xl border border-semantic-accent-cta/30 bg-gradient-to-br from-semantic-accent-cta/10 to-semantic-legacy-brand-blush/10 p-4">
-          <div className="flex flex-col gap-3">
-            {price && (
-              <div className="text-center">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/50">Ready to try?</p>
-                <p className="mt-1 text-sm font-medium text-semantic-text-primary/80">
-                  Only <span className="font-bold text-semantic-text-primary">£{price.toFixed(2)}</span> — ships in 48h
-                </p>
-              </div>
-            )}
-            <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
-              <button
-                className={`inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-5 py-3 text-base font-semibold text-semantic-legacy-brand-cocoa shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 ${justAdded ? 'motion-safe:animate-pulse motion-reduce:animate-none' : ''}`}
-                onClick={onAdd}
-                disabled={isAdding}
-              >
-                <ShoppingBag className="h-4 w-4" />
-                {isAdding ? 'Adding…' : 'Add to Cart'}
-              </button>
-              <button
-                type="button"
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-5 py-3 text-base font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 disabled:cursor-not-allowed disabled:opacity-60"
-                onClick={onBuy}
-                disabled={isAdding}
-              >
-                <Zap className="h-4 w-4" />
-                {isAdding ? 'Processing…' : 'Buy Now'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       <div className="space-y-3">
         {steps.map((step, idx) => {
           const isActive = activeStep === idx
