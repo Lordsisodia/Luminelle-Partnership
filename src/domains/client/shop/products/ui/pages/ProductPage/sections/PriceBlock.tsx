@@ -83,75 +83,80 @@ export const PriceBlock = ({
         <div id="pdp-hero-price" className="h-0 scroll-mt-24" />
         <div className="mt-3">
           {compareAtPrice && compareAtPrice > price ? (
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-baseline gap-3">
-                <span className="text-xl font-semibold text-rose-600 md:text-2xl">
-                  -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
-                </span>
-                <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
-              </div>
-
-              {/* Share button inline with price */}
-              <div className="ml-auto flex shrink-0 items-center gap-2">
-                {shareToast ? (
-                  <span className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft">
-                    {shareToast}
+            <>
+              <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                <div className="flex items-baseline gap-3">
+                  <span className="text-xl font-semibold text-rose-600 md:text-2xl">
+                    -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
                   </span>
-                ) : null}
-                <button
-                  type="button"
-                  aria-label="Share product"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
-                  onClick={async () => {
-                    if (navigator.share) {
-                      try {
-                        await navigator.share({ title: productTitle, url: canonicalUrl })
-                        setShareToast('Shared')
-                      } catch {
-                        // User cancelled / share not completed — avoid noisy errors.
-                      }
-                      return
-                    }
+                  <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
+                </div>
 
-                    try {
-                      if (navigator.clipboard?.writeText) {
-                        await navigator.clipboard.writeText(canonicalUrl)
-                        setShareToast('Link copied')
+                {/* Share button inline with price */}
+                <div className="flex shrink-0 items-center gap-2 self-end md:self-auto">
+                  {shareToast ? (
+                    <span className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft">
+                      {shareToast}
+                    </span>
+                  ) : null}
+                  <button
+                    type="button"
+                    aria-label="Share product"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
+                    onClick={async () => {
+                      if (navigator.share) {
+                        try {
+                          await navigator.share({ title: productTitle, url: canonicalUrl })
+                          setShareToast('Shared')
+                        } catch {
+                          // User cancelled / share not completed — avoid noisy errors.
+                        }
                         return
                       }
 
-                      window.prompt('Copy this link:', canonicalUrl)
-                      setShareToast('Copy link')
-                    } catch {
-                      window.prompt('Copy this link:', canonicalUrl)
-                      setShareToast('Copy link')
-                    }
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                      try {
+                        if (navigator.clipboard?.writeText) {
+                          await navigator.clipboard.writeText(canonicalUrl)
+                          setShareToast('Link copied')
+                          return
+                        }
+
+                        window.prompt('Copy this link:', canonicalUrl)
+                        setShareToast('Copy link')
+                      } catch {
+                        window.prompt('Copy this link:', canonicalUrl)
+                        setShareToast('Copy link')
+                      }
+                    }}
                   >
-                    <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7" />
-                    <path d="M16 6l-4-4-4 4" />
-                    <path d="M12 2v14" />
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7" />
+                      <path d="M16 6l-4-4-4 4" />
+                      <path d="M12 2v14" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
+              <div className="mt-1 text-sm font-semibold text-semantic-text-primary/70">
+                RRP: <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
+              </div>
+            </>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between gap-3">
               <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
 
               {/* Share button inline with price (no discount) */}
-              <div className="ml-auto flex shrink-0 items-center gap-2">
+              <div className="flex shrink-0 items-center gap-2">
                 {shareToast ? (
                   <span className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft">
                     {shareToast}
@@ -204,11 +209,6 @@ export const PriceBlock = ({
                   </svg>
                 </button>
               </div>
-            </div>
-          )}
-          {compareAtPrice && compareAtPrice > price && (
-            <div className="mt-1 text-sm font-semibold text-semantic-text-primary/70">
-              RRP: <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
             </div>
           )}
         </div>
