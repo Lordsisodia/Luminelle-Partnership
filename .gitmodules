@@ -2,3 +2,6 @@
 	path = .siso-app-factory
 	url = https://github.com/Lordsisodia/siso-app-factory
 	branch = main
+[submodule "blackbox5"]
+	path = blackbox5
+	url = https://github.com/Lordsisodia/blackbox5.git
