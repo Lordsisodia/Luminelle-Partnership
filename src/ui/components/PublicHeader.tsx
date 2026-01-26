@@ -25,20 +25,20 @@ export function PublicHeader({
     <>
       {/* Top nav */}
       <div className="w-full px-3 md:px-6">
-        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 md:gap-3 py-1 md:py-2">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 md:gap-3 py-2 md:py-3">
           {/* Burger menu - left */}
           <button
             aria-label="Open menu"
             onClick={handleOpenMenu}
-            className="inline-flex h-9 w-9 md:h-10 md:w-10 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70"
-            style={{ minWidth: '36px', minHeight: '36px' }}
+            className="inline-flex h-11 w-11 md:h-12 md:w-12 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70"
+            style={{ minWidth: '44px', minHeight: '44px' }}
           >
-            <Menu className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.5} />
+            <Menu className="h-6 w-6 md:h-7 md:w-7" strokeWidth={2.5} />
           </button>
 
           {/* Logo - center */}
           <RouterLink to="/" className="flex flex-col items-center justify-center gap-0.5 text-center justify-self-center">
-            <span className="font-heading text-base md:text-lg font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-semantic-legacy-brand-cocoa leading-none">
+            <span className="font-heading text-lg md:text-xl font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-semantic-legacy-brand-cocoa leading-none">
               Lumelle
             </span>
             {subtitle ? (
@@ -55,7 +55,7 @@ export function PublicHeader({
               <button
                 onClick={onPrimaryAction}
                 type="button"
-                className="hidden items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-4 py-1.5 text-sm font-semibold text-semantic-legacy-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90 md:inline-flex"
+                className="hidden items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-4 py-2 text-sm font-semibold text-semantic-legacy-brand-cocoa shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-semantic-accent-cta/90 md:inline-flex"
               >
                 {primaryLabel}
               </button>
@@ -66,9 +66,9 @@ export function PublicHeader({
               type="button"
               aria-label="Open cart"
               onClick={openCart}
-              className="relative hidden h-9 w-9 md:h-10 md:w-10 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70 md:inline-flex"
+              className="relative hidden h-11 w-11 md:h-12 md:w-12 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70 md:inline-flex"
             >
-              <ShoppingBag className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2} />
+              <ShoppingBag className="h-6 w-6 md:h-7 md:w-7" strokeWidth={2} />
               {qty > 0 ? (
                 <span className="absolute -top-0.5 -right-0.5 inline-flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-semantic-accent-cta px-1 text-[10px] font-semibold text-semantic-legacy-brand-cocoa shadow-soft">
                   {qtyLabel}
@@ -87,11 +87,11 @@ export function PublicHeader({
             {/* Profile icon - mobile only */}
             <RouterLink
               to="/account"
-              className="inline-flex h-9 w-9 md:h-10 md:w-10 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70 md:hidden"
+              className="inline-flex h-11 w-11 md:h-12 md:w-12 items-center justify-center text-semantic-legacy-brand-cocoa hover:text-semantic-legacy-brand-cocoa/70 md:hidden"
               aria-label="Account"
-              style={{ minWidth: '36px', minHeight: '36px' }}
+              style={{ minWidth: '44px', minHeight: '44px' }}
             >
-              <UserRound className="h-5 w-5" strokeWidth={2} />
+              <UserRound className="h-6 w-6" strokeWidth={2} />
             </RouterLink>
           </div>
         </div>
