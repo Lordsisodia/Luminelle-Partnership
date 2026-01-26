@@ -1,6 +1,8 @@
 import { useMemo, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { heroContent, heroSpotlightSlides, metricBadges } from '@/content/landing'
 import { useCountUpAnimation } from '@/domains/shared/hooks/useCountUpAnimation'
+import { AnimatedSection, itemVariants } from '@/ui/components/AnimatedSection'
 
 type HeroSectionProps = {
   onPrimaryAction: () => void
@@ -64,17 +66,17 @@ export const HeroSection = ({
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/35 via-white/10 to-white/0 md:from-semantic-legacy-brand-blush/18 md:via-white/8" />
       </div>
       <div className="relative">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 px-4 text-center md:items-start md:px-6 md:text-left">
-          <span className="inline-flex rounded-full bg-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-white/80 backdrop-blur">
+        <AnimatedSection className="mx-auto flex max-w-5xl flex-col items-center gap-10 px-4 text-center md:items-start md:px-6 md:text-left">
+          <motion.span variants={itemVariants} className="inline-flex rounded-full bg-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-white/80 backdrop-blur">
             {heroContent.eyebrow}
-          </span>
-          <h1 className="font-heading text-4xl leading-tight text-white md:text-5xl">
+          </motion.span>
+          <motion.h1 variants={itemVariants} className="font-heading text-4xl leading-tight text-white md:text-5xl">
             {heroContent.headline}
-          </h1>
-          <p className="max-w-2xl text-lg text-white/80 md:text-xl">
+          </motion.h1>
+          <motion.p variants={itemVariants} className="max-w-2xl text-lg text-white/80 md:text-xl">
             {heroContent.subheadline}
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          </motion.p>
+          <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={onPrimaryAction}
@@ -89,8 +91,8 @@ export const HeroSection = ({
             >
               {heroContent.secondaryCta}
             </button>
-          </div>
-          <div className="grid w-full gap-4 sm:grid-cols-3">
+          </motion.div>
+          <motion.div variants={itemVariants} className="grid w-full gap-4 sm:grid-cols-3">
             {metricBadges.map((metric, index) => {
               const refs = [ref0, ref1, ref2]
               const displayValues = [displayMetric0, displayMetric1, displayMetric2]
@@ -117,8 +119,9 @@ export const HeroSection = ({
                 </div>
               )
             })}
-          </div>
-          <div
+          </motion.div>
+          <motion.div
+            variants={itemVariants}
             className="w-full cursor-pointer rounded-[2.5rem] border border-white/40 bg-white/90 p-6 shadow-soft backdrop-blur md:max-w-3xl"
             onTouchStart={(e) => {
               touchStartX.current = e.touches[0].clientX
@@ -155,8 +158,8 @@ export const HeroSection = ({
               </div>
             </div>
             {/* No pagination/next controls when only one slide */}
-          </div>
-        </div>
+          </motion.div>
+        </AnimatedSection>
       </div>
     </section>
   )

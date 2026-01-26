@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { StarRating } from '@ui/components/StarRating'
+import { useCountUpAnimation } from '@/domains/shared/hooks/useCountUpAnimation'
 import { Users, ShieldCheck, Truck, CheckCircle, ChevronDown, ChevronUp, Lock, CreditCard, Shield } from 'lucide-react'
 
 type Fact = {
@@ -24,11 +25,12 @@ type Props = {
 }
 
 export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quotes: quotesProp }: Props) => {
-  const [displayRating, setDisplayRating] = useState(0)
-  const [displayCount, setDisplayCount] = useState(0)
+  // Use the reusable count-up animation hook for rating and count
+  const { displayValue: displayRating } = useCountUpAnimation(rating, 1500)
+  const { displayValue: displayCount } = useCountUpAnimation(count, 1500)
+
   const [expandedFact, setExpandedFact] = useState<number | null>(null)
   const [currentQuote, setCurrentQuote] = useState(0)
-  const [hasAnimated, setHasAnimated] = useState(false)
   const sectionRef = useRef<HTMLDivElement | null>(null)
   const quoteIntervalRef = useRef<number | null>(null)
 
@@ -67,60 +69,7 @@ export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quote
 
   const quotes = quotesProp && quotesProp.length > 0 ? quotesProp : defaultQuotes
 
-  // Animated count-up
-  useEffect(() => {
-    if (hasAnimated) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimated(true)
-
-            // Animate rating
-            const ratingDuration = 1500
-            const ratingStart = Date.now()
-            const animateRating = () => {
-              const now = Date.now()
-              const progress = Math.min((now - ratingStart) / ratingDuration, 1)
-              const easeOut = 1 - Math.pow(1 - progress, 4) // easeOutQuart
-              setDisplayRating(easeOut * rating)
-              if (progress < 1) {
-                requestAnimationFrame(animateRating)
-              } else {
-                setDisplayRating(rating)
-              }
-            }
-            animateRating()
-
-            // Animate count
-            const countDuration = 1500
-            const countStart = Date.now()
-            const animateCount = () => {
-              const now = Date.now()
-              const progress = Math.min((now - countStart) / countDuration, 1)
-              const easeOut = 1 - Math.pow(1 - progress, 4)
-              setDisplayCount(Math.floor(easeOut * count))
-              if (progress < 1) {
-                requestAnimationFrame(animateCount)
-              } else {
-                setDisplayCount(count)
-              }
-            }
-            animateCount()
-          }
-        })
-      },
-      { threshold: 0.5 }
-    )
-
-    const current = sectionRef.current
-    if (current) observer.observe(current)
-
-    return () => {
-      if (current) observer.unobserve(current)
-    }
-  }, [rating, count, hasAnimated])
+  // Animated count-up is now handled by useCountUpAnimation hook
 
   // Rotating quotes
   useEffect(() => {
@@ -153,7 +102,7 @@ export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quote
               </span>
             </div>
             <span className="font-semibold">
-              {hasAnimated ? displayRating.toFixed(1) : rating.toFixed(1)} ({hasAnimated ? displayCount.toLocaleString() : count.toLocaleString()}) — {tagline}
+              {displayRating > 0 ? displayRating.toFixed(1) : rating.toFixed(1)} ({displayCount > 0 ? Math.floor(displayCount).toLocaleString() : count.toLocaleString()}) — {tagline}
             </span>
           </div>
 

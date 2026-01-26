@@ -81,19 +81,21 @@ export const PriceBlock = ({
         </button>
 
         <div id="pdp-hero-price" className="h-0 scroll-mt-24" />
-        <div className="mt-3">
+        <div className="mt-2">
           {compareAtPrice && compareAtPrice > price ? (
             <>
-              <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-xl font-semibold text-rose-600 md:text-2xl">
-                    -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
-                  </span>
-                  <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
+              <div className="flex items-baseline gap-3">
+                <span className="text-xl font-semibold text-rose-600 md:text-2xl">
+                  -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
+                </span>
+                <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
+              </div>
+              <div className="mt-1 flex items-center justify-between">
+                <div className="text-sm font-semibold text-semantic-text-primary/70">
+                  RRP: <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
                 </div>
-
-                {/* Share button inline with price */}
-                <div className="flex shrink-0 items-center gap-2 self-end md:self-auto">
+                {/* Share button inline with RRP */}
+                <div className="flex shrink-0 items-center gap-2">
                   {shareToast ? (
                     <span className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft">
                       {shareToast}
@@ -146,9 +148,6 @@ export const PriceBlock = ({
                     </svg>
                   </button>
                 </div>
-              </div>
-              <div className="mt-1 text-sm font-semibold text-semantic-text-primary/70">
-                RRP: <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
               </div>
             </>
           ) : (
