@@ -68,33 +68,29 @@ export const PriceBlock = ({
       <div className="overflow-visible">
         <div id="pdp-hero-text" className="h-0 scroll-mt-24" />
         <h1 className="font-heading text-[1.95rem] font-bold leading-tight md:text-4xl">{productTitle}</h1>
-        <p className="mt-2 text-semantic-text-primary/70">{productDesc}</p>
+        <p className="mt-2 text-sm text-semantic-text-primary/70">{productDesc}</p>
 
         {/* Bullet points for key benefits */}
-        <ul className="mt-3 space-y-1.5 text-sm text-semantic-text-primary/80">
-          <li className="flex items-start gap-2">
-            <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden="true" />
-            <span>Waterproof exterior keeps water completely out</span>
+        <ul className="mt-3 space-y-2 text-sm font-medium text-semantic-text-primary/90">
+          <li className="flex items-center gap-2">
+            <svg className="h-4 w-4 shrink-0 text-semantic-accent-cta" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+            <span>Waterproof exterior</span>
           </li>
-          <li className="flex items-start gap-2">
-            <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden="true" />
-            <span>Satin lining prevents frizz and breakage</span>
+          <li className="flex items-center gap-2">
+            <svg className="h-4 w-4 shrink-0 text-semantic-accent-cta" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+            <span>Satin lining prevents frizz</span>
           </li>
-          <li className="flex items-start gap-2">
-            <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-semantic-legacy-brand-cocoa" aria-hidden="true" />
-            <span>Adjustable elastic stays secure all night</span>
+          <li className="flex items-center gap-2">
+            <svg className="h-4 w-4 shrink-0 text-semantic-accent-cta" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+            <span>Adjustable secure fit</span>
           </li>
         </ul>
-
-        <div id="pdp-hero-reviews" className="h-0 scroll-mt-24" />
-        <button
-          type="button"
-          onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-          className="mt-3 w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/40"
-          aria-label="Jump to reviews"
-        >
-          <TrustMicro ratingValue={ratingValue} reviewCountLabel={ratingLabel} showShipping={false} />
-        </button>
 
         <div id="pdp-hero-price" className="h-0 scroll-mt-24" />
         <div className="mt-2">
@@ -250,7 +246,8 @@ export const PriceBlock = ({
             <span className="font-semibold">Free shipping {FREE_SHIPPING_THRESHOLD_LABEL}</span>
           </div>
 
-          {badge && badge.toLowerCase() !== 'buy 2, save 10%' && (
+          {/* Remove promotional badges like "Buy 2, save 10%" */}
+          {badge && badge.toLowerCase() !== 'buy 2, save 10%' && badge.toLowerCase() !== 'buy 2, save 5%' && (
             <div className="inline-flex items-center rounded-full bg-white px-4 py-1 font-semibold uppercase tracking-[0.3em] text-semantic-text-primary shadow-soft">
               {badge}
             </div>

@@ -88,7 +88,14 @@ export function renderSections(props: SectionProps): ReactNode {
       </div>
 
       <div id="pdp-care" className="mx-auto mt-8 max-w-6xl px-4 md:px-6">
-        <HowToSection steps={props.how} />
+        <HowToSection
+          steps={props.how}
+          price={props.price}
+          onAdd={props.onAdd}
+          onBuy={props.onBuy}
+          isAdding={props.isAdding}
+          justAdded={props.justAdded}
+        />
       </div>
 
       <div id="pdp-proof">
@@ -96,6 +103,7 @@ export function renderSections(props: SectionProps): ReactNode {
           rating={props.ratingValue}
           count={props.ratingCount}
           tagline="Creator-loved protection"
+          price={props.price}
           facts={
             Array.isArray(props.proofStrip)
               ? props.proofStrip.map((item: any) => ({
