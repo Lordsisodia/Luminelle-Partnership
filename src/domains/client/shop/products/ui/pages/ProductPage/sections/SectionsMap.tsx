@@ -195,7 +195,7 @@ export function renderSections(props: SectionProps): ReactNode {
           <div className="flex w-full max-w-lg flex-col items-center gap-3">
             <button
               id="pdp-bottom-cta-add"
-              className={`inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-semantic-accent-cta to-semantic-legacy-brand-cocoa px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 ${props.justAdded ? 'motion-safe:animate-pulse motion-reduce:animate-none' : ''}`}
+              className={`inline-flex w-full items-center justify-center rounded-full bg-semantic-accent-cta px-6 py-3.5 text-base font-semibold text-semantic-legacy-brand-cocoa shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 ${props.justAdded ? 'motion-safe:animate-pulse motion-reduce:animate-none' : ''}`}
               onClick={props.onAdd}
               disabled={props.isAdding}
             >
@@ -204,7 +204,7 @@ export function renderSections(props: SectionProps): ReactNode {
             <button
               id="pdp-bottom-cta-buy"
               type="button"
-              className="inline-flex w-full items-center justify-center rounded-full border border-semantic-legacy-brand-cocoa px-6 py-3 text-base font-semibold text-semantic-text-primary transition hover:-translate-y-0.5 hover:bg-semantic-legacy-brand-cocoa/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center rounded-full bg-semantic-legacy-brand-blush/70 px-6 py-3 text-base font-semibold text-semantic-legacy-brand-cocoa shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/30 disabled:cursor-not-allowed disabled:opacity-60"
               onClick={props.onBuy}
               disabled={props.isAdding}
             >

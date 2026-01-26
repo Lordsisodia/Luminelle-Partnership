@@ -219,14 +219,14 @@ export const PriceBlock = ({
         </div>
         <div className="mt-4 grid gap-3">
           <button
-            className={`inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-semantic-accent-cta to-semantic-legacy-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)] ${justAdded ? 'motion-safe:animate-pulse motion-reduce:animate-none' : ''}`}
+            className={`inline-flex w-full items-center justify-center rounded-full bg-semantic-accent-cta px-6 py-3 text-base font-semibold text-semantic-legacy-brand-cocoa shadow-[0_10px_24px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.14)] ${justAdded ? 'motion-safe:animate-pulse motion-reduce:animate-none' : ''}`}
             onClick={onAdd}
             disabled={isAdding}
           >
             {isAdding ? 'Adding...' : 'Add to Cart'}
           </button>
           <button
-            className="inline-flex w-full items-center justify-center rounded-full bg-semantic-legacy-brand-cocoa px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.12)]"
+            className="inline-flex w-full items-center justify-center rounded-full bg-semantic-legacy-brand-blush/70 px-6 py-3 text-base font-semibold text-semantic-legacy-brand-cocoa shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.12)]"
             onClick={onBuy}
             disabled={isAdding}
           >
