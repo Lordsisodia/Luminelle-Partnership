@@ -262,23 +262,6 @@ const Reviews2DCarousel = memo(
             aria-hidden="true"
             className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-semantic-bg-subtle via-semantic-bg-subtle/70 to-transparent md:w-16 md:block"
           />
-
-          {/* Pagination dots */}
-          <div className="flex items-center justify-center gap-2 pt-3 md:pt-4">
-            {cards.map((_, idx) => (
-              <button
-                key={`dot-${idx}`}
-                type="button"
-                aria-label={`Go to review ${idx + 1}`}
-                onClick={() => scrollToIndex(idx)}
-                className={`h-2 rounded-full transition-all duration-200 ${
-                  idx === activeIndex
-                    ? 'w-8 bg-semantic-accent-cta'
-                    : 'w-2 bg-semantic-legacy-brand-blush/60 hover:bg-semantic-legacy-brand-blush/80'
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     )

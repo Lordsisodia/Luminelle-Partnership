@@ -373,29 +373,6 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
 	              </>
 	            ) : null}
 
-	          {/* Pagination dots */}
-	          <div className="flex items-center justify-center gap-2 pt-2">
-            {gallery.map((_, idx) => (
-              <button
-                key={`dot-${idx}`}
-                type="button"
-                onClick={() => onSelect(idx)}
-                aria-label={`Go to image ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-200 ${
-                  idx === activeImage
-                    ? 'w-8 bg-semantic-accent-cta'
-                    : 'w-2 bg-semantic-legacy-brand-blush/60 hover:bg-semantic-legacy-brand-blush/80'
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Image counter */}
-          <div className="text-center mt-1">
-            <span className="text-xs font-semibold text-semantic-text-primary/60">
-              {activeImage + 1}/{gallery.length}
-            </span>
-          </div>
 	          </div>
 	        </div>
 	    </section>
