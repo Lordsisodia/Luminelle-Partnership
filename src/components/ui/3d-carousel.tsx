@@ -160,7 +160,7 @@ const ReviewCardContent = ({
 
       {/* Review text */}
       <div className="relative mt-4 flex-1">
-        <p className="text-base leading-relaxed text-left text-semantic-text-primary font-medium line-clamp-4">
+        <p className="text-base leading-relaxed text-center text-semantic-text-primary font-medium">
           {review.body}
         </p>
       </div>
