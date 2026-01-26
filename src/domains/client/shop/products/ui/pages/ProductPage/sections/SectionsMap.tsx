@@ -46,6 +46,7 @@ export type SectionProps = {
   }[]
   reviews?: ReviewType[]
   hideDetailsAccordion?: boolean
+  productBadges?: Array<{ label: string; variant?: 'peach' | 'cocoa' | 'rose' }>
 }
 
 export function renderSections(props: SectionProps): ReactNode {
@@ -144,6 +145,7 @@ export function renderSections(props: SectionProps): ReactNode {
           onSelect={props.setActiveImage}
           productTitle={props.productTitle}
           showLaunchBanner={showLaunchBanner}
+          badges={props.productBadges}
         />
 
         <PriceBlock

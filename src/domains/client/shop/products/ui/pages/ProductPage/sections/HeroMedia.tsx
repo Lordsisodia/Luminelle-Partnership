@@ -22,15 +22,21 @@ const buildSources = (src: string) => {
   }
 }
 
+type ProductBadge = {
+  label: string
+  variant?: 'peach' | 'cocoa' | 'rose'
+}
+
 type Props = {
   gallery: string[]
   activeImage: number
   onSelect: (idx: number) => void
   productTitle: string
   showLaunchBanner?: boolean
+  badges?: ProductBadge[]
 }
 
-const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaunchBanner = true }: Props) => {
+const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaunchBanner = true, badges = [] }: Props) => {
   const thumbnailsRef = useRef<HTMLDivElement | null>(null)
   const [{ hasOverflow, canScrollLeft, canScrollRight }, setThumbnailScrollState] = useState(() => ({
     hasOverflow: false,
@@ -147,6 +153,9 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
                 onClick={() => openZoomModal(activeImage)}
                 aria-label="View full size"
                 className="relative w-full h-full bg-transparent border-0 p-0 cursor-zoom-in"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               >
               (() => {
                 const sources = buildSources(gallery[activeImage])
@@ -174,6 +183,13 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
             )}
               </button>
 
+            {/* Image counter badge */}
+            {gallery.length > 1 && !zoomModalOpen && (
+              <div className="absolute top-3 right-3 z-10 inline-flex items-center rounded-full bg-black/60 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm shadow-lg">
+                <span>{activeImage + 1}/{gallery.length}</span>
+              </div>
+            )}
+
             {/* Navigation arrows on main image */}
             {gallery.length > 1 && !zoomModalOpen && (
               <>
@@ -198,6 +214,29 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
               </>
             )}
 	          </div>
+
+          {/* Product badges */}
+          {badges && badges.length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {badges.map((badge, idx) => {
+                const variantStyles = {
+                  peach: 'bg-semantic-accent-cta text-semantic-legacy-brand-cocoa',
+                  cocoa: 'bg-semantic-legacy-brand-cocoa text-white',
+                  rose: 'bg-rose-500 text-white',
+                }
+                const style = variantStyles[badge.variant || 'peach']
+                return (
+                  <span
+                    key={`${badge.label}-${idx}`}
+                    className={`inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] shadow-soft ${style}`}
+                  >
+                    {badge.label}
+                  </span>
+                )
+              })}
+            </div>
+          )}
+
 	          <div className="relative mt-4 w-full">
 	            <div
 	              ref={thumbnailsRef}
