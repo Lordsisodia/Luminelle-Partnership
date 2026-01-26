@@ -2,6 +2,7 @@ import type { ComponentType } from 'react'
 import { NavLink } from 'react-router-dom'
 import { navSizing } from './AdminSideNav.tokens'
 import { getNavItemStateClasses } from './useNavItemStyles'
+import { NavLabel } from './NavLabel'
 
 type Props = {
   to: string
@@ -36,23 +37,7 @@ export function NavUtilityItem({
       }
     >
       <Icon className="h-4 w-4 shrink-0" aria-hidden />
-      <span
-        className={[
-          'text-[11px] font-semibold uppercase tracking-[0.08em] text-semantic-text-primary/80 transition-all duration-200',
-          inlineLabel
-            ? showLabel
-              ? 'opacity-100 ml-2'
-              : 'opacity-0 pointer-events-none ml-2'
-            : [
-                'absolute left-full top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-semantic-legacy-brand-blush/60 bg-white',
-                navSizing.popoutPadding,
-                navSizing.popoutOffset,
-                showLabel ? 'opacity-100 translate-x-0' : 'opacity-0 pointer-events-none -translate-x-1',
-              ].join(' '),
-        ].join(' ')}
-      >
-        {label}
-      </span>
+      <NavLabel label={label} showLabel={showLabel} inlineLabel={inlineLabel} />
     </NavLink>
   )
 }

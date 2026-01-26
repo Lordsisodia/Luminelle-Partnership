@@ -123,30 +123,32 @@ export const PriceBlock = ({
             </button>
           </div>
         </div>
-        <p className="mt-2 text-sm text-semantic-text-primary/70">{productDesc}</p>
+
+        {/* Short subtitle/hook */}
+        <p className="mt-2 text-base font-medium text-semantic-text-primary">Premium satin-lined protection for overnight styling</p>
 
         <div id="pdp-hero-price" className="h-0 scroll-mt-24" />
         <div id="pdp-hero-badge" className="h-0 scroll-mt-24" />
 
-        {/* Price + Badges row */}
-        <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
-          {/* Price with discount */}
+        {/* Price section - larger, more prominent */}
+        <div className="mt-4">
           {compareAtPrice && compareAtPrice > price ? (
-            <>
-              <div className="flex items-baseline gap-2">
-                <span className="text-lg font-semibold text-rose-600">
-                  -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
-                </span>
-                <span className="text-2xl font-bold text-semantic-text-primary">£{price.toFixed(2)}</span>
-                <span className="text-xs text-semantic-text-primary/60">
-                  was <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
-                </span>
-              </div>
-            </>
+            <div className="flex flex-wrap items-baseline gap-3">
+              <span className="text-xl font-semibold text-rose-600 md:text-2xl">
+                -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
+              </span>
+              <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-5xl">£{price.toFixed(2)}</span>
+              <span className="text-sm font-semibold text-semantic-text-primary/70">
+                was <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
+              </span>
+            </div>
           ) : (
-            <span className="text-2xl font-bold text-semantic-text-primary">£{price.toFixed(2)}</span>
+            <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-5xl">£{price.toFixed(2)}</span>
           )}
+        </div>
 
+        {/* Badges row - below price */}
+        <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
           {/* Stock indicator - creates urgency */}
           <div className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-blush/20 px-3 py-1">
             <span className="h-2 w-2 rounded-full bg-semantic-legacy-brand-cocoa animate-pulse" aria-hidden="true" />
@@ -241,6 +243,14 @@ export const PriceBlock = ({
           >
             {isAdding ? 'Processing...' : 'Buy Now'}
           </button>
+        </div>
+
+        {/* Divider line */}
+        <div className="my-5 border-t border-semantic-legacy-brand-blush/30" />
+
+        {/* Full product description below CTAs */}
+        <div className="text-sm text-semantic-text-primary/80">
+          <p>{productDesc}</p>
         </div>
       </div>
     </div>
