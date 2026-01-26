@@ -1,6 +1,7 @@
 import { cdnUrl } from '@/utils/cdn'
 import { memo, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const toCdn = (src: string) => encodeURI(cdnUrl(src))
 
@@ -36,6 +37,8 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
     canScrollLeft: false,
     canScrollRight: false,
   }))
+  const [zoomModalOpen, setZoomModalOpen] = useState(false)
+  const [zoomImageIndex, setZoomImageIndex] = useState(activeImage)
 
   useEffect(() => {
     const el = thumbnailsRef.current
@@ -75,6 +78,41 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
     el.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' })
   }
 
+  const openZoomModal = (index: number) => {
+    setZoomImageIndex(index)
+    setZoomModalOpen(true)
+    document.body.style.overflow = 'hidden'
+  }
+
+  const closeZoomModal = () => {
+    setZoomModalOpen(false)
+    document.body.style.overflow = ''
+  }
+
+  const navigateZoomImage = (direction: 'prev' | 'next') => {
+    if (direction === 'prev') {
+      setZoomImageIndex((i) => i > 0 ? i - 1 : gallery.length - 1)
+    } else {
+      setZoomImageIndex((i) => i < gallery.length - 1 ? i + 1 : 0)
+    }
+  }
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && zoomModalOpen) {
+        closeZoomModal()
+      }
+      if (e.key === 'ArrowLeft' && zoomModalOpen) {
+        navigateZoomImage('prev')
+      }
+      if (e.key === 'ArrowRight' && zoomModalOpen) {
+        navigateZoomImage('next')
+      }
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [zoomModalOpen, gallery.length])
+
   const titleBase = productTitle?.trim() ? productTitle.trim() : 'Product'
   const heroLabel = `${titleBase} — product photo ${activeImage + 1}`
   const videoLabel = `${titleBase} — product video`
@@ -104,6 +142,12 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
                 loading="lazy"
               />
             ) : (
+              <button
+                type="button"
+                onClick={() => openZoomModal(activeImage)}
+                aria-label="View full size"
+                className="relative w-full h-full bg-transparent border-0 p-0 cursor-zoom-in"
+              >
               (() => {
                 const sources = buildSources(gallery[activeImage])
                 const img = (
@@ -128,6 +172,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
                 )
               })()
             )}
+              </button>
 	          </div>
 	          <div className="relative mt-4 w-full">
 	            <div
@@ -144,7 +189,7 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
 	                      key={src}
 	                      type="button"
 	                      onClick={() => onSelect(idx)}
-	                      className={`h-14 w-14 shrink-0 overflow-hidden rounded-2xl border snap-start ${idx === activeImage ? 'border-semantic-legacy-brand-cocoa' : 'border-semantic-legacy-brand-blush/60'}`}
+	                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-2xl border snap-start md:h-14 md:w-14 ${idx === activeImage ? 'border-semantic-legacy-brand-cocoa ring-2 ring-semantic-accent-cta/30' : 'border-semantic-legacy-brand-blush/60'}`}
 	                      aria-label={`Show media ${idx + 1}`}
 	                    >
 	                      {isVideo ? (
@@ -219,9 +264,115 @@ const HeroMedia = memo(({ gallery, activeImage, onSelect, productTitle, showLaun
 	                ) : null}
 	              </>
 	            ) : null}
+
+	          {/* Pagination dots */}
+	          <div className="flex items-center justify-center gap-2 pt-2">
+            {gallery.map((_, idx) => (
+              <button
+                key={`dot-${idx}`}
+                type="button"
+                onClick={() => onSelect(idx)}
+                aria-label={`Go to image ${idx + 1}`}
+                className={`h-2 rounded-full transition-all duration-200 ${
+                  idx === activeImage
+                    ? 'w-8 bg-semantic-accent-cta'
+                    : 'w-2 bg-semantic-legacy-brand-blush/60 hover:bg-semantic-legacy-brand-blush/80'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Image counter */}
+          <div className="text-center mt-1">
+            <span className="text-xs font-semibold text-semantic-text-primary/60">
+              {activeImage + 1}/{gallery.length}
+            </span>
+          </div>
 	          </div>
 	        </div>
 	    </section>
+
+    {/* Zoom Modal */}
+    {zoomModalOpen && (
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
+        onClick={closeZoomModal}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image viewer"
+      >
+        <button
+          type="button"
+          onClick={closeZoomModal}
+          className="absolute top-4 right-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 transition"
+          aria-label="Close image viewer"
+        >
+          <X className="h-6 w-6" />
+        </button>
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation()
+            navigateZoomImage('prev')
+          }}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 transition"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation()
+            navigateZoomImage('next')
+          }}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 transition"
+          aria-label="Next image"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
+
+        <div className="relative h-[90vh] w-[90vw] max-w-4xl" onClick={(e) => e.stopPropagation()}>
+          {gallery[zoomImageIndex]?.startsWith('video://') ? (
+            <iframe
+              src={gallery[zoomImageIndex].replace('video://', '')}
+              title={`${productTitle} video`}
+              className="w-full h-full rounded-2xl"
+              allowFullScreen
+            />
+          ) : (
+            (() => {
+              const sources = buildSources(gallery[zoomImageIndex])
+              const img = (
+                <img
+                  src={sources?.fallback ?? toCdn(gallery[zoomImageIndex])}
+                  alt={`${productTitle} — image ${zoomImageIndex + 1} of ${gallery.length}`}
+                  className="w-full h-full object-contain"
+                  loading="eager"
+                />
+              )
+              if (!sources) return img
+              return (
+                <picture>
+                  <source type="image/avif" srcSet={sources.avif} sizes="(max-width: 768px) 100vw, 80vw" />
+                  <source type="image/webp" srcSet={sources.webp} sizes="(max-width: 768px) 100vw, 80vw" />
+                  {img}
+                </picture>
+              )
+            })()
+          )}
+        </div>
+
+        {/* Image counter in modal */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+          <span className="text-sm font-semibold text-white/80">
+            {zoomImageIndex + 1} / {gallery.length}
+          </span>
+        </div>
+      </div>
+    )}
 	  )
 })
 
