@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { FREE_SHIPPING_THRESHOLD_LABEL } from '@/config/constants'
 
+// Trust signals only (scrolling marquee below hero)
 const items = [
   { label: '30 day money back guarantee' },
   { label: `Free shipping ${FREE_SHIPPING_THRESHOLD_LABEL}` },
-  { label: 'Buy 2, save 10% • Shop now', href: '/product/lumelle-shower-cap' },
+  { label: '1000+ 5-star reviews' },
+  { label: 'Satin-lined & waterproof' },
 ]
 
 export const TrustBar = () => {
@@ -44,7 +46,7 @@ export const TrustBar = () => {
       <div className="relative">
         <div
           ref={trackRef}
-          className="flex min-w-max items-center gap-6 px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] md:text-xs"
+          className="flex min-w-max items-center gap-12 px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] md:text-xs"
           style={
             duration === 0
               ? undefined
@@ -58,7 +60,7 @@ export const TrustBar = () => {
                 }
           }
         >
-          {[...items, ...items].map((item, idx) => (
+          {[...items, ...items, ...items].map((item, idx) => (
             <span key={`${item.label}-${idx}`} className="inline-flex items-center gap-2 whitespace-nowrap">
               {item.href ? (
                 <RouterLink to={item.href} className="underline decoration-semantic-text-primary/50 underline-offset-4 hover:text-semantic-text-primary/80">

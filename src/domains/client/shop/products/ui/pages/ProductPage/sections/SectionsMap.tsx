@@ -5,7 +5,6 @@ import { FeatureCallouts, DetailsAccordion, HeroProofStrip, ReviewsAutoCarousel,
 import { HeroMedia } from './HeroMedia'
 import { PriceBlock } from './PriceBlock'
 import { HowToSection } from './HowToSection'
-import { CareSection } from './CareSection'
 
 export type SectionProps = {
   productHandle: string
@@ -66,8 +65,8 @@ export function renderSections(props: SectionProps): ReactNode {
 
   return (
     <>
-      {/* Mobile section nav - positioned over hero */}
-      <nav aria-label="Page sections" className="md:hidden sticky top-[132px] z-20 bg-white/95 backdrop-blur border-b border-semantic-legacy-brand-blush/40">
+      {/* Mobile section nav - anchored in document flow */}
+      <nav aria-label="Page sections" className="md:hidden bg-white border-b border-semantic-legacy-brand-blush/40">
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex items-center gap-2 overflow-x-auto py-2">
             {mobileNavItems.map((item) => (
@@ -111,13 +110,8 @@ export function renderSections(props: SectionProps): ReactNode {
         />
       </div>
 
-      <div id="pdp-care" className="mx-auto mt-8 grid max-w-6xl gap-4 px-4 md:grid-cols-2 md:px-6">
-        <div id="pdp-sign">
-          <HowToSection steps={props.how} />
-        </div>
-        <div id="pdp-care-section">
-          <CareSection items={props.care} label={props.careLabel} />
-        </div>
+      <div id="pdp-care" className="mx-auto mt-8 max-w-6xl px-4 md:px-6">
+        <HowToSection steps={props.how} />
       </div>
 
       <div id="pdp-proof">

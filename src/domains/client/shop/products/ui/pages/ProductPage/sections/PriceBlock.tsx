@@ -152,6 +152,13 @@ export const PriceBlock = ({
           )}
         </div>
         <div id="pdp-hero-badge" className="h-0 scroll-mt-24" />
+        {/* Stock indicator - creates urgency */}
+        <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-blush/20 px-3 py-1">
+          <span className="h-2 w-2 rounded-full bg-semantic-legacy-brand-cocoa animate-pulse" aria-hidden="true" />
+          <span className="text-sm font-semibold text-semantic-text-primary">
+            Selling fast
+          </span>
+        </div>
         {badge && badge.toLowerCase() !== 'buy 2, save 10%' && (
           <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1 text-sm font-semibold uppercase tracking-[0.3em] text-semantic-text-primary shadow-soft">
             {badge}
@@ -162,43 +169,53 @@ export const PriceBlock = ({
           <div className="text-semantic-text-primary/80">Dispatch target: 48h · Free 30-day returns</div>
         </div>
         <div className="mt-3 space-y-1">
-          <div className="relative z-10">
-            <label htmlFor="pdp-quantity" className="sr-only">
-              Quantity
-            </label>
-            <select
-              id="pdp-quantity"
-              name="quantity"
-              value={quantity}
-              onChange={(e) => {
-                const next = Number(e.target.value)
-                if (Number.isFinite(next) && next >= 1) setQuantity(next)
-              }}
-              className="flex w-full appearance-none items-center justify-between rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-4 py-3 pr-12 text-sm font-semibold text-semantic-text-primary shadow-sm transition hover:bg-brand-porcelain/60 focus:outline-none focus:ring-2 focus:ring-semantic-legacy-brand-cocoa/30 relative z-50"
-              style={{ position: 'relative', zIndex: 50 }}
+          <label htmlFor="pdp-quantity" className="sr-only">
+            Quantity
+          </label>
+          <div className="flex items-center justify-between rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white px-2 py-2 shadow-sm">
+            {/* Decrease button */}
+            <button
+              type="button"
+              id="pdp-quantity-decrease"
+              onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+              disabled={quantity <= 1}
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-semantic-legacy-brand-blush/30 text-semantic-text-primary disabled:opacity-30 disabled:cursor-not-allowed transition active:scale-95"
+              aria-label="Decrease quantity"
             >
-              {Array.from({ length: MAX_CART_ITEM_QTY }, (_, i) => i + 1).map((qty) => (
-                <option key={qty} value={qty}>
-                  {`Quantity: ${qty} — £${(price * qty).toFixed(2)}`}
-                </option>
-              ))}
-            </select>
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-semantic-text-primary/70 z-50"
-              style={{ position: 'relative', zIndex: 50 }}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14" />
+              </svg>
+            </button>
+
+            {/* Quantity and total display */}
+            <div className="flex flex-col items-center">
+              <span className="text-lg font-bold text-semantic-text-primary">
+                {quantity}
+              </span>
+              <span className="text-[11px] font-semibold text-semantic-text-primary/60 uppercase tracking-wider">
+                £{(price * quantity).toFixed(2)}
+              </span>
+            </div>
+
+            {/* Increase button */}
+            <button
+              type="button"
+              id="pdp-quantity-increase"
+              onClick={() => quantity < MAX_CART_ITEM_QTY && setQuantity(quantity + 1)}
+              disabled={quantity >= MAX_CART_ITEM_QTY}
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-semantic-accent-cta text-semantic-text-primary disabled:opacity-30 disabled:cursor-not-allowed transition active:scale-95"
+              aria-label="Increase quantity"
             >
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
           </div>
+          {quantity >= MAX_CART_ITEM_QTY && (
+            <p className="mt-1 text-xs text-semantic-text-primary/60 text-center">
+              Maximum {MAX_CART_ITEM_QTY} per order
+            </p>
+          )}
         </div>
         <div className="mt-4 grid gap-3">
           <button

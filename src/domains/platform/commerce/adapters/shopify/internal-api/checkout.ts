@@ -12,20 +12,30 @@ const toFirstPartyHandoffUrl = (checkoutUrl: string) => {
   try {
     const u = new URL(checkoutUrl)
 
-    // In development, go directly to Shopify (no proxy locally)
-    // In production, use first-party proxy/handoff URLs
+    // Determine the base URL to use for checkout
+    // In dev with APP_URL set, use the tunnel URL
+    // In production, use the current origin
+    let baseUrl = window.location.origin
+
     const isDevelopment = import.meta.env.DEV
     if (isDevelopment) {
-      console.log('[Checkout] Dev mode: using Shopify domain directly', { url: checkoutUrl })
-      return checkoutUrl
+      // Try to get APP_URL from window.env for development tunnel
+      const appUrl = (window as any).APP_URL || import.meta.env.VITE_APP_URL || import.meta.env.APP_URL
+      if (appUrl) {
+        baseUrl = appUrl
+        console.log('[Checkout] Dev mode: using APP_URL tunnel', { appUrl })
+      } else {
+        console.log('[Checkout] Dev mode: using Shopify domain directly (no APP_URL set)', { url: checkoutUrl })
+        return checkoutUrl
+      }
     }
 
-    const transformed = `${window.location.origin}${u.pathname}${u.search}${u.hash}`
+    const transformed = `${baseUrl}${u.pathname}${u.search}${u.hash}`
     console.log('[Checkout URL Transform]', {
       original: checkoutUrl,
       transformed,
       hostname: u.hostname,
-      currentOrigin: window.location.origin,
+      baseUrl,
     })
     return transformed
   } catch {

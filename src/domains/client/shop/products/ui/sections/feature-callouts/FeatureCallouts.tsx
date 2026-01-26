@@ -173,7 +173,7 @@ export const FeatureCallouts = ({
               </div>
               {sectionId ? <div id={`${sectionId}-pills`} className="h-0 scroll-mt-24" /> : null}
               {pillList.length ? (
-                <div className="mt-6 flex flex-wrap gap-2">
+                <div className="mt-6 flex flex-wrap gap-2 md:static sticky bottom-4 z-10 md:bg-transparent bg-white/95 md:backdrop-blur-none backdrop-blur-sm md:shadow-none md:rounded-none rounded-2xl md:p-0 p-3 md:border-none border border-semantic-accent-cta/30 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                   {pillList.map((pill) => (
                     <span
                       key={pill}
