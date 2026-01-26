@@ -1,8 +1,9 @@
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { heroContent, heroSpotlightSlides, metricBadges } from '@/content/landing'
 import { useCountUpAnimation } from '@/domains/shared/hooks/useCountUpAnimation'
 import { AnimatedSection, itemVariants } from '@/ui/components/AnimatedSection'
+import { ChevronRight } from 'lucide-react'
 
 type HeroSectionProps = {
   onPrimaryAction: () => void
@@ -21,6 +22,7 @@ export const HeroSection = ({
 
   // Swipe gesture state for spotlight card
   const touchStartX = useRef<number>(0)
+  const [isDragging, setIsDragging] = useState(false)
 
   // Parse metric values for count-up animation
   // Extracts numeric value from strings like "20%" or "48 hrs"
@@ -80,14 +82,14 @@ export const HeroSection = ({
             <button
               type="button"
               onClick={onPrimaryAction}
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-8 py-3 text-sm font-semibold text-semantic-text-primary shadow-soft transition-transform duration-100 md:hover:-translate-y-0.5 md:hover:bg-semantic-accent-cta/90 active:scale-95"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-full bg-semantic-accent-cta px-8 py-3 text-sm font-semibold text-semantic-text-primary shadow-soft transition-all duration-150 md:hover:-translate-y-0.5 md:hover:bg-semantic-accent-cta/90 active:scale-95 active:bg-semantic-accent-cta/80"
             >
               {heroContent.primaryCta}
             </button>
             <button
               type="button"
               onClick={onSecondaryAction}
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-3 text-sm font-semibold text-white/80 transition-transform duration-100 md:hover:border-white md:hover:text-white active:scale-95"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-3 text-sm font-semibold text-white/80 transition-all duration-150 md:hover:border-white md:hover:text-white active:scale-95 active:border-white/80 active:bg-white/20"
             >
               {heroContent.secondaryCta}
             </button>
@@ -105,7 +107,7 @@ export const HeroSection = ({
                 <div
                   key={metric.label}
                   ref={ref}
-                  className="rounded-3xl border border-white/40 bg-white/85 px-4 py-5 text-center shadow-soft backdrop-blur transition-all duration-300 md:hover:scale-105 md:hover:shadow-lg"
+                  className="rounded-3xl border border-white/40 bg-white/85 px-4 py-5 text-center shadow-soft backdrop-blur transition-all duration-150 md:hover:scale-105 md:hover:shadow-lg active:scale-95 active:bg-white/95"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">
                     {metric.label}
@@ -122,17 +124,25 @@ export const HeroSection = ({
           </motion.div>
           <motion.div
             variants={itemVariants}
-            className="w-full cursor-pointer rounded-[2.5rem] border border-white/40 bg-white/90 p-6 shadow-soft backdrop-blur md:max-w-3xl"
+            className="relative w-full cursor-pointer rounded-[2.5rem] border border-white/40 bg-white/90 p-6 shadow-soft backdrop-blur transition-all duration-200 active:scale-[0.98] md:max-w-3xl"
             onTouchStart={(e) => {
               touchStartX.current = e.touches[0].clientX
+              setIsDragging(true)
             }}
             onTouchEnd={(e) => {
               const diff = e.changedTouches[0].clientX - touchStartX.current
+              setIsDragging(false)
               if (Math.abs(diff) > 50) {
                 onSecondaryAction()
               }
             }}
+            onClick={onSecondaryAction}
           >
+            {/* Mobile swipe hint indicator */}
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-semantic-accent-cta/10 text-semantic-accent-cta md:hidden">
+              <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
+            </div>
+
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
               {currentSlide.imageSrc ? (
                 <div className="relative h-32 w-full overflow-hidden rounded-2xl border border-semantic-accent-cta/40 bg-semantic-legacy-brand-blush/30 md:h-40 md:w-56">
@@ -145,7 +155,7 @@ export const HeroSection = ({
                   <div className="absolute inset-0 bg-semantic-legacy-brand-cocoa/15 backdrop-blur-[1px]" />
                 </div>
               ) : null}
-              <div className="flex-1 space-y-2">
+              <div className="flex-1 space-y-2 pr-8 md:pr-0">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-semantic-text-primary/60">
                   {currentSlide.label}
                 </p>
