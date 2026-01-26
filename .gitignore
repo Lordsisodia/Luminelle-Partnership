@@ -36,3 +36,4 @@ components-library/
 .worktrees/
 # Transpiled API files from vite plugin
 **/*.ts.js
+/blackbox5/
