@@ -85,7 +85,10 @@ function CtaPanelButton({ to, label, onNavigate }: { to: string; label: string; 
 
 function DisabledRow({ label }: { label: string }) {
   return (
-    <div className="flex w-full items-center rounded-xl px-3 py-2 text-sm font-semibold text-semantic-text-primary/50">
+    <div
+      className="flex w-full items-center rounded-xl border border-dashed border-semantic-text-primary/20 bg-semantic-text-primary/5 px-3 py-2 text-sm font-semibold text-semantic-text-primary/50"
+      title="This feature is coming soon"
+    >
       {label}
     </div>
   )
@@ -245,7 +248,7 @@ export function AdminSideNav({
         <div className="flex min-w-0 flex-1 flex-col gap-3 overflow-visible p-2 w-[clamp(19.5rem,30vw,26rem)] max-w-full">
           <div className="min-h-0 flex-1 overflow-y-auto pr-1">
             {activeSection.id === 'catalog' ? (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <NavLink
                   to="/admin/products"
                   onClick={onNavigate}
@@ -275,7 +278,7 @@ export function AdminSideNav({
                 </div>
               </div>
             ) : activeSection.id === 'pages' ? (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <PrimaryPanelLink
                   to="/admin/pages"
                   label="All Pages"
@@ -292,7 +295,7 @@ export function AdminSideNav({
                 </div>
               </div>
             ) : activeSection.id === 'blogs' ? (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <PrimaryPanelLink
                   to="/admin/blogs"
                   label="All Blog Posts"
@@ -308,7 +311,7 @@ export function AdminSideNav({
                 </div>
               </div>
             ) : activeSection.id === 'media' ? (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <PrimaryPanelLink
                   to="/admin/media"
                   label="All Media"
@@ -324,7 +327,7 @@ export function AdminSideNav({
                 </div>
               </div>
             ) : activeSection.id === 'components' ? (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <PrimaryPanelLink
                   to="/admin/components"
                   label="All Components"
@@ -338,7 +341,7 @@ export function AdminSideNav({
                 </div>
               </div>
             ) : activeSection.id === 'analytics' ? (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <PrimaryPanelLink
                   to="/admin/analytics"
                   label="Analytics Dashboard"
@@ -352,7 +355,7 @@ export function AdminSideNav({
                 <DisabledRow label="Page Analytics (coming soon)" />
               </div>
             ) : activeSection.id === 'settings' ? (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <PrimaryPanelLink
                   to="/admin/settings"
                   label="Settings"
@@ -366,7 +369,7 @@ export function AdminSideNav({
                 </div>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="{navSizing.sectionSpacing}">
                 <PrimaryPanelLink to={activeSection.primaryTo} label={activeSection.label} onNavigate={onNavigate} />
               </div>
             )}

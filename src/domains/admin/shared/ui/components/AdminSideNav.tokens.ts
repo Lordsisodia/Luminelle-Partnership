@@ -12,4 +12,7 @@ export const navSizing = {
   utilityPillText: 'text-[11px] font-semibold uppercase tracking-[0.08em]',
   transition: 'transition-all duration-200 ease-out',
   badgeOffset: '-right-1 -top-1',
+  // Spacing tokens
+  sectionSpacing: 'space-y-3',
+  itemSpacing: 'gap-2',
 }
