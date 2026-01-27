@@ -51,8 +51,37 @@ function getModeConfig(mode: NavMode): NavModeConfig {
   return MODE_CONFIG[mode]
 }
 
-function isInlineLabels(mode: NavMode, collapsed: boolean, activeSectionId: string): boolean {
-  return mode === 'drawer' || (activeSectionId === 'dashboard' && !collapsed)
+/**
+ * Helper to check if we're in drawer mode
+ */
+function isDrawerMode(mode: NavMode): boolean {
+  return mode === 'drawer'
+}
+
+/**
+ * Helper to check if we should show expanded panel
+ */
+function shouldShowExpandedPanel(collapsed: boolean, mode: NavMode): boolean {
+  return !collapsed || isDrawerMode(mode)
+}
+
+/**
+ * Determines if labels should be shown based on mode and section
+ * - Drawer mode: always use inline labels
+ * - Desktop dashboard: show popout labels when not collapsed
+ * - Other sections: no labels in desktop mode
+ */
+function shouldShowLabels(mode: NavMode, collapsed: boolean, sectionId: string): boolean {
+  if (mode === 'drawer') return true
+  if (sectionId === 'dashboard') return !collapsed
+  return false
+}
+
+/**
+ * Determines if inline labels should be used (vs popout)
+ */
+function useInlineLabels(mode: NavMode): boolean {
+  return mode === 'drawer'
 }
 
 // Panel section configuration
@@ -280,7 +309,14 @@ function CtaPanelButton({ to, label, onNavigate }: { to: string; label: string; 
 function DisabledRow({ label }: { label: string }) {
   return (
     <div
-      className="flex w-full items-center rounded-xl border border-dashed border-semantic-text-primary/20 bg-semantic-text-primary/5 px-3 py-2 text-sm font-semibold text-semantic-text-primary/50"
+      className={[
+        'flex w-full items-center rounded-xl px-3 py-2 text-sm font-semibold',
+        // Visual hierarchy for disabled state
+        'border border-dashed border-semantic-text-primary/20',
+        'bg-semantic-text-primary/5 text-semantic-text-primary/50',
+        // Subtle cursor indication
+        'cursor-not-allowed',
+      ].join(' ')}
       title="This feature is coming soon"
     >
       {label}
@@ -372,9 +408,9 @@ export function AdminSideNav({
   const activeSection = adminNavSections.find((section) => section.id === activeId) ?? adminNavSections[0]
   const modeConfig = getModeConfig(mode)
 
-  // Show labels on dashboard or in drawer mode
-  const showLabels = activeSection.id === 'dashboard' && !(mode === 'desktop' && collapsed)
-  const useInlineLabels = modeConfig.usesInlineLabels
+  // Label visibility: use centralized helper
+  const showLabels = shouldShowLabels(mode, collapsed, activeSection.id)
+  const inlineLabels = useInlineLabels(mode)
 
   const productItems = useAdminNavList('products')
   const pageItems = useMemo(() => PAGES.map((p) => ({ label: p.title, to: `/admin/pages/${p.slug}` })), [])
@@ -388,7 +424,7 @@ export function AdminSideNav({
       icon={ProfilePersonIcon}
       onNavigate={onNavigate}
       showLabel={showLabels}
-      inlineLabel={useInlineLabels}
+      inlineLabel={inlineLabels}
     />
   )
   const settingsRailItem = (
@@ -398,7 +434,7 @@ export function AdminSideNav({
       icon={Settings}
       onNavigate={onNavigate}
       showLabel={showLabels}
-      inlineLabel={useInlineLabels}
+      inlineLabel={inlineLabels}
     />
   )
   const notificationsRailItem = (
@@ -408,7 +444,7 @@ export function AdminSideNav({
       icon={Bell}
       onNavigate={onNavigate}
       showLabel={showLabels}
-      inlineLabel={useInlineLabels}
+      inlineLabel={inlineLabels}
     />
   )
   const railSeparator = (
@@ -432,13 +468,13 @@ export function AdminSideNav({
           onNavigate={onNavigate}
           badge={badge}
           showLabel={showLabels}
-          inlineLabel={useInlineLabels}
+          inlineLabel={inlineLabels}
         />
       )
     })
 
   // Rail content based on mode
-  const railContent = mode === 'drawer' ? (
+  const railContent = isDrawerMode(mode) ? (
     <>
       {sectionRailItems}
       <div
@@ -462,7 +498,7 @@ export function AdminSideNav({
   )
 
   // Desktop collapsed: only show the icon rail (no inner divider / "empty" right panel).
-  if (mode === 'desktop' && collapsed) {
+  if (!isDrawerMode(mode) && collapsed) {
     return (
       <div className="flex min-h-0 flex-1 overflow-visible rounded-2xl border border-semantic-legacy-brand-blush/60 bg-brand-porcelain">
         <nav
@@ -502,7 +538,7 @@ export function AdminSideNav({
       </nav>
 
       {/* Expanded panel */}
-      {collapsed && mode !== 'drawer' ? null : (
+      {shouldShowExpandedPanel(collapsed, mode) ? (
         <div className="flex min-w-0 flex-1 flex-col gap-3 overflow-visible p-2 w-[clamp(19.5rem,30vw,26rem)] max-w-full">
           <div className="min-h-0 flex-1 overflow-y-auto pr-1">
             <PanelSection
@@ -511,7 +547,7 @@ export function AdminSideNav({
             />
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   )
 }

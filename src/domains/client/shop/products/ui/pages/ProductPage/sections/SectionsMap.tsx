@@ -22,7 +22,12 @@ const MobileStickyCta = ({ price, onAdd, onBuy, isAdding, justAdded }: { price: 
       // Show when hero section has scrolled mostly out of view
       const shouldShow = heroBottom < 100 && !isDismissed
 
-      setIsVisible(shouldShow)
+      // Hide when near the footer (bottom 300px of the page)
+      const scrollPosition = window.scrollY + window.innerHeight
+      const pageHeight = document.documentElement.scrollHeight
+      const nearFooter = scrollPosition > pageHeight - 300
+
+      setIsVisible(shouldShow && !nearFooter)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
