@@ -225,6 +225,7 @@ export function trackMetaEvent(
 export function trackViewContent(props: {
   content_name: string
   content_ids: string[]
+  content_type?: 'product' | 'product_group'
   value: number
   currency: string
 }): void {
@@ -237,6 +238,7 @@ export function trackViewContent(props: {
 export function trackAddToCart(props: {
   content_name: string
   content_ids: string[]
+  content_type?: 'product' | 'product_group'
   value: number
   currency: string
 }): void {

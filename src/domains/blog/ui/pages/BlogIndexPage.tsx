@@ -1,5 +1,4 @@
 import type { NavItem } from '@/layouts/MarketingLayout'
-import { blogPosts } from '@/content/blog'
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { Link } from 'react-router-dom'
 import { useMemo, useState } from 'react'
@@ -7,6 +6,7 @@ import { cdnUrl } from '@/utils/cdn'
 import { BlogLayout } from '@blog/ui/layouts'
 import { Seo } from '@/components/Seo'
 import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
+import { useBlogPosts } from '@/domains/client/blog/application'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Blog' },
@@ -17,37 +17,34 @@ const tags = ['Frizz-free', 'Protective styles', 'Science', 'Creator tips', 'Tra
 
 export const BlogIndexPage = () => {
   const [tagFilter, setTagFilter] = useState<string | null>(null)
-  const [includeDrafts, setIncludeDrafts] = useState<boolean>(false)
 
-  const visiblePosts = useMemo(() => {
-    if (import.meta.env.DEV && includeDrafts) return blogPosts
-    return blogPosts.filter((p) => p.status !== 'draft')
-  }, [includeDrafts])
+  // Fetch published posts from Supabase
+  const { data: postsData, isLoading, error } = useBlogPosts({ limit: 100, featured: false })
+  const { data: featuredData } = useBlogPosts({ limit: 2, featured: true })
 
-  const featured = useMemo(
-    () =>
-      visiblePosts
-        .filter((p) => p.featured)
-        .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
-        .slice(0, 2),
-    [visiblePosts]
-  )
+  const allPosts = postsData?.posts || []
+  const featuredPosts = featuredData?.posts || []
 
-  const rest = useMemo(() => {
-    const nonFeatured = visiblePosts.filter((p) => !p.featured)
-    const filtered = nonFeatured.filter((p) => !tagFilter || p.tag === tagFilter || p.pillar === tagFilter)
-    return filtered.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
-  }, [visiblePosts, tagFilter])
+  // Filter by tag
+  const filteredPosts = useMemo(() => {
+    if (!tagFilter) return allPosts
+    return allPosts.filter((p) => {
+      const categoryTag = p.category?.name
+      const pillarTag = p.pillar_cluster
+      return categoryTag === tagFilter || pillarTag === tagFilter
+    })
+  }, [allPosts, tagFilter])
 
+  // Get unique tags from posts
   const tagOptions = useMemo(
-    () => Array.from(new Set(visiblePosts.map((p) => p.tag))).sort(),
-    [visiblePosts]
+    () => Array.from(new Set(allPosts.map((p) => p.category?.name).filter(Boolean))).sort(),
+    [allPosts]
   )
 
   const title = 'Journal'
   const description =
     'Guides, routines, and creator tips to keep silk presses, curls, and braids frizz-free with Lumelle.'
-  const heroImage = cdnUrl(featured[0]?.cover || '/uploads/luminele/product-feature-01.webp')
+  const heroImage = cdnUrl(featuredPosts[0]?.cover_image_url || '/uploads/luminele/product-feature-01.webp')
   const url = toPublicUrl('/blog')
 
   // Simple Blog schema
@@ -65,6 +62,26 @@ export const BlogIndexPage = () => {
       { '@type': 'ListItem', position: 1, name: 'Home', item: toPublicUrl('/') },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: url },
     ],
+  }
+
+  if (isLoading) {
+    return (
+      <BlogLayout navItems={navItems} subtitle="Journal">
+        <div className="flex min-h-[400px] items-center justify-center">
+          <div className="text-semantic-text-primary/60">Loading posts...</div>
+        </div>
+      </BlogLayout>
+    )
+  }
+
+  if (error) {
+    return (
+      <BlogLayout navItems={navItems} subtitle="Journal">
+        <div className="flex min-h-[400px] items-center justify-center">
+          <div className="text-red-500">Error loading posts. Please try again.</div>
+        </div>
+      </BlogLayout>
+    )
   }
 
   return (
@@ -113,7 +130,7 @@ export const BlogIndexPage = () => {
               alignment="left"
             />
             <div className="mt-6 grid gap-6 md:grid-cols-2">
-              {featured.map((post) => (
+              {featuredPosts.map((post: any) => (
                 <Link
                   key={post.slug}
                   to={`/blog/${post.slug}`}
@@ -121,7 +138,7 @@ export const BlogIndexPage = () => {
                 >
                   <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
                     <img
-                      src={cdnUrl(post.cover)}
+                      src={cdnUrl(post.cover_image_url)}
                       alt={post.title}
                       className="h-full w-full object-cover"
                       width={800}
@@ -132,13 +149,13 @@ export const BlogIndexPage = () => {
                   </div>
                   <div className="space-y-2 p-5">
                     <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{post.tag}</span>
-                      <span>{post.readTime}</span>
+                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{post.category?.name || 'Article'}</span>
+                      <span>{post.read_time_minutes} min</span>
                     </div>
                     <h3 className="font-heading text-xl text-semantic-text-primary">{post.title}</h3>
-                    <p className="text-sm text-semantic-text-primary/75">{post.teaser}</p>
+                    <p className="text-sm text-semantic-text-primary/75">{post.excerpt}</p>
                     <div className="text-xs text-semantic-text-primary/60">
-                      {post.author} • {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      {post.author?.display_name || 'Lumelle Studio'} • {post.published_at ? new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
                     </div>
                   </div>
                 </Link>
@@ -152,19 +169,6 @@ export const BlogIndexPage = () => {
               alignment="left"
               className="mt-8 pt-2 md:mt-12"
             />
-            {import.meta.env.DEV ? (
-              <div className="mt-2 text-xs text-semantic-text-primary/60">
-                <label className="inline-flex items-center gap-2 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={includeDrafts}
-                    onChange={(e) => setIncludeDrafts(e.target.checked)}
-                    className="h-4 w-4 accent-semantic-legacy-brand-cocoa"
-                  />
-                  Show drafts (dev only)
-                </label>
-              </div>
-            ) : null}
             <div className="mt-4 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/70">
               <button
                 className={`rounded-full px-3 py-1 transition ${tagFilter === null ? 'bg-semantic-legacy-brand-cocoa text-white' : 'bg-white text-semantic-text-primary border border-semantic-legacy-brand-blush/60'
@@ -187,7 +191,7 @@ export const BlogIndexPage = () => {
               ))}
             </div>
             <div className="mt-6 grid gap-6 md:grid-cols-3">
-              {rest.map((post) => (
+              {filteredPosts.map((post: any) => (
                 <Link
                   key={post.slug}
                   to={`/blog/${post.slug}`}
@@ -195,7 +199,7 @@ export const BlogIndexPage = () => {
                 >
                   <div className="aspect-[3/2] w-full overflow-hidden bg-semantic-legacy-brand-blush/20">
                     <img
-                      src={cdnUrl(post.cover)}
+                      src={cdnUrl(post.cover_image_url)}
                       alt={post.title}
                       className="h-full w-full object-cover"
                       width={600}
@@ -206,13 +210,13 @@ export const BlogIndexPage = () => {
                   </div>
                   <div className="space-y-2 p-4">
                     <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/60">
-                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{post.tag}</span>
-                      <span>{post.readTime}</span>
+                      <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-semantic-text-primary/80">{post.category?.name || 'Article'}</span>
+                      <span>{post.read_time_minutes} min</span>
                     </div>
                     <h3 className="font-heading text-lg text-semantic-text-primary">{post.title}</h3>
-                    <p className="text-sm text-semantic-text-primary/75 line-clamp-2">{post.teaser}</p>
+                    <p className="text-sm text-semantic-text-primary/75 line-clamp-2">{post.excerpt}</p>
                     <div className="text-xs text-semantic-text-primary/60">
-                      {post.author} • {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
+                      {post.author?.display_name || 'Lumelle Studio'} • {post.published_at ? new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : ''}
                     </div>
                   </div>
                 </Link>
