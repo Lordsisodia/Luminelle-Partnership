@@ -1,0 +1,152 @@
+# LiteLLM Configuration for Lumelle Agent Hub
+# This configuration routes requests to appropriate models for different agents
+
+model_list:
+  # =====================================================
+  # ORCHESTRATOR POOL (GLM Plan 1)
+  # Primary usage: Task decomposition, agent coordination
+  # =====================================================
+  - model_name: orchestrator
+    litellm_params:
+      model: openai/glm-4
+      api_key: YOUR_GLM_PLAN_1_KEY_HERE
+      api_base: "https://api.z.ai/v1"
+    tags:
+      tier: smart
+      purpose: orchestration
+
+  # =====================================================
+  # WORKER POOL (GLM Plan 2)
+  # Shared across coding, testing, and review agents
+  # =====================================================
+  - model_name: worker
+    litellm_params:
+      model: openai/glm-4
+      api_key: YOUR_GLM_PLAN_2_KEY_1_HERE
+      api_base: "https://api.z.ai/v1"
+    tags:
+      tier: standard
+      purpose: execution
+
+  # Additional worker key from Plan 2 (if available)
+  # - model_name: worker
+  #   litellm_params:
+  #     model: openai/glm-4
+  #     api_key: YOUR_GLM_PLAN_2_KEY_2_HERE
+  #     api_base: "https://api.z.ai/v1"
+  #   tags:
+  #     tier: standard
+  #     purpose: execution
+
+  # =====================================================
+  # RESEARCHER POOL (Gemini)
+  # For research, analysis, and multimodal tasks
+  # =====================================================
+  - model_name: researcher
+    litellm_params:
+      model: openai/gemini-2.0-flash-exp
+      api_key: YOUR_GEMINI_API_KEY_HERE
+    tags:
+      tier: specialized
+      purpose: research
+
+  # Alternative Gemini model for complex reasoning
+  - model_name: researcher-deep
+    litellm_params:
+      model: openai/gemini-pro
+      api_key: YOUR_GEMINI_API_KEY_HERE
+    tags:
+      tier: specialized
+      purpose: deep-research
+
+  # =====================================================
+  # FALLBACK POOL (Optional)
+  # Add other providers as backup or for specific tasks
+  # =====================================================
+  # Example: OpenAI GPT-4 for specific capabilities
+  # - model_name: fallback
+  #   litellm_params:
+  #     model: openai/gpt-4
+  #     api_key: YOUR_OPENAI_API_KEY_HERE
+  #   tags:
+  #     tier: backup
+  #     purpose: fallback
+
+router_settings:
+  # Usage-based routing ensures we utilize all keys efficiently
+  routing_strategy: "usage-based-routing"
+
+  # Enable pre-call checks to detect rate limits before making requests
+  enable_pre_call_checks: true
+
+  # Retry failed requests with different keys
+  num_retries: 3
+
+  # Cooldown period (seconds) when a key hits rate limits
+  cooldown_time: 60
+
+  # Set timeouts (in seconds)
+  request_timeout: 300
+  max_timeout: 600
+
+  # Fallback to alternative models if primary fails
+  fallbacks:
+    - orchestrator: ["worker", "fallback"]
+    - worker: ["orchestrator", "fallback"]
+    - researcher: ["researcher-deep", "worker"]
+
+litellm_settings:
+  # Drop parameters that models don't support
+  drop_params: true
+
+  # Set to true for detailed debugging
+  set_verbose: false
+
+  # Cache responses to reduce redundant API calls
+  cache: true
+  cache_type: "simple"
+
+  # Enable usage tracking to monitor costs
+  track_usage: true
+
+  # Security: Don't log sensitive data
+  hide_api_key_in_logs: true
+
+# =====================================================
+# Model-specific configurations
+# =====================================================
+model_group_alias:
+  # GLM models
+  glm-4: ["glm-4", "glm-4.7", "glm"]
+
+  # Gemini models
+  gemini-flash: ["gemini-2.0-flash-exp", "gemini-flash"]
+  gemini-pro: ["gemini-pro", "gemini-1.5-pro"]
+
+# =====================================================
+# Safety and reliability
+# =====================================================
+security:
+  # Validate inputs before sending to models
+  validate_inputs: true
+
+  # Max tokens to prevent runaway costs
+  max_tokens: 128000
+
+  # Budget limits (optional - set your monthly limits)
+  # budget_limit: 100.0  # USD per month
+
+# =====================================================
+# Monitoring (optional - for production)
+# =====================================================
+# monitoring:
+#   # Send metrics to these services
+#   services: ["prometheus", "datadog"]
+#
+#   # Alert on unusual patterns
+#   alerts:
+#     - type: rate_limit
+#       threshold: 10
+#       window: 60  # 10 rate limits in 60 seconds
+#     - type: error_rate
+#       threshold: 0.1  # 10% error rate

@@ -1,0 +1,814 @@
+/**
+ * Profile Settings View (Integrated)
+ *
+ * This is the main profile settings screen that integrates:
+ * - Existing SISO UI components and patterns
+ * - New profile services (Supabase backend)
+ * - Real profile data with CRUD operations
+ */
+
+"use client";
+
+import { useMemo, useState, useEffect } from "react";
+import { UserRound, Target, Globe, Linkedin, Instagram, Link2, Sparkles, Home, Eye, Users } from "lucide-react";
+import { SettingsDetailLayout } from "@/domains/admin/settings-siso/shared/components/SettingsDetailLayout";
+import { HighlightCard } from "@/components/ui/card-5-static";
+import { SettingsGroupCallout } from "@/domains/admin/settings-siso/shared/navigation/menu/SettingsGroupCallout";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { InfoButton } from "@/components/ui/info-button";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { SETTINGS_ROUTES } from "@/domains/admin/settings-siso/shared/navigation/routes";
+import { CustomDropdown } from "@/domains/admin/settings-siso/01-general/ui/components/CustomDropdown";
+import { ProfileIdentityCallout } from "../components/ProfileIdentityCallout";
+import { PartnershipDetailsCallout } from "../components/PartnershipDetailsCallout";
+import { ProfessionalDetailsCallout } from "../components/ProfessionalDetailsCallout";
+import { certificationOptions, languageOptions, timelineOptions } from "../components/profile-options";
+import { useProfileManagement, useAvatarUpload } from "../../application";
+import { deleteAvatar } from "../../infrastructure/avatarService";
+import { useUser } from "@clerk/clerk-react";
+import type { ProfileVisibility } from "../../domain";
+import { ProfileFormSchema } from "../../domain/schema";
+
+export function ProfileSettingsView() {
+  const { profile, isLoading, error, updateProfile, isUpdating } = useProfileManagement();
+  const { user } = useUser();
+
+  // Avatar upload
+  const { uploadAvatar, isUploading, uploadProgress, uploadError, clearError } = useAvatarUpload();
+
+  // Form state
+  const [displayName, setDisplayName] = useState("");
+  const [status, setStatus] = useState("");
+  const [bio, setBio] = useState("");
+  const [age, setAge] = useState("");
+
+  // Validation state
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+
+  // Professional details
+  const [professionalTitle, setProfessionalTitle] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [yearsOfExperience, setYearsOfExperience] = useState("");
+  const [companySize, setCompanySize] = useState("");
+  const [geographicAvailability, setGeographicAvailability] = useState("");
+
+  // Partnership details
+  const [sisoJoinMonth, setSisoJoinMonth] = useState("");
+  const [sisoJoinYear, setSisoJoinYear] = useState("");
+
+  // Skills & expertise
+  const [specializations, setSpecializations] = useState<string[]>([]);
+  const [sisoCertifications, setSisoCertifications] = useState("");
+  const [languages, setLanguages] = useState("");
+
+  // Social media
+  const [linkedInUrl, setLinkedInUrl] = useState("");
+  const [instagramUrl, setInstagramUrl] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
+  const [twitterUrl, setTwitterUrl] = useState("");
+  const [githubUrl, setGithubUrl] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+
+  // Revenue goals
+  const [revenueGoalAmount, setRevenueGoalAmount] = useState("");
+  const [revenueTimeline, setRevenueTimeline] = useState("");
+
+  // Privacy
+  const [profileVisibility, setProfileVisibility] = useState<ProfileVisibility>('private');
+
+  // UI state
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Initialize from profile data
+  useEffect(() => {
+    if (profile) {
+      setDisplayName(profile.display_name || '');
+      setBio(profile.bio || '');
+      setProfessionalTitle(profile.title || '');
+      setLinkedInUrl(profile.social_linkedin_url || '');
+      setInstagramUrl(profile.social_instagram_url || '');
+      setWebsiteUrl(profile.website || '');
+      setTwitterUrl(profile.social_twitter_url || '');
+      setGithubUrl(profile.social_github_url || '');
+      setYoutubeUrl(profile.social_youtube_url || '');
+      setSpecializations(profile.skills || []);
+      setProfileVisibility(profile.profile_visibility || 'private');
+    }
+  }, [profile]);
+
+  const bioCharactersLeft = useMemo(() => 200 - bio.length, [bio]);
+
+  // Avatar handlers
+  const handleAvatarChange = async (file: File) => {
+    clearError();
+    try {
+      await uploadAvatar(file);
+      // The hook already updates the profile with the new avatar URL
+    } catch (error) {
+      console.error('Avatar upload failed:', error);
+      // Error is already set in the hook
+    }
+  };
+
+  const handleAvatarRemove = async () => {
+    if (!profile?.avatar_path || !user?.id) return;
+
+    try {
+      // Delete from storage
+      await deleteAvatar(user.id, profile.avatar_path);
+      // Update profile to remove avatar
+      await updateProfile({ avatarUrl: null });
+    } catch (error) {
+      console.error('Avatar removal failed:', error);
+      throw error;
+    }
+  };
+
+  const handleSave = async () => {
+    setSaveStatus('saving');
+    setErrorMessage('');
+    setValidationErrors({});
+
+    try {
+      // Validate form data against Zod schema
+      const formData = {
+        displayName: displayName.trim() || profile?.display_name || 'User',
+        bio: bio.trim() || undefined,
+        title: professionalTitle.trim() || undefined,
+        website: websiteUrl.trim() || undefined,
+        skills: specializations,
+        socialTwitterUrl: twitterUrl.trim() || undefined,
+        socialLinkedinUrl: linkedInUrl.trim() || undefined,
+        socialGithubUrl: githubUrl.trim() || undefined,
+        socialYoutubeUrl: youtubeUrl.trim() || undefined,
+        socialInstagramUrl: instagramUrl.trim() || undefined,
+        profileVisibility,
+      };
+
+      const result = ProfileFormSchema.safeParse(formData);
+
+      if (!result.success) {
+        // Format Zod errors into a map
+        const errors: Record<string, string> = {};
+        result.error.issues.forEach((issue) => {
+          const path = issue.path.join('.');
+          errors[path] = issue.message;
+        });
+        setValidationErrors(errors);
+        setSaveStatus('error');
+        setErrorMessage('Please fix the errors below');
+        return;
+      }
+
+      // Clear errors and proceed with save
+      setValidationErrors({});
+      await updateProfile(result.data);
+
+      setSaveStatus('success');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    } catch (err) {
+      setSaveStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Failed to save profile');
+    }
+  };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <SettingsDetailLayout
+        title=""
+        description=""
+        wrapContent={false}
+        backHref={null}
+        compactHeader
+        hideHeader
+        srTitle="Profile Settings"
+      >
+        <div className="flex items-center justify-center py-32">
+          <div className="text-center">
+            <p className="text-siso-text-muted">Loading profile...</p>
+          </div>
+        </div>
+      </SettingsDetailLayout>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <SettingsDetailLayout
+        title=""
+        description=""
+        wrapContent={false}
+        backHref={null}
+        compactHeader
+        hideHeader
+        srTitle="Profile Settings"
+      >
+        <div className="flex items-center justify-center py-32">
+          <div className="rounded-2xl border border-red-200 bg-red-50 p-6">
+            <p className="text-red-800">Failed to load profile. Please try again.</p>
+          </div>
+        </div>
+      </SettingsDetailLayout>
+    );
+  }
+
+  return (
+    <SettingsDetailLayout
+      title=""
+      description=""
+      wrapContent={false}
+      backHref={null}
+      compactHeader
+      hideHeader
+      srTitle="Profile Settings"
+    >
+      <div className="space-y-6 pb-32 text-siso-text-primary">
+        <Breadcrumb className="text-white">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/" className="text-white hover:text-white">
+                <Home size={14} strokeWidth={2} aria-hidden="true" className="text-white" />
+                <span className="sr-only">Home</span>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="text-white/80" />
+            <BreadcrumbItem>
+              <BreadcrumbLink href={SETTINGS_ROUTES.base} className="text-white hover:text-white">Settings</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="text-white/80" />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="text-white">Profile</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        {/* Header with save button */}
+        <div className="flex items-center justify-between">
+          <div className="relative flex-1">
+            <HighlightCard
+              color="orange"
+              className="w-full max-w-none text-left"
+              title="Profile"
+              description="Shape the story partners see when they tap your card."
+              icon={<UserRound className="h-5 w-5" />}
+              metricValue=""
+              metricLabel=""
+              buttonText=""
+              onButtonClick={() => {}}
+              fullWidth
+              hideDivider
+              hideFooter
+              titleClassName="uppercase tracking-[0.35em] font-semibold text-[28px] leading-[1.2]"
+              descriptionClassName="text-xs"
+            />
+          </div>
+
+          <div className="ml-4 flex items-center gap-3">
+            {saveStatus === 'success' && (
+              <span className="text-sm text-green-400">Saved!</span>
+            )}
+            <Button
+              onClick={handleSave}
+              disabled={isUpdating || saveStatus === 'saving'}
+              className="rounded-xl bg-siso-orange px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black"
+            >
+              {saveStatus === 'saving' ? 'Saving...' : 'Save profile'}
+            </Button>
+          </div>
+        </div>
+
+        {/* Error message */}
+        {errorMessage && (
+          <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
+            <p className="text-sm text-red-800">{errorMessage}</p>
+          </div>
+        )}
+
+        <ProfileIdentityCallout
+          status={status}
+          onStatusChange={setStatus}
+          age={age}
+          onAgeChange={setAge}
+          bio={bio}
+          onBioChange={(val) => setBio(val.slice(0, 200))}
+          bioCharactersLeft={Math.max(0, bioCharactersLeft)}
+          // Avatar props
+          avatarUrl={profile?.avatar_url}
+          displayName={profile?.display_name}
+          onAvatarChange={handleAvatarChange}
+          onAvatarRemove={handleAvatarRemove}
+          isUploading={isUploading}
+          uploadProgress={uploadProgress}
+          uploadError={uploadError}
+        />
+          onBioChange={(val) => setBio(val.slice(0, 200))}
+          bioCharactersLeft={Math.max(0, bioCharactersLeft)}
+        />
+
+        {/* Privacy Settings */}
+        <SettingsGroupCallout
+          icon={<Eye className="h-4 w-4" />}
+          title="Privacy Settings"
+          subtitle="Control who can see your profile"
+          showChevron={false}
+        >
+          <div className="space-y-3">
+            <div className="flex items-center justify-between rounded-xl border border-siso-border/70 bg-transparent p-4">
+              <div className="flex items-center gap-3">
+                <UserRound className="h-5 w-5 text-siso-text-muted" />
+                <div>
+                  <p className="text-sm font-medium text-siso-text-primary">Profile Visibility</p>
+                  <p className="text-xs text-siso-text-muted">Who can view your profile</p>
+                </div>
+              </div>
+              <select
+                value={profileVisibility}
+                onChange={(e) => setProfileVisibility(e.target.value as ProfileVisibility)}
+                className="rounded-lg border border-siso-border/70 bg-siso-bg-secondary px-3 py-2 text-sm text-siso-text-primary"
+              >
+                <option value="private">Private - Only me</option>
+                <option value="partners_only">Partners Only</option>
+                <option value="public">Public - Anyone</option>
+              </select>
+            </div>
+          </div>
+        </SettingsGroupCallout>
+
+        <PartnershipDetailsCallout
+          sisoJoinMonth={sisoJoinMonth}
+          onSisoJoinMonthChange={setSisoJoinMonth}
+          sisoJoinYear={sisoJoinYear}
+          onSisoJoinYearChange={setSisoJoinYear}
+        />
+
+        <ProfessionalDetailsCallout
+          professionalTitle={professionalTitle}
+          setProfessionalTitle={setProfessionalTitle}
+          businessName={businessName}
+          setBusinessName={setBusinessName}
+          businessType={businessType}
+          setBusinessType={setBusinessType}
+          industry={industry}
+          setIndustry={setIndustry}
+          yearsOfExperience={yearsOfExperience}
+          setYearsOfExperience={setYearsOfExperience}
+          companySize={companySize}
+          setCompanySize={setCompanySize}
+          geographicAvailability={geographicAvailability}
+          setGeographicAvailability={setGeographicAvailability}
+        />
+
+        <SkillsExpertiseDoubleCallout
+          specializations={specializations.join(', ')}
+          setSpecializations={(val) => setSpecializations(val.split(',').map(s => s.trim()).filter(Boolean))}
+          sisoCertifications={sisoCertifications}
+          setSisoCertifications={setSisoCertifications}
+          languages={languages}
+          setLanguages={setLanguages}
+        />
+
+        <SocialMediaDoubleCallout
+          linkedInUrl={linkedInUrl}
+          setLinkedInUrl={setLinkedInUrl}
+          instagramUrl={instagramUrl}
+          setInstagramUrl={setInstagramUrl}
+          websiteUrl={websiteUrl}
+          setWebsiteUrl={setWebsiteUrl}
+          twitterUrl={twitterUrl}
+          setTwitterUrl={setTwitterUrl}
+          githubUrl={githubUrl}
+          setGithubUrl={setGithubUrl}
+          youtubeUrl={youtubeUrl}
+          setYoutubeUrl={setYoutubeUrl}
+        />
+
+        <RevenueGoalsDoubleCallout
+          revenueGoalAmount={revenueGoalAmount}
+          setRevenueGoalAmount={setRevenueGoalAmount}
+          revenueTimeline={revenueTimeline}
+          setRevenueTimeline={setRevenueTimeline}
+        />
+
+        {/* SISO Stats (Read-only) */}
+        {profile && (
+          <SettingsGroupCallout
+            icon={<Users className="h-4 w-4" />}
+            title="SISO Stats"
+            subtitle="Your platform statistics and achievements"
+            showChevron={false}
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between rounded-xl border border-siso-border/70 bg-transparent p-4">
+                <span className="text-sm text-siso-text-muted">SISO Tokens</span>
+                <span className="text-lg font-bold text-siso-orange">{profile.sisos_tokens || 0}</span>
+              </div>
+              <div className="flex items-center justify-between rounded-xl border border-siso-border/70 bg-transparent p-4">
+                <span className="text-sm text-siso-text-muted">Power Level</span>
+                <span className="text-lg font-bold text-siso-text-primary">Level {profile.power_level || 1}</span>
+              </div>
+              <div className="flex items-center justify-between rounded-xl border border-siso-border/70 bg-transparent p-4">
+                <span className="text-sm text-siso-text-muted">Login Streak</span>
+                <span className="text-lg font-bold text-siso-orange">{profile.login_streak || 0} days</span>
+              </div>
+            </div>
+          </SettingsGroupCallout>
+        )}
+
+        <ProfilePreviewCard status={status} bio={bio} profile={profile} />
+      </div>
+    </SettingsDetailLayout>
+  );
+}
+
+// Skills & Expertise Component
+function SkillsExpertiseDoubleCallout({
+  specializations,
+  setSpecializations,
+  sisoCertifications,
+  setSisoCertifications,
+  languages,
+  setLanguages
+}: {
+  specializations: string;
+  setSpecializations: (value: string) => void;
+  sisoCertifications: string;
+  setSisoCertifications: (value: string) => void;
+  languages: string;
+  setLanguages: (value: string) => void;
+}) {
+  return (
+    <SettingsGroupCallout
+      icon={<Target className="h-4 w-4" />}
+      title="Skills & Expertise"
+      subtitle="Showcase your professional capabilities."
+      showChevron={false}
+    >
+      <div className="space-y-2">
+        <section className="rounded-2xl border border-white/10 bg-white/5 p-3">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold">Specializations</h3>
+            <InfoButton label="About specializations" content="A few keywords that describe your core skills (comma separated)." />
+          </div>
+          <Textarea
+            value={specializations}
+            onChange={(event) => setSpecializations(event.target.value)}
+            placeholder="e.g., B2B Marketing, Sales Funnels, Growth Hacking"
+            rows={3}
+            className="rounded-xl border-siso-border/70 bg-transparent text-sm text-siso-text-primary placeholder:text-siso-text-muted"
+          />
+        </section>
+
+        <section className="rounded-2xl border border-white/10 bg-white/5 p-3">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold">SISO Certifications</h3>
+            <InfoButton label="About certifications" content="Select any SISO certifications you've earned. Use NA if none." />
+          </div>
+          <CustomDropdown
+            options={certificationOptions}
+            value={sisoCertifications}
+            onChange={setSisoCertifications}
+            searchable={true}
+            maxVisible={0}
+          />
+        </section>
+
+        <section className="rounded-2xl border border-white/10 bg-white/5 p-3">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold">Languages Spoken</h3>
+            <InfoButton label="About languages" content="List the languages you can confidently work in." />
+          </div>
+          <CustomDropdown
+            options={languageOptions}
+            value={languages}
+            onChange={setLanguages}
+            searchable={true}
+            maxVisible={0}
+          />
+        </section>
+      </div>
+    </SettingsGroupCallout>
+  );
+}
+
+// Social Media Component
+interface SocialMediaDoubleCalloutProps {
+  linkedInUrl: string;
+  setLinkedInUrl: (value: string) => void;
+  instagramUrl: string;
+  setInstagramUrl: (value: string) => void;
+  websiteUrl: string;
+  setWebsiteUrl: (value: string) => void;
+  twitterUrl?: string;
+  setTwitterUrl?: (value: string) => void;
+  githubUrl?: string;
+  setGithubUrl?: (value: string) => void;
+  youtubeUrl?: string;
+  setYoutubeUrl?: (value: string) => void;
+  validationErrors?: Record<string, string>;
+}
+
+function SocialMediaDoubleCallout({
+  linkedInUrl,
+  setLinkedInUrl,
+  instagramUrl,
+  setInstagramUrl,
+  websiteUrl,
+  setWebsiteUrl,
+  twitterUrl = '',
+  setTwitterUrl = () => {},
+  githubUrl = '',
+  setGithubUrl = () => {},
+  youtubeUrl = '',
+  setYoutubeUrl = () => {},
+  validationErrors = {},
+}: SocialMediaDoubleCalloutProps) {
+  return (
+    <SettingsGroupCallout
+      icon={<Globe className="h-4 w-4" />}
+      title="Social Media"
+      subtitle="Connect your professional profiles."
+      showChevron={false}
+    >
+      <div className="space-y-2">
+        <section className={`rounded-2xl border p-3 ${validationErrors['socialLinkedinUrl'] ? 'border-red-500/50 bg-red-500/5' : 'border-white/10 bg-white/5'}`}>
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold flex items-center gap-2">
+              <Linkedin className="h-3 w-3" /> LinkedIn
+            </h3>
+            <InfoButton label="About LinkedIn" content="Paste the URL to your professional LinkedIn profile." />
+          </div>
+          <Input
+            value={linkedInUrl}
+            onChange={(event) => setLinkedInUrl(event.target.value)}
+            placeholder="https://linkedin.com/in/yourprofile"
+            className={`h-11 rounded-xl bg-transparent text-sm text-siso-text-primary placeholder:text-siso-text-muted ${validationErrors['socialLinkedinUrl'] ? 'border-red-500/50' : 'border-siso-border/70'}`}
+          />
+          {validationErrors['socialLinkedinUrl'] && (
+            <p className="text-xs text-red-400 mt-1">{validationErrors['socialLinkedinUrl']}</p>
+          )}
+        </section>
+
+        <section className={`rounded-2xl border p-3 ${validationErrors['socialInstagramUrl'] ? 'border-red-500/50 bg-red-500/5' : 'border-white/10 bg-white/5'}`}>
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold flex items-center gap-2">
+              <Instagram className="h-3 w-3" /> Instagram
+            </h3>
+            <InfoButton label="About Instagram" content="Optional. Share your professional Instagram if relevant." />
+          </div>
+          <Input
+            value={instagramUrl}
+            onChange={(event) => setInstagramUrl(event.target.value)}
+            placeholder="https://instagram.com/yourprofile"
+            className={`h-11 rounded-xl bg-transparent text-sm text-siso-text-primary placeholder:text-siso-text-muted ${validationErrors['socialInstagramUrl'] ? 'border-red-500/50' : 'border-siso-border/70'}`}
+          />
+          {validationErrors['socialInstagramUrl'] && (
+            <p className="text-xs text-red-400 mt-1">{validationErrors['socialInstagramUrl']}</p>
+          )}
+        </section>
+
+        <section className={`rounded-2xl border p-3 ${validationErrors['website'] ? 'border-red-500/50 bg-red-500/5' : 'border-white/10 bg-white/5'}`}>
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold flex items-center gap-2">
+              <Link2 className="h-3 w-3" /> Website
+            </h3>
+            <InfoButton label="About website" content="Your main professional site or portfolio." />
+          </div>
+          <Input
+            value={websiteUrl}
+            onChange={(event) => setWebsiteUrl(event.target.value)}
+            placeholder="https://yourwebsite.com"
+            className={`h-11 rounded-xl bg-transparent text-sm text-siso-text-primary placeholder:text-siso-text-muted ${validationErrors['website'] ? 'border-red-500/50' : 'border-siso-border/70'}`}
+          />
+          {validationErrors['website'] && (
+            <p className="text-xs text-red-400 mt-1">{validationErrors['website']}</p>
+          )}
+        </section>
+      </div>
+    </SettingsGroupCallout>
+  );
+}
+
+// Revenue Goals Component
+function RevenueGoalsDoubleCallout({
+  revenueGoalAmount,
+  setRevenueGoalAmount,
+  revenueTimeline,
+  setRevenueTimeline
+}: {
+  revenueGoalAmount: string;
+  setRevenueGoalAmount: (value: string) => void;
+  revenueTimeline: string;
+  setRevenueTimeline: (value: string) => void;
+}) {
+  return (
+    <SettingsGroupCallout
+      icon={<Target className="h-4 w-4" />}
+      title="Revenue Goals"
+      subtitle="Set your financial targets and timeline."
+      showChevron={false}
+    >
+      <div className="space-y-2">
+        <section className="rounded-2xl border border-white/10 bg-white/5 p-3">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold">Revenue Goal</h3>
+            <InfoButton label="About revenue goal" content="Your target gross revenue for the chosen timeline. Helps personalize recommendations." />
+          </div>
+          <Input
+            value={revenueGoalAmount}
+            onChange={(event) => setRevenueGoalAmount(event.target.value)}
+            placeholder="$10,000"
+            className="h-11 rounded-xl border-siso-border/70 bg-transparent text-sm text-siso-text-primary placeholder:text-siso-text-muted"
+          />
+        </section>
+
+        <section className="rounded-2xl border border-white/10 bg-white/5 p-3">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-siso-text-bold">Timeline</h3>
+            <InfoButton label="About timeline" content="How long you're giving yourself to hit the goal (e.g., 3 months)." />
+          </div>
+          <CustomDropdown
+            options={timelineOptions}
+            value={revenueTimeline}
+            onChange={setRevenueTimeline}
+            searchable={false}
+          />
+        </section>
+      </div>
+    </SettingsGroupCallout>
+  );
+}
+
+type ProfilePreviewCardProps = {
+  status: string;
+  bio: string;
+  profile?: any;
+};
+
+function ProfilePreviewCard({ status, bio, profile }: ProfilePreviewCardProps) {
+  const model = {
+    avatarUrl: profile?.avatar_url || "https://api.dicebear.com/7.x/notionists/svg?seed=SISOagency",
+    displayName: profile?.display_name || "SISOagency",
+    headline: profile?.title || "Marketing Consultant",
+    status: status || "Dialed in",
+    credits: profile?.sisos_tokens || 342,
+    tier: "Performer" as "Starter" | "Active" | "Performer" | "Elite",
+    milestone: "Next milestone in 12 days",
+    chips: ["Technology", "Global", "5y", "SISO Expert", "EN +2"],
+    bio: bio || profile?.bio || "We help partners ship faster with crisp GTM strategy, content systems, and hands-on enablement.",
+    powerLevel: profile?.power_level || 25,
+    loginStreak: `${profile?.login_streak || 3} / 14 days`,
+    revenue: { amount: "$25k", timeline: "3 mo" },
+    links: [
+      ...(profile?.social_linkedin_url ? [{ label: "linkedin.com", icon: Linkedin, url: profile.social_linkedin_url }] : []),
+      ...(profile?.social_instagram_url ? [{ label: "instagram.com", icon: Instagram, url: profile.social_instagram_url }] : []),
+      ...(profile?.website ? [{ label: new URL(profile.website).hostname, icon: Link2, url: profile.website }] : []),
+    ],
+    backgroundUrl: "https://images.unsplash.com/photo-1549880187-0579aa1a0dbc?q=80&w=1974&auto=format&fit=crop",
+  } as const;
+
+  const [expanded, setExpanded] = useState(false);
+  const [showAllChips, setShowAllChips] = useState(false);
+
+  const tierColor: Record<typeof model.tier, string> = {
+    Starter: "bg-white/10 text-white",
+    Active: "bg-emerald-500/20 text-emerald-300",
+    Performer: "bg-siso-orange/20 text-siso-orange",
+    Elite: "bg-violet-500/20 text-violet-300",
+  };
+
+  return (
+    <section
+      className="relative overflow-hidden rounded-3xl border border-white/10 p-3 text-siso-text-primary shadow-[0_18px_40px_rgba(0,0,0,0.35)]"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(10,10,12,0.60), rgba(10,10,12,0.60)), url(${model.backgroundUrl})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="flex items-center gap-3">
+        <img
+          src={model.avatarUrl}
+          alt="Preview avatar"
+          className="h-12 w-12 rounded-full border-2 border-white/20"
+          loading="lazy"
+        />
+        <div className="min-w-0 flex-1">
+          <h2 className="truncate text-base font-semibold uppercase tracking-[0.25em]">{model.displayName}</h2>
+          {model.status ? (
+            <p className="truncate text-xs text-white/70">{model.status}</p>
+          ) : null}
+        </div>
+        <div className="shrink-0 text-right">
+          <p className="leading-none text-lg font-semibold text-siso-orange">{model.credits}</p>
+          <p className="mt-0.5 text-[11px] text-white/70">credits</p>
+          <div className={`mt-1 inline-flex rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${tierColor[model.tier]}`}>
+            {model.tier}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-3 space-y-2">
+        {model.milestone ? (
+          <div className="flex items-center gap-2 text-xs text-white/80">
+            <Sparkles className="h-4 w-4 text-siso-orange" aria-hidden /> {model.milestone}
+          </div>
+        ) : null}
+        {model.chips.length ? (
+          <ul role="list" className="flex flex-wrap gap-2">
+            {model.chips.slice(0, 3).map((chip) => (
+              <li role="listitem" key={chip} className="rounded-full border border-white/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">
+                {chip}
+              </li>
+            ))}
+            {model.chips.length > 3 ? (
+              <li role="listitem">
+                <button
+                  type="button"
+                  className="rounded-full border border-white/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 hover:text-siso-orange"
+                  onClick={() => setShowAllChips(true)}
+                  aria-haspopup="dialog"
+                  aria-expanded={showAllChips}
+                >
+                  +{model.chips.length - 3}
+                </button>
+              </li>
+            ) : null}
+          </ul>
+        ) : null}
+      </div>
+
+      <div className="mt-3 space-y-3 text-sm text-white/85">
+        {model.bio ? (
+          <div>
+            <p className={expanded ? "" : "line-clamp-2"}>{model.bio}</p>
+            <button
+              type="button"
+              className="mt-1 rounded-md border border-white/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/80 hover:text-siso-orange"
+              aria-expanded={expanded}
+              onClick={() => setExpanded((v) => !v)}
+            >
+              {expanded ? "Show less" : "Read more"}
+            </button>
+          </div>
+        ) : null}
+
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="flex items-center justify-between rounded-2xl border border-white/15 bg-black/20 px-2.5 py-1.5">
+            <span className="text-white/70">Power Level</span>
+            <span className="font-semibold text-siso-orange">{model.powerLevel}</span>
+          </div>
+          <div className="flex items-center justify-between rounded-2xl border border-white/15 bg-black/20 px-2.5 py-1.5">
+            <span className="text-white/70">Login streak</span>
+            <span className="font-semibold text-white">{model.loginStreak}</span>
+          </div>
+          {model.revenue ? (
+            <div className="col-span-2 flex items-center justify-between rounded-2xl border border-white/15 bg-black/20 px-2.5 py-1.5">
+              <span className="text-white/70">Revenue goal</span>
+              <span className="font-semibold text-white">{model.revenue.amount} • {model.revenue.timeline}</span>
+            </div>
+          ) : null}
+        </div>
+
+        {model.links?.length ? (
+          <div className="mt-1 flex items-center gap-2 text-xs">
+            {model.links.map((l) => {
+              const Icon = l.icon;
+              return (
+                <a key={l.url} href={l.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-xl border border-white/15 px-2.5 py-1 text-white/80 hover:text-siso-orange">
+                  <Icon className="h-3.5 w-3.5" aria-hidden />
+                  <span className="hidden sm:inline">{l.label}</span>
+                </a>
+              );
+            })}
+          </div>
+        ) : null}
+      </div>
+
+      {showAllChips ? (
+        <div className="fixed inset-0 z-[60]" aria-modal="true" role="dialog">
+          <button className="absolute inset-0 bg-black/50" aria-label="Close" onClick={() => setShowAllChips(false)} />
+          <div className="absolute bottom-0 left-0 right-0 rounded-t-3xl border border-white/10 bg-siso-bg-secondary p-4 shadow-2xl">
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">All tags</p>
+              <button className="text-xs text-siso-text-muted hover:text-siso-orange" onClick={() => setShowAllChips(false)}>Close</button>
+            </div>
+            <ul role="list" className="flex flex-wrap gap-2">
+              {model.chips.map((chip) => (
+                <li key={chip} role="listitem" className="rounded-full border border-white/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">
+                  {chip}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : null}
+    </section>
+  );
+}

@@ -4,8 +4,9 @@ import { Link as RouterLink, useSearchParams } from 'react-router-dom'
 import AdminPageLayout from '@admin/shared/ui/layouts/AdminPageLayout'
 import { ArrowUpRight, Filter, Plus, RefreshCw } from 'lucide-react'
 import clsx from 'clsx'
-import { blogPosts } from '@/content/blog'
 import { setAdminNavList } from '@admin/shared/application/adminNavLists'
+import { useBlogPosts } from '../../application'
+import { useUpdateBlogPostStatus } from '../../application/useBlogMutations'
 
 const Badge = ({ tone = 'neutral', children }: { tone?: 'neutral' | 'success' | 'warning' | 'danger'; children: ReactNode }) => {
   const toneClass =
@@ -80,12 +81,12 @@ function StatusPill({ status }: { status: BlogRow['status'] }) {
   return <Badge tone={tone[status]}>{status}</Badge>
 }
 
-function Toolbar() {
+function Toolbar({ isLoading, onRefresh }: { isLoading: boolean; onRefresh: () => void }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <Button variant="secondary" size="sm">
-        <RefreshCw className="h-4 w-4" />
-        Reload
+      <Button variant="secondary" size="sm" onClick={onRefresh} disabled={isLoading}>
+        <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+        {isLoading ? 'Loading...' : 'Reload'}
       </Button>
       <Button variant="secondary" size="sm">
         <Filter className="h-4 w-4" />
@@ -121,33 +122,45 @@ export default function BlogsPage() {
   const [ctrOpen, setCtrOpen] = useState(false)
   const [publishOpen, setPublishOpen] = useState(false)
 
+  // Fetch posts from Supabase
+  const { data: postsData, isLoading, error, refetch } = useBlogPosts({
+    limit: 100,
+    status: statusFilter === 'all' ? undefined : statusFilter as any,
+    enabled: true,
+  })
+
+  const updateStatus = useUpdateBlogPostStatus()
+
   const rows: BlogRow[] = useMemo(
     () =>
-      blogPosts.map((p) => ({
+      (postsData?.posts || []).map((p: any) => ({
         title: p.title,
         slug: p.slug,
-        status: (p as any).status ?? 'published',
-        views: 0,
-        reads: 0,
-        likes: 0,
-        comments: 0,
-        tags: [p.tag].filter(Boolean),
-        author: p.author,
-        updatedAt: (p.reviewed || p.date) + 'T00:00:00Z',
-        publishAt: (p.date || '') + 'T00:00:00Z',
+        status: p.status || 'published',
+        views: p.view_count || 0,
+        reads: 0, // Not tracked in DB yet
+        likes: p.like_count || 0,
+        comments: p.comment_count || 0,
+        tags: [p.category?.name].filter(Boolean),
+        author: p.author?.display_name || 'Lumelle Studio',
+        updatedAt: p.updated_at || p.created_at,
+        publishAt: p.published_at || undefined,
       })),
-    [],
+    [postsData],
   )
 
+  // Update admin nav list when posts change
   useEffect(() => {
-    setAdminNavList(
-      'blogPosts',
-      blogPosts.map((p) => ({
-        label: p.title,
-        to: `/admin/blogs/${p.slug}`,
-      })),
-    )
-  }, [])
+    if (postsData?.posts) {
+      setAdminNavList(
+        'blogPosts',
+        postsData.posts.map((p: any) => ({
+          label: p.title,
+          to: `/admin/blogs/${p.slug}`,
+        })),
+      )
+    }
+  }, [postsData])
 
   const tagOptions = useMemo(
     () => ['all', ...Array.from(new Set(rows.flatMap((r) => r.tags.filter(Boolean))))],
@@ -244,22 +257,37 @@ export default function BlogsPage() {
     sessionStorage.setItem('admin:blogCount', String(rows.length))
   }, [rows.length])
 
+  if (error) {
+    return (
+      <AdminPageLayout
+        subtitle="Error loading blog posts"
+        actions={<Toolbar isLoading={false} onRefresh={() => refetch()} />}
+      >
+        <Card className="p-8 text-center">
+          <p className="text-red-500">Failed to load blog posts: {(error as Error).message}</p>
+          <Button onClick={() => refetch()} className="mt-4">Retry</Button>
+        </Card>
+      </AdminPageLayout>
+    )
+  }
+
   return (
     <AdminPageLayout
       subtitle={
         <span className="block max-w-2xl text-sm leading-relaxed">
           Blog posts and metrics live in Supabase (
           <span className="inline-flex items-center whitespace-nowrap rounded-md border border-semantic-legacy-brand-blush/60 bg-brand-porcelain px-1.5 py-0.5 font-mono text-[12px] text-semantic-text-primary/80">
-            cms_blogs
+            blog_posts
           </span>{' '}
           +{' '}
           <span className="inline-flex items-center whitespace-nowrap rounded-md border border-semantic-legacy-brand-blush/60 bg-brand-porcelain px-1.5 py-0.5 font-mono text-[12px] text-semantic-text-primary/80">
-            cms_blog_media
+            blog_authors
           </span>
           ).
+          {postsData && <span className="ml-2 text-semantic-text-primary/60">({postsData.total} posts)</span>}
         </span>
       }
-      actions={<Toolbar />}
+      actions={<Toolbar isLoading={isLoading} onRefresh={() => refetch()} />}
     >
       <Card className="overflow-hidden">
         <div className="overflow-x-auto">

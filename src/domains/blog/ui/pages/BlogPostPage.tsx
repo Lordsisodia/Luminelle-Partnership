@@ -2,7 +2,6 @@ import { useParams, Navigate, Link as RouterLink } from 'react-router-dom'
 import Markdown from 'markdown-to-jsx'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import type { NavItem } from '@/layouts/MarketingLayout'
-import { blogPosts } from '@/content/blog'
 import { SectionHeading } from '@ui/components/SectionHeading'
 import { cdnUrl } from '@/utils/cdn'
 import BlogSocial from '../components/BlogSocial'
@@ -12,6 +11,7 @@ import { SUPPORT_EMAIL } from '@/config/constants'
 import { useCallback, useState, useEffect, useRef } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useBlogPost } from '@/domains/client/blog/application'
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Post' },
@@ -109,21 +109,37 @@ const BLOG_SLUG_ALIASES: Record<string, string> = {
 export const BlogPostPage = () => {
   const { slug } = useParams()
   const canonicalSlug = slug ? BLOG_SLUG_ALIASES[slug] ?? slug : undefined
-  const post = blogPosts.find((p) => p.slug === canonicalSlug)
+
+  // Fetch post from Supabase
+  const { data: post, isLoading, error } = useBlogPost(canonicalSlug)
+
   const [currentRelatedIndex, setCurrentRelatedIndex] = useState(0)
   const relatedTrackRef = useRef<HTMLDivElement | null>(null)
   const [copied, setCopied] = useState(false)
 
-  if (!canonicalSlug || !post) return <Navigate to="/blog" replace />
-  if (post.status === 'draft' && !import.meta.env.DEV) return <Navigate to="/blog" replace />
-  if (slug !== canonicalSlug) return <Navigate to={`/blog/${canonicalSlug}`} replace />
+  // Handle loading, error, and redirect states
+  if (isLoading) {
+    return (
+      <MarketingLayout navItems={navItems} subtitle="Journal">
+        <div className="flex min-h-[400px] items-center justify-center">
+          <div className="text-semantic-text-primary/60">Loading post...</div>
+        </div>
+      </MarketingLayout>
+    )
+  }
 
-  const authorHref = post.authorLink?.trim() ? post.authorLink : null
+  if (error || !post) {
+    return <Navigate to="/blog" replace />
+  }
 
-  const related = blogPosts
-    .filter((p) => p.slug !== post.slug && (import.meta.env.DEV ? true : p.status !== 'draft'))
-    .sort((a, b) => (a.tag === post.tag ? -1 : b.tag === post.tag ? 1 : 0))
-    .slice(0, 3)
+  if (slug !== canonicalSlug) {
+    return <Navigate to={`/blog/${canonicalSlug}`} replace />
+  }
+
+  // Get related posts (for now, skip related posts from Supabase - can be added later)
+  const related: any[] = []
+
+  const authorHref = post.author_link?.trim() ? post.author_link : null
 
   const scrollRelatedToIndex = useCallback(
     (idx: number) => {
@@ -190,8 +206,8 @@ export const BlogPostPage = () => {
 
   const title = post.title
   const description =
-    post.teaser || post.subtitle || 'Frizz-free hair care, creator routines, and product science from Lumelle.'
-  const image = post.ogImage ?? post.cover
+    post.excerpt || post.subtitle || 'Frizz-free hair care, creator routines, and product science from Lumelle.'
+  const image = post.og_image_url ?? post.cover_image_url
   const absImage = cdnUrl(image)
   const url = toPublicUrl(`/blog/${post.slug}`)
   const handleCopy = useCallback(() => {
@@ -201,9 +217,9 @@ export const BlogPostPage = () => {
     })
   }, [url])
 
-  // Structured data: Article + FAQ (2 Qs)
+  // Structured data: Article + FAQ from Supabase
   const faq = post.faqs && post.faqs.length
-    ? post.faqs
+    ? post.faqs.map((f: any) => ({ question: f.question, answer: f.answer }))
     : [
       {
         question: 'How do I keep hair frizz-free in the shower?',
@@ -222,9 +238,9 @@ export const BlogPostPage = () => {
     headline: post.title,
     description,
     image: absImage,
-    author: { '@type': 'Organization', name: post.author || 'Lumelle Studio' },
-    datePublished: post.date,
-    dateModified: post.date,
+    author: { '@type': 'Organization', name: post.author?.display_name || 'Lumelle Studio' },
+    datePublished: post.published_at || post.created_at,
+    dateModified: post.updated_at,
     mainEntityOfPage: url,
   }
 
@@ -248,7 +264,7 @@ export const BlogPostPage = () => {
     ],
   }
 
-  const reviewed = post.reviewed || post.date
+  const reviewed = post.reviewed_at || post.published_at || post.created_at
 
   return (
     <>
@@ -271,53 +287,53 @@ export const BlogPostPage = () => {
               <span className="text-semantic-text-primary/80">{post.title}</span>
             </nav>
             <span className="inline-flex rounded-full bg-semantic-legacy-brand-blush/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-semantic-text-primary/70">
-              {post.tag}
+              {post.category?.name || 'Article'}
             </span>
             <h1 className="mt-3 font-heading text-4xl text-semantic-text-primary">{post.title}</h1>
             <p className="mt-3 text-lg text-semantic-text-primary/75">{post.subtitle}</p>
             <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-semantic-text-primary/80">
               <div className="flex items-center gap-2">
-                {post.authorAvatar ? (
+                {post.author?.avatar_url ? (
                   authorHref ? (
                     <a
                       href={authorHref}
                       className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-semantic-legacy-brand-blush/60 shadow-soft hover:-translate-y-0.5 transition"
                     >
-                      <img src={cdnUrl(post.authorAvatar)} alt={post.author} className="h-full w-full object-cover" loading="lazy" />
+                      <img src={cdnUrl(post.author.avatar_url)} alt={post.author.display_name} className="h-full w-full object-cover" loading="lazy" />
                     </a>
                   ) : (
                     <span className="inline-flex h-9 w-9 overflow-hidden rounded-full border border-semantic-legacy-brand-blush/60 shadow-soft">
-                      <img src={cdnUrl(post.authorAvatar)} alt={post.author} className="h-full w-full object-cover" loading="lazy" />
+                      <img src={cdnUrl(post.author.avatar_url)} alt={post.author.display_name} className="h-full w-full object-cover" loading="lazy" />
                     </span>
                   )
                 ) : (
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-semantic-legacy-brand-blush/50 text-sm font-semibold text-semantic-text-primary">
-                    {post.author.charAt(0)}
+                    {post.author?.display_name?.charAt(0) || 'L'}
                   </span>
                 )}
                 {authorHref ? (
                   <a
                     href={authorHref}
                     className="font-semibold text-semantic-text-primary hover:text-semantic-text-primary/80"
-                    title={post.authorRoleLong || post.authorRole}
+                    title={post.author_role_long || post.author?.role}
                   >
-                    {post.author}
+                    {post.author?.display_name || 'Lumelle Studio'}
                   </a>
                 ) : (
                   <span
                     className="font-semibold text-semantic-text-primary"
-                    title={post.authorRoleLong || post.authorRole}
+                    title={post.author_role_long || post.author?.role}
                   >
-                    {post.author}
+                    {post.author?.display_name || 'Lumelle Studio'}
                   </span>
                 )}
-                {post.authorRole ? <span className="text-semantic-text-primary/70">· {post.authorRole}</span> : null}
+                {post.author?.role ? <span className="text-semantic-text-primary/70">· {post.author.role}</span> : null}
               </div>
-              {post.authorRoleLong ? <span className="text-semantic-text-primary/60">{post.authorRoleLong}</span> : null}
+              {post.author_role_long ? <span className="text-semantic-text-primary/60">{post.author_role_long}</span> : null}
               <span>•</span>
-              <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+              <span>{new Date(post.published_at || post.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               <span>•</span>
-              <span>{post.readTime} read</span>
+              <span>{post.read_time_minutes} min read</span>
               <span>•</span>
               <div className="flex items-center gap-2 text-semantic-text-primary/70">
                 <button
@@ -339,7 +355,7 @@ export const BlogPostPage = () => {
             </div>
             <div className="mt-6 overflow-hidden rounded-[2rem] border border-semantic-legacy-brand-blush/60">
               <img
-                src={cdnUrl(post.cover)}
+                src={cdnUrl(post.cover_image_url)}
                 alt={post.title}
                 className="w-full object-cover"
                 width={1200}
@@ -367,35 +383,35 @@ export const BlogPostPage = () => {
             <div className="rounded-3xl border border-semantic-legacy-brand-blush/50 bg-semantic-legacy-brand-blush/10 p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-semantic-text-primary/60">TL;DR</p>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-semantic-text-primary/80">
-                <li>{post.teaser}</li>
+                <li>{post.excerpt}</li>
                 <li>Skim the subheads for quick wins and routines.</li>
               </ul>
               <div className="mt-4">
-                {post.productCard ? (
+                {post.product_card ? (
                   <div className="flex items-center gap-3 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white p-3 shadow-soft">
                     <img
-                      src={cdnUrl(post.productCard.image)}
-                      alt={post.productCard.title}
+                      src={cdnUrl(post.product_card.image)}
+                      alt={post.product_card.title}
                       className="h-14 w-14 rounded-xl object-cover"
                       loading="lazy"
                     />
                     <div className="flex flex-1 flex-col gap-1 text-left">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-semantic-text-primary">{post.productCard.title}</span>
-                        {post.productCard.badge ? (
+                        <span className="text-sm font-semibold text-semantic-text-primary">{post.product_card.title}</span>
+                        {post.product_card.badge ? (
                           <span className="rounded-full bg-semantic-legacy-brand-blush/40 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-semantic-text-primary/80">
-                            {post.productCard.badge}
+                            {post.product_card.badge}
                           </span>
                         ) : null}
                       </div>
-                      {post.productCard.caption ? (
-                        <p className="text-xs text-semantic-text-primary/70">{post.productCard.caption}</p>
+                      {post.product_card.caption ? (
+                        <p className="text-xs text-semantic-text-primary/70">{post.product_card.caption}</p>
                       ) : null}
                       <div className="flex items-center gap-2 text-sm font-semibold text-semantic-text-primary">
-                        {post.productCard.price ? <span>{post.productCard.price}</span> : null}
-                        {post.productCard.href.startsWith('/') ? (
+                        {post.product_card.price ? <span>{post.product_card.price}</span> : null}
+                        {post.product_card.href?.startsWith('/') ? (
                           <RouterLink
-                            to={post.productCard.href}
+                            to={post.product_card.href}
                             className="inline-flex items-center gap-1 rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
                           >
                             Shop now
@@ -403,7 +419,7 @@ export const BlogPostPage = () => {
                           </RouterLink>
                         ) : (
                           <a
-                            href={post.productCard.href}
+                            href={post.product_card.href || post.cta_target || '/product/lumelle-shower-cap'}
                             target="_blank"
                             rel="noreferrer"
                             className="inline-flex items-center gap-1 rounded-full bg-semantic-legacy-brand-cocoa px-3 py-1 text-xs font-semibold text-white shadow-soft hover:-translate-y-0.5"
@@ -417,7 +433,7 @@ export const BlogPostPage = () => {
                   </div>
                 ) : (
                   <RouterLink
-                    to="/product/lumelle-shower-cap"
+                    to={post.cta_target || '/product/lumelle-shower-cap'}
                     className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-cocoa px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5"
                   >
                     Shop the satin-lined waterproof cap
@@ -427,8 +443,8 @@ export const BlogPostPage = () => {
               </div>
             </div>
 
-            {/* Body with structured sections */}
-            {post.sections?.length ? (
+            {/* Body with structured sections - content is JSONB in Supabase */}
+            {post.content && Array.isArray(post.content) && post.content.length > 0 ? (
               <div className="mb-4 block rounded-xl border border-semantic-legacy-brand-blush/60 bg-white/90 p-3 text-sm text-semantic-text-primary/75 shadow-soft md:hidden">
                 <label className="text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">Jump to</label>
                 <select
@@ -442,7 +458,7 @@ export const BlogPostPage = () => {
                   <option value="" disabled>
                     Select a section
                   </option>
-                  {post.sections.map((section) => {
+                  {post.content.map((section) => {
                     const id = slugify(section.heading)
                     return (
                       <option key={id} value={id}>
@@ -453,13 +469,13 @@ export const BlogPostPage = () => {
                 </select>
               </div>
             ) : null}
-            {post.sections ? (
+            {post.content ? (
               <div className="mt-8 grid gap-8 text-semantic-text-primary lg:grid-cols-[220px_1fr]">
                 <aside className="hidden lg:block">
                   <div className="sticky top-28 rounded-2xl border border-semantic-legacy-brand-blush/60 bg-white/85 p-4 text-sm text-semantic-text-primary/75 shadow-soft">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-semantic-text-primary/60">Jump to</p>
                     <ul className="mt-2 space-y-2">
-                      {post.sections.map((section) => {
+                      {post.content.map((section: any) => {
                         const id = slugify(section.heading)
                         return (
                           <li key={id}>
@@ -473,7 +489,7 @@ export const BlogPostPage = () => {
                   </div>
                 </aside>
                 <div className="space-y-10">
-                  {post.sections.map((section, idx) => {
+                  {post.content.map((section: any, idx: number) => {
                     const id = slugify(section.heading)
                     return (
                       <article key={section.heading + idx} id={id} className="space-y-4 scroll-mt-24">
@@ -578,29 +594,29 @@ export const BlogPostPage = () => {
                   href={authorHref}
                   className="h-12 w-12 rounded-full bg-semantic-legacy-brand-blush/40 text-center text-lg font-semibold text-semantic-text-primary flex items-center justify-center hover:-translate-y-0.5 transition"
                 >
-                  {post.author.charAt(0)}
+                  {(post.author?.display_name || 'L').charAt(0)}
                 </a>
               ) : (
                 <div className="h-12 w-12 rounded-full bg-semantic-legacy-brand-blush/40 text-center text-lg font-semibold text-semantic-text-primary flex items-center justify-center">
-                  {post.author.charAt(0)}
+                  {(post.author?.display_name || 'L').charAt(0)}
                 </div>
               )}
               <div className="space-y-1 text-sm text-semantic-text-primary/80">
                 <div className="font-semibold text-semantic-text-primary">
                   {authorHref ? (
                     <a href={authorHref} className="hover:text-semantic-text-primary">
-                      {post.author}
+                      {post.author?.display_name || 'Lumelle Studio'}
                     </a>
                   ) : (
-                    <span>{post.author}</span>
+                    <span>{post.author?.display_name || 'Lumelle Studio'}</span>
                   )}
-                  {post.authorRole ? ` · ${post.authorRole}` : ''}
+                  {post.author?.role ? ` · ${post.author.role}` : ''}
                 </div>
-                {post.authorRoleLong ? (
-                  <div className="text-semantic-text-primary/70">{post.authorRoleLong}</div>
+                {post.author_role_long ? (
+                  <div className="text-semantic-text-primary/70">{post.author_role_long}</div>
                 ) : null}
                 <div>
-                  Published {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · Last reviewed {new Date(reviewed).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  Published {new Date(post.published_at || post.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · Last reviewed {new Date(reviewed).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </div>
                 <div>
                   Have feedback? Email{' '}

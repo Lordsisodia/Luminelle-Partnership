@@ -339,6 +339,7 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
       trackViewContent({
         content_name: productTitle || config.defaultTitle,
         content_ids: [formatShopifyContentId(productId, variantId)],
+        content_type: 'product',
         value: price,
         currency: 'GBP',
       })

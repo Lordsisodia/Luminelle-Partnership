@@ -34,6 +34,11 @@ components-library/
 **/.blackbox/.cache/
 **/.blackbox/*.log
 .worktrees/
+
+# LiteLLM proxy
+.env.litellm
+.litellm-proxy.log
+.litellm-proxy.pid
 # Transpiled API files from vite plugin
 **/*.ts.js
 /blackbox5/

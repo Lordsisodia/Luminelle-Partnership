@@ -20,7 +20,16 @@
     "snapshots:landing": "node scripts/capture-landing-screenshots.mjs",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.node.json --noEmit",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "litellm:proxy": "./scripts/start-litellm-proxy.sh",
+    "litellm:proxy:start": "./scripts/start-litellm-proxy.sh start",
+    "litellm:proxy:stop": "./scripts/start-litellm-proxy.sh stop",
+    "litellm:proxy:status": "./scripts/start-litellm-proxy.sh status",
+    "litellm:config": "node scripts/update-litellm-config.mjs",
+    "agent:hub": "node --import=tsx src/agents/index.ts",
+    "agent:cli": "node --import=tsx -e \"import { runAgentCLI } from './src/agents/index.ts'; runAgentCLI();\"",
+    "agent:demo": "node scripts/demo-orchestrator.mjs",
+    "agent:test": "node scripts/test-agent-hub.mjs"
   },
   "dependencies": {
     "@clerk/clerk-react": "^4.32.5",

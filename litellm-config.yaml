@@ -1,0 +1,56 @@
+# LiteLLM Configuration for GLM API Load Balancing
+# This config rotates through multiple GLM (XZAI) API keys to handle rate limits
+
+model_list:
+  # Add your GLM API keys below
+  # Each key will be treated as a separate deployment in the load balancer
+  - model_name: glm-pool
+    litellm_params:
+      model: openai/glm-4
+      api_key: YOUR_GLM_API_KEY_1
+      api_base: "https://api.z.ai/v1"
+
+  # - model_name: glm-pool
+  #   litellm_params:
+  #     model: openai/glm-4
+  #     api_key: YOUR_GLM_API_KEY_2
+  #     api_base: "https://api.z.ai/v1"
+
+  # - model_name: glm-pool
+  #   litellm_params:
+  #     model: openai/glm-4
+  #     api_key: YOUR_GLM_API_KEY_3
+  #     api_base: "https://api.z.ai/v1"
+
+  # Add more keys as needed - uncomment and copy the block above
+
+router_settings:
+  # Round-robin distributes requests evenly across all keys
+  routing_strategy: "round-robin"
+
+  # Enable pre-call checks to detect rate limits before making requests
+  enable_pre_call_checks: true
+
+  # Retry failed requests with different keys
+  num_retries: 3
+
+  # Cooldown period (seconds) when a key hits rate limits
+  cooldown_time: 60
+
+  # Set timeouts (in seconds)
+  request_timeout: 300
+  max_timeout: 600
+
+litellm_settings:
+  # Drop parameters that GLM doesn't support
+  drop_params: true
+
+  # Set to true to see detailed logs
+  set_verbose: false
+
+  # Cache responses to reduce API calls (optional)
+  cache: false
+  # cache_type: "simple"  # Options: simple, redis, etc.
+
+  # Enable usage tracking to see which keys are being used
+  track_usage: true
