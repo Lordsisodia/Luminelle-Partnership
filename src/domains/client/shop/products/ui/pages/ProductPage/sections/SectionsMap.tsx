@@ -167,14 +167,7 @@ export function renderSections(props: SectionProps): ReactNode {
       </div>
 
       <div id="pdp-care" className="mx-auto mt-8 max-w-6xl px-4 md:px-6">
-        <HowToSection
-          steps={props.how}
-          price={props.price}
-          onAdd={props.onAdd}
-          onBuy={props.onBuy}
-          isAdding={props.isAdding}
-          justAdded={props.justAdded}
-        />
+        <HowToSection steps={props.how} />
       </div>
 
       <div id="pdp-try">
