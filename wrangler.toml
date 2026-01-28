@@ -1,0 +1,17 @@
+# Cloudflare Pages + Workers configuration
+# See: https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+
+# Compatibility date for Workers runtime
+compatibility_date = "2024-01-01"
+
+# Build configuration for Pages Functions
+[build]
+command = "npm run build"
+cwd = "."
+watch_dirs = ["src", "functions"]
+
+# Pages configuration
+[pages]
+project_name = "lumelle-partnership"
+production_branch = "main"
+preview_branch_includes = ["dev"]
