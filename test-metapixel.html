@@ -71,6 +71,7 @@
     <div class="card">
         <h1>🔍 Meta Pixel Test Page - Lumelle</h1>
         <p>Use this page to verify the Meta Pixel is working correctly.</p>
+        <p><strong>IMPORTANT:</strong> Content IDs must match the catalog format (numeric only: e.g., "56829020504438"), NOT "shopify_GB_XXX_XXX" format.</p>
     </div>
 
     <div class="card">
@@ -160,11 +161,12 @@
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'ViewContent', {
                     content_name: 'Lumelle Shower Cap',
-                    content_ids: [`shopify_GB_${VARIANT_ID}`],
+                    content_ids: [VARIANT_ID],
+                    content_type: 'product',
                     value: 15.00,
                     currency: 'GBP'
                 });
-                log(`✅ ViewContent sent with content_ids: ["shopify_GB_${VARIANT_ID}"]`, 'success');
+                log(`✅ ViewContent sent with content_ids: ["${VARIANT_ID}"]`, 'success');
             } else {
                 log('❌ Cannot send - pixel not loaded', 'error');
             }
@@ -175,11 +177,12 @@
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'AddToCart', {
                     content_name: 'Lumelle Shower Cap',
-                    content_ids: [`shopify_GB_${VARIANT_ID}`],
+                    content_ids: [VARIANT_ID],
+                    content_type: 'product',
                     value: 15.00,
                     currency: 'GBP'
                 });
-                log(`✅ AddToCart sent with content_ids: ["shopify_GB_${VARIANT_ID}"]`, 'success');
+                log(`✅ AddToCart sent with content_ids: ["${VARIANT_ID}"]`, 'success');
             } else {
                 log('❌ Cannot send - pixel not loaded', 'error');
             }
@@ -189,12 +192,13 @@
             log('Sending InitiateCheckout event...', 'info');
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'InitiateCheckout', {
-                    content_ids: [`shopify_GB_${VARIANT_ID}`],
+                    content_ids: [VARIANT_ID],
+                    content_type: 'product',
                     value: 15.00,
                     currency: 'GBP',
                     num_items: 1
                 });
-                log(`✅ InitiateCheckout sent with content_ids: ["shopify_GB_${VARIANT_ID}"]`, 'success');
+                log(`✅ InitiateCheckout sent with content_ids: ["${VARIANT_ID}"]`, 'success');
             } else {
                 log('❌ Cannot send - pixel not loaded', 'error');
             }

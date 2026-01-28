@@ -93,7 +93,17 @@ export function extractVariantId(variantKey: string): string {
 export function formatShopifyContentId(productId: string | null, variantId: string | null): string {
   if (!variantId) return ''
 
+  // Handle legacy GID format: gid://shopify/ProductVariant/123456789
+  const gidMatch = variantId.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
+  if (gidMatch) return gidMatch[1]
+
+  // If it's already numeric, return as-is
+  if (/^\d+$/.test(variantId)) {
+    return variantId
+  }
+
   // Map stable variant keys to their numeric Shopify variant IDs
+  // These MUST match the shopifyVariantId in product-config.ts
   const STABLE_VARIANT_TO_NUMERIC_ID: Record<string, string> = {
     'variant.lumelle-shower-cap.default': '56829020504438',
     'variant.satin-overnight-curler.default': '56852779696502',
@@ -104,16 +114,8 @@ export function formatShopifyContentId(productId: string | null, variantId: stri
     return STABLE_VARIANT_TO_NUMERIC_ID[variantId]
   }
 
-  // Handle legacy GID format: gid://shopify/ProductVariant/123456789
-  const gidMatch = variantId.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
-  if (gidMatch) return gidMatch[1]
-
-  // If it's already numeric, return as-is
-  if (/^\d+$/.test(variantId)) {
-    return variantId
-  }
-
   // Fallback: return as-is (shouldn't happen in production)
+  console.warn(`[Meta Pixel] Unable to extract numeric variant ID from: ${variantId}`)
   return variantId
 }
 
@@ -122,17 +124,6 @@ export function formatShopifyContentId(productId: string | null, variantId: stri
  * Returns just the numeric variant ID to match catalog format.
  */
 export function formatCartItemId(variantKey: string): string {
-  // Map stable variant keys to their numeric Shopify variant IDs
-  const STABLE_VARIANT_TO_NUMERIC_ID: Record<string, string> = {
-    'variant.lumelle-shower-cap.default': '56829020504438',
-    'variant.satin-overnight-curler.default': '56852779696502',
-  }
-
-  // Check if it's a stable key we have a mapping for
-  if (STABLE_VARIANT_TO_NUMERIC_ID[variantKey]) {
-    return STABLE_VARIANT_TO_NUMERIC_ID[variantKey]
-  }
-
   // Handle legacy GID format: gid://shopify/ProductVariant/123456789
   const gidMatch = variantKey.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
   if (gidMatch) {
@@ -144,7 +135,20 @@ export function formatCartItemId(variantKey: string): string {
     return variantKey
   }
 
-  // Fallback: return as-is
+  // Map stable variant keys to their numeric Shopify variant IDs
+  // These MUST match the shopifyVariantId in product-config.ts
+  const STABLE_VARIANT_TO_NUMERIC_ID: Record<string, string> = {
+    'variant.lumelle-shower-cap.default': '56829020504438',
+    'variant.satin-overnight-curler.default': '56852779696502',
+  }
+
+  // Check if it's a stable key we have a mapping for
+  if (STABLE_VARIANT_TO_NUMERIC_ID[variantKey]) {
+    return STABLE_VARIANT_TO_NUMERIC_ID[variantKey]
+  }
+
+  // Fallback: log warning and return as-is
+  console.warn(`[Meta Pixel] Unable to extract numeric cart item ID from: ${variantKey}`)
   return variantKey
 }
 
