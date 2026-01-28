@@ -67,153 +67,87 @@ export const PriceBlock = ({
     <div className="space-y-5 text-semantic-text-primary min-w-0 w-full md:pl-0 overflow-visible">
       <div className="overflow-visible">
         <div id="pdp-hero-text" className="h-0 scroll-mt-24" />
-        <h1 className="font-heading text-[1.95rem] font-bold leading-tight md:text-4xl">{productTitle}</h1>
-        <p className="mt-2 text-semantic-text-primary/70">{productDesc}</p>
+        <div className="mt-2 flex items-start gap-3">
+          <h1 className="font-heading text-[1.95rem] font-bold leading-tight md:text-4xl">{productTitle}</h1>
+          <div className="ml-auto flex shrink-0 items-center gap-2">
+            {shareToast ? (
+              <span className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft">
+                {shareToast}
+              </span>
+            ) : null}
+            <button
+              type="button"
+              aria-label="Share product"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
+              onClick={async () => {
+                if (navigator.share) {
+                  try {
+                    await navigator.share({ title: productTitle, url: canonicalUrl })
+                    setShareToast('Shared')
+                  } catch {
+                    // User cancelled / share not completed — avoid noisy errors.
+                  }
+                  return
+                }
 
-        <div id="pdp-hero-reviews" className="h-0 scroll-mt-24" />
-        <button
-          type="button"
-          onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-          className="mt-3 w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-legacy-brand-cocoa/40"
-          aria-label="Jump to reviews"
-        >
-          <TrustMicro ratingValue={ratingValue} reviewCountLabel={ratingLabel} showShipping={false} />
-        </button>
+                try {
+                  if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(canonicalUrl)
+                    setShareToast('Link copied')
+                    return
+                  }
+
+                  window.prompt('Copy this link:', canonicalUrl)
+                  setShareToast('Copy link')
+                } catch {
+                  window.prompt('Copy this link:', canonicalUrl)
+                  setShareToast('Copy link')
+                }
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7" />
+                <path d="M16 6l-4-4-4 4" />
+                <path d="M12 2v14" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Short subtitle/hook */}
+        <p className="mt-2 text-base font-medium text-semantic-text-primary">Premium satin-lined protection for overnight styling</p>
 
         <div id="pdp-hero-price" className="h-0 scroll-mt-24" />
-        <div className="mt-2">
+        <div id="pdp-hero-badge" className="h-0 scroll-mt-24" />
+
+        {/* Price section - larger, more prominent */}
+        <div className="mt-4">
           {compareAtPrice && compareAtPrice > price ? (
-            <>
-              <div className="flex items-baseline gap-3">
-                <span className="text-xl font-semibold text-rose-600 md:text-2xl">
-                  -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
-                </span>
-                <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
-              </div>
-              <div className="mt-1 flex items-center justify-between">
-                <div className="text-sm font-semibold text-semantic-text-primary/70">
-                  RRP: <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
-                </div>
-                {/* Share button inline with RRP */}
-                <div className="flex shrink-0 items-center gap-2">
-                  {shareToast ? (
-                    <span className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft">
-                      {shareToast}
-                    </span>
-                  ) : null}
-                  <button
-                    type="button"
-                    aria-label="Share product"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
-                    onClick={async () => {
-                      if (navigator.share) {
-                        try {
-                          await navigator.share({ title: productTitle, url: canonicalUrl })
-                          setShareToast('Shared')
-                        } catch {
-                          // User cancelled / share not completed — avoid noisy errors.
-                        }
-                        return
-                      }
-
-                      try {
-                        if (navigator.clipboard?.writeText) {
-                          await navigator.clipboard.writeText(canonicalUrl)
-                          setShareToast('Link copied')
-                          return
-                        }
-
-                        window.prompt('Copy this link:', canonicalUrl)
-                        setShareToast('Copy link')
-                      } catch {
-                        window.prompt('Copy this link:', canonicalUrl)
-                        setShareToast('Copy link')
-                      }
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7" />
-                      <path d="M16 6l-4-4-4 4" />
-                      <path d="M12 2v14" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-[2.75rem]">£{price.toFixed(2)}</span>
-
-              {/* Share button inline with price (no discount) */}
-              <div className="flex shrink-0 items-center gap-2">
-                {shareToast ? (
-                  <span className="rounded-full border border-semantic-legacy-brand-blush/60 bg-white px-3 py-1 text-xs font-semibold text-semantic-text-primary shadow-soft">
-                    {shareToast}
-                  </span>
-                ) : null}
-                <button
-                  type="button"
-                  aria-label="Share product"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-semantic-legacy-brand-blush/60 bg-white text-semantic-text-primary shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
-                  onClick={async () => {
-                    if (navigator.share) {
-                      try {
-                        await navigator.share({ title: productTitle, url: canonicalUrl })
-                        setShareToast('Shared')
-                      } catch {
-                        // User cancelled / share not completed — avoid noisy errors.
-                      }
-                      return
-                    }
-
-                    try {
-                      if (navigator.clipboard?.writeText) {
-                        await navigator.clipboard.writeText(canonicalUrl)
-                        setShareToast('Link copied')
-                        return
-                      }
-
-                      window.prompt('Copy this link:', canonicalUrl)
-                      setShareToast('Copy link')
-                    } catch {
-                      window.prompt('Copy this link:', canonicalUrl)
-                      setShareToast('Copy link')
-                    }
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7" />
-                    <path d="M16 6l-4-4-4 4" />
-                    <path d="M12 2v14" />
-                  </svg>
-                </button>
-              </div>
+            <div className="flex flex-wrap items-baseline gap-3">
+              <span className="text-xl font-semibold text-rose-600 md:text-2xl">
+                -{discountPercentOverride ?? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
+              </span>
+              <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-5xl">£{price.toFixed(2)}</span>
+              <span className="text-sm font-semibold text-semantic-text-primary/70">
+                was <span className="line-through">£{compareAtPrice.toFixed(2)}</span>
+              </span>
             </div>
+          ) : (
+            <span className="text-4xl font-bold text-semantic-text-primary leading-tight md:text-5xl">£{price.toFixed(2)}</span>
           )}
         </div>
 
-        <div id="pdp-hero-badge" className="h-0 scroll-mt-24" />
-        {/* Grouped badges row */}
+        {/* Badges row - below price */}
         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
           {/* Stock indicator - creates urgency */}
           <div className="inline-flex items-center gap-2 rounded-full bg-semantic-legacy-brand-blush/20 px-3 py-1">
@@ -234,7 +168,8 @@ export const PriceBlock = ({
             <span className="font-semibold">Free shipping {FREE_SHIPPING_THRESHOLD_LABEL}</span>
           </div>
 
-          {badge && badge.toLowerCase() !== 'buy 2, save 10%' && (
+          {/* Remove promotional badges like "Buy 2, save 10%" */}
+          {badge && badge.toLowerCase() !== 'buy 2, save 10%' && badge.toLowerCase() !== 'buy 2, save 5%' && (
             <div className="inline-flex items-center rounded-full bg-white px-4 py-1 font-semibold uppercase tracking-[0.3em] text-semantic-text-primary shadow-soft">
               {badge}
             </div>
@@ -308,6 +243,14 @@ export const PriceBlock = ({
           >
             {isAdding ? 'Processing...' : 'Buy Now'}
           </button>
+        </div>
+
+        {/* Divider line */}
+        <div className="my-5 border-t border-semantic-legacy-brand-blush/30" />
+
+        {/* Full product description below CTAs */}
+        <div className="text-sm text-semantic-text-primary/80">
+          <p>{productDesc}</p>
         </div>
       </div>
     </div>

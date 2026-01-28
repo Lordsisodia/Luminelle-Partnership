@@ -25,6 +25,42 @@ export async function runStorefront<T>(query: string, variables?: Record<string,
   return json.data as T
 }
 
+export type ShopifyCart = {
+  id: string
+  checkoutUrl: string
+  lines?: { edges?: Array<{ node: any }> } | null
+}
+
+/**
+ * Rewrites the checkout URL to use the correct domain.
+ * Shopify returns URLs with the myshopify.com domain, but we want to use
+ * the SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN so checkout works properly.
+ */
+export function rewriteCheckoutUrl(checkoutUrl: string): string {
+  try {
+    const url = new URL(checkoutUrl)
+    // Replace the hostname with SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN if set
+    const checkoutDomain = process.env.SHOPIFY_CHECKOUT_UPSTREAM_DOMAIN
+    if (checkoutDomain) {
+      url.hostname = checkoutDomain
+    }
+    return url.toString()
+  } catch {
+    return checkoutUrl
+  }
+}
+
+/**
+ * Processes a cart response to rewrite the checkout URL if present.
+ * Use this on all cart responses before sending to the client.
+ */
+export function processCartResponse(cart: ShopifyCart): ShopifyCart {
+  if (cart.checkoutUrl) {
+    cart.checkoutUrl = rewriteCheckoutUrl(cart.checkoutUrl)
+  }
+  return cart
+}
+
 export const CART_FRAGMENT = `
 fragment CartFields on Cart {
   id

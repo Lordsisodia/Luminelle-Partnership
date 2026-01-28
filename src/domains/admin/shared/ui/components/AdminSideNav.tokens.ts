@@ -10,5 +10,15 @@ export const navSizing = {
   utilityClusterGap: 'gap-2',
   utilityClusterPadTop: 'pt-3',
   utilityPillText: 'text-[11px] font-semibold uppercase tracking-[0.08em]',
+
+  // Transition tokens - standardized for consistent animations
   transition: 'transition-all duration-200 ease-out',
+  transitionFast: 'transition-all duration-150 ease-out',
+  transitionSlow: 'transition-all duration-300 ease-out',
+
+  badgeOffset: '-right-1 -top-1',
+
+  // Spacing tokens
+  sectionSpacing: 'space-y-3',
+  itemSpacing: 'gap-2',
 }

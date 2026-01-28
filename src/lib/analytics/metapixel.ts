@@ -1,6 +1,10 @@
 /**
  * Meta (Facebook) Pixel integration
  * Tracks e-commerce events for ad attribution and retargeting
+ *
+ * IMPORTANT: Content ID format must match catalog exactly
+ * - Catalog expects: just the variant ID (e.g., "56829020504438")
+ * - Not: shopify_GB_XXX_XXX format (that causes mismatch errors)
  */
 import { captureEvent } from './posthog'
 
@@ -76,44 +80,46 @@ export function extractVariantId(variantKey: string): string {
 }
 
 /**
- * Format content ID to match Shopify's Facebook Catalog format:
- * shopify_{COUNTRY}_{PRODUCT_ID}_{VARIANT_ID}
- * Defaults to GB for country.
+ * Format content ID to match Meta Catalog format.
  *
- * For legacy GID format, extracts the numeric ID and formats correctly.
- * For stable keys, requires the numeric variant ID to be passed.
+ * IMPORTANT: Catalog expects just the numeric variant ID (e.g., "56829020504438")
+ * NOT the shopify_GB_XXX_XXX format - that causes "content IDs not matching" errors
+ *
+ * Extracts the numeric variant ID from various formats:
+ * - Legacy GID: gid://shopify/ProductVariant/56829020504438 -> 56829020504438
+ * - Stable key: variant.lumelle-shower-cap.default -> looks up numeric ID
+ * - Already numeric: 56829020504438 -> 56829020504438
  */
 export function formatShopifyContentId(productId: string | null, variantId: string | null): string {
   if (!variantId) return ''
 
-  const cleanId = (id: string) => {
-    // Remove GID prefix if present
-    const gidMatch = id.match(/gid:\/\/shopify\/(Product|ProductVariant)\/(\d+)/)
-    if (gidMatch) return gidMatch[2]
-    // Otherwise return as-is
-    return id.replace(/gid:\/\/shopify\/(Product|ProductVariant)\//, '')
+  // Map stable variant keys to their numeric Shopify variant IDs
+  const STABLE_VARIANT_TO_NUMERIC_ID: Record<string, string> = {
+    'variant.lumelle-shower-cap.default': '56829020504438',
+    'variant.satin-overnight-curler.default': '56852779696502',
   }
 
-  const vId = cleanId(variantId)
-
-  // If it's already a stable key (variant.xxx.yyy), we need the numeric variant ID
-  if (vId.startsWith('variant.') && !/^\d+$/.test(vId)) {
-    // This is a stable key, we need the numeric variant ID
-    // Return empty string to signal we need the actual numeric ID
-    return ''
+  // Check if it's a stable key we have a mapping for
+  if (STABLE_VARIANT_TO_NUMERIC_ID[variantId]) {
+    return STABLE_VARIANT_TO_NUMERIC_ID[variantId]
   }
 
-  if (productId) {
-    const pId = cleanId(productId)
-    return `shopify_GB_${pId}_${vId}`
+  // Handle legacy GID format: gid://shopify/ProductVariant/123456789
+  const gidMatch = variantId.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
+  if (gidMatch) return gidMatch[1]
+
+  // If it's already numeric, return as-is
+  if (/^\d+$/.test(variantId)) {
+    return variantId
   }
 
-  return vId
+  // Fallback: return as-is (shouldn't happen in production)
+  return variantId
 }
 
 /**
  * Format content ID for cart items using variant keys.
- * Maps stable variant keys to their numeric Shopify variant IDs.
+ * Returns just the numeric variant ID to match catalog format.
  */
 export function formatCartItemId(variantKey: string): string {
   // Map stable variant keys to their numeric Shopify variant IDs
@@ -124,17 +130,21 @@ export function formatCartItemId(variantKey: string): string {
 
   // Check if it's a stable key we have a mapping for
   if (STABLE_VARIANT_TO_NUMERIC_ID[variantKey]) {
-    return `shopify_GB_${STABLE_VARIANT_TO_NUMERIC_ID[variantKey]}`
+    return STABLE_VARIANT_TO_NUMERIC_ID[variantKey]
   }
 
-  // Handle legacy GID format
+  // Handle legacy GID format: gid://shopify/ProductVariant/123456789
   const gidMatch = variantKey.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
   if (gidMatch) {
-    return `shopify_GB_${gidMatch[1]}`
+    return gidMatch[1]
   }
 
-  // Handle encoded keys (variant.<base64>) - return as-is for now
-  // In production, these should be decoded to get the actual numeric ID
+  // If already numeric, return as-is
+  if (/^\d+$/.test(variantKey)) {
+    return variantKey
+  }
+
+  // Fallback: return as-is
   return variantKey
 }
 

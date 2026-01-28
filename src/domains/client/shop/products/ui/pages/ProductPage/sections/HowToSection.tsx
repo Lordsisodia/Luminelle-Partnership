@@ -14,7 +14,9 @@ type Step = {
   tips?: Tip[]
 }
 
-type Props = { steps: Step[] }
+type Props = {
+  steps: Step[]
+}
 
 export const HowToSection = ({ steps }: Props) => {
   const [activeStep, setActiveStep] = useState<number | null>(null)
@@ -101,6 +103,7 @@ export const HowToSection = ({ steps }: Props) => {
           </div>
         )}
       </div>
+
       <div className="space-y-3">
         {steps.map((step, idx) => {
           const isActive = activeStep === idx

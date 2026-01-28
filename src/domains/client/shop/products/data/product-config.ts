@@ -92,7 +92,7 @@ const essentialsCap = [
 ]
 
 const reasonsCap = [
-  { title: 'Our best seller', desc: 'Creator-tested fit that keeps silk presses, curls, and braids camera-ready.' },
+  { title: 'Best seller', desc: 'Creator-tested fit that keeps silk presses, curls, and braids camera-ready.' },
   { title: 'Happier hair days', desc: 'Steam-blocking core stops frizz so styles last through busy weeks.' },
   { title: 'Less breakage', desc: 'Satin-soft band prevents tugging while the roomy shape avoids tension.' },
   { title: 'Stays fresh', desc: 'Dual-layer build wipes clean and air-dries fast—made to reuse 100+ times.' },

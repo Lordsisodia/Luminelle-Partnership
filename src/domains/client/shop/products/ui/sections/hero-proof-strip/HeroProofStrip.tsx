@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { StarRating } from '@ui/components/StarRating'
 import { useCountUpAnimation } from '@/domains/shared/hooks/useCountUpAnimation'
-import { Users, ShieldCheck, Truck, CheckCircle, ChevronDown, ChevronUp, Lock, CreditCard, Shield } from 'lucide-react'
+import { Users, ShieldCheck, Truck, CheckCircle, ChevronDown, ChevronUp, Lock, CreditCard, Shield, Quote } from 'lucide-react'
 
 type Fact = {
   label: string
@@ -22,17 +22,16 @@ type Props = {
   tagline: string
   facts?: Fact[]
   quotes?: Quote[]
+  price?: number
 }
 
-export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quotes: quotesProp }: Props) => {
+export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quotes: quotesProp, price }: Props) => {
   // Use the reusable count-up animation hook for rating and count
   const { displayValue: displayRating } = useCountUpAnimation(rating, 1500)
   const { displayValue: displayCount } = useCountUpAnimation(count, 1500)
 
   const [expandedFact, setExpandedFact] = useState<number | null>(null)
-  const [currentQuote, setCurrentQuote] = useState(0)
   const sectionRef = useRef<HTMLDivElement | null>(null)
-  const quoteIntervalRef = useRef<number | null>(null)
 
   const defaultFacts: Fact[] = [
     { label: 'Satin', value: 'Satin-smooth finish', details: 'Our premium satin lining protects hair while you sleep, preventing frizz and breakage.', icon: ShieldCheck },
@@ -71,18 +70,8 @@ export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quote
 
   // Animated count-up is now handled by useCountUpAnimation hook
 
-  // Rotating quotes
-  useEffect(() => {
-    quoteIntervalRef.current = window.setInterval(() => {
-      setCurrentQuote((prev) => (prev + 1) % quotes.length)
-    }, 5000)
-
-    return () => {
-      if (quoteIntervalRef.current) {
-        clearInterval(quoteIntervalRef.current)
-      }
-    }
-  }, [quotes.length])
+  // Show up to 3 reviews at once for more social proof
+  const displayQuotes = quotes.slice(0, 3)
 
   const toggleFact = (idx: number) => {
     setExpandedFact((prev) => (prev === idx ? null : idx))
@@ -104,22 +93,41 @@ export const HeroProofStrip = ({ rating, count, tagline, facts: factsProp, quote
             <span className="font-semibold">
               {displayRating > 0 ? displayRating.toFixed(1) : rating.toFixed(1)} ({displayCount > 0 ? Math.floor(displayCount).toLocaleString() : count.toLocaleString()}) — {tagline}
             </span>
+            {price && (
+              <span className="inline-flex items-center rounded-full bg-semantic-accent-cta/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.15em] text-semantic-legacy-brand-cocoa">
+                £{price.toFixed(2)}
+              </span>
+            )}
           </div>
 
-          {/* Rotating Customer Quote */}
-          <div className="relative min-h-[40px] flex items-center justify-center overflow-hidden">
-            {quotes.map((quote, idx) => (
+          {/* Customer Reviews - Show 2-3 diverse reviews at once */}
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {displayQuotes.map((quote, idx) => (
               <div
                 key={idx}
-                className={`absolute inset-0 flex flex-col items-center gap-1 transition-all duration-500 ${
-                  idx === currentQuote ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-                style={{ transitionDelay: idx === currentQuote ? '0ms' : '100ms' }}
+                className="relative rounded-xl border border-semantic-legacy-brand-blush/30 bg-semantic-legacy-brand-blush/5 p-4 text-left transition-all hover:shadow-sm"
               >
-                <p className="text-sm italic text-semantic-text-primary/80">
+                <div className="mb-2 flex items-center gap-2">
+                  <Quote className="h-4 w-4 text-semantic-accent-cta/60" />
+                  {quote.rating && (
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className={`h-3 w-3 ${i < Math.floor(quote.rating!) ? 'text-orange-400' : 'text-gray-300'}`}
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <p className="mb-2 text-sm italic text-semantic-text-primary/80 leading-relaxed">
                   "{quote.quote}"
                 </p>
-                <p className="text-xs font-medium text-semantic-text-primary/60">
+                <p className="text-xs font-semibold text-semantic-text-primary/60">
                   — {quote.name}
                 </p>
               </div>
