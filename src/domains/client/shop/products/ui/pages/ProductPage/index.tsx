@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
@@ -334,8 +334,11 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
   }, [handleKey, setGallery, setPrice, setProductDesc, setProductTitle])
 
   // Track ViewContent on mount whenever variant/handle changes
+  // Use a ref to prevent duplicate tracking for the same variant
+  const trackedVariantRef = useRef<string | null>(null)
   useEffect(() => {
-    if (variantId) {
+    if (variantId && trackedVariantRef.current !== variantId) {
+      trackedVariantRef.current = variantId
       trackViewContent({
         content_name: productTitle || config.defaultTitle,
         content_ids: [formatShopifyContentId(productId, variantId)],
@@ -344,7 +347,7 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
         currency: 'GBP',
       })
     }
-  }, [variantId, productId, config.handle])
+  }, [variantId, productId, config.handle, productTitle, price])
 
   useEffect(() => {
     // Report height to admin iframe preview (if embedded)
