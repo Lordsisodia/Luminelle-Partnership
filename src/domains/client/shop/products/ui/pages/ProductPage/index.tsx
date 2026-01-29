@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { homeConfig } from '@/content/home.config'
@@ -334,19 +334,22 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
   }, [handleKey, setGallery, setPrice, setProductDesc, setProductTitle])
 
   // Track ViewContent on mount whenever variant/handle changes
-  // Use a ref to prevent duplicate tracking for the same variant
-  const trackedVariantRef = useRef<string | null>(null)
+  // Use a global flag to prevent duplicate tracking across re-renders and remounts
   useEffect(() => {
-    if (variantId && trackedVariantRef.current !== variantId) {
-      trackedVariantRef.current = variantId
-      trackViewContent({
-        content_name: productTitle || config.defaultTitle,
-        content_ids: [formatShopifyContentId(productId, variantId)],
-        content_type: 'product',
-        value: price,
-        currency: 'GBP',
-      })
-    }
+    if (!variantId) return
+
+    // Initialize global tracking object
+    const globalKey = `__viewContentTracked_${config.handle}`
+    if ((window as any)[globalKey]) return
+
+    (window as any)[globalKey] = true
+    trackViewContent({
+      content_name: productTitle || config.defaultTitle,
+      content_ids: [formatShopifyContentId(productId, variantId)],
+      content_type: 'product',
+      value: price,
+      currency: 'GBP',
+    })
   }, [variantId, productId, config.handle, productTitle, price])
 
   useEffect(() => {
