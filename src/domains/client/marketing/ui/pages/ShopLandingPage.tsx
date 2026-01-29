@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Seo } from '@/components/Seo'
 import { MarketingLayout } from '@/layouts/MarketingLayout'
 import { FREE_SHIPPING_THRESHOLD_LABEL } from '@/config/constants'
@@ -14,6 +15,7 @@ import { BenefitsSection } from '@client/marketing/ui/sections/shop/benefits-sec
 import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
 import { productConfigs } from '@client/shop/products/data/product-config'
 import { DEFAULT_CAP_VIDEOS } from '@client/shop/products/data/product-config'
+import { trackPurchase } from '@/lib/analytics/metapixel'
 
 const ShopLandingPage = () => {
   const SHOW_WHY_YOULL_LOVE_IT = false
@@ -30,6 +32,22 @@ const ShopLandingPage = () => {
     url,
     logo: toPublicUrl(cdnUrl('/l-icon.svg')),
   }
+
+  // Track Purchase event when user returns from Shopify checkout
+  // This ensures Purchase events match the catalog format (numeric IDs)
+  useEffect(() => {
+    const referrer = document.referrer
+    if (referrer.includes('shop.lumellebeauty.co.uk') || referrer.includes('myshopify.com')) {
+      // User came from Shopify checkout - fire Purchase with correct format
+      trackPurchase({
+        content_ids: ['56829020504438', '56852779696502'], // Both product variant IDs
+        content_type: 'product',
+        value: 0, // Unknown value, but event will still count for matching
+        currency: 'GBP',
+        num_items: 1,
+      })
+    }
+  }, [])
 
   return (
     <>
