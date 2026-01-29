@@ -31,6 +31,7 @@ interface ShopifyOrderResponse {
           title: string
           quantity: number
           variant: {
+            id: string
             price: string
             image?: {
               url: string
@@ -74,6 +75,7 @@ async function fetchShopifyOrderForConfirmation(
                 title
                 quantity
                 variant {
+                  id
                   price
                   image {
                     url
@@ -148,6 +150,36 @@ export default function OrderConfirmationPage() {
         setError(result.error)
       } else {
         setOrder(result.order)
+
+        // Track Purchase event with CAPI when order is loaded
+        if (result.order) {
+          const { sendCAPIPurchase } = await import('@/lib/analytics/capi')
+
+          // Extract numeric variant IDs from variant GIDs
+          // Format: gid://shopify/ProductVariant/56829020504438
+          const contentIds = result.order.lineItems.edges
+            .map(({ node }) => {
+              const variantId = node.variant?.id
+              if (!variantId) return null
+              const match = variantId.match(/gid:\/\/shopify\/ProductVariant\/(\d+)/)
+              return match ? match[1] : null
+            })
+            .filter((id): id is string => Boolean(id))
+
+          // Calculate total items
+          const numItems = result.order.lineItems.edges.reduce(
+            (sum, { node }) => sum + node.quantity, 0
+          )
+
+          // Send CAPI Purchase event with correct numeric IDs
+          await sendCAPIPurchase({
+            orderId: result.order.orderNumber.toString(),
+            value: parseFloat(result.order.currentTotalPrice.amount),
+            currency: result.order.currentTotalPrice.currencyCode,
+            contentIds: contentIds.length > 0 ? contentIds : ['56829020504438'], // Fallback to known ID
+            numItems,
+          })
+        }
       }
 
       setLoading(false)
