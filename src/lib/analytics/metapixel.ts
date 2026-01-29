@@ -52,6 +52,26 @@ function getPixelId(): string | undefined {
 }
 
 /**
+ * Check if we should initialize the pixel on this domain.
+ * Prevents double-firing with Shopify's Facebook & Instagram app on checkout domain.
+ */
+function shouldInitializePixel(): boolean {
+  if (typeof window === 'undefined') return false
+
+  const hostname = window.location.hostname
+
+  // Don't initialize on Shopify checkout domain (Shopify's app handles it there)
+  if (hostname.includes('shop.lumellebeauty.co.uk') ||
+      hostname.includes('myshopify.com') ||
+      hostname.includes('shopify.com')) {
+    console.debug('[Meta Pixel] Skipping initialization on Shopify domain:', hostname)
+    return false
+  }
+
+  return true
+}
+
+/**
  * Extract the numeric variant ID from various variant key formats.
  * Handles:
  * - Stable keys: variant.lumelle-shower-cap.default
@@ -158,7 +178,13 @@ export function formatCartItemId(variantKey: string): string {
  */
 export function initMetaPixel(): void {
   if (typeof window === 'undefined') return
-  if (isInitialized) return
+
+  // Use a global flag to prevent multiple initializations across re-renders
+  if ((window as any).__metaPixelInitialized) return
+  (window as any).__metaPixelInitialized = true
+
+  // Skip initialization on Shopify domains (Shopify's app handles it there)
+  if (!shouldInitializePixel()) return
 
   const pixelId = getPixelId()
   if (!pixelId) {
@@ -166,7 +192,12 @@ export function initMetaPixel(): void {
     return
   }
 
-  // Load Facebook Pixel script
+  // Check if pixel script is already being loaded or loaded
+  if (document.querySelector('script[src*="connect.facebook.net/en_US/fbevents.js"]')) {
+    console.debug('Meta Pixel: Script already in DOM')
+    return
+  }
+
   // Load Facebook Pixel script
   ; ((f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) => {
     if (f.fbq) return
