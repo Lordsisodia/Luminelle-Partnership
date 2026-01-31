@@ -228,5 +228,12 @@ export function buildCheckoutAttributionAttributes(): Record<string, string> {
     attrs[`exp_${key}`] = variant
   }
 
+  // Capture Facebook cookies for CAPI attribution
+  // These are passed through to Shopify and received in webhooks
+  const fbp = document.cookie.match(/_fbp=([^;]+)/)?.[1]
+  const fbc = document.cookie.match(/_fbc=([^;]+)/)?.[1]
+  if (fbp) attrs.meta_fbp = fbp
+  if (fbc) attrs.meta_fbc = fbc
+
   return attrs
 }

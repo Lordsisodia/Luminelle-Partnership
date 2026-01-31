@@ -3,6 +3,7 @@ import { upsertShopOrder } from "../../_lib/shopOrders.js";
 import { renderOrderEmail, sendOrderConfirmation } from "../../_lib/email.js";
 import { isProcessed, markProcessed } from "../../_lib/webhooks.js";
 import { capturePosthogEvent } from "../../_lib/posthog.js";
+import { sendCAPIPurchaseFromWebhook } from "../../_lib/meta-capi.js";
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
@@ -62,6 +63,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   } catch (e) {
     console.error('PostHog purchase capture failed', e)
+  }
+
+  // Send CAPI Purchase event for Meta attribution
+  try {
+    const attrs = extractNoteAttributes(body)
+    await sendCAPIPurchaseFromWebhook({
+      orderId: body?.name || String(body?.id),
+      value: Number(body?.total_price || 0),
+      currency: body?.currency || body?.presentment_currency || 'GBP',
+      lineItems: body?.line_items || [],
+      fbp: attrs.meta_fbp,
+      fbc: attrs.meta_fbc,
+      email: body?.email,
+      phone: body?.phone,
+    })
+  } catch (e) {
+    console.error('Meta CAPI purchase capture failed', e)
   }
 
   // Optional email confirmation via Resend if enabled and we have an email
