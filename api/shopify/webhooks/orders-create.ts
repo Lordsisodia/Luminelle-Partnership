@@ -68,6 +68,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Send CAPI Purchase event for Meta attribution
   try {
     const attrs = extractNoteAttributes(body)
+    console.log('[Webhook] Extracted note_attributes:', attrs)
+    console.log('[Webhook] Meta cookies found:', { fbp: attrs.meta_fbp, fbc: attrs.meta_fbc })
+
     await sendCAPIPurchaseFromWebhook({
       orderId: body?.name || String(body?.id),
       value: Number(body?.total_price || 0),
@@ -79,7 +82,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       phone: body?.phone,
     })
   } catch (e) {
-    console.error('Meta CAPI purchase capture failed', e)
+    console.error('[Webhook] Meta CAPI purchase capture failed', e)
   }
 
   // Optional email confirmation via Resend if enabled and we have an email
