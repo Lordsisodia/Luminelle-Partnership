@@ -7,6 +7,7 @@ import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
 import { useCart } from '@client/shop/cart/providers/CartContext'
 import { buildCheckoutAttributionAttributes, captureEvent, initPosthogOnce } from '@/lib/analytics/posthog'
 import { trackInitiateCheckout, formatCartItemId } from '@/lib/analytics/metapixel'
+import { trackInitiateCheckoutWithCAPI } from '@/lib/analytics/capi'
 import { FREE_SHIPPING_THRESHOLD_GBP, MAX_CART_ITEM_QTY } from '@/config/constants'
 
 const STANDARD_SHIPPING = 3.95
@@ -58,13 +59,26 @@ export const CartPage = () => {
     // Track InitiateCheckout event for Meta Pixel
     if (items.length > 0) {
       const contentIds = items.map((item) => formatCartItemId(item.id))
+      const numItems = items.reduce((sum, item) => sum + item.qty, 0)
 
       trackInitiateCheckout({
         content_ids: contentIds,
         value: total,
         currency: 'GBP',
-        num_items: items.reduce((sum, item) => sum + item.qty, 0),
+        num_items: numItems,
       })
+      // Also send to CAPI for better coverage
+      trackInitiateCheckoutWithCAPI({
+        contentIds,
+        value: total,
+        currency: 'GBP',
+        numItems,
+        contents: items.map(item => ({
+          id: formatCartItemId(item.id),
+          quantity: item.qty,
+          item_price: item.displayPrice ?? item.price,
+        })),
+      }).catch(() => { /* ignore CAPI errors */ })
     }
 
     try {

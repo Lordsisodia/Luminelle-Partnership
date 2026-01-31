@@ -149,6 +149,7 @@ export class LLMClient {
   private inferTier(model: string): ModelTier {
     if (model.includes('orchestrator')) return 'smart' as ModelTier;
     if (model.includes('gemini')) return 'specialized' as ModelTier;
+    if (model.includes('kimi') || model.includes('claude')) return 'smart' as ModelTier;
     return 'standard' as ModelTier;
   }
 
@@ -164,9 +165,24 @@ export class LLMClient {
     const geminiInputCost = 0.000075;
     const geminiOutputCost = 0.0003;
 
-    const isGemini = stats.model.toLowerCase().includes('gemini');
-    const inputCost = isGemini ? geminiInputCost : glmInputCost;
-    const outputCost = isGemini ? glmOutputCost : glmOutputCost;
+    // Kimi 2.5 / Claude 3.5 Sonnet pricing (approximate)
+    const kimiInputCost = 0.003; // per 1K tokens
+    const kimiOutputCost = 0.015; // per 1K tokens
+
+    const model = stats.model.toLowerCase();
+    const isGemini = model.includes('gemini');
+    const isKimi = model.includes('kimi') || model.includes('claude') || model.includes('sonnet');
+
+    let inputCost = glmInputCost;
+    let outputCost = glmOutputCost;
+
+    if (isGemini) {
+      inputCost = geminiInputCost;
+      outputCost = geminiOutputCost;
+    } else if (isKimi) {
+      inputCost = kimiInputCost;
+      outputCost = kimiOutputCost;
+    }
 
     return (
       (stats.promptTokens / 1000) * inputCost +

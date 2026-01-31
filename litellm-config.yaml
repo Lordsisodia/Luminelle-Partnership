@@ -10,6 +10,14 @@ model_list:
       api_key: YOUR_GLM_API_KEY_1
       api_base: "https://api.z.ai/v1"
 
+  # Kimi K2.5 via Moonshot AI
+  # Get API key from: https://platform.moonshot.cn
+  - model_name: kimi-k2.5
+    litellm_params:
+      model: openai/moonshot-v1-128k  # or moonshot-v1-8k, moonshot-v1-32k
+      api_key: YOUR_MOONSHOT_API_KEY
+      api_base: "https://api.moonshot.cn/v1"
+
   # - model_name: glm-pool
   #   litellm_params:
   #     model: openai/glm-4
@@ -23,6 +31,19 @@ model_list:
   #     api_base: "https://api.z.ai/v1"
 
   # Add more keys as needed - uncomment and copy the block above
+
+  # Model group for testing - routes to both models for A/B comparison
+  - model_name: smart-orchestrator
+    litellm_params:
+      model: openai/glm-4
+      api_key: YOUR_GLM_API_KEY_1
+      api_base: "https://api.z.ai/v1"
+
+  - model_name: smart-orchestrator
+    litellm_params:
+      model: openai/moonshot-v1-128k
+      api_key: YOUR_MOONSHOT_API_KEY
+      api_base: "https://api.moonshot.cn/v1"
 
 router_settings:
   # Round-robin distributes requests evenly across all keys

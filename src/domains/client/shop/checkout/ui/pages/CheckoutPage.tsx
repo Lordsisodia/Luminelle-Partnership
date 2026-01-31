@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useCart } from '@client/shop/cart/providers/CartContext'
 import { trackInitiateCheckout, formatCartItemId } from '@/lib/analytics/metapixel'
+import { trackInitiateCheckoutWithCAPI } from '@/lib/analytics/capi'
 import TemporarilyUnavailablePage from '@/ui/pages/TemporarilyUnavailablePage'
 
 const CheckoutPage = () => {
@@ -12,13 +13,26 @@ const CheckoutPage = () => {
     // Track InitiateCheckout event before redirecting to Shopify checkout
     if (items.length > 0) {
       const contentIds = items.map((item) => formatCartItemId(item.id))
+      const numItems = items.reduce((sum, item) => sum + item.qty, 0)
 
       trackInitiateCheckout({
         content_ids: contentIds,
         value: subtotal,
         currency: 'GBP',
-        num_items: items.reduce((sum, item) => sum + item.qty, 0),
+        num_items: numItems,
       })
+      // Also send to CAPI for better coverage
+      trackInitiateCheckoutWithCAPI({
+        contentIds,
+        value: subtotal,
+        currency: 'GBP',
+        numItems,
+        contents: items.map(item => ({
+          id: formatCartItemId(item.id),
+          quantity: item.qty,
+          item_price: item.displayPrice ?? item.price,
+        })),
+      }).catch(() => { /* ignore CAPI errors */ })
     }
 
     // Small delay to ensure the pixel event fires before redirect

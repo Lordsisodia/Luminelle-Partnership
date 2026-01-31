@@ -6,8 +6,23 @@
  * the browser to trigger CAPI events with the correct ID format
  */
 
+type CAPIEventName =
+  | 'Purchase'
+  | 'AddToCart'
+  | 'ViewContent'
+  | 'InitiateCheckout'
+  | 'Search'
+  | 'AddToWishlist'
+  | 'AddPaymentInfo'
+  | 'Subscribe'
+  | 'StartTrial'
+  | 'CompleteRegistration'
+  | 'Contact'
+  | 'FindLocation'
+  | 'Schedule'
+
 interface CAPIEvent {
-  event_name: string
+  event_name: CAPIEventName
   event_time: number
   event_id: string
   user_data: {
@@ -17,10 +32,22 @@ interface CAPIEvent {
     fbc?: string
     em?: string[]
     ph?: string[]
+    fn?: string[] // First name (hashed)
+    ln?: string[] // Last name (hashed)
+    ct?: string[] // City (hashed)
+    st?: string[] // State (hashed)
+    zp?: string[] // Zip (hashed)
+    country?: string[] // Country (hashed)
+    external_id?: string[]
+    subscription_id?: string
   }
   custom_data: Record<string, unknown>
-  action_source: string
+  action_source: 'website' | 'app' | 'email' | 'other'
   event_source_url: string
+  opt_out?: boolean
+  data_processing_options?: string[]
+  data_processing_options_country?: number
+  data_processing_options_region?: number
 }
 
 interface CAPIRequest {

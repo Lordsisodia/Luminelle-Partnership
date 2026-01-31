@@ -9,6 +9,7 @@ import { CANONICAL_PRODUCT_HANDLES } from '@client/shop/products/data/product-ha
 import { renderSections } from './sections/SectionsMap'
 import { useProductContent } from '@client/shop/products/hooks/useProductContent'
 import { formatShopifyContentId, trackAddToCart, trackViewContent } from '@/lib/analytics/metapixel'
+import { trackAddToCartWithCAPI, trackViewContentWithCAPI } from '@/lib/analytics/capi'
 import SpinWheelPrompt from '@client/shop/products/ui/components/SpinWheelPrompt'
 import { Seo } from '@/components/Seo'
 import { toPublicUrl } from '@platform/seo/logic/publicBaseUrl'
@@ -116,12 +117,20 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
         },
         quantity,
       )
+      const contentId = formatShopifyContentId(productId, variantId)
       trackAddToCart({
         content_name: productTitle || config.defaultTitle,
-        content_ids: [formatShopifyContentId(productId, variantId)],
+        content_ids: [contentId],
         value: price,
         currency: 'GBP',
       })
+      // Also send to CAPI for better coverage
+      trackAddToCartWithCAPI({
+        contentIds: [contentId],
+        contentType: 'product',
+        value: price,
+        currency: 'GBP',
+      }).catch(() => { /* ignore CAPI errors */ })
       window.dispatchEvent(new CustomEvent('lumelle:open-cart'))
       setJustAdded(true)
       window.setTimeout(() => setJustAdded(false), 800)
@@ -146,12 +155,20 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
         },
         quantity,
       )
+      const contentId = formatShopifyContentId(productId, variantId)
       trackAddToCart({
         content_name: productTitle || config.defaultTitle,
-        content_ids: [formatShopifyContentId(productId, variantId)],
+        content_ids: [contentId],
         value: price,
         currency: 'GBP',
       })
+      // Also send to CAPI for better coverage
+      trackAddToCartWithCAPI({
+        contentIds: [contentId],
+        contentType: 'product',
+        value: price,
+        currency: 'GBP',
+      }).catch(() => { /* ignore CAPI errors */ })
       navigate('/checkout')
     } catch (error) {
       console.error('Buy now failed:', error)
@@ -343,13 +360,21 @@ const ProductPageInner = ({ handleKey }: { handleKey: string }) => {
     if ((window as any)[globalKey]) return
 
     (window as any)[globalKey] = true
+    const contentId = formatShopifyContentId(productId, variantId)
     trackViewContent({
       content_name: productTitle || config.defaultTitle,
-      content_ids: [formatShopifyContentId(productId, variantId)],
+      content_ids: [contentId],
       content_type: 'product',
       value: price,
       currency: 'GBP',
     })
+    // Also send to CAPI for better coverage
+    trackViewContentWithCAPI({
+      contentIds: [contentId],
+      contentType: 'product',
+      value: price,
+      currency: 'GBP',
+    }).catch(() => { /* ignore CAPI errors */ })
   }, [variantId, productId, config.handle, productTitle, price])
 
   useEffect(() => {
